@@ -24,9 +24,32 @@ img{
     border-color: white;
 }
 
-.mat-list-item{
+/* .mat-list-item{
+    color: #94a3b8 !important;
+    font-size: 0.8rem;
+    height: 44px !important;
+    margin-bottom: 4px; 
+    ::ng-deep{
+        .mat-list-item-content{
+            border-radius: 5px;
+            margin: 0 8px;
+            &:hover{
+                background: #2c3344 !important;
+            }
+        }
+    }
+}  */
+
+.mat-list-item {
     color: #94a3b8 !important;
     font-size: 0.8rem;
     height: 44px !important;
     margin-bottom: 4px;
+}
+.mat-list-item ::ng-deep .mat-list-item-content {
+    border-radius: 5px;
+    margin: 0 8px;
+}
+.mat-list-item ::ng-deep .mat-list-item-content:hover {
+    background: #2c3344 !important;
 }
