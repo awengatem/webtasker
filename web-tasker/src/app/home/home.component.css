@@ -29,10 +29,10 @@
     background: #f1f5f9;
 }
 .page__box {
-    min-height: 160px;
+    min-height: 85px;
     background: #1e293b;
     margin: 0 -1rem;
-    font-size: 36px;
+    font-size: 24px;
 }
 .page__content {
     min-height: calc(100vh - 178px);
