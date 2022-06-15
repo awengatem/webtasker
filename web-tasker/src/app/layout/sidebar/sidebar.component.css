@@ -1,7 +1,3 @@
-.customLoggo{
-    width: 100px;
-    height: auto;
-}
 
 .logo{
     text-align: center;
@@ -24,22 +20,7 @@ img{
     border-color: white;
 }
 
-/* .mat-list-item{
-    color: #94a3b8 !important;
-    font-size: 0.8rem;
-    height: 44px !important;
-    margin-bottom: 4px; 
-    ::ng-deep{
-        .mat-list-item-content{
-            border-radius: 5px;
-            margin: 0 8px;
-            &:hover{
-                background: #2c3344 !important;
-            }
-        }
-    }
-}  */
-
+/* styling the sidebar menu */
 .mat-list-item {
     color: #94a3b8 !important;
     font-size: 0.8rem;
@@ -52,4 +33,23 @@ img{
 }
 .mat-list-item ::ng-deep .mat-list-item-content:hover {
     background: #2c3344 !important;
+}
+
+/* sidebar selected show */
+.list-item-active {
+    color: f2f5f7 !important;
+}
+.list-item-active ::ng-deep .mat-list-item-content {
+    background: #2c3344 !important;
+}
+.list-item-active ::ng-deep .mat-list-item-content:hover {
+    background: #2c3344 !important;
+}
+
+/* subheader styling */
+.mat-subheader{
+    color: #6e9fde;
+    font-size: 0.6rem;
+    font-weight: 100;
+    letter-spacing: 1px;
 }
