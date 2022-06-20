@@ -1,0 +1,33 @@
+<mat-sidenav-container autosize >
+    <mat-sidenav #sidenav mode="side" opened="true" class="sidebar" [ngClass]="isExpanded ? 'sidebar-extended': ''" >
+
+        <mat-nav-list>
+
+            <mat-list-item>
+                <mat-icon mat-list-icon class="chevron-button sidenav-button" (click)="toggleCollapse()" [ngClass]="{'rotated': isExpanded}">chevron_right</mat-icon>
+            </mat-list-item>
+
+            <mat-list-item [routerLink]="'home'" routerLinkActive="list-item-active">
+                <mat-icon mat-list-icon class="">home</mat-icon>
+                <div class="content" *ngIf="isExpanded"> Home</div>
+            </mat-list-item>
+
+            <mat-list-item [routerLink]="'dashboard'" routerLinkActive="list-item-active">
+                <mat-icon mat-list-icon class="">dashboard</mat-icon>
+                <div class="content" *ngIf="isExpanded"> Dashboard</div>
+            </mat-list-item>
+
+            <mat-list-item [routerLink]="'users'" routerLinkActive="list-item-active">
+                <mat-icon mat-list-icon >supervisor_account</mat-icon>
+                <div class="content" *ngIf="isExpanded"> Users</div>
+            </mat-list-item>
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <div class="content">
+        <app-header (toggleSidebarForMe)="toggleCollapse()"></app-header>
+        <router-outlet></router-outlet>
+    </div>
+</mat-sidenav-container>

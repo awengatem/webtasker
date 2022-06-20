@@ -1,0 +1,73 @@
+mat-sidenav-container{
+    height: 850px;
+
+    .sidebar{
+        background: #010001;
+        //transition: all .5s ease;
+        //width: 5rem;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        height: 100vh;
+    }
+
+    .sidebar-extended{
+        width:16.5625rem;
+    }
+
+    mat-sidenav{
+
+        mat-nav-list{
+
+            .chevron-button{
+                transition: 300ms ease-in-out;
+                transform: rotate(0deg);
+                right: 0;
+                float: right;
+                position: absolute;
+            } 
+
+            .chevron-button.rotated{
+                transform: rotate(180deg);
+            }
+
+            //item styling
+            .mat-list-item {
+                color: #94a3b8 !important;
+                font-size: 0.8rem;
+                height: 44px !important;
+                margin-bottom: 4px;
+
+                &::ng-deep {
+                    .mat-list-item-content {
+                        border-radius: 5px;
+                        margin: 0 8px;
+                        &:hover {
+                            background: #2c3344 !important;
+                        }
+                    }
+                }
+            }
+
+            //selected styling
+            .list-item-active {
+                color: f2f5f7 !important;
+                &::ng-deep {
+                    .mat-list-item-content {
+                        background: #2c3344 !important;
+                        &:hover {
+                            background: #2c3344 !important;
+                        }
+                    }
+                }
+            } 
+        }
+
+        .content{
+            margin-left: 1.5rem;
+            font-size: 0.8rem;
+            margin: 0 8px;
+            margin-top: 0.1rem;
+        }
+    }
+}

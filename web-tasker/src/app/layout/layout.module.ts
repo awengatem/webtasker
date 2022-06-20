@@ -11,20 +11,23 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
-
+import { LayoutRoutingModule } from './layout-routing.module';
 
 import { RouterModule } from '@angular/router';
+import { WrapperComponent } from './components/wrapper/wrapper.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
-    SidenavComponent
+    SidenavComponent,
+    WrapperComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
+    LayoutRoutingModule,
 
     //material imports
     MatToolbarModule,

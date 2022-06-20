@@ -4,13 +4,15 @@
 <i class="fa fa-home fa-2x"></i>
 <app-footer></app-footer> -->
 
-<mat-drawer-container>
+<!-- <mat-drawer-container>
     <mat-drawer mode="side" [opened]="sideBarOpen" *ngIf="collapsed"> 
         <app-sidebar></app-sidebar>
-        <!-- <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav> -->
+        <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
     </mat-drawer>    
     <mat-drawer-content>
         <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
         <router-outlet></router-outlet>
     </mat-drawer-content>
-</mat-drawer-container> 
+</mat-drawer-container>  -->
+
+<router-outlet></router-outlet>

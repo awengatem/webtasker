@@ -13,9 +13,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 
 import { LayoutModule } from './layout/layout.module';
-import { HomeComponent } from './components/home/home.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { UsersComponent } from './components/users/users.component';
+import { HomeComponent } from './layout/components/home/home.component';
+import { DashboardComponent } from './layout/components/dashboard/dashboard.component';
+import { UsersComponent } from './layout/components/users/users.component';
 
 @NgModule({
   declarations: [
