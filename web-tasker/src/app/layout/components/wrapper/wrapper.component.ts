@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 interface sideNavToggle{
   screenWidth: number;
-  collapsed: boolean;
+  isExpanded: boolean;
 }
 
 @Component({
@@ -24,7 +24,7 @@ export class WrapperComponent implements OnInit {
 
   toggleCollapse(): void{
     this.isExpanded = !this.isExpanded;
-    this.onToggleSideNav.emit({collapsed: this.isExpanded,screenWidth:this.screenWidth});
+    this.onToggleSideNav.emit({isExpanded: this.isExpanded,screenWidth:this.screenWidth});
   }
 
 }

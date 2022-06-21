@@ -2,7 +2,7 @@ import { Component,EventEmitter, Output } from '@angular/core';
 
 interface SideNavToggle{
   screenWidth: number;
-  collapsed: boolean;
+  isExpanded: boolean;
 }
 
 @Component({
@@ -15,27 +15,18 @@ export class AppComponent {
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   title = 'web-tasker';
 
+  //variables
+  screenWidth = 0;
   sideBarOpen = true;
-  collapsed = true;
-  isExpanded = false;
+  isExpanded = true;
 
   toggleCollapse(): void{
-    this.collapsed = !this.isExpanded;
-    this.onToggleSideNav.emit({collapsed: this.collapsed,screenWidth:this.screenWidth});
+    this.isExpanded = !this.isExpanded;
+    this.onToggleSideNav.emit({isExpanded: this.isExpanded,screenWidth:this.screenWidth});
   }
 
   //method used by header
   sideBarToggler(){
     this.sideBarOpen = !this.sideBarOpen;
   }
-
-  //variables used by below method
-  isSideNavCollapsed = false;
-  screenWidth = 0;  
-
-  //shared with sidenav component
-  // onToggleSideNav(data: SideNavToggle){
-  //   this.screenWidth = data.screenWidth;
-  //   this.isSideNavCollapsed = data.collapsed;
-  // }
 }
