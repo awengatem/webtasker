@@ -12,7 +12,8 @@ mat-sidenav-container{
     }
 
     .sidebar-extended{
-        width:16.5625rem;
+        //width:16.5625rem;
+        width: 14rem;
     }
 
     mat-sidenav{
@@ -31,8 +32,39 @@ mat-sidenav-container{
                 transform: rotate(180deg);
             }
 
+            //logo styling
+            .logo{
+                text-align: center;
+                padding: 2.6rem 1rem;    
+            }
+            
+            //logo image customizing
+            img{
+                width: 100px;
+                height: auto; 
+            }
+
+            //logo colapsed image customizing
+            .logo-col{
+                width: 35px;
+                height: auto; 
+            }
+
+            mat-divider{
+                border-top-width: 2px;
+                border-color: white;
+            }
+
+            //subheader styling
+            .mat-subheader{
+                color: #6e9fde;
+                font-size: 0.6rem;
+                font-weight: 100;
+                letter-spacing: 1px;
+            }
+
             //item styling
-            .mat-list-item {
+            mat-list-item {
                 color: #94a3b8 !important;
                 font-size: 0.8rem;
                 height: 44px !important;
@@ -47,7 +79,12 @@ mat-sidenav-container{
                         }
                     }
                 }
-            }
+
+                mat-icon{
+                    vertical-align: center;
+                    margin-right: 1rem;
+                }
+            } 
 
             //selected styling
             .list-item-active {
