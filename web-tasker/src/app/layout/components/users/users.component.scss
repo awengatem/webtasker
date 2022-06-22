@@ -2,12 +2,14 @@
     color: white;
     padding: 0 1rem;
     background: #f1f5f9;
+
     &__box{
         min-height: 85px;
         background: #1e293b;
         margin: 0 -1rem;
         font-size: 24px;
     }
+
     &__content{
         min-height: calc(100vh - 178px);
         border-radius: 10px;
@@ -26,48 +28,72 @@
             .grid-container {
                 margin: 0px;
                 //margin-bottom: 40px;
-              }
-              
-              .dashboard-card {
-                position: absolute;
-                top: 15px;
-                left: 15px;
-                right: 15px;
-                bottom: 15px;
-              
-                //height: 50px;
-                //background: cyan;
+
+                /*grid card styling*/
+                .dashboard-card {
+                    position: absolute;
+                    top: 10px;
+                    left: 15px;
+                    right: 15px;
+                    bottom: 10px;
+
+                    &.second{
+                        //taking full space
+                        padding: 0px;
+                    }
+                    //height: 50px;
+                    //background: cyan;                    
+                }
+                .stats{
+                                        
+                }
                 
-              }
-              
-              .more-button {
-                position: absolute;
-                top: 5px;
-                right: 10px;
-              }
-              
-              .dashboard-card-content {
-                text-align: center;
-              }
-              
-              .welcome{
+                /*welcome bar styling*/
+                .welcome{
                 margin-top: 0px;
                 background: grey;
                 margin-right: 15px;
                 margin-left: 15px;
                 font-size: 12;
+                }        
+                
+                /*grid list styling---holding the grid cards--*/
+                .dash-cards{
+                    margin-top: 50px;
 
-                &_message{
-                    font-size: 25;
-                }
-                mat-card-content{
-                    font-size: 24;
-                }
-              }
+                    .stats{
+                        //left: 0px;
+                    }
+        
+                    .card{
+                        background: #06beb6;  /* fallback for old browsers */
+                        background: -webkit-linear-gradient(to right, #48b1bf, #06beb6) !important;  /* Chrome 10-25, Safari 5.1-6 */
+                        background: linear-gradient(to right, #48b1bf, #06beb6) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+                        //margin: 0px;            
+                    }
+
+                    .d-flex{
+                        //height: 150px;
+                    }
+        
+                    svg{
+                        color: rgb(24, 85, 85);
+                    }
+        
+                    .mb-0{
+                        font-size: 18px;
+                    }
+        
+                    h3{
+                        font-size: 20px;
+                        font-weight: 500;
+                    }
+                }   
+            }
               
-              .dash-cards{
-                margin-top: 45px;
-              }
+            
         }
-    }
+    }    
+    
+    
 }
