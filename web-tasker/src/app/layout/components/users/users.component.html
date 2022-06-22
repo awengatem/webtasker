@@ -1,8 +1,28 @@
 <div class="container-fluid page">
     <div class="page__box p-3 mt-2">Users</div>
     <div class="page__content shadow p-3 position-relative">
-        <div class="page__content-data position-absolute">
-            Users Content Goes Here
+        <div class="page__content-data">
+            
+            <div class="grid-container">
+
+                <mat-card class="welcome">
+                    <!-- <mat-card-title></mat-card-title> -->
+                    <mat-card-content class="welcome_message">welcome</mat-card-content>
+                </mat-card>
+              
+                <mat-grid-list class="dash-cards" cols="3" rowHeight="150px">
+                  <mat-grid-tile [colspan]="2" [rowspan]="2">
+                    <mat-card class="dashboard-card">project</mat-card>
+                  </mat-grid-tile>
+                  <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-card class="dashboard-card">card1</mat-card>
+                  </mat-grid-tile>
+                  <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-card class="dashboard-card">card2</mat-card>
+                  </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+
         </div>
     </div>
 </div>

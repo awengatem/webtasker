@@ -12,9 +12,16 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import { LayoutRoutingModule } from './layout-routing.module';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import { RouterModule } from '@angular/router';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+
+//import used by dash component
+import { LayoutModule } from '@angular/cdk/layout';
+import { DashComponent } from './components/dash/dash.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +29,8 @@ import { WrapperComponent } from './components/wrapper/wrapper.component';
     SidebarComponent,
     FooterComponent,
     SidenavComponent,
-    WrapperComponent
+    WrapperComponent,
+    DashComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +43,11 @@ import { WrapperComponent } from './components/wrapper/wrapper.component';
     MatMenuModule,
     MatIconModule,
     MatDividerModule, 
-    MatListModule
+    MatListModule,
+    MatGridListModule,
+    MatCardModule,
+    MatButtonModule,
+    LayoutModule
   ],
   exports: [
     HeaderComponent,
@@ -44,4 +56,4 @@ import { WrapperComponent } from './components/wrapper/wrapper.component';
     SidenavComponent
   ]
 })
-export class LayoutModule { }
+export class LayoutModule1 { }
