@@ -31,6 +31,11 @@
                     left: 15px;
                     right: 15px;
                     bottom: 10px;
+                    //overflow-y: auto;
+
+                    &.first{
+                        //taking full space                        
+                    }
 
                     &.second{
                         //taking full space
@@ -39,6 +44,13 @@
                     background: #d674cb;  /* fallback for old browsers */
                     background: -webkit-linear-gradient(to right,#d674cb,#89fffd);  /* Chrome 10-25, Safari 5.1-6 */
                     background: linear-gradient(to right,#d674cb,#89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+                    .my-projects{
+                        background: red;
+                        //overflow-x: hidden;
+                        //position: relative;
+                        //overflow-y: scroll;
+                    }
 
                     //height: 50px;
                     //background: cyan;                    
