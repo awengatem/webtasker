@@ -15,7 +15,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 
 import { LayoutModule1 } from './layout/layout.module';
 import { HomeComponent } from './layout/components/home/home.component';
-import { DashboardComponent } from './layout/components/dashboard/dashboard.component';
+import { ProjectsComponent } from './layout/components/projects/projects.component';
 import { UsersComponent } from './layout/components/users/users.component';
 import { MatCardModule } from '@angular/material/card';
 
@@ -23,7 +23,7 @@ import { MatCardModule } from '@angular/material/card';
   declarations: [
     AppComponent,
     HomeComponent,
-    DashboardComponent,
+    ProjectsComponent,
     UsersComponent
   ],
   imports: [

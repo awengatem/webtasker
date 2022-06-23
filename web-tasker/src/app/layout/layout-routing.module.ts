@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashComponent } from './components/dash/dash.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProjectsComponent } from './components/projects/projects.component';
 import { HomeComponent } from './components/home/home.component';
 import { UsersComponent } from './components/users/users.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
@@ -12,12 +12,12 @@ const routes: Routes = [
     component: WrapperComponent,
     children: [
       {
-        path: 'dashboard',
-        component: DashboardComponent
-      },
-      {
         path: 'home',
         component: HomeComponent
+      },
+      {
+        path: 'projects',
+        component: ProjectsComponent
       },
       {
         path: 'users',
