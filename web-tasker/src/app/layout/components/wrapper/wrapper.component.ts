@@ -12,8 +12,9 @@ interface sideNavToggle{
 })
 export class WrapperComponent implements OnInit {
   @Output() onToggleSideNav: EventEmitter<sideNavToggle> = new EventEmitter();
-  screenWidth = 0;
 
+  //variables
+  screenWidth = 0;
   isExpanded: boolean = true;
 
   constructor() { }

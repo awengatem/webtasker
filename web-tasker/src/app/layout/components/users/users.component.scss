@@ -19,12 +19,6 @@
         font-size: 2rem;
 
         &-data{
-            //position: relative;
-            // top: 50%;
-            // left: 50%;
-            // transform: translate(-50%,-50%);
-            //background: cyan;
-
             .grid-container {
                 margin: 0px;
                 //margin-bottom: 40px;
@@ -41,15 +35,9 @@
                         //taking full space
                         padding: 0px;
                     }
-                    // background: #ef32d9;  /* fallback for old browsers */
-                    // background: -webkit-linear-gradient(to right,#ef32d9,#89fffd);  /* Chrome 10-25, Safari 5.1-6 */
-                    // background: linear-gradient(to right,#ef32d9,#89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-                    background: #BE93C5;  /* fallback for old browsers */
-                    background: -webkit-linear-gradient(to right, #7BC6CC, #BE93C5);  /* Chrome 10-25, Safari 5.1-6 */
-                    background: linear-gradient(to right, #7BC6CC, #BE93C5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
+                    background: #d674cb;  /* fallback for old browsers */
+                    background: -webkit-linear-gradient(to right,#d674cb,#89fffd);  /* Chrome 10-25, Safari 5.1-6 */
+                    background: linear-gradient(to right,#d674cb,#89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
                     //height: 50px;
                     //background: cyan;                    
@@ -75,21 +63,9 @@
                         
                     }
         
-                    .card{
-                        // background: #06beb6;  /* fallback for old browsers */
-                        // background: -webkit-linear-gradient(to right, #48b1bf, #06beb6) !important;  /* Chrome 10-25, Safari 5.1-6 */
-                        // background: linear-gradient(to right, #48b1bf, #06beb6) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
-
-                        // background: #ef32d9;  /* fallback for old browsers */
-                        // background: -webkit-linear-gradient(to right,#ef32d9,#89fffd);  /* Chrome 10-25, Safari 5.1-6 */
-                        // background: linear-gradient(to right,#ef32d9,#89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-                        background: #BE93C5;  /* fallback for old browsers */
-                        background: -webkit-linear-gradient(to right, #7BC6CC, #BE93C5);  /* Chrome 10-25, Safari 5.1-6 */
-                        background: linear-gradient(to right, #7BC6CC, #BE93C5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-                        //margin: 0px;           
+                    .card{   
+                        background: transparent;
+                        
                     }
 
                     .align-self-center{
