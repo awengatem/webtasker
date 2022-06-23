@@ -57,9 +57,13 @@ mat-sidenav-container{
             //subheader styling
             .mat-subheader{
                 color: #6e9fde;
-                font-size: 0.6rem;
+                font-size: 0.8rem;
                 font-weight: 100;
                 letter-spacing: 1px;
+
+                &.h2-col{
+                    letter-spacing: 0px;
+                }
             }
 
             //item styling

@@ -14,7 +14,8 @@
 
             <mat-divider></mat-divider>
 
-            <h2 matSubheader class="mt-2">Applications</h2>
+            <h2 matSubheader class="mt-2" *ngIf="isExpanded">Applications</h2>
+            <h2 matSubheader class="h2-col mt-2" *ngIf="!isExpanded">Apps</h2>
 
             <mat-list-item [routerLink]="'home'" routerLinkActive="list-item-active">
                 <mat-icon mat-list-icon class="">home</mat-icon>
