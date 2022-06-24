@@ -2,6 +2,7 @@
     color: white;
     padding: 0 1rem;
     background: #f1f5f9;
+    //background: cyan;
 
     &__box{
         min-height: 85px;
@@ -15,7 +16,7 @@
         border-radius: 10px;
         margin-top: -2rem;
         //background: white;
-        background: rgb(29, 29, 29);
+        background: #010001;
         color: black; 
         font-size: 2rem;
 
@@ -39,17 +40,15 @@
 
                     &.second{
                         //taking full space
-                        padding: 0px;
+                        //padding: 0px;
                     }
                     background: #d674cb;  /* fallback for old browsers */
                     background: -webkit-linear-gradient(to right,#d674cb,#89fffd);  /* Chrome 10-25, Safari 5.1-6 */
                     background: linear-gradient(to right,#d674cb,#89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
                     .my-projects{
-                        background: red;
-                        //overflow-x: hidden;
-                        //position: relative;
-                        //overflow-y: scroll;
+                       overflow-y: auto;
+                       height: 215px;
                     }
 
                     //height: 50px;
@@ -62,7 +61,9 @@
                 /*welcome bar styling*/
                 .welcome{
                 margin-top: 0px;
-                background: #94a3b8;
+                color: #94a3b8 !important;
+                //background: #94a3b8;
+                background: #2c3344 !important;
                 margin-right: 15px;
                 margin-left: 15px;
                 font-size: 12;
