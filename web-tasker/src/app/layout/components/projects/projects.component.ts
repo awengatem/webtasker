@@ -15,10 +15,15 @@ export class ProjectsComponent implements OnInit {
   //navigation of schedule
   tabElement: any;
   openTab: any;
+  butElement: any;
 
   tabIdArray: string[] = [];
   loopElement: any;
   loopResult: any;
+
+  butIdArray: string[] = [];
+  loopButElement: any;
+  butResult: any;
 
   //getting the open tab
   getOpenTab(): string {
@@ -32,9 +37,23 @@ export class ProjectsComponent implements OnInit {
     return this.loopResult;
   }
 
+  //remove active link on tab
+  removeActive(){
+    this.butIdArray = ["mon","tue","wed","thu","fri"];
+    this.butIdArray.forEach((tab)=>{
+      this.loopButElement = document.getElementById(tab);
+      if (this.loopButElement.classList.contains("active")) {
+        this.loopButElement.classList.remove("active");
+      }
+    });
+  }
+
   showTab1(){
     this.openTab = document.getElementById(this.getOpenTab());
     this.openTab.classList.remove("active");
+    this.removeActive();
+    this.butElement = document.getElementById("mon");
+    this.butElement.classList.add("active");
     this.tabElement = document.getElementById("tabNav1");
     this.tabElement.classList.add("active");
     console.log("clicked");
@@ -42,24 +61,36 @@ export class ProjectsComponent implements OnInit {
   showTab2(){
     this.openTab = document.getElementById(this.getOpenTab());
     this.openTab.classList.remove("active");
+    this.removeActive();
+    this.butElement = document.getElementById("tue");
+    this.butElement.classList.add("active");
     this.tabElement = document.getElementById("tabNav2");
     this.tabElement.classList.add("active");
   }
   showTab3(){
     this.openTab = document.getElementById(this.getOpenTab());
     this.openTab.classList.remove("active");
+    this.removeActive();
+    this.butElement = document.getElementById("wed");
+    this.butElement.classList.add("active");
     this.tabElement = document.getElementById("tabNav3");
     this.tabElement.classList.add("active");
   }
   showTab4(){
     this.openTab = document.getElementById(this.getOpenTab());
     this.openTab.classList.remove("active");
+    this.removeActive();
+    this.butElement = document.getElementById("thu");
+    this.butElement.classList.add("active");
     this.tabElement = document.getElementById("tabNav4");
     this.tabElement.classList.add("active");
   }
   showTab5(){
     this.openTab = document.getElementById(this.getOpenTab());
     this.openTab.classList.remove("active");
+    this.removeActive();
+    this.butElement = document.getElementById("fri");
+    this.butElement.classList.add("active");
     this.tabElement = document.getElementById("tabNav5");
     this.tabElement.classList.add("active");
   }

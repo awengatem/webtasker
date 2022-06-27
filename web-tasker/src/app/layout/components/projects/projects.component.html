@@ -13,7 +13,7 @@
                         
                                 <!-- Schedule Top Navigation -->
                                 <nav class="nav nav-tabs">
-                                    <button class="nav-link" (click)="showTab1()" id="mon"><a class="">Mon</a></button>
+                                    <button class="nav-link active" (click)="showTab1()" id="mon"><a class="">Mon</a></button>
                                     <button class="nav-link" (click)="showTab2()" id="tue"><a class="">Tue</a></button>
                                     <button class="nav-link" (click)="showTab3()" id="wed"><a class="">Wed</a></button>
                                     <button class="nav-link" (click)="showTab4()" id="thu"><a class="">Thu</a></button>
@@ -31,9 +31,9 @@
                                                 <img src="https://via.placeholder.com/100x80/FFB6C1/000000" alt="Contemporary Dance">
                                                 </div>
                                                 <div class="timetable-item-main">
-                                                <div class="timetable-item-time">4:00pm - 5:00pm</div>
-                                                <div class="timetable-item-name">Contemporary Dance</div>
-                                                <a href="#" class="btn btn-primary btn-book">Book</a>
+                                                <div class="timetable-item-time">8:00am - 1:00pm</div>
+                                                <div class="timetable-item-name">Fruit scout</div>
+                                                <a href="#" class="btn btn-primary btn-book">Start</a>
                                                 <div class="timetable-item-like">
                                                     <i class="fa fa-heart-o" aria-hidden="true"></i>
                                                     <i class="fa fa-heart" aria-hidden="true"></i>
@@ -50,9 +50,9 @@
                                                 <img src="https://via.placeholder.com/100x80/00FFFF/000000" alt="Break Dance">
                                                 </div>
                                                 <div class="timetable-item-main">
-                                                <div class="timetable-item-time">5:00pm - 6:00pm</div>
-                                                <div class="timetable-item-name">Break Dance</div>
-                                                <a href="#" class="btn btn-primary btn-book">Book</a>
+                                                <div class="timetable-item-time">1:00pm - 2:00pm</div>
+                                                <div class="timetable-item-name">Lunch Break</div>
+                                                <a href="#" class="btn btn-primary btn-book">Start</a>
                                                 <div class="timetable-item-like">
                                                     <i class="fa fa-heart-o" aria-hidden="true"></i>
                                                     <i class="fa fa-heart" aria-hidden="true"></i>
@@ -69,9 +69,9 @@
                                                 <img src="https://via.placeholder.com/100x80/8A2BE2/000000" alt="Street Dance">
                                                 </div>
                                                 <div class="timetable-item-main">
-                                                <div class="timetable-item-time">5:00pm - 6:00pm</div>
-                                                <div class="timetable-item-name">Street Dance</div>
-                                                <a href="#" class="btn btn-primary btn-book">Book</a>
+                                                <div class="timetable-item-time">2:00pm - 5:00pm</div>
+                                                <div class="timetable-item-name">Bee Project</div>
+                                                <a href="#" class="btn btn-primary btn-book">Start</a>
                                                 <div class="timetable-item-like">
                                                     <i class="fa fa-heart-o" aria-hidden="true"></i>
                                                     <i class="fa fa-heart" aria-hidden="true"></i>
@@ -88,9 +88,9 @@
                                                 <img src="https://via.placeholder.com/100x80/6495ED/000000" alt="Yoga">
                                                 </div>
                                                 <div class="timetable-item-main">
-                                                <div class="timetable-item-time">7:00pm - 8:00pm</div>
-                                                <div class="timetable-item-name">Yoga</div>
-                                                <a href="#" class="btn btn-primary btn-book">Book</a>
+                                                <div class="timetable-item-time">8:00pm - 1:30am</div>
+                                                <div class="timetable-item-name">Night shift bee project</div>
+                                                <a href="#" class="btn btn-primary btn-book">Start</a>
                                                 <div class="timetable-item-like">
                                                     <i class="fa fa-heart-o" aria-hidden="true"></i>
                                                     <i class="fa fa-heart" aria-hidden="true"></i>
@@ -107,9 +107,9 @@
                                                 <img src="https://via.placeholder.com/100x80/00FFFF/000000" alt="Stretching">
                                                 </div>
                                                 <div class="timetable-item-main">
-                                                <div class="timetable-item-time">6:00pm - 7:00pm</div>
-                                                <div class="timetable-item-name">Stretching</div>
-                                                <a href="#" class="btn btn-primary btn-book">Book</a>
+                                                <div class="timetable-item-time">1:30am - 2:00am</div>
+                                                <div class="timetable-item-name">Night shift break</div>
+                                                <a href="#" class="btn btn-primary btn-book">Start</a>
                                                 <div class="timetable-item-like">
                                                     <i class="fa fa-heart-o" aria-hidden="true"></i>
                                                     <i class="fa fa-heart" aria-hidden="true"></i>
@@ -126,9 +126,9 @@
                                                 <img src="https://via.placeholder.com/100x80/008B8B/000000" alt="Street Dance">
                                                 </div>
                                                 <div class="timetable-item-main">
-                                                <div class="timetable-item-time">8:00pm - 9:00pm</div>
-                                                <div class="timetable-item-name">Street Dance</div>
-                                                <a href="#" class="btn btn-primary btn-book">Book</a>
+                                                <div class="timetable-item-time">2:00am - 5:00am</div>
+                                                <div class="timetable-item-name">Night shift fruit scout</div>
+                                                <a href="#" class="btn btn-primary btn-book">Start</a>
                                                 <div class="timetable-item-like">
                                                     <i class="fa fa-heart-o" aria-hidden="true"></i>
                                                     <i class="fa fa-heart" aria-hidden="true"></i>
@@ -141,20 +141,172 @@
                                     </div>
 
                                     <div class="tab-pane show" id="tabNav2">
-                                        number 2
+                                        <div class="row">
+                                            <!-- Schedule Item 1 -->
+                                            <div class="col-md-6">
+                                                <div class="timetable-item">
+                                                    <div class="timetable-item-img">
+                                                    <img src="https://via.placeholder.com/100x80/FFB6C1/000000" alt="Contemporary Dance">
+                                                    </div>
+                                                    <div class="timetable-item-main">
+                                                    <div class="timetable-item-time">8:00am - 1:00pm</div>
+                                                    <div class="timetable-item-name">Fruit scout</div>
+                                                    <a href="#" class="btn btn-primary btn-book">Start</a>
+                                                    <div class="timetable-item-like">
+                                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                                        <div class="timetable-item-like-count">11</div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                    
+                                                <!-- Schedule Item 2 -->
+                                                <div class="col-md-6">
+                                                <div class="timetable-item">
+                                                    <div class="timetable-item-img">
+                                                    <img src="https://via.placeholder.com/100x80/00FFFF/000000" alt="Break Dance">
+                                                    </div>
+                                                    <div class="timetable-item-main">
+                                                    <div class="timetable-item-time">1:00pm - 2:00pm</div>
+                                                    <div class="timetable-item-name">Lunch Break</div>
+                                                    <a href="#" class="btn btn-primary btn-book">Start</a>
+                                                    <div class="timetable-item-like">
+                                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                                        <div class="timetable-item-like-count">28</div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                        </div>
                                     </div>
 
                                     <div class="tab-pane show" id="tabNav3">
-                                        number 3
+                                        <div class="row">
+                                            <!-- Schedule Item 3 -->
+                                            <div class="col-md-6">
+                                                <div class="timetable-item">
+                                                    <div class="timetable-item-img">
+                                                    <img src="https://via.placeholder.com/100x80/8A2BE2/000000" alt="Street Dance">
+                                                    </div>
+                                                    <div class="timetable-item-main">
+                                                    <div class="timetable-item-time">2:00pm - 5:00pm</div>
+                                                    <div class="timetable-item-name">Bee Project</div>
+                                                    <a href="#" class="btn btn-primary btn-book">Start</a>
+                                                    <div class="timetable-item-like">
+                                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                                        <div class="timetable-item-like-count">28</div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                    
+                                                <!-- Schedule Item 4 -->
+                                                <div class="col-md-6">
+                                                <div class="timetable-item">
+                                                    <div class="timetable-item-img">
+                                                    <img src="https://via.placeholder.com/100x80/6495ED/000000" alt="Yoga">
+                                                    </div>
+                                                    <div class="timetable-item-main">
+                                                    <div class="timetable-item-time">8:00pm - 1:30am</div>
+                                                    <div class="timetable-item-name">Night shift bee project</div>
+                                                    <a href="#" class="btn btn-primary btn-book">Start</a>
+                                                    <div class="timetable-item-like">
+                                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                                        <div class="timetable-item-like-count">23</div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                        </div>
                                     </div>
 
                                     <div class="tab-pane show" id="tabNav4">
-                                        number 4
+                                        <div class="row">
+                                            <!-- Schedule Item 5 -->
+                                            <div class="col-md-6">
+                                                <div class="timetable-item">
+                                                    <div class="timetable-item-img">
+                                                    <img src="https://via.placeholder.com/100x80/00FFFF/000000" alt="Stretching">
+                                                    </div>
+                                                    <div class="timetable-item-main">
+                                                    <div class="timetable-item-time">1:30am - 2:00am</div>
+                                                    <div class="timetable-item-name">Night shift break</div>
+                                                    <a href="#" class="btn btn-primary btn-book">Start</a>
+                                                    <div class="timetable-item-like">
+                                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                                        <div class="timetable-item-like-count">14</div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                    
+                                                <!-- Schedule Item 6 -->
+                                                <div class="col-md-6">
+                                                <div class="timetable-item">
+                                                    <div class="timetable-item-img">
+                                                    <img src="https://via.placeholder.com/100x80/008B8B/000000" alt="Street Dance">
+                                                    </div>
+                                                    <div class="timetable-item-main">
+                                                    <div class="timetable-item-time">2:00am - 5:00am</div>
+                                                    <div class="timetable-item-name">Night shift fruit scout</div>
+                                                    <a href="#" class="btn btn-primary btn-book">Start</a>
+                                                    <div class="timetable-item-like">
+                                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                                        <div class="timetable-item-like-count">9</div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                        </div>
                                     </div>
 
                                     <div class="tab-pane show" id="tabNav5">
-                                        number 5
-                                    </div>
+                                        <div class="row">
+                                            <!-- Schedule Item 1 -->
+                                            <div class="col-md-6">
+                                                <div class="timetable-item">
+                                                    <div class="timetable-item-img">
+                                                    <img src="https://via.placeholder.com/100x80/FFB6C1/000000" alt="Contemporary Dance">
+                                                    </div>
+                                                    <div class="timetable-item-main">
+                                                    <div class="timetable-item-time">8:00am - 1:00pm</div>
+                                                    <div class="timetable-item-name">Fruit scout</div>
+                                                    <a href="#" class="btn btn-primary btn-book">Start</a>
+                                                    <div class="timetable-item-like">
+                                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                                        <div class="timetable-item-like-count">11</div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                    
+                                                <!-- Schedule Item 2 -->
+                                                <div class="col-md-6">
+                                                <div class="timetable-item">
+                                                    <div class="timetable-item-img">
+                                                    <img src="https://via.placeholder.com/100x80/00FFFF/000000" alt="Break Dance">
+                                                    </div>
+                                                    <div class="timetable-item-main">
+                                                    <div class="timetable-item-time">1:00pm - 2:00pm</div>
+                                                    <div class="timetable-item-name">Lunch Break</div>
+                                                    <a href="#" class="btn btn-primary btn-book">Start</a>
+                                                    <div class="timetable-item-like">
+                                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                                        <div class="timetable-item-like-count">28</div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                 </div>
                             </div>
