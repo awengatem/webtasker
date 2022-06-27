@@ -20,6 +20,7 @@ export class ProjectsComponent implements OnInit {
   loopElement: any;
   loopResult: any;
 
+  //getting the open tab
   getOpenTab(): string {
     this.tabIdArray = ["tabNav1","tabNav2","tabNav3","tabNav4","tabNav5"];
     this.tabIdArray.forEach((tab)=>{
