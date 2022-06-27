@@ -13,8 +13,10 @@
         min-height: calc(100vh - 178px);
         border-radius: 10px;
         margin-top: -2rem;
-        background: white;
-        color: black;
+        //background: white;
+        //color: black;
+        background: #010001;
+        color: #fff;
         font-size: 2rem;
 
         &-data{
@@ -32,7 +34,8 @@
                         li {
                             list-style: none;
                             font-size: 15px;
-                            color: #7f7f7f;
+                            //color: #7f7f7f;
+                            color: white;
                         }
                     }
                 }
@@ -109,7 +112,10 @@
                 }
                 .schedule {
                     .nav-tabs {
-                        border-bottom: 2px solid #104455;
+                        //border-bottom: 2px solid #104455;
+                        border-bottom: 2px solid #d674cb;  /* fallback for old browsers */
+                        border-bottom: 2px solid -webkit-linear-gradient(to right,#d674cb,#89fffd);  /* Chrome 10-25, Safari 5.1-6 */
+                        border-bottom: 2px solid linear-gradient(to right,#d674cb,#89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
                     }
                     button{}
                     
@@ -120,7 +126,8 @@
                         font-size: 12px;
                         text-align: center;
                         text-transform: uppercase;
-                        color: #3d3d3d;
+                        //color: #3d3d3d;
+                        color: #fff;
                         font-weight: 500;
                         -webkit-transition: none;
                         -o-transition: none;
@@ -131,18 +138,33 @@
                         cursor: pointer;
                         &:hover {
                             &:not(.active) {
-                                background: #46c1be;
-                                border-color: #46c1be;
+                                //background: #46c1be;
+                                //border-color: #46c1be;
+                                //color: black;
+
                                 color: #fff;
+                                border-color: #89fffd;
                             }
                         }
                     }
                     .nav-link.active {
-                        background: #104455;
-                        border-color: #104455;
-                        color: #fff;
+                        //background: #104455;
+                        //border-color: #104455;
+                        //color: #fff;
+
+                        background: #d674cb;  /* fallback for old browsers */
+                        background: -webkit-linear-gradient(to right,#d674cb,#89fffd);  /* Chrome 10-25, Safari 5.1-6 */
+                        background: linear-gradient(to right,#d674cb,#89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */                        
+                        border-color: #d674cb;  /* fallback for old browsers */
+                        border-color: -webkit-linear-gradient(to right,#d674cb,#89fffd);  /* Chrome 10-25, Safari 5.1-6 */
+                        border-color: linear-gradient(to right,#d674cb,#89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                        color: #010001;
                         &:focus {
-                            border-color: #104455;
+                            //border-color: #104455;
+                            
+                            border-color: #d674cb;  /* fallback for old browsers */
+                            border-color: -webkit-linear-gradient(to right,#d674cb,#89fffd);  /* Chrome 10-25, Safari 5.1-6 */
+                            border-color: linear-gradient(to right,#d674cb,#89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
                         }
                     }
                     .tab-pane {
