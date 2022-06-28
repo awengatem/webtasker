@@ -3,14 +3,12 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss']
+  styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   //navigation of schedule
   tabElement: any;
@@ -27,10 +25,18 @@ export class ProjectsComponent implements OnInit {
 
   //getting the open tab
   getOpenTab(): string {
-    this.tabIdArray = ["tabNav1","tabNav2","tabNav3","tabNav4","tabNav5","tabNav6","tabNav7"];
-    this.tabIdArray.forEach((tab)=>{
+    this.tabIdArray = [
+      'tabNav1',
+      'tabNav2',
+      'tabNav3',
+      'tabNav4',
+      'tabNav5',
+      'tabNav6',
+      'tabNav7',
+    ];
+    this.tabIdArray.forEach((tab) => {
       this.loopElement = document.getElementById(tab);
-      if (this.loopElement.classList.contains("active")) {
+      if (this.loopElement.classList.contains('active')) {
         this.loopResult = tab;
       }
     });
@@ -38,79 +44,78 @@ export class ProjectsComponent implements OnInit {
   }
 
   //remove active link on tab
-  removeActive(){
-    this.butIdArray = ["mon","tue","wed","thu","fri","sat","sun"];
-    this.butIdArray.forEach((tab)=>{
+  removeActive() {
+    this.butIdArray = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+    this.butIdArray.forEach((tab) => {
       this.loopButElement = document.getElementById(tab);
-      if (this.loopButElement.classList.contains("active")) {
-        this.loopButElement.classList.remove("active");
+      if (this.loopButElement.classList.contains('active')) {
+        this.loopButElement.classList.remove('active');
       }
     });
   }
 
-  showTab1(){
+  showTab1() {
     this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove("active");
+    this.openTab.classList.remove('active');
     this.removeActive();
-    this.butElement = document.getElementById("mon");
-    this.butElement.classList.add("active");
-    this.tabElement = document.getElementById("tabNav1");
-    this.tabElement.classList.add("active");
-    console.log("clicked");
+    this.butElement = document.getElementById('mon');
+    this.butElement.classList.add('active');
+    this.tabElement = document.getElementById('tabNav1');
+    this.tabElement.classList.add('active');
+    console.log('clicked');
   }
-  showTab2(){
+  showTab2() {
     this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove("active");
+    this.openTab.classList.remove('active');
     this.removeActive();
-    this.butElement = document.getElementById("tue");
-    this.butElement.classList.add("active");
-    this.tabElement = document.getElementById("tabNav2");
-    this.tabElement.classList.add("active");
+    this.butElement = document.getElementById('tue');
+    this.butElement.classList.add('active');
+    this.tabElement = document.getElementById('tabNav2');
+    this.tabElement.classList.add('active');
   }
-  showTab3(){
+  showTab3() {
     this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove("active");
+    this.openTab.classList.remove('active');
     this.removeActive();
-    this.butElement = document.getElementById("wed");
-    this.butElement.classList.add("active");
-    this.tabElement = document.getElementById("tabNav3");
-    this.tabElement.classList.add("active");
+    this.butElement = document.getElementById('wed');
+    this.butElement.classList.add('active');
+    this.tabElement = document.getElementById('tabNav3');
+    this.tabElement.classList.add('active');
   }
-  showTab4(){
+  showTab4() {
     this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove("active");
+    this.openTab.classList.remove('active');
     this.removeActive();
-    this.butElement = document.getElementById("thu");
-    this.butElement.classList.add("active");
-    this.tabElement = document.getElementById("tabNav4");
-    this.tabElement.classList.add("active");
+    this.butElement = document.getElementById('thu');
+    this.butElement.classList.add('active');
+    this.tabElement = document.getElementById('tabNav4');
+    this.tabElement.classList.add('active');
   }
-  showTab5(){
+  showTab5() {
     this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove("active");
+    this.openTab.classList.remove('active');
     this.removeActive();
-    this.butElement = document.getElementById("fri");
-    this.butElement.classList.add("active");
-    this.tabElement = document.getElementById("tabNav5");
-    this.tabElement.classList.add("active");
+    this.butElement = document.getElementById('fri');
+    this.butElement.classList.add('active');
+    this.tabElement = document.getElementById('tabNav5');
+    this.tabElement.classList.add('active');
   }
-  showTab6(){
+  showTab6() {
     this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove("active");
+    this.openTab.classList.remove('active');
     this.removeActive();
-    this.butElement = document.getElementById("sat");
-    this.butElement.classList.add("active");
-    this.tabElement = document.getElementById("tabNav6");
-    this.tabElement.classList.add("active");
+    this.butElement = document.getElementById('sat');
+    this.butElement.classList.add('active');
+    this.tabElement = document.getElementById('tabNav6');
+    this.tabElement.classList.add('active');
   }
-  showTab7(){
+  showTab7() {
     this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove("active");
+    this.openTab.classList.remove('active');
     this.removeActive();
-    this.butElement = document.getElementById("sun");
-    this.butElement.classList.add("active");
-    this.tabElement = document.getElementById("tabNav7");
-    this.tabElement.classList.add("active");
+    this.butElement = document.getElementById('sun');
+    this.butElement.classList.add('active');
+    this.tabElement = document.getElementById('tabNav7');
+    this.tabElement.classList.add('active');
   }
-  
 }
