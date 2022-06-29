@@ -54,6 +54,7 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
+  //methods used by navtab buttons for navigation
   showTab1() {
     this.openTab = document.getElementById(this.getOpenTab());
     this.openTab.classList.remove('active');
