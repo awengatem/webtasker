@@ -12,6 +12,10 @@ const routes: Routes = [
     component: WrapperComponent,
     children: [
       {
+        path: '',
+        component: HomeComponent
+      },
+      {
         path: 'home',
         component: HomeComponent
       },

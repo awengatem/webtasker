@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-projects',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
-  constructor() {}
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {}
 
@@ -118,5 +119,21 @@ export class ProjectsComponent implements OnInit {
     this.butElement.classList.add('active');
     this.tabElement = document.getElementById('tabNav7');
     this.tabElement.classList.add('active');
+  }
+
+  //methods for testing backend api
+  createNewProject(){
+    this.projectService.createProject('finleys project').subscribe((response: any)=>{
+      console.log(response);
+    });
+  }
+
+  getProjects(){
+    this.projectService.getProject().subscribe((response: any)=>{
+      response.forEach((item: any)=>{
+        console.log(item.title);
+      });
+      //console.log(response);
+    });
   }
 }
