@@ -55,69 +55,14 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
-  //methods used by navtab buttons for navigation
-  showTab1() {
+  //method used by navtab buttons for navigation
+  showTab(bId: string,tabId: string) {
     this.openTab = document.getElementById(this.getOpenTab());
     this.openTab.classList.remove('active');
     this.removeActive();
-    this.butElement = document.getElementById('mon');
+    this.butElement = document.getElementById(bId);
     this.butElement.classList.add('active');
-    this.tabElement = document.getElementById('tabNav1');
-    this.tabElement.classList.add('active');
-    console.log('clicked');
-  }
-  showTab2() {
-    this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove('active');
-    this.removeActive();
-    this.butElement = document.getElementById('tue');
-    this.butElement.classList.add('active');
-    this.tabElement = document.getElementById('tabNav2');
-    this.tabElement.classList.add('active');
-  }
-  showTab3() {
-    this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove('active');
-    this.removeActive();
-    this.butElement = document.getElementById('wed');
-    this.butElement.classList.add('active');
-    this.tabElement = document.getElementById('tabNav3');
-    this.tabElement.classList.add('active');
-  }
-  showTab4() {
-    this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove('active');
-    this.removeActive();
-    this.butElement = document.getElementById('thu');
-    this.butElement.classList.add('active');
-    this.tabElement = document.getElementById('tabNav4');
-    this.tabElement.classList.add('active');
-  }
-  showTab5() {
-    this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove('active');
-    this.removeActive();
-    this.butElement = document.getElementById('fri');
-    this.butElement.classList.add('active');
-    this.tabElement = document.getElementById('tabNav5');
-    this.tabElement.classList.add('active');
-  }
-  showTab6() {
-    this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove('active');
-    this.removeActive();
-    this.butElement = document.getElementById('sat');
-    this.butElement.classList.add('active');
-    this.tabElement = document.getElementById('tabNav6');
-    this.tabElement.classList.add('active');
-  }
-  showTab7() {
-    this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove('active');
-    this.removeActive();
-    this.butElement = document.getElementById('sun');
-    this.butElement.classList.add('active');
-    this.tabElement = document.getElementById('tabNav7');
+    this.tabElement = document.getElementById(tabId);
     this.tabElement.classList.add('active');
   }
 
