@@ -1,44 +1,58 @@
-<mat-sidenav-container autosize >
-    <mat-sidenav #sidenav mode="side" opened="true" class="sidebar" [ngClass]="isExpanded ? 'sidebar-extended': ''" >
-
-        <mat-nav-list>
-
-            <!-- <mat-list-item>
+<mat-sidenav-container autosize>
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    opened="true"
+    class="sidebar"
+    [ngClass]="isExpanded ? 'sidebar-extended' : ''"
+  >
+    <mat-nav-list>
+      <!-- <mat-list-item>
                 <mat-icon mat-list-icon class="chevron-button sidenav-button" (click)="toggleCollapse()" [ngClass]="{'rotated': isExpanded}">chevron_right</mat-icon>
             </mat-list-item> -->
 
-            <div class="logo py-4">
-                <img src="../../../assets/logo.png" alt="Company Logo" *ngIf="isExpanded">
-                <img class="logo-col" src="../../../assets/logo-col.png" alt="Company Logo" *ngIf="!isExpanded">
-            </div>
+      <div class="logo py-4">
+        <img
+          src="../../../assets/logo.png"
+          alt="Company Logo"
+          *ngIf="isExpanded"
+        />
+        <img
+          class="logo-col"
+          src="../../../assets/logo-col.png"
+          alt="Company Logo"
+          *ngIf="!isExpanded"
+        />
+      </div>
 
-            <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
 
-            <h2 matSubheader class="mt-2" *ngIf="isExpanded">Applications</h2>
-            <h2 matSubheader class="h2-col mt-2" *ngIf="!isExpanded">Apps</h2>
+      <h2 matSubheader class="mt-2" *ngIf="isExpanded">Applications</h2>
+      <h2 matSubheader class="h2-col mt-2" *ngIf="!isExpanded">Apps</h2>
 
-            <mat-list-item [routerLink]="'home'" routerLinkActive="list-item-active">
-                <mat-icon mat-list-icon class="">home</mat-icon>
-                <div class="content" *ngIf="isExpanded"> Home</div>
-            </mat-list-item>
+      <mat-list-item [routerLink]="'home'" routerLinkActive="list-item-active">
+        <mat-icon mat-list-icon class="">home</mat-icon>
+        <div class="content" *ngIf="isExpanded">Home</div>
+      </mat-list-item>
 
-            <mat-list-item [routerLink]="'projects'" routerLinkActive="list-item-active">
-                <mat-icon mat-list-icon class="">dashboard</mat-icon>
-                <div class="content" *ngIf="isExpanded"> Projects</div>
-            </mat-list-item>
+      <mat-list-item
+        [routerLink]="'projects'"
+        routerLinkActive="list-item-active"
+      >
+        <mat-icon mat-list-icon class="">dashboard</mat-icon>
+        <div class="content" *ngIf="isExpanded">Projects</div>
+      </mat-list-item>
 
-            <mat-list-item [routerLink]="'users'" routerLinkActive="list-item-active">
-                <mat-icon mat-list-icon >supervisor_account</mat-icon>
-                <div class="content" *ngIf="isExpanded"> Users</div>
-            </mat-list-item>
+      <mat-list-item [routerLink]="'users'" routerLinkActive="list-item-active">
+        <mat-icon mat-list-icon>supervisor_account</mat-icon>
+        <div class="content" *ngIf="isExpanded">Users</div>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
 
-        </mat-nav-list>
-
-    </mat-sidenav>
-
-    <div class="content">
-        <app-header (toggleSidebarForMe)="toggleCollapse()"></app-header>
-        <router-outlet></router-outlet>
-        <footer></footer>
-    </div> 
+  <div class="content">
+    <app-header (toggleSidebarForMe)="toggleCollapse()"></app-header>
+    <router-outlet></router-outlet>
+    <footer></footer>
+  </div>
 </mat-sidenav-container>

@@ -5,15 +5,22 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { HomeComponent } from './components/home/home.component';
 import { UsersComponent } from './components/users/users.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
+import { LoginComponent } from '../auth/login/login.component';
 
 const routes: Routes = [
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path:'',
     component: WrapperComponent,
+    //component: LoginComponent,
     children: [
       {
         path: '',
-        component: HomeComponent
+        redirectTo: 'home',
+        pathMatch: 'full'
       },
       {
         path: 'home',
