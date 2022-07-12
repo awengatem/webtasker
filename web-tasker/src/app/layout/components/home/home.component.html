@@ -1,147 +1,207 @@
 <div class="container-fluid page">
-    <div class="page__box p-3 mt-2">Home</div>
-    <div class="page__content shadow p-3 position-relative">
-        <div class="page__content-data">
+  <div class="page__box p-3 mt-2">Home</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <div class="grid-container">
+        <mat-card class="welcome shadow">
+          <!-- <mat-card-title></mat-card-title> -->
+          <mat-card-content class="welcome_message">welcome</mat-card-content>
+        </mat-card>
 
-          <div class="grid-container">
+        <mat-grid-list class="dash-cards" cols="3" rowHeight="150px">
+          <mat-grid-tile [colspan]="2" [rowspan]="2">
+            <mat-card class="dashboard-card first shadow">
+              <div class="shadow mt-0" style="height: 35px">
+                <h4 class="text-white ps-3 pt-1 pb-2">My Projects</h4>
+              </div>
 
-            <mat-card class="welcome shadow">
-                <!-- <mat-card-title></mat-card-title> -->
-                <mat-card-content class="welcome_message">welcome</mat-card-content>
+              <div
+                class="container ps-3 pt-2 pb-2 mt-2 p-4 card shadow my-projects"
+              >
+                <div class="header">
+                  <div class="row border-bottom" style="align-items: center">
+                    <div class="col-1">
+                      <h2>#</h2>
+                    </div>
+                    <div class="col-sm">
+                      <h2>Project</h2>
+                    </div>
+                    <div class="col-sm">
+                      <h2>Status</h2>
+                    </div>
+                    <div class="col-sm">
+                      <h2>Progress</h2>
+                    </div>
+                    <div class="col-sm">
+                      <h2>Action</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="content" style="font-size: 14px">
+                  <div
+                    class="row pt-3 pb-2 ps-3 border-bottom"
+                    style="align-items: center"
+                  >
+                    <div class="col-1">
+                      <p>1</p>
+                    </div>
+                    <div class="col-sm">
+                      <p>Assess my tasks today</p>
+                    </div>
+                    <div class="col-sm">
+                      <p>in progress</p>
+                    </div>
+                    <div class="col-sm">
+                      <div class="progress">
+                        <div
+                          class="progress-bar progress-bar-striped bg-success"
+                          role="progressbar"
+                          style="width: 76%"
+                          aria-valuenow="76"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        >
+                          76%
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="row">
+                        <button
+                          type="button"
+                          class="col btn btn-outline-success btn-sm me-2"
+                        >
+                          Start
+                        </button>
+                        <button
+                          type="button"
+                          class="col btn btn-outline-danger btn-sm"
+                        >
+                          End
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="row pt-3 pb-2 ps-3 border-bottom"
+                    style="align-items: center"
+                  >
+                    <div class="col-1">
+                      <p>2</p>
+                    </div>
+                    <div class="col-sm">
+                      <p>Assess my tasks today</p>
+                    </div>
+                    <div class="col-sm">
+                      <p>in progress</p>
+                    </div>
+                    <div class="col-sm">
+                      <div class="progress">
+                        <div
+                          class="progress-bar progress-bar-striped bg-danger"
+                          role="progressbar"
+                          style="width: 24%"
+                          aria-valuenow="24"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        >
+                          24%
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="row">
+                        <button
+                          type="button"
+                          class="col btn btn-outline-success btn-sm me-2"
+                        >
+                          Start
+                        </button>
+                        <button
+                          type="button"
+                          class="col btn btn-outline-danger btn-sm"
+                        >
+                          End
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </mat-card>
-          
-            <mat-grid-list class="dash-cards" cols="3" rowHeight="150px">
+          </mat-grid-tile>
 
-              <mat-grid-tile [colspan]="2" [rowspan]="2">
-                <mat-card class="dashboard-card first shadow">
-
-                  <div class="shadow mt-0" style="height: 35px;">
-                    <h4 class="text-white ps-3 pt-1 pb-2">My Projects</h4>
-                  </div>
-
-                  <div class="container ps-3 pt-2 pb-2 mt-2 p-4 card shadow my-projects">
-                      <div class="header">
-                          <div class="row border-bottom" style="align-items: center;">
-                              <div class="col-1">
-                                <h2>#</h2>
-                              </div>
-                              <div class="col-sm">
-                                <h2>Project</h2>
-                              </div>
-                              <div class="col-sm">
-                                <h2>Status</h2>
-                              </div>
-                              <div class="col-sm">
-                                <h2>Progress</h2>
-                              </div>
-                              <div class="col-sm">
-                                <h2>Action</h2>
-                              </div>
-                          </div>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-card class="dashboard-card second shadow">
+              <mat-card-content class="stats">
+                <div class="card">
+                  <div class="card-body mb-0 shadow">
+                    <div class="d-flex justify-content-between px-md-1">
+                      <div class="align-self-center">
+                        <!-- <i class="fas fa-chart-line text-success fa-2x"></i> -->
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="48"
+                          height="48"
+                          fill="currentColor"
+                          class="bi bi-folder2"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5v-9zM2.5 3a.5.5 0 0 0-.5.5V6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3H2.5zM14 7H2v5.5a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V7z"
+                          />
+                        </svg>
                       </div>
-                      <div class="content" style="font-size: 14px;">
-                          <div class="row pt-3 pb-2 ps-3 border-bottom" style="align-items: center;">
-                              <div class="col-1">
-                                <p>1</p>
-                              </div>
-                              <div class="col-sm">
-                                <p>Assess my tasks today</p>
-                              </div>
-                              <div class="col-sm">
-                                <p>in progress</p>
-                              </div>
-                              <div class="col-sm">
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 76%;" aria-valuenow="76" aria-valuemin="0" aria-valuemax="100">76%</div>
-                                    </div>
-                              </div>
-                              <div class="col-sm">
-                                  <div class="row">
-                                      <button type="button" class="col btn btn-outline-success btn-sm me-2">Start</button>
-                                      <button type="button" class="col btn btn-outline-danger btn-sm">End</button>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="row pt-3 pb-2 ps-3 border-bottom" style="align-items: center;">
-                              <div class="col-1">
-                                <p>2</p>
-                              </div>
-                              <div class="col-sm">
-                                <p>Assess my tasks today</p>
-                              </div>
-                              <div class="col-sm">
-                                <p>in progress</p>
-                              </div>
-                              <div class="col-sm">
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 24%;" aria-valuenow="24" aria-valuemin="0" aria-valuemax="100">24%</div>
-                                    </div>
-                              </div>
-                              <div class="col-sm">
-                                  <div class="row">
-                                      <button type="button" class="col btn btn-outline-success btn-sm me-2">Start</button>
-                                      <button type="button" class="col btn btn-outline-danger btn-sm">End</button>
-                                  </div>
-                              </div>
-                          </div>                       
+                      <div class="text-end">
+                        <h3>6</h3>
+                        <p class="mb-0">Total Projects</p>
                       </div>
+                    </div>
                   </div>
-                </mat-card>
-              </mat-grid-tile>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
 
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-card class="dashboard-card second shadow">
-                    <mat-card-content class="stats">
-                            <div class="card">
-                              <div class="card-body mb-0 shadow">
-                                <div class="d-flex justify-content-between px-md-1">
-                                  <div class="align-self-center">
-                                    <!-- <i class="fas fa-chart-line text-success fa-2x"></i> -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-folder2" viewBox="0 0 16 16">
-                                        <path d="M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5v-9zM2.5 3a.5.5 0 0 0-.5.5V6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3H2.5zM14 7H2v5.5a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V7z"/>
-                                      </svg>
-                                      
-                                  </div>
-                                  <div class="text-end">
-                                    <h3>6</h3>
-                                    <p class="mb-0">Total Projects</p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                    </mat-card-content>
-                </mat-card>
-              </mat-grid-tile>
-
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-card class="dashboard-card second shadow">
-                    <mat-card-content class="stats">
-                        <div class="card">
-                            <div class="card-body mb-0 shadow">
-                              <div class="d-flex justify-content-between px-md-1">
-                                <div class="align-self-center">
-                                  <!-- <i class="fas fa-chart-line text-success fa-2x"></i> -->
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-clipboard2-check" viewBox="0 0 16 16">
-                                    <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
-                                    <path d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z"/>
-                                    <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3Z"/>
-                                  </svg>
-                                    
-                                </div>
-                                <div class="text-end">
-                                  <h3>2</h3>
-                                  <p class="mb-0">Completed</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                    </mat-card-content>
-                </mat-card>
-              </mat-grid-tile>
-            </mat-grid-list>
-
-        </div>
-
-        </div>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-card class="dashboard-card second shadow">
+              <mat-card-content class="stats">
+                <div class="card">
+                  <div class="card-body mb-0 shadow">
+                    <div class="d-flex justify-content-between px-md-1">
+                      <div class="align-self-center">
+                        <!-- <i class="fas fa-chart-line text-success fa-2x"></i> -->
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="48"
+                          height="48"
+                          fill="currentColor"
+                          class="bi bi-clipboard2-check"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"
+                          />
+                          <path
+                            d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z"
+                          />
+                          <path
+                            d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3Z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="text-end">
+                        <h3>2</h3>
+                        <p class="mb-0">Completed</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
     </div>
+  </div>
 </div>

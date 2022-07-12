@@ -11,10 +11,9 @@ import { LayoutRoutingModule } from './layout-routing.module';
 
 import { RouterModule } from '@angular/router';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
-
-//import used by dash component
-import { LayoutModule } from '@angular/cdk/layout';
-import { DashComponent } from './components/dash/dash.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +21,12 @@ import { DashComponent } from './components/dash/dash.component';
     SidebarComponent,
     FooterComponent,
     SidenavComponent,
+
+    //components declarations
     WrapperComponent,
-    DashComponent
+    HomeComponent,
+    ProjectsComponent,
+    UsersComponent,
   ],
   imports: [
     CommonModule,
@@ -31,9 +34,7 @@ import { DashComponent } from './components/dash/dash.component';
     LayoutRoutingModule,
 
     //material imports
-    AngularMaterialModule,
-
-    LayoutModule
+    AngularMaterialModule
   ],
   exports: [
     HeaderComponent,
