@@ -4,7 +4,8 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { HomeComponent } from './components/home/home.component';
 import { UsersComponent } from './components/users/users.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
-import { LoginComponent } from '../auth/login/login.component';
+import { LoginComponent } from './auth/login/login.component';
+import { LogHeaderComponent } from './auth/log-header/log-header.component';
 
 const routes: Routes = [
   {

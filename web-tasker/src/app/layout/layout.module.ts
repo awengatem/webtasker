@@ -14,6 +14,9 @@ import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { UsersComponent } from './components/users/users.component';
+import { LogHeaderComponent } from './auth/log-header/log-header.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,11 @@ import { UsersComponent } from './components/users/users.component';
     HomeComponent,
     ProjectsComponent,
     UsersComponent,
+
+    //auth declarations
+    LogHeaderComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
