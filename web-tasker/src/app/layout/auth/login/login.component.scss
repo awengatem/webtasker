@@ -1,14 +1,3 @@
-/* Please ❤ this if you like it! */
-//@import "https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900";
-body {
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 1.7;
-  color: #c4c3ca;
-  background-color: #e3e3e3;
-  overflow-x: hidden;
-}
 a {
   cursor: pointer;
   transition: all 200ms linear;
@@ -19,7 +8,8 @@ a {
 .link {
   color: #c4c3ca;
   &:hover {
-    color: #ffeba7;
+    //color: #ffeba7;
+    color: #22b8f0;
   }
 }
 p {
@@ -27,14 +17,43 @@ p {
   font-size: 14px;
   line-height: 1.7;
 }
-h4 {
-  font-weight: 600;
+
+//inpage logo customizing
+img {
+  width: 150px;
+  height: auto;
 }
-h6 {
-  span {
-    padding: 0 20px;
+
+h4 {
+  font-weight: 500;
+}
+h5 {
+  .spanner {
+    padding: 5px 20px;
     text-transform: uppercase;
     font-weight: 700;
+    transition: 5s;
+
+    &_checked {
+      padding: 5px 20px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: white;
+      background-image: -webkit-linear-gradient(
+        90deg,
+        #d35ca1,
+        #a164ea 50%,
+        #73cfdf
+      ); /* Chrome 10-25, Safari 5.1-6 */
+      background-image: linear-gradient(
+        90deg,
+        #d35ca1,
+        #a164ea 50%,
+        #73cfdf
+      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      border-radius: 5px;
+      margin: 1rem;
+    }
   }
 }
 .section {
@@ -68,15 +87,15 @@ h6 {
         padding: 0;
         margin: 10px auto;
         cursor: pointer;
-        background-color: #ffeba7;
+        background-color: #22b8f0;
         &:before {
           position: absolute;
           display: block;
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          color: #ffeba7;
           background-color: #102770;
+          color: #22b8f0;
           font-family: "unicons";
           content: "\eb4f";
           z-index: 20;
@@ -110,14 +129,16 @@ h6 {
         padding: 0;
         margin: 10px auto;
         cursor: pointer;
-        background-color: #ffeba7;
+        //background-color: #ffeba7;
+        background-color: #e43ba5;
         &:before {
           position: absolute;
           display: block;
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          color: #ffeba7;
+          //color: #ffeba7;
+          color: #e43ba5;
           background-color: #102770;
           font-family: "unicons";
           content: "\eb4f";
@@ -292,12 +313,12 @@ h6 {
   font-size: 24px;
   line-height: 48px;
   text-align: left;
-  color: #ffeba7;
+  color: #22b8f0;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
 }
 .btn {
-  border-radius: 4px;
+  border-radius: 8px;
   height: 44px;
   font-size: 13px;
   font-weight: 600;
@@ -320,23 +341,53 @@ h6 {
   -ms-flex-pack: center;
   text-align: center;
   border: none;
-  background-color: #ffeba7;
-  color: #102770;
+
+  //myeditions
+  -webkit-text-fill-color: white;
+  background-image: -webkit-linear-gradient(
+    90deg,
+    #e838a0,
+    #a164ea 50%,
+    #50c1d6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background-image: linear-gradient(
+    90deg,
+    #e838a0,
+    #a164ea 50%,
+    #50c1d6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
+
+  //border-radius: 999px;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#e838a0),
+    color-stop(50%, #a164ea),
+    to(#50c1d6)
+  );
+  background-clip: padding-box;
+
   &:active {
-    background-color: #102770;
-    color: #ffeba7;
+    -webkit-text-fill-color: inherit;
+    background-image: linear-gradient(90deg, #e838a0, #a164ea 50%, #50c1d6);
     box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
   }
   &:focus {
-    background-color: #102770;
-    color: #ffeba7;
+    -webkit-text-fill-color: inherit;
+    background-image: linear-gradient(90deg, #e838a0, #a164ea 50%, #50c1d6);
     box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
   }
   &:hover {
-    background-color: #102770;
-    color: #ffeba7;
+    background-color: transparent;
     box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
+    //my editions
+    border: 2px solid hsla(0, 0%, 100%, 0.25);
+    backdrop-filter: contrast(200%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 .logo {

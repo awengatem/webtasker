@@ -12,4 +12,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isChecked: boolean = true;
+
+  toggleCheck(){
+    this.isChecked = !this.isChecked;
+    console.log("Check is toggled");
+  }
 }

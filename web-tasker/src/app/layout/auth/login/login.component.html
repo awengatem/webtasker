@@ -1,21 +1,34 @@
-<!-- <a href="https://front.codes/" class="logo" target="_blank">
-  <img src="https://assets.codepen.io/1462889/fcy.png" alt="" />
-</a> -->
+<app-log-header></app-log-header>
 
 <div class="section">
   <div class="container">
-    <div class="row full-height justify-content-center">
-      <div class="col-12 text-center align-self-center py-5">
+    <!--removed==>full-height  in class list below-->
+    <div class="row justify-content-center">
+      <div class="col-12 align-self-center py-0 text-center">
+        <img src="assets/logo-down.png" alt="" class="p-3" />
+      </div>
+      <div class="col-12 text-center align-self-center py-3 mt-1">
         <div class="section pb-5 pt-5 pt-sm-2 text-center">
-          <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
-          <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
-          <label for="reg-log">guy</label>
+          <h5 class="mb-0 pb-2" [ngClass]="isChecked ? 'spanner' : ''">
+            <span class="spanner_checked" *ngIf="isChecked">Log In </span>
+            <span class="spanner" *ngIf="!isChecked">Log In </span>
+            <span class="spanner_checked" *ngIf="!isChecked">Sign Up</span>
+            <span class="spanner" *ngIf="isChecked">Sign Up</span>
+          </h5>
+          <input
+            class="checkbox"
+            type="checkbox"
+            id="reg-log"
+            name="reg-log"
+            (click)="toggleCheck()"
+          />
+          <label for="reg-log"></label>
           <div class="card-3d-wrap mx-auto">
             <div class="card-3d-wrapper">
               <div class="card-front">
                 <div class="center-wrap">
                   <div class="section text-center">
-                    <h4 class="mb-4 pb-3">Log In</h4>
+                    <h4 class="mb-4 pb-3 text-white">Log In</h4>
                     <div class="form-group">
                       <input
                         type="email"
@@ -48,7 +61,7 @@
               <div class="card-back">
                 <div class="center-wrap">
                   <div class="section text-center">
-                    <h4 class="mb-4 pb-3">Sign Up</h4>
+                    <h4 class="mb-4 pb-3 text-white">Sign Up</h4>
                     <div class="form-group">
                       <input
                         type="text"
