@@ -18,4 +18,8 @@ export class LoginComponent implements OnInit {
     this.isChecked = !this.isChecked;
     console.log("Check is toggled");
   }
+
+  test(){
+    console.log("signing up");
+  }
 }
