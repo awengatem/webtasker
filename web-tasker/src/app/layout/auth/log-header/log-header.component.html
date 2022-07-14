@@ -1,17 +1,24 @@
 <mat-toolbar>
   <mat-toolbar-row class="justify-content-between">
-    <img src="assets/logo.png" alt="">
-    <h2 class="apptitle">Webtasker</h2>
-    <div class="row mr-2 ml-auto">
-      <ul>
-        <li class="">
-          <div class="m-3 pt-3" id="">
-            <button class="btn btn-outline-light me-3" type="button" (click)="logger()">Login</button>
-            <button class="custom_btn me-0" type="button" (click)="signer()">Sign Up</button>
+    <img src="assets/logo.png" alt="" />
+    <div class="col"><h2 class="apptitle">Webtasker</h2></div>
+    <ul>
+      <li>
+        <div class="row mr-2 ml-auto mt-2">
+          <div class="pt-1" id="">
+            <button
+              class="btn btn-outline-light me-3"
+              type="button"
+              (click)="logger()"
+            >
+              Login
+            </button>
+            <button class="custom_btn me-0" type="button" (click)="signer()">
+              Sign Up
+            </button>
           </div>
-        </li>
-        
-      </ul>
-    </div>
+        </div>
+      </li>
+    </ul>
   </mat-toolbar-row>
 </mat-toolbar>

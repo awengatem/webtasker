@@ -1,110 +1,121 @@
-.page{
+.page {
+  color: white;
+  padding: 0 1rem;
+  background: #f1f5f9;
+  //background: cyan;
+
+  &__box {
+    min-height: 85px;
+    background: #1e293b;
+    margin: 0 -1rem;
+    font-size: 24px;
+  }
+
+  &__content {
+    min-height: calc(100vh - 178px);
+    border-radius: 10px;
+    margin-top: -2rem;
+    //background: white;
+    background: #121212;
     color: white;
-    padding: 0 1rem;
-    background: #f1f5f9;
-    //background: cyan;
+    font-size: 2rem;
 
-    &__box{
-        min-height: 85px;
-        background: #1e293b;
-        margin: 0 -1rem;
-        font-size: 24px;
-    }
+    &-data {
+      .grid-container {
+        margin: 0px;
+        //margin-bottom: 40px;
 
-    &__content{
-        min-height: calc(100vh - 178px);
-        border-radius: 10px;
-        margin-top: -2rem;
-        //background: white;
-        background: #121212;
-        color: white; 
-        font-size: 2rem;
+        /*grid card styling*/
+        .dashboard-card {
+          position: absolute;
+          top: 10px;
+          left: 15px;
+          right: 15px;
+          bottom: 10px;
+          font-family: inherit;
+          //overflow-y: auto;
 
-        &-data{
-            .grid-container {
-                margin: 0px;
-                //margin-bottom: 40px;
+          &.first {
+            //taking full space
+          }
 
-                /*grid card styling*/
-                .dashboard-card {
-                    position: absolute;
-                    top: 10px;
-                    left: 15px;
-                    right: 15px;
-                    bottom: 10px;
-                    //overflow-y: auto;
+          &.second {
+            //taking full space
+            //padding: 0px;
+          }
+          background: #d674cb; /* fallback for old browsers */
+          background: -webkit-linear-gradient(
+            to right,
+            #d674cb,
+            #89fffd
+          ); /* Chrome 10-25, Safari 5.1-6 */
+          background: linear-gradient(
+            to right,
+            #d674cb,
+            #89fffd
+          ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+          //background-image: linear-gradient(90deg,#e838a0,#a164ea 50%,#50c1d6);
 
-                    &.first{
-                        //taking full space                        
-                    }
+          .my-projects {
+            overflow-y: auto;
+            height: 215px;
 
-                    &.second{
-                        //taking full space
-                        //padding: 0px;
-                    }
-                    background: #d674cb;  /* fallback for old browsers */
-                    background: -webkit-linear-gradient(to right,#d674cb,#89fffd);  /* Chrome 10-25, Safari 5.1-6 */
-                    background: linear-gradient(to right,#d674cb,#89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-                    //background-image: linear-gradient(90deg,#e838a0,#a164ea 50%,#50c1d6);
-
-                    .my-projects{
-                       overflow-y: auto;
-                       height: 215px;
-                    }
-
-                    //height: 50px;
-                    //background: cyan;                    
-                }
-                .stats{
-                                        
-                }
-                
-                /*welcome bar styling*/
-                .welcome{
-                margin-top: 0px;
-                color: #94a3b8 !important;
-                //background: #94a3b8;
-                background: #2c3344 !important;
-                margin-right: 15px;
-                margin-left: 15px;
-                font-size: 12;
-                }        
-                
-                /*grid list styling---holding the grid cards--*/
-                .dash-cards{
-                    margin-top: 50px;
-
-                    .stats{
-                        
-                    }
-        
-                    .card{   
-                        background: transparent;
-                        
-                    }
-
-                    .align-self-center{
-                       // height: 13px;
-                    }
-        
-                    svg{
-                        color: rgb(24, 85, 85);
-                    }
-        
-                    .mb-0{
-                        font-size: 18px;
-                    }
-        
-                    h3{
-                        font-size: 20px;
-                        font-weight: 500;
-                    }
-                }   
+            .header {
+              h2 {
+                font-family: inherit;
+                //font-size: x-large;
+                font-weight: 600;
+              }
             }
-              
-            
+          }
+
+          //height: 50px;
+          //background: cyan;
         }
-    }    
-    
-    
+
+        /*welcome bar styling*/
+        .welcome {
+          margin-top: 0px;
+          color: #94a3b8 !important;
+          //background: #94a3b8;
+          background: #2c3344 !important;
+          margin-right: 15px;
+          margin-left: 15px;
+          font-size: 12;
+          font-family: inherit;
+        }
+
+        /*grid list styling---holding the grid cards--*/
+        .dash-cards {
+          margin-top: 50px;
+
+          .card {
+            background: transparent;
+          }
+
+          .align-self-center {
+            // height: 13px;
+          }
+
+          svg {
+            color: rgb(24, 85, 85);
+          }
+
+          .mb-0 {
+            font-size: 18px;
+          }
+
+          h3 {
+            font-size: 20px;
+            font-weight: 500;
+          }
+        }
+
+        //ubuntu font custom class
+        .ubuntu {
+          font-family: inherit;
+        }
+      }
+    }
+  }
 }

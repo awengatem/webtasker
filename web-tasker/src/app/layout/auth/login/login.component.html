@@ -1,6 +1,6 @@
 <app-log-header
-  (login)="toggleCheck()"
-  (signup)="test()"
+  (login)="login()"
+  (signup)="signUp()"
 ></app-log-header>
 
 <div class="section">
@@ -13,10 +13,10 @@
       <div class="col-12 text-center align-self-center py-3 mt-1">
         <div class="section pb-5 pt-5 pt-sm-2 text-center">
           <h5 class="mb-0 pb-2" [ngClass]="isChecked ? 'spanner' : ''">
-            <span class="spanner_checked" *ngIf="isChecked">Log In </span>
-            <span class="spanner" *ngIf="!isChecked">Log In </span>
-            <span class="spanner_checked" *ngIf="!isChecked">Sign Up</span>
-            <span class="spanner" *ngIf="isChecked">Sign Up</span>
+            <span class="spanner_checked" *ngIf="!isChecked">Log In </span>
+            <span class="spanner" *ngIf="isChecked">Log In </span>
+            <span class="spanner_checked" *ngIf="isChecked">Sign Up</span>
+            <span class="spanner" *ngIf="!isChecked">Sign Up</span>
           </h5>
           <input
             class="checkbox"
@@ -24,6 +24,7 @@
             id="reg-log"
             name="reg-log"
             (click)="toggleCheck()"
+            #checkbox
           />
           <label for="reg-log"></label>
           <div class="card-3d-wrap mx-auto">
@@ -32,7 +33,7 @@
                 <div class="center-wrap">
                   <div class="section text-center">
                     <h4 class="mb-4 pb-3 text-white">Log In</h4>
-                    <div class="form-group">
+                    <div class="form-group"> 
                       <input
                         type="email"
                         name="logemail"
@@ -54,7 +55,7 @@
                       />
                       <i class="input-icon uil uil-lock-alt"></i>
                     </div>
-                    <a href="#" class="btn mt-4">submit</a>
+                    <a  class="btn mt-4" (click)="test()">submit</a>
                     <p class="mb-0 mt-4 text-center">
                       <a href="#0" class="link">Forgot your password?</a>
                     </p>

@@ -13,15 +13,15 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path:'',
+    path:'r',
     component: WrapperComponent,
     //component: LoginComponent,
     children: [
-      {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
-      },
+      // {
+      //   path: '',
+      //   redirectTo: 'home',
+      //   pathMatch: 'full'
+      // },
       {
         path: 'home',
         component: HomeComponent
@@ -48,3 +48,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class LayoutRoutingModule { }
+
+//remember to add redirect tomorrow

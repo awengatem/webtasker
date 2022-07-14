@@ -1,25 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('checkbox') private checkbox!: ElementRef;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  //property to control styling of login and signup span elements
+  isChecked: boolean = false;
+
+  //method used by checkbox
+  toggleCheck() {
+    this.isChecked = !this.isChecked;
+    console.log('Checkbox is toggled');
   }
 
-  isChecked: boolean = true;
+  //methods used by header buttons
+  signUp() {
+    console.log('signing up');
+    this.checkbox.nativeElement.checked = true;
+    this.isChecked = true;
+  }
 
-  toggleCheck(){
-    this.isChecked = !this.isChecked;
-    console.log("Check is toggled");
+  login() {
+    console.log('login');
+    this.checkbox.nativeElement.checked = false;
+    this.isChecked = false;
   }
 
   test(){
-    console.log("signing up");
+    console.log("loggged in");
   }
 }
