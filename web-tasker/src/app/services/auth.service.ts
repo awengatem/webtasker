@@ -15,7 +15,7 @@ export class AuthService {
   ) {}
 
   login(email: string, password: string) {
-    this.webService.login(email, password).pipe(
+    return this.webService.login(email, password).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         //the auth tokens will be in the header of this response
@@ -25,7 +25,6 @@ export class AuthService {
           //res.body.authTokens //aka refreshtoken
         );
         console.log("Logged in!");
-        console.log(res);
       })
     );
   }

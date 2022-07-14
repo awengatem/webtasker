@@ -1,4 +1,6 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class LoginComponent implements OnInit {
   @ViewChild('checkbox') private checkbox!: ElementRef;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
 
@@ -36,5 +38,11 @@ export class LoginComponent implements OnInit {
 
   test(){
     console.log("loggged in");
+  }
+
+  onLoginButtonClicked(email: string,password: string){
+    this.authService.login(email,password).subscribe((res: HttpResponse<any>)=>{
+      console.log(res);
+    })
   }
 }

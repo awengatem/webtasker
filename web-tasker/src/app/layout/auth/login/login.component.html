@@ -1,7 +1,4 @@
-<app-log-header
-  (login)="login()"
-  (signup)="signUp()"
-></app-log-header>
+<app-log-header (login)="login()" (signup)="signUp()"></app-log-header>
 
 <div class="section">
   <div class="container">
@@ -33,8 +30,9 @@
                 <div class="center-wrap">
                   <div class="section text-center">
                     <h4 class="mb-4 pb-3 text-white">Log In</h4>
-                    <div class="form-group"> 
+                    <div class="form-group">
                       <input
+                        #emailInput
                         type="email"
                         name="logemail"
                         class="form-style"
@@ -46,6 +44,7 @@
                     </div>
                     <div class="form-group mt-2">
                       <input
+                        #pwdInput
                         type="password"
                         name="logpass"
                         class="form-style"
@@ -55,7 +54,13 @@
                       />
                       <i class="input-icon uil uil-lock-alt"></i>
                     </div>
-                    <a  class="btn mt-4" (click)="test()">submit</a>
+                    <a
+                      class="btn mt-4"
+                      (click)="
+                        onLoginButtonClicked(emailInput.value, pwdInput.value)
+                      "
+                      >submit</a
+                    >
                     <p class="mb-0 mt-4 text-center">
                       <a href="#0" class="link">Forgot your password?</a>
                     </p>
