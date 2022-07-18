@@ -16,35 +16,38 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.webService.login(email, password).pipe(
-      shareReplay(),
+      shareReplay(),//avoid multiple execution by multiple subscribers
       tap((res: HttpResponse<any>) => {
         //the auth tokens will be in the header of this response
         this.setSession(
           res.body.user._id,
-          res.headers.get('X-Token')
+          res.headers.get('x-token')
           //res.body.authTokens //aka refreshtoken
         );
         console.log("Logged in!");
+        this.router.navigate(['/r/home']);
       })
     );
   }
 
   logout() {
     this.removeSession();
+
+    this.router.navigate(['/login']);
   }
 
   //accessor methods
   getAccessToken() {
-    return localStorage.getItem('access_token');
+    return localStorage.getItem('access-token');
   }
 
   getRefreshToken() {
-    return localStorage.getItem('refresh_token');
+    return localStorage.getItem('refresh-token');
   }
 
   //setter for access token
   setAccessToken(accessToken: string) {
-    localStorage.setItem('access_token', accessToken);
+    localStorage.setItem('access-token', accessToken);
   }
 
   private setSession(

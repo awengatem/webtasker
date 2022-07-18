@@ -27,6 +27,15 @@ export class WebReqInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         console.log(error);
 
+        if(error.status === 401){
+          //401 error therefore unauthorized
+
+          //refresh the access token
+          
+
+          this.authService.logout();
+        }
+
         return throwError(error);
       })
     )
@@ -40,7 +49,7 @@ export class WebReqInterceptor implements HttpInterceptor {
       //append access token to request header
       return req.clone({
         setHeaders: {
-          'X-Token': token,
+          'x-token': `Bearer ${token}`,
         }
       });
     }
