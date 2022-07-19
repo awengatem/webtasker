@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 interface sideNavToggle{
   screenWidth: number;
@@ -17,7 +18,7 @@ export class WrapperComponent implements OnInit {
   screenWidth = 0;
   isExpanded: boolean = true;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
@@ -26,6 +27,11 @@ export class WrapperComponent implements OnInit {
   toggleCollapse(): void{
     this.isExpanded = !this.isExpanded;
     this.onToggleSideNav.emit({isExpanded: this.isExpanded,screenWidth:this.screenWidth});
+  }
+
+  logout(){
+    this.authService.logout();
+    //console.log("logout works!!");
   }
 
 }

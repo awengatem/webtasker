@@ -8,6 +8,7 @@ import { AccountService } from 'src/app/services/account-service.service';
 })
 export class HeaderComponent implements OnInit {
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
+  @Output() logout: EventEmitter<any> = new EventEmitter();
 
   constructor(private account: AccountService) { }
 
@@ -19,6 +20,10 @@ export class HeaderComponent implements OnInit {
 
   toggleSidebar(){
     this.toggleSidebarForMe.emit(); 
+  }
+
+  logger(){
+    this.logout.emit();
   }
 
   getUser(): any{

@@ -8,9 +8,13 @@ import { Injectable } from '@angular/core';
 export class WebRequestService {
   //handle the http logic here
   readonly ROOT_URL;
+  httpOptions;
 
   constructor(private http: HttpClient) {
     this.ROOT_URL = 'http://localhost:3000';
+    this.httpOptions = {
+      withCredentials: true,
+    };
   }
 
   get(uri: string) {
@@ -33,7 +37,7 @@ export class WebRequestService {
     return this.http.post(
       `${this.ROOT_URL}/login`,
       { username, password },
-      { observe: 'response' }
+      { observe: 'response', withCredentials: true }
     );
   }
 }

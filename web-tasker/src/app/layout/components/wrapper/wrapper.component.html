@@ -51,7 +51,7 @@
   </mat-sidenav>
 
   <div class="content">
-    <app-header (toggleSidebarForMe)="toggleCollapse()"></app-header>
+    <app-header (toggleSidebarForMe)="toggleCollapse()" (logout)="logout()"></app-header>
     <router-outlet></router-outlet>
     <footer></footer>
   </div>

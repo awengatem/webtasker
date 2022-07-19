@@ -13,15 +13,15 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path:'r',
+    path:'',
     component: WrapperComponent,
     //component: LoginComponent,
     children: [
-      // {
-      //   path: '',
-      //   redirectTo: 'home',
-      //   pathMatch: 'full'
-      // },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
       {
         path: 'home',
         component: HomeComponent
@@ -38,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'home',//add "pagenot found" component
     pathMatch: 'full'
   }
 ];
