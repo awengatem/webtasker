@@ -6,7 +6,7 @@ import { AngularMaterialModule } from './angular-material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { WebReqInterceptor } from './services/web-req.interceptor';
+import { WebReqInterceptor } from './helpers/web-req.interceptor';
 import { NgInitDirective } from './load-directive';
 
 @NgModule({

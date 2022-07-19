@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { AuthService } from './auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +15,7 @@ import { AuthService } from './auth.service';
 export class WebReqInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<any>{
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
     //Handle the request
     req = this.addAuthHeader(req);
 
@@ -27,18 +24,17 @@ export class WebReqInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         console.log(error);
 
-        if(error.status === 401){
+        if (error.status === 401) {
           //401 error therefore unauthorized
 
           //refresh the access token
-          
 
           this.authService.logout();
         }
 
         return throwError(error);
       })
-    )
+    );
   }
 
   addAuthHeader(req: HttpRequest<any>) {
@@ -50,7 +46,8 @@ export class WebReqInterceptor implements HttpInterceptor {
       return req.clone({
         setHeaders: {
           'x-token': `Bearer ${token}`,
-        }
+        },
+        withCredentials: true,
       });
     }
     return req;
