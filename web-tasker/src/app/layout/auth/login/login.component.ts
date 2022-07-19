@@ -14,16 +14,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  //property to control styling of login and signup span elements
+  /*property to control styling of login and signup span elements*/
   isChecked: boolean = false;
 
-  //method used by checkbox
+  /*method used by checkbox*/
   toggleCheck() {
     this.isChecked = !this.isChecked;
     console.log('Checkbox is toggled');
   }
 
-  //methods used by header buttons
+  /*methods used by header buttons*/
   signUp() {
     console.log('signing up');
     this.checkbox.nativeElement.checked = true;
@@ -46,3 +46,9 @@ export class LoginComponent implements OnInit {
     })
   }
 }
+
+/**very helpful content
+ * 
+ */
+
+//https://www.bezkoder.com/angular-13-jwt-auth-httponly-cookie/
