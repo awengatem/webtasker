@@ -25,15 +25,15 @@ export class AuthService {
           //res.body.authTokens //aka refreshtoken
         );
         console.log("Logged in!");
-        this.router.navigate(['/r/home']);
+        this.router.navigate(['/home']);
       })
     );
   }
 
   logout() {
-    this.removeSession();
-
+    this.removeSession();    
     this.router.navigate(['/login']);
+    return this.webService.get('logout');
   }
 
   //accessor methods

@@ -5,6 +5,15 @@ a {
     text-decoration: none;
   }
 }
+
+.a {
+  cursor: pointer;
+  transition: all 200ms linear;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .link {
   color: #c4c3ca;
   &:hover {

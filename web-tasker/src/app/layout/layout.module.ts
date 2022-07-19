@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -40,6 +41,7 @@ import { RegisterComponent } from './auth/register/register.component';
     CommonModule,
     RouterModule,
     LayoutRoutingModule,
+    FormsModule,
 
     //material imports
     AngularMaterialModule
