@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
     console.log("loggged in");
   }
 
+  /*login methods*/
   onLoginButtonClicked(){
     const {username,password} = this.form;
     this.authService.login(username,password).subscribe((res: HttpResponse<any>)=>{
@@ -72,7 +73,8 @@ export class LoginComponent implements OnInit {
         this.accountService.saveUser(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.accountService.getUser().roles;
+        //this.roles = this.accountService.getUser().roles;
+        this.user = this.accountService.getUser().body.user;
         //this.reloadPage();
       },
       error: err => {

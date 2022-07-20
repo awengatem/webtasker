@@ -32,6 +32,12 @@ export class WebReqInterceptor implements HttpInterceptor {
           this.authService.logout();
         }
 
+        if (error.status === 403) {
+          //403 forbidden//remember to work on this
+
+          this.authService.logout();
+        }
+
         return throwError(error);
       })
     );

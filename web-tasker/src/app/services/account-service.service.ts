@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WebRequestService } from './web-request.service';
+//variables
+const USER_KEY = 'auth-user';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +19,12 @@ export class AccountService {
   }
 
   public saveUser(user: any){
-    window.sessionStorage.removeItem('USER_KEY');
-    window.sessionStorage.setItem('USER_KEY',JSON.stringify(user));
+    window.sessionStorage.removeItem(USER_KEY);
+    window.sessionStorage.setItem(USER_KEY,JSON.stringify(user));
   }
 
   public getUser(): any{
-    const user = window.sessionStorage.getItem('USER_KEY');
+    const user = window.sessionStorage.getItem(USER_KEY);
     if(user){
       return JSON.parse(user);
     }
@@ -30,7 +32,7 @@ export class AccountService {
   }
 
   public isLoggedIn(): boolean{
-    const user = window.sessionStorage.getItem('USER_KEY');
+    const user = window.sessionStorage.getItem(USER_KEY);
     if(user){
       return true;
     }

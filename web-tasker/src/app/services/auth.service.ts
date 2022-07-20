@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { shareReplay, tap } from 'rxjs';
+import { AccountService } from './account-service.service';
 import { WebRequestService } from './web-request.service';
 
 @Injectable({
@@ -11,11 +12,12 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private webService: WebRequestService,
-    private router: Router
+    private router: Router,
+    private accountService: AccountService
   ) {}
 
-  login(email: string, password: string) {
-    return this.webService.login(email, password).pipe(
+  login(username: string, password: string) {
+    return this.webService.login(username, password).pipe(
       shareReplay(),//avoid multiple execution by multiple subscribers
       tap((res: HttpResponse<any>) => {
         //the auth tokens will be in the header of this response
@@ -31,7 +33,8 @@ export class AuthService {
   }
 
   logout() {
-    this.removeSession();    
+    this.removeSession();
+    this.accountService.clean();    
     this.router.navigate(['/login']);
     return this.webService.get('logout');
   }
