@@ -26,16 +26,18 @@ export class AuthService {
           res.headers.get('x-token')
           //res.body.authTokens //aka refreshtoken
         );
-        console.log("Logged in!");
+        console.log(`${res.body.user.username} Logged in!`);
         this.router.navigate(['/home']);
       })
     );
   }
 
   logout() {
+    const username = this.accountService.getUser().username;
     this.removeSession();
     this.accountService.clean();    
     this.router.navigate(['/login']);
+    console.log(`${username} Logged out!`);
     return this.webService.get('logout');
   }
 

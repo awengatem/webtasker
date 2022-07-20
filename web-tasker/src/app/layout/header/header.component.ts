@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   username!: string;
 
   ngOnInit(): void {
-    this.getUser();
+    this.getUsername();
   }
 
   toggleSidebar(){
@@ -26,10 +26,7 @@ export class HeaderComponent implements OnInit {
     this.logout.emit();
   }
 
-  getUser(): any{
-    this.account.getUserAccount().subscribe((response: any) =>{      
-      this.username = response.username;
-      console.log(this.username);
-    })
+  getUsername(): any{
+    this.username = this.account.getUser().username;
   }
 }

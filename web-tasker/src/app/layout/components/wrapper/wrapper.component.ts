@@ -39,7 +39,6 @@ export class WrapperComponent implements OnInit {
     this.authService.logout().subscribe({
       next: res => {
         console.log(res);
-        //this.accountService.clean();
       },
       error: err => {
         console.log(err);
