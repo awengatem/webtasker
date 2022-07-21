@@ -6,6 +6,7 @@ import { UsersComponent } from './components/users/users.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { LoginComponent } from './auth/login/login.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
+import { AuthGuard } from '../helpers/auth-guard.guard';
 
 const routes: Routes = [
   {
@@ -24,21 +25,24 @@ const routes: Routes = [
       },
       {
         path: 'home',
+        canActivate: [AuthGuard],
         component: HomeComponent
       },
       {
         path: 'projects',
+        canActivate: [AuthGuard],
         component: ProjectsComponent
       },
       {
         path: 'users',
+        canActivate: [AuthGuard],
         component: UsersComponent
       }
     ]
   },
   {
     path: '**',
-    redirectTo: 'home',//add "pagenot found" component
+    redirectTo: 'home',//add "page not found" component
     pathMatch: 'full'
   }
 ];

@@ -9,6 +9,10 @@ import { WebRequestService } from './web-request.service';
   providedIn: 'root',
 })
 export class AuthService {
+
+  //variables
+  myBool!: boolean;
+
   constructor(
     private http: HttpClient,
     private webService: WebRequestService,
@@ -18,7 +22,7 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.webService.login(username, password).pipe(
-      shareReplay(),//avoid multiple execution by multiple subscribers
+      shareReplay(), //avoid multiple execution by multiple subscribers
       tap((res: HttpResponse<any>) => {
         //the auth tokens will be in the header of this response
         this.setSession(
@@ -35,7 +39,7 @@ export class AuthService {
   logout() {
     const username = this.accountService.getUser().username;
     this.removeSession();
-    this.accountService.clean();    
+    this.accountService.clean();
     this.router.navigate(['/login']);
     console.log(`${username} Logged out!`);
     return this.webService.get('logout');
@@ -69,5 +73,25 @@ export class AuthService {
     localStorage.removeItem('user-id');
     localStorage.removeItem('access-token');
     //localStorage.removeItem('refresh-token');
+  }
+
+  /*dummy method to check if authheaders are set
+   *request passes through the jwt middleware at backend api
+   * returns 401 if not authorized
+   * returns 403 if token is expired
+   */
+  verifyUser() {
+    this.myBool = true;    
+    this.accountService.getUserAccount().subscribe({
+      next: (res) => {
+        if(res.status === 401){
+          this.myBool = false;
+        }
+      },
+      error: (err) => {
+        console.log(err.error.message);
+      },
+    });
+    return this.myBool;
   }
 }

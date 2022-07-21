@@ -19,9 +19,10 @@ export class WebReqInterceptor implements HttpInterceptor {
 
   constructor(private authService: AuthService,private tokenService: TokenService) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     //Handle the request
     req = this.addAuthHeader(req);
+    req =  this.addCredentials(req);
 
     //call next() and handle the response
     return next.handle(req).pipe(
@@ -66,6 +67,10 @@ export class WebReqInterceptor implements HttpInterceptor {
 
   handle401Error(req: HttpRequest<any>,next: HttpHandler){
     //get refreshed access token and reset it
+
+
+
+
     //get access token from local storage
     const token = this.authService.getAccessToken();
 
@@ -79,6 +84,12 @@ export class WebReqInterceptor implements HttpInterceptor {
       });
     }
     return req;
+  }
+
+  addCredentials(req:  HttpRequest<any>){
+    return req.clone({
+      withCredentials: true,
+    });
   }
 }
 

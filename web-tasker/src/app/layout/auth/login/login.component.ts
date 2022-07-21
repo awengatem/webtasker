@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     if (this.accountService.isLoggedIn()) {
       this.isLoggedIn = true;
       //this.roles = this.accountService.getUser().roles;
-      this.user = this.accountService.getUser();
+      this.user = this.accountService.getUserAccount();
     }
   }
 

@@ -11,7 +11,7 @@ export class AccountService {
   constructor(private webservice: WebRequestService) { }
 
   getUserAccount(){
-    return this.webservice.get('users/current')
+    return this.webservice.getObserved('users/current');
   }
 
   clean(){
