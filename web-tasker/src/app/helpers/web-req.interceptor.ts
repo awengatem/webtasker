@@ -67,7 +67,14 @@ export class WebReqInterceptor implements HttpInterceptor {
 
   handle403Error(req: HttpRequest<any>,next: HttpHandler){
     //get refreshed access token and reset it
-    //this.authService.getRefreshToken().subscribe()
+    this.authService.getNewToken().subscribe({
+      next: (response)=>{
+        //const accessToken = response.b
+      },
+      error: (err)=>{
+        console.log(err.error.message);
+      }
+    });
 
 
 

@@ -50,8 +50,9 @@ export class AuthService {
     return localStorage.getItem('access-token');
   }
 
-  getRefreshToken() {
-    return localStorage.getItem('refresh-token');
+  getNewToken() {
+    //return localStorage.getItem('refresh-token');
+    return this.webService.getObserved('refresh');
   }
 
   //setter for access token
