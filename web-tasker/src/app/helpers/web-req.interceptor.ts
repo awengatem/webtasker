@@ -4,8 +4,10 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
+  HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { error } from 'jquery';
 import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { TokenService } from '../services/token.service';
@@ -15,34 +17,40 @@ import { TokenService } from '../services/token.service';
 })
 export class WebReqInterceptor implements HttpInterceptor {
   private isRefreshing = false;
-  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
+    null
+  );
 
-  constructor(private authService: AuthService,private tokenService: TokenService) {}
+  constructor(
+    private authService: AuthService,
+    private tokenService: TokenService
+  ) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     //Handle the request
     req = this.addAuthHeader(req);
-    req =  this.addCredentials(req);
+    req = this.addCredentials(req);
 
     //call next() and handle the response
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log(error);
 
-        if(error instanceof HttpErrorResponse && !req.url.includes('login') && error.status === 401){
-          //return this.handle401Error(req)
-
-        }
-
         if (error.status === 401) {
           //401 error therefore unauthorized
-
-          //refresh the access token
-
           this.authService.logout();
         }
 
-        
+        if (
+          error instanceof HttpErrorResponse &&
+          !req.url.includes('login') &&
+          error.status === 403
+        ) {
+          this.handle403Error(req);          
+        }
 
         return throwError(error);
       })
@@ -51,7 +59,7 @@ export class WebReqInterceptor implements HttpInterceptor {
 
   addAuthHeader(req: HttpRequest<any>) {
     //get access token from local storage
-    const token = this.authService.getAccessToken();
+    const token = this.tokenService.getAccessTokenLocal();
 
     if (token) {
       //append access token to request header
@@ -65,36 +73,29 @@ export class WebReqInterceptor implements HttpInterceptor {
     return req;
   }
 
-  handle403Error(req: HttpRequest<any>,next: HttpHandler){
+  handle403Error(req: HttpRequest<any>) {
     //get refreshed access token and reset it
-    this.authService.getNewToken().subscribe({
-      next: (response)=>{
-        //const accessToken = response.b
+    return this.tokenService.getNewToken().subscribe({
+      next: (response: HttpResponse<any>) => {
+        const accessToken = response.body.accessToken;
+
+        //reset the access token
+        this.tokenService.saveAccessToken(accessToken); //saves to session storage
+        this.tokenService.setAccessTokenLocal(accessToken); //saves to local storage
+        window.location.reload();
+        //localStorage['access-token'] = accessToken;
       },
-      error: (err)=>{
+      error: (err) => {
         console.log(err.error.message);
-      }
+        if(err.status === 403){
+          this.authService.logout();
+        }
+      },
     });
-
-
-
-
-    //get access token from local storage
-    const token = this.authService.getAccessToken();
-
-    if (token) {
-      //append access token to request header
-      return req.clone({
-        setHeaders: {
-          'x-token': `Bearer ${token}`,
-        },
-        withCredentials: true,
-      });
-    }
-    return req;
   }
 
-  addCredentials(req:  HttpRequest<any>){
+  //method to set credentials to true on all requests
+  addCredentials(req: HttpRequest<any>) {
     return req.clone({
       withCredentials: true,
     });

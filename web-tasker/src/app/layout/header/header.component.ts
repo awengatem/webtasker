@@ -1,6 +1,8 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AccountService } from 'src/app/services/account-service.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +15,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private account: AccountService,
-    private authService: AuthService
+    private authService: AuthService,
+    private tokenService: TokenService
   ) {}
 
   username!: string;
@@ -52,12 +55,15 @@ export class HeaderComponent implements OnInit {
 
   //testing of check new access token
   getNewAccessToken() {
-    this.authService.getNewToken().subscribe({
-      next: (response) => {
+    this.tokenService.getNewToken().subscribe({
+      next: (response: HttpResponse<any>) => {
         console.log('new access token in response below');
         console.log(response.body);
+        const token = response.body.accessToken;
+        console.log(token);
+
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err.error.message);
       },
     });

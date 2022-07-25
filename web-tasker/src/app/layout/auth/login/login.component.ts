@@ -11,6 +11,9 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  //local variables
+  status: boolean = true;
+
   form: any = {
     username: null,
     password: null,
@@ -88,6 +91,7 @@ export class LoginComponent implements OnInit {
           firstName: firstName,
           lastName: lastName,
         };
+        //below saves to session storage
         this.accountService.saveUser(filteredUser);
         this.tokenService.saveAccessToken(data.body.accessToken);
         this.tokenService.saveRefreshToken(data.body.user.authTokens);

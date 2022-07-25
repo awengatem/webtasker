@@ -284,6 +284,14 @@ h5 {
         transition: all 200ms linear;
       }
     }
+
+    &.ng-invalid.ng-touched {
+      border: 1px solid #e74c3c;
+    }
+
+    &.ng-valid.ng-touched {
+      border: 1px solid #2ecc71;
+    }
   }
 }
 .form-style {
@@ -314,6 +322,26 @@ h5 {
     box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
   }
 }
+.alert-style{
+  padding: 13px 20px;
+  padding-left: 55px;
+  height: 24px;
+  width: 100%;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //color: #c4c3ca;
+  //background-color: #1f2029;
+  border: none;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+}
 .input-icon {
   position: absolute;
   top: 0;
@@ -325,6 +353,32 @@ h5 {
   color: #22b8f0;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
+}
+.vericon {
+  position: absolute;
+  top: 0;
+  right: 18px;
+  height: 48px;
+  font-size: 12px;
+  line-height: 48px;
+  text-align: left;  
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+
+  &.danger{
+    color: #e74c3c;
+  }
+  &.success{
+    color: #2ecc71;
+  }
+}
+
+
+small{
+  color: #e74c3c;
+  position: absolute;
+  left: 18px;
+  //float: left;
 }
 .btn {
   border-radius: 8px;

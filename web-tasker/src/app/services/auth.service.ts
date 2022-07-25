@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { shareReplay, tap } from 'rxjs';
 import { AccountService } from './account-service.service';
+import { TokenService } from './token.service';
 import { WebRequestService } from './web-request.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-
   //variables
   myBool!: boolean;
 
@@ -17,8 +17,11 @@ export class AuthService {
     private http: HttpClient,
     private webService: WebRequestService,
     private router: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private tokenService: TokenService
   ) {}
+
+  /*methods here deal with local storage*/
 
   login(username: string, password: string) {
     return this.webService.login(username, password).pipe(
@@ -42,57 +45,36 @@ export class AuthService {
     this.accountService.clean();
     this.router.navigate(['/login']);
     console.log(`${username} Logged out!`);
-    return this.webService.get('logout');
+    return this.webService.get('logout').subscribe({
+      next: (res) => {
+        //console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
-  //accessor methods
-  getAccessToken() {
-    return localStorage.getItem('access-token');
-  }
-
-  getNewToken() {
-    //return localStorage.getItem('refresh-token');
-    return this.webService.getObserved('refresh');
-  }
-
-  //setter for access token
-  setAccessToken(accessToken: string) {
-    localStorage.setItem('access-token', accessToken);
-  }
-
-  private setSession(
-    userId: string,
-    accessToken: any
-    //refreshToken: string
-  ) {
+  private setSession(userId: string, accessToken: any) {
     localStorage.setItem('user-id', userId);
     localStorage.setItem('access-token', accessToken);
-    //localStorage.setItem('refresh-token', refreshToken);
   }
 
   private removeSession() {
     localStorage.removeItem('user-id');
     localStorage.removeItem('access-token');
-    //localStorage.removeItem('refresh-token');
   }
 
   /*dummy method to check if authheaders are set
-   *request passes through the jwt middleware at backend api
-   * returns 401 if not authorized
-   * returns 403 if token is expired
+   *checks if the access tokens are available
    */
   verifyUser() {
-    this.myBool = true;    
-    this.accountService.getUserAccount().subscribe({
-      next: (res) => {
-        if(res.status === 401){
-          this.myBool = false;
-        }
-      },
-      error: (err) => {
-        console.log(err.error.message);
-      },
-    });
+    this.myBool = false;
+    const token1 = this.tokenService.getAccessTokenSession();
+    const token2 = this.tokenService.getAccessTokenLocal();
+    if (token1 === token2 && token1 !== null) {
+      this.myBool = true;
+    }
     return this.myBool;
   }
 }

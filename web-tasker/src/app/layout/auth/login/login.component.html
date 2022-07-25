@@ -31,7 +31,6 @@
                   <div class="section text-center">
                     <h4 class="mb-4 pb-3 text-white">Log In</h4>
                     <form
-                      
                       name="form"
                       (ngSubmit)="f.form.valid && onSubmit()"
                       #f="ngForm"
@@ -45,16 +44,30 @@
                           [(ngModel)]="form.username"
                           placeholder="Your Email"
                           required
+                          minlength="3"
                           autocomplete="on"
                           #username="ngModel"
                         />
                         <i class="input-icon uil uil-at"></i>
+                        <i
+                          class="vericon success fas fa-check-circle fa-xs"
+                          *ngIf="!username.errors && f.touched"
+                        ></i>
+                        <i
+                          class="vericon danger fas fa-exclamation-circle fa-xs"
+                          *ngIf="username.errors && f.touched"
+                        ></i>
                         <div
-                          class="alert alert-danger"
+                          class="alert alert-style"
                           role="alert"
-                          *ngIf="username.errors && f.submitted"
+                          *ngIf="username.errors && f.touched"
                         >
-                          Username is required!
+                          <small *ngIf="username.errors['required']">
+                            Username is required!
+                          </small>
+                          <small *ngIf="username.errors['minlength']">
+                            Username must be at least 3 characters
+                          </small>
                         </div>
                       </div>
                       <div class="form-group mt-2">
@@ -70,17 +83,25 @@
                           #password="ngModel"
                         />
                         <i class="input-icon uil uil-lock-alt"></i>
+                        <i
+                          class="vericon danger fas fa-exclamation-circle fa-xs"
+                          *ngIf="password.errors && f.touched"
+                        ></i>
+                        <i
+                          class="vericon success fas fa-check-circle fa-xs"
+                          *ngIf="!password.errors && f.touched"
+                        ></i>
                         <div
-                          class="alert alert-danger"
+                          class="alert alert-style"
                           role="alert"
-                          *ngIf="password.errors && f.submitted"
+                          *ngIf="password.errors && f.touched"
                         >
-                          <div *ngIf="password.errors['required']">
-                            Password is required
-                          </div>
-                          <div *ngIf="password.errors['minlength']">
+                          <small *ngIf="password.errors['required']"
+                            >password is required!</small
+                          >
+                          <small *ngIf="password.errors['minlength']">
                             Password must be at least 6 characters
-                          </div>
+                          </small>
                         </div>
                       </div>
                       <div class="form-group">
@@ -88,11 +109,11 @@
                       </div>
                       <div class="form-group">
                         <div
-                          class="alert alert-danger"
+                          class="alert-style mt-2"
                           role="alert"
                           *ngIf="f.submitted && isLoginFailed"
                         >
-                          Login failed: {{ errorMessage }}
+                          <small> Login failed: {{ errorMessage }} </small>
                         </div>
                       </div>
                       <div class="form-group">
@@ -106,45 +127,68 @@
                     </div> -->
                   </div>
                 </div>
-                <div class="card-back">
-                  <div class="center-wrap">
-                    <div class="section text-center">
-                      <h4 class="mb-4 pb-3 text-white">Sign Up</h4>
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          name="logname"
-                          class="form-style"
-                          placeholder="Your Full Name"
-                          id="logname"
-                          autocomplete="off"
-                        />
-                        <i class="input-icon uil uil-user"></i>
-                      </div>
-                      <div class="form-group mt-2">
-                        <input
-                          type="email"
-                          name="logemail"
-                          class="form-style"
-                          placeholder="Your Email"
-                          id="logemail"
-                          autocomplete="off"
-                        />
-                        <i class="input-icon uil uil-at"></i>
-                      </div>
-                      <div class="form-group mt-2">
-                        <input
-                          type="password"
-                          name="logpass"
-                          class="form-style"
-                          placeholder="Your Password"
-                          id="logpass"
-                          autocomplete="off"
-                        />
-                        <i class="input-icon uil uil-lock-alt"></i>
-                      </div>
-                      <a href="#" class="btn mt-4">submit</a>
+              </div>
+              <div class="card-back">
+                <div class="center-wrap">
+                  <div class="section text-center">
+                    <h4 class="mb-2 pb-1 text-white">Sign Up</h4>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        name="logname"
+                        class="form-style"
+                        placeholder="Your Full Name"
+                        id="logname"
+                        autocomplete="off"
+                      />
+                      <i class="input-icon uil uil-user"></i>
                     </div>
+                    <div class="form-group mt-2">
+                      <input
+                        type="email"
+                        name="logemail"
+                        class="form-style"
+                        placeholder="Your Email"
+                        id="logemail"
+                        autocomplete="off"
+                      />
+                      <i class="input-icon uil uil-at"></i>
+                    </div>
+                    <div class="form-group mt-2">
+                      <input
+                        type="text"
+                        name="logpass"
+                        class="form-style"
+                        placeholder="Set username"
+                        id="logpass"
+                        autocomplete="off"
+                      />
+                      <i class="input-icon uil uil-google-hangouts-alt"></i>
+                    </div>
+                    <div class="form-group mt-2">
+                      <input
+                        type="password"
+                        name="logpass"
+                        class="form-style"
+                        placeholder="Set Password"
+                        id="logpass"
+                        autocomplete="off"
+                      />
+                      <i class="input-icon uil uil-lock-alt"></i>
+                    </div>
+                    <div class="form-group mt-2">
+                      <input
+                        type="password"
+                        name="logpass"
+                        class="form-style"
+                        placeholder="Confirm Password"
+                        id="logpass"
+                        autocomplete="off"
+                      />
+                      <i class="input-icon uil uil-keyboard"></i>
+                    </div>
+
+                    <a href="#" class="btn mt-2">submit</a>
                   </div>
                 </div>
               </div>
