@@ -29,10 +29,10 @@
               <div class="card-front">
                 <div class="center-wrap">
                   <div class="section text-center">
-                    <h4 class="mb-4 pb-3 text-white">Log In</h4>
+                    <h4 class="mb-3 pb-3 text-white">Log In</h4>
                     <form
                       name="form"
-                      (ngSubmit)="f.form.valid && onSubmit()"
+                      (ngSubmit)="f.form.valid && onSignin()"
                       #f="ngForm"
                       novalidate
                     >
@@ -51,16 +51,16 @@
                         <i class="input-icon uil uil-at"></i>
                         <i
                           class="vericon success fas fa-check-circle fa-xs"
-                          *ngIf="!username.errors && f.touched"
+                          *ngIf="!username.errors && username.dirty"
                         ></i>
                         <i
                           class="vericon danger fas fa-exclamation-circle fa-xs"
-                          *ngIf="username.errors && f.touched"
+                          *ngIf="username.errors && username.dirty"
                         ></i>
                         <div
                           class="alert alert-style"
                           role="alert"
-                          *ngIf="username.errors && f.touched"
+                          *ngIf="username.errors && username.dirty"
                         >
                           <small *ngIf="username.errors['required']">
                             Username is required!
@@ -85,16 +85,16 @@
                         <i class="input-icon uil uil-lock-alt"></i>
                         <i
                           class="vericon danger fas fa-exclamation-circle fa-xs"
-                          *ngIf="password.errors && f.touched"
+                          *ngIf="password.errors && password.dirty"
                         ></i>
                         <i
                           class="vericon success fas fa-check-circle fa-xs"
-                          *ngIf="!password.errors && f.touched"
+                          *ngIf="!password.errors && f.dirty"
                         ></i>
                         <div
                           class="alert alert-style"
                           role="alert"
-                          *ngIf="password.errors && f.touched"
+                          *ngIf="password.errors && password.dirty"
                         >
                           <small *ngIf="password.errors['required']"
                             >password is required!</small
@@ -132,63 +132,212 @@
                 <div class="center-wrap">
                   <div class="section text-center">
                     <h4 class="mb-2 pb-1 text-white">Sign Up</h4>
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        name="logname"
-                        class="form-style"
-                        placeholder="Your Full Name"
-                        id="logname"
-                        autocomplete="off"
-                      />
-                      <i class="input-icon uil uil-user"></i>
-                    </div>
-                    <div class="form-group mt-2">
-                      <input
-                        type="email"
-                        name="logemail"
-                        class="form-style"
-                        placeholder="Your Email"
-                        id="logemail"
-                        autocomplete="off"
-                      />
-                      <i class="input-icon uil uil-at"></i>
-                    </div>
-                    <div class="form-group mt-2">
-                      <input
-                        type="text"
-                        name="logpass"
-                        class="form-style"
-                        placeholder="Set username"
-                        id="logpass"
-                        autocomplete="off"
-                      />
-                      <i class="input-icon uil uil-google-hangouts-alt"></i>
-                    </div>
-                    <div class="form-group mt-2">
-                      <input
-                        type="password"
-                        name="logpass"
-                        class="form-style"
-                        placeholder="Set Password"
-                        id="logpass"
-                        autocomplete="off"
-                      />
-                      <i class="input-icon uil uil-lock-alt"></i>
-                    </div>
-                    <div class="form-group mt-2">
-                      <input
-                        type="password"
-                        name="logpass"
-                        class="form-style"
-                        placeholder="Confirm Password"
-                        id="logpass"
-                        autocomplete="off"
-                      />
-                      <i class="input-icon uil uil-keyboard"></i>
-                    </div>
-
-                    <a href="#" class="btn mt-2">submit</a>
+                    <form
+                      name="form"
+                      (ngSubmit)="fSignup.form.valid && onSignup()"
+                      #fSignup="ngForm"
+                      novalidate
+                    >
+                      <div class="custom-form-row row">
+                        <div class="form-group col me-2">
+                          <input
+                            type="text"
+                            name="name"
+                            class="form-style form-control"
+                            [(ngModel)]="form.username2"
+                            placeholder="Your Full Name"
+                            required
+                            minlength="3"
+                            autocomplete="on"
+                            #username2="ngModel"
+                          />
+                          <i class="input-icon uil uil-user"></i>
+                          <i
+                            class="vericon success fas fa-check-circle fa-xs"
+                            *ngIf="!username.errors && username.dirty"
+                          ></i>
+                          <i
+                            class="vericon danger fas fa-exclamation-circle fa-xs"
+                            *ngIf="username.errors && username.dirty"
+                          ></i>
+                          <div
+                            class="alert alert-style"
+                            role="alert"
+                            *ngIf="username.errors && username.dirty"
+                          >
+                            <small *ngIf="username.errors['required']">
+                              Username is required!
+                            </small>
+                            <small *ngIf="username.errors['minlength']">
+                              Username must be at least 3 characters
+                            </small>
+                          </div>
+                        </div>
+                        <div class="form-group col">
+                          <input
+                            type="text"
+                            name="name"
+                            class="form-style form-control"
+                            [(ngModel)]="form.username2"
+                            placeholder="Your Full Name"
+                            required
+                            minlength="3"
+                            autocomplete="on"
+                            #username2="ngModel"
+                          />
+                          <i class="input-icon uil uil-user"></i>
+                          <i
+                            class="vericon success fas fa-check-circle fa-xs"
+                            *ngIf="!username.errors && username.dirty"
+                          ></i>
+                          <i
+                            class="vericon danger fas fa-exclamation-circle fa-xs"
+                            *ngIf="username.errors && username.dirty"
+                          ></i>
+                          <div
+                            class="alert alert-style"
+                            role="alert"
+                            *ngIf="username.errors && username.dirty"
+                          >
+                            <small *ngIf="username.errors['required']">
+                              Username is required!
+                            </small>
+                            <small *ngIf="username.errors['minlength']">
+                              Username must be at least 3 characters
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="custom-form-row row">
+                        <div class="form-group mt-2 col me-2">
+                          <input
+                            type="email"
+                            name="logemail"
+                            class="form-style"
+                            placeholder="Your Email"
+                            id="logemail"
+                            autocomplete="off"
+                          />
+                          <i class="input-icon uil uil-at"></i>
+                          <i
+                            class="vericon success fas fa-check-circle fa-xs"
+                            *ngIf="!username.errors && username.dirty"
+                          ></i>
+                          <i
+                            class="vericon danger fas fa-exclamation-circle fa-xs"
+                            *ngIf="username.errors && username.dirty"
+                          ></i>
+                          <div
+                            class="alert alert-style"
+                            role="alert"
+                            *ngIf="username.errors && username.dirty"
+                          >
+                            <small *ngIf="username.errors['required']">
+                              Username is required!
+                            </small>
+                            <small *ngIf="username.errors['minlength']">
+                              Username must be at least 3 characters
+                            </small>
+                          </div>
+                        </div>
+                        <div class="form-group mt-2 col">
+                          <input
+                            type="text"
+                            name="logpass"
+                            class="form-style"
+                            placeholder="Set username"
+                            id="logpass"
+                            autocomplete="off"
+                          />
+                          <i class="input-icon uil uil-google-hangouts-alt"></i>
+                          <i
+                            class="vericon success fas fa-check-circle fa-xs"
+                            *ngIf="!username.errors && username.dirty"
+                          ></i>
+                          <i
+                            class="vericon danger fas fa-exclamation-circle fa-xs"
+                            *ngIf="username.errors && username.dirty"
+                          ></i>
+                          <div
+                            class="alert alert-style"
+                            role="alert"
+                            *ngIf="username.errors && username.dirty"
+                          >
+                            <small *ngIf="username.errors['required']">
+                              Username is required!
+                            </small>
+                            <small *ngIf="username.errors['minlength']">
+                              Username must be at least 3 characters
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group mt-2">
+                        <input
+                          type="password"
+                          name="logpass"
+                          class="form-style"
+                          placeholder="Set Password"
+                          id="logpass"
+                          autocomplete="off"
+                        />
+                        <i class="input-icon uil uil-lock-alt"></i>
+                        <i
+                          class="vericon success fas fa-check-circle fa-xs"
+                          *ngIf="!username.errors && username.dirty"
+                        ></i>
+                        <i
+                          class="vericon danger fas fa-exclamation-circle fa-xs"
+                          *ngIf="username.errors && username.dirty"
+                        ></i>
+                        <div
+                          class="alert alert-style"
+                          role="alert"
+                          *ngIf="username.errors && username.dirty"
+                        >
+                          <small *ngIf="username.errors['required']">
+                            Username is required!
+                          </small>
+                          <small *ngIf="username.errors['minlength']">
+                            Username must be at least 3 characters
+                          </small>
+                        </div>
+                      </div>
+                      <div class="form-group mt-2">
+                        <input
+                          type="password"
+                          name="logpass"
+                          class="form-style"
+                          placeholder="Confirm Password"
+                          id="logpass"
+                          autocomplete="off"
+                        />
+                        <i class="input-icon uil uil-keyboard"></i>
+                        <i
+                          class="vericon success fas fa-check-circle fa-xs"
+                          *ngIf="!username.errors && username.dirty"
+                        ></i>
+                        <i
+                          class="vericon danger fas fa-exclamation-circle fa-xs"
+                          *ngIf="username.errors && username.dirty"
+                        ></i>
+                        <div
+                          class="alert alert-style"
+                          role="alert"
+                          *ngIf="username.errors && username.dirty"
+                        >
+                          <small *ngIf="username.errors['required']">
+                            Username is required!
+                          </small>
+                          <small *ngIf="username.errors['minlength']">
+                            Username must be at least 3 characters
+                          </small>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <button class="btn mt-3 a">submit</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>

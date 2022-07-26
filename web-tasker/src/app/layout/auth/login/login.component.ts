@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  onSubmit() {
+  onSignin() {
     const { username, password } = this.form;
     this.authService.login(username, password).subscribe({
       next: (data) => {
@@ -106,6 +106,10 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
       },
     });
+  }
+
+  onSignup(){
+    console.log("signup submit button works!");
   }
 
   reloadPage() {
