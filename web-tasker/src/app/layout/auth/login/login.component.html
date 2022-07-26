@@ -134,22 +134,20 @@
                     <h4 class="mb-2 pb-1 text-white">Sign Up</h4>
                     <form
                       name="form2"
-                      (ngSubmit)="fSignup.form.valid && onSignup()"
-                      #fSignup="ngForm"
+                      (ngSubmit)="onSignup()"
+                      [formGroup]="form2"
                       novalidate
                     >
                       <div class="custom-form-row row">
                         <div class="form-group col me-2">
                           <input
                             type="text"
-                            name="firstname"
                             class="form-style form-control"
-                            [(ngModel)]="form2.firstname"
+                            formControlName="firstname"
                             placeholder="Your First Name"
                             required
                             minlength="3"
                             autocomplete="on"
-                            #firstname="ngModel"
                           />
                           <i class="input-icon uil uil-user"></i>
                           <i
@@ -176,14 +174,13 @@
                         <div class="form-group col">
                           <input
                             type="text"
-                            name="lastname"
+                            formControlName="lastname"
                             class="form-style form-control"
                             [(ngModel)]="form2.lastname"
                             placeholder="Your Last Name"
                             required
                             minlength="3"
                             autocomplete="on"
-                            #lastname="ngModel"
                           />
                           <i class="input-icon uil uil-user"></i>
                           <i
@@ -212,11 +209,11 @@
                         <div class="form-group mt-2 col me-2">
                           <input
                             type="email"
-                            name="email"
+                            formControlName="email"
                             class="form-style form-control"
                             [(ngModel)]="form2.email"
                             placeholder="Your Email"
-                            required                            
+                            required
                             autocomplete="on"
                             #email="ngModel"
                           />
@@ -232,7 +229,11 @@
                           <div
                             class="alert-style"
                             role="alert"
-                            *ngIf="email.errors && email.dirty"
+                            *ngIf="
+                              emailid['email'].touched &&
+                              emailid['email'].invalid
+                            "
+                            class="show-error"
                           >
                             <small *ngIf="email.errors['required']">
                               Username is required!
