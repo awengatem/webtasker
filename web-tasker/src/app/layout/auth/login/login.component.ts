@@ -138,7 +138,7 @@ export class LoginComponent implements OnInit {
   }
 
   test() {
-    console.log('loggged in');
+    console.log('working');
   }
 
   /**functions used by reactive form fSignup */
@@ -214,9 +214,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSignup() {
+
+  /**sign up methods */
+  onSignup() {  
+    console.log('submission successful!!');
+  }
+
+  validate() {
+    console.log('working');
     this.submitted = true;
-    console.log('signup submit button works!');
   }
 
   reloadPage() {

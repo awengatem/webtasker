@@ -132,7 +132,10 @@
                 <div class="center-wrap">
                   <div class="section text-center">
                     <h4 class="mb-2 pb-1 text-white">Sign Up</h4>
-                    <form [formGroup]="fSignup" (ngSubmit)="onSignup()">
+                    <form
+                      [formGroup]="fSignup"
+                      (ngSubmit)="fSignup.valid && onSignup()"
+                    >
                       <div class="custom-form-row row">
                         <div class="form-group col me-2">
                           <input
@@ -142,7 +145,7 @@
                             [ngClass]="{
                               'is-invalid':
                                 (firstname?.dirty && firstname?.errors) ||
-                                submitted
+                                (submitted && firstname?.errors)
                             }"
                             placeholder="Your First Name"
                             autocomplete="on"
@@ -158,7 +161,7 @@
                             role="alert"
                             *ngIf="
                               (firstname?.dirty && firstname?.errors) ||
-                              submitted
+                              (submitted && firstname?.errors)
                             "
                           >
                             <small *ngIf="firstname?.errors?.['required']">
@@ -177,7 +180,7 @@
                             [ngClass]="{
                               'is-invalid':
                                 (lastname?.dirty && lastname?.errors) ||
-                                submitted
+                                (submitted && lastname?.errors)
                             }"
                             placeholder="Your Last Name"
                             autocomplete="on"
@@ -192,7 +195,8 @@
                             class="alert-style"
                             role="alert"
                             *ngIf="
-                              (lastname?.dirty && lastname?.errors) || submitted
+                              (lastname?.dirty && lastname?.errors) ||
+                              (submitted && lastname?.errors)
                             "
                           >
                             <small *ngIf="lastname?.errors?.['required']">
@@ -212,7 +216,8 @@
                             class="form-style form-control"
                             [ngClass]="{
                               'is-invalid':
-                                (email?.dirty && email?.errors) || submitted
+                                (email?.dirty && email?.errors) ||
+                                (submitted && email?.errors)
                             }"
                             placeholder="Your Email"
                             autocomplete="on"
@@ -226,7 +231,10 @@
                           <div
                             class="alert-style"
                             role="alert"
-                            *ngIf="(email?.dirty && email?.errors) || submitted"
+                            *ngIf="
+                              (email?.dirty && email?.errors) ||
+                              (submitted && email?.errors)
+                            "
                           >
                             <small *ngIf="email?.errors?.['required']">
                               email is required!
@@ -246,7 +254,7 @@
                             [ngClass]="{
                               'is-invalid':
                                 (username?.dirty && username?.errors) ||
-                                submitted
+                                (submitted && username?.errors)
                             }"
                           />
                           <i class="input-icon uil uil-google-hangouts-alt"></i>
@@ -259,7 +267,8 @@
                             class="alert-style"
                             role="alert"
                             *ngIf="
-                              (username?.dirty && username?.errors) || submitted
+                              (username?.dirty && username?.errors) ||
+                              (submitted && username?.errors)
                             "
                           >
                             <small *ngIf="username?.errors?.['required']">
@@ -323,7 +332,7 @@
                             'is-invalid':
                               (confirmPassword?.dirty &&
                                 confirmPassword?.errors) ||
-                              submitted
+                              (submitted && confirmPassword?.errors)
                           }"
                         />
                         <i class="input-icon uil uil-keyboard"></i>
@@ -340,7 +349,7 @@
                           *ngIf="
                             (confirmPassword?.dirty &&
                               confirmPassword?.errors) ||
-                            submitted
+                            (submitted && confirmPassword?.errors)
                           "
                         >
                           <small *ngIf="confirmPassword?.errors?.['required']">
@@ -352,7 +361,9 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <button class="btn mt-3 a">submit</button>
+                        <button class="btn mt-3 a" (click)="validate()">
+                          submit
+                        </button>
                       </div>
                     </form>
                   </div>
