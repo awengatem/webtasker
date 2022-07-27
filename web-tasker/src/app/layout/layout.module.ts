@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -42,6 +42,7 @@ import { RegisterComponent } from './auth/register/register.component';
     RouterModule,
     LayoutRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
 
     //material imports
     AngularMaterialModule

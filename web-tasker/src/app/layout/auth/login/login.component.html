@@ -39,33 +39,33 @@
                       <div class="form-group">
                         <input
                           type="text"
-                          name="username"
+                          name="user"
                           class="form-style form-control"
                           [(ngModel)]="form.username"
                           placeholder="Your Email"
                           required
                           minlength="3"
                           autocomplete="on"
-                          #username="ngModel"
+                          #user="ngModel"
                         />
                         <i class="input-icon uil uil-at"></i>
                         <i
                           class="vericon success fas fa-check-circle fa-xs"
-                          *ngIf="!username.errors && username.dirty"
+                          *ngIf="!user.errors && user.dirty"
                         ></i>
                         <i
                           class="vericon danger fas fa-exclamation-circle fa-xs"
-                          *ngIf="username.errors && username.dirty"
+                          *ngIf="user.errors && user.dirty"
                         ></i>
                         <div
                           class="alert-style"
                           role="alert"
-                          *ngIf="username.errors && username.dirty"
+                          *ngIf="user.errors && user.dirty"
                         >
-                          <small *ngIf="username.errors['required']">
+                          <small *ngIf="user.errors['required']">
                             Username is required!
                           </small>
-                          <small *ngIf="username.errors['minlength']">
+                          <small *ngIf="user.errors['minlength']">
                             Username must be at least 3 characters
                           </small>
                         </div>
@@ -73,33 +73,33 @@
                       <div class="form-group mt-2">
                         <input
                           type="password"
-                          name="password"
+                          name="pwd"
                           [(ngModel)]="form.password"
                           required
                           minlength="5"
                           class="form-style form-control"
                           placeholder="Your Password"
                           autocomplete="off"
-                          #password="ngModel"
+                          #pwd="ngModel"
                         />
                         <i class="input-icon uil uil-lock-alt"></i>
                         <i
                           class="vericon danger fas fa-exclamation-circle fa-xs"
-                          *ngIf="password.errors && password.dirty"
+                          *ngIf="pwd.errors && pwd.dirty"
                         ></i>
                         <i
                           class="vericon success fas fa-check-circle fa-xs"
-                          *ngIf="!password.errors && f.dirty"
+                          *ngIf="!pwd.errors && f.dirty"
                         ></i>
                         <div
                           class="alert-style"
                           role="alert"
-                          *ngIf="password.errors && password.dirty"
+                          *ngIf="pwd.errors && pwd.dirty"
                         >
-                          <small *ngIf="password.errors['required']"
+                          <small *ngIf="pwd.errors['required']"
                             >password is required!</small
                           >
-                          <small *ngIf="password.errors['minlength']">
+                          <small *ngIf="pwd.errors['minlength']">
                             Password must be at least 6 characters
                           </small>
                         </div>
@@ -133,40 +133,42 @@
                   <div class="section text-center">
                     <h4 class="mb-2 pb-1 text-white">Sign Up</h4>
                     <form
-                      name="form2"
-                      (ngSubmit)="onSignup()"
-                      [formGroup]="form2"
-                      novalidate
+                      [formGroup]="fSignup"
+                      (ngSubmit)="onSignup()"              
+                      
                     >
                       <div class="custom-form-row row">
                         <div class="form-group col me-2">
                           <input
                             type="text"
-                            class="form-style form-control"
                             formControlName="firstname"
+                            class="form-style form-control"
+                            [ngClass]="{
+                              'is-invalid':
+                                (firstname?.dirty && firstname?.errors) ||
+                                submitted
+                            }"
                             placeholder="Your First Name"
-                            required
-                            minlength="3"
                             autocomplete="on"
                           />
                           <i class="input-icon uil uil-user"></i>
                           <i
                             class="vericon success fas fa-check-circle fa-xs"
-                            *ngIf="!firstname.errors && firstname.dirty"
+                            *ngIf="firstname?.dirty && !firstname?.errors"
                           ></i>
-                          <i
-                            class="vericon danger fas fa-exclamation-circle fa-xs"
-                            *ngIf="firstname.errors && firstname.dirty"
-                          ></i>
+
                           <div
                             class="alert-style"
                             role="alert"
-                            *ngIf="firstname.errors && firstname.dirty"
+                            *ngIf="
+                              (firstname?.dirty && firstname?.errors) ||
+                              submitted
+                            "
                           >
-                            <small *ngIf="firstname.errors['required']">
+                            <small *ngIf="firstname?.errors?.['required']">
                               Firstame is required!
                             </small>
-                            <small *ngIf="firstname.errors['minlength']">
+                            <small *ngIf="firstname?.errors?.['minlength']">
                               Firstname must be at least 3 characters
                             </small>
                           </div>
@@ -176,30 +178,31 @@
                             type="text"
                             formControlName="lastname"
                             class="form-style form-control"
-                            [(ngModel)]="form2.lastname"
+                            [ngClass]="{
+                              'is-invalid':
+                                (lastname?.dirty && lastname?.errors) ||
+                                submitted
+                            }"
                             placeholder="Your Last Name"
-                            required
-                            minlength="3"
                             autocomplete="on"
                           />
                           <i class="input-icon uil uil-user"></i>
                           <i
                             class="vericon success fas fa-check-circle fa-xs"
-                            *ngIf="!lastname.errors && lastname.dirty"
+                            *ngIf="lastname?.dirty && !lastname?.errors"
                           ></i>
-                          <i
-                            class="vericon danger fas fa-exclamation-circle fa-xs"
-                            *ngIf="lastname.errors && lastname.dirty"
-                          ></i>
+
                           <div
                             class="alert-style"
                             role="alert"
-                            *ngIf="lastname.errors && lastname.dirty"
+                            *ngIf="
+                              (lastname?.dirty && lastname?.errors) || submitted
+                            "
                           >
-                            <small *ngIf="lastname.errors['required']">
-                              Lastname is required!
+                            <small *ngIf="lastname?.errors?.['required']">
+                              Lastame is required!
                             </small>
-                            <small *ngIf="lastname.errors['minlength']">
+                            <small *ngIf="lastname?.errors?.['minlength']">
                               Lastname must be at least 3 characters
                             </small>
                           </div>
@@ -211,66 +214,66 @@
                             type="email"
                             formControlName="email"
                             class="form-style form-control"
-                            [(ngModel)]="form2.email"
+                            [ngClass]="{
+                              'is-invalid':
+                                (email?.dirty && email?.errors) || submitted
+                            }"
                             placeholder="Your Email"
-                            required
                             autocomplete="on"
-                            #email="ngModel"
                           />
                           <i class="input-icon uil uil-at"></i>
                           <i
                             class="vericon success fas fa-check-circle fa-xs"
-                            *ngIf="!email.errors && email.dirty"
+                            *ngIf="email?.dirty && !email?.errors"
                           ></i>
-                          <i
-                            class="vericon danger fas fa-exclamation-circle fa-xs"
-                            *ngIf="email.errors && email.dirty"
-                          ></i>
+
                           <div
                             class="alert-style"
                             role="alert"
-                            *ngIf="
-                              emailid['email'].touched &&
-                              emailid['email'].invalid
-                            "
-                            class="show-error"
+                            *ngIf="(email?.dirty && email?.errors) || submitted"
                           >
-                            <small *ngIf="email.errors['required']">
-                              Username is required!
+                            <small *ngIf="email?.errors?.['required']">
+                              email is required!
                             </small>
-                            <small *ngIf="email.errors['minlength']">
-                              Username must be at least 3 characters
+                            <small *ngIf="email?.errors?.['email']">
+                              email is invalid!
                             </small>
                           </div>
                         </div>
                         <div class="form-group mt-2 col">
                           <input
                             type="text"
-                            name="logpass"
-                            class="form-style"
+                            formControlName="username"
+                            class="form-style form-control"
                             placeholder="Set username"
-                            id="logpass"
                             autocomplete="off"
+                            [ngClass]="{
+                              'is-invalid':
+                                (username?.dirty && username?.errors) ||
+                                submitted
+                            }"
                           />
                           <i class="input-icon uil uil-google-hangouts-alt"></i>
                           <i
                             class="vericon success fas fa-check-circle fa-xs"
-                            *ngIf="!username.errors && username.dirty"
+                            *ngIf="username?.dirty && !username?.errors"
                           ></i>
-                          <i
-                            class="vericon danger fas fa-exclamation-circle fa-xs"
-                            *ngIf="username.errors && username.dirty"
-                          ></i>
+
                           <div
                             class="alert-style"
                             role="alert"
-                            *ngIf="username.errors && username.dirty"
+                            *ngIf="
+                              (username?.dirty && username?.errors) || submitted
+                            "
                           >
-                            <small *ngIf="username.errors['required']">
+                            <small *ngIf="username?.errors?.['required']">
                               Username is required!
                             </small>
-                            <small *ngIf="username.errors['minlength']">
+                            <small *ngIf="username?.errors?.['minlength']">
                               Username must be at least 3 characters
+                            </small>
+                            <small *ngIf="username?.errors?.['maxlength']">
+                              Username must not exceed 20 characters
                             </small>
                           </div>
                         </div>
@@ -278,62 +281,75 @@
                       <div class="form-group mt-2">
                         <input
                           type="password"
-                          name="logpass"
-                          class="form-style"
+                          formControlName="password"
+                          class="form-style form-control"
                           placeholder="Set Password"
-                          id="logpass"
                           autocomplete="off"
+                          [ngClass]="{
+                            'is-invalid':
+                              (password?.dirty && password?.errors) || submitted
+                          }"
                         />
                         <i class="input-icon uil uil-lock-alt"></i>
                         <i
                           class="vericon success fas fa-check-circle fa-xs"
-                          *ngIf="!username.errors && username.dirty"
+                          *ngIf="password?.dirty && !password?.errors"
                         ></i>
-                        <i
-                          class="vericon danger fas fa-exclamation-circle fa-xs"
-                          *ngIf="username.errors && username.dirty"
-                        ></i>
+
                         <div
                           class="alert-style"
                           role="alert"
-                          *ngIf="username.errors && username.dirty"
+                          *ngIf="
+                            (password?.dirty && password?.errors) || submitted
+                          "
                         >
-                          <small *ngIf="username.errors['required']">
-                            Username is required!
+                          <small *ngIf="password?.errors?.['required']">
+                            Password is required!
                           </small>
-                          <small *ngIf="username.errors['minlength']">
-                            Username must be at least 3 characters
+                          <small *ngIf="password?.errors?.['minlength']">
+                            Password must be at least 6 characters
+                          </small>
+                          <small *ngIf="password?.errors?.['maxlength']">
+                            Password must not exceed 20 characters
                           </small>
                         </div>
                       </div>
                       <div class="form-group mt-2">
                         <input
                           type="password"
-                          name="logpass"
-                          class="form-style"
+                          formControlName="confirmPassword"
+                          class="form-style form-control"
                           placeholder="Confirm Password"
-                          id="logpass"
                           autocomplete="off"
+                          [ngClass]="{
+                            'is-invalid':
+                              (confirmPassword?.dirty &&
+                                confirmPassword?.errors) ||
+                              submitted
+                          }"
                         />
                         <i class="input-icon uil uil-keyboard"></i>
                         <i
                           class="vericon success fas fa-check-circle fa-xs"
-                          *ngIf="!username.errors && username.dirty"
+                          *ngIf="
+                            confirmPassword?.dirty && !confirmPassword?.errors
+                          "
                         ></i>
-                        <i
-                          class="vericon danger fas fa-exclamation-circle fa-xs"
-                          *ngIf="username.errors && username.dirty"
-                        ></i>
+
                         <div
                           class="alert-style"
                           role="alert"
-                          *ngIf="username.errors && username.dirty"
+                          *ngIf="
+                            (confirmPassword?.dirty &&
+                              confirmPassword?.errors) ||
+                            submitted
+                          "
                         >
-                          <small *ngIf="username.errors['required']">
-                            Username is required!
+                          <small *ngIf="confirmPassword?.errors?.['required']">
+                            Confirm Password is required!
                           </small>
-                          <small *ngIf="username.errors['minlength']">
-                            Username must be at least 3 characters
+                          <small *ngIf="confirmPassword?.errors?.['matching']">
+                            Confirm Password does not match
                           </small>
                         </div>
                       </div>
