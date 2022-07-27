@@ -108,7 +108,10 @@ export class LoginComponent implements OnInit {
 
     /**helps detect form touched */
     this.fSignup.valueChanges.subscribe((res) => {
-      console.log('touching');
+      //console.log('touching');
+      if (this.submitted === true) {
+        this.submitted = false;
+      }
     });
   }
 
@@ -167,14 +170,6 @@ export class LoginComponent implements OnInit {
 
   get confirmPassword() {
     return this.fSignup.get('confirmPassword');
-  }
-
-  checkTouch() {
-    if (this.fSignup.touched) {
-      //this.submitted = false;
-    }
-
-    console.log('toooouch');
   }
 
   /*login methods*/

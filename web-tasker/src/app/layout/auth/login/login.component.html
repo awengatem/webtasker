@@ -132,11 +132,7 @@
                 <div class="center-wrap">
                   <div class="section text-center">
                     <h4 class="mb-2 pb-1 text-white">Sign Up</h4>
-                    <form
-                      [formGroup]="fSignup"
-                      (ngSubmit)="onSignup()"              
-                      
-                    >
+                    <form [formGroup]="fSignup" (ngSubmit)="onSignup()">
                       <div class="custom-form-row row">
                         <div class="form-group col me-2">
                           <input
@@ -287,7 +283,8 @@
                           autocomplete="off"
                           [ngClass]="{
                             'is-invalid':
-                              (password?.dirty && password?.errors) || submitted
+                              (password?.dirty && password?.errors) ||
+                              (submitted && password?.errors)
                           }"
                         />
                         <i class="input-icon uil uil-lock-alt"></i>
@@ -300,7 +297,8 @@
                           class="alert-style"
                           role="alert"
                           *ngIf="
-                            (password?.dirty && password?.errors) || submitted
+                            (password?.dirty && password?.errors) ||
+                            (submitted && password?.errors)
                           "
                         >
                           <small *ngIf="password?.errors?.['required']">
