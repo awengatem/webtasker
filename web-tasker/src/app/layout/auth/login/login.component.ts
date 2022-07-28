@@ -14,10 +14,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { data } from 'jquery';
 import { AccountService } from 'src/app/services/account-service.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
+import { WebRequestService } from 'src/app/services/web-request.service';
 import Validation from './validation';
 
 // /**directive helps detect form touched */
@@ -68,6 +68,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private accountService: AccountService,
     private tokenService: TokenService,
+    private webService: WebRequestService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -120,21 +121,36 @@ export class LoginComponent implements OnInit {
 
   /*method used by checkbox*/
   toggleCheck() {
+    if (this.checkbox.nativeElement.checked === true) {
+      this.isChecked = true;
+      //console.log('Checkbox is toggled');
+    } else {
+      this.isChecked = false;
+    }
+  }
+
+  /**method flaps card */
+  flapCard() {    
+    const status = this.checkbox.nativeElement.checked;
+    this.checkbox.nativeElement.checked = !status;
     this.isChecked = !this.isChecked;
-    console.log('Checkbox is toggled');
   }
 
   /*methods used by header buttons*/
   signUp() {
     console.log('signing up');
-    this.checkbox.nativeElement.checked = true;
-    this.isChecked = true;
+    if(this.isChecked === false){      
+      this.flapCard();
+    }
+    //this.isChecked = true;
   }
 
   login() {
     console.log('login');
-    this.checkbox.nativeElement.checked = false;
-    this.isChecked = false;
+    if(this.isChecked === true){      
+      this.flapCard();
+    }    
+    //this.isChecked = false;
   }
 
   test() {
@@ -235,17 +251,33 @@ export class LoginComponent implements OnInit {
       isProjectManager: false,
     };
 
-    console.log(`welcome ${username}`);
+    //post to server
+    this.webService.post('register', user).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.resetSignup(user.username);
+      },
+      error: (err) => {
+        console.log(err.error.message);
+      },
+    });
   }
 
   validate() {
     console.log('sign up button okay');
-    this.submitted = true;
+    this.submitted = true;    
   }
 
   validateLogin() {
     console.log('sign in button okay');
     this.logsubmitted = true;
+  }
+
+  resetSignup(username: string) {
+    this.submitted = false;
+    this.fSignup.reset();
+    this.flapCard();
+    alert(`${username} registered successfully` );
   }
 
   reloadPage() {
