@@ -42,7 +42,9 @@ export class LoginComponent implements OnInit {
   logsubmitted: boolean = false;
   isLoggedIn = false;
   isLoginFailed = false;
-  errorMessage = '';
+  signupFailed = false;
+  loginErrorMessage = '';
+  signupErrorMessage = '';
   roles: string[] = [];
   user: any;
 
@@ -130,7 +132,7 @@ export class LoginComponent implements OnInit {
   }
 
   /**method flaps card */
-  flapCard() {    
+  flapCard() {
     const status = this.checkbox.nativeElement.checked;
     this.checkbox.nativeElement.checked = !status;
     this.isChecked = !this.isChecked;
@@ -139,7 +141,7 @@ export class LoginComponent implements OnInit {
   /*methods used by header buttons*/
   signUp() {
     console.log('signing up');
-    if(this.isChecked === false){      
+    if (this.isChecked === false) {
       this.flapCard();
     }
     //this.isChecked = true;
@@ -147,9 +149,9 @@ export class LoginComponent implements OnInit {
 
   login() {
     console.log('login');
-    if(this.isChecked === true){      
+    if (this.isChecked === true) {
       this.flapCard();
-    }    
+    }
     //this.isChecked = false;
   }
 
@@ -224,7 +226,7 @@ export class LoginComponent implements OnInit {
         //this.reloadPage();
       },
       error: (err) => {
-        this.errorMessage = err.error.message;
+        this.loginErrorMessage = err.error.message;
         this.isLoginFailed = true;
       },
     });
@@ -251,21 +253,24 @@ export class LoginComponent implements OnInit {
       isProjectManager: false,
     };
 
-    //post to server
+    /**post user to server*/
     this.webService.post('register', user).subscribe({
       next: (res) => {
-        console.log(res);
         this.resetSignup(user.username);
+        console.log(res);
+        this.signupFailed = false;
       },
       error: (err) => {
         console.log(err.error.message);
+        this.signupErrorMessage = err.error.message;
+        this.signupFailed = true;
       },
     });
   }
 
   validate() {
     console.log('sign up button okay');
-    this.submitted = true;    
+    this.submitted = true;
   }
 
   validateLogin() {
@@ -277,7 +282,7 @@ export class LoginComponent implements OnInit {
     this.submitted = false;
     this.fSignup.reset();
     this.flapCard();
-    alert(`${username} registered successfully` );
+    alert(`${username} registered successfully`);
   }
 
   reloadPage() {

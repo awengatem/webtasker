@@ -42,7 +42,7 @@
                           name="user"
                           class="form-style form-control"
                           [(ngModel)]="form.username"
-                          placeholder="Your Email"
+                          placeholder="username or email"
                           required
                           minlength="3"
                           autocomplete="on"
@@ -69,10 +69,10 @@
                           "
                         >
                           <small *ngIf="user.errors['required']">
-                            Username is required!
+                            Username or email is required!
                           </small>
                           <small *ngIf="user.errors['minlength']">
-                            Username must be at least 3 characters
+                            Username or email must be at least 3 characters
                           </small>
                         </div>
                       </div>
@@ -84,7 +84,7 @@
                           required
                           minlength="5"
                           class="form-style form-control"
-                          placeholder="Your Password"
+                          placeholder="password"
                           autocomplete="off"
                           #pwd="ngModel"
                         />
@@ -127,7 +127,9 @@
                           role="alert"
                           *ngIf="f.submitted && isLoginFailed"
                         >
-                          <h5 class="error mt-3"> Login failed: {{ errorMessage }} </h5>
+                          <h5 class="error mt-3">
+                            Login failed: {{ loginErrorMessage }}
+                          </h5>
                         </div>
                       </div>
                       <div class="form-group">
@@ -164,7 +166,7 @@
                             placeholder="Your First Name"
                             autocomplete="on"
                           />
-                          <i class="input-icon uil uil-user"></i>
+                          <i class="input-icon uil uil-user-plus"></i>
                           <i
                             class="vericon success fas fa-check-circle fa-xs"
                             *ngIf="firstname?.dirty && !firstname?.errors"
@@ -199,7 +201,7 @@
                             placeholder="Your Last Name"
                             autocomplete="on"
                           />
-                          <i class="input-icon uil uil-user"></i>
+                          <i class="input-icon uil uil-user-plus"></i>
                           <i
                             class="vericon success fas fa-check-circle fa-xs"
                             *ngIf="lastname?.dirty && !lastname?.errors"
@@ -239,7 +241,7 @@
                           <i class="input-icon uil uil-at"></i>
                           <i
                             class="vericon success fas fa-check-circle fa-xs"
-                            *ngIf="email?.dirty && !email?.errors"
+                            *ngIf="email?.dirty && !email?.errors && !email?.invalid"
                           ></i>
 
                           <div
@@ -378,6 +380,17 @@
                         <button class="btn mt-3 a" (click)="validate()">
                           submit
                         </button>
+                      </div>
+                      <div class="form-group">
+                        <div
+                          class="alert-style mt-2"
+                          role="alert"
+                          *ngIf="submitted && signupFailed"
+                        >
+                          <h5 class="error mt-3">
+                            Registration failed: {{ signupErrorMessage }}
+                          </h5>
+                        </div>
                       </div>
                     </form>
                   </div>
