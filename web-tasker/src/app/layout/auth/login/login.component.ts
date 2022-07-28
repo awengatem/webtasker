@@ -39,6 +39,12 @@ export class LoginComponent implements OnInit {
   /**local variables */
   status: boolean = true;
   submitted: boolean = false;
+  logsubmitted: boolean = false;
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
+  user: any;
 
   /**form used in login part */
   form: any = {
@@ -55,12 +61,6 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
   });
-
-  isLoggedIn = false;
-  isLoginFailed = false;
-  errorMessage = '';
-  roles: string[] = [];
-  user: any;
 
   @ViewChild('checkbox') private checkbox!: ElementRef;
 
@@ -108,7 +108,7 @@ export class LoginComponent implements OnInit {
 
     /**helps detect form touched */
     this.fSignup.valueChanges.subscribe((res) => {
-      //console.log('touching');
+      //console.log('touching signup form');
       if (this.submitted === true) {
         this.submitted = false;
       }
@@ -187,17 +187,17 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).subscribe({
       next: (data) => {
         console.log(data);
-        const { authTokens, email, firstName, lastName, username, _id } =
-          data.body.user;
+        const { email, firstName, lastName, username, _id } = data.body.user;
         const filteredUser = {
-          authTokens: authTokens,
           _id: _id,
           username: username,
           email: email,
           firstName: firstName,
           lastName: lastName,
         };
-        //below saves to session storage
+        /**below saves to session storage
+         * local storage saving is done in authService
+         */
         this.accountService.saveUser(filteredUser);
         this.tokenService.saveAccessToken(data.body.accessToken);
         this.tokenService.saveRefreshToken(data.body.user.authTokens);
@@ -214,15 +214,38 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
   /**sign up methods */
-  onSignup() {  
+  onSignup() {
     console.log('submission successful!!');
+    console.log(this.fSignup.value);
+
+    //get the form values
+    const { email, firstname, lastname, username, password } =
+      this.fSignup.value;
+
+    /**creating user object to pass to server
+     *properties name's should not be changed
+     */
+    const user = {
+      username: username,
+      email: email,
+      password: password,
+      firstName: firstname,
+      lastName: lastname,
+      isProjectManager: false,
+    };
+
+    console.log(`welcome ${username}`);
   }
 
   validate() {
-    console.log('working');
+    console.log('sign up button okay');
     this.submitted = true;
+  }
+
+  validateLogin() {
+    console.log('sign in button okay');
+    this.logsubmitted = true;
   }
 
   reloadPage() {

@@ -44,7 +44,9 @@ export class AuthService {
     this.removeSession();
     this.accountService.clean();
     this.router.navigate(['/login']);
-    console.log(`${username} Logged out!`);
+    if (username){      
+      console.log(`${username} Logged out!`);
+    }
     return this.webService.get('logout').subscribe({
       next: (res) => {
         //console.log(res);
@@ -56,6 +58,8 @@ export class AuthService {
   }
 
   private setSession(userId: string, accessToken: any) {
+    //clear any previous data if any
+    this.removeSession();
     localStorage.setItem('user-id', userId);
     localStorage.setItem('access-token', accessToken);
   }
