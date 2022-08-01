@@ -52,7 +52,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content [@openCloseSidenavContent]="isOpen ? 'open' :'closed'">
-    <app-header (toggleSidebarForMe)=" toggle()" (logout)="logout()"></app-header>
+    <app-header (toggleSidebarForMe)="toggle()" (logout)="logout()"></app-header>
     <router-outlet></router-outlet>
     <footer></footer>
   </mat-sidenav-content>
