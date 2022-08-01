@@ -44,7 +44,7 @@ export class AuthService {
     this.removeSession();
     this.accountService.clean();
     this.router.navigate(['/login']);
-    if (username){      
+    if (username) {
       console.log(`${username} Logged out!`);
     }
     return this.webService.get('logout').subscribe({

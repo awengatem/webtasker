@@ -10,7 +10,11 @@ export class WebRequestService {
   readonly ROOT_URL;
 
   constructor(private http: HttpClient) {
+    /**for development purpose */
     this.ROOT_URL = 'http://127.0.0.1:3000';
+
+    /**for production testing purpose */
+    //this.ROOT_URL = 'http://192.168.31.120:3000';
   }
 
   get(uri: string) {
