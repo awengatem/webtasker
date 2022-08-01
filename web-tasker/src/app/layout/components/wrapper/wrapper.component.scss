@@ -1,112 +1,111 @@
-mat-sidenav-container{
-    height: 100%;
+mat-sidenav-container {
+  height: 100%;
 
-    .sidebar{
-        background: #010001;
-        //transition: all .5s ease;
-        width: 5rem;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        height: 100vh;
-    }
+  .sidebar {
+    background: #010001;
+    //transition: all .5s ease;
+    width: 5rem;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    height: 100vh;
+  }
 
-    .sidebar-extended{
-        width: 14rem;
-    }
+  .sidebar-extended {
+    width: 14rem;
+  }
 
-    mat-sidenav{
-        mat-nav-list{
+  mat-sidenav {
+    mat-nav-list {
+      .chevron-button {
+        transition: 300ms ease-in-out;
+        transform: rotate(0deg);
+        right: 0;
+        float: right;
+        position: absolute;
+      }
 
-            .chevron-button{
-                transition: 300ms ease-in-out;
-                transform: rotate(0deg);
-                right: 0;
-                float: right;
-                position: absolute;
-            } 
+      .chevron-button.rotated {
+        transform: rotate(180deg);
+      }
 
-            .chevron-button.rotated{
-                transform: rotate(180deg);
-            }
+      //logo styling
+      .logo {
+        text-align: center;
+        padding: 2.6rem 1rem;
+      }
 
-            //logo styling
-            .logo{
-                text-align: center;
-                padding: 2.6rem 1rem;    
-            }
-            
-            //logo image customizing
-            img{
-                width: 100px;
-                height: auto; 
-            }
+      //logo image customizing
+      img {
+        width: 100px;
+        height: auto;
+      }
 
-            //logo colapsed image customizing
-            .logo-col{
-                width: 35px;
-                height: auto; 
-            }
+      //logo colapsed image customizing
+      .logo-col {
+        width: 35px;
+        height: auto;
+      }
 
-            mat-divider{
-                border-top-width: 2px;
-                border-color: white;
-            }
+      mat-divider {
+        border-top-width: 2px;
+        border-color: white;
+      }
 
-            //subheader styling
-            .mat-subheader{
-                color: #6e9fde;
-                font-size: 0.8rem;
-                font-weight: 100;
-                letter-spacing: 1px;
+      //subheader styling
+      .mat-subheader {
+        color: #6e9fde;
+        font-size: 0.8rem;
+        font-weight: 100;
+        letter-spacing: 1px;
 
-                &.h2-col{
-                    letter-spacing: 0px;
-                }
-            }
-
-            //item styling
-            mat-list-item {
-                color: #94a3b8 !important;
-                font-size: 0.8rem;
-                height: 44px !important;
-                margin-bottom: 4px;
-
-                &::ng-deep {
-                    .mat-list-item-content {
-                        border-radius: 5px;
-                        margin: 0 8px;
-                        &:hover {
-                            background: #2c3344 !important;
-                        }
-                    }
-                }
-
-                mat-icon{
-                    vertical-align: center;
-                    margin-right: 1rem;
-                }
-            } 
-
-            //selected styling
-            .list-item-active {
-                color: #f2f5f7 !important;
-                &::ng-deep {
-                    .mat-list-item-content {
-                        background: #2c3344 !important;
-                        &:hover {
-                            background: #2c3344 !important;
-                        }
-                    }
-                }
-            } 
+        &.h2-col {
+          letter-spacing: 0px;
         }
+      }
 
-        .content{
-            margin-left: 1.5rem;
-            font-size: 0.8rem;
+      //item styling
+      mat-list-item {
+        color: #94a3b8 !important;
+        font-size: 0.8rem;
+        height: 44px !important;
+        margin-bottom: 4px;
+
+        &::ng-deep {
+          .mat-list-item-content {
+            border-radius: 5px;
             margin: 0 8px;
-            margin-top: 0.1rem;
+            &:hover {
+              background: #2c3344 !important;
+            }
+          }
         }
+
+        mat-icon {
+          vertical-align: center;
+          margin-right: 1rem;
+        }
+      }
+
+      //selected styling
+      .list-item-active {
+        color: #f2f5f7 !important;
+        &::ng-deep {
+          .mat-list-item-content {
+            background: #2c3344 !important;
+            &:hover {
+              background: #2c3344 !important;
+            }
+          }
+        }
+      }
     }
+
+    .content {
+      margin-left: 1.5rem;
+      font-size: 0.8rem;
+      margin: 0 8px;
+      margin-top: 0.1rem;
+    }
+  }
 }

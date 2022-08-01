@@ -1,8 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AccountService } from 'src/app/services/account-service.service';
 import { AuthService } from 'src/app/services/auth.service';
+import {
+  sideNavAnimation,
+  sideNavContainerAnimation,
+} from './wrapper.animations';
 
-interface sideNavToggle{
+interface sideNavToggle {
   screenWidth: number;
   isExpanded: boolean;
 }
@@ -10,7 +14,8 @@ interface sideNavToggle{
 @Component({
   selector: 'app-wrapper',
   templateUrl: './wrapper.component.html',
-  styleUrls: ['./wrapper.component.scss']
+  styleUrls: ['./wrapper.component.scss'],
+  animations: [sideNavAnimation, sideNavContainerAnimation],
 })
 export class WrapperComponent implements OnInit {
   @Output() onToggleSideNav: EventEmitter<sideNavToggle> = new EventEmitter();
@@ -18,27 +23,54 @@ export class WrapperComponent implements OnInit {
   //variables
   screenWidth = 0;
   isExpanded: boolean = true;
+  isOpen = true;
 
-  constructor(private authService: AuthService,private accountService: AccountService) { }
+  constructor(
+    private authService: AuthService,
+    private accountService: AccountService
+  ) {}
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
   }
 
-  toggleCollapse(): void{
-    this.isExpanded = !this.isExpanded;
-    this.onToggleSideNav.emit({isExpanded: this.isExpanded,screenWidth:this.screenWidth});
+  toggleCollapse(): void {
+    if (this.isExpanded === true) {
+      this.isExpanded = false;
+    } else {
+      this.isExpanded = true;
+    }
+    this.onToggleSideNav.emit({
+      isExpanded: this.isExpanded,
+      screenWidth: this.screenWidth,
+    });
   }
 
-  logout1(){
+  toggle() {
+    this.isOpen = !this.isOpen;
+    if (this.isExpanded === true) {
+      this.isExpanded = false;
+    } else {
+      this.isExpanded = true;
+    }
+  }
+
+  closeSidenav(): void {
+    this.isExpanded = false;
+    this.onToggleSideNav.emit({
+      isExpanded: this.isExpanded,
+      screenWidth: this.screenWidth,
+    });
+  }
+
+  logout1() {
     this.authService.logout();
     //console.log("logout works!!");
   }
 
   logout(): void {
     this.authService.logout();
-    
+
     //window.location.reload();
   }
-
 }
