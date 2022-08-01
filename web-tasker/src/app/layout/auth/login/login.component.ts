@@ -143,16 +143,14 @@ export class LoginComponent implements OnInit {
     console.log('signing up');
     if (this.isChecked === false) {
       this.flapCard();
-    }
-    //this.isChecked = true;
+    }   
   }
 
   login() {
     console.log('login');
     if (this.isChecked === true) {
       this.flapCard();
-    }
-    //this.isChecked = false;
+    }   
   }
 
   test() {
