@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { AccountService } from 'src/app/services/account-service.service';
 import { AuthService } from 'src/app/services/auth.service';
 import {
@@ -14,9 +15,11 @@ import {
 })
 export class WrapperComponent implements OnInit {
   @Output() onToggleSideNav: EventEmitter<any> = new EventEmitter();
+  //@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
   isExpanded: boolean = true;
   isOpen = true;
+  sublist = false;
 
   constructor(
     private authService: AuthService,
@@ -43,5 +46,10 @@ export class WrapperComponent implements OnInit {
     this.authService.logout();
 
     //window.location.reload();
+  }
+
+  showSublist(){
+    this.sublist = !this.sublist;
+    console.log("greeeeeet");
   }
 }

@@ -18,6 +18,7 @@ import { UsersComponent } from './components/users/users.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { AdDashboardComponent } from './components/ad-dashboard/ad-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RegisterComponent } from './auth/register/register.component';
     //auth declarations
     LogHeaderComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdDashboardComponent,
   ],
   imports: [
     CommonModule,
@@ -45,13 +47,13 @@ import { RegisterComponent } from './auth/register/register.component';
     ReactiveFormsModule,
 
     //material imports
-    AngularMaterialModule
+    AngularMaterialModule,
   ],
   exports: [
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
-    SidenavComponent
-  ]
+    SidenavComponent,
+  ],
 })
-export class LayoutModule1 { }
+export class LayoutModule1 {}

@@ -83,7 +83,14 @@ mat-sidenav-container {
 
         mat-icon {
           vertical-align: center;
-          margin-right: 1rem;
+          margin-right: 1rem;          
+        }
+
+        i {
+          font-size: 18px;
+          vertical-align: center;
+          margin-right: 0.5rem;
+          margin-left: 1rem;
         }
       }
 
