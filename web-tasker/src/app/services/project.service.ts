@@ -8,13 +8,18 @@ export class ProjectService {
 
   constructor(private webReqService: WebRequestService) { }
 
-  createProject(title: string){
-    //send a web request to create a project
+  createList(title: string){
+    //send a web request to create a list
     return this.webReqService.post('lists',{title});
   }
 
-  getProject(){
-    //send a web request to get a project
+  getLists(){
+    //send a web request to get lists
     return this.webReqService.get('lists');
+  }
+
+  getProjects(){
+    //send a web request to get user projects
+    return this.webReqService.get('projects/myprojects');
   }
 }

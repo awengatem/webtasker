@@ -44,6 +44,23 @@
           font-weight: 600;
         }
       }
+
+      .content {
+        .row {
+          .progress {
+            background: #8e9eab;
+          }          
+        }
+        .notify{
+          margin-top: 40px;
+          font-weight: 400;
+          font-size: 18px;          
+
+          i{
+            color: #811f15;
+          }
+        }
+      }
     }
 
     //height: 50px;

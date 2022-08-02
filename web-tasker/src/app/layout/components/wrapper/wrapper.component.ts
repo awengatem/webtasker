@@ -49,7 +49,6 @@ export class WrapperComponent implements OnInit {
   }
 
   showSublist(){
-    this.sublist = !this.sublist;
-    console.log("greeeeeet");
+    this.sublist = !this.sublist;    
   }
 }

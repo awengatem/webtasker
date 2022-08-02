@@ -84,7 +84,7 @@ export class WebReqInterceptor implements HttpInterceptor {
         //reset the access token
         this.tokenService.saveAccessToken(accessToken); //saves to session storage
         this.tokenService.setAccessTokenLocal(accessToken); //saves to local storage
-        window.location.reload();
+        //window.location.reload();
         //localStorage['access-token'] = accessToken;
       },
       error: (err) => {

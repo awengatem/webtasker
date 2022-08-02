@@ -56,7 +56,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   //method used by navtab buttons for navigation
-  showTab(bId: string,tabId: string) {
+  showTab(bId: string, tabId: string) {
     this.openTab = document.getElementById(this.getOpenTab());
     this.openTab.classList.remove('active');
     this.removeActive();
@@ -67,15 +67,17 @@ export class ProjectsComponent implements OnInit {
   }
 
   //methods for testing backend api
-  createNewProject(){
-    this.projectService.createProject('finleys project').subscribe((response: any)=>{
-      console.log(response);
-    });
+  createNewList() {
+    this.projectService
+      .createList('finleys project')
+      .subscribe((response: any) => {
+        console.log(response);
+      });
   }
 
-  getProjects(){
-    this.projectService.getProject().subscribe((response: any)=>{
-      response.forEach((item: any)=>{
+  getLists() {
+    this.projectService.getLists().subscribe((response: any) => {
+      response.forEach((item: any) => {
         console.log(item.title);
       });
       //console.log(response);

@@ -5,7 +5,9 @@
       <div class="grid-container">
         <mat-card class="welcome shadow">
           <!-- <mat-card-title></mat-card-title> -->
-          <mat-card-content class="welcome_message">welcome @{{username}}</mat-card-content>
+          <mat-card-content class="welcome_message"
+            >welcome @{{ username }}</mat-card-content
+          >
         </mat-card>
 
         <mat-grid-list class="dash-cards" cols="3" rowHeight="150px">
@@ -41,12 +43,13 @@
                   <div
                     class="row pt-3 pb-2 ps-3 border-bottom"
                     style="align-items: center"
+                    *ngFor="let project of projects"
                   >
                     <div class="col-1">
-                      <p>1</p>
+                      <p>{{ projects.indexOf(project) + 1 }}</p>
                     </div>
                     <div class="col-sm">
-                      <p>Assess my tasks today</p>
+                      <p>{{ project.projectName }}</p>
                     </div>
                     <div class="col-sm">
                       <p>in progress</p>
@@ -56,12 +59,12 @@
                         <div
                           class="progress-bar progress-bar-striped bg-success"
                           role="progressbar"
-                          style="width: 76%"
-                          aria-valuenow="76"
+                          style="width: 30%"
+                          aria-valuenow="1"
                           aria-valuemin="0"
                           aria-valuemax="100"
                         >
-                          76%
+                          1%
                         </div>
                       </div>
                     </div>
@@ -82,49 +85,9 @@
                       </div>
                     </div>
                   </div>
-                  <div
-                    class="row pt-3 pb-2 ps-3 border-bottom"
-                    style="align-items: center"
-                  >
-                    <div class="col-1">
-                      <p>2</p>
-                    </div>
-                    <div class="col-sm">
-                      <p>Assess my tasks today</p>
-                    </div>
-                    <div class="col-sm">
-                      <p>in progress</p>
-                    </div>
-                    <div class="col-sm">
-                      <div class="progress">
-                        <div
-                          class="progress-bar progress-bar-striped bg-danger"
-                          role="progressbar"
-                          style="width: 24%"
-                          aria-valuenow="24"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        >
-                          24%
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm">
-                      <div class="row">
-                        <button
-                          type="button"
-                          class="col btn btn-outline-success btn-sm me-2"
-                        >
-                          Start
-                        </button>
-                        <button
-                          type="button"
-                          class="col btn btn-outline-danger btn-sm"
-                        >
-                          End
-                        </button>
-                      </div>
-                    </div>
+                  <div class="centered notify" *ngIf="totalProjects === 0">
+                    <i class="fa-solid fa-circle-exclamation me-2"></i>
+                    <div>No projects available at the moment</div>
                   </div>
                 </div>
               </div>
@@ -153,7 +116,7 @@
                         </svg>
                       </div>
                       <div class="text-end">
-                        <h3>6</h3>
+                        <h3>{{ totalProjects }}</h3>
                         <p class="mb-0">Total Projects</p>
                       </div>
                     </div>
@@ -191,7 +154,7 @@
                         </svg>
                       </div>
                       <div class="text-end">
-                        <h3>2</h3>
+                        <h3>0</h3>
                         <p class="mb-0">Completed</p>
                       </div>
                     </div>
