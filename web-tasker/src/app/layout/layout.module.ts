@@ -12,13 +12,15 @@ import { LayoutRoutingModule } from './layout-routing.module';
 
 import { RouterModule } from '@angular/router';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
-import { HomeComponent } from './components/home/home.component';
-import { ProjectsComponent } from './components/projects/projects.component';
-import { UsersComponent } from './components/users/users.component';
+import { HomeComponent } from './components/user/home/home.component';
+import { ProjectsComponent } from './components/user/projects/projects.component';
+import { UsersComponent } from './components/user/users/users.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { AdDashboardComponent } from './components/ad-dashboard/ad-dashboard.component';
+import { AdDashboardComponent } from './components/admin/ad-dashboard/ad-dashboard.component';
+import { AdProjectsComponent } from './components/admin/ad-projects/ad-projects.component';
+import { AdTeamsComponent } from './components/admin/ad-teams/ad-teams.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { AdDashboardComponent } from './components/ad-dashboard/ad-dashboard.com
     LoginComponent,
     RegisterComponent,
     AdDashboardComponent,
+    AdProjectsComponent,
+    AdTeamsComponent,
   ],
   imports: [
     CommonModule,

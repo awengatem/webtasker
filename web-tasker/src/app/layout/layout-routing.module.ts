@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProjectsComponent } from './components/projects/projects.component';
-import { HomeComponent } from './components/home/home.component';
-import { UsersComponent } from './components/users/users.component';
+import { ProjectsComponent } from './components/user/projects/projects.component';
+import { HomeComponent } from './components/user/home/home.component';
+import { UsersComponent } from './components/user/users/users.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { LoginComponent } from './auth/login/login.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
