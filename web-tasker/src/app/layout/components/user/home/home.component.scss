@@ -18,8 +18,9 @@
 
     &.second {
       //taking full space
-      //padding: 0px;
-    }
+      //padding: 0px;      
+    }   
+
     background: #d674cb; /* fallback for old browsers */
     background: -webkit-linear-gradient(
       to right,
@@ -49,14 +50,14 @@
         .row {
           .progress {
             background: #8e9eab;
-          }          
+          }
         }
-        .notify{
+        .notify {
           margin-top: 40px;
           font-weight: 400;
-          font-size: 18px;          
+          font-size: 18px;
 
-          i{
+          i {
             color: #811f15;
           }
         }
@@ -83,7 +84,7 @@
     margin-top: 50px;
 
     .card {
-      background: transparent;
+      background: transparent;      
     }
 
     .align-self-center {
