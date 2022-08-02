@@ -54,7 +54,7 @@ mat-sidenav-container {
 
       //subheader styling
       .mat-subheader {
-        color: #6e9fde;
+        color: #22b8f0;
         font-size: 0.8rem;
         font-weight: 100;
         letter-spacing: 1px;
@@ -83,7 +83,7 @@ mat-sidenav-container {
 
         mat-icon {
           vertical-align: center;
-          margin-right: 1rem;          
+          margin-right: 1rem;
         }
 
         i {
@@ -99,11 +99,24 @@ mat-sidenav-container {
         color: #f2f5f7 !important;
         &::ng-deep {
           .mat-list-item-content {
-            background: #2c3344 !important;
+            background: #2c3344 !important;            
             &:hover {
               background: #2c3344 !important;
-            }
-          }
+            }           
+          }         
+        }
+      }
+
+      //submenu selected styling
+      .menu {
+        color: #22b8f0 !important;
+        &::ng-deep {
+          .mat-list-item-content {
+            background: transparent;            
+            &:hover {
+              background: #2c3344 !important;
+            }           
+          }         
         }
       }
     }

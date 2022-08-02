@@ -51,14 +51,14 @@
 
       <mat-list-item        
         (click)="showSublist()"
-        [ngClass]="sublist ? 'list-item-active' : ''"
+        [ngClass]="sublist ? 'menu' : ''"
       >
         <mat-icon mat-list-icon>verified_user</mat-icon>
         <div class="content" *ngIf="isExpanded">Admin</div>
       </mat-list-item>
 
       <mat-list-item
-        [routerLink]="'home'"
+        [routerLink]="'ad_dashboard'"
         routerLinkActive="list-item-active"
         *ngIf="sublist"
       >
@@ -67,7 +67,7 @@
       </mat-list-item>
 
       <mat-list-item
-        [routerLink]=""
+        [routerLink]="'ad_projects'"
         routerLinkActive="list-item-active"
         *ngIf="sublist"
       >
@@ -76,7 +76,7 @@
       </mat-list-item>
 
       <mat-list-item
-        [routerLink]=""
+        [routerLink]="'ad_teams'"
         routerLinkActive="list-item-active"
         *ngIf="sublist"
       >

@@ -7,50 +7,70 @@ import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { LoginComponent } from './auth/login/login.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
 import { AuthGuard } from '../helpers/auth-guard.guard';
+import { AdDashboardComponent } from './components/admin/ad-dashboard/ad-dashboard.component';
+import { AdProjectsComponent } from './components/admin/ad-projects/ad-projects.component';
+import { AdTeamsComponent } from './components/admin/ad-teams/ad-teams.component';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
-    path:'',
+    path: '',
     component: WrapperComponent,
     //component: LoginComponent,
     children: [
       {
         path: '',
         redirectTo: 'home',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'home',
         canActivate: [AuthGuard],
-        component: HomeComponent
+        component: HomeComponent,
       },
       {
         path: 'projects',
         canActivate: [AuthGuard],
-        component: ProjectsComponent
+        component: ProjectsComponent,
       },
       {
         path: 'users',
         canActivate: [AuthGuard],
-        component: UsersComponent
-      }
-    ]
+        component: UsersComponent,
+      },
+
+      /**ADMIN ROUTES */
+      {
+        path: 'ad_dashboard',
+        canActivate: [AuthGuard],
+        component: AdDashboardComponent,
+      },
+      {
+        path: 'ad_projects',
+        canActivate: [AuthGuard],
+        component: AdProjectsComponent,
+      },
+      {
+        path: 'ad_teams',
+        canActivate: [AuthGuard],
+        component: AdTeamsComponent,
+      },
+    ],
   },
   {
     path: '**',
-    redirectTo: 'home',//add "page not found" component
-    pathMatch: 'full'
-  }
+    redirectTo: 'home', //add "page not found" component
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class LayoutRoutingModule { }
+export class LayoutRoutingModule {}
 
 //remember to add redirect tomorrow
