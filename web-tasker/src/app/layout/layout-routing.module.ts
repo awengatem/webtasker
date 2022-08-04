@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProjectsComponent } from './components/user/projects/projects.component';
 import { HomeComponent } from './components/user/home/home.component';
-import { UsersComponent } from './components/user/users/users.component';
+import { TeamsComponent } from './components/user/teams/teams.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { LoginComponent } from './auth/login/login.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
@@ -37,9 +37,9 @@ const routes: Routes = [
         component: ProjectsComponent,
       },
       {
-        path: 'users',
+        path: 'teams',
         canActivate: [AuthGuard],
-        component: UsersComponent,
+        component: TeamsComponent,
       },
 
       /**ADMIN ROUTES */

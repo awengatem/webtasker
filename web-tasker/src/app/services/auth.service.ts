@@ -57,6 +57,7 @@ export class AuthService {
     });
   }
 
+  //deals with local storage
   private setSession(userId: string, accessToken: any) {
     //clear any previous data if any
     this.removeSession();

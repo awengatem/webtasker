@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { HomeComponent } from './components/user/home/home.component';
 import { ProjectsComponent } from './components/user/projects/projects.component';
-import { UsersComponent } from './components/user/users/users.component';
+import { TeamsComponent } from './components/user/teams/teams.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -24,21 +24,24 @@ import { AdTeamsComponent } from './components/admin/ad-teams/ad-teams.component
 
 @NgModule({
   declarations: [
+    /*helper components*/
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
     SidenavComponent,
-
-    //components declarations
     WrapperComponent,
+
+    /*user components declarations*/
     HomeComponent,
     ProjectsComponent,
-    UsersComponent,
+    TeamsComponent,
 
-    //auth declarations
+    /*auth component declarations*/
     LogHeaderComponent,
     LoginComponent,
     RegisterComponent,
+
+    /*admin component declarations*/
     AdDashboardComponent,
     AdProjectsComponent,
     AdTeamsComponent,
@@ -50,7 +53,7 @@ import { AdTeamsComponent } from './components/admin/ad-teams/ad-teams.component
     FormsModule,
     ReactiveFormsModule,
 
-    //material imports
+    /*material imports*/
     AngularMaterialModule,
   ],
   exports: [
