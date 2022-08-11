@@ -7,10 +7,10 @@
           <div class="projects">
             <h1 class="text-dark">projects</h1>
             <mat-divider></mat-divider>
-            <div class="projects-inside">
+            <div class="projects-inside" id="projects">
               <div class="row">
                 <!-- item 1 -->
-                <div class="col-md-6" *ngFor="let project of projects">
+                <div class="col-md-6" *ngFor="let project of projects" [routerLink]="['/ad_projects',project._id]">
                   <div class="timetable-item shadow">
                     <div class="timetable-item-main">
                       <div class="timetable-item-name">
@@ -50,6 +50,7 @@
       </div>
       <div class="row centered-content create">
         <div class="col-md-1">
+          <!-- routerLink="/new-project" -->
           <button class="btn btn-outline-custom" routerLink="/new-project">
             <div class="btn-txt">+</div>
           </button>

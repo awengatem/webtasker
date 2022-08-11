@@ -44,21 +44,31 @@ const routes: Routes = [
       },
 
       /**ADMIN ROUTES */
+      /**Dashboard */
       {
         path: 'ad_dashboard',
         canActivate: [AuthGuard],
         component: AdDashboardComponent,
+      },
+
+      /**Projects */
+      {
+        path: 'ad_projects',
+        canActivate: [AuthGuard],
+        component: AdProjectsComponent,
+      }, 
+      {
+        path: 'ad_projects/:projectId',
+        canActivate: [AuthGuard],
+        component: AdProjectsComponent,
       },
       {
         path: 'new-project',
         canActivate: [AuthGuard],
         component: NewProjectComponent,
       },
-      {
-        path: 'ad_projects',
-        canActivate: [AuthGuard],
-        component: AdProjectsComponent,
-      },
+
+      /**Teams */
       {
         path: 'ad_teams',
         canActivate: [AuthGuard],

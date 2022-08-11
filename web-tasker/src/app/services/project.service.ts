@@ -5,6 +5,8 @@ import { WebRequestService } from './web-request.service';
   providedIn: 'root'
 })
 export class ProjectService {
+  //variable to help view newly created project
+  private projectAdded: Boolean = false;
 
   constructor(private webReqService: WebRequestService) { }
 
@@ -31,5 +33,14 @@ export class ProjectService {
   createProject(projectName:string){
     //send a web request to create a project
     return this.webReqService.post('projects',{projectName});
+  }
+
+  /**Methods used by projectAdded above */
+  getAddStatus(){
+    return this.projectAdded;
+  }
+
+  setAddStatus(status: Boolean){
+    this.projectAdded = status;
   }
 }
