@@ -50,7 +50,7 @@ const routes: Routes = [
         component: AdDashboardComponent,
       },
       {
-        path: '/new-project',
+        path: 'new-project',
         canActivate: [AuthGuard],
         component: NewProjectComponent,
       },

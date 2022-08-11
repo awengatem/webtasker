@@ -1,0 +1,24 @@
+.centered-content {
+  position: absolute;
+  .modal-box {
+    min-height: 200px;
+    width: 100%;
+    max-width: 580px;
+    background: #ffff;
+    border-radius: 5px;
+    padding: 35px;
+
+    input {
+      border-radius: 5px;
+    }
+
+    .btm-rgt {    
+     margin-left: 69%;
+     margin-right: 3px;
+
+     .btn-primary{
+        color: #ffff;
+     }
+    }
+  }
+}

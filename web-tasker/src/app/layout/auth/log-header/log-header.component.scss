@@ -122,29 +122,11 @@ ul li {
   }
 }
 
-//customizing bootstrap button used in toolbar
-/* import the Bootstrap */
-@import "bootstrap";
-
-/* ------- customize primary button color -------- */
-$mynewcolor: #22b8f0;
-
-.btn-primary {
-  @include button-variant(
-    $mynewcolor,
-    darken($mynewcolor, 7.5%),
-    darken($mynewcolor, 10%),
-    lighten($mynewcolor, 5%),
-    lighten($mynewcolor, 10%),
-    darken($mynewcolor, 30%)
-  );
-}
-
-.btn-outline-light {
-  @include button-outline-variant(
-    $mynewcolor,
-    #222222,
-    lighten($mynewcolor, 5%),
-    $mynewcolor
-  );
+.btn-outline-custom{
+  &:hover{
+    color: #010001;
+  }
+  &:focus{
+    color: #010001;
+  }
 }

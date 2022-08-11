@@ -33,6 +33,7 @@
     display: block;
     background: whitesmoke;
     border-radius: 2px;
+    opacity: 0.8;
 
     &-main {
       -webkit-box-flex: 1;
@@ -81,6 +82,13 @@
         color: #010001;
       }
     }
+
+    &:hover{
+      opacity: 1.0;
+      overflow: hidden;
+      transition: transform .5s ease;
+      transform: scale(1.05);
+    }
   }
 }
 
@@ -95,37 +103,11 @@
     font-size: 20px;
    }  
   }
-  h5 {    
+  h4 {    
     font-family: inherit;
     font-weight: 400;
-    font-size: 12px; 
+    font-size: 16px; 
     margin-left: 0.5rem;
     position: absolute;
-  }
-  //customizing bootstrap button used in create project
-  /* import the Bootstrap */
-  @import "bootstrap";
-
-  /* ------- customize primary button color -------- */
-  $mycolor2: #22b8f0;
-
-  .btn-primary {
-    @include button-variant(
-      $mycolor2,
-      darken($mycolor2, 7.5%),
-      darken($mycolor2, 10%),
-      lighten($mycolor2, 5%),
-      lighten($mycolor2, 10%),
-      darken($mycolor2, 30%)
-    );
-  }
-
-  .btn-outline-custom {
-    @include button-outline-variant(
-      $mycolor2,
-      #ffff,
-      lighten($mycolor2, 5%),
-      $mycolor2
-    );
-  }
+  }  
 }

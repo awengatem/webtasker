@@ -17,6 +17,7 @@ mat-sidenav-container {
 
   mat-sidenav {
     mat-nav-list {
+      overflow-x: hidden;
       .chevron-button {
         transition: 300ms ease-in-out;
         transform: rotate(0deg);

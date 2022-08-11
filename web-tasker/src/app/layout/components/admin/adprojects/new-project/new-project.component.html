@@ -1,1 +1,38 @@
-<p>new-project works!</p>
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Projects</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <div class="centered-content">
+        <div class="modal-box shadow">
+          <h1>+ Create a new project</h1>
+          <div class="input-group mb-3">
+            <input
+              #projectName
+              type="text"
+              class="form-control bg-light"
+              placeholder="new project"
+              aria-label="new project"
+              aria-describedby="basic-addon2"
+            />
+          </div>
+          <div class="input-group-append row btm-rgt">
+            <button
+              class="btn btn-outline-secondary col me-2"
+              type="button"
+              routerLink="/ad_projects"
+            >
+              Back
+            </button>
+            <button
+              class="btn btn-primary col"
+              type="button"
+              (click)="createProject(projectName.value)"
+            >
+              Create
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

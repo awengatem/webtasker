@@ -49,10 +49,7 @@
         <div class="content" *ngIf="isExpanded">My teams</div>
       </mat-list-item>
 
-      <mat-list-item        
-        (click)="showSublist()"
-        [ngClass]="sublist ? 'menu' : ''"
-      >
+      <mat-list-item (click)="showSublist()" [ngClass]="sublist ? 'menu' : ''">
         <mat-icon mat-list-icon>verified_user</mat-icon>
         <div class="content" *ngIf="isExpanded">Admin</div>
       </mat-list-item>
@@ -71,6 +68,12 @@
         routerLinkActive="list-item-active"
         *ngIf="sublist"
       >
+        <!-- for children components -->
+        <div
+          [routerLink]="'new-project'"
+          routerLinkActive="list-item-active"
+          *ngIf="sublist"
+        ></div>
         <i class="fa-solid fa-folder-open"></i>
         <div class="content" *ngIf="isExpanded">Projects</div>
       </mat-list-item>

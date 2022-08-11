@@ -27,4 +27,9 @@ export class ProjectService {
     //send a web request to get user projects
     return this.webReqService.get('projects');
   }
+
+  createProject(projectName:string){
+    //send a web request to create a project
+    return this.webReqService.post('projects',{projectName});
+  }
 }
