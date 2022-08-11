@@ -19,8 +19,9 @@ import { LogHeaderComponent } from './auth/log-header/log-header.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AdDashboardComponent } from './components/admin/ad-dashboard/ad-dashboard.component';
-import { AdProjectsComponent } from './components/admin/ad-projects/ad-projects.component';
+import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
 import { AdTeamsComponent } from './components/admin/ad-teams/ad-teams.component';
+import { NewProjectComponent } from './components/admin/adprojects/new-project/new-project.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AdTeamsComponent } from './components/admin/ad-teams/ad-teams.component
     AdDashboardComponent,
     AdProjectsComponent,
     AdTeamsComponent,
+    NewProjectComponent,
   ],
   imports: [
     CommonModule,

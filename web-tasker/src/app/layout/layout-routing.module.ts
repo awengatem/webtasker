@@ -8,8 +8,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
 import { AuthGuard } from '../helpers/auth-guard.guard';
 import { AdDashboardComponent } from './components/admin/ad-dashboard/ad-dashboard.component';
-import { AdProjectsComponent } from './components/admin/ad-projects/ad-projects.component';
+import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
 import { AdTeamsComponent } from './components/admin/ad-teams/ad-teams.component';
+import { NewProjectComponent } from './components/admin/adprojects/new-project/new-project.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,11 @@ const routes: Routes = [
         path: 'ad_dashboard',
         canActivate: [AuthGuard],
         component: AdDashboardComponent,
+      },
+      {
+        path: '/new-project',
+        canActivate: [AuthGuard],
+        component: NewProjectComponent,
       },
       {
         path: 'ad_projects',

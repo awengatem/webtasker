@@ -1,0 +1,59 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Projects</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <div class="centered-content">
+        <div class="projects-container">
+          <div class="projects">
+            <h1 class="text-dark">projects</h1>
+            <mat-divider></mat-divider>
+            <div class="projects-inside">
+              <div class="row">
+                <!-- item 1 -->
+                <div class="col-md-6" *ngFor="let project of projects">
+                  <div class="timetable-item shadow">
+                    <div class="timetable-item-main">
+                      <div class="timetable-item-name">
+                        {{ project.projectName }}
+                      </div>
+                      <div class="timetable-item-time">
+                        <small>Last updated 3 mins ago</small>
+                      </div>
+                      <div class="col-sm action">
+                        <div class="row">
+                          <button
+                            type="button"
+                            class="col btn btn-outline-dark btn-sm me-2"
+                          >
+                            <i class="fa-solid fa-pen-fancy"></i>
+                          </button>
+                          <button
+                            type="button"
+                            class="col btn btn-outline-danger btn-sm"
+                          >
+                            <i class="fa-solid fa-trash-can"></i>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="timetable-item-users">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                        <div class="timetable-item-users-count">11</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row centered-content create">
+        <div class="col-md-1">
+          <button class="btn btn-outline-custom"><div class="btn-txt">+</div></button>
+        </div>
+        <div class="col"><h5>Create new project</h5></div>
+      </div>
+    </div>
+  </div>
+</div>

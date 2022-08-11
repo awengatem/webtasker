@@ -22,4 +22,9 @@ export class ProjectService {
     //send a web request to get user projects
     return this.webReqService.get('projects/myprojects');
   }
+
+  getAllProjects(){
+    //send a web request to get user projects
+    return this.webReqService.get('projects');
+  }
 }
