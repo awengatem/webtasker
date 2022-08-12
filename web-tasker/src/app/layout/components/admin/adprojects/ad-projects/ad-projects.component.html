@@ -10,10 +10,10 @@
             <div class="projects-inside" id="projects">
               <div class="row">
                 <!-- item 1 -->
+                <!-- [routerLink]="['/ad_projects', project._id]" -->
                 <div
                   class="col-md-6"
-                  *ngFor="let project of projects"
-                  [routerLink]="['/ad_projects', project._id]"
+                  *ngFor="let project of projects"                  
                 >
                   <div class="timetable-item shadow">
                     <div class="timetable-item-main">
@@ -38,101 +38,7 @@
                             class="col btn btn-outline-danger btn-sm"
                           >
                             <i class="fa-solid fa-trash-can"></i>
-                          </button>
-
-                          <!-- Modal -->
-                          <div
-                            class="modal fade"
-                            id="exampleModal"
-                            tabindex="-1"
-                            aria-labelledby="exampleModalLabel"
-                            aria-hidden="true"
-                          >
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5
-                                    class="modal-title"
-                                    id="exampleModalLabel"
-                                  >
-                                    Modal title
-                                  </h5>
-                                  <button
-                                    type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                  ></button>
-                                </div>
-                                <div class="modal-body">
-                                  <form
-                                    name="form"
-                                    (ngSubmit)="f.form.valid && editProject()"
-                                    #f="ngForm"
-                                    novalidate
-                                  >
-                                    <div class="input-group mb-3">
-                                      <input
-                                        #project="ngModel"
-                                        type="text"
-                                        name="project"
-                                        class="form-control bg-light"
-                                        required
-                                        autocomplete="off"
-                                        minlength="3"
-                                        [(ngModel)]="form.projectName"
-                                        placeholder="new project"
-                                        aria-label="new project"
-                                        aria-describedby="basic-addon2"
-                                      />
-                                    </div>
-                                    <i
-                                      class="vericon danger fas fa-exclamation-circle fa-xs"
-                                      *ngIf="
-                                        (project.errors && project.dirty) ||
-                                        (project.errors && submitted)
-                                      "
-                                    ></i>
-                                    <div
-                                      class="alert-style"
-                                      role="alert"
-                                      *ngIf="
-                                        (project.errors && project.dirty) ||
-                                        (project.errors && submitted)
-                                      "
-                                    >
-                                      <small *ngIf="project.errors['required']">
-                                        Project name is required!
-                                      </small>
-                                      <small
-                                        *ngIf="project.errors['minlength']"
-                                      >
-                                        Project name must be at least 3
-                                        characters
-                                      </small>
-                                    </div>
-                                    <div class="input-group-append row btm-rgt">
-                                      <button
-                                        class="btn btn-outline-secondary col me-2"
-                                        type="button"
-                                        data-bs-dismiss="modal"
-                                        routerLink="/ad_projects"
-                                      >
-                                        Back
-                                      </button>
-                                      <button
-                                        class="btn btn-primary col"
-                                        type="submit"
-                                        (click)="submit()"
-                                      >
-                                        Update
-                                      </button>
-                                    </div>
-                                  </form>
-                                </div>                                
-                              </div>
-                            </div>
-                          </div>
+                          </button>                          
                         </div>
                       </div>
                       <div class="timetable-item-users">
@@ -141,7 +47,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div>                
               </div>
             </div>
           </div>
@@ -154,7 +60,7 @@
             <div class="btn-txt">+</div>
           </button>
         </div>
-        <div class="col"><h4>Create new project</h4></div>
+        <div class="col"><h4>Create new project</h4></div>        
       </div>
     </div>
   </div>
