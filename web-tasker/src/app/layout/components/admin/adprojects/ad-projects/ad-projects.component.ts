@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-ad-projects',
@@ -12,14 +12,22 @@ export class AdProjectsComponent implements OnInit {
   projDiv: any;
   projectStatus: any;
 
+  /**Used by modal */
+  form: any = {
+    projectName: null,
+  };
+  submitted: boolean = false;
+
   constructor(
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.getProjects();
-    this.route.params.subscribe((params: Params) => {
+    //subscribe to the route params
+    this.route.params.subscribe((params: Params) => {      
       console.log(params);
     });
     this.scrollDown();
@@ -38,16 +46,44 @@ export class AdProjectsComponent implements OnInit {
     if (this.projectService.getAddStatus() === true) {
       const setInterval_ID = window.setInterval(() => {
         this.projDiv = document.getElementById('projects');
-        this.projDiv.scrollTop = this.projDiv?.scrollHeight;        
+        this.projDiv.scrollTop = this.projDiv?.scrollHeight;
       }, 100);
 
       //stopping interval above after sometime
       window.setTimeout(() => {
         window.clearInterval(setInterval_ID);
-      },500);
+      }, 500);
     }
     //unsetting the condition
     this.projectService.setAddStatus(false);
     //console.log(this.projectService.getAddStatus());
+  }
+
+  /**ACTION METHODS USED BY MODAL*/
+  /**edit method */
+  editProject() {
+    const { projectName } = this.form; //data comes from template not here
+    //subscribe to the route params
+    this.route.params.subscribe((params: Params) => {
+      const projId = params['projectId'];
+      console.log(params);
+      this.projectService.editProject(projectName, projId).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          //setting status to true to help in scrolldown method
+          this.projectService.setAddStatus(true);
+          //console.log(this.projectService.getAddStatus());
+          this.router.navigate(['/ad_projects']);
+          alert(`project ${projectName} updated successfully`);
+        },
+        error: (err) => {
+          alert(err.error.message);
+        },
+      });
+    });
+  }
+
+  submit() {
+    this.submitted = true;
   }
 }
