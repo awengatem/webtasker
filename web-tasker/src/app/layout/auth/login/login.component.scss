@@ -288,21 +288,30 @@ h5 {
       }
     }
 
-    &.ng-invalid.ng-dirty{
+    &.ng-invalid.ng-dirty {
       border: 1px solid #e74c3c;
     }
 
     &.ng-valid.ng-dirty {
       //border: 1px solid #2ecc71;
-    }
+    }    
   }
 
-  &_group{
+  &_group {
     margin: 2px;
     // padding-left: 2px;
     // padding-right: 0;
   }
 }
+
+/*Avoid white bg on autofill*/
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #1f2029 inset !important;
+  -webkit-text-fill-color: #c4c3ca !important;
+}
+
 .form-style {
   //padding: 0;
   padding: 13px 20px;
@@ -332,7 +341,7 @@ h5 {
     box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
   }
 }
-.alert-style{
+.alert-style {
   padding: 13px 20px;
   padding-left: 55px;
   height: 24px;
@@ -351,7 +360,7 @@ h5 {
   transition: all 200ms linear;
   //background: green;
 }
-.custom-form-row{
+.custom-form-row {
   position: relative;
   //display: block;
   margin: 0;
@@ -376,20 +385,19 @@ h5 {
   height: 48px;
   font-size: 12px;
   line-height: 48px;
-  text-align: left;  
+  text-align: left;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
 
-  &.danger{
+  &.danger {
     color: #e74c3c;
   }
-  &.success{
+  &.success {
     color: #2ecc71;
   }
 }
 
-
-small{
+small {
   color: #e74c3c;
   position: absolute;
   left: 18px;
@@ -397,7 +405,7 @@ small{
 }
 
 //used for the login error alert
-.error{
+.error {
   color: #f3796b;
   position: absolute;
   //left: 18px;
