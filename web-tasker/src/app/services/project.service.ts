@@ -35,6 +35,14 @@ export class ProjectService {
     return this.webReqService.post('projects',{projectName});
   }
 
+  editProject(newProject: string){
+    return this.webReqService.patch('projects',{newProject});
+  }
+
+  deleteProject(projId: string){
+    return this.webReqService.delete(`projects/${projId}`);
+  }
+
   /**Methods used by projectAdded above */
   getAddStatus(){
     return this.projectAdded;

@@ -1,6 +1,7 @@
 .centered-content {
   position: absolute;
   .modal-box {
+    position: relative;
     min-height: 200px;
     width: 100%;
     max-width: 580px;
@@ -20,5 +21,55 @@
         color: #ffff;
      }
     }
+
+    .vericon {
+      position: absolute;
+      top: 80px;
+      right: 41px;
+      z-index: 100;
+      height: 48px;
+      font-size: 12px;
+      line-height: 48px;
+      text-align: left;  
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+    
+      &.danger{
+        color: #e74c3c;
+      }
+      &.success{
+        color: #2ecc71;
+      }
+    }
+
+    .alert-style{
+      //position: absolute;
+      padding: 13px 20px;
+      padding-left: 55px;
+      //top: 0;
+      height: 24px;
+      width: 100%;
+      font-weight: 500;
+      border-radius: 4px;
+      font-size: 12px;
+      line-height: 22px;
+      letter-spacing: 0.5px;
+      outline: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+      //background: green;
+    }
+
+    small{
+      color: #e74c3c;
+      position: absolute;
+      left: 36px;
+      //float: left;
+    }
+   
   }
 }

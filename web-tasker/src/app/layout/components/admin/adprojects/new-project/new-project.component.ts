@@ -9,23 +9,33 @@ import { AdProjectsComponent } from '../ad-projects/ad-projects.component';
   styleUrls: ['./new-project.component.scss'],
 })
 export class NewProjectComponent implements OnInit {
+  form: any = {
+    projectName: null,    
+  };
+  submitted: boolean = false;
+
   constructor(private projectService: ProjectService, private router: Router) {}
 
   ngOnInit(): void {}
 
-  createProject(name: any) {
-    this.projectService.createProject(name).subscribe({
+  createProject() {
+    const { projectName } = this.form; //data comes from template not here
+    this.projectService.createProject(projectName).subscribe({
       next: (response: any) => {
         console.log(response);
+        //setting status to true to help in scrolldown method
         this.projectService.setAddStatus(true);
-        const status = this.projectService.getAddStatus();
-        console.log(status);
+        //console.log(this.projectService.getAddStatus());
         this.router.navigate(['/ad_projects']);
-        alert(`project ${name} created successfully`);
+        alert(`project ${projectName} created successfully`);
       },
       error: (err) => {
         alert(err.error.message);
       },
     });
+  }
+
+  submit(){
+    this.submitted = true;
   }
 }
