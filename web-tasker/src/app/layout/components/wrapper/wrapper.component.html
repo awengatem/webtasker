@@ -31,11 +31,13 @@
       <h2 matSubheader class="mt-2" *ngIf="isExpanded">Applications</h2>
       <h2 matSubheader class="h2-col mt-2" *ngIf="!isExpanded">Apps</h2>
 
+      <!-- user home -->
       <mat-list-item [routerLink]="'home'" routerLinkActive="list-item-active">
         <mat-icon mat-list-icon class="">home</mat-icon>
         <div class="content" *ngIf="isExpanded">Home</div>
       </mat-list-item>
 
+      <!-- user projects -->
       <mat-list-item
         [routerLink]="'projects'"
         routerLinkActive="list-item-active"
@@ -44,16 +46,19 @@
         <div class="content" *ngIf="isExpanded">Projects</div>
       </mat-list-item>
 
+      <!-- user teams -->
       <mat-list-item [routerLink]="'teams'" routerLinkActive="list-item-active">
         <mat-icon mat-list-icon>group</mat-icon>
         <div class="content" *ngIf="isExpanded">My teams</div>
       </mat-list-item>
 
+      <!-- ADMIN SECTION -->
       <mat-list-item (click)="showSublist()" [ngClass]="sublist ? 'menu' : ''">
         <mat-icon mat-list-icon>verified_user</mat-icon>
         <div class="content" *ngIf="isExpanded">Admin</div>
       </mat-list-item>
 
+      <!-- admin dashboard -->
       <mat-list-item
         [routerLink]="'ad_dashboard'"
         routerLinkActive="list-item-active"
@@ -63,6 +68,7 @@
         <div class="content" *ngIf="isExpanded">Dashboard</div>
       </mat-list-item>
 
+      <!-- admin projects -->
       <mat-list-item
         [routerLink]="'ad_projects'"
         routerLinkActive="list-item-active"
@@ -70,7 +76,12 @@
       >
         <!-- for children components -->
         <div
-          [routerLink]="'new-project'"
+          [routerLink]="'new_project'"
+          routerLinkActive="list-item-active"
+          *ngIf="sublist"
+        ></div>
+        <div
+          [routerLink]="'edit_project'"
           routerLinkActive="list-item-active"
           *ngIf="sublist"
         ></div>
@@ -78,6 +89,7 @@
         <div class="content" *ngIf="isExpanded">Projects</div>
       </mat-list-item>
 
+      <!-- admin teams -->
       <mat-list-item
         [routerLink]="'ad_teams'"
         routerLinkActive="list-item-active"

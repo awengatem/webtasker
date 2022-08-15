@@ -22,6 +22,7 @@ import { AdDashboardComponent } from './components/admin/ad-dashboard/ad-dashboa
 import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
 import { AdTeamsComponent } from './components/admin/ad-teams/ad-teams.component';
 import { NewProjectComponent } from './components/admin/adprojects/new-project/new-project.component';
+import { EditProjectComponent } from './components/admin/adprojects/edit-project/edit-project.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { NewProjectComponent } from './components/admin/adprojects/new-project/n
     AdProjectsComponent,
     AdTeamsComponent,
     NewProjectComponent,
+    EditProjectComponent,
   ],
   imports: [
     CommonModule,

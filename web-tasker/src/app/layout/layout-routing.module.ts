@@ -11,6 +11,7 @@ import { AdDashboardComponent } from './components/admin/ad-dashboard/ad-dashboa
 import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
 import { AdTeamsComponent } from './components/admin/ad-teams/ad-teams.component';
 import { NewProjectComponent } from './components/admin/adprojects/new-project/new-project.component';
+import { EditProjectComponent } from './components/admin/adprojects/edit-project/edit-project.component';
 
 const routes: Routes = [
   {
@@ -63,9 +64,14 @@ const routes: Routes = [
         component: AdProjectsComponent,
       },
       {
-        path: 'new-project',
+        path: 'new_project',
         canActivate: [AuthGuard],
         component: NewProjectComponent,
+      },
+      {
+        path: 'edit_project',
+        canActivate: [AuthGuard],
+        component: EditProjectComponent,
       },
 
       /**Teams */
