@@ -69,7 +69,7 @@ const routes: Routes = [
         component: NewProjectComponent,
       },
       {
-        path: 'edit_project',
+        path: 'edit_project/:projectId',
         canActivate: [AuthGuard],
         component: EditProjectComponent,
       },

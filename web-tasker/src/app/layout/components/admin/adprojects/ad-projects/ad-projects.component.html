@@ -10,10 +10,11 @@
             <div class="projects-inside" id="projects">
               <div class="row">
                 <!-- item 1 -->
-                <!-- [routerLink]="['/ad_projects', project._id]" -->
+                <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
                 <div
                   class="col-md-6"
-                  *ngFor="let project of projects"                  
+                  *ngFor="let project of projects"
+                  [routerLink]="['/ad_projects', project._id]"
                 >
                   <div class="timetable-item shadow">
                     <div class="timetable-item-main">
@@ -28,7 +29,7 @@
                           <button
                             type="button"
                             class="col btn btn-outline-dark btn-sm me-2"
-                            routerLink="/edit_project"                            
+                            [routerLink]="['/edit_project', project._id]"
                           >
                             <i class="fa-solid fa-pen-fancy"></i>
                           </button>
@@ -37,7 +38,7 @@
                             class="col btn btn-outline-danger btn-sm"
                           >
                             <i class="fa-solid fa-trash-can"></i>
-                          </button>                          
+                          </button>
                         </div>
                       </div>
                       <div class="timetable-item-users">
@@ -46,7 +47,7 @@
                       </div>
                     </div>
                   </div>
-                </div>                
+                </div>
               </div>
             </div>
           </div>
@@ -59,7 +60,7 @@
             <div class="btn-txt">+</div>
           </button>
         </div>
-        <div class="col"><h4>Create new project</h4></div>        
+        <div class="col"><h4>Create new project</h4></div>
       </div>
     </div>
   </div>

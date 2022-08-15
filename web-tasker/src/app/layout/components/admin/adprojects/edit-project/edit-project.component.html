@@ -4,10 +4,10 @@
       <div class="page__content-data">
         <div class="centered-content">
           <div class="modal-box shadow">
-            <h1>Edit project</h1>
+            <h1><i class="uil uil-file-edit-alt"></i>Edit project</h1>
             <form
               name="form"
-              (ngSubmit)="f.form.valid"
+              (ngSubmit)="f.form.valid && editProject()"
               #f="ngForm"
               novalidate
             >
