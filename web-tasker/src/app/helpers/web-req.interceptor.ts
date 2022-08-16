@@ -74,6 +74,29 @@ export class WebReqInterceptor implements HttpInterceptor {
   }
 
   handle403Error(req: HttpRequest<any>) {
+    //get refreshed access token and reset it
+    return this.tokenService.getNewToken().subscribe({
+      next: (response: HttpResponse<any>) => {
+        const accessToken = response.body.accessToken;
+
+        //reset the access token
+        this.tokenService.saveAccessToken(accessToken); //saves to session storage
+        this.tokenService.setAccessTokenLocal(accessToken); //saves to local storage
+        //window.location.reload();
+        //localStorage['access-token'] = accessToken;
+      },
+      error: (err) => {
+        console.log(err.error.message);
+        if (err.status === 403) {
+          this.authService.logout();
+        }
+      },
+    });
+  }
+
+  /*
+  *suggested method to handle resending of request after refreshing token
+  handle403Error(req: HttpRequest<any>) {
     if (this.refreshingAccessToken) {
       return new Observable((observer)=>{
         this.accessTokenRefreshed.subscribe(()=>{
@@ -103,26 +126,9 @@ export class WebReqInterceptor implements HttpInterceptor {
           }
         },
       });
-    }
-    // //get refreshed access token and reset it
-    // return this.tokenService.getNewToken().subscribe({
-    //   next: (response: HttpResponse<any>) => {
-    //     const accessToken = response.body.accessToken;
-
-    //     //reset the access token
-    //     this.tokenService.saveAccessToken(accessToken); //saves to session storage
-    //     this.tokenService.setAccessTokenLocal(accessToken); //saves to local storage
-    //     //window.location.reload();
-    //     //localStorage['access-token'] = accessToken;
-    //   },
-    //   error: (err) => {
-    //     console.log(err.error.message);
-    //     if(err.status === 403){
-    //       this.authService.logout();
-    //     }
-    //   },
-    // });
+    }    
   }
+  */
 
   //method to set credentials to true on all requests
   addCredentials(req: HttpRequest<any>) {
