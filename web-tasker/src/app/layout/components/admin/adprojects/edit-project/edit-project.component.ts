@@ -12,6 +12,7 @@ export class EditProjectComponent implements OnInit {
     projectName: null,
   };
   submitted: boolean = false;
+  projectId!: string;
 
   constructor(
     private projectService: ProjectService,
@@ -19,28 +20,36 @@ export class EditProjectComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  //getting capturedProject
+  capturedProject!: string;
+
+  ngOnInit(): void {
+    //subscribe to the route params
+    this.route.params.subscribe((params: Params) => {
+      this.projectId = params['projectId'];
+      console.log(this.projectId);
+    });
+
+    //get the selected project
+    this.capturedProject = this.projectService.getCapturedProject();
+    this.form.projectName = this.capturedProject;
+  }
 
   /**edit method */
   editProject() {
     const { projectName } = this.form; //data comes from template not here
-    //subscribe to the route params
-    this.route.params.subscribe((params: Params) => {
-      const projId = params['projectId'];
-      console.log(projId);
-      // this.projectService.editProject(projectName, projId).subscribe({
-      //   next: (response: any) => {
-      //     console.log(response);
-      //     //setting status to true to help in scrolldown method
-      //     this.projectService.setAddStatus(true);
-      //     //console.log(this.projectService.getAddStatus());
-      //     this.router.navigate(['/ad_projects']);
-      //     alert(`project ${projectName} updated successfully`);
-      //   },
-      //   error: (err) => {
-      //     alert(err.error.message);
-      //   },
-      // });
+    this.projectService.editProject(this.projectId, projectName).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        //setting status to true to help in scrolldown method
+        this.projectService.setAddStatus(true);
+        //console.log(this.projectService.getAddStatus());
+        this.router.navigate(['/ad_projects']);
+        alert(`project ${projectName} updated successfully`);
+      },
+      error: (err) => {
+        alert(err.error.message);
+      },
     });
   }
 

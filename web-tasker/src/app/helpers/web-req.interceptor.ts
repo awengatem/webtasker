@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { error } from 'jquery';
-import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+import { Subject, catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { TokenService } from '../services/token.service';
 
@@ -16,15 +16,13 @@ import { TokenService } from '../services/token.service';
   providedIn: 'root',
 })
 export class WebReqInterceptor implements HttpInterceptor {
-  private isRefreshing = false;
-  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
-    null
-  );
-
   constructor(
     private authService: AuthService,
     private tokenService: TokenService
   ) {}
+
+  refreshingAccessToken!: boolean;
+  accessTokenRefreshed: Subject<any> = new Subject();
 
   intercept(
     req: HttpRequest<any>,
@@ -51,7 +49,7 @@ export class WebReqInterceptor implements HttpInterceptor {
           !req.url.includes('login') &&
           error.status === 403
         ) {
-          this.handle403Error(req);          
+          this.handle403Error(req);
         }
 
         return throwError(error);
@@ -76,24 +74,54 @@ export class WebReqInterceptor implements HttpInterceptor {
   }
 
   handle403Error(req: HttpRequest<any>) {
-    //get refreshed access token and reset it
-    return this.tokenService.getNewToken().subscribe({
-      next: (response: HttpResponse<any>) => {
-        const accessToken = response.body.accessToken;
+    if (this.refreshingAccessToken) {
+      return new Observable((observer)=>{
+        this.accessTokenRefreshed.subscribe(()=>{
+          //this code will run when the access token has been refreshed
+          observer.next();
+          observer.complete();
+        })
+      })
+    } else {
+      this.refreshingAccessToken = true;
+      //get refreshed access token and reset it
+      return this.tokenService.getNewToken().subscribe({
+        next: (response: HttpResponse<any>) => {
+          const accessToken = response.body.accessToken;
 
-        //reset the access token
-        this.tokenService.saveAccessToken(accessToken); //saves to session storage
-        this.tokenService.setAccessTokenLocal(accessToken); //saves to local storage
-        //window.location.reload();
-        //localStorage['access-token'] = accessToken;
-      },
-      error: (err) => {
-        console.log(err.error.message);
-        if(err.status === 403){
-          this.authService.logout();
-        }
-      },
-    });
+          //reset the access token
+          this.tokenService.saveAccessToken(accessToken); //saves to session storage
+          this.tokenService.setAccessTokenLocal(accessToken); //saves to local storage
+          //window.location.reload();
+          //localStorage['access-token'] = accessToken;
+          this.accessTokenRefreshed.next;
+        },
+        error: (err) => {
+          console.log(err.error.message);
+          if (err.status === 403) {
+            this.authService.logout();
+          }
+        },
+      });
+    }
+    // //get refreshed access token and reset it
+    // return this.tokenService.getNewToken().subscribe({
+    //   next: (response: HttpResponse<any>) => {
+    //     const accessToken = response.body.accessToken;
+
+    //     //reset the access token
+    //     this.tokenService.saveAccessToken(accessToken); //saves to session storage
+    //     this.tokenService.setAccessTokenLocal(accessToken); //saves to local storage
+    //     //window.location.reload();
+    //     //localStorage['access-token'] = accessToken;
+    //   },
+    //   error: (err) => {
+    //     console.log(err.error.message);
+    //     if(err.status === 403){
+    //       this.authService.logout();
+    //     }
+    //   },
+    // });
   }
 
   //method to set credentials to true on all requests

@@ -59,6 +59,11 @@ export class AdProjectsComponent implements OnInit {
     //console.log(this.projectService.getAddStatus());
   }
 
+  /**Capture project to help load it to edit component */
+  captureProject(project: string){
+    this.projectService.setCapturedProject(project);   
+  }
+
   /**ACTION METHODS USED BY MODAL*/
   
 

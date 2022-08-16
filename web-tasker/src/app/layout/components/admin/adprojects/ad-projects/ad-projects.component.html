@@ -30,6 +30,7 @@
                             type="button"
                             class="col btn btn-outline-dark btn-sm me-2"
                             [routerLink]="['/edit_project', project._id]"
+                            (click)="captureProject(project.projectName)"
                           >
                             <i class="fa-solid fa-pen-fancy"></i>
                           </button>
