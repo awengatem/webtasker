@@ -12,6 +12,8 @@ import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/a
 import { AdTeamsComponent } from './components/admin/adteams/ad-teams/ad-teams.component';
 import { NewProjectComponent } from './components/admin/adprojects/new-project/new-project.component';
 import { EditProjectComponent } from './components/admin/adprojects/edit-project/edit-project.component';
+import { NewTeamComponent } from './components/admin/adteams/new-team/new-team.component';
+import { EditTeamComponent } from './components/admin/adteams/edit-team/edit-team.component';
 
 const routes: Routes = [
   {
@@ -79,6 +81,21 @@ const routes: Routes = [
         path: 'ad_teams',
         canActivate: [AuthGuard],
         component: AdTeamsComponent,
+      },
+      {
+        path: 'ad_teams/:teamId',
+        canActivate: [AuthGuard],
+        component: AdTeamsComponent,
+      },
+      {
+        path: 'new_team',
+        canActivate: [AuthGuard],
+        component: NewTeamComponent,
+      },
+      {
+        path: 'edit_team/:teamId',
+        canActivate: [AuthGuard],
+        component: EditTeamComponent,
       },
     ],
   },
