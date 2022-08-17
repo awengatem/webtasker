@@ -5,7 +5,7 @@
     opened="true"
     class="sidebar"
     [ngClass]="isExpanded ? 'sidebar-extended' : ''"
-    [@openCloseSidenav]="isOpen ? 'open' : 'closed'"
+    [@openCloseSidenav]="isExpanded ? 'open' : 'closed'"
   >
     <mat-nav-list>
       <!-- <mat-list-item>
@@ -101,7 +101,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content [@openCloseSidenavContent]="isOpen ? 'open' : 'closed'">
+  <mat-sidenav-content [@openCloseSidenavContent]="isExpanded ? 'open' : 'closed'">
     <app-header
       (toggleSidebarForMe)="toggle()"
       (logout)="logout()"

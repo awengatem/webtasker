@@ -35,8 +35,8 @@ export class AuthService {
           res.headers.get('x-token')
           //res.body.authTokens //aka refreshtoken
         );
-        //capture sidenav statuses
-        
+        //set sidenav statuses
+        this.setSidenavValues();
 
         console.log(`${res.body.user.username} Logged in!`);
         this.router.navigate(['/home']);
@@ -70,7 +70,9 @@ export class AuthService {
     localStorage.setItem('access-token', accessToken);
   }
 
-  //sets sidenav defaults to local storage
+  /**Sets sidenav defaults to local storage
+   * Helps preserve sidenav status after refresh
+  */
   private setSidenavValues(){
     localStorage.setItem('isExpanded', this.positive);
     localStorage.setItem('isOpen', this.positive);
@@ -80,6 +82,10 @@ export class AuthService {
   private removeSession() {
     localStorage.removeItem('user-id');
     localStorage.removeItem('access-token');
+    //clear sidenav statuses
+    localStorage.removeItem('isExpanded');
+    localStorage.removeItem('isOpen');
+    localStorage.removeItem('sublist');
   }
 
   /*dummy method to check if authheaders are set
