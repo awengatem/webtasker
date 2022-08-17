@@ -25,8 +25,7 @@ export class WrapperComponent implements OnInit {
   //@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
   /**Variables used by sidenav status */
-  isExpanded!: boolean;
-  isOpen!: boolean;
+  isExpanded!: boolean;  
   sublist!: boolean;
 
   constructor(
@@ -36,19 +35,13 @@ export class WrapperComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const expanded = this.sidenavService.getIsExpanded();
-    const open = this.sidenavService.getIsOpen();
+    const expanded = this.sidenavService.getIsExpanded();    
     const sublist = this.sidenavService.getSublist();
     if (expanded === 'true') {
       this.isExpanded = true;
     } else {
       this.isExpanded = false;
-    }
-    if (open === 'true') {
-      this.isOpen = true;
-    } else {
-      this.isOpen = false;
-    }
+    }    
     if (sublist === 'true') {
       this.sublist = true;
     } else {
@@ -56,17 +49,7 @@ export class WrapperComponent implements OnInit {
     }
   }
 
-  toggle() {
-    let status;
-    this.isOpen = !this.isOpen;
-
-    if(this.isOpen === true){
-      status = 'true';
-    }else{
-      status = 'false';
-    }
-    //update local storage
-    this.sidenavService.setIsOpen(status);
+  toggle() {    
     if (this.isExpanded === true) {
       this.isExpanded = false;
       this.sidenavService.setIsExpanded('false');

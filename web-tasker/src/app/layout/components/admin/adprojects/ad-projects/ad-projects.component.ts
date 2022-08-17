@@ -73,13 +73,19 @@ export class AdProjectsComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
       cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
     }).then((result) => {
       //delete project from db
       if (result.value) {
         this.deleteProject(projectId, projectName);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire('Cancelled', `Project "${projectName}" still in our database.)`, 'error');
+        Swal.fire(
+          'Cancelled',
+          `Project "${projectName}" still in our database.)`,
+          'error'
+        );
       }
     });
   }
@@ -98,7 +104,7 @@ export class AdProjectsComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
-        Swal.fire('Oops! Something went wrong',err.error, 'error');        
+        Swal.fire('Oops! Something went wrong', err.error, 'error');
       },
     });
   }

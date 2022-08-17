@@ -74,8 +74,7 @@ export class AuthService {
    * Helps preserve sidenav status after refresh
   */
   private setSidenavValues(){
-    localStorage.setItem('isExpanded', this.positive);
-    localStorage.setItem('isOpen', this.positive);
+    localStorage.setItem('isExpanded', this.positive);    
     localStorage.setItem('sublist', this.negative);
   }
 
@@ -83,8 +82,7 @@ export class AuthService {
     localStorage.removeItem('user-id');
     localStorage.removeItem('access-token');
     //clear sidenav statuses
-    localStorage.removeItem('isExpanded');
-    localStorage.removeItem('isOpen');
+    localStorage.removeItem('isExpanded');    
     localStorage.removeItem('sublist');
   }
 

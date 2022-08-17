@@ -10,11 +10,7 @@ export class SidenavService {
   //accessor methods
   getIsExpanded() {
     return localStorage.getItem('isExpanded');
-  }
-
-  getIsOpen() {
-    return localStorage.getItem('isOpen');
-  }
+  }  
 
   getSublist() {
     return localStorage.getItem('sublist');
@@ -23,11 +19,7 @@ export class SidenavService {
   //setter methods
   setIsExpanded(status: string) {
     localStorage.setItem('isExpanded', status);
-  }
-
-  setIsOpen(status: string) {
-    localStorage.setItem('isOpen', status);
-  }
+  }  
 
   setSublist(status: string) {
     localStorage.setItem('sublist', status);

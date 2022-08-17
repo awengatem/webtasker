@@ -9,7 +9,7 @@ import { LogHeaderComponent } from './auth/log-header/log-header.component';
 import { AuthGuard } from '../helpers/auth-guard.guard';
 import { AdDashboardComponent } from './components/admin/ad-dashboard/ad-dashboard.component';
 import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
-import { AdTeamsComponent } from './components/admin/ad-teams/ad-teams.component';
+import { AdTeamsComponent } from './components/admin/adteams/ad-teams/ad-teams.component';
 import { NewProjectComponent } from './components/admin/adprojects/new-project/new-project.component';
 import { EditProjectComponent } from './components/admin/adprojects/edit-project/edit-project.component';
 
