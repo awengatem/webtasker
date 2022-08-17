@@ -1,1 +1,71 @@
-<p>edit-team works!</p>
+<div class="container-fluid page">
+    <div class="page__box p-3 mt-2">teams</div>
+    <div class="page__content shadow p-3 position-relative">
+      <div class="page__content-data">
+        <div class="centered-content">
+          <div class="modal-box shadow">
+            <h1><i class="uil uil-file-edit-alt"></i>Edit team</h1>
+            <form
+              name="form"
+              (ngSubmit)="f.form.valid && editTeam()"
+              #f="ngForm"
+              novalidate
+            >
+              <div class="input-group mb-3">
+                <input
+                  #team="ngModel"
+                  type="text"
+                  name="team"
+                  class="form-control bg-light"
+                  required
+                  autocomplete="off"
+                  minlength="3"
+                  [(ngModel)]="form.teamName"                                                      
+                  aria-label="new team"
+                  aria-describedby="basic-addon2"
+                />              
+              </div>
+              <i
+                  class="vericon danger fas fa-exclamation-circle fa-xs"
+                  *ngIf="
+                    (team.errors && team.dirty) || (team.errors && submitted)
+                  "
+                ></i>
+              <div
+                class="alert-style"
+                role="alert"
+                *ngIf="
+                  (team.errors && team.dirty) ||
+                  (team.errors && submitted)
+                "
+              >
+                <small *ngIf="team.errors['required']">
+                  Team name is required!
+                </small>
+                <small *ngIf="team.errors['minlength']">
+                  Team name must be at least 3 characters
+                </small>
+              </div>
+              <div class="input-group-append row btm-rgt">
+                <button
+                  class="btn btn-outline-secondary col me-2"
+                  type="button"
+                  routerLink="/ad_teams"
+                >
+                  Back
+                </button>
+                <button
+                  class="btn btn-primary col"
+                  type="submit"
+                  (click)="submit()"
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
