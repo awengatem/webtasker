@@ -129,4 +129,8 @@ mat-sidenav-container {
       margin-top: 0.1rem;
     }
   }
+
+  mat-sidenav-content{
+    overflow-x: hidden;
+  }
 }

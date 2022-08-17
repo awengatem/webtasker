@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
+import Swal from 'sweetalert2';
 import { AdProjectsComponent } from '../ad-projects/ad-projects.component';
 
 @Component({
@@ -26,11 +27,12 @@ export class NewProjectComponent implements OnInit {
         //setting status to true to help in scrolldown method
         this.projectService.setAddStatus(true);
         //console.log(this.projectService.getAddStatus());
-        this.router.navigate(['/ad_projects']);
-        alert(`project ${projectName} created successfully`);
+        this.router.navigate(['/ad_projects']);       
+        Swal.fire('Success!', `Project "${projectName}" created successfully`, 'success');
       },
       error: (err) => {
-        alert(err.error.message);
+        console.log(err);
+        Swal.fire('Oops! Something went wrong',err.error, 'error');        
       },
     });
   }

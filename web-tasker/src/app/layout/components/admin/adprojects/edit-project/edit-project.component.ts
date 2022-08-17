@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-project',
@@ -45,10 +46,11 @@ export class EditProjectComponent implements OnInit {
         this.projectService.setAddStatus(true);
         //console.log(this.projectService.getAddStatus());
         this.router.navigate(['/ad_projects']);
-        alert(`project ${projectName} updated successfully`);
+        Swal.fire('Success!', `Project "${projectName}" updated successfully`, 'success');        
       },
       error: (err) => {
-        alert(err.error.message);
+        console.log(err);
+        Swal.fire('Oops! Something went wrong',err.error, 'error');        
       },
     });
   }

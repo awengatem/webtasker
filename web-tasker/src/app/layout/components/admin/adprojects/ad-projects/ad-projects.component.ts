@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ad-projects',
@@ -27,7 +28,7 @@ export class AdProjectsComponent implements OnInit {
   ngOnInit(): void {
     this.getProjects();
     //subscribe to the route params
-    this.route.params.subscribe((params: Params) => {      
+    this.route.params.subscribe((params: Params) => {
       console.log(params);
     });
     this.scrollDown();
@@ -60,12 +61,47 @@ export class AdProjectsComponent implements OnInit {
   }
 
   /**Capture project to help load it to edit component */
-  captureProject(project: string){
-    this.projectService.setCapturedProject(project);   
+  captureProject(project: string) {
+    this.projectService.setCapturedProject(project);
   }
 
-  /**ACTION METHODS USED BY MODAL*/
-  
+  /**ACTION METHODS USED BY ALERT*/
+  alertConfirmation(projectId: string, projectName: string) {
+    Swal.fire({
+      title: `Delete "${projectName}"?`,
+      text: 'This process is irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      cancelButtonText: 'No, let me think',
+    }).then((result) => {
+      //delete project from db
+      if (result.value) {
+        this.deleteProject(projectId, projectName);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', `Project "${projectName}" still in our database.)`, 'error');
+      }
+    });
+  }
+
+  /**Delete method */
+  deleteProject(projectId: string, projectName: string) {
+    this.projectService.deleteProject(projectId).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.router.navigate(['/ad_projects']);
+        Swal.fire(
+          'Removed!',
+          `Project "${projectName}" has been removed`,
+          'success'
+        );
+      },
+      error: (err) => {
+        console.log(err);
+        Swal.fire('Oops! Something went wrong',err.error, 'error');        
+      },
+    });
+  }
 
   submit() {
     this.submitted = true;

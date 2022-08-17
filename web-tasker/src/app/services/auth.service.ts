@@ -12,6 +12,8 @@ import { WebRequestService } from './web-request.service';
 export class AuthService {
   //variables
   myBool!: boolean;
+  readonly positive: string = 'true';
+  readonly negative: string = 'false';
 
   constructor(
     private http: HttpClient,
@@ -33,6 +35,9 @@ export class AuthService {
           res.headers.get('x-token')
           //res.body.authTokens //aka refreshtoken
         );
+        //capture sidenav statuses
+        
+
         console.log(`${res.body.user.username} Logged in!`);
         this.router.navigate(['/home']);
       })
@@ -63,6 +68,13 @@ export class AuthService {
     this.removeSession();
     localStorage.setItem('user-id', userId);
     localStorage.setItem('access-token', accessToken);
+  }
+
+  //sets sidenav defaults to local storage
+  private setSidenavValues(){
+    localStorage.setItem('isExpanded', this.positive);
+    localStorage.setItem('isOpen', this.positive);
+    localStorage.setItem('sublist', this.negative);
   }
 
   private removeSession() {

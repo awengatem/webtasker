@@ -55,7 +55,7 @@ import { EditProjectComponent } from './components/admin/adprojects/edit-project
     RouterModule,
     LayoutRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,    
 
     /*material imports*/
     AngularMaterialModule,

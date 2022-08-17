@@ -17,6 +17,7 @@ export class WrapperComponent implements OnInit {
   @Output() onToggleSideNav: EventEmitter<any> = new EventEmitter();
   //@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
+  /**Variables used by sidenav status */
   isExpanded: boolean = true;
   isOpen = true;
   sublist = false;
