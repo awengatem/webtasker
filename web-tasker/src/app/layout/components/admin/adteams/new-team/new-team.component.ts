@@ -27,11 +27,11 @@ export class NewTeamComponent implements OnInit {
         this.teamService.setAddStatus(true);
         //console.log(this.teamService.getAddStatus());
         this.router.navigate(['/ad_teams']);       
-        Swal.fire('Success!', `team "${teamName}" created successfully`, 'success');
+        Swal.fire('Success!', `Team "${teamName}" created successfully`, 'success');
       },
       error: (err) => {
         console.log(err);
-        Swal.fire('Oops! Something went wrong',err.error, 'error');        
+        Swal.fire('Oops! Something went wrong',err.error.message, 'error',);        
       },
     });
   }

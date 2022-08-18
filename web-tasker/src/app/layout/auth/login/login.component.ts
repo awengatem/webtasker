@@ -18,6 +18,7 @@ import { AccountService } from 'src/app/services/account-service.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 import { WebRequestService } from 'src/app/services/web-request.service';
+import Swal from 'sweetalert2';
 import Validation from './validation';
 
 // /**directive helps detect form touched */
@@ -280,7 +281,8 @@ export class LoginComponent implements OnInit {
     this.submitted = false;
     this.fSignup.reset();
     this.flapCard();
-    alert(`${username} registered successfully`);
+    Swal.fire(`${username} registered successfully`)
+    alert();
   }
 
   reloadPage() {
