@@ -14,6 +14,7 @@
                 <div
                   class="col-md-6"
                   *ngFor="let team of teams"
+                  (click)="captureTeam(team.teamName)"
                   [routerLink]="['/ad_teams', team._id]"
                 >
                   <div class="timetable-item shadow">

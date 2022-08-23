@@ -14,6 +14,7 @@ import { NewProjectComponent } from './components/admin/adprojects/new-project/n
 import { EditProjectComponent } from './components/admin/adprojects/edit-project/edit-project.component';
 import { NewTeamComponent } from './components/admin/adteams/new-team/new-team.component';
 import { EditTeamComponent } from './components/admin/adteams/edit-team/edit-team.component';
+import { TeamInfoComponent } from './components/admin/adteams/team-info/team-info.component';
 
 const routes: Routes = [
   {
@@ -85,7 +86,7 @@ const routes: Routes = [
       {
         path: 'ad_teams/:teamId',
         canActivate: [AuthGuard],
-        component: AdTeamsComponent,
+        component: TeamInfoComponent,
       },
       {
         path: 'new_team',

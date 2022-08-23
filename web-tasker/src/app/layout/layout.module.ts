@@ -25,6 +25,7 @@ import { NewProjectComponent } from './components/admin/adprojects/new-project/n
 import { EditProjectComponent } from './components/admin/adprojects/edit-project/edit-project.component';
 import { EditTeamComponent } from './components/admin/adteams/edit-team/edit-team.component';
 import { NewTeamComponent } from './components/admin/adteams/new-team/new-team.component';
+import { TeamInfoComponent } from './components/admin/adteams/team-info/team-info.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { NewTeamComponent } from './components/admin/adteams/new-team/new-team.c
     EditProjectComponent,
     EditTeamComponent,
     NewTeamComponent,
+    TeamInfoComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,149 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Teams</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <link
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+        rel="stylesheet"
+      />
+      <div class="idance">
+        <div class="schedule content-block">
+          <div class="container">
+            <h2 data-aos="zoom-in-up" class="aos-init aos-animate">{{selectedTeam}}</h2>
+
+            <div class="timetable">
+              <!-- Schedule Top Navigation -->
+              <nav class="nav nav-tabs">
+                <button
+                  class="nav-link active"
+                  (click)="showTab('members', 'tabNav1')"
+                  id="members"
+                >
+                  <a class="">Members</a>
+                </button>
+                <button
+                  class="nav-link"
+                  (click)="showTab('projects', 'tabNav2')"
+                  id="projects"
+                >
+                  <a class="">Projects</a>
+                </button>
+              </nav>
+
+              <div class="tab-content">
+                <div class="tab-pane show active" id="tabNav1">
+                  <div class="row">
+                    <!-- Schedule Item 1 -->
+                    <div class="col-md-6">
+                      <div class="timetable-item">
+                        <div class="timetable-item-img">
+                          <img
+                            src="https://via.placeholder.com/100x80/FFB6C1/000000"
+                            alt="Contemporary Dance"
+                          />
+                        </div>
+                        <div class="timetable-item-main">
+                          <div class="timetable-item-time">8:00am - 1:00pm</div>
+                          <div class="timetable-item-name">Fruit scout</div>
+                          <a href="1" class="btn btn-outline-primary btn-book"
+                            >Start</a
+                          >
+                          <div class="timetable-item-like">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                            <div class="timetable-item-like-count">11</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Schedule Item 6 -->
+                    <div class="col-md-6">
+                      <div class="timetable-item">
+                        <div class="timetable-item-img">
+                          <img
+                            src="https://via.placeholder.com/100x80/008B8B/000000"
+                            alt="Street Dance"
+                          />
+                        </div>
+                        <div class="timetable-item-main">
+                          <div class="timetable-item-time">2:00am - 5:00am</div>
+                          <div class="timetable-item-name">
+                            Night shift fruit scout
+                          </div>
+                          <a href="#" class="btn btn-outline-primary btn-book"
+                            >Start</a
+                          >
+                          <div class="timetable-item-like">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                            <div class="timetable-item-like-count">9</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane show" id="tabNav2">
+                  <div class="row">
+                    <!-- Schedule Item 1 -->
+                    <div class="col-md-6">
+                      <div class="timetable-item">
+                        <div class="timetable-item-img">
+                          <img
+                            src="https://via.placeholder.com/100x80/FFB6C1/000000"
+                            alt="Contemporary Dance"
+                          />
+                        </div>
+                        <div class="timetable-item-main">
+                          <div class="timetable-item-time">8:00am - 1:00pm</div>
+                          <div class="timetable-item-name">Fruit scout</div>
+                          <a href="#" class="btn btn-outline-primary btn-book"
+                            >Start</a
+                          >
+                          <div class="timetable-item-like">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                            <div class="timetable-item-like-count">11</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Schedule Item 2 -->
+                    <div class="col-md-6">
+                      <div class="timetable-item">
+                        <div class="timetable-item-img">
+                          <img
+                            src="https://via.placeholder.com/100x80/00FFFF/000000"
+                            alt="Break Dance"
+                          />
+                        </div>
+                        <div class="timetable-item-main">
+                          <div class="timetable-item-time">1:00pm - 2:00pm</div>
+                          <div class="timetable-item-name">Lunch Break</div>
+                          <a href="#" class="btn btn-outline-primary btn-book"
+                            >Start</a
+                          >
+                          <div class="timetable-item-like">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                            <div class="timetable-item-like-count">28</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-outline-custom" routerLink="/ad_teams">
+        <div class="btn-txt">Back</div>
+      </button>
+    </div>
+  </div>
+</div>
