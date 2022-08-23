@@ -95,6 +95,17 @@
         routerLinkActive="list-item-active"
         *ngIf="sublist"
       >
+        <!-- for children components -->
+        <div
+          [routerLink]="'new_team'"
+          routerLinkActive="list-item-active"
+          *ngIf="sublist"
+        ></div>
+        <div
+          [routerLink]="'edit_team'"
+          routerLinkActive="list-item-active"
+          *ngIf="sublist"
+        ></div>
         <i class="fa-solid fa-people-group"></i>
         <div class="content" *ngIf="isExpanded">Teams</div>
       </mat-list-item>
