@@ -269,7 +269,7 @@ h5 {
       &:-ms-input-placeholder {
         opacity: 0;
         -webkit-transition: all 200ms linear;
-        transition: all 200ms linear;
+        transition: all 200ms linear;        
       }
       &::-moz-placeholder {
         opacity: 0;
@@ -334,6 +334,8 @@ select:-webkit-autofill {
     border: none;
     outline: none;
     box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
+    background: #1f2029;
+    color: #c4c3ca;
   }
   &:active {
     border: none;
