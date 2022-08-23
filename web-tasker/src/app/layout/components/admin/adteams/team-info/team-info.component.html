@@ -9,7 +9,9 @@
       <div class="idance">
         <div class="schedule content-block">
           <div class="container">
-            <h2 data-aos="zoom-in-up" class="aos-init aos-animate">{{selectedTeam}}</h2>
+            <h2 data-aos="zoom-in-up" class="aos-init aos-animate">
+              {{ selectedTeam }}
+            </h2>
 
             <div class="timetable">
               <!-- Schedule Top Navigation -->
@@ -87,49 +89,40 @@
 
                 <div class="tab-pane show" id="tabNav2">
                   <div class="row">
-                    <!-- Schedule Item 1 -->
-                    <div class="col-md-6">
-                      <div class="timetable-item">
-                        <div class="timetable-item-img">
-                          <img
-                            src="https://via.placeholder.com/100x80/FFB6C1/000000"
-                            alt="Contemporary Dance"
-                          />
-                        </div>
+                    <div
+                      class="col-md-6"
+                      *ngFor="let project of projects"                      
+                    >
+                      <div class="timetable-item shadow">
                         <div class="timetable-item-main">
-                          <div class="timetable-item-time">8:00am - 1:00pm</div>
-                          <div class="timetable-item-name">Fruit scout</div>
-                          <a href="#" class="btn btn-outline-primary btn-book"
-                            >Start</a
-                          >
-                          <div class="timetable-item-like">
-                            <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            <i class="fa fa-heart" aria-hidden="true"></i>
-                            <div class="timetable-item-like-count">11</div>
+                          <div class="timetable-item-name">
+                            {{ project.projectName }}
                           </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Schedule Item 2 -->
-                    <div class="col-md-6">
-                      <div class="timetable-item">
-                        <div class="timetable-item-img">
-                          <img
-                            src="https://via.placeholder.com/100x80/00FFFF/000000"
-                            alt="Break Dance"
-                          />
-                        </div>
-                        <div class="timetable-item-main">
-                          <div class="timetable-item-time">1:00pm - 2:00pm</div>
-                          <div class="timetable-item-name">Lunch Break</div>
-                          <a href="#" class="btn btn-outline-primary btn-book"
-                            >Start</a
-                          >
-                          <div class="timetable-item-like">
-                            <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            <i class="fa fa-heart" aria-hidden="true"></i>
-                            <div class="timetable-item-like-count">28</div>
+                          <div class="timetable-item-time">
+                            <small>Last updated 3 mins ago</small>
+                          </div>
+                          <div class="col-sm action">
+                            <div class="row">
+                              <button
+                                type="button"
+                                class="col btn btn-outline-dark btn-sm me-2"
+                                [routerLink]="['/edit_project', project._id]"
+                                
+                              >
+                                <i class="fa-solid fa-pen-fancy"></i>
+                              </button>
+                              <button
+                                type="button"
+                                class="col btn btn-outline-danger btn-sm"
+                                
+                              >
+                                <i class="fa-solid fa-trash-can"></i>
+                              </button>
+                            </div>
+                          </div>
+                          <div class="timetable-item-users">
+                            <i class="fa-solid fa-users-viewfinder"></i>
+                            <div class="timetable-item-users-count">11</div>
                           </div>
                         </div>
                       </div>

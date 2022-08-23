@@ -55,4 +55,9 @@ export class TeamService {
   setCapturedTeam(team: string) {
     this.capturedTeam = team;
   }
+
+  /**Method to get team projects */
+  getTeamProjects(teamId: string) {
+    return this.webReqService.get(`teams/projects/${teamId}`);
+  }
 }
