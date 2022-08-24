@@ -13,9 +13,9 @@ export class TeamService {
 
   constructor(private webReqService: WebRequestService) {}
 
-  getTeams() {
-    //send a web request to get user teams
-    //return this.webReqService.get('projects/myprojects');
+  getSpecificTeam(teamId: string) {
+    //send a web request to get a specified team
+    return this.webReqService.get(`teams/${teamId}`);
   }
 
   getAllTeams() {

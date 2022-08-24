@@ -10,21 +10,21 @@
         <div class="schedule content-block">
           <div class="container">
             <h2 data-aos="zoom-in-up" class="aos-init aos-animate">
-              {{ selectedTeam }}
+              {{ teamName }}
             </h2>
 
             <div class="timetable">
               <!-- Schedule Top Navigation -->
               <nav class="nav nav-tabs">
                 <button
-                  class="nav-link active"
+                  class="nav-link"
                   (click)="showTab('members', 'tabNav1')"
                   id="members"
                 >
                   <a class="">Members</a>
                 </button>
                 <button
-                  class="nav-link"
+                  class="nav-link active"
                   (click)="showTab('projects', 'tabNav2')"
                   id="projects"
                 >
@@ -33,11 +33,11 @@
               </nav>
 
               <div class="tab-content">
-                <div class="tab-pane show active" id="tabNav1">
+                <div class="tab-pane show" id="tabNav1">
                   <div class="row">
                     <!-- Schedule Item 1 -->
                     <div class="col-md-6">
-                      <div class="timetable-item">                        
+                      <div class="timetable-item">
                         <div class="timetable-item-main">
                           <div class="timetable-item-time">8:00am - 1:00pm</div>
                           <div class="timetable-item-name">Fruit scout</div>
@@ -55,7 +55,7 @@
 
                     <!-- Schedule Item 6 -->
                     <div class="col-md-6">
-                      <div class="timetable-item">                        
+                      <div class="timetable-item">
                         <div class="timetable-item-main">
                           <div class="timetable-item-time">2:00am - 5:00am</div>
                           <div class="timetable-item-name">
@@ -75,12 +75,9 @@
                   </div>
                 </div>
 
-                <div class="tab-pane show" id="tabNav2">
+                <div class="tab-pane show active" id="tabNav2">
                   <div class="row">
-                    <div
-                      class="col-md-6"
-                      *ngFor="let project of projects"                      
-                    >
+                    <div class="col-md-6" *ngFor="let project of projects">
                       <div class="timetable-item shadow">
                         <div class="timetable-item-main">
                           <div class="timetable-item-name">
@@ -93,17 +90,9 @@
                             <div class="row">
                               <button
                                 type="button"
-                                class="col btn btn-outline-dark btn-sm me-2"
-                                [routerLink]="['/edit_project', project._id]"
-                                
-                              >
-                                <i class="fa-solid fa-pen-fancy"></i>
-                              </button>
-                              <button
-                                type="button"
                                 class="col btn btn-outline-danger btn-sm"
-                                
                               >
+                                remove 
                                 <i class="fa-solid fa-trash-can"></i>
                               </button>
                             </div>

@@ -8,7 +8,8 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./team-info.component.scss'],
 })
 export class TeamInfoComponent implements OnInit {
-  readonly selectedTeam: string = this.teamService.getCapturedTeam();
+  selectedTeam!: any[];
+  teamName!: string;
   projects!: any[];
 
   constructor(
@@ -25,6 +26,7 @@ export class TeamInfoComponent implements OnInit {
     //subscribe to the route params
     this.route.params.subscribe((params: Params) => {
       const teamId = params['teamId'];
+      this.getTeamName(teamId);
       this.getTeamProjects(teamId);
     });
   }
@@ -81,6 +83,15 @@ export class TeamInfoComponent implements OnInit {
     this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
+    });
+  }
+
+  //getting projects for team
+  getTeamName(teamId: string) {
+    this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
+      console.log(team);
+      this.selectedTeam = team;
+      this.teamName = team.teamName;
     });
   }
 }
