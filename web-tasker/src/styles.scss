@@ -67,7 +67,7 @@ body {
   /* ------- customize primary button color -------- */
   $mycolor2: #22b8f0;
 
-  .btn-primary {
+  .btn-custom {
     @include button-variant(
       $mycolor2,
       darken($mycolor2, 7.5%),
