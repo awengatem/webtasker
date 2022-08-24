@@ -8,7 +8,7 @@
       />
       <div class="idance">
         <div class="schedule content-block">
-          <div class="container">
+          <div class="container ">
             <h2 data-aos="zoom-in-up" class="aos-init aos-animate">
               {{ teamName }}
             </h2>
@@ -88,12 +88,18 @@
                           </div>
                           <div class="col-sm action">
                             <div class="row">
+                              <!-- <button
+                                type="button"
+                                class="col btn btn-outline-danger btn-sm"
+                              >
+                                <i class="fa-solid fa-trash-can"></i>
+                              </button> -->
                               <button
                                 type="button"
                                 class="col btn btn-outline-danger btn-sm"
                               >
-                                remove 
                                 <i class="fa-solid fa-trash-can"></i>
+                                <small> remove</small>
                               </button>
                             </div>
                           </div>
@@ -111,7 +117,7 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-outline-custom" routerLink="/ad_teams">
+      <button class="btn btn-outline-custom back" routerLink="/ad_teams">
         <div class="btn-txt">Back</div>
       </button>
     </div>

@@ -8,198 +8,220 @@
   .schedule {
     display: flex;
     flex-direction: column;
-    width: 100%;   
+    width: 100%;
     background: transparent;
+    //background: red;
     padding: 24px;
     border-radius: 2px;
     justify-content: center;
-    align-items: center;
-
-    .nav-tabs {
-      //border-bottom: 2px solid #104455;
-      border-bottom: 2px solid #d674cb; /* fallback for old browsers */
-      border-bottom: 2px solid -webkit-linear-gradient(to right, #d674cb, #89fffd); /* Chrome 10-25, Safari 5.1-6 */
-      border-bottom: 2px solid linear-gradient(to right, #d674cb, #89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    align-items: center;  
+    
+    h2{
+      margin-left: 5%;
     }
 
-    .nav-link {
-      -webkit-box-flex: 1;
-      -ms-flex: 1;
-      flex: 1;
-      font-size: 12px;
-      text-align: center;
-      text-transform: uppercase;
-      color: #3d3d3d;
-      //color: #fff;
-      font-weight: 500;
-      -webkit-transition: none;
-      -o-transition: none;
-      transition: none;
-      border-radius: 2px 2px 0 0;
-      padding-left: 0;
-      padding-right: 0;
-      cursor: pointer;
-      &:hover {
-        &:not(.active) {
-          //background: #46c1be;
-          //border-color: #46c1be;
-          //color: black;
+    .timetable {
+      max-width: 900px;
+      max-height: 520px;
+      //background: blue;
+      margin-left: 5%;    
 
+      .nav-tabs {
+        //border-bottom: 2px solid #104455;
+        border-bottom: 2px solid #d674cb; /* fallback for old browsers */
+        border-bottom: 2px solid -webkit-linear-gradient(to right, #d674cb, #89fffd); /* Chrome 10-25, Safari 5.1-6 */
+        border-bottom: 2px solid linear-gradient(to right, #d674cb, #89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        .nav-link {
+          -webkit-box-flex: 1;
+          -ms-flex: 1;
+          flex: 1;
+          font-size: 12px;
+          text-align: center;
+          text-transform: uppercase;
           color: #3d3d3d;
-          border-color: #89fffd;
+          //color: #fff;
+          font-weight: 500;
+          -webkit-transition: none;
+          -o-transition: none;
+          transition: none;
+          border-radius: 2px 2px 0 0;
+          padding-left: 0;
+          padding-right: 0;
+          cursor: pointer;
+          &:hover {
+            &:not(.active) {
+              //background: #46c1be;
+              //border-color: #46c1be;
+              //color: black;
+
+              color: #3d3d3d;
+              border-color: #89fffd;
+            }
+          }
+
+          &.active {
+            //background: #104455;
+            //border-color: #104455;
+            //color: #fff;
+
+            background: #d674cb; /* fallback for old browsers */
+            background: -webkit-linear-gradient(
+              to right,
+              #d674cb,
+              #89fffd
+            ); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(
+              to right,
+              #d674cb,
+              #89fffd
+            ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            border-color: #d674cb; /* fallback for old browsers */
+            border-color: -webkit-linear-gradient(
+              to right,
+              #d674cb,
+              #89fffd
+            ); /* Chrome 10-25, Safari 5.1-6 */
+            border-color: linear-gradient(
+              to right,
+              #d674cb,
+              #89fffd
+            ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            //color: #22b8f0;
+            color: #010001;
+            &:focus {
+              //border-color: #104455;
+
+              border-color: #d674cb; /* fallback for old browsers */
+              border-color: -webkit-linear-gradient(
+                to right,
+                #d674cb,
+                #89fffd
+              ); /* Chrome 10-25, Safari 5.1-6 */
+              border-color: linear-gradient(
+                to right,
+                #d674cb,
+                #89fffd
+              ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            }
+          }
         }
       }
-    }
-    .nav-link.active {
-      //background: #104455;
-      //border-color: #104455;
-      //color: #fff;
 
-      background: #d674cb; /* fallback for old browsers */
-      background: -webkit-linear-gradient(
-        to right,
-        #d674cb,
-        #89fffd
-      ); /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(
-        to right,
-        #d674cb,
-        #89fffd
-      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      border-color: #d674cb; /* fallback for old browsers */
-      border-color: -webkit-linear-gradient(
-        to right,
-        #d674cb,
-        #89fffd
-      ); /* Chrome 10-25, Safari 5.1-6 */
-      border-color: linear-gradient(
-        to right,
-        #d674cb,
-        #89fffd
-      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      //color: #22b8f0;
-      color: #010001;
-      &:focus {
-        //border-color: #104455;
+      .tab-content {
+        display: flex;
+        flex-direction: column;
+        max-height: 520px;
+        width: 100%;
+        padding: 15px;        
+        //background: transparent;        
+        border-radius: 2px;
+        overflow-y: auto;
 
-        border-color: #d674cb; /* fallback for old browsers */
-        border-color: -webkit-linear-gradient(
-          to right,
-          #d674cb,
-          #89fffd
-        ); /* Chrome 10-25, Safari 5.1-6 */
-        border-color: linear-gradient(
-          to right,
-          #d674cb,
-          #89fffd
-        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        .tab-pane {
+          .timetable-item {
+            border: 1px solid #d8e3eb;
+            padding: 15px;
+            margin-top: 20px;
+            position: relative;
+            display: block;
+            background: whitesmoke;
+            border-radius: 2px;
+            opacity: 0.8;
+
+            &-main {
+              -webkit-box-flex: 1;
+              -ms-flex: 1;
+              flex: 1;
+              position: relative;
+              margin-top: 12px;
+
+              .action {
+                width: 15%;
+                margin-left: 81%;
+              }
+            }
+
+            &-name {
+              font-weight: 580;
+              font-size: 16px;
+              margin-bottom: 4px;
+            }
+
+            &-time {
+              font-weight: 500;
+              font-size: 14px;
+              margin-bottom: 19px;
+            }
+
+            &-users {
+              position: absolute;
+              top: 3px;
+              right: 3px;
+              font-size: 20px;
+              //color: #f15465;
+              cursor: pointer;
+              .fa-users-viewfinder {
+                display: block;
+                color: #010001;
+              }
+              &:hover {
+                .fa-users-viewfinder {
+                  color: #22b8f0;
+                }
+              }
+              &-count {
+                font-size: 12px;
+                text-align: center;
+                padding-top: 5px;
+                color: #010001;
+              }
+            }
+
+            &-like {
+              position: absolute;
+              top: 3px;
+              right: 3px;
+              font-size: 20px;
+              //color: #f15465;
+              cursor: pointer;
+              .fa-heart-o {
+                display: block;
+                color: #b7b7b7;
+              }
+              .fa-heart {
+                display: none;
+                color: #f15465;
+              }
+              &:hover {
+                .fa-heart {
+                  display: block;
+                }
+                .fa-heart-o {
+                  display: none;
+                }
+              }
+              &-count {
+                font-size: 12px;
+                text-align: center;
+                padding-top: 5px;
+                color: #010001;
+              }
+            }
+
+            &:hover {
+              opacity: 1;
+              overflow: hidden;
+              transition: transform 0.5s ease;
+              transform: scale(1.05);
+            }
+          }
+        }
       }
-    }
-    .tab-pane {
-      padding-top: 10px;
     }
   }
+}
 
-  .timetable {
-    max-width: 900px;
-    //background: grey;
-  }
-
-  .timetable-item {
-    border: 1px solid #d8e3eb;
-    padding: 15px;
-    margin-top: 20px;
-    position: relative;
-    display: block;
-    background: whitesmoke;
-    border-radius: 2px;
-    opacity: 0.8;
-
-    &-main {
-      -webkit-box-flex: 1;
-      -ms-flex: 1;
-      flex: 1;
-      position: relative;
-      margin-top: 12px;
-
-      .action {
-        width: 25%;
-        margin-left: 71%;
-      }
-    }
-
-    &-name {
-      font-weight: 580;
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    &-time {
-      font-weight: 500;
-      font-size: 14px;
-      margin-bottom: 19px;
-    }
-
-    &-users {
-      position: absolute;
-      top: 3px;
-      right: 3px;
-      font-size: 20px;
-      //color: #f15465;
-      cursor: pointer;
-      .fa-users-viewfinder {
-        display: block;
-        color: #010001;
-      }
-      &:hover {
-        .fa-users-viewfinder {
-          color: #22b8f0;
-        }
-      }
-      &-count {
-        font-size: 12px;
-        text-align: center;
-        padding-top: 5px;
-        color: #010001;
-      }
-    }
-
-    &-like {
-      position: absolute;
-      top: 3px;
-      right: 3px;
-      font-size: 20px;
-      //color: #f15465;
-      cursor: pointer;
-      .fa-heart-o {
-        display: block;
-        color: #b7b7b7;
-      }
-      .fa-heart {
-        display: none;
-        color: #f15465;
-      }
-      &:hover {
-        .fa-heart {
-          display: block;
-        }
-        .fa-heart-o {
-          display: none;
-        }
-      }
-      &-count {
-        font-size: 12px;
-        text-align: center;
-        padding-top: 5px;
-        color: #010001;
-      }
-    }
-
-    &:hover {
-      opacity: 1;
-      overflow: hidden;
-      transition: transform 0.5s ease;
-      transform: scale(1.05);
-    }
-  }
+.back {
+  margin-top: 45px;
 }
