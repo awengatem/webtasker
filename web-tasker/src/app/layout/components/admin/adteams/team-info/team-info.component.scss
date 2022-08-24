@@ -4,97 +4,22 @@
 //@import url("../home/home.component.scss");
 
 .idance {
-  .classes-details {
-    ul.timetable {
-      margin: 0 0 22px;
-      padding: 0;
-      li {
-        list-style: none;
-        font-size: 15px;
-        //color: #7f7f7f;
-        color: white;
-      }
-    }
-  }
-  .timetable-item {
-    border: 1px solid #d8e3eb;
-    padding: 15px;
-    margin-top: 20px;
-    position: relative;
-    display: block;
-  }
-  .timetable-item-img {
-    overflow: hidden;
-    height: 100px;
-    width: 100px;
-    display: none;
-    img {
-      height: 100%;
-    }
-  }
-  .timetable-item-main {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    position: relative;
-    margin-top: 12px;
-  }
-  .timetable-item-time {
-    font-weight: 500;
-    font-size: 16px;
-    margin-bottom: 4px;
-  }
-  .timetable-item-name {
-    font-size: 14px;
-    margin-bottom: 19px;
-  }
-  .btn-book {
-    padding: 6px 30px;
-    width: 100%;
-  }
-  .timetable-item-like {
-    position: absolute;
-    top: 3px;
-    right: 3px;
-    font-size: 20px;
-    cursor: pointer;
-    .fa-heart-o {
-      display: block;
-      color: #b7b7b7;
-    }
-    .fa-heart {
-      display: none;
-      color: #f15465;
-    }
-    &:hover {
-      .fa-heart {
-        display: block;
-      }
-      .fa-heart-o {
-        display: none;
-      }
-    }
-  }
-  .timetable-item-like-count {
-    font-size: 12px;
-    text-align: center;
-    padding-top: 5px;
-    color: #7f7f7f;
-  }
-  .timetable-item-book {
-    width: 200px;
-    .btn {
-      width: 100%;
-    }
-  }
+  //background: grey;
   .schedule {
+    display: flex;
+    flex-direction: column;
+    width: 100%;   
+    background: transparent;
+    padding: 24px;
+    border-radius: 2px;
+    justify-content: center;
+    align-items: center;
+
     .nav-tabs {
       //border-bottom: 2px solid #104455;
       border-bottom: 2px solid #d674cb; /* fallback for old browsers */
       border-bottom: 2px solid -webkit-linear-gradient(to right, #d674cb, #89fffd); /* Chrome 10-25, Safari 5.1-6 */
       border-bottom: 2px solid linear-gradient(to right, #d674cb, #89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    }
-    button {
     }
 
     .nav-link {
@@ -174,86 +99,107 @@
       padding-top: 10px;
     }
   }
-}
-idance {
+
   .timetable {
     max-width: 900px;
-    margin: 0 auto;
+    //background: grey;
   }
-}
-@media (min-width: 768px) {
-  .idance {
-    .timetable-item {
-      border: 1px solid #d8e3eb;
-      padding: 15px;
-      margin-top: 20px;
+
+  .timetable-item {
+    border: 1px solid #d8e3eb;
+    padding: 15px;
+    margin-top: 20px;
+    position: relative;
+    display: block;
+    background: whitesmoke;
+    border-radius: 2px;
+    opacity: 0.8;
+
+    &-main {
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
       position: relative;
-      display: block;
-      background: whitesmoke;
-      border-radius: 2px;
-      opacity: 0.8;
+      margin-top: 12px;
 
-      &-main {
-        -webkit-box-flex: 1;
-        -ms-flex: 1;
-        flex: 1;
-        position: relative;
-        margin-top: 12px;
-
-        .action {
-          width: 25%;
-          margin-left: 71%;
-        }
-      }
-
-      &-name {
-        font-weight: 580;
-        font-size: 16px;
-        margin-bottom: 4px;
-      }
-
-      &-time {
-        font-weight: 500;
-        font-size: 14px;
-        margin-bottom: 19px;
-      }
-
-      &-users {
-        position: absolute;
-        top: 3px;
-        right: 3px;
-        font-size: 20px;
-        //color: #f15465;
-        cursor: pointer;
-        .fa-users-viewfinder {
-          display: block;
-          color: #010001;
-        }
-        &:hover {
-          .fa-users-viewfinder {
-            color: #22b8f0;
-          }
-        }
-        &-count {
-          font-size: 12px;
-          text-align: center;
-          padding-top: 5px;
-          color: #010001;
-        }
-      }
-
-      &:hover {
-        opacity: 1;
-        overflow: hidden;
-        transition: transform 0.5s ease;
-        transform: scale(1.05);
+      .action {
+        width: 25%;
+        margin-left: 71%;
       }
     }
-  }
 
-  .schedule {
-    .nav-link {
-      font-size: 16px;      
+    &-name {
+      font-weight: 580;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    &-time {
+      font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 19px;
+    }
+
+    &-users {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      font-size: 20px;
+      //color: #f15465;
+      cursor: pointer;
+      .fa-users-viewfinder {
+        display: block;
+        color: #010001;
+      }
+      &:hover {
+        .fa-users-viewfinder {
+          color: #22b8f0;
+        }
+      }
+      &-count {
+        font-size: 12px;
+        text-align: center;
+        padding-top: 5px;
+        color: #010001;
+      }
+    }
+
+    &-like {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      font-size: 20px;
+      //color: #f15465;
+      cursor: pointer;
+      .fa-heart-o {
+        display: block;
+        color: #b7b7b7;
+      }
+      .fa-heart {
+        display: none;
+        color: #f15465;
+      }
+      &:hover {
+        .fa-heart {
+          display: block;
+        }
+        .fa-heart-o {
+          display: none;
+        }
+      }
+      &-count {
+        font-size: 12px;
+        text-align: center;
+        padding-top: 5px;
+        color: #010001;
+      }
+    }
+
+    &:hover {
+      opacity: 1;
+      overflow: hidden;
+      transition: transform 0.5s ease;
+      transform: scale(1.05);
     }
   }
 }
