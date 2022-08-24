@@ -15,6 +15,8 @@ import { EditProjectComponent } from './components/admin/adprojects/edit-project
 import { NewTeamComponent } from './components/admin/adteams/new-team/new-team.component';
 import { EditTeamComponent } from './components/admin/adteams/edit-team/edit-team.component';
 import { TeamInfoComponent } from './components/admin/adteams/team-info/team-info.component';
+import { AddMemberComponent } from './components/admin/adteams/add-member/add-member.component';
+import { AssignProjectComponent } from './components/admin/adteams/assign-project/assign-project.component';
 
 const routes: Routes = [
   {
@@ -48,14 +50,14 @@ const routes: Routes = [
       },
 
       /**ADMIN ROUTES */
-      /**Dashboard */
+      /**DASHBOARD */
       {
         path: 'ad_dashboard',
         canActivate: [AuthGuard],
         component: AdDashboardComponent,
       },
 
-      /**Projects */
+      /**PROJECTS */
       {
         path: 'ad_projects',
         canActivate: [AuthGuard],
@@ -77,7 +79,7 @@ const routes: Routes = [
         component: EditProjectComponent,
       },
 
-      /**Teams */
+      /**TEAMS */
       {
         path: 'ad_teams',
         canActivate: [AuthGuard],
@@ -87,6 +89,16 @@ const routes: Routes = [
         path: 'ad_teams/:teamId',
         canActivate: [AuthGuard],
         component: TeamInfoComponent,
+      },
+      {
+        path: 'ad_teams/:teamId/add_member',
+        canActivate: [AuthGuard],
+        component: AddMemberComponent,
+      },
+      {
+        path: 'ad_teams/:teamId/assign_project',
+        canActivate: [AuthGuard],
+        component: AssignProjectComponent,
       },
       {
         path: 'new_team',

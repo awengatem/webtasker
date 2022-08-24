@@ -21,11 +21,15 @@
                     <!-- routerLink="/new_team" -->
                     <button
                       class="btn btn-primary"                     
+                      [routerLink]="tab1 ? ['/ad_teams', teamId,'add_member'] : ['/ad_teams', teamId,'assign_project']"
+                      (click)="addRespective()"
                     >
                       <div class="btn-txt">+</div>
                     </button>
                   </div>
-                  <div class="col"><h4>Assign project</h4></div>
+                  <div class="col">
+                    <h4>{{ addButtonText }}</h4>
+                  </div>
                 </div>
               </div>
             </div>
@@ -34,14 +38,14 @@
               <!-- Schedule Top Navigation -->
               <nav class="nav nav-tabs">
                 <button
-                  class="nav-link"
+                  class="nav-link active"
                   (click)="showTab('members', 'tabNav1')"
                   id="members"
                 >
                   <a class="">Members</a>
                 </button>
                 <button
-                  class="nav-link active"
+                  class="nav-link"
                   (click)="showTab('projects', 'tabNav2')"
                   id="projects"
                 >
@@ -50,7 +54,8 @@
               </nav>
 
               <div class="tab-content">
-                <div class="tab-pane show" id="tabNav1">
+                <!-- TAB 1 -->
+                <div class="tab-pane show active" id="tabNav1">
                   <div class="row">
                     <!-- Schedule Item 1 -->
                     <div class="col-md-6">
@@ -92,7 +97,8 @@
                   </div>
                 </div>
 
-                <div class="tab-pane show active" id="tabNav2">
+                <!-- TAB 2 -->
+                <div class="tab-pane show" id="tabNav2">
                   <div class="row">
                     <div class="col-md-6" *ngFor="let project of projects">
                       <div class="timetable-item shadow">

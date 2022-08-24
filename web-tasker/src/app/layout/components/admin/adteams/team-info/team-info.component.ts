@@ -11,6 +11,10 @@ export class TeamInfoComponent implements OnInit {
   selectedTeam!: any[];
   teamName!: string;
   projects!: any[];
+  teamId!: string;
+
+  //control the router link, defines active default tab
+  tab1: boolean = true;
 
   constructor(
     private teamService: TeamService,
@@ -26,6 +30,7 @@ export class TeamInfoComponent implements OnInit {
     //subscribe to the route params
     this.route.params.subscribe((params: Params) => {
       const teamId = params['teamId'];
+      this.teamId = teamId;
       this.getTeamName(teamId);
       this.getTeamProjects(teamId);
     });
@@ -43,6 +48,10 @@ export class TeamInfoComponent implements OnInit {
   butIdArray: string[] = [];
   loopButElement: any;
   butResult: any;
+
+  //monitor selected tab set default also
+  selectedTab: string = 'tabNav1';
+  addButtonText: string = 'Add member';
 
   //getting the open tab
   getOpenTab(): string {
@@ -76,6 +85,18 @@ export class TeamInfoComponent implements OnInit {
     this.butElement.classList.add('active');
     this.tabElement = document.getElementById(tabId);
     this.tabElement.classList.add('active');
+
+    //note selected tab to help in shared + button
+    if (tabId) {
+      this.selectedTab = tabId;
+      if (tabId === 'tabNav1') {
+        this.addButtonText = 'Add member';
+        this.tab1 = true;
+      } else if (tabId === 'tabNav2') {
+        this.addButtonText = 'Assign Project';
+        this.tab1 = false;
+      }     
+    }
   }
 
   //getting projects for team
@@ -93,5 +114,14 @@ export class TeamInfoComponent implements OnInit {
       this.selectedTeam = team;
       this.teamName = team.teamName;
     });
+  }
+
+  //Shared function used by the + button
+  addRespective() {
+    if (this.selectedTab === 'tabNav1') {
+      console.log('addding member');
+    } else if (this.selectedTab === 'tabNav2') {
+      console.log('addding project');
+    }
   }
 }
