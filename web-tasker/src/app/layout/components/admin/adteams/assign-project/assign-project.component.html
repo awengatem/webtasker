@@ -1,10 +1,31 @@
 <div class="container-fluid page">
-    <div class="page__box p-3 mt-2">Teams</div>
-    <div class="page__content shadow p-3 position-relative">
-      <div class="page__content-data">
-        Assign project
+  <div class="page__box p-3 mt-2">Teams</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <div class="centered-content">
+        <div class="members-container">
+          <div class="members">
+            <h1 class="text-dark">assign projects <i class="fa-solid fa-user-plus"></i></h1>
+            <mat-divider></mat-divider>
+            <div class="members-inside" id="teams">
+              <div class="row">
+                <!-- item 1 -->
+                <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row centered-content add">
+        <div class="col-md-1">
+          <!-- routerLink="/new_team" -->
+          <button class="btn btn-outline-custom">
+            <div class="btn-txt">+</div>
+          </button>
+        </div>
+        <div class="col"><h4>Assign projects</h4></div>
       </div>
     </div>
   </div>
-
-
+</div>
