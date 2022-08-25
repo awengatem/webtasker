@@ -5,14 +5,20 @@
       <div class="centered-content">
         <div class="members-container">
           <div class="members">
-            <h1 class="text-dark">add members <i class="fa-solid fa-user-plus"></i></h1>
+            <h1 class="text-dark">
+              add members <i class="fa-solid fa-user-plus"></i>
+            </h1>
             <mat-divider></mat-divider>
             <div class="members-inside" id="teams">
-              <div class="row">
-                <!-- item 1 -->
-                <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
-                
-              </div>
+              <ng-multiselect-dropdown              
+                [placeholder]="'Please select members to add'"
+                [settings]="dropdownSettings"
+                [data]="dropdownList"
+                [(ngModel)]="selectedItems"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+              >
+              </ng-multiselect-dropdown>
             </div>
           </div>
         </div>

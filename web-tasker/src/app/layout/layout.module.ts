@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
 import { AngularMaterialModule } from '../angular-material.module';
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
 import { LayoutRoutingModule } from './layout-routing.module';
 
@@ -69,6 +70,7 @@ import { AssignProjectComponent } from './components/admin/adteams/assign-projec
 
     /*material imports*/
     AngularMaterialModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   exports: [
     HeaderComponent,
