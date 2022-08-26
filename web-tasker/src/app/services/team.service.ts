@@ -65,4 +65,9 @@ export class TeamService {
   getTeamMembers(teamId: string) {
     return this.webReqService.get(`team_members/${teamId}`);
   }
+
+   /**Method to get users */
+   getUsers() {
+    return this.webReqService.get(`users`);
+  }
 }

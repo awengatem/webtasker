@@ -5,14 +5,36 @@
       <div class="centered-content">
         <div class="members-container">
           <div class="members">
-            <h1 class="text-dark">assign projects <i class="fa-regular fa-layer-plus"></i></h1>
+            <div class="row">
+              <div class="col">
+                <h1 class="text-dark">
+                  assign projects <i class="uil uil-folder-check"></i>
+                </h1>
+              </div>
+              <div class="col-md-1">
+                <div class="row back">
+                  <!-- routerLink="/new_team" -->
+                  <button
+                    class="btn btn-primary back"
+                    [routerLink]="['/ad_teams', teamId]"
+                  >
+                    <div class="btn-txt">Back</div>
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <mat-divider></mat-divider>
             <div class="members-inside" id="teams">
-              <div class="row">
-                <!-- item 1 -->
-                <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
-                
-              </div>
+              <ng-multiselect-dropdown
+                [placeholder]="'Please select projects to assign'"
+                [settings]="dropdownSettings"
+                [data]="dropdownList"
+                [(ngModel)]="selectedItems"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+              >
+              </ng-multiselect-dropdown>
             </div>
           </div>
         </div>
@@ -20,7 +42,7 @@
       <div class="row centered-content add">
         <div class="col-md-1">
           <!-- routerLink="/new_team" -->
-          <button class="btn btn-outline-custom">
+          <button class="btn btn-outline-custom" (click)="tester()">
             <div class="btn-txt">+</div>
           </button>
         </div>

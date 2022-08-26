@@ -5,9 +5,25 @@
       <div class="centered-content">
         <div class="members-container">
           <div class="members">
-            <h1 class="text-dark">
-              add members <i class="fa-solid fa-user-plus"></i>
-            </h1>
+            <div class="row">
+              <div class="col">
+                <h1 class="text-dark">
+                  add members <i class="uil uil-user-plus"></i>
+                </h1>
+              </div>
+              <div class="col-md-1">
+                <div class="row back">
+                  <!-- routerLink="/new_team" -->
+                  <button
+                    class="btn btn-primary back"
+                    [routerLink]="['/ad_teams', teamId]"
+                  >
+                    <div class="btn-txt">Back</div>
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <mat-divider></mat-divider>
             <div class="members-inside" id="teams">
               <ng-multiselect-dropdown

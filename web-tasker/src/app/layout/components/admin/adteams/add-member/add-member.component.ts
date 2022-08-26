@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-add-member',
   templateUrl: './add-member.component.html',
-  styleUrls: ['./add-member.component.scss'],  
+  styleUrls: ['./add-member.component.scss'],
 })
 export class AddMemberComponent implements OnInit {
 
@@ -13,16 +15,31 @@ export class AddMemberComponent implements OnInit {
   selectedItems: any = [];
   dropdownSettings!: IDropdownSettings;
 
-  constructor() {}
+  teamId!: string;
+
+  constructor(
+    private teamService: TeamService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.dropdownList = [
-      { item_id: 1, item_text: 'Joe' },
-      { item_id: 2, item_text: 'Frank' },
-      { item_id: 3, item_text: 'Joy' },
-      { item_id: 4, item_text: 'Purity' },
-      { item_id: 5, item_text: 'John' }
-    ];
+    // this.dropdownList = [
+    //   { item_id: 1, item_text: 'Joe' },
+    //   { item_id: 2, item_text: 'Frank' },
+    //   { item_id: 3, item_text: 'Joy' },
+    //   { item_id: 4, item_text: 'Purity' },
+    //   { item_id: 5, item_text: 'John' }
+    // ];
+    this.route.params.subscribe((params: Params) => {
+      console.log(params);
+      const teamId = params['teamId'];
+      this.teamId = teamId;
+      console.log(this.teamId);     
+    });
+
+    //get dropdown list data
+    this.getUsers();
     this.selectedItems = [
       //{ item_id: 3, item_text: 'Pune' },
       //{ item_id: 4, item_text: 'Navsari' }
@@ -34,7 +51,7 @@ export class AddMemberComponent implements OnInit {
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
-      allowSearchFilter: true
+      allowSearchFilter: true,
     };
   }
   onItemSelect(item: any) {
@@ -44,7 +61,19 @@ export class AddMemberComponent implements OnInit {
     console.log(items);
   }
 
-  tester(){
+  //populating the dropdown list
+  getUsers() {
+    let tmp: any = [];
+    this.teamService.getUsers().subscribe((users: any) => {
+      for (let i = 0; i < users.length; i++) {
+        tmp.push({ item_id: i, item_text: users[i].username });
+      }
+      //console.log(users);
+      this.dropdownList = tmp;
+    });
+  }
+
+  tester() {
     console.log(this.selectedItems);
   }
 }
