@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { TeamService } from 'src/app/services/team.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-assign-project',
@@ -17,8 +17,8 @@ export class AssignProjectComponent implements OnInit {
 
   teamId!: string;
 
-  constructor(
-    private teamService: TeamService,
+  constructor(    
+    private projectService: ProjectService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -39,7 +39,7 @@ export class AssignProjectComponent implements OnInit {
     });
 
     //get dropdown list data
-    this.getUsers();
+    this.getProjects();
     this.selectedItems = [
       //{ item_id: 3, item_text: 'Pune' },
       //{ item_id: 4, item_text: 'Navsari' }
@@ -62,13 +62,13 @@ export class AssignProjectComponent implements OnInit {
   }
 
   //populating the dropdown list
-  getUsers() {
+  getProjects() {
     let tmp: any = [];
-    this.teamService.getUsers().subscribe((users: any) => {
-      for (let i = 0; i < users.length; i++) {
-        tmp.push({ item_id: i, item_text: users[i].username });
+    this.projectService.getAllProjects().subscribe((projects: any) => {
+      for (let i = 0; i < projects.length; i++) {
+        tmp.push({ item_id: i, item_text: projects[i].projectName });
       }
-      //console.log(users);
+      //console.log(projects);
       this.dropdownList = tmp;
     });
   }

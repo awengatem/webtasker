@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { TeamService } from 'src/app/services/team.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-member',
@@ -9,9 +10,9 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./add-member.component.scss'],
 })
 export class AddMemberComponent implements OnInit {
-
   //used by dropdown list
   dropdownList: any = [];
+  userArr: any = [];
   selectedItems: any = [];
   dropdownSettings!: IDropdownSettings;
 
@@ -35,7 +36,6 @@ export class AddMemberComponent implements OnInit {
       console.log(params);
       const teamId = params['teamId'];
       this.teamId = teamId;
-      console.log(this.teamId);     
     });
 
     //get dropdown list data
@@ -50,7 +50,7 @@ export class AddMemberComponent implements OnInit {
       textField: 'item_text',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
+      itemsShowLimit: 10,
       allowSearchFilter: true,
     };
   }
@@ -64,16 +64,58 @@ export class AddMemberComponent implements OnInit {
   //populating the dropdown list
   getUsers() {
     let tmp: any = [];
-    this.teamService.getUsers().subscribe((users: any) => {
-      for (let i = 0; i < users.length; i++) {
-        tmp.push({ item_id: i, item_text: users[i].username });
-      }
-      //console.log(users);
-      this.dropdownList = tmp;
+    let userArr: any = [];
+
+    this.teamService.getUsers().subscribe({
+      next:(users: any) => {
+        //push usernames and users to respective array
+        for (let i = 0; i < users.length; i++) {
+          tmp.push({ item_id: i, item_text: users[i].username });
+          userArr.push(users[i]);
+        }
+        //add usernames to dropdown list and users to array
+        this.dropdownList = tmp;
+        this.userArr = userArr;
+      },
+      error: (err) => {
+        console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+      },
     });
   }
 
-  tester() {
-    console.log(this.selectedItems);
+  addMember() {
+    let teamMembers: any = [];
+    //ensure members are selected
+    if (this.selectedItems.length > 0) {
+      this.selectedItems.forEach((item: any) => {
+        let userId;
+        //get user account id
+        for (let i = 0; i < this.userArr.length; i++) {
+          if (this.userArr[i].username === item.item_text) {
+            userId = this.userArr[i]._id;
+          }
+        }
+        //hardcode object to match api
+        //get the post team members payload
+        teamMembers.push({ user_account_id: userId, team_id: this.teamId });
+      });
+      //console.log(teamMembers);
+
+      //post them to db
+      this.teamService.addTeamMembers(teamMembers).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.router.navigate([`/ad_teams/${this.teamId}`]);
+          Swal.fire('Added!', `Members have been added`, 'success');
+        }, 
+        error: (err) => {
+          console.log(err);
+          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+        },
+      });
+    } else if (this.selectedItems.length <= 0) {
+      Swal.fire('Alert!', `Please select a member to add`, 'warning');
+    }
   }
 }

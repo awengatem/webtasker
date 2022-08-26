@@ -105,7 +105,7 @@ export class AdTeamsComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
-        Swal.fire('Oops! Something went wrong', err.error, 'error');
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
     });
   }
