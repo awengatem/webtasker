@@ -43,4 +43,8 @@ export class AddMemberComponent implements OnInit {
   onSelectAll(items: any) {
     console.log(items);
   }
+
+  tester(){
+    console.log(this.selectedItems);
+  }
 }

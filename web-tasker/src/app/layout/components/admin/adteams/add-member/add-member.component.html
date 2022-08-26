@@ -10,7 +10,7 @@
             </h1>
             <mat-divider></mat-divider>
             <div class="members-inside" id="teams">
-              <ng-multiselect-dropdown              
+              <ng-multiselect-dropdown
                 [placeholder]="'Please select members to add'"
                 [settings]="dropdownSettings"
                 [data]="dropdownList"
@@ -26,7 +26,7 @@
       <div class="row centered-content add">
         <div class="col-md-1">
           <!-- routerLink="/new_team" -->
-          <button class="btn btn-outline-custom">
+          <button class="btn btn-outline-custom" (click)="tester()">
             <div class="btn-txt">+</div>
           </button>
         </div>

@@ -20,8 +20,12 @@
                   <div class="col-md-1">
                     <!-- routerLink="/new_team" -->
                     <button
-                      class="btn btn-primary"                     
-                      [routerLink]="tab1 ? ['/ad_teams', teamId,'add_member'] : ['/ad_teams', teamId,'assign_project']"
+                      class="btn btn-primary"
+                      [routerLink]="
+                        tab1
+                          ? ['/ad_teams', teamId, 'add_member']
+                          : ['/ad_teams', teamId, 'assign_project']
+                      "
                       (click)="addRespective()"
                     >
                       <div class="btn-txt">+</div>
@@ -57,39 +61,25 @@
                 <!-- TAB 1 -->
                 <div class="tab-pane show active" id="tabNav1">
                   <div class="row">
-                    <!-- Schedule Item 1 -->
-                    <div class="col-md-6">
-                      <div class="timetable-item">
-                        <div class="timetable-item-main">
-                          <div class="timetable-item-time">8:00am - 1:00pm</div>
-                          <div class="timetable-item-name">Fruit scout</div>
-                          <a href="1" class="btn btn-outline-primary btn-book"
-                            >Start</a
-                          >
-                          <div class="timetable-item-like">
-                            <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            <i class="fa fa-heart" aria-hidden="true"></i>
-                            <div class="timetable-item-like-count">11</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Schedule Item 6 -->
-                    <div class="col-md-6">
-                      <div class="timetable-item">
-                        <div class="timetable-item-main">
-                          <div class="timetable-item-time">2:00am - 5:00am</div>
+                    <!-- Member Item  -->
+                    <div class="col-md-6" *ngFor="let member of members">
+                      <div class="timetable-item member shadow">
+                        <div class="timetable-item-main-member">
                           <div class="timetable-item-name">
-                            Night shift fruit scout
+                            {{ member.username }}
                           </div>
-                          <a href="#" class="btn btn-outline-primary btn-book"
-                            >Start</a
-                          >
-                          <div class="timetable-item-like">
-                            <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            <i class="fa fa-heart" aria-hidden="true"></i>
-                            <div class="timetable-item-like-count">9</div>
+                          <div class="timetable-item-time">
+                            <small>active</small>
+                          </div>
+                          <div class="col-sm action-member">
+                            <div class="row">
+                              <button
+                                type="button"
+                                class="col btn btn-outline-danger btn-sm"
+                              >
+                                <i class="fa-solid fa-trash-can"></i>
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -100,6 +90,7 @@
                 <!-- TAB 2 -->
                 <div class="tab-pane show" id="tabNav2">
                   <div class="row">
+                    <!-- Project Item  -->
                     <div class="col-md-6" *ngFor="let project of projects">
                       <div class="timetable-item shadow">
                         <div class="timetable-item-main">
@@ -111,12 +102,6 @@
                           </div>
                           <div class="col-sm action">
                             <div class="row">
-                              <!-- <button
-                                type="button"
-                                class="col btn btn-outline-danger btn-sm"
-                              >
-                                <i class="fa-solid fa-trash-can"></i>
-                              </button> -->
                               <button
                                 type="button"
                                 class="col btn btn-outline-danger btn-sm"

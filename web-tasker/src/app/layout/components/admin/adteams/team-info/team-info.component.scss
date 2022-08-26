@@ -21,14 +21,14 @@
       //background: red;
       height: 100%;
       width: 100%;
-      
+
       button {
         height: 75%;
         width: 75px;
         margin-bottom: 20px;
         .btn-txt {
           font-size: 20px;
-          color: white;          
+          color: white;
         }
       }
       h4 {
@@ -161,9 +161,35 @@
               position: relative;
               margin-top: 12px;
 
+              &-member{
+                margin-top: 0;
+
+                .action {
+                  width: 15%;
+                  margin-left: 81%;
+  
+                  //member butttobn customizing
+                  &-member {
+                    position: absolute;
+                    top: 28px;
+                    right: 25px;
+                    
+                    button{
+                      border-radius: 4px;
+                      width: 45px;
+
+                      &:hover {
+                        opacity: 1;
+                        overflow: hidden;                        
+                      }
+                    }
+                  }
+                }
+              }
+
               .action {
                 width: 15%;
-                margin-left: 81%;
+                margin-left: 81%;               
               }
             }
 
@@ -239,6 +265,19 @@
               overflow: hidden;
               transition: transform 0.5s ease;
               transform: scale(1.05);
+            }
+
+            //customized for members
+            &.member {
+              border: 1px solid #d8e3eb;
+              height: 60%;
+              //padding: 15px;
+              margin-top: 20px;
+              position: relative;
+              display: block;
+              //background: grey;
+              border-radius: 20px;
+              opacity: 0.8;
             }
           }
         }

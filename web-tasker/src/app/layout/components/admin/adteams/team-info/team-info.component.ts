@@ -11,6 +11,7 @@ export class TeamInfoComponent implements OnInit {
   selectedTeam!: any[];
   teamName!: string;
   projects!: any[];
+  members!: any[];
   teamId!: string;
 
   //control the router link, defines active default tab
@@ -33,6 +34,7 @@ export class TeamInfoComponent implements OnInit {
       this.teamId = teamId;
       this.getTeamName(teamId);
       this.getTeamProjects(teamId);
+      this.getTeamMembers(teamId);
     });
   }
 
@@ -107,7 +109,17 @@ export class TeamInfoComponent implements OnInit {
     });
   }
 
-  //getting projects for team
+  //getting members for team
+  getTeamMembers(teamId: string) {
+    this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
+      // members.forEach((member: any) => {
+      //   console.log(member.username);
+      // });
+      this.members = members;
+    });
+  }
+
+  //getting team name
   getTeamName(teamId: string) {
     this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
       console.log(team);
