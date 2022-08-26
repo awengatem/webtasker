@@ -173,8 +173,14 @@
                     position: absolute;
                     top: 28px;
                     right: 25px;
+
+                    i{
+                      color: red;
+                      font-size: medium;
+                      cursor: pointer;
+                    }
                     
-                    button{
+                    .button{
                       border-radius: 4px;
                       width: 45px;
 
@@ -270,9 +276,7 @@
             //customized for members
             &.member {
               border: 1px solid #d8e3eb;
-              height: 60%;
-              //padding: 15px;
-              margin-top: 20px;
+              height: 60%;              
               position: relative;
               display: block;
               //background: grey;
