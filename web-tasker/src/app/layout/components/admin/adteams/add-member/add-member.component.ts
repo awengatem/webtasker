@@ -18,6 +18,9 @@ export class AddMemberComponent implements OnInit {
 
   teamId!: string;
 
+  //members already in team
+  members: any = [];
+
   constructor(
     private teamService: TeamService,
     private route: ActivatedRoute,
@@ -32,13 +35,17 @@ export class AddMemberComponent implements OnInit {
     //   { item_id: 4, item_text: 'Purity' },
     //   { item_id: 5, item_text: 'John' }
     // ];
+    //Subscribe first
     this.route.params.subscribe((params: Params) => {
       console.log(params);
       const teamId = params['teamId'];
       this.teamId = teamId;
     });
 
-    //get dropdown list data
+    //get team members first
+    //this.getTeamMembers(this.teamId);
+
+    //then get dropdown list data
     this.getUsers();
     this.selectedItems = [
       //{ item_id: 3, item_text: 'Pune' },
@@ -64,18 +71,61 @@ export class AddMemberComponent implements OnInit {
   //populating the dropdown list
   getUsers() {
     let tmp: any = [];
+    let filteredTmp: any = [];
+    let tmp2: any = [];
     let userArr: any = [];
+    let test: any = [];
 
-    this.teamService.getUsers().subscribe({
-      next:(users: any) => {
-        //push usernames and users to respective array
-        for (let i = 0; i < users.length; i++) {
-          tmp.push({ item_id: i, item_text: users[i].username });
-          userArr.push(users[i]);
+    //get members already in team first
+    this.teamService.getTeamMembers(this.teamId).subscribe({
+      next: (members: any) => {
+        // members.forEach((member: any) => {
+        //   console.log(member.username);
+        // });
+        for (let i = 0; i < members.length; i++) {
+          tmp2.push(members[i]);
         }
-        //add usernames to dropdown list and users to array
-        this.dropdownList = tmp;
-        this.userArr = userArr;
+        this.members = tmp2;
+        console.log(this.members);
+
+        //get all users in db
+        this.teamService.getUsers().subscribe({
+          next: (users: any) => {
+            //push usernames and users to respective array
+            for (let i = 0; i < users.length; i++) {
+              tmp.push({ item_id: i, item_text: users[i].username });
+              test.push(users[i].username);
+              userArr.push(users[i]);
+            }
+
+            //filter out existing team members to avoid duplicates
+            for (let j = 0; j < this.members.length; j++) {
+              for (let i = 0; i < tmp.length; i++) {
+                //pick out duplicates
+                if (tmp[i].item_text === this.members[j].username) {
+                  filteredTmp.push(this.members[j].username);
+                }
+              }
+            }
+
+            //filter members
+            const filtered = users.forEach((user: any) => {
+              const filtered = test.filter((test: any) => {
+                test !== user.username;
+              });
+            });            
+
+            console.log(filteredTmp);
+            //add usernames to dropdown list and users to array
+            this.dropdownList = tmp;
+            //this.dropdownList = filteredTmp;
+            this.userArr = userArr;
+          },
+          error: (err) => {
+            console.log(err);
+            Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+          },
+        });
       },
       error: (err) => {
         console.log(err);
@@ -83,6 +133,22 @@ export class AddMemberComponent implements OnInit {
       },
     });
   }
+
+  /* //getting members already in team
+  getTeamMembers(teamId: string) {
+    let tmp: any = [];
+    this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
+      // members.forEach((member: any) => {
+      //   console.log(member.username);
+      // });
+      for (let i = 0; i < members.length; i++) {
+        tmp.push(members[i]);
+      }
+      this.members = tmp;
+      console.log(this.members);
+      //return this.members;
+    });
+  }*/
 
   addMember() {
     let teamMembers: any = [];
@@ -108,7 +174,7 @@ export class AddMemberComponent implements OnInit {
           console.log(res);
           this.router.navigate([`/ad_teams/${this.teamId}`]);
           Swal.fire('Added!', `Members have been added`, 'success');
-        }, 
+        },
         error: (err) => {
           console.log(err);
           Swal.fire('Oops! Something went wrong', err.error.message, 'error');
