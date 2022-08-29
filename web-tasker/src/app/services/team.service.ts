@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { WebRequestService } from './web-request.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class TeamService {  
+export class TeamService {
   //variable to help view newly created team
-  private teamAdded: Boolean = false; 
+  private teamAdded: Boolean = false;
 
   //variable to contain selected team to aid in edit component
   private capturedTeam!: string;
@@ -68,11 +68,18 @@ export class TeamService {
 
   /**Method to add team members */
   addTeamMembers(members: any[]) {
-    return this.webReqService.post(`team_members`,members);
+    return this.webReqService.post(`team_members`, members);
   }
 
-   /**Method to get users */
-   getUsers() {
+  /**Method to add team projects */
+  assignTeamProjects(teamId: string, projects: any[]) {
+    return this.webReqService.patch(`teams/projects/${teamId}`, {
+      projects: projects,
+    });
+  }
+
+  /**Method to get users */
+  getUsers() {
     return this.webReqService.get(`users`);
   }
 }
