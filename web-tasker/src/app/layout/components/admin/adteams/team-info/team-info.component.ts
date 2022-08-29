@@ -131,6 +131,7 @@ export class TeamInfoComponent implements OnInit {
   }
 
   /**ACTION METHODS USED BY ALERT*/
+  //used by members tab
   alertConfirmation(userId: string, username: string) {
     Swal.fire({
       title: `Remove "${username}"?`,
@@ -155,6 +156,31 @@ export class TeamInfoComponent implements OnInit {
     });
   }
 
+  //used by projects tab
+  alertConfirmation2(projectId: string, projectName: string) {
+    Swal.fire({
+      title: `Remove "${projectName}"?`,
+      text: `Project "${projectName}' will be removed from this team and will therefore be lost by all team members.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      //delete team from db
+      if (result.value) {
+        this.deleteTeamProject(projectId, projectName);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          `Project "${projectName}" still belongs to this team .)`,
+          'error'
+        );
+      }
+    });
+  }
+
   //deleting specific member
   deleteTeamMember(userId: string, username: string) {
     this.teamService.deleteTeamMember(this.teamId, userId).subscribe({
@@ -163,7 +189,30 @@ export class TeamInfoComponent implements OnInit {
         this.router.navigate([`/ad_teams/${this.teamId}`]);
         Swal.fire(
           'Removed!',
-          `${username}" has been removed from this team.`,
+          `${username} has been removed from this team.`,
+          'success'
+        ).then((result) => window.location.reload());
+      },
+      error: (err) => {
+        console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+      },
+    });
+  }
+
+  //deleting specific project
+  deleteTeamProject(projectId: string, projectName: string) {
+    //place project to be deleted in array
+    let projects = [projectId];
+
+    //pass array of projects to be deleted to api
+    this.teamService.deleteTeamProject(this.teamId, projects).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.router.navigate([`/ad_teams/${this.teamId}`]);
+        Swal.fire(
+          'Removed!',
+          `Project "${projectName}" has been removed from this team.`,
           'success'
         ).then((result) => window.location.reload());
       },

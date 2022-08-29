@@ -83,8 +83,16 @@ export class TeamService {
     return this.webReqService.get(`users`);
   }
 
-   /**Method to delete specified team member */
-   deleteTeamMember(teamId: string,userId: string) {
+  /**Method to delete specified team member */
+  deleteTeamMember(teamId: string, userId: string) {
     return this.webReqService.delete(`team_members/${teamId}/${userId}`);
+  }
+
+  /**Method to delete specified assigned team projects */
+  deleteTeamProject(teamId: string, projects: any[]) {
+    return this.webReqService.patch(
+      `teams/delete_assigned_projects/${teamId}`,
+      { projects: projects }
+    );
   }
 }
