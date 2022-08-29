@@ -73,7 +73,12 @@
                           </div>
                           <div class="col-sm action-member">
                             <div class="row">
-                              <i class="fa-solid fa-trash-can"></i>
+                              <i
+                                class="fa-solid fa-trash-can"
+                                (click)="
+                                  alertConfirmation(member._id, member.username)
+                                "
+                              ></i>
                             </div>
                           </div>
                         </div>

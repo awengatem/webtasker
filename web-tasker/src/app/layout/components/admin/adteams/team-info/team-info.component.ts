@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TeamService } from 'src/app/services/team.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-team-info',
@@ -97,7 +98,7 @@ export class TeamInfoComponent implements OnInit {
       } else if (tabId === 'tabNav2') {
         this.addButtonText = 'Assign Project';
         this.tab1 = false;
-      }     
+      }
     }
   }
 
@@ -116,6 +117,7 @@ export class TeamInfoComponent implements OnInit {
       //   console.log(member.username);
       // });
       this.members = members;
+      //console.log(this.members);
     });
   }
 
@@ -125,6 +127,50 @@ export class TeamInfoComponent implements OnInit {
       console.log(team);
       this.selectedTeam = team;
       this.teamName = team.teamName;
+    });
+  }
+
+  /**ACTION METHODS USED BY ALERT*/
+  alertConfirmation(userId: string, username: string) {
+    Swal.fire({
+      title: `Remove "${username}"?`,
+      text: `${username} will be removed from this team and will therefore loose all projects related to this team.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      //delete team from db
+      if (result.value) {
+        this.deleteTeamMember(userId, username);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          `${username} is still part of this team .)`,
+          'error'
+        );
+      }
+    });
+  }
+
+  //deleting specific member
+  deleteTeamMember(userId: string, username: string) {
+    this.teamService.deleteTeamMember(this.teamId, userId).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.router.navigate([`/ad_teams/${this.teamId}`]);
+        Swal.fire(
+          'Removed!',
+          `${username}" has been removed from this team.`,
+          'success'
+        ).then((result) => window.location.reload());
+      },
+      error: (err) => {
+        console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+      },
     });
   }
 
