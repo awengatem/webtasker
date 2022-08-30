@@ -281,8 +281,7 @@ export class LoginComponent implements OnInit {
     this.submitted = false;
     this.fSignup.reset();
     this.flapCard();
-    Swal.fire(`${username} registered successfully`)
-    alert();
+    Swal.fire(`${username} registered successfully`);    
   }
 
   reloadPage() {
