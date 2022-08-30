@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   }
 
   getProjects() {
-    this.projectService.getProjects().subscribe((projects: any) => {
+    this.projectService.getUserProjects().subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
       this.totalProjects = projects.length;

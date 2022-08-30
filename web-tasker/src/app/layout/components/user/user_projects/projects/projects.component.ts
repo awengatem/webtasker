@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-projects',
@@ -7,80 +9,60 @@ import { ProjectService } from 'src/app/services/project.service';
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
-  constructor(private projectService: ProjectService) {}
+  projects!: any[];
+  projDiv: any;
+  projectStatus: any;
 
-  ngOnInit(): void {}
+  /**Used by modal */
+  form: any = {
+    projectName: null,
+  };
+  submitted: boolean = false;
 
-  //navigation of schedule
-  tabElement: any;
-  openTab: any;
-  butElement: any;
+  constructor(
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  tabIdArray: string[] = [];
-  loopElement: any;
-  loopResult: any;
-
-  butIdArray: string[] = [];
-  loopButElement: any;
-  butResult: any;
-
-  //getting the open tab
-  getOpenTab(): string {
-    this.tabIdArray = [
-      'tabNav1',
-      'tabNav2',
-      'tabNav3',
-      'tabNav4',
-      'tabNav5',
-      'tabNav6',
-      'tabNav7',
-    ];
-    this.tabIdArray.forEach((tab) => {
-      this.loopElement = document.getElementById(tab);
-      if (this.loopElement.classList.contains('active')) {
-        this.loopResult = tab;
-      }
+  ngOnInit(): void {
+    this.getProjects();
+    //subscribe to the route params
+    this.route.params.subscribe((params: Params) => {
+      console.log(params);
     });
-    return this.loopResult;
+    this.scrollDown();
   }
 
-  //remove active link on tab
-  removeActive() {
-    this.butIdArray = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-    this.butIdArray.forEach((tab) => {
-      this.loopButElement = document.getElementById(tab);
-      if (this.loopButElement.classList.contains('active')) {
-        this.loopButElement.classList.remove('active');
-      }
+  /**getting projects belonging to user */
+  getProjects() {
+    this.projectService.getUserProjects().subscribe((projects: any) => {
+      console.log(projects);
+      this.projects = projects;
     });
   }
 
-  //method used by navtab buttons for navigation
-  showTab(bId: string, tabId: string) {
-    this.openTab = document.getElementById(this.getOpenTab());
-    this.openTab.classList.remove('active');
-    this.removeActive();
-    this.butElement = document.getElementById(bId);
-    this.butElement.classList.add('active');
-    this.tabElement = document.getElementById(tabId);
-    this.tabElement.classList.add('active');
+  /**scrolldown immediately after adding new project */
+  scrollDown() {
+    //ensuring intervals only run once
+    if (this.projectService.getAddStatus() === true) {
+      const setInterval_ID = window.setInterval(() => {
+        this.projDiv = document.getElementById('projects');
+        this.projDiv.scrollTop = this.projDiv?.scrollHeight;
+      }, 100);
+
+      //stopping interval above after sometime
+      window.setTimeout(() => {
+        window.clearInterval(setInterval_ID);
+      }, 500);
+    }
+    //unsetting the condition
+    this.projectService.setAddStatus(false);
+    //console.log(this.projectService.getAddStatus());
   }
 
-  //methods for testing backend api
-  createNewList() {
-    this.projectService
-      .createList('finleys project')
-      .subscribe((response: any) => {
-        console.log(response);
-      });
-  }
-
-  getLists() {
-    this.projectService.getLists().subscribe((response: any) => {
-      response.forEach((item: any) => {
-        console.log(item.title);
-      });
-      //console.log(response);
-    });
+  /**Capture project to help load it to edit component */
+  captureProject(project: string) {
+    this.projectService.setCapturedProject(project);
   }
 }
