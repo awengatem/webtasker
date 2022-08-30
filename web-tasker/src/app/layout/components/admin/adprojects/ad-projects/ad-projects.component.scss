@@ -23,6 +23,11 @@
   .projects-inside {
     overflow-y: auto;
     padding: 15px;
+
+    //styling for teams
+    .team{
+      cursor: pointer;
+    }
   }
 
   .timetable-item {
