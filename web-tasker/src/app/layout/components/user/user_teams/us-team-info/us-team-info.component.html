@@ -1,0 +1,141 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Teams</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <link
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+        rel="stylesheet"
+      />
+      <div class="idance">
+        <div class="schedule content-block">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <h2 data-aos="zoom-in-up" class="aos-init aos-animate">
+                  {{ teamName }}
+                </h2>
+              </div>
+              <div class="col-md-3">
+                <!-- MULTIPURPOSE ADD BUTTON NOT IN USE -->
+                <!-- <div class="row centered-content create">
+                    <div class="col-md-1">                      
+                      <button
+                        class="btn btn-primary"
+                        [routerLink]="
+                          tab1
+                            ? ['/ad_teams', teamId, 'add_member']
+                            : ['/ad_teams', teamId, 'assign_project']
+                        "
+                        (click)="addRespective()"
+                      >
+                        <div class="btn-txt">+</div>
+                      </button>
+                    </div>
+                    <div class="col">
+                      <h4>{{ addButtonText }}</h4>
+                    </div>
+                  </div> -->
+              </div>
+            </div>
+
+            <div class="timetable">
+              <!-- Schedule Top Navigation -->
+              <nav class="nav nav-tabs">
+                <button
+                  class="nav-link active"
+                  (click)="showTab('members', 'tabNav1')"
+                  id="members"
+                >
+                  <a class="">Members</a>
+                </button>
+                <button
+                  class="nav-link"
+                  (click)="showTab('projects', 'tabNav2')"
+                  id="projects"
+                >
+                  <a class="">Projects</a>
+                </button>
+              </nav>
+
+              <div class="tab-content">
+                <!-- TAB 1 -->
+                <div class="tab-pane show active" id="tabNav1">
+                  <div class="row">
+                    <!-- Member Item  -->
+                    <div class="col-md-6" *ngFor="let member of members">
+                      <div class="timetable-item member shadow">
+                        <div class="timetable-item-main-member">
+                          <div class="timetable-item-name">
+                            {{ member.username }}
+                          </div>
+                          <div class="timetable-item-time">
+                            <small>active</small>
+                          </div>
+                          <!-- DELETE ICON NOT IN USE -->
+                          <!-- <div class="col-sm action-member">
+                              <div class="row">
+                                <i
+                                  class="fa-solid fa-trash-can"
+                                  (click)="
+                                    alertConfirmation(member._id, member.username)
+                                  "
+                                ></i>
+                              </div>
+                            </div> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TAB 2 -->
+                <div class="tab-pane show" id="tabNav2">
+                  <div class="row">
+                    <!-- Project Item  -->
+                    <div class="col-md-6" *ngFor="let project of projects">
+                      <div class="timetable-item shadow">
+                        <div class="timetable-item-main">
+                          <div class="timetable-item-name">
+                            {{ project.projectName }}
+                          </div>
+                          <div class="timetable-item-time">
+                            <small>Last updated 3 mins ago</small>
+                          </div>
+                          <!-- DELETE BUTTON NOT IN USE -->
+                          <!-- <div class="col-sm action">
+                              <div class="row">
+                                <button
+                                  type="button"
+                                  class="col btn btn-outline-danger btn-sm"
+                                  (click)="
+                                    alertConfirmation2(
+                                      project._id,
+                                      project.projectName
+                                    )
+                                  "
+                                >
+                                  <i class="fa-solid fa-trash-can"></i>
+                                  <small> remove</small>
+                                </button>
+                              </div>
+                            </div> -->
+                          <div class="timetable-item-users">
+                            <i class="fa-solid fa-users-viewfinder"></i>
+                            <div class="timetable-item-users-count">11</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-outline-custom back" routerLink="/teams">
+        <div class="btn-txt">Back</div>
+      </button>
+    </div>
+  </div>
+</div>

@@ -63,54 +63,5 @@ export class TeamsComponent implements OnInit {
   /**Capture team to help load it to edit component */
   captureTeam(team: string) {
     this.teamService.setCapturedTeam(team);
-  }
-
-  /**ACTION METHODS USED BY ALERT*/
-  alertConfirmation(teamId: string, teamName: string) {
-    Swal.fire({
-      title: `Delete "${teamName}"?`,
-      text: 'This process is irreversible.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, go ahead.',
-      confirmButtonColor: '#e74c3c',
-      cancelButtonText: 'No, let me think',
-      cancelButtonColor: '#22b8f0',
-    }).then((result) => {
-      //delete team from db
-      if (result.value) {
-        this.deleteteam(teamId, teamName);
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          `Team "${teamName}" still in our database.)`,
-          'error'
-        );
-      }
-    });
-  }
-
-  /**Delete method */
-  deleteteam(teamId: string, teamName: string) {
-    this.teamService.deleteTeam(teamId).subscribe({
-      next: (response: any) => {
-        console.log(response);
-        this.router.navigate(['/ad_teams']);
-        Swal.fire(
-          'Removed!',
-          `team "${teamName}" has been removed`,
-          'success'
-        );
-      },
-      error: (err) => {
-        console.log(err);
-        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-      },
-    });
-  }
-
-  submit() {
-    this.submitted = true;
-  }
- 
+  } 
 }

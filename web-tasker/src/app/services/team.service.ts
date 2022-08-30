@@ -18,9 +18,16 @@ export class TeamService {
     return this.webReqService.get(`teams/${teamId}`);
   }
 
+  /**Method to get all teams */
   getAllTeams() {
-    //send a web request to get user teams
+    //send a web request to get all teams
     return this.webReqService.get('teams');
+  }
+
+  /**Method to get user teams */
+  getUserTeams() {
+    //send a web request to get user teams
+    return this.webReqService.get('teams/myteams');
   }
 
   createTeam(teamName: string) {
