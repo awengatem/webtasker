@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProjectsComponent } from './components/user/projects/projects.component';
-import { HomeComponent } from './components/user/home/home.component';
-import { TeamsComponent } from './components/user/teams/teams.component';
+import { ProjectsComponent } from './components/user/user_projects/projects/projects.component';
+import { HomeComponent } from './components/user/user_home/home/home.component';
+import { TeamsComponent } from './components/user/user_teams/teams/teams.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { LoginComponent } from './auth/login/login.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
@@ -33,16 +33,23 @@ const routes: Routes = [
         redirectTo: 'home',
         pathMatch: 'full',
       },
+
+      /**USER ROUTES */
+      /**DASHBOARD */
       {
         path: 'home',
         canActivate: [AuthGuard],
         component: HomeComponent,
       },
+
+      /**PROJECTS */
       {
         path: 'projects',
         canActivate: [AuthGuard],
         component: ProjectsComponent,
       },
+
+       /**TEAMS */
       {
         path: 'teams',
         canActivate: [AuthGuard],

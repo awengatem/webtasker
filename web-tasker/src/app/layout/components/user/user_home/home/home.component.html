@@ -5,8 +5,8 @@
       <div class="grid-container">
         <mat-card class="welcome shadow">
           <!-- <mat-card-title></mat-card-title> -->
-          <mat-card-content class="welcome_message"
-            >welcome @{{ username }}</mat-card-content
+          <mat-card-content class="welcome-message"
+            >Welcome @{{ username }}</mat-card-content
           >
         </mat-card>
 
@@ -52,7 +52,7 @@
                       <p>{{ project.projectName }}</p>
                     </div>
                     <div class="col-sm">
-                      <p>in progress</p>
+                      <p>{{projectStatus}}</p>
                     </div>
                     <div class="col-sm">
                       <div class="progress">
@@ -68,19 +68,39 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-sm">
+                    <div class="col-4">
                       <div class="row">
                         <button
                           type="button"
                           class="col btn btn-outline-success btn-sm me-2"
+                          *ngIf="!started || ended"
+                          (click)="start()"
                         >
-                          Start
+                          start
+                        </button>
+                        <button
+                          type="button"
+                          class="col btn btn-custom btn-sm me-2 text-white"
+                          *ngIf="paused && started"
+                          (click)="continue()"
+                        >
+                          continue
+                        </button>
+                        <button
+                          type="button"
+                          class="col btn btn-custom btn-sm me-2 text-white"
+                          *ngIf="!paused && started &&!ended"
+                          (click)="pause()"
+                        >
+                          break
                         </button>
                         <button
                           type="button"
                           class="col btn btn-outline-danger btn-sm"
+                          *ngIf="started && !ended"
+                          (click)="reset()"
                         >
-                          End
+                          end
                         </button>
                       </div>
                     </div>
@@ -159,6 +179,22 @@
                       </div>
                     </div>
                   </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-card class="dashboard-card second shadow">
+              <mat-card-content>
+                <div class="shadow mt-0" style="height: 35px">
+                  <h4 class="text-white ps-3 pt-1 pb-2 ubuntu">Timer</h4>
+                </div>
+                <div class="centered mt-4 timer">
+                  <span id="hour">00</span>:<span id="minute">00</span>:<span
+                    id="second"
+                    >00</span
+                  >
                 </div>
               </mat-card-content>
             </mat-card>

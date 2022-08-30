@@ -7,15 +7,15 @@ import { FooterComponent } from './footer/footer.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
 import { AngularMaterialModule } from '../angular-material.module';
-import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { LayoutRoutingModule } from './layout-routing.module';
 
 import { RouterModule } from '@angular/router';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
-import { HomeComponent } from './components/user/home/home.component';
-import { ProjectsComponent } from './components/user/projects/projects.component';
-import { TeamsComponent } from './components/user/teams/teams.component';
+import { HomeComponent } from './components/user/user_home/home/home.component';
+import { ProjectsComponent } from './components/user/user_projects/projects/projects.component';
+import { TeamsComponent } from './components/user/user_teams/teams/teams.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -29,6 +29,7 @@ import { NewTeamComponent } from './components/admin/adteams/new-team/new-team.c
 import { TeamInfoComponent } from './components/admin/adteams/team-info/team-info.component';
 import { AddMemberComponent } from './components/admin/adteams/add-member/add-member.component';
 import { AssignProjectComponent } from './components/admin/adteams/assign-project/assign-project.component';
+import { ScheduleComponent } from './components/user/user_projects/schedule/schedule.component';
 
 @NgModule({
   declarations: [
@@ -60,13 +61,14 @@ import { AssignProjectComponent } from './components/admin/adteams/assign-projec
     TeamInfoComponent,
     AddMemberComponent,
     AssignProjectComponent,
+    ScheduleComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     LayoutRoutingModule,
     FormsModule,
-    ReactiveFormsModule,    
+    ReactiveFormsModule,
 
     /*material imports*/
     AngularMaterialModule,

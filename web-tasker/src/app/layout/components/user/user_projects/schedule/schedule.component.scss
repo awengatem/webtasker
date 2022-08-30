@@ -1,0 +1,202 @@
+//@import url("../home/home.component.scss");
+
+.idance {
+    .classes-details {
+      ul.timetable {
+        margin: 0 0 22px;
+        padding: 0;
+        li {
+          list-style: none;
+          font-size: 15px;
+          //color: #7f7f7f;
+          color: white;
+        }
+      }
+    }
+    .timetable-item {
+      border: 1px solid #d8e3eb;
+      padding: 15px;
+      margin-top: 20px;
+      position: relative;
+      display: block;
+    }
+    .timetable-item-img {
+      overflow: hidden;
+      height: 100px;
+      width: 100px;
+      display: none;
+      img {
+        height: 100%;
+      }
+    }
+    .timetable-item-main {
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      position: relative;
+      margin-top: 12px;
+    }
+    .timetable-item-time {
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    .timetable-item-name {
+      font-size: 14px;
+      margin-bottom: 19px;
+    }
+    .btn-book {
+      padding: 6px 30px;
+      width: 100%;
+    }
+    .timetable-item-like {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      font-size: 20px;
+      cursor: pointer;
+      .fa-heart-o {
+        display: block;
+        color: #b7b7b7;
+      }
+      .fa-heart {
+        display: none;
+        color: #f15465;
+      }
+      &:hover {
+        .fa-heart {
+          display: block;
+        }
+        .fa-heart-o {
+          display: none;
+        }
+      }
+    }
+    .timetable-item-like-count {
+      font-size: 12px;
+      text-align: center;
+      padding-top: 5px;
+      color: #7f7f7f;
+    }
+    .timetable-item-book {
+      width: 200px;
+      .btn {
+        width: 100%;
+      }
+    }
+    .schedule {
+      .nav-tabs {
+        //border-bottom: 2px solid #104455;
+        border-bottom: 2px solid #d674cb; /* fallback for old browsers */
+        border-bottom: 2px solid -webkit-linear-gradient(to right, #d674cb, #89fffd); /* Chrome 10-25, Safari 5.1-6 */
+        border-bottom: 2px solid linear-gradient(to right, #d674cb, #89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
+      button {
+      }
+  
+      .nav-link {
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        font-size: 12px;
+        text-align: center;
+        text-transform: uppercase;
+        color: #3d3d3d;
+        //color: #fff;
+        font-weight: 500;
+        -webkit-transition: none;
+        -o-transition: none;
+        transition: none;
+        border-radius: 2px 2px 0 0;
+        padding-left: 0;
+        padding-right: 0;
+        cursor: pointer;
+        &:hover {
+          &:not(.active) {
+            //background: #46c1be;
+            //border-color: #46c1be;
+            //color: black;
+  
+            color: #fff;
+            border-color: #89fffd;
+          }
+        }
+      }
+      .nav-link.active {
+        //background: #104455;
+        //border-color: #104455;
+        //color: #fff;
+  
+        background: #d674cb; /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+          to right,
+          #d674cb,
+          #89fffd
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(
+          to right,
+          #d674cb,
+          #89fffd
+        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        border-color: #d674cb; /* fallback for old browsers */
+        border-color: -webkit-linear-gradient(
+          to right,
+          #d674cb,
+          #89fffd
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        border-color: linear-gradient(
+          to right,
+          #d674cb,
+          #89fffd
+        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        //color: #010001;
+        color: #fff;
+        &:focus {
+          //border-color: #104455;
+  
+          border-color: #d674cb; /* fallback for old browsers */
+          border-color: -webkit-linear-gradient(
+            to right,
+            #d674cb,
+            #89fffd
+          ); /* Chrome 10-25, Safari 5.1-6 */
+          border-color: linear-gradient(
+            to right,
+            #d674cb,
+            #89fffd
+          ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+      }
+      .tab-pane {
+        padding-top: 10px;
+      }
+    }
+  }
+  idance {
+    .timetable {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  }
+  @media (min-width: 768px) {
+    .idance {
+      .timetable-item {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+      }
+      .timetable-item-img {
+        display: block;
+      }
+      .timetable-item-main {
+        margin-top: 0;
+        padding-left: 15px;
+      }
+      .schedule {
+        .nav-link {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  
