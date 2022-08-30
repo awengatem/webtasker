@@ -1,9 +1,75 @@
 <div class="container-fluid page">
-    <div class="page__box p-3 mt-2">Teams</div>
-    <div class="page__content shadow p-3 position-relative">
-      <div class="page__content-data">
-        User team here
+  <div class="page__box p-3 mt-2">Teams</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <div class="centered-content">
+        <div class="projects-container">
+          <div class="projects">
+            <h1 class="text-dark">my teams <i class="fa-solid fa-people-group"></i></h1>
+            <mat-divider></mat-divider>
+            <div class="projects-inside" id="teams">
+              <div class="row">
+                <!-- item 1 -->
+                <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
+                <div
+                  class="col-md-6"
+                  *ngFor="let team of teams"
+                  (click)="captureTeam(team.teamName)"
+                  [routerLink]="['/ad_teams', team._id]"
+                >
+                  <div class="timetable-item shadow">
+                    <div class="timetable-item-main">
+                      <div class="timetable-item-name">
+                        {{ team.teamName }}
+                      </div>                      
+                      <div class="timetable-item-time">
+                        <small>Last updated 3 mins ago</small>
+                      </div>
+                      <div class="col-sm action">
+                        <div class="row">
+                          <button
+                            type="button"
+                            class="col btn btn-outline-dark btn-sm me-2"
+                            [routerLink]="['/edit_team', team._id]"
+                            (click)="captureTeam(team.teamName)"
+                          >
+                            <i class="fa-solid fa-pen-fancy"></i>
+                          </button>
+                          <button
+                            type="button"
+                            class="col btn btn-outline-danger btn-sm"
+                            (click)="
+                              alertConfirmation(
+                                team._id,
+                                team.teamName
+                              )
+                            "
+                          >
+                            <i class="fa-solid fa-trash-can"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="timetable-item-users">
+                        <i class="fa-solid fa-users-line"></i>                  
+                        <div class="timetable-item-users-count">11</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row centered-content create">
+        <div class="col-md-1">
+          <!-- routerLink="/new_team" -->
+          <button class="btn btn-outline-custom" routerLink="/new_team">
+            <div class="btn-txt">+</div>
+          </button>
+        </div>
+        <div class="col"><h4>Create new team</h4></div>
       </div>
     </div>
   </div>
-
+</div>
