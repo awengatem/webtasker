@@ -11,15 +11,16 @@
                   assign projects <i class="uil uil-folder-check"></i>
                 </h1>
               </div>
-              <div class="col-md-1">
-                <div class="row back">
-                  <!-- routerLink="/new_team" -->
-                  <button
-                    class="btn btn-primary back"
-                    [routerLink]="['/ad_teams', teamId]"
-                  >
-                    <div class="btn-txt">Back</div>
-                  </button>
+              <div class="col-md-3">
+                <div class="row centered-content add">
+                  <div class="col-md-1">
+                    <button class="btn btn-primary" (click)="assignProject()">
+                      <div class="btn-txt">+</div>
+                    </button>
+                  </div>
+                  <div class="col">
+                    <h4>Assign projects</h4>
+                  </div>
                 </div>
               </div>
             </div>
@@ -39,14 +40,13 @@
           </div>
         </div>
       </div>
-      <div class="row centered-content add">
-        <div class="col-md-1">
-          <!-- routerLink="/new_team" -->
-          <button class="btn btn-outline-custom" (click)="assignProject()">
-            <div class="btn-txt">+</div>
-          </button>
-        </div>
-        <div class="col"><h4>Assign projects</h4></div>
+      <div class="back">
+        <button
+          class="btn btn-outline-custom"
+          [routerLink]="['/ad_teams', teamId]"
+        >
+          <div class="btn-txt">Back</div>
+        </button>
       </div>
     </div>
   </div>
