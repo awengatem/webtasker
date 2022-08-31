@@ -59,8 +59,10 @@ export class AddMemberComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 10,
       allowSearchFilter: true,
+      defaultOpen: true,
     };
   }
+
   onItemSelect(item: any) {
     console.log(item);
   }
@@ -125,7 +127,7 @@ export class AddMemberComponent implements OnInit {
       },
     });
   }
-  
+
   addMember() {
     let teamMembers: any = [];
     //ensure members are selected

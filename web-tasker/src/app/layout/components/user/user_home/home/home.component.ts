@@ -15,8 +15,8 @@ export class HomeComponent implements OnInit {
   projects!: any[];
   totalProjects: number = 0;
   projectStatus!: any;
-  activeStatus!: any;
-
+  activeStatus!: any; 
+  
   /**Variables used by timer */
   hour = 0;
   minute = 0;
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private account: AccountService,
-    private projectService: ProjectService
+    private projectService: ProjectService,    
   ) {}
 
   ngOnInit(): void {
@@ -68,12 +68,13 @@ export class HomeComponent implements OnInit {
       //update status
       this.projectStatus = 'Productive';
       this.activeStatus = true;
+      //identify the selected project
       for (let i = 0; i < this.projects.length; i++) {
         if (this.projects[i]._id === projectId) {
           this.projects[i].selected = true;
           console.log(this.projects[i]);
         }
-      }
+      }      
     }else{
       //alert sesssion in progress
       Swal.fire(

@@ -74,7 +74,7 @@ import { UsTeamInfoComponent } from './components/user/user_teams/us-team-info/u
 
     /*material imports*/
     AngularMaterialModule,
-    NgMultiSelectDropDownModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot(),   
   ],
   exports: [
     HeaderComponent,
