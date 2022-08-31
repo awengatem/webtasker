@@ -4,10 +4,30 @@
     <div class="page__content-data">
       <div class="grid-container">
         <mat-card class="welcome shadow">
-          <!-- <mat-card-title></mat-card-title> -->
-          <mat-card-content class="welcome-message"
-            >Welcome @{{ username }}</mat-card-content
+          <!-- <div class="row">
+            <div class="col">
+              <mat-card-content class="welcome-message">{{
+                greeting
+              }}</mat-card-content>
+            </div>
+            <div class="col"></div>
+          </div> -->
+          <mat-card-content
+            class="welcome-message d-flex justify-content-between px-md-1"
           >
+            <div class="">{{ greeting }}</div>
+            <div class="d-flex">
+              <span>Status:&nbsp;</span>
+              <div
+                class=""
+                *ngIf="started"
+                [ngClass]="activeStatus ? 'active' : 'break'"
+              >
+                {{ projectStatus }}
+              </div>
+              <div class="default" *ngIf="!started">{{ projectStatus }}</div>
+            </div>
+          </mat-card-content>
         </mat-card>
 
         <mat-grid-list class="dash-cards" cols="3" rowHeight="150px">
@@ -52,7 +72,7 @@
                       <p>{{ project.projectName }}</p>
                     </div>
                     <div class="col-sm">
-                      <p>{{projectStatus}}</p>
+                      <p>{{ projectStatus }}</p>
                     </div>
                     <div class="col-sm">
                       <div class="progress">
@@ -68,20 +88,20 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                       <div class="row">
                         <button
                           type="button"
                           class="col btn btn-outline-success btn-sm me-2"
-                          *ngIf="!started || ended"
-                          (click)="start()"
+                          *ngIf="!project.selected"
+                          (click)="start(project._id.valueOf())"
                         >
                           start
                         </button>
                         <button
                           type="button"
                           class="col btn btn-custom btn-sm me-2 text-white"
-                          *ngIf="paused && started"
+                          *ngIf="paused && started && project.selected"
                           (click)="continue()"
                         >
                           continue
@@ -89,7 +109,9 @@
                         <button
                           type="button"
                           class="col btn btn-custom btn-sm me-2 text-white"
-                          *ngIf="!paused && started &&!ended"
+                          *ngIf="
+                            !paused && started && !ended && project.selected
+                          "
                           (click)="pause()"
                         >
                           break
@@ -97,8 +119,8 @@
                         <button
                           type="button"
                           class="col btn btn-outline-danger btn-sm"
-                          *ngIf="started && !ended"
-                          (click)="reset()"
+                          *ngIf="started && !ended && project.selected"
+                          (click)="alertConfirmation(project._id.valueOf())"
                         >
                           end
                         </button>

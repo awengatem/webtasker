@@ -12,9 +12,19 @@
     font-size: 12;
     font-family: inherit;
 
-    &-message{
+    &-message {
       font-size: large;
       font-weight: 700;
+
+      .default {
+        color: #ac1100;
+      }
+      .active {
+        color: #027a34;
+      }
+      .break {
+        color: #ebeb10;
+      }
     }
   }
 
@@ -32,14 +42,14 @@
       font-family: inherit;
       //overflow-y: auto;
 
-      &.first {
-        //taking full space
-      }
+      // &.first {
+      //   //taking full space
+      // }
 
-      &.second {
-        //taking full space
-        //padding: 0px;
-      }
+      // &.second {
+      //   //taking full space
+      //   //padding: 0px;
+      // }
 
       background: #d674cb; /* fallback for old browsers */
       background: -webkit-linear-gradient(
@@ -88,9 +98,9 @@
       .card {
         background: transparent;
 
-        .align-self-center {
-          // height: 13px;
-        }
+        // .align-self-center {
+        //   // height: 13px;
+        // }
 
         svg {
           color: rgb(24, 85, 85);
@@ -107,7 +117,7 @@
       }
 
       /*Timer styling*/
-      .timer{
+      .timer {
         //color: red;
         letter-spacing: 2px;
         font-weight: 600;
@@ -115,7 +125,7 @@
       }
       //height: 50px;
       //background: cyan;
-    }    
+    }
   }
 
   //ubuntu font custom class
