@@ -15,12 +15,12 @@ export class WebRequestService {
     /**for development purpose
      * also accepts cookies
      */
-    this.ROOT_URL = 'http://127.0.0.1:3000';
+    //this.ROOT_URL = 'http://127.0.0.1:3000';
 
     /**for production testing purpose
      * rejects cookies but will fix later
      */
-    //this.ROOT_URL = 'http://192.168.33.120:3000';
+    this.ROOT_URL = 'http://192.168.31.120:3000';
   }
 
   get(uri: string): Observable<any> {

@@ -188,11 +188,11 @@ export class HomeComponent implements OnInit {
     const date = new Date();
     const hours = date.getHours();
     if (hours < 12) {
-      this.greeting = `Good morning @${this.username}`;
+      this.greeting = `Good morning ${this.username}`;
     } else if (hours < 17) {
-      this.greeting = `Good afternoon @${this.username}`;
+      this.greeting = `Good afternoon ${this.username}`;
     } else if (hours < 24) {
-      this.greeting = `Good evening @${this.username}`;
+      this.greeting = `Good evening ${this.username}`;
     }
   }
 }

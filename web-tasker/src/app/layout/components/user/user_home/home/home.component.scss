@@ -13,8 +13,9 @@
     font-family: inherit;
 
     &-message {
-      font-size: large;
+      font-size: 20px;
       font-weight: 700;
+      letter-spacing: 1px;
 
       .default {
         color: #ac1100;
