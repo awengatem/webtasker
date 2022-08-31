@@ -11,6 +11,9 @@ export class ProjectService {
   //variable to contain selected project to aid in edit component
   private capturedProject!: string;
 
+  //variable to help if user was assigning projects and then show projects next
+  private fromAssignProject!: boolean;
+
   constructor(private webReqService: WebRequestService) {}
 
   createList(title: string) {
@@ -64,5 +67,14 @@ export class ProjectService {
 
   setCapturedProject(project: string) {
     this.capturedProject = project;
+  }
+
+  /**Methods used to check whether user comes from assign projects component */
+  getFromAssigning() {
+    return this.fromAssignProject;
+  }
+
+  setFromAssigning(bool: boolean) {
+    this.fromAssignProject= bool;
   }
 }

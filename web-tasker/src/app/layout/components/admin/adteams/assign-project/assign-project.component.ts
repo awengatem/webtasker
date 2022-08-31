@@ -42,7 +42,10 @@ export class AssignProjectComponent implements OnInit {
       console.log(params);
       const teamId = params['teamId'];
       this.teamId = teamId;
-    });   
+    });
+    
+    //record where you are
+    this.projectService.setFromAssigning(true);
 
     //then get dropdown list data
     this.getProjects();

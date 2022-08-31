@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import Swal from 'sweetalert2';
 
@@ -20,6 +21,7 @@ export class TeamInfoComponent implements OnInit {
 
   constructor(
     private teamService: TeamService,
+    private projectService: ProjectService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -35,8 +37,13 @@ export class TeamInfoComponent implements OnInit {
       this.teamId = teamId;
       this.getTeamName(teamId);
       this.getTeamProjects(teamId);
-      this.getTeamMembers(teamId);
+      this.getTeamMembers(teamId);      
     });
+
+    //check where from and decide which tab to display
+    if(this.projectService.getFromAssigning()){
+      this.showProjects();
+    }
   }
 
   //navigation of schedule
@@ -100,6 +107,13 @@ export class TeamInfoComponent implements OnInit {
         this.tab1 = false;
       }
     }
+  }
+
+  //method to load projects tab
+  showProjects() {
+    this.showTab('projects', 'tabNav2');
+    //unset
+    this.projectService.setFromAssigning(false);
   }
 
   //getting projects for team
