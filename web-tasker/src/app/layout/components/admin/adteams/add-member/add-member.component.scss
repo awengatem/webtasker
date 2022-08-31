@@ -1,3 +1,4 @@
+/*CSS SHARED BY OTHER COMPONENTS*/
 .members-container {
   display: flex;
   width: 100%;
@@ -15,60 +16,66 @@
     padding: 24px;
     border-radius: 2px;
 
-    h1{
-      .uil{
+    h1 {
+      .uil {
         font-size: 30px;
       }
     }
 
-    .back{
-      // padding: 24px;      
+    .add {
+      // padding: 24px;
+      //background: red;
       height: 100%;
-      width: 100%;      
+      width: 100%;
 
       button {
         height: 75%;
-        width: 75px;       
-      }      
+        width: 65px;
+        margin-bottom: 20px;
+        .btn-txt {
+          font-size: 20px;
+          color: white;
+        }
+      }
+      h4 {
+        font-family: inherit;
+        font-weight: 400;
+        font-size: 16px;
+        margin-left: 5%;
+        top: 60px;
+        position: absolute;
+      }
     }
 
     mat-divider {
       border-color: grey;
     }
 
-    .members-inside {      
+    .members-inside {
       min-height: 450px;
       overflow-y: hidden;
       overflow-x: hidden;
       //padding: 15px;
       //background: grey;
 
-      ng-multiselect-dropdown {        
+      ng-multiselect-dropdown {
         padding: 20px;
         width: 75%;
         font-size: small;
-        overflow-x: hidden;        
+        overflow-x: hidden;
       }
     }
   }
 }
 
-.add {
-  padding: 24px;
-  height: 100%;
-  width: 100%;
+.back {
+  margin-top: 45px;
+  margin-left: 10px;
   button {
     height: 50px;
     width: 75px;
     .btn-txt {
-      font-size: 20px;
+      font-size: 18px;
     }
-  }
-  h4 {
-    font-family: inherit;
-    font-weight: 400;
-    font-size: 16px;
-    margin-left: 1px;
-    position: absolute;
   }
 }
