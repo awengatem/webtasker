@@ -15,8 +15,8 @@ export class HomeComponent implements OnInit {
   projects!: any[];
   totalProjects: number = 0;
   projectStatus!: any;
-  activeStatus!: any; 
-  
+  activeStatus!: any;
+
   /**Variables used by timer */
   hour = 0;
   minute = 0;
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private account: AccountService,
-    private projectService: ProjectService,    
+    private projectService: ProjectService
   ) {}
 
   ngOnInit(): void {
@@ -74,16 +74,11 @@ export class HomeComponent implements OnInit {
           this.projects[i].selected = true;
           console.log(this.projects[i]);
         }
-      }      
-    }else{
+      }
+    } else {
       //alert sesssion in progress
-      Swal.fire(
-        'Sorry!',
-        `session in progress.`,
-        'error'
-      );
+      Swal.fire('Sorry!', `session in progress.`, 'error');
     }
-
 
     //save status variables to lcal storage
   }
@@ -155,7 +150,7 @@ export class HomeComponent implements OnInit {
   }
 
   returnData(input: any) {
-    return input > 10 ? input : `0${input}`;
+    return input >= 10 ? input : `0${input}`;
   }
 
   /**ACTION METHODS USED BY ALERT*/
@@ -174,11 +169,7 @@ export class HomeComponent implements OnInit {
       if (result.value) {
         this.reset(projectId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          `session still in progress .)`,
-          'error'
-        );
+        Swal.fire('Cancelled', `session still in progress .)`, 'error');
       }
     });
   }
@@ -187,7 +178,9 @@ export class HomeComponent implements OnInit {
   greetUser() {
     const date = new Date();
     const hours = date.getHours();
-    if (hours < 12) {
+    if (hours < 3) {
+      this.greeting = `Good evening ${this.username}`;
+    } else if (hours < 12) {
       this.greeting = `Good morning ${this.username}`;
     } else if (hours < 17) {
       this.greeting = `Good afternoon ${this.username}`;

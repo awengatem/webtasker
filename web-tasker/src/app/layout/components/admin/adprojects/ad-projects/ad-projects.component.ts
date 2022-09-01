@@ -69,7 +69,7 @@ export class AdProjectsComponent implements OnInit {
   alertConfirmation(projectId: string, projectName: string) {
     Swal.fire({
       title: `Delete "${projectName}"?`,
-      text: 'This process is irreversible.',
+      text: `This process is irreversible. Project "${projectName}" will be lost in all teams assigned to.`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, go ahead.',
