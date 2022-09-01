@@ -18,6 +18,7 @@ import { TeamInfoComponent } from './components/admin/adteams/team-info/team-inf
 import { AddMemberComponent } from './components/admin/adteams/add-member/add-member.component';
 import { AssignProjectComponent } from './components/admin/adteams/assign-project/assign-project.component';
 import { UsTeamInfoComponent } from './components/user/user_teams/us-team-info/us-team-info.component';
+import { ProjectInfoComponent } from './components/user/user_projects/project-info/project-info.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,11 @@ const routes: Routes = [
         path: 'projects',
         canActivate: [AuthGuard],
         component: ProjectsComponent,
+      },
+      {
+        path: 'projects/:projectId',
+        canActivate: [AuthGuard],
+        component: ProjectInfoComponent,
       },
 
        /**TEAMS */
