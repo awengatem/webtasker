@@ -31,6 +31,7 @@ import { AddMemberComponent } from './components/admin/adteams/add-member/add-me
 import { AssignProjectComponent } from './components/admin/adteams/assign-project/assign-project.component';
 import { ScheduleComponent } from './components/user/user_projects/schedule/schedule.component';
 import { UsTeamInfoComponent } from './components/user/user_teams/us-team-info/us-team-info.component';
+import { ProjectInfoComponent } from './components/user/user_projects/project-info/project-info.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { UsTeamInfoComponent } from './components/user/user_teams/us-team-info/u
     AssignProjectComponent,
     ScheduleComponent,
     UsTeamInfoComponent,
+    ProjectInfoComponent,
   ],
   imports: [
     CommonModule,
