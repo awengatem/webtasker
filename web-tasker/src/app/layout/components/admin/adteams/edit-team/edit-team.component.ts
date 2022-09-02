@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { GeneralService } from 'src/app/services/general.service';
 import { TeamService } from 'src/app/services/team.service';
 import Swal from 'sweetalert2';
 
@@ -17,6 +18,7 @@ export class EditTeamComponent implements OnInit {
 
   constructor(
     private teamService: TeamService,
+    private generalService: GeneralService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -39,14 +41,16 @@ export class EditTeamComponent implements OnInit {
   /**edit method */
   editTeam() {
     const { teamName } = this.form; //data comes from template not here
-    this.teamService.editTeam(this.teamId, teamName).subscribe({
+    //remove unnecessary whitespace
+    const newTeam = this.generalService.clean(teamName);
+    this.teamService.editTeam(this.teamId, newTeam).subscribe({
       next: (response: any) => {
         console.log(response);
         //setting status to true to help in scrolldown method
         this.teamService.setAddStatus(true);
         //console.log(this.teamService.getAddStatus());
         this.router.navigate(['/ad_teams']);
-        Swal.fire('Success!', `team "${teamName}" updated successfully`, 'success');        
+        Swal.fire('Success!', `team "${newTeam}" updated successfully`, 'success');        
       },
       error: (err) => {
         console.log(err);
