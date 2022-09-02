@@ -1,0 +1,86 @@
+/*CSS SHARED BY OTHER COMPONENTS*/
+//shared with user project-info component.scss
+
+.centered-content {
+    position: absolute;
+    .modal-box {
+      position: relative;
+      //min-height: 500px;
+      min-width: 700px;
+      width: 100%;
+      max-width: 580px;
+      background: #ffff;
+      border-radius: 5px;
+      padding: 35px;
+      opacity: 0.8;
+  
+      .title {
+        font-size: 26px;
+      }
+  
+      .content {
+        margin-top: 0;
+        //background: grey;
+        padding: 5px;
+  
+        .child {
+          display: flex;
+          padding-bottom: 30px;
+          .label {
+            font-size: 18px;
+            font-weight: 600;
+          }
+          .data {
+            font-size: 16px;
+            padding-left: 10px;
+            font-weight: 500;
+          }
+        }
+        h5 {
+          font-size: 18px;
+        }
+      }
+  
+      h1 {
+        i {
+          color: #22b8f0;
+          font-size: 28px;
+        }
+      }
+  
+      input {
+        border-radius: 5px;
+        -webkit-transition: all 200ms linear;
+        transition: all 200ms linear;
+        //border: none;
+        &:focus {
+          outline: none;
+          box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
+        }
+        &:active {
+          outline: none;
+          box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
+        }
+        &.ng-invalid.ng-dirty {
+          border: 1px solid #e74c3c;
+        }
+      }
+  
+      .btm-rgt {
+        margin-left: 69%;
+        margin-right: 3px;
+  
+        .btn-custom {
+          color: #ffff;
+        }
+      }
+  
+      &:hover {
+        opacity: 1;
+        overflow: hidden;
+        transition: transform 0.5s ease;
+        transform: scale(1.05);
+      }
+    }
+  }
+  

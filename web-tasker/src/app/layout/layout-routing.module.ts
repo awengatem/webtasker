@@ -19,6 +19,7 @@ import { AddMemberComponent } from './components/admin/adteams/add-member/add-me
 import { AssignProjectComponent } from './components/admin/adteams/assign-project/assign-project.component';
 import { UsTeamInfoComponent } from './components/user/user_teams/us-team-info/us-team-info.component';
 import { ProjectInfoComponent } from './components/user/user_projects/project-info/project-info.component';
+import { AdProjectInfoComponent } from './components/admin/adprojects/ad-project-info/ad-project-info.component';
 
 const routes: Routes = [
   {
@@ -85,7 +86,7 @@ const routes: Routes = [
       {
         path: 'ad_projects/:projectId',
         canActivate: [AuthGuard],
-        component: AdProjectsComponent,
+        component: AdProjectInfoComponent,
       },
       {
         path: 'new_project',

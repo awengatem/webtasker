@@ -38,6 +38,8 @@ export class TeamsComponent implements OnInit {
     this.teamService.getUserTeams().subscribe((teams: any) => {
       console.log(teams);
       this.teams = teams;
+      //get team members for each
+      this.getTeamMembers();
     });
   }
 
@@ -58,10 +60,20 @@ export class TeamsComponent implements OnInit {
     //unsetting the condition
     this.teamService.setAddStatus(false);
     //console.log(this.teamService.getAddStatus());
-  }
+  }  
 
-  /**Capture team to help load it to edit component */
-  captureTeam(team: string) {
-    this.teamService.setCapturedTeam(team);
-  } 
+  /**Get team members for each */
+  getTeamMembers() {
+    if (this.teams.length > 0) {      
+      for (let i = 0; i < this.teams.length; i++) {
+        this.teamService
+          .getTeamMembersDoc(this.teams[i]._id)
+          .subscribe((members: any) => {
+            console.log(members.length);
+            //push number of members to projects
+            this.teams[i].members = members.length;
+          });
+      }
+    }
+  }
 }
