@@ -26,6 +26,11 @@ export class ProjectService {
     return this.webReqService.get('lists');
   }
 
+  /** Method to get a specified project*/
+  getSpecificProject(projectId: string) {    
+    return this.webReqService.get(`projects/${projectId}`);
+  }
+  
   getUserProjects() {
     //send a web request to get user projects
     return this.webReqService.get('projects/myprojects');
