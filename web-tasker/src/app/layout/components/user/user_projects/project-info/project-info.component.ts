@@ -8,7 +8,10 @@ import { ProjectService } from 'src/app/services/project.service';
   styleUrls: ['./project-info.component.scss'],
 })
 export class ProjectInfoComponent implements OnInit {
-  projectName = 'Project name';
+  projectName: any;
+  createdBy: any;
+  lastUpdated: any;
+  teamCount: any;
   selectedProject!: any[];
   projectId!: string;
 
@@ -21,7 +24,7 @@ export class ProjectInfoComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       const projectId = params['projectId'];
       this.projectId = projectId;
-      this.getProject(projectId);      
+      this.getProject(projectId);
     });
   }
 
@@ -32,7 +35,18 @@ export class ProjectInfoComponent implements OnInit {
       .subscribe((project: any) => {
         console.log(project);
         this.selectedProject = project;
-        this.projectName = project.projectName;
+        project.projectName
+          ? (this.projectName = project.projectName)
+          : (this.projectName = 'Project name');
+        project.createdBy
+          ? (this.createdBy = project.createdBy)
+          : (this.createdBy = 'Unknown');
+        project.updatedAt
+          ? (this.lastUpdated = project.updatedAt)
+          : (this.lastUpdated = 'Unknown');
+        project.teams
+          ? (this.teamCount = project.teams.length)
+          : (this.teamCount = 0);
       });
   }
 }

@@ -2,25 +2,25 @@
   <div class="page__box p-3 mt-2">Projects</div>
   <div class="page__content shadow p-3 position-relative">
     <div class="page__content-data">
-      <div class="centered-content">      
+      <div class="centered-content">
         <div class="modal-box shadow">
           <h1 class="title">
-            {{projectName}} <i class="fa-solid fa-folder-open"></i>
+            {{ projectName }} <i class="fa-solid fa-folder-open"></i>
           </h1>
           <div class="content">
             <div class="child">
               <div class="label"><i class="uil uil-user"></i> Created By:</div>
-              <div class="data">Joe</div>
+              <div class="data">{{ createdBy }}</div>
             </div>
             <div class="child">
               <div class="label">
                 <i class="uil uil-clock"></i> Last updated:
               </div>
-              <div class="data">3 mins ago</div>
+              <div class="data">{{ lastUpdated }}</div>
             </div>
             <div class="child">
               <div class="label"><i class="uil uil-users-alt"></i> Teams:</div>
-              <div class="data">3</div>
+              <div class="data">{{ teamCount }}</div>
             </div>
             <div class="child">
               <div class="label"><i class="uil uil-server"></i> Status:</div>
