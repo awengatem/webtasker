@@ -73,6 +73,11 @@ export class TeamService {
     return this.webReqService.get(`team_members/${teamId}`);
   }
 
+  /**Method to get team members */
+  getTeamMembersDoc(teamId: string) {
+    return this.webReqService.get(`team_members/docs/${teamId}`);
+  }
+
   /**Method to add team members */
   addTeamMembers(members: any[]) {
     return this.webReqService.post(`team_members`, members);

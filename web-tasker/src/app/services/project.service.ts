@@ -41,6 +41,11 @@ export class ProjectService {
     return this.webReqService.get('projects');
   }
 
+  /**Method to get project members */
+  getProjectMembers(projectId: string) {   
+    return this.webReqService.get(`projects/members/${projectId}`);
+  }
+
   createProject(projectName: string) {
     //send a web request to create a project
     return this.webReqService.post('projects', { projectName });

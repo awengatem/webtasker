@@ -38,6 +38,8 @@ export class AdProjectsComponent implements OnInit {
     this.projectService.getAllProjects().subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
+      //get project members
+      this.getProjectMembers();
     });
   }
 
@@ -107,6 +109,21 @@ export class AdProjectsComponent implements OnInit {
         Swal.fire('Oops! Something went wrong', err.error, 'error');
       },
     });
+  }
+
+  /**Get project members */
+  getProjectMembers() {
+    if (this.projects.length > 0) {      
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectService
+          .getProjectMembers(this.projects[i]._id)
+          .subscribe((members: any) => {
+            console.log(members.length);
+            //push number of members to projects
+            this.projects[i].members = members.length;
+          });
+      }
+    }
   }
 
   submit() {

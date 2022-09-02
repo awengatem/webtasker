@@ -39,6 +39,8 @@ export class AdTeamsComponent implements OnInit {
     this.teamService.getAllTeams().subscribe((teams: any) => {
       console.log(teams);
       this.teams = teams;
+      //get team members for each
+      this.getTeamMembers();
     });
   }
 
@@ -108,6 +110,21 @@ export class AdTeamsComponent implements OnInit {
         Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
     });
+  }
+
+   /**Get team members for each */
+   getTeamMembers() {
+    if (this.teams.length > 0) {      
+      for (let i = 0; i < this.teams.length; i++) {
+        this.teamService
+          .getTeamMembersDoc(this.teams[i]._id)
+          .subscribe((members: any) => {
+            console.log(members.length);
+            //push number of members to projects
+            this.teams[i].members = members.length;
+          });
+      }
+    }
   }
 
   submit() {
