@@ -3,51 +3,50 @@
     <button mat-icon-button (click)="toggleSidebar()">
       <mat-icon>menu</mat-icon>
     </button>
-    <div class="mr-1 help">
-      <i
-        class="uil uil-github"
-        data-toggle="tooltip"
-        data-placement="bottom"
-        title="Click to open repository"
-        (click)="goToLink('https://github.com/joe052')"
-      >
-      </i>
-      <i
-        class="uil uil-question-circle"
-        data-toggle="tooltip"
-        data-placement="bottom"
-        title="Click to view guide"
-        (click)="
-          goToLink(
-            'https://chartreuse-flame-068.notion.site/Africa-AI-Project-2c6684b2a4dc457da01950e19ebb22e2'
-          )
-        "
-      ></i>
-    </div>
+
     <div class="row mr-2 ml-auto">
       <ul>
         <li>
-          <button
-            mat-button
-            [matMenuTriggerFor]="menu"
-            class="user mt-2 d-flex align-items-center"
-          >
-            <img
-              src="../../assets/username.png"
-              alt=""
-              class="user-image mr-1 p-2"
-            />
-            {{ username }}
-            <mat-icon class="user-image-icon ml-1"
-              >keyboard_arrow_down</mat-icon
-            >
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="logger()">
-              <mat-icon>exit_to_app</mat-icon>
-              Logout
+          <div class="user mt-2 d-flex align-items-center help">
+            <div class="icons">
+              <i
+                class="uil uil-github"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title="Click to open repository"
+                (click)="goToLink('https://github.com/joe052')"
+              >
+              </i>
+              <i
+                class="uil uil-question-circle"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title="Click to view guide"
+                (click)="
+                  goToLink(
+                    'https://chartreuse-flame-068.notion.site/Africa-AI-Project-2c6684b2a4dc457da01950e19ebb22e2'
+                  )
+                "
+              ></i>
+            </div>
+            <button mat-button [matMenuTriggerFor]="menu" class="">
+              <img
+                src="../../assets/username.png"
+                alt=""
+                class="user-image mr-1 p-2"
+              />
+              {{ username }}
+              <mat-icon class="user-image-icon ml-1"
+                >keyboard_arrow_down</mat-icon
+              >
             </button>
-          </mat-menu>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="logger()">
+                <mat-icon>exit_to_app</mat-icon>
+                Logout
+              </button>
+            </mat-menu>
+          </div>
         </li>
       </ul>
     </div>

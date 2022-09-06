@@ -1,64 +1,57 @@
-img{
-    width: 50px;
-    height: auto; 
+img {
+  width: 50px;
+  height: auto;
 }
 
 /* header styling */
-mat-toolbar{
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    //background: #676d92;
-    //background: #2c3344 !important;
-    background: #010001 !important;     
-    color: white;
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  //background: #676d92;
+  //background: #2c3344 !important;
+  background: #010001 !important;
+  color: white;
 
-    &-row{
-        .help{
-            //background: red;
-            position: absolute;
-            right: 170px;
-            top: 14px;
-            font-size: 30px;
-            padding-left: 50px;
-
-            a{
-                color: white;
-            }
-
-            i{
-                cursor: pointer;
-            }
-        }
+  &-row {
+    .help {        
+      i {
+        cursor: pointer;
+        font-size: 30px;
+      }    
     }
+    .icons{
+        border-right: solid;
+        padding: 5px;
+    }
+  }
 }
 
 ul li {
-    list-style: none;
+  list-style: none;
 }
 
-
-button{
-    border: 0;
-    outline: none;
-    background: transparent;
+button {
+  border: 0;
+  outline: none;
+  background: transparent;
 }
 
-.user{
-    font-size: 14px;    
+.user {
+  font-size: 14px;
 }
 
-.user-image{
+.user-image {
   border-radius: 50%;
-  width: 50px;  
+  width: 50px;
   height: 50px;
 }
 
-.user-image-icon{
-    height: 18px;
-    font-size: 16px;
+.user-image-icon {
+  height: 18px;
+  font-size: 16px;
 }
 
 ::ng-deep .mat-menu-content {
-    width: 160px;
+  width: 160px;
 }
