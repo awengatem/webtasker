@@ -1,5 +1,5 @@
 # Project Monitor Portal
-Project status monitoring portal Front-end that monitors production behaviors of various teams working on respective projects in a company. Currently customized for Africa AI and implemented using angular 13 framework together with bootstrap.
+Project status monitoring portal Front-end that monitors production behaviors of various teams working on respective projects in a company. Currently customized for Africa AI and implemented using angular 13 framework and bootstrap.
 
 # Documentation
 you can access the documentation at:-
