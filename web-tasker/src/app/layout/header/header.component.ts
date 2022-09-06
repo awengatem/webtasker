@@ -68,4 +68,9 @@ export class HeaderComponent implements OnInit {
       },
     });
   }
+
+  //methods used by github and help icons in header
+  goToLink(url: string){
+    window.open(url, "_blank");
+}
 }

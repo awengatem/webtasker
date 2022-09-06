@@ -12,6 +12,25 @@ mat-toolbar{
     //background: #2c3344 !important;
     background: #010001 !important;     
     color: white;
+
+    &-row{
+        .help{
+            //background: red;
+            position: absolute;
+            right: 170px;
+            top: 14px;
+            font-size: 30px;
+            padding-left: 50px;
+
+            a{
+                color: white;
+            }
+
+            i{
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 ul li {
