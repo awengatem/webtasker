@@ -37,16 +37,26 @@
             </button>
             <button
               class="btn btn-custom col dropdown-toggle"
-              type="submit"
-              (click)="action()"
+              type="submit"              
+              (click)="actionClick()"                       
             >
               Action
             </button>
-            <div class="dropdown row" *ngIf="actionClicked">
+            <div
+              class="dropdown row"
+              *ngIf="actionClicked"                            
+            >
               <div class="col"></div>
               <div class="col dropdown-content shadow">
-                <a class="dropdown-item">Start</a>
-                <a class="dropdown-item">end</a>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/edit_project', projectId]"
+                  (click)="captureProject()"
+                  ><i class="fa-solid fa-pen-fancy"></i> edit</a
+                >
+                <a class="dropdown-item" (click)="alertConfirmation()"
+                  ><i class="fa-solid fa-trash-can text-danger"></i> delete</a
+                >
               </div>
             </div>
           </div>

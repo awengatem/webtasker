@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ad-project-info',
@@ -18,7 +19,8 @@ export class AdProjectInfoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +54,72 @@ export class AdProjectInfoComponent implements OnInit {
   }
 
   //method to show action menu
-  action(){
-    this.actionClicked = !this.actionClicked;
+  action(mode: string) {
+    if (mode === 'in') {
+      window.setTimeout(() => {
+        this.actionClicked = true;
+      }, 1000);
+    } else if (mode === 'out') {
+      window.setTimeout(() => {
+        this.actionClicked = false;
+      }, 1000);
+    }
+  }
+
+  actionClick() {
+    if(this.actionClicked === true){
+    this.actionClicked = false;
+    }else{
+      this.actionClicked = true;
+    }
+  }
+
+  /**Capture project to help load it to edit component */
+  captureProject() {
+    this.projectService.setCapturedProject(this.projectName);
+  }
+
+  /**ACTION METHODS USED BY ALERT*/
+  alertConfirmation() {
+    Swal.fire({
+      title: `Delete "${this.projectName}"?`,
+      text: `This process is irreversible. Project "${this.projectName}" will be lost in all teams assigned to.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      //delete project from db
+      if (result.value) {
+        this.deleteProject(this.projectId, this.projectName);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          `Project "${this.projectName}" still in our database.)`,
+          'error'
+        );
+      }
+    });
+  }
+
+  /**Delete method */
+  deleteProject(projectId: string, projectName: string) {
+    this.projectService.deleteProject(projectId).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.router.navigate(['/ad_projects']);
+        Swal.fire(
+          'Removed!',
+          `Project "${projectName}" has been removed`,
+          'success'
+        );
+      },
+      error: (err) => {
+        console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error, 'error');
+      },
+    });
   }
 }
