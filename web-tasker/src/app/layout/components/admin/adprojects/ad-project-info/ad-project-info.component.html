@@ -35,7 +35,20 @@
             >
               Back
             </button>
-            <button class="btn btn-custom col" type="submit">Action</button>
+            <button
+              class="btn btn-custom col dropdown-toggle"
+              type="submit"
+              (click)="action()"
+            >
+              Action
+            </button>
+            <div class="dropdown row" *ngIf="actionClicked">
+              <div class="col"></div>
+              <div class="col dropdown-content shadow">
+                <a class="dropdown-item">Start</a>
+                <a class="dropdown-item">end</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

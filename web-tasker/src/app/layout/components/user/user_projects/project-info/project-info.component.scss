@@ -1,31 +1,5 @@
 /*IMPORTING CSS USED IN ADMIN PROJECT-INFO COMPONENT*/
 @use "../../../admin/adprojects/ad-project-info/ad-project-info.component.scss";
 .modal-box {
-  .dropdown {
-    margin: 0;
-    padding: 0;
-    margin-top: 10px;
-    
-    &-content {
-      display: flex;
-      flex-direction: column;
-      padding: 0;      
-
-      a {
-        cursor: pointer;
-        font-size: 12px;
-        font-family: "Segoe UI";
-        font-weight: 100;
-        text-align: center;
-        margin-top: 1px;
-        margin-bottom: 2px;
-        line-height: 25px;        
-        width: 100%;
-
-        &:hover {
-          background: #dbedfa;
-        }
-      }
-    }
-  }
+  
 }
