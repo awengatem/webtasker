@@ -8,6 +8,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 
 import { AngularMaterialModule } from '../angular-material.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 
 import { LayoutRoutingModule } from './layout-routing.module';
 
@@ -78,7 +79,8 @@ import { AdProjectInfoComponent } from './components/admin/adprojects/ad-project
 
     /*material imports*/
     AngularMaterialModule,
-    NgMultiSelectDropDownModule.forRoot(),   
+    NgMultiSelectDropDownModule.forRoot(), 
+    MdbDropdownModule,  
   ],
   exports: [
     HeaderComponent,
