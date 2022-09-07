@@ -14,6 +14,7 @@ export class ProjectInfoComponent implements OnInit {
   teamCount: any;
   selectedProject!: any[];
   projectId!: string;
+  actionClicked = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,5 +49,10 @@ export class ProjectInfoComponent implements OnInit {
           ? (this.teamCount = project.teams.length)
           : (this.teamCount = 0);
       });
+  }
+
+  //method to show action menu
+  action(){
+    this.actionClicked = !this.actionClicked;
   }
 }
