@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
     //ensure timer runs if only started
     if (!this.started) {
       //set started to true
-      this.statusService.setStarted("true");
+      this.statusService.setStarted('true');
       this.started = true;
       this.cron = setInterval(() => {
         this.timer(begin);
@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
     //capture time
     this.pauseTime = new Date();
     this.paused = true;
-    this.statusService.setPaused("true");
+    this.statusService.setPaused('true');
     //update status
     this.projectStatus = 'Break';
     this.activeStatus = false;
@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
       }, 10);
       //update paused
       this.paused = false;
-      this.statusService.setPaused("false");
+      this.statusService.setPaused('false');
       //update status
       this.projectStatus = 'Productive';
       this.activeStatus = true;
@@ -131,14 +131,14 @@ export class HomeComponent implements OnInit {
   reset(projectId: string) {
     clearInterval(this.cron);
     this.ended = true;
-    this.statusService.setEnded("true");
+    this.statusService.setEnded('true');
     //restore all button status variable defaults
     this.paused = false;
     this.started = false;
     this.ended = false;
-    this.statusService.setPaused("false");
-    this.statusService.setStarted("false");    
-    this.statusService.setEnded("false");
+    this.statusService.setPaused('false');
+    this.statusService.setStarted('false');
+    this.statusService.setEnded('false');
     //restore other defaults
     this.hour = 0;
     this.minute = 0;
@@ -147,6 +147,7 @@ export class HomeComponent implements OnInit {
     document.getElementById('hour')!.innerText = '00';
     document.getElementById('minute')!.innerText = '00';
     document.getElementById('second')!.innerText = '00';
+    document.getElementById('millisecond')!.innerText = '00';
     //update status
     this.projectStatus = 'Unproductive';
     this.activeStatus = null;
@@ -159,16 +160,19 @@ export class HomeComponent implements OnInit {
   }
 
   timer(begin: any) {
-    let current =  new Date();
+    let current = new Date();
     let count = +current - +begin;
-    this.ms = count % 1000;
-    this.s = Math.floor((count / 1000)) % 60;
-    this.m = Math.floor((count / 60000)) % 60;
-    this.h = Math.floor((count / 3600000)) % 60;
+    let ms = count % 1000;
+    let s = Math.floor(count / 1000) % 60;
+    let m = Math.floor(count / 60000) % 60;
+    let h = Math.floor(count / 3600000) % 60;
+
     document.getElementById('hour')!.innerText = this.returnData(this.h);
     document.getElementById('minute')!.innerText = this.returnData(this.m);
     document.getElementById('second')!.innerText = this.returnData(this.s);
-    document.getElementById('millisecond')!.innerText = this.returnData(this.ms);
+    document.getElementById('millisecond')!.innerText = this.returnData(
+      this.ms
+    );
     // if ((this.millisecond += 10) == 1000) {
     //   this.millisecond = 0;
     //   this.second++;
@@ -228,13 +232,13 @@ export class HomeComponent implements OnInit {
   }
 
   hangTheBrowser() {
-    let val = "";
-  
-      for(let i=0; i<10000; i++){
-        for(let j=0; j<10000; j++) {
-          val = "Loop returned: " + i + j;
-        }
+    let val = '';
+
+    for (let i = 0; i < 10000; i++) {
+      for (let j = 0; j < 10000; j++) {
+        val = 'Loop returned: ' + i + j;
       }
+    }
   }
 }
 
