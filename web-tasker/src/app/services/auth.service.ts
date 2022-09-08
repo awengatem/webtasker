@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { shareReplay, tap } from 'rxjs';
 import { AccountService } from './account-service.service';
+import { StatusService } from './status.service';
 import { TokenService } from './token.service';
 import { WebRequestService } from './web-request.service';
 
@@ -20,7 +21,8 @@ export class AuthService {
     private webService: WebRequestService,
     private router: Router,
     private accountService: AccountService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private statusService: StatusService
   ) {}
 
   /*methods here deal with local storage*/
@@ -37,6 +39,8 @@ export class AuthService {
         );
         //set sidenav statuses
         this.setSidenavValues();
+        //set home action button status defaults
+        this.setButtonStatus();
 
         console.log(`${res.body.user.username} Logged in!`);
         this.router.navigate(['/home']);
@@ -76,6 +80,15 @@ export class AuthService {
   private setSidenavValues(){
     localStorage.setItem('isExpanded', this.positive);    
     localStorage.setItem('sublist', this.negative);
+  }
+
+  /**Sets session button defaults to local storage
+   * Helps control the start and end buttons
+  */
+   private setButtonStatus(){
+    this.statusService.setEnded("false");
+    this.statusService.setStarted("false");
+    this.statusService.setPaused("false");
   }
 
   private removeSession() {
