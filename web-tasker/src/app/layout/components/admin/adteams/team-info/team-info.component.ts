@@ -121,6 +121,9 @@ export class TeamInfoComponent implements OnInit {
     this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
+      /**get project members immediately 
+       * after filling projects array*/
+       this.getProjectMembers();
     });
   }
 
@@ -243,6 +246,21 @@ export class TeamInfoComponent implements OnInit {
       console.log('addding member');
     } else if (this.selectedTab === 'tabNav2') {
       console.log('addding project');
+    }
+  }
+
+  /**Get project members to add on icon*/
+  getProjectMembers() {
+    if (this.projects && this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectService
+          .getProjectMembers(this.projects[i]._id)
+          .subscribe((members: any) => {
+            console.log(members.length);
+            //push number of members to projects
+            this.projects[i].members = members.length;
+          });
+      }
     }
   }
 }

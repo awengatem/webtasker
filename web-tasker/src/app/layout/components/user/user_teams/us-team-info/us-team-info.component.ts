@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import Swal from 'sweetalert2';
 
@@ -21,7 +22,8 @@ export class UsTeamInfoComponent implements OnInit {
   constructor(
     private teamService: TeamService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private projectService: ProjectService
   ) {}
 
   ngOnInit(): void {
@@ -104,6 +106,8 @@ export class UsTeamInfoComponent implements OnInit {
     this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
+      //get project members
+      this.getProjectMembers();
     });
   }
 
@@ -133,6 +137,21 @@ export class UsTeamInfoComponent implements OnInit {
       console.log('addding member');
     } else if (this.selectedTab === 'tabNav2') {
       console.log('addding project');
+    }
+  }
+
+  /**Get project members */
+  getProjectMembers() {
+    if (this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectService
+          .getProjectMembers(this.projects[i]._id)
+          .subscribe((members: any) => {
+            console.log(members.length);
+            //push number of members to projects
+            this.projects[i].members = members.length;
+          });
+      }
     }
   }
 }

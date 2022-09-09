@@ -39,7 +39,8 @@ export class ProjectsComponent implements OnInit {
     this.projectService.getUserProjects().subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
-      //get project members
+      /**get project members immediately 
+       * after filling projects array*/
       this.getProjectMembers();
     });
   }
@@ -61,11 +62,11 @@ export class ProjectsComponent implements OnInit {
     //unsetting the condition
     this.projectService.setAddStatus(false);
     //console.log(this.projectService.getAddStatus());
-  }  
+  }
 
-  /**Get project members */
+  /**Get project members to add on icon*/
   getProjectMembers() {
-    if (this.projects.length > 0) {      
+    if (this.projects.length > 0) {
       for (let i = 0; i < this.projects.length; i++) {
         this.projectService
           .getProjectMembers(this.projects[i]._id)
