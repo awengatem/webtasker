@@ -142,7 +142,7 @@ export class UsTeamInfoComponent implements OnInit {
 
   /**Get project members */
   getProjectMembers() {
-    if (this.projects.length > 0) {
+    if (this.projects && this.projects.length > 0) {
       for (let i = 0; i < this.projects.length; i++) {
         this.projectService
           .getProjectMembers(this.projects[i]._id)
