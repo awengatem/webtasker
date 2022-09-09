@@ -40,7 +40,7 @@ export class AuthService {
         //set sidenav statuses
         this.setSidenavValues();
         //set home action button status defaults
-        this.setButtonStatus();
+        //this.setButtonStatus();
 
         console.log(`${res.body.user.username} Logged in!`);
         this.router.navigate(['/home']);
@@ -92,11 +92,12 @@ export class AuthService {
   }
 
   private removeSession() {
-    localStorage.removeItem('user-id');
-    localStorage.removeItem('access-token');
-    //clear sidenav statuses
-    localStorage.removeItem('isExpanded');    
-    localStorage.removeItem('sublist');
+    localStorage.clear();
+    // localStorage.removeItem('user-id');
+    // localStorage.removeItem('access-token');
+    // //clear sidenav statuses
+    // localStorage.removeItem('isExpanded');    
+    // localStorage.removeItem('sublist');
   }
 
   /*dummy method to check if authheaders are set
