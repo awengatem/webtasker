@@ -27,6 +27,7 @@
     "mdb-angular-ui-kit": "^2.3.0",
     "ng-multiselect-dropdown": "^1.0.0-beta.19",
     "rxjs": "~7.5.0",
+    "socket.io-client": "^4.5.2",
     "sweetalert2": "^11.4.27",
     "tslib": "^2.4.0",
     "zone.js": "~0.11.4"
