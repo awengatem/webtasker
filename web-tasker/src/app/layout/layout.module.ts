@@ -34,6 +34,7 @@ import { ScheduleComponent } from './components/user/user_projects/schedule/sche
 import { UsTeamInfoComponent } from './components/user/user_teams/us-team-info/us-team-info.component';
 import { ProjectInfoComponent } from './components/user/user_projects/project-info/project-info.component';
 import { AdProjectInfoComponent } from './components/admin/adprojects/ad-project-info/ad-project-info.component';
+import { SocketTestComponent } from './components/admin/socket-test/socket-test.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { AdProjectInfoComponent } from './components/admin/adprojects/ad-project
     UsTeamInfoComponent,
     ProjectInfoComponent,
     AdProjectInfoComponent,
+    SocketTestComponent,
   ],
   imports: [
     CommonModule,
