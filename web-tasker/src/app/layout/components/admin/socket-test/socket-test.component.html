@@ -11,6 +11,17 @@
               <strong>{{ data.handle }} : </strong>{{ data.message }}
             </p>
           </div>
+
+          <!-- my test stuff -->
+          <!-- <div id="output" *ngFor="let data of timerData">
+            <p>
+              <strong>{{ data.timer }}</strong>
+            </p>
+          </div> -->
+          <div id="output">
+            <span id="count">00</span>
+          </div>
+
           <div id="feedback">
             <p>{{ feedback }}</p>
           </div>
@@ -36,6 +47,14 @@
           (click)="sendMessage()"
         >
           Send
+        </button>
+        <button
+          type="button"
+          id="send"
+          style="cursor: pointer"
+          (click)="startTimer()"
+        >
+          start
         </button>
       </div>
     </div>

@@ -11,7 +11,10 @@ export class SocketTestComponent implements OnInit {
   userName!: string;
   message!: string;
   output: any[] = [];
+  timerData: any[] = [];
   feedback!: string;
+
+  timer!: any;
 
   constructor(private webSocketService: SocketIoService) {}
   ngOnInit(): void {
@@ -20,6 +23,11 @@ export class SocketTestComponent implements OnInit {
     });
     this.webSocketService.listen('chat').subscribe((data) => {
       this.updateMessage(data);
+    });
+
+    //testing
+    this.webSocketService.listen('tick').subscribe((data) => {
+      this.updateTimer(data);
     });
   }
 
@@ -31,6 +39,13 @@ export class SocketTestComponent implements OnInit {
 
   updateFeedback(data: any) {
     this.feedback = `${data} is typing a message;`;
+  }
+
+  updateTimer(data: any) {
+    this.timer = '';
+    if (!!!data) return;
+    document.getElementById('count')!.innerText = data.timer;
+    //this.timerData.push(data);
   }
 
   messageTyping(): void {
@@ -48,5 +63,10 @@ export class SocketTestComponent implements OnInit {
       handle: this.userName,
     });
     this.message = '';
+  }
+
+  //test stuff
+  startTimer(): void {
+    this.webSocketService.emit('start',{});
   }
 }
