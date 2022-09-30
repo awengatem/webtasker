@@ -10,12 +10,22 @@ export class SocketIoService {
   socket: io.Socket;
 
   constructor(private webReqService: WebRequestService) {
-    this.socket = io.connect(this.ROOT_URL,{
+    this.socket = io.connect(this.ROOT_URL, {
       withCredentials: true,
       extraHeaders: {
-        "socket-header":"abcd"
-      }
+        'socket-header': 'abcd',
+      },
+      query: {
+        socketId: localStorage.getItem('user-id') || '',
+      },
     });
+
+    /**To be used with custom ID */
+    // this.socket.on('reconnect_attempt', () => {
+    //   this.socket.io.opts.query = {
+    //     socketId: localStorage.getItem('user-id') || '',
+    //   };
+    // });
   }
 
   //get the root url
