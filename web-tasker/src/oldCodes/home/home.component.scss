@@ -1,0 +1,136 @@
+.grid-container {
+  margin: 0px;
+  //margin-bottom: 40px;
+
+  /*welcome bar styling*/
+  .welcome {
+    margin-top: 0px;
+    color: #010001 !important;
+    background: transparent;
+    margin-right: 15px;
+    margin-left: 15px;
+    font-size: 12;
+    font-family: inherit;
+
+    &-message {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+
+      .default {
+        color: #ac1100;
+      }
+      .active {
+        color: #027a34;
+      }
+      .break {
+        color: #ebeb10;
+      }
+    }
+  }
+
+  /*grid list styling---holding the grid cards--*/
+  .dash-cards {
+    margin-top: 50px;
+
+    /*grid card styling*/
+    .dashboard-card {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      right: 15px;
+      bottom: 10px;
+      font-family: inherit;
+      //overflow-y: auto;
+
+      // &.first {
+      //   //taking full space
+      // }
+
+      // &.second {
+      //   //taking full space
+      //   //padding: 0px;
+      // }
+
+      background: #d674cb; /* fallback for old browsers */
+      background: -webkit-linear-gradient(
+        to right,
+        #d674cb,
+        #89fffd
+      ); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(
+        to right,
+        #d674cb,
+        #89fffd
+      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      //background-image: linear-gradient(90deg,#e838a0,#a164ea 50%,#50c1d6);
+
+      .my-projects {
+        overflow-y: auto;
+        height: 215px;
+
+        .header {
+          h2 {
+            font-family: inherit;
+            //font-size: x-large;
+            font-weight: 600;
+          }
+        }
+
+        .content {
+          .row {
+            .progress {
+              background: #8e9eab;
+            }
+          }
+          .notify {
+            margin-top: 40px;
+            font-weight: 400;
+            font-size: 18px;
+
+            i {
+              color: #811f15;
+            }
+          }
+        }
+      }
+
+      /*Stats Cards styling*/
+      .card {
+        background: transparent;
+
+        // .align-self-center {
+        //   // height: 13px;
+        // }
+
+        svg {
+          color: rgb(24, 85, 85);
+        }
+
+        .mb-0 {
+          font-size: 18px;
+        }
+
+        h3 {
+          font-size: 20px;
+          font-weight: 500;
+        }
+      }
+
+      /*Timer styling*/
+      .timer {
+        //color: red;
+        letter-spacing: 2px;
+        font-weight: 600;
+        font-size: 16px;
+      }
+      //height: 50px;
+      //background: cyan;
+    }
+  }
+
+  //ubuntu font custom class
+  .ubuntu {
+    font-family: inherit;
+  }
+}
