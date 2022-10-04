@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./project-action.component.scss']
 })
 export class ProjectActionComponent implements OnInit {
+  /**local variables */
+  activeStatus: boolean = false;
 
   constructor() { }
 

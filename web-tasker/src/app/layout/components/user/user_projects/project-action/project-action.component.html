@@ -5,12 +5,39 @@
       <div class="centered-content">
         <div class="projects-container">
           <div class="projects">
-            <h1 class="text-dark">
-              project name <i class="fa-regular fa-folder-open"></i>
-            </h1>
+            <div class="d-flex justify-content-between">
+              <div class="">
+                <h1 class="text-dark">
+                  project name <i class="fa-regular fa-folder-open"></i>
+                </h1>
+              </div>
+              <div class="d-flex status">
+                <span>Status:&nbsp;</span>
+                <div [ngClass]="activeStatus ? 'active' : 'default'">
+                  Unproductive
+                </div>
+              </div>
+              <!-- <div class="col-md-3">
+                <div class="row centered-content create">
+                  <div class="col-md-1">                    
+                    <button class="btn btn-primary">
+                      <div class="btn-txt">start</div>
+                    </button>
+                  </div>
+                </div>
+              </div> -->
+            </div>
             <mat-divider></mat-divider>
             <div class="projects-inside" id="projects"></div>
           </div>
+          <!-- <div class="projects">
+            <h1 class="text-dark">
+              project name <i class="fa-regular fa-folder-open"></i>
+            </h1>
+            <button class="btn">Start</button>
+            <mat-divider></mat-divider>
+            <div class="projects-inside" id="projects"></div>
+          </div> -->
         </div>
       </div>
     </div>

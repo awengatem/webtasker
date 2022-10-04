@@ -16,6 +16,24 @@
   padding: 24px;
   border-radius: 2px;
 
+  //styling status label
+  .status {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px;
+
+    .active {
+      color: #027a34;
+    }
+    .break {
+      color: #ebeb10;
+    }
+
+    .default {
+      color: #ac1100;
+    }
+  }
+
   mat-divider {
     border-color: grey;
   }
