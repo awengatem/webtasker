@@ -94,7 +94,7 @@
                           type="button"
                           class="col btn btn-outline-success btn-sm me-2"
                           *ngIf="!project.selected"
-                          (click)="start(project._id.valueOf())"
+                          [routerLink]="['/projects', project._id]"                          
                         >
                           start
                         </button>
@@ -201,23 +201,6 @@
                       </div>
                     </div>
                   </div>
-                </div>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>
-
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-card class="dashboard-card second shadow">
-              <mat-card-content>
-                <div class="shadow mt-0" style="height: 35px">
-                  <h4 class="text-white ps-3 pt-1 pb-2 ubuntu">Timer</h4>
-                </div>
-                <div class="centered mt-4 timer">
-                  <span id="hour">00</span>:<span id="minute">00</span>:<span
-                    id="second"
-                    >00</span
-                  >
-                  <!-- <button class="btn" (click)="hangTheBrowser()">hang</button> -->
                 </div>
               </mat-card-content>
             </mat-card>

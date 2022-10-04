@@ -29,7 +29,7 @@ export class ProjectInfoComponent implements OnInit {
     });
   }
 
-  //getting team name
+  //getting project name
   getProject(projectId: string) {
     this.projectService
       .getSpecificProject(projectId)

@@ -8,7 +8,7 @@
             <div class="d-flex justify-content-between">
               <div class="">
                 <h1 class="text-dark">
-                  project name <i class="fa-regular fa-folder-open"></i>
+                  {{ projectName }} <i class="fa-regular fa-folder-open"></i>
                 </h1>
               </div>
               <div class="d-flex status">
@@ -19,7 +19,7 @@
               </div>
             </div>
             <mat-divider></mat-divider>
-            <div class="projects-inside" id="projects">
+            <div class="projects-inside">
               <div class="centered-content">
                 <mat-card class="timer shadow">
                   <mat-card-content>
@@ -108,7 +108,33 @@
                   </mat-card-content>
                 </mat-card> -->
               </div>
-              <button class="btn" (click)="startTimer()">start</button>
+              <section class="watch-buttons centered">
+                <nav>
+                  <button id="stopwatch-reset" class="btn-pause">Pause</button>
+                  <button
+                    *ngIf="!stopwatchStarted"
+                    id="stopwatch-start"
+                    class="btn-start-stopwatch"
+                    (click)="startTimer()"
+                  >
+                    Start
+                  </button>
+                  <button
+                    *ngIf="stopwatchStarted"
+                    id="stopwatch-start"
+                    class="btn-stopwatch-stop"
+                  >
+                    Finish
+                  </button>
+                </nav>
+              </section>
+              <button
+                class="btn btn-custom mt-4"
+                style="color: white"
+                [routerLink]="['/projects', projectId]" 
+              >
+                back
+              </button>
             </div>
           </div>
         </div>

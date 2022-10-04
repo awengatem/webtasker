@@ -47,13 +47,13 @@
     .timer {
       width: 100%;
       height: 100%;
-      background: transparent;      
+      background: transparent;
 
-      &-text{
+      &-text {
         font-weight: 650;
-        font-family: 'ubuntu';
+        font-family: "ubuntu";
       }
-      
+
       .clock {
         height: 200px;
         position: absolute;
@@ -154,6 +154,45 @@
         position: relative;
         top: -90px;
       }
+    }
+
+    button {
+      font-size: 12px;
+    }
+
+    section.watch-buttons {
+      height: 160px;
+      padding-top: 40px;
+    }
+
+    button.btn-pause {
+      margin-right: 20px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: none;
+      background-color: #222;
+      color: #fff;
+    }
+
+    button.btn-start-stopwatch {
+      margin-left: 20px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: none;
+      background-color: #182e1c;
+      color: #41cc57;
+    }
+
+    button.btn-stopwatch-stop {
+      margin-left: 20px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: none;
+      background-color: #3e1815;
+      color: red;
     }
   }
 }

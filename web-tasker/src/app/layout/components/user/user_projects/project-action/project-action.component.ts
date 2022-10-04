@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { ProjectService } from 'src/app/services/project.service';
 import { SocketIoService } from 'src/app/services/socket.io.service';
 
 @Component({
@@ -8,12 +10,25 @@ import { SocketIoService } from 'src/app/services/socket.io.service';
 })
 export class ProjectActionComponent implements OnInit {
   /**local variables */
+  projectName: any;
   activeStatus: boolean = false;
+  projectId!: string;
+  stopwatchStarted: boolean = false;
 
-  constructor(private webSocketService: SocketIoService) {}
+  constructor(
+    private webSocketService: SocketIoService,
+    private projectService: ProjectService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    //testing
+    this.route.params.subscribe((params: Params) => {
+      const projectId = params['projectId'];
+      this.projectId = projectId;
+      this.getProject(projectId);
+    });
+
+    //listening the timer tick event from server
     this.webSocketService.listen('tick').subscribe((data) => {
       this.updateTimer(data);
     });
@@ -109,5 +124,17 @@ export class ProjectActionComponent implements OnInit {
   //test stuff
   startTimer(): void {
     this.webSocketService.emit('start', {});
+    this.stopwatchStarted = true;
+  }
+
+  //getting project name
+  getProject(projectId: string) {
+    this.projectService
+      .getSpecificProject(projectId)
+      .subscribe((project: any) => {
+        project.projectName
+          ? (this.projectName = project.projectName)
+          : (this.projectName = 'Project name');
+      });
   }
 }
