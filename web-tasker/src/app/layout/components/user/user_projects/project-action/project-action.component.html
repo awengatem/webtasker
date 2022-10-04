@@ -17,27 +17,100 @@
                   Unproductive
                 </div>
               </div>
-              <!-- <div class="col-md-3">
-                <div class="row centered-content create">
-                  <div class="col-md-1">                    
-                    <button class="btn btn-primary">
-                      <div class="btn-txt">start</div>
-                    </button>
-                  </div>
-                </div>
-              </div> -->
             </div>
             <mat-divider></mat-divider>
-            <div class="projects-inside" id="projects"></div>
+            <div class="projects-inside" id="projects">
+              <div class="centered-content">
+                <mat-card class="timer shadow">
+                  <mat-card-content>
+                    <div class="shadow mt-0" style="height: 35px">
+                      <h3 class="text-dark ps-3 pt-1 pb-2 timer-text">Timer</h3>
+                    </div>
+                    <div class="mt-4">
+                      <div class="clock">
+                        <div class="digit hours">
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                        </div>
+
+                        <div class="digit hours">
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                        </div>
+
+                        <div class="separator"></div>
+
+                        <div class="digit minutes">
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                        </div>
+
+                        <div class="digit minutes">
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                        </div>
+
+                        <div class="separator"></div>
+
+                        <div class="digit seconds">
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                        </div>
+
+                        <div class="digit seconds">
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                          <div class="segment"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+
+                <!-- <mat-card class="timer shadow">
+                  <mat-card-content>
+                    <div class="shadow mt-0" style="height: 35px">
+                      <h4 class="text-dark ps-3 pt-1 pb-2 ubuntu">Timer</h4>
+                    </div>
+                    <div class="centered mt-4">
+                      <span id="hour">00</span>:<span id="minute">00</span
+                      >:<span id="second">00</span>
+                    </div>
+                  </mat-card-content>
+                </mat-card> -->
+              </div>
+              <button class="btn" (click)="startTimer()">start</button>
+            </div>
           </div>
-          <!-- <div class="projects">
-            <h1 class="text-dark">
-              project name <i class="fa-regular fa-folder-open"></i>
-            </h1>
-            <button class="btn">Start</button>
-            <mat-divider></mat-divider>
-            <div class="projects-inside" id="projects"></div>
-          </div> -->
         </div>
       </div>
     </div>
