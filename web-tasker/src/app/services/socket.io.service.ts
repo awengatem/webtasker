@@ -10,6 +10,8 @@ export class SocketIoService {
   socket: io.Socket;
 
   constructor(private webReqService: WebRequestService) {
+    const roomId = localStorage.getItem('user-id');
+
     this.socket = io.connect(this.ROOT_URL, {
       withCredentials: true,
       extraHeaders: {
@@ -19,6 +21,9 @@ export class SocketIoService {
         socketId: localStorage.getItem('user-id') || '',
       },
     });
+
+    //emit room as userID
+    this.socket.emit('create', roomId);
 
     /**To be used with custom ID */
     // this.socket.on('reconnect_attempt', () => {
