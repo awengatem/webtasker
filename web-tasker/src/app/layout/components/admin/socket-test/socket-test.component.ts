@@ -44,7 +44,18 @@ export class SocketTestComponent implements OnInit {
   updateTimer(data: any) {
     this.timer = '';
     if (!!!data) return;
-    document.getElementById('count')!.innerText = data.timer;
+    const count = data.timer;
+
+    let ms = count % 1000;
+    let s = Math.floor(count / 1000) % 60;
+    let m = Math.floor(count / 60000) % 60;
+    let h = Math.floor(count / 3600000) % 60;
+
+    document.getElementById('hour')!.innerText = this.returnData(h);
+    document.getElementById('minute')!.innerText = this.returnData(m);
+    document.getElementById('second')!.innerText = this.returnData(s);
+    document.getElementById('millisecond')!.innerText = this.returnData(ms);
+    //document.getElementById('count')!.innerText = data.timer;
     //this.timerData.push(data);
   }
 
@@ -65,8 +76,12 @@ export class SocketTestComponent implements OnInit {
     this.message = '';
   }
 
+  returnData(input: any) {
+    return input >= 10 ? input : `0${input}`;
+  }
+
   //test stuff
   startTimer(): void {
-    this.webSocketService.emit('start',{});
+    this.webSocketService.emit('start', {});
   }
 }

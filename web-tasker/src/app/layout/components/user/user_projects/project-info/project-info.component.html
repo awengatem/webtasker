@@ -37,7 +37,7 @@
             </button>
             <button
               class="btn btn-custom col dropdown-toggle"
-              type="submit"             
+              type="submit"
               (click)="action()"
             >
               Action
@@ -45,7 +45,11 @@
             <div class="dropdown row" *ngIf="actionClicked">
               <div class="col"></div>
               <div class="col dropdown-content shadow">
-                <a class="dropdown-item">Start</a>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/projects', projectId,'action']"
+                  >Start</a
+                >
                 <a class="dropdown-item">end</a>
               </div>
             </div>

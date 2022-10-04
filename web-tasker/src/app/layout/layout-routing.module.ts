@@ -21,6 +21,7 @@ import { UsTeamInfoComponent } from './components/user/user_teams/us-team-info/u
 import { ProjectInfoComponent } from './components/user/user_projects/project-info/project-info.component';
 import { AdProjectInfoComponent } from './components/admin/adprojects/ad-project-info/ad-project-info.component';
 import { SocketTestComponent } from './components/admin/socket-test/socket-test.component';
+import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,11 @@ const routes: Routes = [
         path: 'projects/:projectId',
         canActivate: [AuthGuard],
         component: ProjectInfoComponent,
+      },
+      {
+        path: 'projects/:projectId/action',
+        canActivate: [AuthGuard],
+        component: ProjectActionComponent,
       },
 
        /**TEAMS */

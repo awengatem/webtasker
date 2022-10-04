@@ -12,15 +12,25 @@
             </p>
           </div>
 
-          <!-- my test stuff -->
-          <!-- <div id="output" *ngFor="let data of timerData">
-            <p>
-              <strong>{{ data.timer }}</strong>
-            </p>
-          </div> -->
-          <div id="output">
+          <!-- my test stuff -->          
+          <mat-card class="shadow">
+            <mat-card-content>
+              <div class="shadow mt-0" style="height: 35px">
+                <h4 class="text-dark ps-3 pt-1 pb-2 ubuntu">Timer</h4>
+              </div>
+              <div class="centered mt-4 timer">
+                <span id="hour">00</span>:<span id="minute">00</span>:<span
+                  id="second"
+                  >00</span
+                >
+                <!-- <button class="btn" (click)="hangTheBrowser()">hang</button> -->
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- <div id="output">
             <span id="count">00</span>
-          </div>
+          </div> -->
 
           <div id="feedback">
             <p>{{ feedback }}</p>
