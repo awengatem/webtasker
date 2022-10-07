@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { SocketIoService } from 'src/app/services/socket.io.service';
 
@@ -18,7 +18,8 @@ export class ProjectActionComponent implements OnInit {
   constructor(
     private webSocketService: SocketIoService,
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -121,10 +122,16 @@ export class ProjectActionComponent implements OnInit {
     this.setNumber(_seconds[1], seconds % 10, 1);
   }
 
-  //test stuff
+  /**Timer control methods */
   startTimer(): void {
     this.webSocketService.emit('start', {});
     this.stopwatchStarted = true;
+  }
+
+  stopTimer() {
+    //AKA reset
+    this.webSocketService.emit('stop', {});
+    this.stopwatchStarted = false;
   }
 
   //getting project name
