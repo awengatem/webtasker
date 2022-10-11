@@ -111,11 +111,20 @@
               <section class="watch-buttons centered">
                 <nav>
                   <button
+                    *ngIf="!stopwatchPaused"
                     id="stopwatch-reset"
                     class="btn-pause"
-                    (click)="stopTimer()"
+                    (click)="pauseTimer()"
                   >
                     Pause
+                  </button>
+                  <button
+                    *ngIf="stopwatchPaused"
+                    id="stopwatch-reset"
+                    class="btn-pause"
+                    (click)="startTimer()"
+                  >
+                    Continue
                   </button>
                   <button
                     *ngIf="!stopwatchStarted"

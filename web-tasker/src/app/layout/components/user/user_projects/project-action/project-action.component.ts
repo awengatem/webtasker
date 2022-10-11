@@ -14,6 +14,7 @@ export class ProjectActionComponent implements OnInit {
   activeStatus: boolean = false;
   projectId!: string;
   stopwatchStarted: boolean = false;
+  stopwatchPaused: boolean = false;
 
   constructor(
     private webSocketService: SocketIoService,
@@ -126,6 +127,12 @@ export class ProjectActionComponent implements OnInit {
   startTimer(): void {
     this.webSocketService.emit('start', {});
     this.stopwatchStarted = true;
+    this.stopwatchPaused = false;
+  }
+
+  pauseTimer(): void {
+    //this.webSocketService.emit('pause', {});
+    this.stopwatchPaused = true;
   }
 
   stopTimer() {
