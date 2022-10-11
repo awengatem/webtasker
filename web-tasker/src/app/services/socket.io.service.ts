@@ -8,9 +8,11 @@ import { WebRequestService } from './web-request.service';
 })
 export class SocketIoService {
   socket: io.Socket;
+  roomId: any;
 
   constructor(private webReqService: WebRequestService) {
     const roomId = localStorage.getItem('user-id');
+    this.roomId = roomId;
 
     this.socket = io.connect(this.ROOT_URL, {
       withCredentials: true,
@@ -22,7 +24,7 @@ export class SocketIoService {
       },
     });
 
-    //emit room as userID
+    /**emit room as userID*/
     this.socket.emit('create', roomId);
 
     /**To be used with custom ID */
@@ -33,8 +35,14 @@ export class SocketIoService {
     // });
   }
 
-  //get the root url
+  /**get the root url*/
   readonly ROOT_URL = this.webReqService.ROOT_URL;
+
+  /**method used to recover running timers */
+  emitOuter() {
+    /*rejoin new socket to room*/
+    this.socket.emit('create', this.roomId);
+  }
 
   listen(eventname: string): Observable<any> {
     return new Observable((subscribe) => {

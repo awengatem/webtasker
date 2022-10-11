@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { SocketIoService } from 'src/app/services/socket.io.service';
-
 @Component({
   selector: 'app-project-action',
   templateUrl: './project-action.component.html',
@@ -19,7 +18,7 @@ export class ProjectActionComponent implements OnInit {
   constructor(
     private webSocketService: SocketIoService,
     private projectService: ProjectService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute,   
     private router: Router
   ) {}
 
@@ -33,6 +32,11 @@ export class ProjectActionComponent implements OnInit {
     //listening the timer tick event from server
     this.webSocketService.listen('tick').subscribe((data) => {
       this.updateTimer(data);
+    });
+
+    //listening the refresh event from server
+    this.webSocketService.listen('recovertimer').subscribe((data) => {
+      this.webSocketService.emitOuter();
     });
 
     // var _hours = document.querySelectorAll('.hours');
