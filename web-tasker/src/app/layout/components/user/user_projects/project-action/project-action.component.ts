@@ -135,7 +135,7 @@ export class ProjectActionComponent implements OnInit {
   }
 
   pauseTimer(): void {
-    //this.webSocketService.emit('pause', {});
+    this.webSocketService.emit('pause', {});
     this.stopwatchPaused = true;
   }
 
