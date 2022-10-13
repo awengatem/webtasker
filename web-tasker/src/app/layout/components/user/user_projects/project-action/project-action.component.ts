@@ -35,6 +35,9 @@ export class ProjectActionComponent implements OnInit {
     //request timerbuttons from server
     this.webSocketService.emit('sendButtonStatus', {});
 
+    //requesttimervalue from server
+    this.webSocketService.emit('sendTimerValue', {});
+
     //listening the timer buttonStatus event to decide on buttons to display
     this.webSocketService.listen('buttonStatus').subscribe((data) => {
       this.showTimerButtons(data);
