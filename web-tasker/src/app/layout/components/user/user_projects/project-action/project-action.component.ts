@@ -12,8 +12,6 @@ export class ProjectActionComponent implements OnInit {
   projectName: any;
   activeStatus: boolean = false;
   projectId!: string;
-  // stopwatchStarted: boolean = false;
-  // stopwatchPaused: boolean = false;
   stopwatchStarted!: boolean;
   stopwatchPaused!: boolean;
   stopwatchnotStarted!: boolean;
@@ -38,7 +36,7 @@ export class ProjectActionComponent implements OnInit {
     this.webSocketService.emit('sendButtonStatus', {});
 
     //listening the timer buttonStatus event to decide on buttons to display
-    this.webSocketService.listen('buttonStatus').subscribe((data)=>{
+    this.webSocketService.listen('buttonStatus').subscribe((data) => {
       this.showTimerButtons(data);
     });
 
@@ -51,26 +49,6 @@ export class ProjectActionComponent implements OnInit {
     this.webSocketService.listen('recovertimer').subscribe((data) => {
       this.webSocketService.emitOuter();
     });
-
-    // var _hours = document.querySelectorAll('.hours');
-    // var _minutes = document.querySelectorAll('.minutes');
-    // var _seconds = document.querySelectorAll('.seconds');
-
-    // setInterval(() => {
-    //   var date = new Date();
-    //   var hours = date.getHours(),
-    //     minutes = date.getMinutes(),
-    //     seconds = date.getSeconds();
-
-    //   this.setNumber(_hours[0], Math.floor(hours / 10), 1);
-    //   this.setNumber(_hours[1], hours % 10, 1);
-
-    //   this.setNumber(_minutes[0], Math.floor(minutes / 10), 1);
-    //   this.setNumber(_minutes[1], minutes % 10, 1);
-
-    //   this.setNumber(_seconds[0], Math.floor(seconds / 10), 1);
-    //   this.setNumber(_seconds[1], seconds % 10, 1);
-    // }, 1000);
   }
 
   digitSegments = [
@@ -167,18 +145,18 @@ export class ProjectActionComponent implements OnInit {
     this.stopwatchnotPaused = false;
   }
 
-  showTimerButtons(data: any){
+  showTimerButtons(data: any) {
     if (!!!data) return;
     const timerStatus = data.status;
     //show the buttons
-    if (timerStatus === 'running'){
+    if (timerStatus === 'running') {
       this.stopwatchnotPaused = true;
       this.stopwatchStarted = true;
-    }else if(timerStatus === 'paused'){
+    } else if (timerStatus === 'paused') {
       this.stopwatchPaused = true;
       this.stopwatchStarted = true;
-    }else if(timerStatus === 'stopped'){
-      this.stopwatchnotStarted = true;      
+    } else if (timerStatus === 'stopped') {
+      this.stopwatchnotStarted = true;
     }
   }
 
