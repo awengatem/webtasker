@@ -12,21 +12,34 @@ export class ProjectActionComponent implements OnInit {
   projectName: any;
   activeStatus: boolean = false;
   projectId!: string;
-  stopwatchStarted: boolean = false;
-  stopwatchPaused: boolean = false;
+  // stopwatchStarted: boolean = false;
+  // stopwatchPaused: boolean = false;
+  stopwatchStarted!: boolean;
+  stopwatchPaused!: boolean;
+  stopwatchnotStarted!: boolean;
+  stopwatchnotPaused!: boolean;
 
   constructor(
     private webSocketService: SocketIoService,
     private projectService: ProjectService,
-    private route: ActivatedRoute,   
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    //get the project from params
     this.route.params.subscribe((params: Params) => {
       const projectId = params['projectId'];
       this.projectId = projectId;
       this.getProject(projectId);
+    });
+
+    //request timerbuttons from server
+    this.webSocketService.emit('sendButtonStatus', {});
+
+    //listening the timer buttonStatus event to decide on buttons to display
+    this.webSocketService.listen('buttonStatus').subscribe((data)=>{
+      this.showTimerButtons(data);
     });
 
     //listening the timer tick event from server
@@ -130,19 +143,43 @@ export class ProjectActionComponent implements OnInit {
   /**Timer control methods */
   startTimer(): void {
     this.webSocketService.emit('start', {});
+    //update button control variables
     this.stopwatchStarted = true;
+    this.stopwatchnotPaused = true;
     this.stopwatchPaused = false;
+    this.stopwatchnotStarted = false;
   }
 
   pauseTimer(): void {
     this.webSocketService.emit('pause', {});
+    //update button control variables
     this.stopwatchPaused = true;
+    this.stopwatchnotPaused = false;
   }
 
   stopTimer() {
     //AKA reset
     this.webSocketService.emit('stop', {});
+    //update button control variables
+    this.stopwatchnotStarted = true;
     this.stopwatchStarted = false;
+    this.stopwatchPaused = false;
+    this.stopwatchnotPaused = false;
+  }
+
+  showTimerButtons(data: any){
+    if (!!!data) return;
+    const timerStatus = data.status;
+    //show the buttons
+    if (timerStatus === 'running'){
+      this.stopwatchnotPaused = true;
+      this.stopwatchStarted = true;
+    }else if(timerStatus === 'paused'){
+      this.stopwatchPaused = true;
+      this.stopwatchStarted = true;
+    }else if(timerStatus === 'stopped'){
+      this.stopwatchnotStarted = true;      
+    }
   }
 
   //getting project name
