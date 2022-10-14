@@ -94,35 +94,10 @@
                           type="button"
                           class="col btn btn-outline-success btn-sm me-2"
                           *ngIf="!project.selected"
-                          [routerLink]="['/projects', project._id]"                          
+                          (click)="saveProjectTeam(project.team)"
+                          [routerLink]="['/projects', project._id]"
                         >
                           start
-                        </button>
-                        <button
-                          type="button"
-                          class="col btn btn-custom btn-sm me-2 text-white"
-                          *ngIf="paused && started && project.selected"
-                          (click)="continue()"
-                        >
-                          continue
-                        </button>
-                        <button
-                          type="button"
-                          class="col btn btn-custom btn-sm me-2 text-white"
-                          *ngIf="
-                            !paused && started && !ended && project.selected
-                          "
-                          (click)="pause()"
-                        >
-                          break
-                        </button>
-                        <button
-                          type="button"
-                          class="col btn btn-outline-danger btn-sm"
-                          *ngIf="started && !ended && project.selected"
-                          (click)="alertConfirmation(project._id.valueOf())"
-                        >
-                          end
                         </button>
                       </div>
                     </div>
