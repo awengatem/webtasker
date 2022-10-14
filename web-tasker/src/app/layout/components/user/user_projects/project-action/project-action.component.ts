@@ -122,8 +122,16 @@ export class ProjectActionComponent implements OnInit {
   }
 
   /**Timer control methods */
-  startTimer(): void {
-    this.webSocketService.emit('start', {});
+  startTimer(mode: string): void {
+    const teamId = localStorage.getItem('capturedProjectTeam');
+    if (mode === 'start') {
+      this.webSocketService.emit('start', {
+        projectId: this.projectId,
+        teamId: teamId,
+      });
+    } else if (mode === 'continue') {
+      this.webSocketService.emit('continue', {});
+    }
     //update button control variables
     this.stopwatchStarted = true;
     this.stopwatchnotPaused = true;
@@ -171,11 +179,11 @@ export class ProjectActionComponent implements OnInit {
           ? (this.projectName = project.projectName)
           : (this.projectName = 'Project name');
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err);
         //redirect to projects if anything goes wrong
         this.router.navigate(['/projects']);
-      }
+      },
     });
   }
 }

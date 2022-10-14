@@ -123,7 +123,7 @@
                       *ngIf="stopwatchPaused"
                       id="stopwatch-reset"
                       class="btn-pause"
-                      (click)="startTimer()"
+                      (click)="startTimer('continue')"
                     >
                       Continue
                     </button>
@@ -131,7 +131,7 @@
                       *ngIf="stopwatchnotStarted"
                       id="stopwatch-start"
                       class="btn-start-stopwatch"
-                      (click)="startTimer()"
+                      (click)="startTimer('start')"
                     >
                       Start
                     </button>
