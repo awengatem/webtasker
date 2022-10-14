@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-projects',
@@ -22,6 +23,7 @@ export class ProjectsComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute,
+    private teamService: TeamService,
     private router: Router
   ) {}
 
@@ -39,6 +41,13 @@ export class ProjectsComponent implements OnInit {
     this.projectService.getUserProjects().subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
+      /**push teamname to each project */
+      for (let i = 0; i < this.projects.length; i++) {
+        const teamId = this.projects[i].team;
+        this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
+          this.projects[i].teamName = team.teamName;
+        });
+      }
       /**get project members immediately
        * after filling projects array*/
       this.getProjectMembers();
