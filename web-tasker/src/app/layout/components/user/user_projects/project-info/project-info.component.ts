@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 
@@ -20,7 +20,8 @@ export class ProjectInfoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,9 +35,8 @@ export class ProjectInfoComponent implements OnInit {
 
   //getting project name
   getProject(projectId: string) {
-    this.projectService
-      .getSpecificProject(projectId)
-      .subscribe((project: any) => {
+    this.projectService.getSpecificProject(projectId).subscribe({
+      next: (project: any) => {
         console.log(project);
         this.selectedProject = project;
         project.projectName
@@ -49,7 +49,13 @@ export class ProjectInfoComponent implements OnInit {
           ? (this.lastUpdated = project.updatedAt)
           : (this.lastUpdated = 'Unknown');
         project.teams ? this.teamName : (this.teamName = 'Team name');
-      });
+      },
+      error: (err) => {
+        console.log(err);
+        //redirect to projects if anything goes wrong
+        this.router.navigate(['/projects']);
+      },
+    });
   }
 
   //getting the team name
@@ -72,7 +78,7 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   //clear localstorage teamId immediately we navigate away
-  clearCapturedTeam(){
+  clearCapturedTeam() {
     localStorage.removeItem('capturedProjectTeam');
   }
 

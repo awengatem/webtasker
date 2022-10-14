@@ -165,12 +165,17 @@ export class ProjectActionComponent implements OnInit {
 
   //getting project name
   getProject(projectId: string) {
-    this.projectService
-      .getSpecificProject(projectId)
-      .subscribe((project: any) => {
+    this.projectService.getSpecificProject(projectId).subscribe({
+      next: (project: any) => {
         project.projectName
           ? (this.projectName = project.projectName)
           : (this.projectName = 'Project name');
-      });
+      },
+      error:(err)=>{
+        console.log(err);
+        //redirect to projects if anything goes wrong
+        this.router.navigate(['/projects']);
+      }
+    });
   }
 }
