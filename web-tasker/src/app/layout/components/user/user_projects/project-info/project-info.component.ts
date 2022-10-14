@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-project-info',
@@ -11,20 +12,22 @@ export class ProjectInfoComponent implements OnInit {
   projectName: any;
   createdBy: any;
   lastUpdated: any;
-  teamCount: any;
+  teamName: any;
   selectedProject!: any[];
   projectId!: string;
   actionClicked = false;
 
   constructor(
     private route: ActivatedRoute,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private teamService: TeamService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       const projectId = params['projectId'];
       this.projectId = projectId;
+      this.getTeamName();
       this.getProject(projectId);
     });
   }
@@ -45,14 +48,36 @@ export class ProjectInfoComponent implements OnInit {
         project.updatedAt
           ? (this.lastUpdated = project.updatedAt)
           : (this.lastUpdated = 'Unknown');
-        project.teams
-          ? (this.teamCount = project.teams.length)
-          : (this.teamCount = 0);
+        project.teams ? this.teamName : (this.teamName = 'Team name');
       });
   }
 
+  //getting the team name
+  getTeamName() {
+    /**get teamId first*/
+    let teamId = this.projectService.getCapturedProjectTeam();
+    /**check from localstorage if it is undefined*/
+    if (teamId === undefined) {
+      teamId = localStorage.getItem('capturedProjectTeam')!;
+    }
+    if (teamId != undefined) {
+      this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
+        this.teamName = team.teamName;
+        /**store this in localstorage to aid in refresh */
+        localStorage.setItem('capturedProjectTeam', teamId);
+      });
+    } else {
+      this.teamName = 'Unknown';
+    }
+  }
+
+  //clear localstorage teamId immediately we navigate away
+  clearCapturedTeam(){
+    localStorage.removeItem('capturedProjectTeam');
+  }
+
   //method to show action menu
-  action(){
+  action() {
     this.actionClicked = !this.actionClicked;
   }
 }

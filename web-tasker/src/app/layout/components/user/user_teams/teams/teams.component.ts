@@ -34,6 +34,7 @@ export class TeamsComponent implements OnInit {
     this.scrollDown();
   }
 
+  /**getting the teams */
   getTeams() {
     this.teamService.getUserTeams().subscribe((teams: any) => {
       console.log(teams);
@@ -70,7 +71,7 @@ export class TeamsComponent implements OnInit {
           .getTeamMembersDoc(this.teams[i]._id)
           .subscribe((members: any) => {
             console.log(members.length);
-            //push number of members to projects
+            //push number of members to teams
             this.teams[i].members = members.length;
           });
       }

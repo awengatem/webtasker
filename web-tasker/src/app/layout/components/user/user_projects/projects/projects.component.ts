@@ -39,7 +39,7 @@ export class ProjectsComponent implements OnInit {
     this.projectService.getUserProjects().subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
-      /**get project members immediately 
+      /**get project members immediately
        * after filling projects array*/
       this.getProjectMembers();
     });
@@ -77,5 +77,12 @@ export class ProjectsComponent implements OnInit {
           });
       }
     }
+  }
+
+  /**Carry the project team to project-info through service */
+  saveProjectTeam(teamId: string) {
+    /**set the teamId to carry to the next window */
+    this.projectService.setCapturedProjectTeam(teamId);
+    // console.log(teamId);
   }
 }

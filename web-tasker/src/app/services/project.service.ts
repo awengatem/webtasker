@@ -11,6 +11,9 @@ export class ProjectService {
   //variable to contain selected project to aid in edit component
   private capturedProject!: string;
 
+  //variable to contain selected project's team to aid in deciding teamId for timer
+  private capturedProjectTeam!: string;
+
   //variable to help if user was assigning projects and then show projects next
   private fromAssignProject!: boolean;
 
@@ -27,10 +30,10 @@ export class ProjectService {
   }
 
   /** Method to get a specified project*/
-  getSpecificProject(projectId: string) {    
+  getSpecificProject(projectId: string) {
     return this.webReqService.get(`projects/${projectId}`);
   }
-  
+
   getUserProjects() {
     //send a web request to get user projects
     return this.webReqService.get('projects/myprojects');
@@ -42,7 +45,7 @@ export class ProjectService {
   }
 
   /**Method to get project members */
-  getProjectMembers(projectId: string) {   
+  getProjectMembers(projectId: string) {
     return this.webReqService.get(`projects/members/${projectId}`);
   }
 
@@ -79,12 +82,21 @@ export class ProjectService {
     this.capturedProject = project;
   }
 
+  /**Methods used by capturedProjectTeam above */
+  getCapturedProjectTeam() {
+    return this.capturedProjectTeam;
+  }
+
+  setCapturedProjectTeam(teamId: string) {
+    this.capturedProjectTeam = teamId;
+  }
+
   /**Methods used to check whether user comes from assign projects component */
   getFromAssigning() {
     return this.fromAssignProject;
   }
 
   setFromAssigning(bool: boolean) {
-    this.fromAssignProject= bool;
+    this.fromAssignProject = bool;
   }
 }
