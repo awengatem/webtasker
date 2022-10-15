@@ -162,18 +162,13 @@ export class ProjectActionComponent implements OnInit {
     //show the buttons
     if (timerStatus === 'running') {
       this.stopwatchnotPaused = true;
-      this.stopwatchStarted = true;
-      this.stopwatchPaused = false;
-      this.stopwatchnotStarted = false;
+      this.stopwatchStarted = true;      
     } else if (timerStatus === 'paused') {
       this.stopwatchPaused = true;
       this.stopwatchStarted = true;
       this.stopwatchnotPaused = false;
     } else if (timerStatus === 'stopped') {
-      this.stopwatchnotStarted = true;
-      this.stopwatchStarted = false;
-      this.stopwatchPaused = false;
-      this.stopwatchnotPaused = false;
+      this.stopwatchnotStarted = true;      
     }
   }
 
