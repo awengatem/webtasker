@@ -42,6 +42,7 @@ export class SocketIoService {
   emitOuter() {
     /*rejoin new socket to room*/
     this.socket.emit('create', this.roomId);
+    //this.socket.emit('recover', {});
   }
 
   listen(eventname: string): Observable<any> {

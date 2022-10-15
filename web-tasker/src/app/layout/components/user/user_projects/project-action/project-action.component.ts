@@ -163,11 +163,17 @@ export class ProjectActionComponent implements OnInit {
     if (timerStatus === 'running') {
       this.stopwatchnotPaused = true;
       this.stopwatchStarted = true;
+      this.stopwatchPaused = false;
+      this.stopwatchnotStarted = false;
     } else if (timerStatus === 'paused') {
       this.stopwatchPaused = true;
       this.stopwatchStarted = true;
+      this.stopwatchnotPaused = false;
     } else if (timerStatus === 'stopped') {
       this.stopwatchnotStarted = true;
+      this.stopwatchStarted = false;
+      this.stopwatchPaused = false;
+      this.stopwatchnotPaused = false;
     }
   }
 
