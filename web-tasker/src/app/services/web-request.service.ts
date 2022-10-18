@@ -36,7 +36,7 @@ export class WebRequestService {
     return this.http.post(`${this.ROOT_URL}/${uri}`, payload);
   }
 
-  patch(uri: string, payload: object) {    
+  patch(uri: string, payload: object) {
     return this.http.patch(`${this.ROOT_URL}/${uri}`, payload);
   }
 

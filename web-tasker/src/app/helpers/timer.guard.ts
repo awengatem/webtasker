@@ -30,6 +30,7 @@ export class TimerGuard implements CanActivate {
         if (message === 'allowed') {
           resolve(true);
         } else {
+          this.router.navigate(['/projects']);
           resolve(false);
         }
       });
