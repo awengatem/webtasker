@@ -77,9 +77,12 @@ export class HomeComponent implements OnInit {
   }
 
  /**Carry the project team to project-info through service */
- saveProjectTeam(teamId: string) {
+ saveProjectTeam(teamId: string,projectId: string) {
   /**set the teamId to carry to the next window */
   this.projectService.setCapturedProjectTeam(teamId);
+   /**store this in localstorage to aid in refresh */
+   localStorage.setItem('capturedProjectTeam', teamId);
+   localStorage.setItem('capturedProjectId', projectId);
   // console.log(teamId);
 }
 

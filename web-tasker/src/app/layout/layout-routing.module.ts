@@ -22,6 +22,7 @@ import { ProjectInfoComponent } from './components/user/user_projects/project-in
 import { AdProjectInfoComponent } from './components/admin/adprojects/ad-project-info/ad-project-info.component';
 import { SocketTestComponent } from './components/admin/socket-test/socket-test.component';
 import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
+import { TimerGuard } from '../helpers/timer.guard';
 
 const routes: Routes = [
   {
@@ -60,7 +61,7 @@ const routes: Routes = [
       },
       {
         path: 'projects/:projectId/action',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard,TimerGuard],
         component: ProjectActionComponent,
       },
 

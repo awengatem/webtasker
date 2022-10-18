@@ -26,15 +26,13 @@ export class TimerGuard implements CanActivate {
     | boolean
     | UrlTree {
     return new Promise((resolve, reject) => {
-      this.isUserAllowed = this.timerService.authorizeUser();
-
-      if (this.isUserAllowed) {
-        resolve(true);
-      } else {
-        //navigate back to the component
-        this.router.navigate(['/projects']);
-        resolve(false);
-      }
+      this.timerService.authorizeUser().then((message) => {
+        if (message === 'allowed') {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
     });
   }
 }

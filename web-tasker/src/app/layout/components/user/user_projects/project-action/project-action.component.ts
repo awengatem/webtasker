@@ -126,7 +126,7 @@ export class ProjectActionComponent implements OnInit {
   /**Timer control methods */
   startTimer(mode: string): void {
     const teamId = localStorage.getItem('capturedProjectTeam');
-    if (mode === 'start') {
+    if (mode === 'start' && teamId != null) {
       this.webSocketService.emit('start', {
         projectId: this.projectId,
         teamId: teamId,

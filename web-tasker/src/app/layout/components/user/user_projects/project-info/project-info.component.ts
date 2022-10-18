@@ -92,8 +92,7 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   /**authorize the user timer */
-  authTimer(){
-    //console.log(this.teamId.typeOf());
+  authTimer(){    
     this.timerService.navigator(this.projectId,this.teamId);
   }
 

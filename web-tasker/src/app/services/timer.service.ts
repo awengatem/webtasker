@@ -47,21 +47,20 @@ export class TimerService {
   }
 
   /**method used by route guard to authorize user */
-  authorizeUser(): boolean {
-    let myBool = false;
+  authorizeUser() {
+    //let myBool = false;
     /**get the project and team ids first to check if they are authorized */
     const projectId = localStorage.getItem('capturedProjectId')!;
     const teamId = localStorage.getItem('capturedProjectTeam')!;
     /**check response first */
-    this.authorizeTimer(projectId, teamId).subscribe({
-      next: (response: any) => {
-        const message = response.message;
-        /**return true if allowed */
-        if (message === 'allowed') {
-          myBool = true;
-        }
-      },
+    return new Promise(async (resolve, reject) => {
+      /**return server response to decide */
+      this.authorizeTimer(projectId, teamId).subscribe({
+        next: (response: any) => {
+          const message = response.message;
+          resolve(message);
+        },
+      });
     });
-    return myBool;
   }
 }
