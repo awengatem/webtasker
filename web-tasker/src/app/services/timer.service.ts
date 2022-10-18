@@ -32,10 +32,19 @@ export class TimerService {
         if (message === 'allowed') {
           return this.router.navigate([`/projects/${projectId}/action`]);
         }
-        /**notify user */
+
+        if (message === 'denied') {
+          /**notify user */
+          return Swal.fire(
+            'Complete current session first!',
+            `a session is already in progress.`,
+            'error'
+          );
+        }
+
         return Swal.fire(
-          'Complete current session first!',
-          `a session is already in progress.`,
+          'An error occurred!',
+          `contact the administrator`,
           'error'
         );
       },
