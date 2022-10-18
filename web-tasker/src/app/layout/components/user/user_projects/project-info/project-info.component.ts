@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
+import { TimerService } from 'src/app/services/timer.service';
 
 @Component({
   selector: 'app-project-info',
@@ -13,6 +14,7 @@ export class ProjectInfoComponent implements OnInit {
   createdBy: any;
   lastUpdated: any;
   teamName: any;
+  teamId: any;
   selectedProject!: any[];
   projectId!: string;
   actionClicked = false;
@@ -21,6 +23,7 @@ export class ProjectInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private teamService: TeamService,
+    private timerService: TimerService,
     private router: Router
   ) {}
 
@@ -67,6 +70,13 @@ export class ProjectInfoComponent implements OnInit {
       teamId = localStorage.getItem('capturedProjectTeam')!;
     }
     if (teamId != undefined) {
+      /**taking the value only if type returned is an array */
+      if(typeof teamId === 'object'){
+        this.teamId = teamId[0];
+      }else{
+        this.teamId = teamId;
+      }
+      
       this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
         this.teamName = team.teamName;
         /**store this in localstorage to aid in refresh */
@@ -80,6 +90,12 @@ export class ProjectInfoComponent implements OnInit {
   //clear localstorage teamId immediately we navigate away
   clearCapturedTeam() {
     localStorage.removeItem('capturedProjectTeam');
+  }
+
+  /**authorize the user timer */
+  authTimer(){
+    //console.log(this.teamId.typeOf());
+    this.timerService.navigator(this.projectId,this.teamId);
   }
 
   //method to show action menu

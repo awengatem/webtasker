@@ -48,7 +48,7 @@
               <div class="col dropdown-content shadow">
                 <a
                   class="dropdown-item"
-                  [routerLink]="['/projects', projectId,'action']"
+                  (click)="authTimer()"
                   >work</a
                 >
                 <a class="dropdown-item">sessions</a>

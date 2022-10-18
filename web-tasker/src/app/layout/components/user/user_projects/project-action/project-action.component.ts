@@ -68,29 +68,31 @@ export class ProjectActionComponent implements OnInit {
   ];
 
   setNumber(digit: any, number: any, on: any) {
-    var segments = digit.querySelectorAll('.segment');
-    var current = parseInt(digit.getAttribute('data-value'));
+    if (digit != undefined) {
+      var segments = digit.querySelectorAll('.segment');
+      var current = parseInt(digit.getAttribute('data-value'));
 
-    // only switch if number has changed or wasn't set
-    if (!isNaN(current) && current != number) {
-      // unset previous number
-      this.digitSegments[current].forEach(function (digitSegment, index) {
-        setTimeout(function () {
-          segments[digitSegment - 1].classList.remove('on');
-        }, index * 45);
-      });
-    }
-
-    if (isNaN(current) || current != number) {
-      // set new number after
-      setTimeout(() => {
-        this.digitSegments[number].forEach(function (digitSegment, index) {
+      // only switch if number has changed or wasn't set
+      if (!isNaN(current) && current != number) {
+        // unset previous number
+        this.digitSegments[current].forEach(function (digitSegment, index) {
           setTimeout(function () {
-            segments[digitSegment - 1].classList.add('on');
+            segments[digitSegment - 1].classList.remove('on');
           }, index * 45);
         });
-      }, 250);
-      digit.setAttribute('data-value', number);
+      }
+
+      if (isNaN(current) || current != number) {
+        // set new number after
+        setTimeout(() => {
+          this.digitSegments[number].forEach(function (digitSegment, index) {
+            setTimeout(function () {
+              segments[digitSegment - 1].classList.add('on');
+            }, index * 45);
+          });
+        }, 250);
+        digit.setAttribute('data-value', number);
+      }
     }
   }
 
@@ -162,13 +164,13 @@ export class ProjectActionComponent implements OnInit {
     //show the buttons
     if (timerStatus === 'running') {
       this.stopwatchnotPaused = true;
-      this.stopwatchStarted = true;      
+      this.stopwatchStarted = true;
     } else if (timerStatus === 'paused') {
       this.stopwatchPaused = true;
       this.stopwatchStarted = true;
       //this.stopwatchnotPaused = false;
     } else if (timerStatus === 'stopped') {
-      this.stopwatchnotStarted = true;      
+      this.stopwatchnotStarted = true;
     }
   }
 
