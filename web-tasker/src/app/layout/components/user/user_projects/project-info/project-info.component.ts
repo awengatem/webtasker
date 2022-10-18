@@ -78,9 +78,7 @@ export class ProjectInfoComponent implements OnInit {
       }
       
       this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
-        this.teamName = team.teamName;
-        /**store this in localstorage to aid in refresh */
-        localStorage.setItem('capturedProjectTeam', teamId);
+        this.teamName = team.teamName;       
       });
     } else {
       this.teamName = 'Unknown';
@@ -90,6 +88,7 @@ export class ProjectInfoComponent implements OnInit {
   //clear localstorage teamId immediately we navigate away
   clearCapturedTeam() {
     localStorage.removeItem('capturedProjectTeam');
+    localStorage.removeItem('capturedProjectId');
   }
 
   /**authorize the user timer */

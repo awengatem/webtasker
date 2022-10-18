@@ -16,7 +16,7 @@
                 <div
                   class="col-md-6"
                   *ngFor="let project of projects"
-                  (click)="saveProjectTeam(project.team)"
+                  (click)="saveProjectTeam(project.team,project._id)"
                   [routerLink]="['/projects', project._id]"
                 >
                   <div class="timetable-item shadow pointer">
