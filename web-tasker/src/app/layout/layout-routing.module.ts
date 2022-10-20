@@ -6,7 +6,7 @@ import { TeamsComponent } from './components/user/user_teams/teams/teams.compone
 import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { LoginComponent } from './auth/login/login.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
-import { AuthGuard } from '../helpers/auth-guard.guard';
+import { AuthGuard } from '../helpers/guards/auth-guard.guard';
 import { AdDashboardComponent } from './components/admin/ad-dashboard/ad-dashboard.component';
 import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
 import { AdTeamsComponent } from './components/admin/adteams/ad-teams/ad-teams.component';
@@ -22,7 +22,7 @@ import { ProjectInfoComponent } from './components/user/user_projects/project-in
 import { AdProjectInfoComponent } from './components/admin/adprojects/ad-project-info/ad-project-info.component';
 import { SocketTestComponent } from './components/admin/socket-test/socket-test.component';
 import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
-import { TimerGuard } from '../helpers/timer.guard';
+import { TimerGuard } from '../helpers/guards/timer.guard';
 
 const routes: Routes = [
   {
