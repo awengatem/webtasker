@@ -7,13 +7,14 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { TimerService } from '../../services/timer.service';
+import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TimerGuard implements CanActivate {
-  constructor(private timerService: TimerService, private router: Router) {}
+export class AdminGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -24,11 +25,13 @@ export class TimerGuard implements CanActivate {
     | boolean
     | UrlTree {
     return new Promise((resolve, reject) => {
-      this.timerService.authorizeUser().then((message) => {
-        if (message === 'allowed') {
+      this.authService.verifyAdmin().then((result) => {
+        if (result === true) {
           resolve(true);
         } else {
-          this.router.navigate(['/projects']);
+          /**notify user */
+          Swal.fire('Unauthorized!', `You are not an admin.`, 'warning');
+          this.router.navigate(['/home']);
           resolve(false);
         }
       });

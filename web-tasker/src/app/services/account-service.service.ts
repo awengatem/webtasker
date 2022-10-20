@@ -21,6 +21,7 @@ export class AccountService {
   public saveUser(user: any){
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY,JSON.stringify(user));
+    window.sessionStorage.setItem("user-id",user._id);
   }
 
   public getUser(): any{

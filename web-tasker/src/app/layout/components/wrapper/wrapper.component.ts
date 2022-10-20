@@ -9,6 +9,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { AccountService } from 'src/app/services/account-service.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { SidenavService } from 'src/app/services/sidenav.service';
+import Swal from 'sweetalert2';
 import {
   sideNavAnimation,
   sideNavContainerAnimation,
@@ -25,7 +26,7 @@ export class WrapperComponent implements OnInit {
   //@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
   /**Variables used by sidenav status */
-  isExpanded!: boolean;  
+  isExpanded!: boolean;
   sublist!: boolean;
 
   constructor(
@@ -35,21 +36,28 @@ export class WrapperComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const expanded = this.sidenavService.getIsExpanded();    
+    const expanded = this.sidenavService.getIsExpanded();
     const sublist = this.sidenavService.getSublist();
     if (expanded === 'true') {
       this.isExpanded = true;
     } else {
       this.isExpanded = false;
-    }    
+    }
     if (sublist === 'true') {
-      this.sublist = true;
+      //check if admin first
+      this.authService.verifyAdmin().then((result) => {
+        if (result === true) {
+          this.sublist = true;
+        } else {
+          this.sublist = false;
+        }
+      });
     } else {
       this.sublist = false;
     }
   }
 
-  toggle() {    
+  toggle() {
     if (this.isExpanded === true) {
       this.isExpanded = false;
       this.sidenavService.setIsExpanded('false');
@@ -71,14 +79,31 @@ export class WrapperComponent implements OnInit {
   }
 
   showSublist() {
-    let status;
-    this.sublist = !this.sublist;
-    if(this.sublist === true){
-      status = 'true';
-    }else{
-      status = 'false';
-    }
-    //update local storage
-    this.sidenavService.setSublist(status);
+    /**prevent showing sublist if user is not an admin */
+    this.authService
+      .verifyAdmin()
+      .then((result) => {
+        let status;
+        if (result === true) {
+          this.sublist = !this.sublist;
+          if (this.sublist === true) {
+            status = 'true';
+          } else {
+            status = 'false';
+          }
+        } else {
+          /**hide sublist */
+          this.sublist = false;
+          status = 'false';
+          /**notify user */
+          Swal.fire('Unauthorized!', `You are not an admin.`, 'warning');
+        }
+        //update local storage
+        this.sidenavService.setSublist(status);
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire('Error!', `Some error ocurred`, 'error');
+      });
   }
 }

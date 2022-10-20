@@ -76,19 +76,19 @@ export class AuthService {
 
   /**Sets sidenav defaults to local storage
    * Helps preserve sidenav status after refresh
-  */
-  private setSidenavValues(){
-    localStorage.setItem('isExpanded', this.positive);    
+   */
+  private setSidenavValues() {
+    localStorage.setItem('isExpanded', this.positive);
     localStorage.setItem('sublist', this.negative);
   }
 
   /**Sets session button defaults to local storage
    * Helps control the start and end buttons
-  */
-   private setButtonStatus(){
-    this.statusService.setEnded("false");
-    this.statusService.setStarted("false");
-    this.statusService.setPaused("false");
+   */
+  private setButtonStatus() {
+    this.statusService.setEnded('false');
+    this.statusService.setStarted('false');
+    this.statusService.setPaused('false');
   }
 
   private removeSession() {
@@ -96,13 +96,11 @@ export class AuthService {
     // localStorage.removeItem('user-id');
     // localStorage.removeItem('access-token');
     // //clear sidenav statuses
-    // localStorage.removeItem('isExpanded');    
+    // localStorage.removeItem('isExpanded');
     // localStorage.removeItem('sublist');
   }
 
-  /*dummy method to check if authheaders are set
-   *checks if the access tokens are available
-   */
+  /**method used by auth guard to check if the user is authorized*/
   verifyUser() {
     this.myBool = false;
     const token1 = this.tokenService.getAccessTokenSession();
@@ -111,5 +109,24 @@ export class AuthService {
       this.myBool = true;
     }
     return this.myBool;
+  }
+
+  /**method used by admin guard to authorize admins */
+  verifyAdmin() {
+    return new Promise((resolve, reject) => {
+      /**get the userId from session storage */
+      const userId = window.sessionStorage.getItem('user-id');
+      /**check from db if user is an admin */
+      this.webService.get('users/current').subscribe({
+        next: (user) => {
+          const isProjectManager = user.isProjectManager;
+          resolve(isProjectManager);
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+    });
   }
 }

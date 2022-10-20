@@ -23,6 +23,7 @@ import { AdProjectInfoComponent } from './components/admin/adprojects/ad-project
 import { SocketTestComponent } from './components/admin/socket-test/socket-test.component';
 import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
 import { TimerGuard } from '../helpers/guards/timer.guard';
+import { AdminGuard } from '../helpers/guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -61,11 +62,11 @@ const routes: Routes = [
       },
       {
         path: 'projects/:projectId/action',
-        canActivate: [AuthGuard,TimerGuard],
+        canActivate: [AuthGuard, TimerGuard],
         component: ProjectActionComponent,
       },
 
-       /**TEAMS */
+      /**TEAMS */
       {
         path: 'teams',
         canActivate: [AuthGuard],
@@ -81,61 +82,61 @@ const routes: Routes = [
       /**DASHBOARD */
       {
         path: 'ad_dashboard',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         component: AdDashboardComponent,
       },
 
       /**PROJECTS */
       {
         path: 'ad_projects',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         component: AdProjectsComponent,
-      }, 
+      },
       {
         path: 'ad_projects/:projectId',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         component: AdProjectInfoComponent,
       },
       {
         path: 'new_project',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         component: NewProjectComponent,
       },
       {
         path: 'edit_project/:projectId',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         component: EditProjectComponent,
       },
 
       /**TEAMS */
       {
         path: 'ad_teams',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         component: AdTeamsComponent,
       },
       {
         path: 'ad_teams/:teamId',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         component: TeamInfoComponent,
       },
       {
         path: 'ad_teams/:teamId/add_member',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         component: AddMemberComponent,
       },
       {
         path: 'ad_teams/:teamId/assign_project',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         component: AssignProjectComponent,
       },
       {
         path: 'new_team',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         component: NewTeamComponent,
       },
       {
         path: 'edit_team/:teamId',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         component: EditTeamComponent,
       },
 
