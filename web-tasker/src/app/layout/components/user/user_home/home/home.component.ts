@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/account-service.service';
+import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { StatusService } from 'src/app/services/status.service';
 import Swal from 'sweetalert2';
@@ -16,27 +17,20 @@ export class HomeComponent implements OnInit {
   projects!: any[];
   totalProjects: number = 0;
   projectStatus: any = 'Unknown';
-  activeStatus!: any;
-  pauseTime!: any;
-
-  //button status variables{dont tamper}
-  paused = false;
-  started = false;
-  ended = false;
+  idle = true; //controls statusText styling(must be true by default)
+  started!: any; //controls statusText styling
 
   constructor(
     private account: AccountService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private projectStatusService: ProjectStatusService
   ) {}
 
   ngOnInit(): void {
     this.getUsername();
     this.getProjects();
     this.greetUser();
-
-    if (!this.started) {
-      this.projectStatus = 'Unproductive';
-    }
+    this.getStatus();
   }
 
   private getUsername(): any {
@@ -55,36 +49,24 @@ export class HomeComponent implements OnInit {
 
   /**METHODS USED BY TIMER */
   start(projectId: string) {
-    //ensure timer runs if only started
-    if (!this.started) {
-      //set started to true
-      //this.statusService.setStarted('true');
-      this.started = true;
-      //update status
-      this.projectStatus = 'Productive';
-      this.activeStatus = true;
-      //identify the selected project
-      for (let i = 0; i < this.projects.length; i++) {
-        if (this.projects[i]._id === projectId) {
-          this.projects[i].selected = true;
-          console.log(this.projects[i]);
-        }
+    //identify the selected project
+    for (let i = 0; i < this.projects.length; i++) {
+      if (this.projects[i]._id === projectId) {
+        this.projects[i].selected = true;
+        console.log(this.projects[i]);
       }
-    } else {
-      //alert sesssion in progress
-      Swal.fire('Sorry!', `session in progress.`, 'error');
     }
   }
 
- /**Carry the project team to project-info through service */
- saveProjectTeam(teamId: string,projectId: string) {
-  /**set the teamId to carry to the next window */
-  this.projectService.setCapturedProjectTeam(teamId);
-   /**store this in localstorage to aid in refresh */
-   localStorage.setItem('capturedProjectTeam', teamId);
-   localStorage.setItem('capturedProjectId', projectId);
-  // console.log(teamId);
-}
+  /**Carry the project team to project-info through service */
+  saveProjectTeam(teamId: string, projectId: string) {
+    /**set the teamId to carry to the next window */
+    this.projectService.setCapturedProjectTeam(teamId);
+    /**store this in localstorage to aid in refresh */
+    localStorage.setItem('capturedProjectTeam', teamId);
+    localStorage.setItem('capturedProjectId', projectId);
+    // console.log(teamId);
+  }
 
   /**METHOD TO GET TIME AND DISPLAY GREETING */
   greetUser() {
@@ -101,13 +83,33 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  hangTheBrowser() {
-    let val = '';
-
-    for (let i = 0; i < 10000; i++) {
-      for (let j = 0; j < 10000; j++) {
-        val = 'Loop returned: ' + i + j;
-      }
-    }
+  /**method to get the project status */
+  getStatus() {
+    this.projectStatusService.getActiveProjects().subscribe({
+      next: (documents) => {
+        //console.log(documents);
+        /**update status to productive or break */
+        if (documents.length > 0) {
+          /**update control variables first */
+          this.idle = false;
+          const document = documents[0];
+          if (document.status === 'running') {
+            this.projectStatus = 'Productive';
+            this.started = true;
+          } else if (document.status === 'paused') {
+            this.projectStatus = 'Break';
+            this.started = false;
+          }
+        } else {
+          /**restore defaults as there is no active project */
+          this.idle = true;
+          this.started = null;
+          this.projectStatus = 'Unproductive';
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

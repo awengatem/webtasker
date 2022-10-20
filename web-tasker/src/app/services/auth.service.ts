@@ -114,8 +114,6 @@ export class AuthService {
   /**method used by admin guard to authorize admins */
   verifyAdmin() {
     return new Promise((resolve, reject) => {
-      /**get the userId from session storage */
-      const userId = window.sessionStorage.getItem('user-id');
       /**check from db if user is an admin */
       this.webService.get('users/current').subscribe({
         next: (user) => {

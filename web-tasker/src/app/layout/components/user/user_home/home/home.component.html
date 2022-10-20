@@ -20,12 +20,12 @@
               <span>Status:&nbsp;</span>
               <div
                 class=""
-                *ngIf="started"
-                [ngClass]="activeStatus ? 'active' : 'break'"
+                *ngIf="!idle"
+                [ngClass]="started ? 'active' : 'break'"
               >
                 {{ projectStatus }}
               </div>
-              <div class="default" *ngIf="!started">{{ projectStatus }}</div>
+              <div class="default" *ngIf="idle">{{ projectStatus }}</div>
             </div>
           </mat-card-content>
         </mat-card>
