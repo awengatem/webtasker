@@ -13,9 +13,10 @@
               </div>
               <div class="d-flex status">
                 <span>Status:&nbsp;</span>
-                <div [ngClass]="activeStatus ? 'active' : 'default'">
-                  Unproductive
+                <div *ngIf="!idle" [ngClass]="started ? 'active' : 'break'">
+                  {{ projectStatus }}
                 </div>
+                <div class="default" *ngIf="idle">{{ projectStatus }}</div>
               </div>
             </div>
             <mat-divider></mat-divider>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { SocketIoService } from 'src/app/services/socket.io.service';
 @Component({
@@ -10,16 +11,20 @@ import { SocketIoService } from 'src/app/services/socket.io.service';
 export class ProjectActionComponent implements OnInit {
   /**local variables */
   projectName: any;
-  activeStatus: boolean = false;
   projectId!: string;
+  /**controls timer buttons */
   stopwatchStarted!: boolean;
   stopwatchPaused!: boolean;
   stopwatchnotStarted!: boolean;
   stopwatchnotPaused!: boolean;
+  projectStatus: any = 'Unknown';
+  idle = true; //controls statusText styling(must be true by default)
+  started!: any; //controls statusText styling
 
   constructor(
     private webSocketService: SocketIoService,
     private projectService: ProjectService,
+    private projectStatusService: ProjectStatusService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -52,6 +57,9 @@ export class ProjectActionComponent implements OnInit {
     this.webSocketService.listen('recovertimer').subscribe((data) => {
       this.webSocketService.emitOuter();
     });
+
+    /**get project status */
+    this.getStatus();
   }
 
   digitSegments = [
@@ -174,7 +182,7 @@ export class ProjectActionComponent implements OnInit {
     }
   }
 
-  //getting project name
+  /**getting project name*/
   getProject(projectId: string) {
     this.projectService.getSpecificProject(projectId).subscribe({
       next: (project: any) => {
@@ -186,6 +194,36 @@ export class ProjectActionComponent implements OnInit {
         console.log(err);
         //redirect to projects if anything goes wrong
         this.router.navigate(['/projects']);
+      },
+    });
+  }
+
+  /**method to get the project status */
+  getStatus() {
+    this.projectStatusService.getActiveProjects().subscribe({
+      next: (documents) => {
+        //console.log(documents);
+        /**update status to productive or break */
+        if (documents.length > 0) {
+          /**update control variables first */
+          this.idle = false;
+          const document = documents[0];
+          if (document.status === 'running') {
+            this.projectStatus = 'Productive';
+            this.started = true;
+          } else if (document.status === 'paused') {
+            this.projectStatus = 'Break';
+            this.started = false;
+          }
+        } else {
+          /**restore defaults as there is no active project */
+          this.idle = true;
+          this.started = null;
+          this.projectStatus = 'Unproductive';
+        }
+      },
+      error: (err) => {
+        console.log(err);
       },
     });
   }
