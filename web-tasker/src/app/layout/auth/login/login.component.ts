@@ -16,6 +16,7 @@ import {
 } from '@angular/forms';
 import { AccountService } from 'src/app/services/account-service.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { GeneralService } from 'src/app/services/general.service';
 import { TokenService } from 'src/app/services/token.service';
 import { WebRequestService } from 'src/app/services/web-request.service';
 import Swal from 'sweetalert2';
@@ -72,6 +73,7 @@ export class LoginComponent implements OnInit {
     private accountService: AccountService,
     private tokenService: TokenService,
     private webService: WebRequestService,
+    private generalService: GeneralService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -144,14 +146,14 @@ export class LoginComponent implements OnInit {
     console.log('signing up');
     if (this.isChecked === false) {
       this.flapCard();
-    }   
+    }
   }
 
   login() {
     console.log('login');
     if (this.isChecked === true) {
       this.flapCard();
-    }   
+    }
   }
 
   test() {
@@ -243,19 +245,26 @@ export class LoginComponent implements OnInit {
     /**creating user object to pass to server
      *properties name's should not be changed
      */
+    /**trim off white space before sending to server */
+    let cUsername = this.generalService.deepClean(username);
+    let cEmail = this.generalService.deepClean(email);
+    let cFirstname = this.generalService.deepClean(firstname);
+    let cLastname = this.generalService.deepClean(lastname);
+
     const user = {
-      username: username,
-      email: email,
+      username: cUsername,
+      email: cEmail,
       password: password,
-      firstName: firstname,
-      lastName: lastname,
+      firstName: cFirstname,
+      lastName: cLastname,
       isProjectManager: false,
     };
 
     /**post user to server*/
     this.webService.post('register', user).subscribe({
-      next: (res) => {
-        this.resetSignup(user.username);
+      next: (res: any) => {
+        Swal.fire(res.message);
+        this.resetSignup();
         console.log(res);
         this.signupFailed = false;
       },
@@ -277,11 +286,10 @@ export class LoginComponent implements OnInit {
     this.logsubmitted = true;
   }
 
-  resetSignup(username: string) {
+  resetSignup() {
     this.submitted = false;
     this.fSignup.reset();
     this.flapCard();
-    Swal.fire(`${username} registered successfully`);    
   }
 
   reloadPage() {

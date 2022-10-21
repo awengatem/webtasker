@@ -55,7 +55,9 @@ export class TimerService {
     });
   }
 
-  /**method used by route guard to authorize user */
+  /**method used by timer guard to authorize user
+   * method uses local storage variables
+   */
   authorizeUser() {
     //let myBool = false;
     /**get the project and team ids first to check if they are authorized */

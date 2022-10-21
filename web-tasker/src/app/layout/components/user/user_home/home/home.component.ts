@@ -3,6 +3,7 @@ import { AccountService } from 'src/app/services/account-service.service';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { StatusService } from 'src/app/services/status.service';
+import { TimerService } from 'src/app/services/timer.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private account: AccountService,
     private projectService: ProjectService,
+    private timerService: TimerService,
     private projectStatusService: ProjectStatusService
   ) {}
 
@@ -135,5 +137,13 @@ export class HomeComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  /**authorize the user timer */
+  authTimer(projectId: any, teamId: any) {
+    /**store this in localstorage to aid in timer guard authorization*/
+    localStorage.setItem('capturedProjectTeam', teamId);
+    localStorage.setItem('capturedProjectId', projectId);
+    this.timerService.navigator(projectId, teamId[0]);
   }
 }
