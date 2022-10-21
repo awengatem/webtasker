@@ -68,7 +68,13 @@
                       <p>{{ project.projectName }}</p>
                     </div>
                     <div class="col-sm">
-                      <p>{{ projectStatus }}</p>
+                      <p
+                        [ngClass]="
+                          project.status === 'Active' ? 'active' : 'break'
+                        "
+                      >
+                        {{ project.status }}
+                      </p>
                     </div>
                     <div class="col-sm">
                       <div class="progress">

@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit {
     this.getUsername();
     this.getProjects();
     this.greetUser();
-    this.getStatus();
   }
 
   private getUsername(): any {
@@ -42,12 +41,15 @@ export class HomeComponent implements OnInit {
       console.log(projects);
       this.projects = projects;
       this.totalProjects = projects.length;
-      //pushs selected status to projects
-      this.projects.forEach((p) => (p.selected = false));
+      //pushs project status to projects
+      this.projects.forEach((p) => (p.status = 'Unknown'));
     });
+    window.setTimeout(() => {
+      this.getStatus();
+    }, 100);
   }
 
-  /**METHODS USED BY TIMER */
+  /**test*/
   start(projectId: string) {
     //identify the selected project
     for (let i = 0; i < this.projects.length; i++) {
@@ -93,6 +95,8 @@ export class HomeComponent implements OnInit {
           /**update control variables first */
           this.idle = false;
           const document = documents[0];
+          //console.log(document);
+          /**update projectStatus text */
           if (document.status === 'running') {
             this.projectStatus = 'Productive';
             this.started = true;
@@ -100,11 +104,28 @@ export class HomeComponent implements OnInit {
             this.projectStatus = 'Break';
             this.started = false;
           }
+
+          /**update project status */
+          if (this.projects) {
+            for (let i = 0; i < this.projects.length; i++) {
+              if (this.projects[i]._id === document.project_id) {
+                this.projects[i].status = 'Active';
+              } else {
+                this.projects[i].status = 'Unproductive';
+              }
+            }
+          }
         } else {
-          /**restore defaults as there is no active project */
-          this.idle = true;
-          this.started = null;
-          this.projectStatus = 'Unproductive';
+          /**update project status */
+          if (this.projects) {
+            for (let i = 0; i < this.projects.length; i++) {
+              this.projects[i].status = 'Unproductive';
+            }
+            /**restore defaults as there is no active project */
+            this.idle = true;
+            this.started = null;
+            this.projectStatus = 'Unproductive';
+          }
         }
       },
       error: (err) => {
