@@ -108,7 +108,10 @@ export class HomeComponent implements OnInit {
           /**update project status */
           if (this.projects) {
             for (let i = 0; i < this.projects.length; i++) {
-              if (this.projects[i]._id === document.project_id) {
+              if (
+                this.projects[i]._id === document.project_id &&
+                this.projects[i].team[0] === document.team_id
+              ) {
                 this.projects[i].status = 'Active';
               } else {
                 this.projects[i].status = 'Unproductive';

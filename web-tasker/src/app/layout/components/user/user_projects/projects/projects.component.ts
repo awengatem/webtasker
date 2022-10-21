@@ -3,6 +3,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { TeamService } from 'src/app/services/team.service';
+import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 
 @Component({
   selector: 'app-projects',
@@ -24,6 +25,7 @@ export class ProjectsComponent implements OnInit {
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private teamService: TeamService,
+    private projectStatusService: ProjectStatusService,
     private router: Router
   ) {}
 
@@ -41,6 +43,8 @@ export class ProjectsComponent implements OnInit {
     this.projectService.getUserProjects().subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
+      /**pushs project status to projects*/
+      this.projects.forEach((p) => (p.status = 'Unknown'));
       /**push teamname to each project */
       for (let i = 0; i < this.projects.length; i++) {
         const teamId = this.projects[i].team;
@@ -51,6 +55,10 @@ export class ProjectsComponent implements OnInit {
       /**get project members immediately
        * after filling projects array*/
       this.getProjectMembers();
+      /**update project status after a short while */
+      window.setTimeout(() => {
+        this.getStatus();
+      }, 100);
     });
   }
 
@@ -89,12 +97,49 @@ export class ProjectsComponent implements OnInit {
   }
 
   /**Carry the project team to project-info through service */
-  saveProjectTeam(teamId: string,projectId: string) {
+  saveProjectTeam(teamId: string, projectId: string) {
     /**set the teamId to carry to the next window */
     this.projectService.setCapturedProjectTeam(teamId);
     /**store this in localstorage to aid in refresh */
     localStorage.setItem('capturedProjectTeam', teamId);
     localStorage.setItem('capturedProjectId', projectId);
     // console.log(teamId);
+  }
+
+  /**method to get the project status */
+  getStatus() {
+    this.projectStatusService.getActiveProjects().subscribe({
+      next: (documents) => {
+        //console.log(documents);
+        /**update status to productive or break */
+        if (documents.length > 0) {
+          const document = documents[0];
+          //console.log(document);
+          /**update project status */
+          if (this.projects) {
+            for (let i = 0; i < this.projects.length; i++) {
+              if (
+                this.projects[i]._id === document.project_id &&
+                this.projects[i].team[0] === document.team_id
+              ) {
+                this.projects[i].status = 'Active';
+              } else {
+                this.projects[i].status = 'Unproductive';
+              }
+            }
+          }
+        } else {
+          /**update project status */
+          if (this.projects) {
+            for (let i = 0; i < this.projects.length; i++) {
+              this.projects[i].status = 'Unproductive';
+            }
+          }
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }
