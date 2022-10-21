@@ -147,6 +147,10 @@ export class ProjectActionComponent implements OnInit {
     this.stopwatchnotPaused = true;
     this.stopwatchPaused = false;
     this.stopwatchnotStarted = false;
+    /**get project status */
+    window.setTimeout(() => {
+      this.getStatus();
+    }, 2000);
   }
 
   pauseTimer(): void {
@@ -154,6 +158,8 @@ export class ProjectActionComponent implements OnInit {
     //update button control variables
     this.stopwatchPaused = true;
     this.stopwatchnotPaused = false;
+    /**get project status */
+    this.getStatus();
   }
 
   stopTimer() {
@@ -164,6 +170,8 @@ export class ProjectActionComponent implements OnInit {
     this.stopwatchStarted = false;
     this.stopwatchPaused = false;
     this.stopwatchnotPaused = false;
+    /**get project status */
+    this.getStatus();
   }
 
   showTimerButtons(data: any) {
