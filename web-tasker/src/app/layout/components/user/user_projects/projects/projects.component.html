@@ -35,7 +35,14 @@
                           <div class="row">
                             <small
                               ><i class="uil uil-server"></i>status:
-                              {{ project.status }}</small
+                              <span
+                                [ngClass]="
+                                  project.status === 'Active'
+                                    ? 'active'
+                                    : 'break'
+                                "
+                                >{{ project.status }}</span
+                              ></small
                             >
                           </div>
                         </div>
