@@ -26,7 +26,6 @@
                     aria-label="Search"
                     aria-describedby="search-addon"
                     [(ngModel)]="searchText"
-                    autofocus
                   />
                   <span class="input-group-text border-0" id="search-addon">
                     <i class="uil uil-filter"></i>
@@ -41,7 +40,7 @@
                 <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
                 <div
                   class="col-md-6"
-                  *ngFor="let project of projects | appFilter: searchText"
+                  *ngFor="let project of projects | projectFilter: searchText"
                   [routerLink]="['/ad_projects', project._id]"
                 >
                   <div class="timetable-item shadow pointer">

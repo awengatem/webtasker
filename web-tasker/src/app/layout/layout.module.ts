@@ -36,8 +36,12 @@ import { ProjectInfoComponent } from './components/user/user_projects/project-in
 import { AdProjectInfoComponent } from './components/admin/adprojects/ad-project-info/ad-project-info.component';
 import { SocketTestComponent } from './components/admin/socket-test/socket-test.component';
 import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
-
-import { FilterPipe } from '../filter.pipe';
+/**Filters imported below */
+import {
+  ProjectFilterPipe,
+  TeamFilterPipe,
+  UserFilterPipe,
+} from '../filter.pipe';
 
 @NgModule({
   declarations: [
@@ -77,7 +81,9 @@ import { FilterPipe } from '../filter.pipe';
     ProjectActionComponent,
 
     /**added filter pipe to use it inside a component to filter*/
-    FilterPipe,
+    ProjectFilterPipe,
+    TeamFilterPipe,
+    UserFilterPipe,
   ],
   imports: [
     CommonModule,
