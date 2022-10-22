@@ -5,9 +5,35 @@
       <div class="centered-content">
         <div class="projects-container">
           <div class="projects">
-            <h1 class="text-dark">
-              my projects <i class="fa-regular fa-folder-open"></i>
-            </h1>
+            <div class="row">
+              <div class="col-3">
+                <h1 class="text-dark position-relative">
+                  my projects <i class="fa-regular fa-folder-open"></i>
+                  <span
+                    class="position-absolute top-0 start-99 translate-middle badge rounded-pill badge-danger count"
+                  >
+                    10+
+                  </span>
+                </h1>
+              </div>
+              <div class="col"></div>
+              <div class="col">
+                <div class="input-group rounded search-bar">
+                  <input
+                    type="search"
+                    class="form-control rounded"
+                    placeholder="enter project name to search ..."
+                    aria-label="Search"
+                    aria-describedby="search-addon"
+                    [(ngModel)]="searchText"
+                    autofocus
+                  />
+                  <span class="border-0 filter-icon" id="search-addon">
+                    <i class="uil uil-filter"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
             <mat-divider></mat-divider>
             <div class="projects-inside" id="projects">
               <div class="row">
@@ -15,7 +41,7 @@
                 <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
                 <div
                   class="col-md-6"
-                  *ngFor="let project of projects"
+                  *ngFor="let project of projects | projectFilter: searchText"
                   (click)="saveProjectTeam(project.team, project._id)"
                   [routerLink]="['/projects', project._id]"
                 >

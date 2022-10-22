@@ -14,12 +14,9 @@ export class ProjectsComponent implements OnInit {
   projects!: any[];
   projDiv: any;
   projectStatus: any;
-
-  /**Used by modal */
-  form: any = {
-    projectName: null,
-  };
   submitted: boolean = false;
+  /**used by search bar */
+  searchText = '';
 
   constructor(
     private projectService: ProjectService,
