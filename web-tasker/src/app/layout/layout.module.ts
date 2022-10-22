@@ -37,6 +37,8 @@ import { AdProjectInfoComponent } from './components/admin/adprojects/ad-project
 import { SocketTestComponent } from './components/admin/socket-test/socket-test.component';
 import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
 
+import { FilterPipe } from '../filter.pipe';
+
 @NgModule({
   declarations: [
     /*helper components*/
@@ -73,6 +75,9 @@ import { ProjectActionComponent } from './components/user/user_projects/project-
     AdProjectInfoComponent,
     SocketTestComponent,
     ProjectActionComponent,
+
+    /**added filter pipe to use it inside a component to filter*/
+    FilterPipe,
   ],
   imports: [
     CommonModule,
@@ -83,8 +88,8 @@ import { ProjectActionComponent } from './components/user/user_projects/project-
 
     /*material imports*/
     AngularMaterialModule,
-    NgMultiSelectDropDownModule.forRoot(), 
-    MdbDropdownModule,  
+    NgMultiSelectDropDownModule.forRoot(),
+    MdbDropdownModule,
   ],
   exports: [
     HeaderComponent,

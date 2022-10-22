@@ -1,11 +1,39 @@
 <div class="container-fluid page">
-  <div class="page__box p-3 mt-2"> Projects </div>
+  <div class="page__box p-3 mt-2">Projects</div>
   <div class="page__content shadow p-3 position-relative">
     <div class="page__content-data">
       <div class="centered-content">
         <div class="projects-container">
           <div class="projects">
-            <h1 class="text-dark">projects <i class="fa-regular fa-folder-open"></i></h1>
+            <div class="row">
+              <div class="col-2">
+                <h1 class="text-dark position-relative">
+                  projects <i class="fa-regular fa-folder-open"></i>
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger text-dark"
+                  >
+                    10+
+                  </span>
+                </h1>
+              </div>
+              <div class="col"></div>
+              <div class="col">
+                <div class="input-group rounded">
+                  <input
+                    type="search"
+                    class="form-control rounded"
+                    placeholder="Search"
+                    aria-label="Search"
+                    aria-describedby="search-addon"
+                    [(ngModel)]="searchText"
+                    autofocus
+                  />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="uil uil-filter"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
             <mat-divider></mat-divider>
             <div class="projects-inside" id="projects">
               <div class="row">
@@ -13,7 +41,7 @@
                 <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
                 <div
                   class="col-md-6"
-                  *ngFor="let project of projects"
+                  *ngFor="let project of projects | appFilter: searchText"
                   [routerLink]="['/ad_projects', project._id]"
                 >
                   <div class="timetable-item shadow pointer">
@@ -37,7 +65,12 @@
                           <button
                             type="button"
                             class="col btn btn-outline-danger btn-sm"
-                            (click)="alertConfirmation(project._id,project.projectName)"
+                            (click)="
+                              alertConfirmation(
+                                project._id,
+                                project.projectName
+                              )
+                            "
                           >
                             <i class="fa-solid fa-trash-can"></i>
                           </button>
@@ -45,7 +78,9 @@
                       </div>
                       <div class="timetable-item-users">
                         <i class="fa-solid fa-users-viewfinder"></i>
-                        <div class="timetable-item-users-count">{{project.members}}</div>
+                        <div class="timetable-item-users-count">
+                          {{ project.members }}
+                        </div>
                       </div>
                     </div>
                   </div>

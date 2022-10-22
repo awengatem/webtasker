@@ -12,12 +12,9 @@ export class AdProjectsComponent implements OnInit {
   projects!: any[];
   projDiv: any;
   projectStatus: any;
-
-  /**Used by modal */
-  form: any = {
-    projectName: null,
-  };
   submitted: boolean = false;
+  /**used by search bar */
+  searchText = '';
 
   constructor(
     private projectService: ProjectService,
@@ -113,7 +110,7 @@ export class AdProjectsComponent implements OnInit {
 
   /**Get project members */
   getProjectMembers() {
-    if (this.projects.length > 0) {      
+    if (this.projects.length > 0) {
       for (let i = 0; i < this.projects.length; i++) {
         this.projectService
           .getProjectMembers(this.projects[i]._id)
