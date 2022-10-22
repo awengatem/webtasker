@@ -22,7 +22,7 @@
   .count {
     font-size: 18px;
     color: #96281b;
-   // color: #af4154;
+    // color: #af4154;
   }
 
   /**styling search bar*/
@@ -99,6 +99,10 @@
       font-weight: 580;
       font-size: 16px;
       margin-bottom: 4px;
+
+      &:hover {
+        color: #22b8f0;
+      }
     }
 
     &-time {
