@@ -10,7 +10,7 @@
                 <h1 class="text-dark position-relative">
                   projects <i class="fa-regular fa-folder-open"></i>
                   <span
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger text-dark"
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger count"
                   >
                     10+
                   </span>
@@ -18,16 +18,16 @@
               </div>
               <div class="col"></div>
               <div class="col">
-                <div class="input-group rounded">
+                <div class="input-group rounded search-bar">
                   <input
                     type="search"
                     class="form-control rounded"
-                    placeholder="Search"
+                    placeholder="enter project name to search ..."
                     aria-label="Search"
                     aria-describedby="search-addon"
                     [(ngModel)]="searchText"
                   />
-                  <span class="input-group-text border-0" id="search-addon">
+                  <span class="border-0 filter-icon" id="search-addon">
                     <i class="uil uil-filter"></i>
                   </span>
                 </div>
