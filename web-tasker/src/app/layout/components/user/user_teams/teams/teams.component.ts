@@ -6,18 +6,15 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-teams',
   templateUrl: './teams.component.html',
-  styleUrls: ['./teams.component.scss']
+  styleUrls: ['./teams.component.scss'],
 })
 export class TeamsComponent implements OnInit {
   teams!: any[];
   teamDiv: any;
   teamStatus: any;
-
-  /**Used by modal */
-  form: any = {
-    teamName: null,
-  };
   submitted: boolean = false;
+  /**used by search bar */
+  searchText = '';
 
   constructor(
     private teamService: TeamService,
@@ -61,11 +58,11 @@ export class TeamsComponent implements OnInit {
     //unsetting the condition
     this.teamService.setAddStatus(false);
     //console.log(this.teamService.getAddStatus());
-  }  
+  }
 
   /**Get team members for each */
   getTeamMembers() {
-    if (this.teams.length > 0) {      
+    if (this.teams.length > 0) {
       for (let i = 0; i < this.teams.length; i++) {
         this.teamService
           .getTeamMembersDoc(this.teams[i]._id)
