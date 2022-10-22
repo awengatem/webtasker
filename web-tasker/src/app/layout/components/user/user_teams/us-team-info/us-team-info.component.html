@@ -12,7 +12,7 @@
             <div class="row">
               <div class="col">
                 <h2 data-aos="zoom-in-up" class="aos-init aos-animate">
-                  {{ teamName }}
+                  {{ teamName }} <i class="fa-solid fa-people-group"></i>
                 </h2>
               </div>
               <div class="col-md-3">
@@ -121,7 +121,9 @@
                             </div> -->
                           <div class="timetable-item-users">
                             <i class="fa-solid fa-users-viewfinder"></i>
-                            <div class="timetable-item-users-count">{{project.members}}</div>
+                            <div class="timetable-item-users-count">
+                              {{ project.members }}
+                            </div>
                           </div>
                         </div>
                       </div>
