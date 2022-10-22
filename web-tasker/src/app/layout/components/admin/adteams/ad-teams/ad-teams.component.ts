@@ -6,19 +6,15 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-ad-teams',
   templateUrl: './ad-teams.component.html',
-  styleUrls: ['./ad-teams.component.scss']
+  styleUrls: ['./ad-teams.component.scss'],
 })
 export class AdTeamsComponent implements OnInit {
-
   teams!: any[];
   teamDiv: any;
   teamStatus: any;
-
-  /**Used by modal */
-  form: any = {
-    teamName: null,
-  };
   submitted: boolean = false;
+  /**used by search bar */
+  searchText = '';
 
   constructor(
     private teamService: TeamService,
@@ -99,11 +95,7 @@ export class AdTeamsComponent implements OnInit {
       next: (response: any) => {
         console.log(response);
         this.router.navigate(['/ad_teams']);
-        Swal.fire(
-          'Removed!',
-          `team "${teamName}" has been removed`,
-          'success'
-        );
+        Swal.fire('Removed!', `team "${teamName}" has been removed`, 'success');
       },
       error: (err) => {
         console.log(err);
@@ -112,9 +104,9 @@ export class AdTeamsComponent implements OnInit {
     });
   }
 
-   /**Get team members for each */
-   getTeamMembers() {
-    if (this.teams.length > 0) {      
+  /**Get team members for each */
+  getTeamMembers() {
+    if (this.teams.length > 0) {
       for (let i = 0; i < this.teams.length; i++) {
         this.teamService
           .getTeamMembersDoc(this.teams[i]._id)
@@ -130,5 +122,4 @@ export class AdTeamsComponent implements OnInit {
   submit() {
     this.submitted = true;
   }
-
 }
