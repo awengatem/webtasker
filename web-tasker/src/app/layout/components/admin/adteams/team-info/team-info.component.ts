@@ -115,6 +115,8 @@ export class TeamInfoComponent implements OnInit {
         this.placeholder = 'enter project name to search ...';
       }
     }
+    /**clear the search bar text */
+    this.searchText = '';
   }
 
   //method to load projects tab
