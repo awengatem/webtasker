@@ -15,6 +15,9 @@ export class UsTeamInfoComponent implements OnInit {
   projects!: any[];
   members!: any[];
   teamId!: string;
+  /**variable for search parameter */
+  searchText = '';
+  placeholder = 'enter username to search ...';
 
   //control the router link, defines active default tab
   tab1: boolean = true;
