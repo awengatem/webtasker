@@ -17,7 +17,7 @@ export class TeamInfoComponent implements OnInit {
   teamId!: string;
   /**variable for search parameter */
   searchText = '';
-  placeholder = 'yeeeeep';
+  placeholder = 'enter username to search ...';
 
   //control the router link, defines active default tab
   tab1: boolean = true;
@@ -101,15 +101,18 @@ export class TeamInfoComponent implements OnInit {
 
     /**note selected tab to help in shared + button
      * difference noted by routerlink
+     * also customize placeholder value
      */
     if (tabId) {
       this.selectedTab = tabId;
       if (tabId === 'tabNav1') {
         this.addButtonText = 'Add member';
         this.tab1 = true;
+        this.placeholder = 'enter username to search ...';
       } else if (tabId === 'tabNav2') {
         this.addButtonText = 'Assign Project';
         this.tab1 = false;
+        this.placeholder = 'enter project name to search ...';
       }
     }
   }
