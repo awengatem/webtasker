@@ -15,6 +15,9 @@ export class TeamInfoComponent implements OnInit {
   projects!: any[];
   members!: any[];
   teamId!: string;
+  /**variable for search parameter */
+  searchText = '';
+  placeholder = 'yeeeeep';
 
   //control the router link, defines active default tab
   tab1: boolean = true;
@@ -37,11 +40,11 @@ export class TeamInfoComponent implements OnInit {
       this.teamId = teamId;
       this.getTeamName(teamId);
       this.getTeamProjects(teamId);
-      this.getTeamMembers(teamId);      
+      this.getTeamMembers(teamId);
     });
 
     //check where from and decide which tab to display
-    if(this.projectService.getFromAssigning()){
+    if (this.projectService.getFromAssigning()) {
       this.showProjects();
     }
   }
@@ -96,7 +99,9 @@ export class TeamInfoComponent implements OnInit {
     this.tabElement = document.getElementById(tabId);
     this.tabElement.classList.add('active');
 
-    //note selected tab to help in shared + button
+    /**note selected tab to help in shared + button
+     * difference noted by routerlink
+     */
     if (tabId) {
       this.selectedTab = tabId;
       if (tabId === 'tabNav1') {
@@ -121,9 +126,9 @@ export class TeamInfoComponent implements OnInit {
     this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
-      /**get project members immediately 
+      /**get project members immediately
        * after filling projects array*/
-       this.getProjectMembers();
+      this.getProjectMembers();
     });
   }
 
