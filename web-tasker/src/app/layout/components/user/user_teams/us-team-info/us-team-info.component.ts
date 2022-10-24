@@ -97,11 +97,16 @@ export class UsTeamInfoComponent implements OnInit {
       if (tabId === 'tabNav1') {
         this.addButtonText = 'Add member';
         this.tab1 = true;
+        this.placeholder = 'enter username to search ...';
       } else if (tabId === 'tabNav2') {
         this.addButtonText = 'Assign Project';
         this.tab1 = false;
+        this.placeholder = 'enter project name to search ...';
       }
     }
+
+    /**clear the search bar text */
+    this.searchText = '';
   }
 
   //getting projects for team
