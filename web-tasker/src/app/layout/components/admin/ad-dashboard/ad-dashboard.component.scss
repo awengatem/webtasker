@@ -1,0 +1,8 @@
+/**Custom css for admin dashboard*/
+.main_dashboard {
+  //width: 500px;
+  //   max-height: 500px;
+  height: calc(90vh - 110px); /*50+60*/
+  overflow-y: auto;
+  overflow-x: hidden;
+}
