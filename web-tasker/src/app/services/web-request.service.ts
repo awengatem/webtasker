@@ -20,7 +20,7 @@ export class WebRequestService {
     /**for production testing purpose
      * rejects cookies but will fix later
      */
-    //this.ROOT_URL = 'http://192.168.5.120:3000';
+    // this.ROOT_URL = 'http://192.168.5.120:3000';
   }
 
   get(uri: string): Observable<any> {
