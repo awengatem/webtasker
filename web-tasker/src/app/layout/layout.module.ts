@@ -104,4 +104,4 @@ import {
     SidenavComponent,
   ],
 })
-export class LayoutModule1 {}
+export class MyLayoutModule {}
