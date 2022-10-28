@@ -96,12 +96,6 @@ import {
     AngularMaterialModule,
     NgMultiSelectDropDownModule.forRoot(),
     MdbDropdownModule,
-  ],
-  exports: [
-    HeaderComponent,
-    SidebarComponent,
-    FooterComponent,
-    SidenavComponent,
-  ],
+  ], 
 })
 export class MyLayoutModule {}
