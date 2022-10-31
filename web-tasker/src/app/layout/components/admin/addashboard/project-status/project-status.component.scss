@@ -91,7 +91,7 @@ the card with data table*/
         max-height: calc(100vh - 550px);
         overflow-y: auto;
         overflow-x: hidden;
-        padding-right: 0;        
+        padding-right: 0;
 
         &-row {
           &:hover {
@@ -134,6 +134,24 @@ the card with data table*/
             color: red;
           }
         }
+      }
+    }
+
+    .create {
+      padding: 24px;
+      button {
+        height: 50px;
+        width: 75px;
+        .btn-txt {
+          font-size: 20px;
+        }
+      }
+      h4 {
+        font-family: inherit;
+        font-weight: 400;
+        font-size: 16px;
+        margin-left: 1px;
+        position: absolute;
       }
     }
   }
