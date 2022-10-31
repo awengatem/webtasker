@@ -10,15 +10,15 @@
   overflow-x: hidden;
 
   /*Self defined css*/
-  .linker{
-    &:hover{
+  .linker {
+    &:hover {
       color: #22b8f0;
       cursor: pointer;
     }
 
-    a{
-      &:hover{
-        color: #22b8f0;        
+    a {
+      &:hover {
+        color: #22b8f0;
       }
     }
   }
@@ -10587,7 +10587,7 @@
   }
 
   ._end {
-    margin-left: auto;   
+    margin-left: auto;
   }
 
   .text-center {

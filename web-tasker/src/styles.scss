@@ -26,6 +26,7 @@ body {
     }
     &__content {
       min-height: calc(100vh - 178px);
+      max-height: calc(100vh - 110px);
       border-radius: 10px;
       margin-top: -2rem;
       background: #8e9eab; /* fallback for old browsers */
@@ -48,7 +49,7 @@ body {
       // align-items: center;
       // position: absolute;
 
-      &-data {
+      &-data {             
         //top: 50%;
         //left: 50%;
         // display: flex;
@@ -85,7 +86,7 @@ body {
       lighten($mycolor2, 5%),
       $mycolor2
     );
-  }  
+  }
 }
 
 //center content
