@@ -9,8 +9,15 @@
   overflow-y: auto;
   overflow-x: hidden;
 
-  /**general css*/
+  /*Self defined css*/
+  .user_status{
+    &:hover{
+      color: #22b8f0;
+      cursor: pointer;
+    }
+  }
 
+  /**general css default with template*/
   /*!
  * Bootstrap v5.2.0-beta1 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
