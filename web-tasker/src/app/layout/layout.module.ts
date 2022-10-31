@@ -42,6 +42,7 @@ import {
   TeamFilterPipe,
   UserFilterPipe,
 } from '../filter.pipe';
+import { ProjectStatusComponent } from './components/admin/addashboard/project-status/project-status.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import {
     ProjectFilterPipe,
     TeamFilterPipe,
     UserFilterPipe,
+    ProjectStatusComponent,
   ],
   imports: [
     CommonModule,
