@@ -20,13 +20,79 @@ the card with data table*/
   padding: 24px;
   border-radius: 2px;
 
-  h1 {
-    font-size: 24px;
-    i {
+  .heading {
+    h1 {
       font-size: 28px;
+      font-weight: 700;
+      i {
+        font-size: 28px;
+      }
     }
   }
 
+  .count {
+    h1 {
+      font-weight: 400;
+
+      span {
+        font-size: 24px;
+        color: #96281b;
+      }
+    }
+  }
+
+  /*customizing the select*/
+  .selector {
+    label{
+font-weight: 400;
+    }
+
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border: solid 1px #ccc;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      outline: none;
+      padding: 5px 20px 5px 5px;
+      position: relative;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    .ui-dropdown {
+      margin: 2px auto;
+      position: relative;
+      width: 50%;
+      height: 100%;      
+    }
+    // .ui-dropdown:before {
+    //   content: "Custom Dropdown Demo";
+    //   position: absolute;
+    //   top: -25px;
+    //   left: 0;
+    //   font-size: 20px;
+    // }
+    .ui-dropdown:after {      
+      background-color: #146fb6;
+      -moz-border-radius: 0 3px 3px 0;
+      border-radius: 0 3px 3px 0;
+      color: #fff;
+      content: "▼";
+      display: block;
+      font-size: 10px;
+      width: 25px;
+      padding: 7px 0;
+      position: absolute;
+      pointer-events: none;
+      top: 0;
+      bottom: 0;
+      text-align: center;
+      right: 0;
+    }
+  }
   /**styling search bar*/
   .search-bar {
     input {
