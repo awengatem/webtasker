@@ -24,6 +24,7 @@ import { SocketTestComponent } from './components/admin/socket-test/socket-test.
 import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
 import { TimerGuard } from '../helpers/guards/timer.guard';
 import { AdminGuard } from '../helpers/guards/admin.guard';
+import { ProjectStatusComponent } from './components/admin/addashboard/project-status/project-status.component';
 
 const routes: Routes = [
   {
@@ -84,6 +85,12 @@ const routes: Routes = [
         path: 'ad_dashboard',
         canActivate: [AuthGuard, AdminGuard],
         component: AdDashboardComponent,
+      },
+
+      {
+        path: 'project_status',
+        canActivate: [AuthGuard, AdminGuard],
+        component: ProjectStatusComponent,
       },
 
       /**PROJECTS */
