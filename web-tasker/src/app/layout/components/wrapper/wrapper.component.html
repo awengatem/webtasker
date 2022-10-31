@@ -64,6 +64,12 @@
         routerLinkActive="list-item-active"
         *ngIf="sublist"
       >
+        <!-- for children components -->
+        <div
+          [routerLink]="'project_status'"
+          routerLinkActive="list-item-active"
+          *ngIf="sublist"
+        ></div>
         <i class="fa-solid fa-gauge-high"></i>
         <div class="content" *ngIf="isExpanded">Dashboard</div>
       </mat-list-item>
@@ -112,13 +118,14 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content [@openCloseSidenavContent]="isExpanded ? 'open' : 'closed'">
+  <mat-sidenav-content
+    [@openCloseSidenavContent]="isExpanded ? 'open' : 'closed'"
+  >
     <app-header
       (toggleSidebarForMe)="toggle()"
       (logout)="logout()"
     ></app-header>
     <router-outlet></router-outlet>
     <footer>footer</footer>
-    <!-- for notifications -->   
   </mat-sidenav-content>
 </mat-sidenav-container>

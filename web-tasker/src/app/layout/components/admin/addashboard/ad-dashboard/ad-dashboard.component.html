@@ -227,7 +227,10 @@
                   ></canvas>
                 </div>
               </div>
-              <h6 class="ms-2 mt-4 mb-0 user_status" routerLink="/project_status">
+              <h6
+                class="ms-2 mt-4 mb-0 linker"
+                routerLink="/project_status"
+              >
                 User status
               </h6>
               <p class="text-sm ms-2">
@@ -486,10 +489,22 @@
           <div class="card z-index-2">
             <div class="card-header pb-0">
               <h6>projects overview</h6>
-              <p class="text-sm">
+              <p class="text-sm text-body linker" routerLink="/project_status">
+                <a
+                  class="text-sm font-weight-bold mb-0 icon-move-right"
+                >
+                  Project status
+                  <i
+                    class="fas fa-arrow-right text-sm ms-1"
+                    aria-hidden="true"
+                  ></i>
+                </a>
+              </p>
+
+              <!-- <p class="text-sm">
                 <i class="fa fa-arrow-up text-success"></i>
                 <span class="font-weight-bold">4% more</span> in the past week
-              </p>
+              </p> -->
             </div>
             <div class="card-body p-3">
               <div class="chart">
