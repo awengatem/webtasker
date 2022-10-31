@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectStatusComponent implements OnInit {
   searchText = '';
+  data = [1,1,1,1,1,1,1,1,1,1,1,1,1,1];
   constructor() {}
 
   ngOnInit(): void {}

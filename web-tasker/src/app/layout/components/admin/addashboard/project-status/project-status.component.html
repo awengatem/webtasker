@@ -35,8 +35,76 @@
               </div>
             </div>
             <mat-divider></mat-divider>
-            <div class="projects-inside" id="projects">
-              <div class="card">
+            <div class="projects-inside">
+              <mat-card class="shadow">
+                <div class="container ps-3 pt-1 pb-2 mt-1 p-1 table-data">
+                  <div class="header">
+                    <div class="row border-bottom" style="align-items: center">
+                      <div class="col-1">
+                        <h2>#</h2>
+                      </div>
+                      <div class="col-sm">
+                        <h2>Project</h2>
+                      </div>
+                      <div class="col-sm">
+                        <h2>Status</h2>
+                      </div>
+                      <div class="col-sm">
+                        <h2>Duration</h2>
+                      </div>
+                      <div class="col-sm">
+                        <h2>Action</h2>
+                      </div>
+                      <div class="col-sm">
+                        <h2>Action</h2>
+                      </div>
+                      <div class="col-sm">
+                        <h2>Action</h2>
+                      </div>
+                      <div class="col-sm">
+                        <h2>Action</h2>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="content" style="font-size: 14px">
+                    <div
+                      class="row pt-3 pb-2 ps-3 border-bottom"
+                      style="align-items: center"
+                      *ngFor="let d of data"
+                    >
+                      <div class="col-1">
+                        <p>1</p>
+                      </div>
+                      <div class="col-sm">
+                        <p>name</p>
+                      </div>
+                      <div class="col-sm">
+                        <p>status</p>
+                      </div>
+                      <div class="col-sm">
+                        <p>status</p>
+                      </div>
+                      <div class="col-sm">
+                        <p>status</p>
+                      </div>
+                      <div class="col-sm">
+                        <p>status</p>
+                      </div>
+                      <div class="col-sm">
+                        <p>status</p>
+                      </div>
+                      <div class="col-sm">
+                        <p>status</p>
+                      </div>
+                    </div>
+                    <!-- <div class="centered notify">
+                      <i class="fa-solid fa-circle-exclamation me-2"></i>
+                      <div>No data available at the moment</div>
+                    </div> -->
+                  </div>
+                </div>
+              </mat-card>
+              <!-- <div class="card">
                 <div class="card-header pb-0">
                   <div class="row">
                     <div class="col-lg-6 col-7">
@@ -587,7 +655,7 @@
                     </table>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
