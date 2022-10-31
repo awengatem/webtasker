@@ -20,7 +20,7 @@ import { TeamsComponent } from './components/user/user_teams/teams/teams.compone
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { AdDashboardComponent } from './components/admin/ad-dashboard/ad-dashboard.component';
+import { AdDashboardComponent } from './components/admin/addashboard/ad-dashboard/ad-dashboard.component';
 import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
 import { AdTeamsComponent } from './components/admin/adteams/ad-teams/ad-teams.component';
 import { NewProjectComponent } from './components/admin/adprojects/new-project/new-project.component';
