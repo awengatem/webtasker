@@ -25,7 +25,7 @@
               <div class="col selector">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend me-2">
-                    <label class="input-group-text" for="inputGroupSelect01"
+                    <label class="input-group-text" for="inputGroupSelect"
                       >Filter by</label
                     >
                   </div>
@@ -36,13 +36,18 @@
                     <option value="3">Three</option>
                   </select> -->
                   <div class="ui-dropdown shadow">
-                    <select class="custom-select" id="inputGroupSelect01">
-                      <option value="user">Username</option>
+                    <select
+                      #fields
+                      class="custom-select"
+                      id="inputGroupSelect"
+                      (change)="onSelected()"
+                    >
+                      <option value="user" selected>Username</option>
                       <option value="project">Project name</option>
-                      <option value="Team">Team name</option>
-                      <option value="Status">Status</option>
-                      <option value="start">Start date</option>
-                      <option value="finish">Finish date</option>
+                      <option value="team">Team name</option>
+                      <option value="status">Status</option>
+                      <option value="start time">Start date</option>
+                      <option value="finish time">Finish date</option>
                     </select>
                   </div>
                 </div>
@@ -52,7 +57,7 @@
                   <input
                     type="search"
                     class="form-control rounded shadow"
-                    placeholder="enter project name to search ..."
+                    [placeholder]="placeholder"
                     aria-label="Search"
                     aria-describedby="search-addon"
                     [(ngModel)]="searchText"
