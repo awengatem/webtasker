@@ -11,4 +11,9 @@ export class ProjectStatusService {
   getActiveProjects() {
     return this.webService.get('project_status/my_active');
   }
+
+  /**get all project status docs  from db */
+  getProjectStatus() {
+    return this.webService.get('project_status');
+  }
 }
