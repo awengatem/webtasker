@@ -18,6 +18,9 @@ export class ProjectStatusComponent implements OnInit {
   documents!: any[];
   data = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
+  /**variables for the status table */
+  teamName: any;
+
   constructor(
     private projectStatusService: ProjectStatusService,
     private teamService: TeamService,
@@ -52,7 +55,14 @@ export class ProjectStatusComponent implements OnInit {
         );
         console.log(this.documents);
         //loop through the documents and assign new values
-        for (let i = 0; i < this.documents.length; i++) {}
+        for (let i = 0; i < this.documents.length; i++) {
+          //assign team name
+          this.getTeamName(this.documents[i].team_id).then((teamName) => {
+            this.documents[i].teamName = teamName;
+          });
+          //assign project name
+        }
+        console.log(this.documents);
       },
       error: (err) => {
         console.log(err);
@@ -60,16 +70,48 @@ export class ProjectStatusComponent implements OnInit {
     });
   }
 
-  getTeamName(teamId: string): string {
-    let result = '';
-    this.teamService.getSpecificTeam(teamId).subscribe({
-      next: (teamDoc) => {
-        result = teamDoc.teamName;
-      },
-      error: (err) => {
-        console.log(err);
-      },
+  /**get team name */
+  getTeamName(teamId: string) {
+    return new Promise((resolve, reject) => {
+      this.teamService.getSpecificTeam(teamId).subscribe({
+        next: (teamDoc) => {
+          resolve(teamDoc.teamName);
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
     });
-    return result;
+  }
+
+  /**get project name */
+  getProjectName(teamId: string) {
+    return new Promise((resolve, reject) => {
+      this.teamService.getSpecificTeam(teamId).subscribe({
+        next: (teamDoc) => {
+          resolve(teamDoc.teamName);
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+    });
+  }
+
+  /**get user name */
+  getUserName(teamId: string) {
+    return new Promise((resolve, reject) => {
+      this.teamService.getSpecificTeam(teamId).subscribe({
+        next: (teamDoc) => {
+          resolve(teamDoc.teamName);
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+    });
   }
 }
