@@ -55,14 +55,25 @@ export class ProjectStatusComponent implements OnInit {
             (document.finishTime = 'Unknown')
           )
         );
-        console.log(this.documents);
+        //console.log(this.documents);
         //loop through the documents and assign new values
         for (let i = 0; i < this.documents.length; i++) {
+          //assign user name
+          this.getUserName(this.documents[i].user_account_id).then(
+            (username) => {
+              this.documents[i].username = username;
+            }
+          );
+          //assign project name
+          this.getProjectName(this.documents[i].project_id).then(
+            (projectName) => {
+              this.documents[i].projectName = projectName;
+            }
+          );
           //assign team name
           this.getTeamName(this.documents[i].team_id).then((teamName) => {
             this.documents[i].teamName = teamName;
           });
-          //assign project name
         }
         console.log(this.documents);
       },
