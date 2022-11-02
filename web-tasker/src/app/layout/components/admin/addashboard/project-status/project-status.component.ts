@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
+import { ProjectService } from 'src/app/services/project.service';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-project-status',
@@ -16,7 +18,11 @@ export class ProjectStatusComponent implements OnInit {
   documents!: any[];
   data = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
-  constructor(private projectStatusService: ProjectStatusService) {}
+  constructor(
+    private projectStatusService: ProjectStatusService,
+    private teamService: TeamService,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -44,19 +50,26 @@ export class ProjectStatusComponent implements OnInit {
             (document.finishTime = 'Unknown')
           )
         );
-
+        console.log(this.documents);
         //loop through the documents and assign new values
-        for(let i=0;i<this.documents.length;i++){
-
-        }
+        for (let i = 0; i < this.documents.length; i++) {}
       },
       error: (err) => {
         console.log(err);
       },
-    });   
+    });
   }
 
-  getTeamName(teamId:string){
-    
+  getTeamName(teamId: string): string {
+    let result = '';
+    this.teamService.getSpecificTeam(teamId).subscribe({
+      next: (teamDoc) => {
+        result = teamDoc.teamName;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    return result;
   }
 }
