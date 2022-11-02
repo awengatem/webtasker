@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
+import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 
@@ -24,7 +25,8 @@ export class ProjectStatusComponent implements OnInit {
   constructor(
     private projectStatusService: ProjectStatusService,
     private teamService: TeamService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private userAccountService: UserAccountService
   ) {}
 
   ngOnInit(): void {}
@@ -101,11 +103,11 @@ export class ProjectStatusComponent implements OnInit {
   }
 
   /**get user name */
-  getUserName(teamId: string) {
+  getUserName(userId: string) {
     return new Promise((resolve, reject) => {
-      this.teamService.getSpecificTeam(teamId).subscribe({
-        next: (teamDoc) => {
-          resolve(teamDoc.teamName);
+      this.userAccountService.getSpecificUser(userId).subscribe({
+        next: (userDoc) => {
+          resolve(userDoc.username);
         },
         error: (err) => {
           console.log(err);
