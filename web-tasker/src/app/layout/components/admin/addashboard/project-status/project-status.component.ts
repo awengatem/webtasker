@@ -86,11 +86,11 @@ export class ProjectStatusComponent implements OnInit {
   }
 
   /**get project name */
-  getProjectName(teamId: string) {
+  getProjectName(projectId: string) {
     return new Promise((resolve, reject) => {
-      this.teamService.getSpecificTeam(teamId).subscribe({
-        next: (teamDoc) => {
-          resolve(teamDoc.teamName);
+      this.projectService.getSpecificProject(projectId).subscribe({
+        next: (projectDoc) => {
+          resolve(projectDoc.projectName);
         },
         error: (err) => {
           console.log(err);
