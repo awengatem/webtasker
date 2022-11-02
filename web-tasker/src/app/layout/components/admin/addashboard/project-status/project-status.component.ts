@@ -37,6 +37,8 @@ export class ProjectStatusComponent implements OnInit {
   onSelected(): void {
     this.selectedValue = this.fields.nativeElement.value;
     console.log(this.selectedValue);
+    /**clear the search bar text */
+    this.searchText = '';
     this.placeholder = `enter ${this.selectedValue} to search ...`;
   }
 
