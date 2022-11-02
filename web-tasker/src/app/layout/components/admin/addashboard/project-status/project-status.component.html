@@ -19,7 +19,7 @@
               <div class="col count">
                 <h1 class="text-dark position-relative">
                   Documents:
-                  <span class=""> 16 </span>
+                  <span class=""> {{ documents.length }} </span>
                 </h1>
               </div>
               <div class="col selector">
@@ -105,37 +105,37 @@
                     <div
                       class="row pt-3 pb-2 ps-3 border-bottom content-row"
                       style="align-items: center"
-                      *ngFor="let d of data"
+                      *ngFor="let document of documents"
                     >
                       <div class="col-1 centered-content">
-                        <p>1</p>
+                        <p>{{ documents.indexOf(document) + 1 }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>username</p>
+                        <p>{{ document.username }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>project nameddhfhfhf hghg</p>
+                        <p>{{ document.projectName }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>team name</p>
+                        <p>{{ document.teamName }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>status</p>
+                        <p>{{ document.status }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>duration</p>
+                        <p>{{ document.duration }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>started</p>
+                        <p>{{ document.started }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>finished</p>
+                        <p>{{ document.finished }}</p>
                       </div>
                     </div>
-                    <!-- <div class="centered notify">
+                    <div class="centered notify" *ngIf="docLength === 0">
                       <i class="fa-solid fa-circle-exclamation me-2"></i>
                       <div>No data available at the moment</div>
-                    </div> -->
+                    </div>
                   </div>
                 </div>
               </mat-card>

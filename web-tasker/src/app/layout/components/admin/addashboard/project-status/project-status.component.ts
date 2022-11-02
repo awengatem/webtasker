@@ -17,7 +17,7 @@ export class ProjectStatusComponent implements OnInit {
   searchText = '';
   placeholder = 'enter username to search ...';
   documents!: any[];
-  data = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+  docLength = 0;
 
   /**variables for the status table */
   teamName: any;
@@ -29,13 +29,15 @@ export class ProjectStatusComponent implements OnInit {
     private userAccountService: UserAccountService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getStatusDocs();
+  }
 
   /**what to do after select is changed */
   onSelected(): void {
     this.selectedValue = this.fields.nativeElement.value;
     console.log(this.selectedValue);
-    this.searchText = `enter ${this.selectedValue} to search ...`;
+    this.placeholder = `enter ${this.selectedValue} to search ...`;
   }
 
   /**get the project status docs from api */
@@ -44,6 +46,7 @@ export class ProjectStatusComponent implements OnInit {
       next: (documents) => {
         //console.log(this.documents);
         this.documents = documents;
+        this.docLength = this.documents.length;
         //push new fields to retrieved documents
         this.documents.forEach(
           (document) => (
