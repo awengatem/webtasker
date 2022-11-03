@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { SocketIoService } from 'src/app/services/socket.io.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-project-action',
   templateUrl: './project-action.component.html',
@@ -131,6 +132,73 @@ export class ProjectActionComponent implements OnInit {
     this.setNumber(_seconds[1], seconds % 10, 1);
   }
 
+  /**Multipurpose method used by alert */
+  alertConfirmation(action: string) {
+    let title = '';
+    let text = '';
+    /**Set the title and text for the alert */
+    if (action === 'start') {
+      title = 'Start a new session?';
+      text = 'A new session will be started.';
+    }
+
+    if (action === 'pause') {
+      title = 'Pause this session?';
+      text = 'This session will be paused.';
+    }
+
+    if (action === 'continue') {
+      title = 'Continue with session?';
+      text = 'This session will be resumed.';
+    }
+
+    if (action === 'stop') {
+      title = 'End session?';
+      text = 'Session will be ended and timer reset.';
+    }
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      if (result.value) {
+        //start timer if started
+        if (action === 'start') {
+          this.startTimer(action);
+        }
+        //pause timer if paused
+        if (action === 'pause') {
+          this.pauseTimer();
+        }
+        //continue timer if continued
+        if (action === 'continue') {
+          this.startTimer(action);
+        }
+        //stop timer if stopped
+        if (action === 'stop') {
+          this.stopTimer();
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        if (action === 'pause') {
+          Swal.fire('Cancelled', `session still in progress .)`, 'error');
+        }
+
+        if (action === 'continue') {
+          Swal.fire('Cancelled', `session is still paused .)`, 'error');
+        }
+
+        if (action === 'stop') {
+          Swal.fire('Cancelled', `session still in progress .)`, 'error');
+        }
+      }
+    });
+  }
+
   /**Timer control methods */
   startTimer(mode: string): void {
     const teamId = localStorage.getItem('capturedProjectTeam');
@@ -139,8 +207,10 @@ export class ProjectActionComponent implements OnInit {
         projectId: this.projectId,
         teamId: teamId,
       });
+      Swal.fire('started', 'Session started successfully', 'success');
     } else if (mode === 'continue') {
       this.webSocketService.emit('continue', {});
+      Swal.fire('resumed', 'Session resumed successfully', 'success');
     }
     //update button control variables
     this.stopwatchStarted = true;
@@ -153,15 +223,20 @@ export class ProjectActionComponent implements OnInit {
     }, 2000);
   }
 
+  /**method to pause timer */
   pauseTimer(): void {
     this.webSocketService.emit('pause', {});
     //update button control variables
     this.stopwatchPaused = true;
     this.stopwatchnotPaused = false;
     /**get project status */
-    this.getStatus();
+    window.setTimeout(() => {
+      this.getStatus();
+    }, 2000);
+    Swal.fire('paused', 'Session paused successfully', 'success');
   }
 
+  /**method to stop timer */
   stopTimer() {
     //AKA reset
     this.webSocketService.emit('stop', {});
@@ -171,9 +246,13 @@ export class ProjectActionComponent implements OnInit {
     this.stopwatchPaused = false;
     this.stopwatchnotPaused = false;
     /**get project status */
-    this.getStatus();
+    window.setTimeout(() => {
+      this.getStatus();
+    }, 2000);
+    Swal.fire('ended', 'Session ended successfully', 'success');
   }
 
+  /**Method to display timer buttons */
   showTimerButtons(data: any) {
     if (!!!data) return;
     const timerStatus = data.status;
