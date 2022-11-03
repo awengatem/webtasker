@@ -42,12 +42,14 @@
                       id="inputGroupSelect"
                       (change)="onSelected()"
                     >
-                      <option value="user" selected>Username</option>
-                      <option value="project">Project name</option>
-                      <option value="team">Team name</option>
+                      <!-- values here must match the object properties -->
+                      <option value="username" selected>Username</option>
+                      <option value="projectName">Project name</option>
+                      <option value="teamName">Team name</option>
                       <option value="status">Status</option>
-                      <option value="start time">Start date</option>
-                      <option value="finish time">Finish date</option>
+                      <!-- <option value="duration">Duration</option> -->
+                      <option value="startTime">Start date</option>
+                      <option value="finishTime">Finish date</option>
                     </select>
                   </div>
                 </div>
@@ -60,7 +62,8 @@
                     [placeholder]="placeholder"
                     aria-label="Search"
                     aria-describedby="search-addon"
-                    [(ngModel)]="searchText"
+                    [(ngModel)]="filterFields[propName]"
+                    (ngModelChange)="updateFilters()"
                     autofocus
                   />
                   <span class="border-0 filter-icon" id="search-addon">
@@ -105,7 +108,7 @@
                     <div
                       class="row pt-3 pb-2 ps-3 border-bottom content-row"
                       style="align-items: center"
-                      *ngFor="let document of documents"
+                      *ngFor="let document of documents | myFilter: filter"
                     >
                       <div class="col-1 centered-content">
                         <p>{{ documents.indexOf(document) + 1 }}</p>

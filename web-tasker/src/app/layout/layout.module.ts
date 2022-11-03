@@ -38,6 +38,7 @@ import { SocketTestComponent } from './components/admin/socket-test/socket-test.
 import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
 /**Filters imported below */
 import {
+  MyFilterPipe,
   ProjectFilterPipe,
   TeamFilterPipe,
   UserFilterPipe,
@@ -82,14 +83,15 @@ import { RecentSessionsComponent } from './components/admin/addashboard/recent-s
     AdProjectInfoComponent,
     SocketTestComponent,
     ProjectActionComponent,
+    ProjectStatusComponent,
+    ActiveSessionsComponent,
+    RecentSessionsComponent,
 
     /**added filter pipe to use it inside a component to filter*/
     ProjectFilterPipe,
     TeamFilterPipe,
     UserFilterPipe,
-    ProjectStatusComponent,
-    ActiveSessionsComponent,
-    RecentSessionsComponent,
+    MyFilterPipe,
   ],
   imports: [
     CommonModule,
@@ -102,6 +104,6 @@ import { RecentSessionsComponent } from './components/admin/addashboard/recent-s
     AngularMaterialModule,
     NgMultiSelectDropDownModule.forRoot(),
     MdbDropdownModule,
-  ], 
+  ],
 })
 export class MyLayoutModule {}

@@ -14,10 +14,24 @@ export class ProjectStatusComponent implements OnInit {
 
   /**variables used by search and filter inputs */
   selectedValue = '';
-  searchText = '';
+  //must match default selected value
+  propName = 'username';
   placeholder = 'enter username to search ...';
   documents!: any[];
   docLength = 0;
+
+  /**note that the field properties should match the object
+   * properties to be filtered
+   */
+  filterFields: { [key: string]: string } = {
+    username: '',
+    projectName: '',
+    teamName: '',
+    status: '',
+    startTime: '',
+    finishTime: '',
+  };
+  filter = {};
 
   constructor(private projectStatusService: ProjectStatusService) {}
 
@@ -30,8 +44,22 @@ export class ProjectStatusComponent implements OnInit {
     this.selectedValue = this.fields.nativeElement.value;
     console.log(this.selectedValue);
     /**clear the search bar text */
-    this.searchText = '';
+    Object.keys(this.filterFields).forEach((key) => {
+      this.filterFields[key] = '';
+    });
+
     this.placeholder = `enter ${this.selectedValue} to search ...`;
+    /**update the filter fields */
+    this.propName = this.selectedValue;
+  }
+
+  /**ensure that we preserve only fields to be filtered */
+  updateFilters() {
+    Object.keys(this.filterFields).forEach((key) =>
+      this.filterFields[key] === '' ? delete this.filterFields[key] : key
+    );
+    this.filter = Object.assign({}, this.filterFields);
+    console.log(this.filter);
   }
 
   /**getting documents from service */
@@ -40,6 +68,7 @@ export class ProjectStatusComponent implements OnInit {
       .getStatusDocs()
       .then((documents: any) => {
         this.documents = documents;
+        console.log(this.documents);
         this.docLength = documents.length;
       })
       .catch((error) => {
