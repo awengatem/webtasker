@@ -43,48 +43,54 @@ export class ProjectStatusComponent implements OnInit {
   }
 
   /**get the project status docs from api */
-  getStatusDocs() {
-    this.projectStatusService.getProjectStatus().subscribe({
-      next: (documents) => {
-        //console.log(this.documents);
-        this.documents = documents;
-        this.docLength = this.documents.length;
-        //push new fields to retrieved documents
-        this.documents.forEach(
-          (document) => (
-            (document.username = 'Unknown'),
-            (document.projectName = 'Unknown'),
-            (document.teamName = 'Unknown'),
-            (document.newDuration = 'Unknown'),
-            (document.startTime = 'Unknown'),
-            (document.finishTime = 'Unknown')
-          )
-        );
-        //console.log(this.documents);
-        //loop through the documents and assign new values
-        for (let i = 0; i < this.documents.length; i++) {
-          //assign user name
-          this.getUserName(this.documents[i].user_account_id).then(
-            (username) => {
-              this.documents[i].username = username;
-            }
-          );
-          //assign project name
-          this.getProjectName(this.documents[i].project_id).then(
-            (projectName) => {
-              this.documents[i].projectName = projectName;
-            }
-          );
-          //assign team name
-          this.getTeamName(this.documents[i].team_id).then((teamName) => {
-            this.documents[i].teamName = teamName;
-          });
-        }
-        console.log(this.documents);
-      },
-      error: (err) => {
-        console.log(err);
-      },
+  // getStatusDocs() {
+  //   this.projectStatusService.getProjectStatus().subscribe({
+  //     next: (documents) => {
+  //       //console.log(this.documents);
+  //       this.documents = documents;
+  //       this.docLength = this.documents.length;
+  //       //push new fields to retrieved documents
+  //       this.documents.forEach(
+  //         (document) => (
+  //           (document.username = 'Unknown'),
+  //           (document.projectName = 'Unknown'),
+  //           (document.teamName = 'Unknown'),
+  //           (document.newDuration = 'Unknown'),
+  //           (document.startTime = 'Unknown'),
+  //           (document.finishTime = 'Unknown')
+  //         )
+  //       );
+  //       //console.log(this.documents);
+  //       //loop through the documents and assign new values
+  //       for (let i = 0; i < this.documents.length; i++) {
+  //         //assign user name
+  //         this.getUserName(this.documents[i].user_account_id).then(
+  //           (username) => {
+  //             this.documents[i].username = username;
+  //           }
+  //         );
+  //         //assign project name
+  //         this.getProjectName(this.documents[i].project_id).then(
+  //           (projectName) => {
+  //             this.documents[i].projectName = projectName;
+  //           }
+  //         );
+  //         //assign team name
+  //         this.getTeamName(this.documents[i].team_id).then((teamName) => {
+  //           this.documents[i].teamName = teamName;
+  //         });
+  //       }
+  //       console.log(this.documents);
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
+
+  getStatusDocs(){
+    this.projectStatusService.getStatusDocs().then((documents)=>{
+      //this.documents= documents;
     });
   }
 
