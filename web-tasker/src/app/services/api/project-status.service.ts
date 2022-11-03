@@ -8,29 +8,19 @@ import { UserAccountService } from './user-account.service';
   providedIn: 'root',
 })
 export class ProjectStatusService {
+  /**Array used to getStatusDocs function */
   documents!: any[];
   constructor(
     private webService: WebRequestService,
-    private projectStatusService: ProjectStatusService,
     private teamService: TeamService,
     private projectService: ProjectService,
     private userAccountService: UserAccountService
   ) {}
 
-  /**get active projects for user */
-  getActiveProjects() {
-    return this.webService.get('project_status/my_active');
-  }
-
-  /**get all project status docs  from db */
-  getProjectStatus() {
-    return this.webService.get('project_status');
-  }
-
   /**get the project status docs from api */
   getStatusDocs() {
     return new Promise((resolve, reject) => {
-      this.projectStatusService.getProjectStatus().subscribe({
+      this.getProjectStatus().subscribe({
         next: (documents) => {
           //console.log(this.documents);
           this.documents = documents;
@@ -73,6 +63,16 @@ export class ProjectStatusService {
         },
       });
     });
+  }
+
+  /**get active projects for user */
+  getActiveProjects() {
+    return this.webService.get('project_status/my_active');
+  }
+
+  /**get all project status docs  from db */
+  getProjectStatus() {
+    return this.webService.get('project_status');
   }
 
   /**get team name */

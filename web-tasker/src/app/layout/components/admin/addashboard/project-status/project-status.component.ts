@@ -22,12 +22,7 @@ export class ProjectStatusComponent implements OnInit {
   /**variables for the status table */
   teamName: any;
 
-  constructor(
-    private projectStatusService: ProjectStatusService,
-    private teamService: TeamService,
-    private projectService: ProjectService,
-    private userAccountService: UserAccountService
-  ) {}
+  constructor(private projectStatusService: ProjectStatusService) {}
 
   ngOnInit(): void {
     this.getStatusDocs();
@@ -42,100 +37,16 @@ export class ProjectStatusComponent implements OnInit {
     this.placeholder = `enter ${this.selectedValue} to search ...`;
   }
 
-  /**get the project status docs from api */
-  // getStatusDocs() {
-  //   this.projectStatusService.getProjectStatus().subscribe({
-  //     next: (documents) => {
-  //       //console.log(this.documents);
-  //       this.documents = documents;
-  //       this.docLength = this.documents.length;
-  //       //push new fields to retrieved documents
-  //       this.documents.forEach(
-  //         (document) => (
-  //           (document.username = 'Unknown'),
-  //           (document.projectName = 'Unknown'),
-  //           (document.teamName = 'Unknown'),
-  //           (document.newDuration = 'Unknown'),
-  //           (document.startTime = 'Unknown'),
-  //           (document.finishTime = 'Unknown')
-  //         )
-  //       );
-  //       //console.log(this.documents);
-  //       //loop through the documents and assign new values
-  //       for (let i = 0; i < this.documents.length; i++) {
-  //         //assign user name
-  //         this.getUserName(this.documents[i].user_account_id).then(
-  //           (username) => {
-  //             this.documents[i].username = username;
-  //           }
-  //         );
-  //         //assign project name
-  //         this.getProjectName(this.documents[i].project_id).then(
-  //           (projectName) => {
-  //             this.documents[i].projectName = projectName;
-  //           }
-  //         );
-  //         //assign team name
-  //         this.getTeamName(this.documents[i].team_id).then((teamName) => {
-  //           this.documents[i].teamName = teamName;
-  //         });
-  //       }
-  //       console.log(this.documents);
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // }
-
-  getStatusDocs(){
-    this.projectStatusService.getStatusDocs().then((documents)=>{
-      //this.documents= documents;
-    });
-  }
-
-  /**get team name */
-  getTeamName(teamId: string) {
-    return new Promise((resolve, reject) => {
-      this.teamService.getSpecificTeam(teamId).subscribe({
-        next: (teamDoc) => {
-          resolve(teamDoc.teamName);
-        },
-        error: (err) => {
-          console.log(err);
-          reject();
-        },
+  /**getting documents from service */
+  getStatusDocs() {
+    this.projectStatusService
+      .getStatusDocs()
+      .then((documents: any) => {
+        this.documents = documents;
+        this.docLength = documents.length;
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    });
-  }
-
-  /**get project name */
-  getProjectName(projectId: string) {
-    return new Promise((resolve, reject) => {
-      this.projectService.getSpecificProject(projectId).subscribe({
-        next: (projectDoc) => {
-          resolve(projectDoc.projectName);
-        },
-        error: (err) => {
-          console.log(err);
-          reject();
-        },
-      });
-    });
-  }
-
-  /**get user name */
-  getUserName(userId: string) {
-    return new Promise((resolve, reject) => {
-      this.userAccountService.getSpecificUser(userId).subscribe({
-        next: (userDoc) => {
-          resolve(userDoc.username);
-        },
-        error: (err) => {
-          console.log(err);
-          reject();
-        },
-      });
-    });
   }
 }
