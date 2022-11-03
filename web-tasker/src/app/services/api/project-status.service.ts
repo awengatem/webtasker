@@ -17,7 +17,7 @@ export class ProjectStatusService {
     private userAccountService: UserAccountService
   ) {}
 
-  /**get the project status docs from api */
+  /**get all the project status docs from api */
   getStatusDocs() {
     return new Promise((resolve, reject) => {
       this.getProjectStatus().subscribe({
@@ -63,6 +63,59 @@ export class ProjectStatusService {
         },
       });
     });
+  }
+
+  /**get active project status docs from api */
+  getActiveStatusDocs() {
+    return new Promise((resolve, reject) => {
+      this.getAllActiveProjects().subscribe({
+        next: (documents) => {
+          //console.log(this.documents);
+          this.documents = documents;
+          //push new fields to retrieved documents
+          this.documents.forEach(
+            (document) => (
+              (document.username = 'Unknown'),
+              (document.projectName = 'Unknown'),
+              (document.teamName = 'Unknown'),
+              (document.newDuration = 'Unknown'),
+              (document.startTime = 'Unknown'),
+              (document.finishTime = 'Unknown')
+            )
+          );
+          //console.log(this.documents);
+          //loop through the documents and assign new values
+          for (let i = 0; i < this.documents.length; i++) {
+            //assign user name
+            this.getUserName(this.documents[i].user_account_id).then(
+              (username) => {
+                this.documents[i].username = username;
+              }
+            );
+            //assign project name
+            this.getProjectName(this.documents[i].project_id).then(
+              (projectName) => {
+                this.documents[i].projectName = projectName;
+              }
+            );
+            //assign team name
+            this.getTeamName(this.documents[i].team_id).then((teamName) => {
+              this.documents[i].teamName = teamName;
+            });
+          }
+          resolve(this.documents);
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+    });
+  }
+
+  /**get all active projects */
+  getAllActiveProjects() {
+    return this.webService.get('project_status/active');
   }
 
   /**get active projects for user */

@@ -19,9 +19,6 @@ export class ProjectStatusComponent implements OnInit {
   documents!: any[];
   docLength = 0;
 
-  /**variables for the status table */
-  teamName: any;
-
   constructor(private projectStatusService: ProjectStatusService) {}
 
   ngOnInit(): void {
