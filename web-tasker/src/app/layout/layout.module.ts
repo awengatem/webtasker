@@ -43,6 +43,8 @@ import {
   UserFilterPipe,
 } from '../filter.pipe';
 import { ProjectStatusComponent } from './components/admin/addashboard/project-status/project-status.component';
+import { ActiveSessionsComponent } from './components/admin/addashboard/active-sessions/active-sessions.component';
+import { RecentSessionsComponent } from './components/admin/addashboard/recent-sessions/recent-sessions.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +88,8 @@ import { ProjectStatusComponent } from './components/admin/addashboard/project-s
     TeamFilterPipe,
     UserFilterPipe,
     ProjectStatusComponent,
+    ActiveSessionsComponent,
+    RecentSessionsComponent,
   ],
   imports: [
     CommonModule,
