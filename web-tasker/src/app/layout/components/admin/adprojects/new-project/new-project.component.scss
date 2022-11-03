@@ -12,8 +12,8 @@
     border-radius: 5px;
     padding: 35px;
 
-    h1{
-      i{
+    h1 {
+      i {
         color: #22b8f0;
         font-size: 28px;
       }
@@ -24,26 +24,45 @@
       -webkit-transition: all 200ms linear;
       transition: all 200ms linear;
       //border: none;
-      &:focus {       
+      &:focus {
         outline: none;
         box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
       }
-      &:active {        
+      &:active {
         outline: none;
         box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
       }
-      &.ng-invalid.ng-dirty{
+      &.ng-invalid.ng-dirty {
         border: 1px solid #e74c3c;
       }
     }
 
-    .btm-rgt {    
-     margin-left: 69%;
-     margin-right: 3px;
+    /*for text area used in disposition component*/
+    textarea {
+      border-radius: 5px;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+      //border: none;
+      &:focus {
+        outline: none;
+        box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
+      }
+      &:active {
+        outline: none;
+        box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
+      }
+      &.ng-invalid.ng-dirty {
+        border: 1px solid #e74c3c;
+      }
+    }
 
-     .btn-custom{
+    .btm-rgt {
+      margin-left: 69%;
+      margin-right: 3px;
+
+      .btn-custom {
         color: #ffff;
-     }
+      }
     }
 
     .vericon {
@@ -54,19 +73,19 @@
       height: 48px;
       font-size: 12px;
       line-height: 48px;
-      text-align: left;  
+      text-align: left;
       -webkit-transition: all 200ms linear;
       transition: all 200ms linear;
-    
-      &.danger{
+
+      &.danger {
         color: #e74c3c;
       }
-      &.success{
+      &.success {
         color: #2ecc71;
       }
     }
 
-    .alert-style{
+    .alert-style {
       //position: absolute;
       padding: 13px 20px;
       padding-left: 55px;
@@ -88,11 +107,11 @@
       //background: green;
     }
 
-    small{
+    small {
       color: #e74c3c;
       position: absolute;
       left: 36px;
       //float: left;
-    }   
+    }
   }
 }

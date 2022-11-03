@@ -26,6 +26,7 @@ import { TimerGuard } from '../helpers/guards/timer.guard';
 import { AdminGuard } from '../helpers/guards/admin.guard';
 import { ProjectStatusComponent } from './components/admin/addashboard/project-status/project-status.component';
 import { ActiveSessionsComponent } from './components/admin/addashboard/active-sessions/active-sessions.component';
+import { DispositionComponent } from './components/user/user_projects/disposition/disposition.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,11 @@ const routes: Routes = [
         path: 'projects/:projectId/action',
         canActivate: [AuthGuard, TimerGuard],
         component: ProjectActionComponent,
+      },
+      {
+        path: 'projects/:projectId/action/disposition',
+        canActivate: [AuthGuard, TimerGuard],
+        component: DispositionComponent,
       },
 
       /**TEAMS */
