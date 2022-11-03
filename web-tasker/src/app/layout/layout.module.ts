@@ -46,6 +46,7 @@ import {
 import { ProjectStatusComponent } from './components/admin/addashboard/project-status/project-status.component';
 import { ActiveSessionsComponent } from './components/admin/addashboard/active-sessions/active-sessions.component';
 import { RecentSessionsComponent } from './components/admin/addashboard/recent-sessions/recent-sessions.component';
+import { DispositionComponent } from './components/user/user_projects/disposition/disposition.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { RecentSessionsComponent } from './components/admin/addashboard/recent-s
     TeamFilterPipe,
     UserFilterPipe,
     MyFilterPipe,
+    DispositionComponent,
   ],
   imports: [
     CommonModule,
