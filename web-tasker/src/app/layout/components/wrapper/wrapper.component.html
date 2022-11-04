@@ -70,6 +70,21 @@
           routerLinkActive="list-item-active"
           *ngIf="sublist"
         ></div>
+        <div
+          [routerLink]="'active_sessions'"
+          routerLinkActive="list-item-active"
+          *ngIf="sublist"
+        ></div>
+        <div
+          [routerLink]="'recent_sessions'"
+          routerLinkActive="list-item-active"
+          *ngIf="sublist"
+        ></div>
+        <div
+          [routerLink]="'user_status'"
+          routerLinkActive="list-item-active"
+          *ngIf="sublist"
+        ></div>
         <i class="fa-solid fa-gauge-high"></i>
         <div class="content" *ngIf="isExpanded">Dashboard</div>
       </mat-list-item>

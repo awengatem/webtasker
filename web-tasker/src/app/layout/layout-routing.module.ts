@@ -28,6 +28,7 @@ import { ProjectStatusComponent } from './components/admin/addashboard/project-s
 import { ActiveSessionsComponent } from './components/admin/addashboard/active-sessions/active-sessions.component';
 import { DispositionComponent } from './components/user/user_projects/disposition/disposition.component';
 import { RecentSessionsComponent } from './components/admin/addashboard/recent-sessions/recent-sessions.component';
+import { UserStatusComponent } from './components/admin/addashboard/user-status/user-status.component';
 
 const routes: Routes = [
   {
@@ -111,6 +112,12 @@ const routes: Routes = [
         path: 'recent_sessions',
         canActivate: [AuthGuard, AdminGuard],
         component: RecentSessionsComponent,
+      },
+
+      {
+        path: 'user_status',
+        canActivate: [AuthGuard, AdminGuard],
+        component: UserStatusComponent,
       },
 
       /**PROJECTS */
