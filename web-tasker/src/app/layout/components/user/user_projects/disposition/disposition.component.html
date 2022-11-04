@@ -24,7 +24,7 @@
                 id="exampleFormControlTextarea6"
                 rows="3"
                 [(ngModel)]="form.reason"
-                placeholder="Write you reason here..."
+                placeholder="Write your reason here..."
               ></textarea>
             </div>
             <i
@@ -48,7 +48,11 @@
               </small>
             </div>
             <div class="input-group-append row btm-rgt">
-              <button class="btn btn-outline-secondary col me-1" type="button">
+              <button
+                class="btn btn-outline-secondary col me-1"
+                type="button"
+                routerLink="/project/projectId/action"
+              >
                 Cancel
               </button>
               <button

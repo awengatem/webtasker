@@ -173,7 +173,13 @@ export class ProjectActionComponent implements OnInit {
         }
         //pause timer if paused
         if (action === 'pause') {
-          this.pauseTimer();
+          //update button control variables here (temporary)
+          this.stopwatchPaused = true;
+          this.stopwatchnotPaused = false;
+          /**navigate to disposition page */
+          this.router.navigate([
+            `/project/${this.projectId}/action/disposition`,
+          ]);
         }
         //continue timer if continued
         if (action === 'continue') {
@@ -221,19 +227,6 @@ export class ProjectActionComponent implements OnInit {
     window.setTimeout(() => {
       this.getStatus();
     }, 2000);
-  }
-
-  /**method to pause timer */
-  pauseTimer(): void {
-    this.webSocketService.emit('pause', {});
-    //update button control variables
-    this.stopwatchPaused = true;
-    this.stopwatchnotPaused = false;
-    /**get project status */
-    window.setTimeout(() => {
-      this.getStatus();
-    }, 2000);
-    Swal.fire('paused', 'Session paused successfully', 'success');
   }
 
   /**method to stop timer */
