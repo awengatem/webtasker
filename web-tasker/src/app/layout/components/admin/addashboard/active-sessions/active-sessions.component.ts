@@ -25,6 +25,7 @@ export class ActiveSessionsComponent implements OnInit {
     projectName: '',
     teamName: '',
     status: '',
+    newDuration: '',
     startTime: '',
     finishTime: '',
   };

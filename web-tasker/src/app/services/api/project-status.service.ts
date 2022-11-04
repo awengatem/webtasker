@@ -60,6 +60,19 @@ export class ProjectStatusService {
                 this.documents[i].newDuration = newDuration;
               }
             );
+            //assign new start time
+            this.timestampConverter(this.documents[i].started).then(
+              (startTime) => {
+                this.documents[i].startTime = startTime;
+              }
+            );
+
+            //assign new finish time
+            this.timestampConverter(this.documents[i].finished).then(
+              (finishTime) => {
+                this.documents[i].finishTime = finishTime;
+              }
+            );
           }
           resolve(this.documents);
         },
@@ -192,5 +205,16 @@ export class ProjectStatusService {
   /**uniforms the returned data */
   returnData(input: any) {
     return input >= 10 ? input : `0${input}`;
+  }
+
+  /**convert timestamps to human readable */
+  timestampConverter(timestamp: number) {
+    return new Promise((resolve, reject) => {
+      if (timestamp === 0) {
+        resolve('null');
+      }
+      const date = new Date(timestamp);
+      resolve(date);
+    });
   }
 }

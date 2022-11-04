@@ -25,6 +25,7 @@ export class RecentSessionsComponent implements OnInit {
     projectName: '',
     teamName: '',
     status: '',
+    newDuration: '',
     startTime: '',
     finishTime: '',
   };
