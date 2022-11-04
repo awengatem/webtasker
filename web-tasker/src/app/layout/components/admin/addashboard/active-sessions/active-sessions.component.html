@@ -116,17 +116,29 @@
                       <div class="col-sm">
                         <p>{{ document.teamName }}</p>
                       </div>
-                      <div class="col-sm">
+                      <div
+                        *ngIf="document.status != 'finished'"
+                        class="col-sm"
+                        [ngClass]="
+                          document.status === 'running' ? 'running' : 'paused'
+                        "
+                      >
+                        <p>{{ document.status }}</p>
+                      </div>
+                      <div
+                        *ngIf="document.status === 'finished'"
+                        class="col-sm default"
+                      >
                         <p>{{ document.status }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.duration }}</p>
+                        <p>{{ document.newDuration }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.started }}</p>
+                        <p>{{ document.startTime }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.finished }}</p>
+                        <p>{{ document.finishTime }}</p>
                       </div>
                     </div>
                     <div class="centered notify" *ngIf="docLength === 0">
