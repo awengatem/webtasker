@@ -54,6 +54,12 @@ export class ProjectStatusService {
             this.getTeamName(this.documents[i].team_id).then((teamName) => {
               this.documents[i].teamName = teamName;
             });
+            //assign new duration
+            this.durationConverter(this.documents[i].duration).then(
+              (newDuration) => {
+                this.documents[i].newDuration = newDuration;
+              }
+            );
           }
           resolve(this.documents);
         },
@@ -171,5 +177,20 @@ export class ProjectStatusService {
         },
       });
     });
+  }
+
+  /**convert duration to specified calibrations */
+  durationConverter(duration: number) {
+    return new Promise((resolve, reject) => {
+      let seconds = this.returnData(Math.floor(duration / 1000) % 60);
+      let minutes = this.returnData(Math.floor(duration / 60000) % 60);
+      let hours = this.returnData(Math.floor(duration / 3600000) % 60);
+      resolve(`${hours}Hrs ${minutes}Mins ${seconds}Sec`);
+    });
+  }
+
+  /**uniforms the returned data */
+  returnData(input: any) {
+    return input >= 10 ? input : `0${input}`;
   }
 }

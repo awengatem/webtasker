@@ -28,6 +28,7 @@ export class ProjectStatusComponent implements OnInit {
     projectName: '',
     teamName: '',
     status: '',
+    newDuration: '',
     startTime: '',
     finishTime: '',
   };
