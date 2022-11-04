@@ -178,7 +178,7 @@ export class ProjectActionComponent implements OnInit {
           this.stopwatchnotPaused = false;
           /**navigate to disposition page */
           this.router.navigate([
-            `/project/${this.projectId}/action/disposition`,
+            `/projects/${this.projectId}/action/disposition`,
           ]);
         }
         //continue timer if continued

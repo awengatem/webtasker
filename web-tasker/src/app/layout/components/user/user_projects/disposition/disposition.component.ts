@@ -51,7 +51,7 @@ export class DispositionComponent implements OnInit {
           .catch((err) => {
             console.log(err);
           });
-        this.router.navigate([`/project/${this.projectId}/action`]);
+        this.router.navigate([`/projects/${this.projectId}/action`]);
       },
       error: (err) => {
         console.log(err);

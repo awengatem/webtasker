@@ -51,7 +51,7 @@
               <button
                 class="btn btn-outline-secondary col me-1"
                 type="button"
-                routerLink="/project/projectId/action"
+                [routerLink]="['/projects', projectId, 'action']"
               >
                 Cancel
               </button>
