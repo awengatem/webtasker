@@ -63,7 +63,7 @@ export class RecentSessionsComponent implements OnInit {
   /**getting documents from service */
   getStatusDocs() {
     this.projectStatusService
-      .getActiveStatusDocs()
+      .getRecentFDocs()
       .then((documents: any) => {
         this.documents = documents;
         this.docLength = documents.length;
