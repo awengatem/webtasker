@@ -218,6 +218,63 @@ export class ProjectStatusService {
     });
   }
 
+  /**get recently finished(status) project status docs from api */
+  getUserStatus() {
+    return new Promise((resolve, reject) => {
+      this.getUserStatusDocs().subscribe({
+        next: (documents) => {
+          //console.log(this.documents);
+          this.documents = documents;
+          //push new fields to retrieved documents
+          this.documents.forEach(
+            (document) => (
+              (document.projectName = 'Unknown'),
+              (document.teamName = 'Unknown'),
+              (document.newDuration = 'Unknown'),
+              (document.startTime = 'Unknown')
+            )
+          );
+          //console.log(this.documents);
+          //loop through the documents and assign new values
+          for (let i = 0; i < this.documents.length; i++) {
+            //assign project name
+            this.getProjectName(this.documents[i].project_id).then(
+              (projectName) => {
+                this.documents[i].projectName = projectName;
+              }
+            );
+            //assign team name
+            this.getTeamName(this.documents[i].team_id).then((teamName) => {
+              this.documents[i].teamName = teamName;
+            });
+            //assign new duration
+            this.durationConverter(this.documents[i].duration).then(
+              (newDuration) => {
+                this.documents[i].newDuration = newDuration;
+              }
+            );
+            //assign new start time
+            this.timestampConverter(this.documents[i].started).then(
+              (startTime) => {
+                this.documents[i].startTime = startTime;
+              }
+            );
+
+            //name status
+            if (this.documents[i].status === 'null') {
+              this.documents[i].status = 'Unproductive';
+            }
+          }
+          resolve(this.documents);
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+    });
+  }
+
   /**get all active projects */
   getAllActiveProjects() {
     return this.webService.get('project_status/active');
@@ -236,6 +293,11 @@ export class ProjectStatusService {
   /**get recent finished (status) project status docs  from db */
   getRFinishedProjects() {
     return this.webService.get('project_status/recent');
+  }
+
+  /**get recent finished (status) project status docs  from db */
+  getUserStatusDocs() {
+    return this.webService.get('users/status');
   }
 
   /**get team name */
