@@ -26,8 +26,8 @@ export class WrapperComponent implements OnInit {
   //@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
   /**Variables used by sidenav status */
-  isExpanded!: boolean;
-  sublist!: boolean;
+  isExpanded =  false;
+  sublist = false;
   isAdmin!: boolean;
 
   constructor(
