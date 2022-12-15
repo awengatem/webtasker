@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class AdProjectsComponent implements OnInit {
   projects!: any[];
+  projectsLength = 0;
   projDiv: any;
   projectStatus: any;
   submitted: boolean = false;
@@ -35,6 +36,7 @@ export class AdProjectsComponent implements OnInit {
     this.projectService.getAllProjects().subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
+      this.projectsLength = projects.length;
       //get project members
       this.getProjectMembers();
     });

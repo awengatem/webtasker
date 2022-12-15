@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class AdTeamsComponent implements OnInit {
   teams!: any[];
+  teamsLength = 0;
   teamDiv: any;
   teamStatus: any;
   submitted: boolean = false;
@@ -35,6 +36,7 @@ export class AdTeamsComponent implements OnInit {
     this.teamService.getAllTeams().subscribe((teams: any) => {
       console.log(teams);
       this.teams = teams;
+      this.teamsLength = teams.length;
       //get team members for each
       this.getTeamMembers();
     });
