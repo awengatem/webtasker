@@ -16,7 +16,7 @@ export class ProjectsComponent implements OnInit {
   projDiv: any;
   projectStatus: any;
   submitted: boolean = false;
-  /**used by search bar */
+  /**used by  the search bar */
   searchText = '';
 
   constructor(
