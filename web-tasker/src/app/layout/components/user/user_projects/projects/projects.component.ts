@@ -12,6 +12,7 @@ import { ProjectStatusService } from 'src/app/services/api/project-status.servic
 })
 export class ProjectsComponent implements OnInit {
   projects!: any[];
+  projectsLength = 0;
   projDiv: any;
   projectStatus: any;
   submitted: boolean = false;
@@ -39,6 +40,7 @@ export class ProjectsComponent implements OnInit {
     this.projectService.getUserProjects().subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
+      this.projectsLength = projects.length;
       /**pushs project status to projects*/
       this.projects.forEach((p) => (p.status = 'Unknown'));
       /**push teamname to each project */
