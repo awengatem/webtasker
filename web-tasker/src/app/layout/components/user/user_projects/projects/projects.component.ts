@@ -32,7 +32,6 @@ export class ProjectsComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       console.log(params);
     });
-    this.scrollDown();
   }
 
   /**getting projects belonging to user */
@@ -57,25 +56,6 @@ export class ProjectsComponent implements OnInit {
         this.getStatus();
       }, 100);
     });
-  }
-
-  /**scrolldown immediately after adding new project */
-  scrollDown() {
-    //ensuring intervals only run once
-    if (this.projectService.getAddStatus() === true) {
-      const setInterval_ID = window.setInterval(() => {
-        this.projDiv = document.getElementById('projects');
-        this.projDiv.scrollTop = this.projDiv?.scrollHeight;
-      }, 100);
-
-      //stopping interval above after sometime
-      window.setTimeout(() => {
-        window.clearInterval(setInterval_ID);
-      }, 500);
-    }
-    //unsetting the condition
-    this.projectService.setAddStatus(false);
-    //console.log(this.projectService.getAddStatus());
   }
 
   /**Get project members to add on icon*/
