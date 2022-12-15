@@ -28,6 +28,7 @@ export class WrapperComponent implements OnInit {
   /**Variables used by sidenav status */
   isExpanded!: boolean;
   sublist!: boolean;
+  isAdmin!: boolean;
 
   constructor(
     private authService: AuthService,
@@ -36,6 +37,8 @@ export class WrapperComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // check whether user is admin to uipdate menu
+    this.checkAdmin();
     const expanded = this.sidenavService.getIsExpanded();
     const sublist = this.sidenavService.getSublist();
     if (expanded === 'true') {
@@ -105,5 +108,13 @@ export class WrapperComponent implements OnInit {
         console.log(error);
         Swal.fire('Error!', `Some error ocurred`, 'error');
       });
+  }
+
+  /**Check if user is admin */
+  checkAdmin() {
+    this.authService.verifyAdmin().then((result) => {
+      if (result === true) this.isAdmin = result;
+      else this.isAdmin = false;
+    });
   }
 }
