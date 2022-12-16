@@ -238,13 +238,13 @@ export class ProjectStatusService {
           //loop through the documents and assign new values
           for (let i = 0; i < this.documents.length; i++) {
             //assign project name
-            this.getProjectName(this.documents[i].project_id).then(
+            this.getProjectName(this.documents[i].projectId).then(
               (projectName) => {
                 this.documents[i].projectName = projectName;
               }
             );
             //assign team name
-            this.getTeamName(this.documents[i].team_id).then((teamName) => {
+            this.getTeamName(this.documents[i].teamId).then((teamName) => {
               this.documents[i].teamName = teamName;
             });
             //assign new duration
