@@ -67,6 +67,7 @@ export class ActiveSessionsComponent implements OnInit {
       .then((documents: any) => {
         this.documents = documents;
         this.docLength = documents.length;
+        console.log(this.documents);        
       })
       .catch((error) => {
         console.log(error);

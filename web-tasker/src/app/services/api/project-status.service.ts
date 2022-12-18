@@ -315,7 +315,7 @@ export class ProjectStatusService {
     return new Promise((resolve, reject) => {
       this.teamService.getSpecificTeam(teamId).subscribe({
         next: (teamDoc) => {
-          resolve(teamDoc.teamName);
+          if (teamDoc) resolve(teamDoc.teamName);
         },
         error: (err) => {
           console.log(err);
@@ -330,7 +330,7 @@ export class ProjectStatusService {
     return new Promise((resolve, reject) => {
       this.projectService.getSpecificProject(projectId).subscribe({
         next: (projectDoc) => {
-          resolve(projectDoc.projectName);
+          if (projectDoc) resolve(projectDoc.projectName);
         },
         error: (err) => {
           console.log(err);
@@ -345,7 +345,7 @@ export class ProjectStatusService {
     return new Promise((resolve, reject) => {
       this.userAccountService.getSpecificUser(userId).subscribe({
         next: (userDoc) => {
-          resolve(userDoc.username);
+          if (userDoc) resolve(userDoc.username);
         },
         error: (err) => {
           console.log(err);
