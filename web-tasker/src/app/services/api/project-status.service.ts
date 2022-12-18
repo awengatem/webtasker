@@ -237,32 +237,42 @@ export class ProjectStatusService {
           //console.log(this.documents);
           //loop through the documents and assign new values
           for (let i = 0; i < this.documents.length; i++) {
-            //assign project name
-            this.getProjectName(this.documents[i].projectId).then(
-              (projectName) => {
-                this.documents[i].projectName = projectName;
-              }
-            );
-            //assign team name
-            this.getTeamName(this.documents[i].teamId).then((teamName) => {
-              this.documents[i].teamName = teamName;
-            });
-            //assign new duration
-            this.durationConverter(this.documents[i].duration).then(
-              (newDuration) => {
-                this.documents[i].newDuration = newDuration;
-              }
-            );
-            //assign new start time
-            this.timestampConverter(this.documents[i].started).then(
-              (startTime) => {
-                this.documents[i].startTime = startTime;
-              }
-            );
+            if (
+              this.documents[i].projectId != 'null' &&
+              this.documents[i].teamId != 'null'
+            ) {
+              //assign project name
+              this.getProjectName(this.documents[i].projectId).then(
+                (projectName) => {
+                  this.documents[i].projectName = projectName;
+                }
+              );
+              //assign team name
+              this.getTeamName(this.documents[i].teamId).then((teamName) => {
+                this.documents[i].teamName = teamName;
+              });
+              //assign new duration
+              this.durationConverter(this.documents[i].duration).then(
+                (newDuration) => {
+                  this.documents[i].newDuration = newDuration;
+                }
+              );
+              //assign new start time
+              this.timestampConverter(this.documents[i].started).then(
+                (startTime) => {
+                  this.documents[i].startTime = startTime;
+                }
+              );
+            } else {
+              this.documents[i].projectName = 'null';
+              this.documents[i].teamName = 'null';
+              this.documents[i].newDuration = 'null';
+              this.documents[i].startTime = 'null';
+            }
 
             //name status
             if (this.documents[i].status === 'null') {
-              this.documents[i].status = 'Unproductive';
+              this.documents[i].status = 'unproductive';
             }
           }
           resolve(this.documents);

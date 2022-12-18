@@ -116,7 +116,7 @@
                         <p>{{ document.teamName }}</p>
                       </div>
                       <div
-                        *ngIf="document.status != 'Unproductive'"
+                        *ngIf="document.status != 'unproductive'"
                         class="col-sm"
                         [ngClass]="
                           document.status === 'running' ? 'running' : 'paused'
@@ -125,7 +125,7 @@
                         <p>{{ document.status }}</p>
                       </div>
                       <div
-                        *ngIf="document.status === 'Unproductive'"
+                        *ngIf="document.status === 'unproductive'"
                         class="col-sm default"
                       >
                         <p>{{ document.status }}</p>
