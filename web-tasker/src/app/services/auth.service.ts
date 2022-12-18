@@ -5,7 +5,7 @@ import { shareReplay, tap } from 'rxjs';
 import { AccountService } from './account-service.service';
 import { StatusService } from './status.service';
 import { TokenService } from './token.service';
-import { WebRequestService } from './web-request.service';
+import { WebRequestService } from './api/web-request.service';
 
 @Injectable({
   providedIn: 'root',

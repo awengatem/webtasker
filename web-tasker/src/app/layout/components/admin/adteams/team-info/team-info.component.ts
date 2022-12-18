@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ProjectService } from 'src/app/services/project.service';
-import { TeamService } from 'src/app/services/team.service';
+import { ProjectService } from 'src/app/services/api/project.service';
+import { TeamService } from 'src/app/services/api/team.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -211,7 +211,7 @@ export class TeamInfoComponent implements OnInit {
   //deleting specific member
   deleteTeamMember(userId: string, username: string) {
     this.teamService.deleteTeamMember(this.teamId, userId).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         console.log(res);
         this.router.navigate([`/ad_teams/${this.teamId}`]);
         Swal.fire(
@@ -220,7 +220,7 @@ export class TeamInfoComponent implements OnInit {
           'success'
         ).then((result) => window.location.reload());
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err);
         Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
@@ -234,7 +234,7 @@ export class TeamInfoComponent implements OnInit {
 
     //pass array of projects to be deleted to api
     this.teamService.deleteTeamProject(this.teamId, projects).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         console.log(res);
         this.router.navigate([`/ad_teams/${this.teamId}`]);
         Swal.fire(
@@ -243,7 +243,7 @@ export class TeamInfoComponent implements OnInit {
           'success'
         ).then((result) => window.location.reload());
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err);
         Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },

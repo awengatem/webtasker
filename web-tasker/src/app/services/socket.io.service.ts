@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as io from 'socket.io-client';
-import { WebRequestService } from './web-request.service';
+import { WebRequestService } from './api/web-request.service';
 
 @Injectable({
   providedIn: 'root',

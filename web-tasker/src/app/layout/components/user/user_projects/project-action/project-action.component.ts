@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
-import { ProjectService } from 'src/app/services/project.service';
+import { ProjectService } from 'src/app/services/api/project.service';
 import { SocketIoService } from 'src/app/services/socket.io.service';
 import Swal from 'sweetalert2';
 @Component({

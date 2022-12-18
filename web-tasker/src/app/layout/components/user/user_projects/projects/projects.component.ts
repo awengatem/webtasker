@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from 'src/app/services/project.service';
+import { ProjectService } from 'src/app/services/api/project.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { TeamService } from 'src/app/services/team.service';
+import { TeamService } from 'src/app/services/api/team.service';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 
 @Component({

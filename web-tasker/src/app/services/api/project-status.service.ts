@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ProjectService } from '../project.service';
-import { TeamService } from '../team.service';
-import { WebRequestService } from '../web-request.service';
+import { ProjectService } from './project.service';
+import { TeamService } from './team.service';
+import { WebRequestService } from './web-request.service';
 import { UserAccountService } from './user-account.service';
 
 @Injectable({
@@ -314,10 +314,10 @@ export class ProjectStatusService {
   getTeamName(teamId: string) {
     return new Promise((resolve, reject) => {
       this.teamService.getSpecificTeam(teamId).subscribe({
-        next: (teamDoc) => {
+        next: (teamDoc: any) => {
           if (teamDoc) resolve(teamDoc.teamName);
         },
-        error: (err) => {
+        error: (err: any) => {
           console.log(err);
           reject();
         },
