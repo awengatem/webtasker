@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
-import { ProjectService } from 'src/app/services/project.service';
-import { TeamService } from 'src/app/services/team.service';
+import { ProjectService } from 'src/app/services/api/project.service';
+import { TeamService } from 'src/app/services/api/team.service';
 
 @Component({
   selector: 'app-project-status',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { TeamService } from 'src/app/services/team.service';
+import { TeamService } from 'src/app/services/api/team.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -99,7 +99,7 @@ export class AdTeamsComponent implements OnInit {
         this.router.navigate(['/ad_teams']);
         Swal.fire('Removed!', `team "${teamName}" has been removed`, 'success');
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err);
         Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },

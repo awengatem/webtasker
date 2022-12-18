@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GeneralService } from 'src/app/services/general.service';
-import { TeamService } from 'src/app/services/team.service';
+import { TeamService } from 'src/app/services/api/team.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -52,7 +52,7 @@ export class EditTeamComponent implements OnInit {
         this.router.navigate(['/ad_teams']);
         Swal.fire('Success!', `team "${newTeam}" updated successfully`, 'success');        
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err);
         Swal.fire('Oops! Something went wrong',err.error.message, 'error');        
       },
