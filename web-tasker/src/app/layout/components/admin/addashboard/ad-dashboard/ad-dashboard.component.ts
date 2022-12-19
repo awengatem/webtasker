@@ -18,7 +18,13 @@ export class AdDashboardComponent implements OnInit {
   productiveUsers = 0;
   breakUsers = 0;
   idleUsers = 0;
+  coursesPercentage = 80;
   statusDocs = [];
+
+  totalPerc = 100;
+  productivePerc = 0;
+  breakPerc = 0;
+  idlePerc = 0;
 
   constructor(
     private userAccountService: UserAccountService,
@@ -111,9 +117,21 @@ export class AdDashboardComponent implements OnInit {
             this.idleUsers++;
           }
         });
+        //compute percentages
+        this.productivePerc = (this.productiveUsers / this.totalUsers) * 100;
+        this.breakPerc = (this.breakUsers / this.totalUsers) * 100;
+        this.idlePerc = (this.idleUsers / this.totalUsers) * 100;
+        console.log(this.idlePerc);
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  /**compute percentages for progress bars */
+  computePercentages() {
+    this.productivePerc = (this.productiveUsers / this.totalUsers) * 100;
+    this.breakPerc = (this.breakUsers / this.totalUsers) * 100;
+    this.idlePerc = (this.idleUsers / this.totalUsers) * 100;
   }
 }
