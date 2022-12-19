@@ -19,7 +19,7 @@
                         Total users
                       </p>
                       <h5 class="font-weight-bolder mb-0">
-                        75
+                        {{totalUsers}}
                         <span class="text-success text-sm font-weight-bolder"
                           >55% active</span
                         >
@@ -50,7 +50,7 @@
                         Total projects
                       </p>
                       <h5 class="font-weight-bolder mb-0">
-                        16
+                        {{totalProjects}}
                         <span class="text-success text-sm font-weight-bolder"
                           >100% active</span
                         >
@@ -81,7 +81,7 @@
                         total teams
                       </p>
                       <h5 class="font-weight-bolder mb-0">
-                        12
+                        {{totalTeams}}
                         <span class="text-danger text-sm font-weight-bolder"
                           >50% active</span
                         >
@@ -143,7 +143,7 @@
                 <div class="col-lg-6">
                   <div class="d-flex flex-column h-100">
                     <p class="mb-1 pt-2 text-bold">Active users</p>
-                    <h5 class="font-weight-bolder">16 Active</h5>
+                    <h5 class="font-weight-bolder">{{activeUsers}} Active</h5>
                     <p class="mb-5">
                       This filters all active users at the moment from any team
                       and working on any project.
@@ -193,7 +193,7 @@
                 class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3"
               >
                 <h5 class="text-white font-weight-bolder mb-4 pt-2">
-                  15 recent sessions
+                  {{recentSessions}} recent sessions
                 </h5>
                 <p class="text-white">
                   This displays the recently finished user sessions, their
@@ -281,7 +281,7 @@
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Users</p>
                     </div>
-                    <h4 class="font-weight-bolder">75</h4>
+                    <h4 class="font-weight-bolder">{{totalUsers}}</h4>
                     <div class="progress w-75">
                       <div
                         class="progress-bar bg-dark w-60"
@@ -347,7 +347,7 @@
                         Productive
                       </p>
                     </div>
-                    <h4 class="font-weight-bolder">52</h4>
+                    <h4 class="font-weight-bolder">{{productiveUsers}}</h4>
                     <div class="progress w-75">
                       <div
                         class="progress-bar bg-dark w-90"
@@ -404,7 +404,7 @@
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Break</p>
                     </div>
-                    <h4 class="font-weight-bolder">13</h4>
+                    <h4 class="font-weight-bolder">{{breakUsers}}</h4>
                     <div class="progress w-75">
                       <div
                         class="progress-bar bg-dark w-30"
@@ -466,7 +466,7 @@
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Idle</p>
                     </div>
-                    <h4 class="font-weight-bolder">43</h4>
+                    <h4 class="font-weight-bolder">{{idleUsers}}</h4>
                     <div class="progress w-75">
                       <div
                         class="progress-bar bg-dark w-50"

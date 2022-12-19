@@ -93,16 +93,13 @@
                       <div class="col-sm">
                         <h2>Start time</h2>
                       </div>
-                      <div class="col-sm">
-                        <h2>Finish time</h2>
-                      </div>
                     </div>
                   </div>
                   <div class="content" style="font-size: 14px">
                     <div
                       class="row pt-3 pb-2 ps-3 border-bottom content-row"
                       style="align-items: center"
-                      *ngFor="let document of documents | myFilter: filter"
+                      *ngFor="let document of documents | myFilter : filter"
                     >
                       <div class="col-1 centered-content">
                         <p>{{ documents.indexOf(document) + 1 }}</p>
@@ -136,9 +133,6 @@
                       </div>
                       <div class="col-sm">
                         <p>{{ document.startTime }}</p>
-                      </div>
-                      <div class="col-sm">
-                        <p>{{ document.finishTime }}</p>
                       </div>
                     </div>
                     <div class="centered notify" *ngIf="docLength === 0">
