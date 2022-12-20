@@ -21,6 +21,7 @@ export class AdDashboardComponent implements OnInit {
   coursesPercentage = 80;
   statusDocs = [];
 
+  //percentages
   totalPerc = 100;
   productivePerc = 0;
   breakPerc = 0;
@@ -126,12 +127,5 @@ export class AdDashboardComponent implements OnInit {
       .catch((error) => {
         console.log(error);
       });
-  }
-
-  /**compute percentages for progress bars */
-  computePercentages() {
-    this.productivePerc = (this.productiveUsers / this.totalUsers) * 100;
-    this.breakPerc = (this.breakUsers / this.totalUsers) * 100;
-    this.idlePerc = (this.idleUsers / this.totalUsers) * 100;
   }
 }
