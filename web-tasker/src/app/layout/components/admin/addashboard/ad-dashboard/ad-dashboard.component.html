@@ -161,15 +161,17 @@
                   </div>
                 </div>
                 <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
-                  <div class="bg-gradient-primary border-radius-lg h-100">
-                    <img
-                      src="../assets/images/rocketlaunch.jpeg"
-                      class="position-absolute h-100 w-50 top-0 d-lg-block d-none"
-                      alt="waves"
-                    />
+                  <div
+                    class="active_icon bg-gradient-primary border-radius-lg h-100"
+                  >
                     <div
                       class="position-relative d-flex align-items-center justify-content-center h-100"
                     >
+                      <img
+                        src="../assets/images/rocketlaunch.png"
+                        class="position-relative z-index-2"
+                        alt="waves"
+                      />
                       <!-- <img
                         class="w-100 position-relative z-index-2 pt-4"
                         src="../assets/images/wavep.png"
@@ -284,9 +286,9 @@
                     <h4 class="font-weight-bolder">{{ totalUsers }}</h4>
                     <div class="progress w-75">
                       <mat-progress-bar
-                      mode="determinate"
-                      [value]="totalPerc"
-                    ></mat-progress-bar>
+                        mode="determinate"
+                        [value]="totalPerc"
+                      ></mat-progress-bar>
                     </div>
                   </div>
                   <div class="col-3 py-3 ps-0">
