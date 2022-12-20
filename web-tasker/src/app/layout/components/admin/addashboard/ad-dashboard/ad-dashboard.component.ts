@@ -39,6 +39,7 @@ export class AdDashboardComponent implements OnInit {
     this.getTotalProjects();
     this.getTotalTeams();
     this.getActiveUsers();
+    this.getRecentDocs();
     this.getStatusDocs();
   }
 
