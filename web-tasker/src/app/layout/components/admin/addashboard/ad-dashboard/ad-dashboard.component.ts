@@ -19,7 +19,12 @@ export class AdDashboardComponent implements OnInit {
   breakUsers = 0;
   idleUsers = 0;
   coursesPercentage = 80;
+
+  // arrays
   statusDocs = [];
+  activeUserDocs = [];
+  uniqueProjects: string[] = [];
+  projectidArr: string[] = [];
 
   //percentages
   totalPerc = 100;
@@ -83,7 +88,17 @@ export class AdDashboardComponent implements OnInit {
     this.projectStatusService
       .getActiveStatusDocs()
       .then((documents: any) => {
+        this.activeUserDocs = documents;
         this.activeUsers = documents.length;
+        //get projectnames only
+        if (this.activeUserDocs.length > 0) {
+          this.activeUserDocs.forEach((doc: any) => {
+            this.projectidArr.push(doc.project_id);
+          });
+        }
+        //get unique projects
+        this.uniqueProjects = [...new Set(this.projectidArr)];
+        console.log(this.uniqueProjects);
       })
       .catch((error) => {
         console.log(error);
@@ -123,7 +138,6 @@ export class AdDashboardComponent implements OnInit {
         this.productivePerc = (this.productiveUsers / this.totalUsers) * 100;
         this.breakPerc = (this.breakUsers / this.totalUsers) * 100;
         this.idlePerc = (this.idleUsers / this.totalUsers) * 100;
-        console.log(this.idlePerc);
       })
       .catch((error) => {
         console.log(error);

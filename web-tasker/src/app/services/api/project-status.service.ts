@@ -105,41 +105,43 @@ export class ProjectStatusService {
           //console.log(this.documents);
           //loop through the documents and assign new values
           for (let i = 0; i < this.documents.length; i++) {
-            //assign user name
-            this.getUserName(this.documents[i].user_account_id).then(
-              (username) => {
-                this.documents[i].username = username;
-              }
-            );
-            //assign project name
-            this.getProjectName(this.documents[i].project_id).then(
-              (projectName) => {
-                this.documents[i].projectName = projectName;
-              }
-            );
-            //assign team name
-            this.getTeamName(this.documents[i].team_id).then((teamName) => {
-              this.documents[i].teamName = teamName;
-            });
-            //assign new duration
-            this.durationConverter(this.documents[i].duration).then(
-              (newDuration) => {
-                this.documents[i].newDuration = newDuration;
-              }
-            );
-            //assign new start time
-            this.timestampConverter(this.documents[i].started).then(
-              (startTime) => {
-                this.documents[i].startTime = startTime;
-              }
-            );
+            if (this.documents[i] != null) {
+              //assign user name
+              this.getUserName(this.documents[i].user_account_id).then(
+                (username) => {
+                  this.documents[i].username = username;
+                }
+              );
+              //assign project name
+              this.getProjectName(this.documents[i].project_id).then(
+                (projectName) => {
+                  this.documents[i].projectName = projectName;
+                }
+              );
+              //assign team name
+              this.getTeamName(this.documents[i].team_id).then((teamName) => {
+                this.documents[i].teamName = teamName;
+              });
+              //assign new duration
+              this.durationConverter(this.documents[i].duration).then(
+                (newDuration) => {
+                  this.documents[i].newDuration = newDuration;
+                }
+              );
+              //assign new start time
+              this.timestampConverter(this.documents[i].started).then(
+                (startTime) => {
+                  this.documents[i].startTime = startTime;
+                }
+              );
 
-            //assign new finish time
-            this.timestampConverter(this.documents[i].finished).then(
-              (finishTime) => {
-                this.documents[i].finishTime = finishTime;
-              }
-            );
+              //assign new finish time
+              this.timestampConverter(this.documents[i].finished).then(
+                (finishTime) => {
+                  this.documents[i].finishTime = finishTime;
+                }
+              );
+            }
           }
           resolve(this.documents);
         },
