@@ -90,14 +90,15 @@ export class AdDashboardComponent implements OnInit {
       .then((documents: any) => {
         this.activeUserDocs = documents;
         this.activeUsers = documents.length;
-        //get projectnames only
+        //get projectids only
         if (this.activeUserDocs.length > 0) {
           this.activeUserDocs.forEach((doc: any) => {
             this.projectidArr.push(doc.project_id);
           });
         }
         //get unique projects
-        this.uniqueProjects = [...new Set(this.projectidArr)];
+        // this.uniqueProjects = [...new Set(this.projectidArr)];
+        // console.log(this.projectidArr);
         console.log(this.uniqueProjects);
       })
       .catch((error) => {

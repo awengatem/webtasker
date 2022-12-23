@@ -220,7 +220,7 @@ export class ProjectStatusService {
     });
   }
 
-  /**get recently finished(status) project status docs from api */
+  /**get user status statistics for all users from api */
   getUserStatus() {
     return new Promise((resolve, reject) => {
       this.getUserStatusDocs().subscribe({
