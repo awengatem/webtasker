@@ -19,9 +19,9 @@
                         Total users
                       </p>
                       <h5 class="font-weight-bolder mb-0">
-                        {{totalUsers}}
+                        {{ totalUsers }}
                         <span class="text-success text-sm font-weight-bolder"
-                          >55% active</span
+                          >{{ activeUsersPerc }}% active</span
                         >
                       </h5>
                     </div>
@@ -50,9 +50,9 @@
                         Total projects
                       </p>
                       <h5 class="font-weight-bolder mb-0">
-                        {{totalProjects}}
+                        {{ totalProjects }}
                         <span class="text-success text-sm font-weight-bolder"
-                          >100% active</span
+                          >{{ activeProjectsPerc }}% active</span
                         >
                       </h5>
                     </div>
@@ -81,9 +81,9 @@
                         total teams
                       </p>
                       <h5 class="font-weight-bolder mb-0">
-                        {{totalTeams}}
-                        <span class="text-danger text-sm font-weight-bolder"
-                          >50% active</span
+                        {{ totalTeams }}
+                        <span class="text-success text-sm font-weight-bolder"
+                          >{{ activeTeamsPerc }}% active</span
                         >
                       </h5>
                     </div>
@@ -143,7 +143,7 @@
                 <div class="col-lg-6">
                   <div class="d-flex flex-column h-100">
                     <p class="mb-1 pt-2 text-bold">Active users</p>
-                    <h5 class="font-weight-bolder">{{activeUsers}} Active</h5>
+                    <h5 class="font-weight-bolder">{{ activeUsers }} Active</h5>
                     <p class="mb-5">
                       This filters all active users at the moment from any team
                       and working on any project.
@@ -161,15 +161,17 @@
                   </div>
                 </div>
                 <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
-                  <div class="bg-gradient-primary border-radius-lg h-100">
-                    <!-- <img
-                      src="../../../../../assets/img/shapes/waves-white.svg"
-                      class="position-absolute h-100 w-50 top-0 d-lg-block d-none"
-                      alt="waves"
-                    /> -->
+                  <div
+                    class="active_icon bg-gradient-primary border-radius-lg h-100"
+                  >
                     <div
                       class="position-relative d-flex align-items-center justify-content-center h-100"
                     >
+                      <img
+                        src="../assets/images/rocketlaunch.png"
+                        class="position-relative z-index-2"
+                        alt="waves"
+                      />
                       <!-- <img
                         class="w-100 position-relative z-index-2 pt-4"
                         src="../assets/images/wavep.png"
@@ -193,7 +195,7 @@
                 class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3"
               >
                 <h5 class="text-white font-weight-bolder mb-4 pt-2">
-                  {{recentSessions}} recent sessions
+                  {{ recentSessions }} recent sessions
                 </h5>
                 <p class="text-white">
                   This displays the recently finished user sessions, their
@@ -220,11 +222,16 @@
             <div class="card-body p-3">
               <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">
                 <div class="chart">
-                  <canvas
+                  <!-- <canvas
                     id="chart-bars"
                     class="chart-canvas"
                     height="170"
-                  ></canvas>
+                  ></canvas> -->
+                  <img
+                    src="../assets/images/stats.png"
+                    class="position-relative z-index-2"
+                    alt="waves"
+                  />
                 </div>
               </div>
               <h6 class="ms-2 mt-4 mb-0 linker" routerLink="/user_status">
@@ -281,15 +288,12 @@
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Users</p>
                     </div>
-                    <h4 class="font-weight-bolder">{{totalUsers}}</h4>
+                    <h4 class="font-weight-bolder">{{ totalUsers }}</h4>
                     <div class="progress w-75">
-                      <div
-                        class="progress-bar bg-dark w-60"
-                        role="progressbar"
-                        aria-valuenow="60"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                      ></div>
+                      <mat-progress-bar
+                        mode="determinate"
+                        [value]="totalPerc"
+                      ></mat-progress-bar>
                     </div>
                   </div>
                   <div class="col-3 py-3 ps-0">
@@ -347,15 +351,12 @@
                         Productive
                       </p>
                     </div>
-                    <h4 class="font-weight-bolder">{{productiveUsers}}</h4>
+                    <h4 class="font-weight-bolder">{{ productiveUsers }}</h4>
                     <div class="progress w-75">
-                      <div
-                        class="progress-bar bg-dark w-90"
-                        role="progressbar"
-                        aria-valuenow="90"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                      ></div>
+                      <mat-progress-bar
+                        mode="determinate"
+                        [value]="productivePerc"
+                      ></mat-progress-bar>
                     </div>
                   </div>
                   <div class="col-3 py-3 ps-0">
@@ -404,15 +405,12 @@
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Break</p>
                     </div>
-                    <h4 class="font-weight-bolder">{{breakUsers}}</h4>
+                    <h4 class="font-weight-bolder">{{ breakUsers }}</h4>
                     <div class="progress w-75">
-                      <div
-                        class="progress-bar bg-dark w-30"
-                        role="progressbar"
-                        aria-valuenow="30"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                      ></div>
+                      <mat-progress-bar
+                        mode="determinate"
+                        [value]="breakPerc"
+                      ></mat-progress-bar>
                     </div>
                   </div>
                   <div class="col-3 py-3 ps-0">
@@ -466,15 +464,12 @@
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Idle</p>
                     </div>
-                    <h4 class="font-weight-bolder">{{idleUsers}}</h4>
+                    <h4 class="font-weight-bolder">{{ idleUsers }}</h4>
                     <div class="progress w-75">
-                      <div
-                        class="progress-bar bg-dark w-50"
-                        role="progressbar"
-                        aria-valuenow="50"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                      ></div>
+                      <mat-progress-bar
+                        mode="determinate"
+                        [value]="idlePerc"
+                      ></mat-progress-bar>
                     </div>
                   </div>
                 </div>

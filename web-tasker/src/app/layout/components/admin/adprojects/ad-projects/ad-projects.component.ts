@@ -117,7 +117,7 @@ export class AdProjectsComponent implements OnInit {
         this.projectService
           .getProjectMembers(this.projects[i]._id)
           .subscribe((members: any) => {
-            console.log(members.length);
+            // console.log(members.length);
             //push number of members to projects
             this.projects[i].members = members.length;
           });

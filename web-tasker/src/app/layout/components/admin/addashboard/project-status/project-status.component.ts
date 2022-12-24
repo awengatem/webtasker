@@ -11,33 +11,39 @@ import { TeamService } from 'src/app/services/api/team.service';
 })
 export class ProjectStatusComponent implements OnInit {
   @ViewChild('fields') fields!: ElementRef;
+  documents!: any[];
+  projectsLength = 0;
+  projects!: any[];
+  activeSessionDocs: string[] = [];
+  projectidArr: string[] = [];
+  uniqueProjects: string[] = [];
 
   /**variables used by search and filter inputs */
   selectedValue = '';
   //must match default selected value
-  propName = 'username';
-  placeholder = 'enter username to search ...';
-  documents!: any[];
-  docLength = 0;
+  propName = 'projectName';
+  placeholder = 'enter project name to search ...';
 
   /**note that the field properties should match the object
    * properties to be filtered
    */
   filterFields: { [key: string]: string } = {
-    username: '',
     projectName: '',
-    teamName: '',
+    teamCount: '',
     status: '',
-    newDuration: '',
-    startTime: '',
-    finishTime: '',
+    duration: '',
+    userPerc: '',
   };
   filter = {};
 
-  constructor(private projectStatusService: ProjectStatusService) {}
+  constructor(
+    private projectStatusService: ProjectStatusService,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit(): void {
-    this.getStatusDocs();
+    this.composeProjectStatus();
+    this.getActiveProjects();
   }
 
   /**what to do after select is changed */
@@ -63,14 +69,89 @@ export class ProjectStatusComponent implements OnInit {
     console.log(this.filter);
   }
 
-  /**getting documents from service */
-  getStatusDocs() {
+  /**compose final project status */
+  composeProjectStatus() {
+    this.getProjects().then((projects: any) => {
+      this.projects = projects;
+      this.projectsLength = projects.length;
+      //compute values for additional properties
+      this.getProjectMembers();
+      console.log(this.projects);
+    });
+  }
+
+  /**Getting all projects */
+  getProjects() {
+    return new Promise<any>((resolve, reject) => {
+      this.projectService.getAllProjects().subscribe({
+        next: (documents: any) => {
+          this.documents = documents;
+          //add additional properties
+          this.documents.forEach(
+            (document: any) => (
+              (document.members = 0),
+              (document.teamCount = 0),
+              (document.status = 'Unknown'),
+              (document.duration = 0),
+              (document.userPerc = 0)
+            )
+          );
+          resolve(this.documents);
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+      //get project members
+      // this.getProjectMembers();
+    });
+  }
+
+  /**Get project members */
+  getProjectMembers() {
+    if (this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectService
+          .getProjectMembers(this.projects[i]._id)
+          .subscribe((members: any) => {
+            // console.log(members.length);
+            //push number of members to projects
+            this.projects[i].members = members.length;
+          });
+        // adding the number of teams for UI
+        this.projects[i].teamCount = this.projects[i].teams.length;
+      }
+    }
+  }
+
+  /**getting active projects from active sessions to determine status*/
+  getActiveProjects() {
     this.projectStatusService
-      .getStatusDocs()
+      .getActiveStatusDocs()
       .then((documents: any) => {
-        this.documents = documents;
-        console.log(this.documents);
-        this.docLength = documents.length;
+        this.activeSessionDocs = documents;
+        //get projectids only
+        if (this.activeSessionDocs.length > 0) {
+          this.activeSessionDocs.forEach((doc: any) => {
+            this.projectidArr.push(doc.project_id);
+          });
+        }
+        //get unique projects
+        this.uniqueProjects = [...new Set(this.projectidArr)];
+        //get the active projects from total projects
+        for (let i = 0; i < this.uniqueProjects.length; i++) {
+          for (let j = 0; j < this.projects.length; j++) {
+            if (this.uniqueProjects[i] == this.projects[j]._id) {
+              this.projects[j].status = 'active';
+            }
+          }
+        }
+        for (let i = 0; i < this.projects.length; i++) {
+          if (this.projects[i].status != 'active') {
+            this.projects[i].status = 'dormant';
+          }
+        }
       })
       .catch((error) => {
         console.log(error);

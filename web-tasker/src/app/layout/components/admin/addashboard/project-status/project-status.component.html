@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col-3">
                 <h1 class="text-dark position-relative heading">
-                  Timer data <i class="uil uil-database"></i>
+                  Project status <i class="uil uil-database"></i>
                   <!-- <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger count"
                   >
@@ -18,8 +18,8 @@
               </div>
               <div class="col count">
                 <h1 class="text-dark position-relative">
-                  Documents:
-                  <span class=""> {{ docLength }} </span>
+                  Projects:
+                  <span class=""> {{ projectsLength }} </span>
                 </h1>
               </div>
               <div class="col selector">
@@ -37,13 +37,12 @@
                       (change)="onSelected()"
                     >
                       <!-- values here must match the object properties -->
-                      <option value="username" selected>Username</option>
-                      <option value="projectName">Project name</option>
-                      <option value="teamName">Team name</option>
+                      <option value="projectName" selected>Projectname</option>
+                      <option value="teamCount">Teams</option>
+                      <option value="members">Members</option>
                       <option value="status">Status</option>
-                      <option value="newDuration">Duration</option>
-                      <option value="startTime">Start date</option>
-                      <option value="finishTime">Finish date</option>
+                      <option value="duration">Duration</option>
+                      <option value="userPerc">User percentage</option>
                     </select>
                   </div>
                 </div>
@@ -76,13 +75,13 @@
                         <h2>#</h2>
                       </div>
                       <div class="col-sm text-left">
-                        <h2>Username</h2>
-                      </div>
-                      <div class="col-sm">
                         <h2>Project</h2>
                       </div>
                       <div class="col-sm">
-                        <h2>Team</h2>
+                        <h2>Teams</h2>
+                      </div>
+                      <div class="col-sm">
+                        <h2>Members</h2>
                       </div>
                       <div class="col-sm">
                         <h2>Status</h2>
@@ -91,10 +90,7 @@
                         <h2>Duration</h2>
                       </div>
                       <div class="col-sm">
-                        <h2>Start time</h2>
-                      </div>
-                      <div class="col-sm">
-                        <h2>Finish time</h2>
+                        <h2>User Percentage</h2>
                       </div>
                     </div>
                   </div>
@@ -102,46 +98,43 @@
                     <div
                       class="row pt-3 pb-2 ps-3 border-bottom content-row"
                       style="align-items: center"
-                      *ngFor="let document of documents | myFilter: filter"
+                      *ngFor="let project of projects | myFilter : filter"
                     >
                       <div class="col-1 centered-content">
-                        <p>{{ documents.indexOf(document) + 1 }}</p>
+                        <p>{{ projects.indexOf(project) + 1 }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.username }}</p>
+                        <p>{{ project.projectName }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.projectName }}</p>
+                        <p>{{ project.teamCount }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.teamName }}</p>
+                        <p>{{ project.members }}</p>
                       </div>
                       <div
-                        *ngIf="document.status != 'finished'"
+                        *ngIf="project.status != 'dormant'"
                         class="col-sm"
                         [ngClass]="
-                          document.status === 'running' ? 'running' : 'paused'
+                          project.status === 'active' ? 'running' : 'paused'
                         "
                       >
-                        <p>{{ document.status }}</p>
+                        <p>{{ project.status }}</p>
                       </div>
                       <div
-                        *ngIf="document.status === 'finished'"
+                        *ngIf="project.status === 'dormant'"
                         class="col-sm default"
                       >
-                        <p>{{ document.status }}</p>
+                        <p>{{ project.status }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.newDuration }}</p>
+                        <p>{{ project.duration }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.startTime }}</p>
-                      </div>
-                      <div class="col-sm">
-                        <p>{{ document.finishTime }}</p>
+                        <p>{{ project.userPerc }}</p>
                       </div>
                     </div>
-                    <div class="centered notify" *ngIf="docLength === 0">
+                    <div class="centered notify" *ngIf="projectsLength === 0">
                       <i class="fa-solid fa-circle-exclamation me-2"></i>
                       <div>No data available at the moment</div>
                     </div>
