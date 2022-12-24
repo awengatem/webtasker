@@ -11,14 +11,17 @@ import { TeamService } from 'src/app/services/api/team.service';
 })
 export class ProjectStatusComponent implements OnInit {
   @ViewChild('fields') fields!: ElementRef;
+  documents!: any[];
+  documents2!: any[];
+  docLength = 0;
+  projectsLength = 0;
+  projects!: any[];
 
   /**variables used by search and filter inputs */
   selectedValue = '';
   //must match default selected value
   propName = 'username';
   placeholder = 'enter username to search ...';
-  documents!: any[];
-  docLength = 0;
 
   /**note that the field properties should match the object
    * properties to be filtered
@@ -34,10 +37,14 @@ export class ProjectStatusComponent implements OnInit {
   };
   filter = {};
 
-  constructor(private projectStatusService: ProjectStatusService) {}
+  constructor(
+    private projectStatusService: ProjectStatusService,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit(): void {
     this.getStatusDocs();
+    this.composeProjectStatus();
   }
 
   /**what to do after select is changed */
@@ -69,11 +76,62 @@ export class ProjectStatusComponent implements OnInit {
       .getStatusDocs()
       .then((documents: any) => {
         this.documents = documents;
-        console.log(this.documents);
+        // console.log(this.documents);
         this.docLength = documents.length;
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+  /**compose final project status */
+  composeProjectStatus() {
+    this.getProjects().then((projects: any) => {
+      this.projects = projects;
+      this.projectsLength = projects.length;
+      //compute values for additional properties
+      this.getProjectMembers();
+      console.log(this.projects);
+    });
+  }
+
+  /**Getting all projects */
+  getProjects() {
+    return new Promise<any>((resolve, reject) => {
+      this.projectService.getAllProjects().subscribe({
+        next: (documents: any) => {
+          this.documents2 = documents;
+          //add additional properties
+          this.documents2.forEach(
+            (document: any) => (
+              (document.members = 0),
+              (document.duration = 0),
+              (document.userPerc = 0)
+            )
+          );
+          resolve(this.documents2);
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+      //get project members
+      // this.getProjectMembers();
+    });
+  }
+
+  /**Get project members */
+  getProjectMembers() {
+    if (this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectService
+          .getProjectMembers(this.projects[i]._id)
+          .subscribe((members: any) => {
+            // console.log(members.length);
+            //push number of members to projects
+            this.projects[i].members = members.length;
+          });
+      }
+    }
   }
 }
