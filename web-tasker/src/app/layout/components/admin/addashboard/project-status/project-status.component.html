@@ -18,8 +18,8 @@
               </div>
               <div class="col count">
                 <h1 class="text-dark position-relative">
-                  Users:
-                  <span class=""> {{ docLength }} </span>
+                  Projects:
+                  <span class=""> {{ projectsLength }} </span>
                 </h1>
               </div>
               <div class="col selector">
@@ -99,43 +99,43 @@
                     <div
                       class="row pt-3 pb-2 ps-3 border-bottom content-row"
                       style="align-items: center"
-                      *ngFor="let document of documents | myFilter : filter"
+                      *ngFor="let project of projects | myFilter : filter"
                     >
                       <div class="col-1 centered-content">
-                        <p>{{ documents.indexOf(document) + 1 }}</p>
+                        <p>{{ projects.indexOf(project) + 1 }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.username }}</p>
+                        <p>{{ project.projectName }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.projectName }}</p>
+                        <p>{{ project.teams.length }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.teamName }}</p>
+                        <p>{{ project.members }}</p>
                       </div>
                       <div
-                        *ngIf="document.status != 'finished'"
+                        *ngIf="project.status != 'inactive'"
                         class="col-sm"
                         [ngClass]="
-                          document.status === 'running' ? 'running' : 'paused'
+                          project.status === 'active' ? 'running' : 'paused'
                         "
                       >
-                        <p>{{ document.status }}</p>
+                        <p>{{ project.status }}</p>
                       </div>
                       <div
-                        *ngIf="document.status === 'finished'"
+                        *ngIf="project.status === 'inactive'"
                         class="col-sm default"
                       >
-                        <p>{{ document.status }}</p>
+                        <p>{{ project.status }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.newDuration }}</p>
+                        <p>{{ project.duration }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ document.startTime }}</p>
+                        <p>{{ project.userPerc }}</p>
                       </div>
                     </div>
-                    <div class="centered notify" *ngIf="docLength === 0">
+                    <div class="centered notify" *ngIf="projectsLength === 0">
                       <i class="fa-solid fa-circle-exclamation me-2"></i>
                       <div>No data available at the moment</div>
                     </div>

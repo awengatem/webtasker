@@ -11,11 +11,13 @@ import { TeamService } from 'src/app/services/api/team.service';
 })
 export class ProjectStatusComponent implements OnInit {
   @ViewChild('fields') fields!: ElementRef;
-  documents!: any[];
-  documents2!: any[];
+  documents!: any[];  
   docLength = 0;
   projectsLength = 0;
   projects!: any[];
+  activeSessionDocs: string[] = [];
+  projectidArr: string[] = [];
+  uniqueProjects: string[] = [];
 
   /**variables used by search and filter inputs */
   selectedValue = '';
@@ -42,9 +44,9 @@ export class ProjectStatusComponent implements OnInit {
     private projectService: ProjectService
   ) {}
 
-  ngOnInit(): void {
-    this.getStatusDocs();
+  ngOnInit(): void {    
     this.composeProjectStatus();
+    this.getActiveProjects();
   }
 
   /**what to do after select is changed */
@@ -70,19 +72,6 @@ export class ProjectStatusComponent implements OnInit {
     console.log(this.filter);
   }
 
-  /**getting documents from service */
-  getStatusDocs() {
-    this.projectStatusService
-      .getStatusDocs()
-      .then((documents: any) => {
-        this.documents = documents;
-        // console.log(this.documents);
-        this.docLength = documents.length;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
   /**compose final project status */
   composeProjectStatus() {
     this.getProjects().then((projects: any) => {
@@ -99,16 +88,17 @@ export class ProjectStatusComponent implements OnInit {
     return new Promise<any>((resolve, reject) => {
       this.projectService.getAllProjects().subscribe({
         next: (documents: any) => {
-          this.documents2 = documents;
+          this.documents = documents;
           //add additional properties
-          this.documents2.forEach(
+          this.documents.forEach(
             (document: any) => (
               (document.members = 0),
+              (document.status = 'Unknown'),
               (document.duration = 0),
               (document.userPerc = 0)
             )
           );
-          resolve(this.documents2);
+          resolve(this.documents);
         },
         error: (err) => {
           console.log(err);
@@ -133,5 +123,38 @@ export class ProjectStatusComponent implements OnInit {
           });
       }
     }
+  }
+
+  /**getting active projects from active sessions to determine status*/
+  getActiveProjects() {
+    this.projectStatusService
+      .getActiveStatusDocs()
+      .then((documents: any) => {
+        this.activeSessionDocs = documents;
+        //get projectids only
+        if (this.activeSessionDocs.length > 0) {
+          this.activeSessionDocs.forEach((doc: any) => {
+            this.projectidArr.push(doc.project_id);
+          });
+        }
+        //get unique projects
+        this.uniqueProjects = [...new Set(this.projectidArr)];
+        //get the active projects from total projects
+        for (let i = 0; i < this.uniqueProjects.length; i++) {
+          for (let j = 0; j < this.projects.length; j++) {
+            if (this.uniqueProjects[i] == this.projects[j]._id) {
+              this.projects[j].status = 'active';
+            }
+          }
+        }
+        for (let i = 0; i < this.projects.length; i++) {
+          if (this.projects[i].status != 'active') {
+            this.projects[i].status = 'inactive';
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

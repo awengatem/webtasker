@@ -10,6 +10,9 @@ import { UserAccountService } from './user-account.service';
 export class ProjectStatusService {
   /**Array used to getStatusDocs function */
   documents!: any[];
+  documents2!: any[];
+  documents3!: any[];
+  documents4!: any[];
   constructor(
     private webService: WebRequestService,
     private teamService: TeamService,
@@ -89,10 +92,10 @@ export class ProjectStatusService {
     return new Promise((resolve, reject) => {
       this.getAllActiveProjects().subscribe({
         next: (documents) => {
-          //console.log(this.documents);
-          this.documents = documents;
+          //console.log(this.documents2);
+          this.documents2 = documents;
           //push new fields to retrieved documents
-          this.documents.forEach(
+          this.documents2.forEach(
             (document) => (
               (document.username = 'Unknown'),
               (document.projectName = 'Unknown'),
@@ -102,48 +105,48 @@ export class ProjectStatusService {
               (document.finishTime = 'Unknown')
             )
           );
-          //console.log(this.documents);
+          //console.log(this.documents2);
           //loop through the documents and assign new values
-          for (let i = 0; i < this.documents.length; i++) {
-            if (this.documents[i] != null) {
+          for (let i = 0; i < this.documents2.length; i++) {
+            if (this.documents2[i] != null) {
               //assign user name
-              this.getUserName(this.documents[i].user_account_id).then(
+              this.getUserName(this.documents2[i].user_account_id).then(
                 (username) => {
-                  this.documents[i].username = username;
+                  this.documents2[i].username = username;
                 }
               );
               //assign project name
-              this.getProjectName(this.documents[i].project_id).then(
+              this.getProjectName(this.documents2[i].project_id).then(
                 (projectName) => {
-                  this.documents[i].projectName = projectName;
+                  this.documents2[i].projectName = projectName;
                 }
               );
               //assign team name
-              this.getTeamName(this.documents[i].team_id).then((teamName) => {
-                this.documents[i].teamName = teamName;
+              this.getTeamName(this.documents2[i].team_id).then((teamName) => {
+                this.documents2[i].teamName = teamName;
               });
               //assign new duration
-              this.durationConverter(this.documents[i].duration).then(
+              this.durationConverter(this.documents2[i].duration).then(
                 (newDuration) => {
-                  this.documents[i].newDuration = newDuration;
+                  this.documents2[i].newDuration = newDuration;
                 }
               );
               //assign new start time
-              this.timestampConverter(this.documents[i].started).then(
+              this.timestampConverter(this.documents2[i].started).then(
                 (startTime) => {
-                  this.documents[i].startTime = startTime;
+                  this.documents2[i].startTime = startTime;
                 }
               );
 
               //assign new finish time
-              this.timestampConverter(this.documents[i].finished).then(
+              this.timestampConverter(this.documents2[i].finished).then(
                 (finishTime) => {
-                  this.documents[i].finishTime = finishTime;
+                  this.documents2[i].finishTime = finishTime;
                 }
               );
             }
           }
-          resolve(this.documents);
+          resolve(this.documents2);
         },
         error: (err) => {
           console.log(err);
@@ -158,10 +161,10 @@ export class ProjectStatusService {
     return new Promise((resolve, reject) => {
       this.getRFinishedProjects().subscribe({
         next: (documents) => {
-          //console.log(this.documents);
-          this.documents = documents;
+          //console.log(this.documents3);
+          this.documents3 = documents;
           //push new fields to retrieved documents
-          this.documents.forEach(
+          this.documents3.forEach(
             (document) => (
               (document.username = 'Unknown'),
               (document.projectName = 'Unknown'),
@@ -171,46 +174,46 @@ export class ProjectStatusService {
               (document.finishTime = 'Unknown')
             )
           );
-          //console.log(this.documents);
+          //console.log(this.documents3);
           //loop through the documents and assign new values
-          for (let i = 0; i < this.documents.length; i++) {
+          for (let i = 0; i < this.documents3.length; i++) {
             //assign user name
-            this.getUserName(this.documents[i].user_account_id).then(
+            this.getUserName(this.documents3[i].user_account_id).then(
               (username) => {
-                this.documents[i].username = username;
+                this.documents3[i].username = username;
               }
             );
             //assign project name
-            this.getProjectName(this.documents[i].project_id).then(
+            this.getProjectName(this.documents3[i].project_id).then(
               (projectName) => {
-                this.documents[i].projectName = projectName;
+                this.documents3[i].projectName = projectName;
               }
             );
             //assign team name
-            this.getTeamName(this.documents[i].team_id).then((teamName) => {
-              this.documents[i].teamName = teamName;
+            this.getTeamName(this.documents3[i].team_id).then((teamName) => {
+              this.documents3[i].teamName = teamName;
             });
             //assign new duration
-            this.durationConverter(this.documents[i].duration).then(
+            this.durationConverter(this.documents3[i].duration).then(
               (newDuration) => {
-                this.documents[i].newDuration = newDuration;
+                this.documents3[i].newDuration = newDuration;
               }
             );
             //assign new start time
-            this.timestampConverter(this.documents[i].started).then(
+            this.timestampConverter(this.documents3[i].started).then(
               (startTime) => {
-                this.documents[i].startTime = startTime;
+                this.documents3[i].startTime = startTime;
               }
             );
 
             //assign new finish time
-            this.timestampConverter(this.documents[i].finished).then(
+            this.timestampConverter(this.documents3[i].finished).then(
               (finishTime) => {
-                this.documents[i].finishTime = finishTime;
+                this.documents3[i].finishTime = finishTime;
               }
             );
           }
-          resolve(this.documents);
+          resolve(this.documents3);
         },
         error: (err) => {
           console.log(err);
@@ -225,10 +228,10 @@ export class ProjectStatusService {
     return new Promise((resolve, reject) => {
       this.getUserStatusDocs().subscribe({
         next: (documents) => {
-          //console.log(this.documents);
-          this.documents = documents;
+          //console.log(this.documents4);
+          this.documents4 = documents;
           //push new fields to retrieved documents
-          this.documents.forEach(
+          this.documents4.forEach(
             (document) => (
               (document.projectName = 'Unknown'),
               (document.teamName = 'Unknown'),
@@ -236,48 +239,48 @@ export class ProjectStatusService {
               (document.startTime = 'Unknown')
             )
           );
-          //console.log(this.documents);
+          //console.log(this.documents4);
           //loop through the documents and assign new values
-          for (let i = 0; i < this.documents.length; i++) {
+          for (let i = 0; i < this.documents4.length; i++) {
             if (
-              this.documents[i].projectId != 'null' &&
-              this.documents[i].teamId != 'null'
+              this.documents4[i].projectId != 'null' &&
+              this.documents4[i].teamId != 'null'
             ) {
               //assign project name
-              this.getProjectName(this.documents[i].projectId).then(
+              this.getProjectName(this.documents4[i].projectId).then(
                 (projectName) => {
-                  this.documents[i].projectName = projectName;
+                  this.documents4[i].projectName = projectName;
                 }
               );
               //assign team name
-              this.getTeamName(this.documents[i].teamId).then((teamName) => {
-                this.documents[i].teamName = teamName;
+              this.getTeamName(this.documents4[i].teamId).then((teamName) => {
+                this.documents4[i].teamName = teamName;
               });
               //assign new duration
-              this.durationConverter(this.documents[i].duration).then(
+              this.durationConverter(this.documents4[i].duration).then(
                 (newDuration) => {
-                  this.documents[i].newDuration = newDuration;
+                  this.documents4[i].newDuration = newDuration;
                 }
               );
               //assign new start time
-              this.timestampConverter(this.documents[i].started).then(
+              this.timestampConverter(this.documents4[i].started).then(
                 (startTime) => {
-                  this.documents[i].startTime = startTime;
+                  this.documents4[i].startTime = startTime;
                 }
               );
             } else {
-              this.documents[i].projectName = 'null';
-              this.documents[i].teamName = 'null';
-              this.documents[i].newDuration = 'null';
-              this.documents[i].startTime = 'null';
+              this.documents4[i].projectName = 'null';
+              this.documents4[i].teamName = 'null';
+              this.documents4[i].newDuration = 'null';
+              this.documents4[i].startTime = 'null';
             }
 
             //name status
-            if (this.documents[i].status === 'null') {
-              this.documents[i].status = 'unproductive';
+            if (this.documents4[i].status === 'null') {
+              this.documents4[i].status = 'unproductive';
             }
           }
-          resolve(this.documents);
+          resolve(this.documents4);
         },
         error: (err) => {
           console.log(err);
