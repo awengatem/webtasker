@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col-3">
                 <h1 class="text-dark position-relative heading">
-                  Timer data <i class="uil uil-database"></i>
+                  Project status <i class="uil uil-database"></i>
                   <!-- <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger count"
                   >
@@ -76,13 +76,13 @@
                         <h2>#</h2>
                       </div>
                       <div class="col-sm text-left">
-                        <h2>Username</h2>
-                      </div>
-                      <div class="col-sm">
                         <h2>Project</h2>
                       </div>
                       <div class="col-sm">
-                        <h2>Team</h2>
+                        <h2>Teams</h2>
+                      </div>
+                      <div class="col-sm">
+                        <h2>Members</h2>
                       </div>
                       <div class="col-sm">
                         <h2>Status</h2>
@@ -91,10 +91,7 @@
                         <h2>Duration</h2>
                       </div>
                       <div class="col-sm">
-                        <h2>Start time</h2>
-                      </div>
-                      <div class="col-sm">
-                        <h2>Finish time</h2>
+                        <h2>User Percentage</h2>
                       </div>
                     </div>
                   </div>
@@ -102,7 +99,7 @@
                     <div
                       class="row pt-3 pb-2 ps-3 border-bottom content-row"
                       style="align-items: center"
-                      *ngFor="let document of documents | myFilter: filter"
+                      *ngFor="let document of documents | myFilter : filter"
                     >
                       <div class="col-1 centered-content">
                         <p>{{ documents.indexOf(document) + 1 }}</p>
@@ -136,9 +133,6 @@
                       </div>
                       <div class="col-sm">
                         <p>{{ document.startTime }}</p>
-                      </div>
-                      <div class="col-sm">
-                        <p>{{ document.finishTime }}</p>
                       </div>
                     </div>
                     <div class="centered notify" *ngIf="docLength === 0">

@@ -53,10 +53,10 @@ export class AdDashboardComponent implements OnInit {
 
   /**Initialize fetching of data */
   init() {
-    // arrays
+    // reset push arrays
     this.projectidArr = [];
     this.teamidArr = [];
-
+    // initiate methods
     this.getTotalUsers();
     this.getTotalProjects();
     this.getTotalTeams();
