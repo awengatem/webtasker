@@ -21,7 +21,7 @@
                       <h5 class="font-weight-bolder mb-0">
                         {{ totalUsers }}
                         <span class="text-success text-sm font-weight-bolder"
-                          >55% active</span
+                          >{{ activeUsersPerc }}% active</span
                         >
                       </h5>
                     </div>
@@ -52,7 +52,7 @@
                       <h5 class="font-weight-bolder mb-0">
                         {{ totalProjects }}
                         <span class="text-success text-sm font-weight-bolder"
-                          >100% active</span
+                          >{{ activeProjectsPerc }}% active</span
                         >
                       </h5>
                     </div>
@@ -82,8 +82,8 @@
                       </p>
                       <h5 class="font-weight-bolder mb-0">
                         {{ totalTeams }}
-                        <span class="text-danger text-sm font-weight-bolder"
-                          >50% active</span
+                        <span class="text-success text-sm font-weight-bolder"
+                          >{{ activeTeamsPerc }}% active</span
                         >
                       </h5>
                     </div>

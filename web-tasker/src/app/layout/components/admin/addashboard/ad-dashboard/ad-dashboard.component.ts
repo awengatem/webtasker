@@ -18,19 +18,23 @@ export class AdDashboardComponent implements OnInit {
   productiveUsers = 0;
   breakUsers = 0;
   idleUsers = 0;
-  coursesPercentage = 80;
 
   // arrays
   statusDocs = [];
   activeUserDocs = [];
-  uniqueProjects: string[] = [];
   projectidArr: string[] = [];
+  teamidArr: string[] = [];
+  uniqueProjects: string[] = [];
+  uniqueTeams: string[] = [];
 
   //percentages
   totalPerc = 100;
   productivePerc = 0;
   breakPerc = 0;
   idlePerc = 0;
+  activeUsersPerc = 0;
+  activeProjectsPerc = 0;
+  activeTeamsPerc = 0;
 
   constructor(
     private userAccountService: UserAccountService,
@@ -40,12 +44,25 @@ export class AdDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.init();
+    // refresh data every 20 seconds
+    window.setInterval(() => {
+      this.init();
+    }, 20000);
+  }
+
+  /**Initialize fetching of data */
+  init() {
+    // arrays
+    this.projectidArr = [];
+    this.teamidArr = [];
+
     this.getTotalUsers();
     this.getTotalProjects();
     this.getTotalTeams();
-    this.getActiveUsers();
     this.getRecentDocs();
     this.getStatusDocs();
+    this.getActiveUsers();
   }
 
   /**Get the number of total users */
@@ -90,16 +107,27 @@ export class AdDashboardComponent implements OnInit {
       .then((documents: any) => {
         this.activeUserDocs = documents;
         this.activeUsers = documents.length;
-        //get projectids only
+        //get projectids and teamids only
         if (this.activeUserDocs.length > 0) {
           this.activeUserDocs.forEach((doc: any) => {
             this.projectidArr.push(doc.project_id);
+            this.teamidArr.push(doc.team_id);
           });
         }
         //get unique projects
-        // this.uniqueProjects = [...new Set(this.projectidArr)];
-        // console.log(this.projectidArr);
-        console.log(this.uniqueProjects);
+        this.uniqueProjects = [...new Set(this.projectidArr)];
+        //get unique teams
+        this.uniqueTeams = [...new Set(this.teamidArr)];
+        //compute active percentages
+        this.activeUsersPerc = Math.round(
+          (this.activeUsers / this.totalUsers) * 100
+        );
+        this.activeProjectsPerc = Math.round(
+          (this.uniqueProjects.length / this.totalProjects) * 100
+        );
+        this.activeTeamsPerc = Math.round(
+          (this.uniqueTeams.length / this.totalTeams) * 100
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -123,18 +151,24 @@ export class AdDashboardComponent implements OnInit {
     this.projectStatusService
       .getUserStatus()
       .then((documents: any) => {
-        console.log(documents);
+        // console.log(documents);
         this.statusDocs = documents;
         // categorize the status
+        let productive = 0;
+        let paused = 0;
+        let idle = 0;
         this.statusDocs.forEach((doc: any) => {
           if (doc.status === 'running') {
-            this.productiveUsers++;
+            productive++;
           } else if (doc.status === 'paused') {
-            this.breakUsers++;
+            paused++;
           } else if (doc.status === 'unproductive') {
-            this.idleUsers++;
+            idle++;
           }
         });
+        this.productiveUsers = productive;
+        this.breakUsers = paused;
+        this.idleUsers = idle;
         //compute percentages
         this.productivePerc = (this.productiveUsers / this.totalUsers) * 100;
         this.breakPerc = (this.breakUsers / this.totalUsers) * 100;
