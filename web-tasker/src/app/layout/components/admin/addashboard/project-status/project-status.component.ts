@@ -11,8 +11,7 @@ import { TeamService } from 'src/app/services/api/team.service';
 })
 export class ProjectStatusComponent implements OnInit {
   @ViewChild('fields') fields!: ElementRef;
-  documents!: any[];  
-  docLength = 0;
+  documents!: any[];
   projectsLength = 0;
   projects!: any[];
   activeSessionDocs: string[] = [];
@@ -22,20 +21,18 @@ export class ProjectStatusComponent implements OnInit {
   /**variables used by search and filter inputs */
   selectedValue = '';
   //must match default selected value
-  propName = 'username';
-  placeholder = 'enter username to search ...';
+  propName = 'projectName';
+  placeholder = 'enter project name to search ...';
 
   /**note that the field properties should match the object
    * properties to be filtered
    */
   filterFields: { [key: string]: string } = {
-    username: '',
     projectName: '',
-    teamName: '',
+    teamCount: '',
     status: '',
-    newDuration: '',
-    startTime: '',
-    finishTime: '',
+    duration: '',
+    userPerc: '',
   };
   filter = {};
 
@@ -44,7 +41,7 @@ export class ProjectStatusComponent implements OnInit {
     private projectService: ProjectService
   ) {}
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.composeProjectStatus();
     this.getActiveProjects();
   }
@@ -93,6 +90,7 @@ export class ProjectStatusComponent implements OnInit {
           this.documents.forEach(
             (document: any) => (
               (document.members = 0),
+              (document.teamCount = 0),
               (document.status = 'Unknown'),
               (document.duration = 0),
               (document.userPerc = 0)
@@ -121,6 +119,8 @@ export class ProjectStatusComponent implements OnInit {
             //push number of members to projects
             this.projects[i].members = members.length;
           });
+        // adding the number of teams for UI
+        this.projects[i].teamCount = this.projects[i].teams.length;
       }
     }
   }

@@ -37,13 +37,12 @@
                       (change)="onSelected()"
                     >
                       <!-- values here must match the object properties -->
-                      <option value="username" selected>Username</option>
-                      <option value="projectName">Project name</option>
-                      <option value="teamName">Team name</option>
+                      <option value="projectName" selected>Projectname</option>
+                      <option value="teamCount">Teams</option>
+                      <option value="members">Members</option>
                       <option value="status">Status</option>
-                      <option value="newDuration">Duration</option>
-                      <option value="startTime">Start date</option>
-                      <option value="finishTime">Finish date</option>
+                      <option value="duration">Duration</option>
+                      <option value="userPerc">User percentage</option>
                     </select>
                   </div>
                 </div>
@@ -108,7 +107,7 @@
                         <p>{{ project.projectName }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>{{ project.teams.length }}</p>
+                        <p>{{ project.teamCount }}</p>
                       </div>
                       <div class="col-sm">
                         <p>{{ project.members }}</p>
