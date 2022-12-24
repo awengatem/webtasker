@@ -113,7 +113,7 @@
                         <p>{{ project.members }}</p>
                       </div>
                       <div
-                        *ngIf="project.status != 'inactive'"
+                        *ngIf="project.status != 'dormant'"
                         class="col-sm"
                         [ngClass]="
                           project.status === 'active' ? 'running' : 'paused'
@@ -122,7 +122,7 @@
                         <p>{{ project.status }}</p>
                       </div>
                       <div
-                        *ngIf="project.status === 'inactive'"
+                        *ngIf="project.status === 'dormant'"
                         class="col-sm default"
                       >
                         <p>{{ project.status }}</p>

@@ -149,7 +149,7 @@ export class ProjectStatusComponent implements OnInit {
         }
         for (let i = 0; i < this.projects.length; i++) {
           if (this.projects[i].status != 'active') {
-            this.projects[i].status = 'inactive';
+            this.projects[i].status = 'dormant';
           }
         }
       })
