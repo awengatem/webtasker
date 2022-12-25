@@ -44,6 +44,7 @@ export class ProjectStatusComponent implements OnInit {
   ngOnInit(): void {
     this.composeProjectStatus();
     this.getActiveProjects();
+    this.getProjectDuration();
   }
 
   /**what to do after select is changed */
@@ -155,6 +156,15 @@ export class ProjectStatusComponent implements OnInit {
       })
       .catch((error) => {
         console.log(error);
+      });
+  }
+
+  /**getting and computing the total duration per project */
+  getProjectDuration() {
+    this.projectStatusService
+      .getProjectDuration('63527d2c5615ae0e6cb75528')
+      .then((duration) => {
+        console.log(duration);
       });
   }
 }

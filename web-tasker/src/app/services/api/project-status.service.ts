@@ -20,6 +20,7 @@ export class ProjectStatusService {
     private userAccountService: UserAccountService
   ) {}
 
+  /**MAIN METHODS */
   /**get all the project status docs from api */
   getStatusDocs() {
     return new Promise((resolve, reject) => {
@@ -290,31 +291,33 @@ export class ProjectStatusService {
     });
   }
 
-  /**get all active projects */
-  getAllActiveProjects() {
-    return this.webService.get('project_status/active');
+  /**get project status docs from api specified by Projectid*/
+  getStatusDocsById(projectId: string) {
+    return new Promise((resolve, reject) => {
+      this.getProjectStatusByProjId(projectId).subscribe({
+        next: (statusDocs) => {
+          resolve(statusDocs);
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+    });
   }
 
-  /**get active projects for user */
-  getActiveProjects() {
-    return this.webService.get('project_status/my_active');
+  /**get project duration*/
+  getProjectDuration(projectId: string) {
+    return new Promise((resolve, reject) => {
+      //work on docs with specified project Id
+      this.getStatusDocsById(projectId).then((statusDocs: any) => {
+        let totalDuration = this.computeDurationOnStatusDocs(statusDocs);
+        resolve(totalDuration);
+      });
+    });
   }
 
-  /**get all project status docs  from db */
-  getProjectStatus() {
-    return this.webService.get('project_status');
-  }
-
-  /**get recent finished (status) project status docs  from db */
-  getRFinishedProjects() {
-    return this.webService.get('project_status/recent');
-  }
-
-  /**get recent finished (status) project status docs  from db */
-  getUserStatusDocs() {
-    return this.webService.get('users/status');
-  }
-
+  /**HELPER METHODS */
   /**get team name */
   getTeamName(teamId: string) {
     return new Promise((resolve, reject) => {
@@ -384,5 +387,45 @@ export class ProjectStatusService {
       const date = new Date(timestamp);
       resolve(date);
     });
+  }
+
+  /**Compute specified total duration */
+  computeDurationOnStatusDocs(statusDocs: any[]): number {
+    let duration = 0;
+    statusDocs.forEach((doc) => {
+      duration += doc.duration;
+    });
+    return duration;
+  }
+
+  /**API CONNECTION METHODS */
+  /**get all active projects */
+  getAllActiveProjects() {
+    return this.webService.get('project_status/active');
+  }
+
+  /**get active projects for user */
+  getActiveProjects() {
+    return this.webService.get('project_status/my_active');
+  }
+
+  /**get all project status docs  from db */
+  getProjectStatus() {
+    return this.webService.get('project_status');
+  }
+
+  /**get recent finished (status) project status docs  from db */
+  getRFinishedProjects() {
+    return this.webService.get('project_status/recent');
+  }
+
+  /**get all project status docs  from db */
+  getProjectStatusByProjId(projectId: string) {
+    return this.webService.get(`project_status/project/${projectId}`);
+  }
+
+  /**get recent finished (status) project status docs  from db */
+  getUserStatusDocs() {
+    return this.webService.get('users/status');
   }
 }
