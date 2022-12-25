@@ -18,6 +18,7 @@ export class AdDashboardComponent implements OnInit {
   productiveUsers = 0;
   breakUsers = 0;
   idleUsers = 0;
+  projectsLength = 0;
 
   // arrays
   statusDocs = [];
@@ -189,7 +190,7 @@ export class AdDashboardComponent implements OnInit {
   composeProjectStatus() {
     this.projectService.getProjects().then((projects: any) => {
       this.projects = projects;
-      // this.projectsLength = projects.length;
+      this.projectsLength = projects.length;
       /**compute values for additional properties
        * these methods must be in this scope where projects are available
        *  otherwise they don't work
