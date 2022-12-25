@@ -5,6 +5,9 @@ import { WebRequestService } from './web-request.service';
   providedIn: 'root',
 })
 export class ProjectService {
+  /**local variables*/
+  documents!: any[];
+
   //variable to help view newly created project
   private projectAdded: Boolean = false;
 
@@ -18,6 +21,36 @@ export class ProjectService {
   private fromAssignProject!: boolean;
 
   constructor(private webReqService: WebRequestService) {}
+
+  /**Method to return projects with specialized
+   *  formatting to be used with project status */
+  /**Getting all projects */
+  getProjects() {
+    return new Promise<any>((resolve, reject) => {
+      this.getAllProjects().subscribe({
+        next: (documents: any) => {
+          this.documents = documents;
+          //add additional properties
+          this.documents.forEach(
+            (document: any) => (
+              (document.members = 0),
+              (document.teamCount = 0),
+              (document.status = 'Unknown'),
+              (document.duration = 0),
+              (document.userPerc = 0)
+            )
+          );
+          resolve(this.documents);
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+      //get project members
+      // this.getProjectMembers();
+    });
+  }
 
   createList(title: string) {
     //send a web request to create a list

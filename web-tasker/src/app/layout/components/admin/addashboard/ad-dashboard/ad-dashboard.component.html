@@ -589,7 +589,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let project of projects">
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
@@ -602,58 +602,29 @@
                           <div
                             class="d-flex flex-column justify-content-center"
                           >
-                            <h6 class="mb-0 text-sm">Soft UI XD Version</h6>
+                            <h6 class="mb-0 text-sm">
+                              {{ project.projectName }}
+                            </h6>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <div class="avatar-group mt-2">
-                          <a
-                            href="javascript:;"
-                            class="avatar avatar-xs rounded-circle"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="bottom"
-                            title="Ryan Tompson"
-                          >
-                            <img src="../assets/img/team-1.jpg" alt="team1" />
-                          </a>
-                          <a
-                            href="javascript:;"
-                            class="avatar avatar-xs rounded-circle"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="bottom"
-                            title="Romina Hadid"
-                          >
-                            <img src="../assets/img/team-2.jpg" alt="team2" />
-                          </a>
-                          <a
-                            href="javascript:;"
-                            class="avatar avatar-xs rounded-circle"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="bottom"
-                            title="Alexander Smith"
-                          >
-                            <img src="../assets/img/team-3.jpg" alt="team3" />
-                          </a>
-                          <a
-                            href="javascript:;"
-                            class="avatar avatar-xs rounded-circle"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="bottom"
-                            title="Jessica Doe"
-                          >
-                            <img src="../assets/img/team-4.jpg" alt="team4" />
-                          </a>
+                        <div class="col-sm">
+                          <p>{{ project.members }}</p>
                         </div>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold"> $14,000 </span>
+                        <span class="text-xs font-weight-bold">
+                          {{ project.duration }}
+                        </span>
                       </td>
                       <td class="align-middle">
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold">60%</span>
+                              <span class="text-xs font-weight-bold"
+                                >{{ project.userPerc }}%</span
+                              >
                             </div>
                           </div>
                           <div class="progress">
@@ -668,7 +639,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
@@ -985,7 +956,7 @@
                           </div>
                         </div>
                       </td>
-                    </tr>
+                    </tr> -->
                   </tbody>
                 </table>
               </div>

@@ -11,7 +11,6 @@ import { TeamService } from 'src/app/services/api/team.service';
 })
 export class ProjectStatusComponent implements OnInit {
   @ViewChild('fields') fields!: ElementRef;
-  documents!: any[];
   projectsLength = 0;
   totalUsers = 0;
   projects!: any[];
@@ -72,7 +71,7 @@ export class ProjectStatusComponent implements OnInit {
 
   /**compose final project status */
   composeProjectStatus() {
-    this.getProjects().then((projects: any) => {
+    this.projectService.getProjects().then((projects: any) => {
       this.projects = projects;
       this.projectsLength = projects.length;
       /**compute values for additional properties
@@ -85,34 +84,6 @@ export class ProjectStatusComponent implements OnInit {
       });
       this.getProjectDuration();
       console.log(this.projects);
-    });
-  }
-
-  /**Getting all projects */
-  getProjects() {
-    return new Promise<any>((resolve, reject) => {
-      this.projectService.getAllProjects().subscribe({
-        next: (documents: any) => {
-          this.documents = documents;
-          //add additional properties
-          this.documents.forEach(
-            (document: any) => (
-              (document.members = 0),
-              (document.teamCount = 0),
-              (document.status = 'Unknown'),
-              (document.duration = 0),
-              (document.userPerc = 0)
-            )
-          );
-          resolve(this.documents);
-        },
-        error: (err) => {
-          console.log(err);
-          reject();
-        },
-      });
-      //get project members
-      // this.getProjectMembers();
     });
   }
 
