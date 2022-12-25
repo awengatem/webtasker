@@ -183,6 +183,17 @@ the card with data table*/
             color: #bebe0a;
             font-weight: 500;
           }
+          .team-count {
+            font-weight: 500;
+            color: #00b5cc;
+            &:hover {
+              color: #cb0c9f;
+              cursor: pointer;
+            }
+          }
+          .members {
+            font-weight: 500;
+          }
         }
 
         .row {

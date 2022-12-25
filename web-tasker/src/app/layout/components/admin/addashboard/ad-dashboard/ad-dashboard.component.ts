@@ -18,10 +18,12 @@ export class AdDashboardComponent implements OnInit {
   productiveUsers = 0;
   breakUsers = 0;
   idleUsers = 0;
+  projectsLength = 0;
 
   // arrays
   statusDocs = [];
   activeUserDocs = [];
+  projects!: any[];
   projectidArr: string[] = [];
   teamidArr: string[] = [];
   uniqueProjects: string[] = [];
@@ -63,17 +65,22 @@ export class AdDashboardComponent implements OnInit {
     this.getRecentDocs();
     this.getStatusDocs();
     this.getActiveUsers();
+    this.composeProjectStatus();
   }
 
   /**Get the number of total users */
   getTotalUsers() {
-    this.userAccountService.getUsers().subscribe({
-      next: (users) => {
-        this.totalUsers = users.length;
-      },
-      error: (err) => {
-        console.log(err);
-      },
+    return new Promise((resolve, reject) => {
+      this.userAccountService.getUsers().subscribe({
+        next: (users) => {
+          this.totalUsers = users.length;
+          resolve(this.totalUsers);
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
     });
   }
   /**Get the number of totalt projects */
@@ -177,5 +184,55 @@ export class AdDashboardComponent implements OnInit {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  /**compose project status for the projects div */
+  composeProjectStatus() {
+    this.projectService.getProjects().then((projects: any) => {
+      this.projects = projects;
+      this.projectsLength = projects.length;
+      /**compute values for additional properties
+       * these methods must be in this scope where projects are available
+       *  otherwise they don't work
+       */
+      this.getTotalUsers().then((totalUsers: any) => {
+        this.getProjectMembers(totalUsers);
+      });
+      this.getProjectDuration();
+      console.log(this.projects);
+    });
+  }
+
+  /**Get project members */
+  getProjectMembers(totalUsers: number) {
+    if (this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectService
+          .getProjectMembers(this.projects[i]._id)
+          .subscribe((members: any) => {
+            // console.log(members.length);
+            //push number of members to projects
+            this.projects[i].members = members.length;
+            // calculate user percentage
+            let userPerc = Math.round((members.length / totalUsers) * 100);
+            this.projects[i].userPerc = userPerc;
+          });
+        // adding the number of teams for UI
+        this.projects[i].teamCount = this.projects[i].teams.length;
+      }
+    }
+  }
+
+  /**getting and computing the total duration per project */
+  getProjectDuration() {
+    if (this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectStatusService
+          .getProjectDuration(this.projects[i]._id)
+          .then((duration) => {
+            this.projects[i].duration = duration;
+          });
+      }
+    }
   }
 }

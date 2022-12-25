@@ -24,9 +24,16 @@
   }
 
   .active_icon {
-    img{
+    img {
       height: auto;
       max-width: 50%;
+    }
+  }
+
+  .project-div {
+    height: 400px;
+    .sticky {
+      position: sticky;
     }
   }
 

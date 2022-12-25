@@ -11,8 +11,8 @@ import { TeamService } from 'src/app/services/api/team.service';
 })
 export class ProjectStatusComponent implements OnInit {
   @ViewChild('fields') fields!: ElementRef;
-  documents!: any[];
   projectsLength = 0;
+  totalUsers = 0;
   projects!: any[];
   activeSessionDocs: string[] = [];
   projectidArr: string[] = [];
@@ -38,12 +38,12 @@ export class ProjectStatusComponent implements OnInit {
 
   constructor(
     private projectStatusService: ProjectStatusService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private userAccountService: UserAccountService
   ) {}
 
   ngOnInit(): void {
     this.composeProjectStatus();
-    this.getActiveProjects();
   }
 
   /**what to do after select is changed */
@@ -71,45 +71,24 @@ export class ProjectStatusComponent implements OnInit {
 
   /**compose final project status */
   composeProjectStatus() {
-    this.getProjects().then((projects: any) => {
+    this.projectService.getProjects().then((projects: any) => {
       this.projects = projects;
       this.projectsLength = projects.length;
-      //compute values for additional properties
-      this.getProjectMembers();
+      /**compute values for additional properties
+       * these methods must be in this scope where projects are available
+       *  otherwise they don't work
+       */
+      this.getActiveProjects();
+      this.getTotalUsers().then((totalUsers: any) => {
+        this.getProjectMembers(totalUsers);
+      });
+      this.getProjectDuration();
       console.log(this.projects);
     });
   }
 
-  /**Getting all projects */
-  getProjects() {
-    return new Promise<any>((resolve, reject) => {
-      this.projectService.getAllProjects().subscribe({
-        next: (documents: any) => {
-          this.documents = documents;
-          //add additional properties
-          this.documents.forEach(
-            (document: any) => (
-              (document.members = 0),
-              (document.teamCount = 0),
-              (document.status = 'Unknown'),
-              (document.duration = 0),
-              (document.userPerc = 0)
-            )
-          );
-          resolve(this.documents);
-        },
-        error: (err) => {
-          console.log(err);
-          reject();
-        },
-      });
-      //get project members
-      // this.getProjectMembers();
-    });
-  }
-
   /**Get project members */
-  getProjectMembers() {
+  getProjectMembers(totalUsers: number) {
     if (this.projects.length > 0) {
       for (let i = 0; i < this.projects.length; i++) {
         this.projectService
@@ -118,6 +97,9 @@ export class ProjectStatusComponent implements OnInit {
             // console.log(members.length);
             //push number of members to projects
             this.projects[i].members = members.length;
+            // calculate user percentage
+            let userPerc = Math.round((members.length / totalUsers) * 100);
+            this.projects[i].userPerc = userPerc;
           });
         // adding the number of teams for UI
         this.projects[i].teamCount = this.projects[i].teams.length;
@@ -156,5 +138,47 @@ export class ProjectStatusComponent implements OnInit {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  /**getting and computing the total duration per project */
+  getProjectDuration() {
+    if (this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectStatusService
+          .getProjectDuration(this.projects[i]._id)
+          .then((duration) => {
+            this.projects[i].duration = duration;
+          });
+      }
+    }
+  }
+
+  /**Get the number of total users */
+  getTotalUsers() {
+    return new Promise((resolve, reject) => {
+      this.userAccountService.getUsers().subscribe({
+        next: (users) => {
+          this.totalUsers = users.length;
+          resolve(this.totalUsers);
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+    });
+  }
+
+  /**Compute user percentage */
+  computeUserPercentage() {
+    if (this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        let members = this.projects[i].members;
+        console.log(members);
+        console.log(this.totalUsers);
+        let userPerc = Math.round((members / this.totalUsers) * 100);
+        this.projects[i].userPerc = userPerc;
+      }
+    }
   }
 }
