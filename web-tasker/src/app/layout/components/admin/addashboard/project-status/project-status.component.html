@@ -130,8 +130,19 @@
                       <div class="col-sm">
                         <p>{{ project.duration }}</p>
                       </div>
-                      <div class="col-sm">
-                        <p>{{ project.userPerc }}</p>
+                      <div
+                        *ngIf="project.userPerc > 70"
+                        class="col-sm members"
+                        [ngClass]="project.userPerc > 70 ? 'running' : ''"
+                      >
+                        <p>{{ project.userPerc }}%</p>
+                      </div>
+                      <div
+                        *ngIf="project.userPerc < 70"
+                        class="col-sm members"
+                        [ngClass]="project.userPerc < 20 ? 'default' : ''"
+                      >
+                        <p>{{ project.userPerc }}%</p>
                       </div>
                     </div>
                     <div class="centered notify" *ngIf="projectsLength === 0">

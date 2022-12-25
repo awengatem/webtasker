@@ -312,7 +312,10 @@ export class ProjectStatusService {
       //work on docs with specified project Id
       this.getStatusDocsById(projectId).then((statusDocs: any) => {
         let totalDuration = this.computeDurationOnStatusDocs(statusDocs);
-        resolve(totalDuration);
+        //convert to string
+        this.durationConverter(totalDuration).then((duration) => {
+          resolve(duration);
+        });
       });
     });
   }
