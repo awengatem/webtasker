@@ -540,22 +540,22 @@
                       <li>
                         <a
                           class="dropdown-item border-radius-md"
-                          href="javascript:;"
-                          >Action</a
+                          routerLink="/ad_projects"
+                          >Projects</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          class="dropdown-item border-radius-md"
+                          routerLink="/project_status"
+                          >Projects overview</a
                         >
                       </li>
                       <li>
                         <a
                           class="dropdown-item border-radius-md"
                           href="javascript:;"
-                          >Another action</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          class="dropdown-item border-radius-md"
-                          href="javascript:;"
-                          >Something else here</a
+                          >Manage</a
                         >
                       </li>
                     </ul>
@@ -669,13 +669,10 @@
                             </div>
                           </div>
                           <div class="progress">
-                            <div
-                              class="progress-bar bg-gradient-info w-60"
-                              role="progressbar"
-                              aria-valuenow="60"
-                              aria-valuemin="0"
-                              aria-valuemax="100"
-                            ></div>
+                            <mat-progress-bar
+                              mode="determinate"
+                              [value]="project.userPerc"
+                            ></mat-progress-bar>
                           </div>
                         </div>
                       </td>
