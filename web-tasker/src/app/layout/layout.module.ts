@@ -48,6 +48,8 @@ import { ActiveSessionsComponent } from './components/admin/addashboard/active-s
 import { RecentSessionsComponent } from './components/admin/addashboard/recent-sessions/recent-sessions.component';
 import { DispositionComponent } from './components/user/user_projects/disposition/disposition.component';
 import { UserStatusComponent } from './components/admin/addashboard/user-status/user-status.component';
+import { ManageComponent } from './components/admin/manage/manage/manage.component';
+import { UsersComponent } from './components/admin/manage/users/users.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,8 @@ import { UserStatusComponent } from './components/admin/addashboard/user-status/
     MyFilterPipe,
     DispositionComponent,
     UserStatusComponent,
+    ManageComponent,
+    UsersComponent,
   ],
   imports: [
     CommonModule,
