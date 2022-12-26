@@ -3,6 +3,7 @@ import { ProjectStatusService } from 'src/app/services/api/project-status.servic
 import { ProjectService } from 'src/app/services/api/project.service';
 import { TeamService } from 'src/app/services/api/team.service';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-ad-dashboard',
@@ -38,6 +39,9 @@ export class AdDashboardComponent implements OnInit {
   activeProjectsPerc = 0;
   activeTeamsPerc = 0;
 
+  // chart
+  public chart: any;
+
   constructor(
     private userAccountService: UserAccountService,
     private projectService: ProjectService,
@@ -66,6 +70,7 @@ export class AdDashboardComponent implements OnInit {
     this.getStatusDocs();
     this.getActiveUsers();
     this.composeProjectStatus();
+    this.createChart();
   }
 
   /**Get the number of total users */
@@ -234,5 +239,41 @@ export class AdDashboardComponent implements OnInit {
           });
       }
     }
+  }
+
+  /**Method to create chart */
+  createChart() {
+    this.chart = new Chart('MyChart', {
+      type: 'bar', //this denotes tha type of chart
+
+      data: {
+        // values on X-Axis
+        labels: [
+          '2022-05-10',
+          '2022-05-11',
+          '2022-05-12',
+          '2022-05-13',
+          '2022-05-14',
+          '2022-05-15',
+          '2022-05-16',
+          '2022-05-17',
+        ],
+        datasets: [
+          {
+            label: 'Sales',
+            data: ['467', '576', '572', '79', '92', '574', '573', '576'],
+            backgroundColor: 'blue',
+          },
+          {
+            label: 'Profit',
+            data: ['542', '542', '536', '327', '17', '0.00', '538', '541'],
+            backgroundColor: 'limegreen',
+          },
+        ],
+      },
+      options: {
+        aspectRatio: 2.5,
+      },
+    });
   }
 }
