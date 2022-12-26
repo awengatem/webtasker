@@ -25,6 +25,7 @@ export class AdDashboardComponent implements OnInit {
   statusDocs = [];
   activeUserDocs = [];
   projects!: any[];
+  memberChartArr!: any[];
   projectidArr: string[] = [];
   teamidArr: string[] = [];
   uniqueProjects: string[] = [];
@@ -41,6 +42,35 @@ export class AdDashboardComponent implements OnInit {
 
   // chart
   public chart: any;
+  labels = [1, 2, 3, 4, 5, 6, 7];
+  chartData = {
+    labels: this.labels,
+    datasets: [
+      {
+        label: 'My First Dataset',
+        data: [65, 59, 80, 81, 56, 55, 40],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)',
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
 
   constructor(
     private userAccountService: UserAccountService,
@@ -54,7 +84,7 @@ export class AdDashboardComponent implements OnInit {
     // refresh data every 20 seconds
     window.setInterval(() => {
       this.init();
-    }, 20000);
+    }, 2000000);
   }
 
   /**Initialize fetching of data */
@@ -70,7 +100,7 @@ export class AdDashboardComponent implements OnInit {
     this.getStatusDocs();
     this.getActiveUsers();
     this.composeProjectStatus();
-    this.createChart();
+    // this.createChart();
   }
 
   /**Get the number of total users */
@@ -191,7 +221,7 @@ export class AdDashboardComponent implements OnInit {
       });
   }
 
-  /**compose project status for the projects div */
+  /**compose project status for the projects div and draw the chart */
   composeProjectStatus() {
     this.projectService.getProjects().then((projects: any) => {
       this.projects = projects;
@@ -201,31 +231,50 @@ export class AdDashboardComponent implements OnInit {
        *  otherwise they don't work
        */
       this.getTotalUsers().then((totalUsers: any) => {
-        this.getProjectMembers(totalUsers);
+        this.getProjectMembers(totalUsers).then((projects: any) => {
+          // split resolved member chart array
+          let result = this.splitMemberChartArr(projects);
+          console.log(result);
+        });
       });
       this.getProjectDuration();
       console.log(this.projects);
     });
   }
 
-  /**Get project members */
+  /**Get project members ===> then
+   * resolves object pair array of project name and members
+   */
   getProjectMembers(totalUsers: number) {
-    if (this.projects.length > 0) {
-      for (let i = 0; i < this.projects.length; i++) {
-        this.projectService
-          .getProjectMembers(this.projects[i]._id)
-          .subscribe((members: any) => {
-            // console.log(members.length);
-            //push number of members to projects
-            this.projects[i].members = members.length;
-            // calculate user percentage
-            let userPerc = Math.round((members.length / totalUsers) * 100);
-            this.projects[i].userPerc = userPerc;
-          });
-        // adding the number of teams for UI
-        this.projects[i].teamCount = this.projects[i].teams.length;
+    return new Promise((resolve, reject) => {
+      if (this.projects.length > 0) {
+        let memberArr: any = [];
+        let x = 0;
+        for (let i = 0; i < this.projects.length; i++) {
+          this.projectService
+            .getProjectMembers(this.projects[i]._id)
+            .subscribe((members: any) => {
+              // console.log(members.length);
+              //push number of members to projects
+              this.projects[i].members = members.length;
+              // calculate user percentage
+              let userPerc = Math.round((members.length / totalUsers) * 100);
+              this.projects[i].userPerc = userPerc;
+              // prepare object to be used by chart
+              let obj = {
+                members: members.length,
+                projectName: this.projects[i].projectName,
+              };
+              memberArr.push(obj);
+              x++;
+              //resolve array from within here where its available
+              if (x === this.projects.length) resolve(memberArr);
+            });
+          // adding the number of teams for UI
+          this.projects[i].teamCount = this.projects[i].teams.length;
+        }
       }
-    }
+    });
   }
 
   /**getting and computing the total duration per project */
@@ -241,38 +290,29 @@ export class AdDashboardComponent implements OnInit {
     }
   }
 
+  /**method to split memberChartArr */
+  splitMemberChartArr(memberChartArr: any[]) {
+    let array = memberChartArr,
+      result = array.reduce((r, o) => {
+        Object.entries(o).forEach(([k, v]) => (r[k] = r[k] || []).push(v));
+        return r;
+      }, Object.create(null));
+
+    return result;
+  }
+
   /**Method to create chart */
   createChart() {
     this.chart = new Chart('MyChart', {
       type: 'bar', //this denotes tha type of chart
-
-      data: {
-        // values on X-Axis
-        labels: [
-          '2022-05-10',
-          '2022-05-11',
-          '2022-05-12',
-          '2022-05-13',
-          '2022-05-14',
-          '2022-05-15',
-          '2022-05-16',
-          '2022-05-17',
-        ],
-        datasets: [
-          {
-            label: 'Sales',
-            data: ['467', '576', '572', '79', '92', '574', '573', '576'],
-            backgroundColor: 'blue',
-          },
-          {
-            label: 'Profit',
-            data: ['542', '542', '536', '327', '17', '0.00', '538', '541'],
-            backgroundColor: 'limegreen',
-          },
-        ],
-      },
+      data: this.chartData,
       options: {
-        aspectRatio: 2.5,
+        aspectRatio: 3.0,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
       },
     });
   }
