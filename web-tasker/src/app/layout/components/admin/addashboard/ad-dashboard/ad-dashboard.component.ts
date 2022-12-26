@@ -42,35 +42,6 @@ export class AdDashboardComponent implements OnInit {
 
   // chart
   public chart: any;
-  labels = [1, 2, 3, 4, 5, 6, 7];
-  chartData = {
-    labels: this.labels,
-    datasets: [
-      {
-        label: 'My First Dataset',
-        data: [65, 59, 80, 81, 56, 55, 40],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 205, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(201, 203, 207, 0.2)',
-        ],
-        borderColor: [
-          'rgb(255, 99, 132)',
-          'rgb(255, 159, 64)',
-          'rgb(255, 205, 86)',
-          'rgb(75, 192, 192)',
-          'rgb(54, 162, 235)',
-          'rgb(153, 102, 255)',
-          'rgb(201, 203, 207)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
 
   constructor(
     private userAccountService: UserAccountService,
@@ -81,10 +52,11 @@ export class AdDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.init();
-    // refresh data every 20 seconds
+    // refresh data every 60 seconds
     window.setInterval(() => {
+      this.chart.destroy();
       this.init();
-    }, 2000000);
+    }, 60000);
   }
 
   /**Initialize fetching of data */
@@ -233,8 +205,10 @@ export class AdDashboardComponent implements OnInit {
       this.getTotalUsers().then((totalUsers: any) => {
         this.getProjectMembers(totalUsers).then((projects: any) => {
           // split resolved member chart array
-          let result = this.splitMemberChartArr(projects);
-          console.log(result);
+          let splitArr = this.splitMemberChartArr(projects);
+          console.log(splitArr);
+          // draw the chart with result
+          this.createChart(splitArr);
         });
       });
       this.getProjectDuration();
@@ -302,10 +276,43 @@ export class AdDashboardComponent implements OnInit {
   }
 
   /**Method to create chart */
-  createChart() {
+  createChart(dataObj: any) {
+    //required data
+    let labels = dataObj.projectName;
+    let data = dataObj.members;
+    let chartData = {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Users',
+          data: data,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)',
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)',
+          ],
+          borderWidth: 1,
+        },
+      ],
+    };
+
+    // implementation
     this.chart = new Chart('MyChart', {
       type: 'bar', //this denotes tha type of chart
-      data: this.chartData,
+      data: chartData,
       options: {
         aspectRatio: 3.0,
         scales: {
