@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col">
                 <h1 class="text-dark position-relative">
-                  System data <i class="fa-solid fa-people-group"></i>
+                  System data <i class="fa-sharp fa-solid fa-database"></i>
                 </h1>
               </div>
               <div class="col"></div>
@@ -31,30 +31,118 @@
             </div>
             <mat-divider></mat-divider>
             <div class="manage-inside" id="teams">
-              <!-- <div class="row">                    
-                    <div
-                      class="col-md-6"
-                      *ngFor="let team of teams | teamFilter: searchText"
-                      [routerLink]="['/teams', team._id]"
-                    >
-                      <div class="timetable-item shadow pointer">
-                        <div class="timetable-item-main">
-                          <div class="timetable-item-name">
-                            {{ team.teamName }}
+              <div class="row">
+                <div class="col-md-6">
+                  <div
+                    class="card timetable-item shadow border-radius-md pointer"
+                  >
+                    <div class="card-body p-3">
+                      <div class="row">
+                        <div class="col-4 text-end">
+                          <div
+                            class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md"
+                          >
+                            <i class="fa-solid fa-user-group opacity-10"></i>
                           </div>
-                          <div class="timetable-item-time">
-                            <small>Last updated 3 mins ago</small>
-                          </div>
-                          <div class="timetable-item-users">
-                            <i class="fa-solid fa-users-line"></i>
-                            <div class="timetable-item-users-count">
-                              {{ team.members }}
+                        </div>
+                        <div class="col-8">
+                          <div class="timetable-item-content">
+                            <div class="timetable-item-name">User accounts</div>
+                            <div class="timetable-item-time">
+                              <small>
+                                <span class="value">5</span> fetched records
+                              </small>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div> -->
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div
+                    class="card timetable-item shadow border-radius-md pointer"
+                  >
+                    <div class="card-body p-3">
+                      <div class="row">
+                        <div class="col-4 text-end">
+                          <div
+                            class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md"
+                          >
+                            <i
+                              class="fa-sharp fa-solid fa-folder opacity-10"
+                            ></i>
+                          </div>
+                        </div>
+                        <div class="col-8">
+                          <div class="timetable-item-content">
+                            <div class="timetable-item-name">Projects</div>
+                            <div class="timetable-item-time">
+                              <small>
+                                <span class="value">5</span> fetched records
+                              </small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div
+                    class="card timetable-item shadow border-radius-md pointer"
+                  >
+                    <div class="card-body p-3">
+                      <div class="row">
+                        <div class="col-4 text-end">
+                          <div
+                            class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md"
+                          >
+                            <i class="fa-solid fa-people-group opacity-10"></i>
+                          </div>
+                        </div>
+                        <div class="col-8">
+                          <div class="timetable-item-content">
+                            <div class="timetable-item-name">Teams</div>
+                            <div class="timetable-item-time">
+                              <small>
+                                <span class="value">5</span> fetched records
+                              </small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div
+                    class="card timetable-item shadow border-radius-md pointer"
+                  >
+                    <div class="card-body p-3">
+                      <div class="row">
+                        <div class="col-4 text-end">
+                          <div
+                            class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md"
+                          >
+                          <i class="fa-solid fa-stopwatch opacity-10"></i>
+                          </div>
+                        </div>
+                        <div class="col-8">
+                          <div class="timetable-item-content">
+                            <div class="timetable-item-name">Sessions</div>
+                            <div class="timetable-item-time">
+                              <small>
+                                <span class="value">5</span> fetched records
+                              </small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

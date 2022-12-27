@@ -70,23 +70,43 @@
     .pointer {
       cursor: pointer;
     }
+
+    .icon-shape {
+      width: 50px;
+      height: 50px;
+      background-position: center;
+      border-radius: 0.75rem;
+
+      i {
+        color: #22b8f0;
+        opacity: 0.8;
+        top: 11px;
+        position: relative;
+      }
+
+      .ni {
+        top: 14px;
+      }
+    }
+    ._end {
+      //   margin-left: auto;
+    }
   }
 
   .timetable-item {
+    position: relative;
     border: 1px solid #d8e3eb;
     padding: 15px;
     margin-top: 20px;
-    position: relative;
     display: block;
     background: whitesmoke;
-    border-radius: 2px;
     opacity: 0.8;
 
     &-main {
+      position: relative;
       -webkit-box-flex: 1;
       -ms-flex: 1;
       flex: 1;
-      position: relative;
       margin-top: 12px;
 
       .action {
@@ -96,8 +116,8 @@
     }
 
     &-name {
-      font-weight: 580;
-      font-size: 16px;
+      font-weight: 600;
+      font-size: 20px;
       margin-bottom: 4px;
 
       &:hover {
@@ -109,11 +129,17 @@
       font-weight: 500;
       font-size: 14px;
       margin-bottom: 19px;
+
+      .value {
+        font-weight: 500;
+        color: #22b8f0;
+      }
     }
 
-    &-users {
+    &-content {
       position: absolute;
-      top: 3px;
+      padding: 15px;
+      //   top: 3px;
       right: 3px;
       font-size: 20px;
       //color: #f15465;
