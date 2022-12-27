@@ -134,6 +134,15 @@
         <i class="fa-solid fa-people-group"></i>
         <div class="content" *ngIf="isExpanded">Teams</div>
       </mat-list-item>
+      <!-- admin management -->
+      <mat-list-item
+        [routerLink]="'ad_manage'"
+        routerLinkActive="list-item-active"
+        *ngIf="sublist"
+      >
+        <i class="fa-solid fa-people-roof"></i>
+        <div class="content" *ngIf="isExpanded">Manage</div>
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
 

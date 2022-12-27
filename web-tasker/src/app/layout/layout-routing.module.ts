@@ -29,6 +29,7 @@ import { ActiveSessionsComponent } from './components/admin/addashboard/active-s
 import { DispositionComponent } from './components/user/user_projects/disposition/disposition.component';
 import { RecentSessionsComponent } from './components/admin/addashboard/recent-sessions/recent-sessions.component';
 import { UserStatusComponent } from './components/admin/addashboard/user-status/user-status.component';
+import { ManageComponent } from './components/admin/manage/manage/manage.component';
 
 const routes: Routes = [
   {
@@ -172,6 +173,13 @@ const routes: Routes = [
         path: 'edit_team/:teamId',
         canActivate: [AuthGuard, AdminGuard],
         component: EditTeamComponent,
+      },
+
+      /**MANAGE*/
+      {
+        path: 'ad_manage',
+        canActivate: [AuthGuard, AdminGuard],
+        component: ManageComponent,
       },
 
       /**TESTING PURPOSE */

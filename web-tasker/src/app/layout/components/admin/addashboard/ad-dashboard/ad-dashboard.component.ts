@@ -3,6 +3,7 @@ import { ProjectStatusService } from 'src/app/services/api/project-status.servic
 import { ProjectService } from 'src/app/services/api/project.service';
 import { TeamService } from 'src/app/services/api/team.service';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-ad-dashboard',
@@ -24,6 +25,7 @@ export class AdDashboardComponent implements OnInit {
   statusDocs = [];
   activeUserDocs = [];
   projects!: any[];
+  memberChartArr!: any[];
   projectidArr: string[] = [];
   teamidArr: string[] = [];
   uniqueProjects: string[] = [];
@@ -38,6 +40,9 @@ export class AdDashboardComponent implements OnInit {
   activeProjectsPerc = 0;
   activeTeamsPerc = 0;
 
+  // chart
+  public chart: any;
+
   constructor(
     private userAccountService: UserAccountService,
     private projectService: ProjectService,
@@ -47,10 +52,11 @@ export class AdDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.init();
-    // refresh data every 20 seconds
+    // refresh data every 60 seconds
     window.setInterval(() => {
+      this.chart.destroy();
       this.init();
-    }, 20000);
+    }, 60000);
   }
 
   /**Initialize fetching of data */
@@ -66,6 +72,7 @@ export class AdDashboardComponent implements OnInit {
     this.getStatusDocs();
     this.getActiveUsers();
     this.composeProjectStatus();
+    // this.createChart();
   }
 
   /**Get the number of total users */
@@ -186,7 +193,7 @@ export class AdDashboardComponent implements OnInit {
       });
   }
 
-  /**compose project status for the projects div */
+  /**compose project status for the projects div and draw the chart */
   composeProjectStatus() {
     this.projectService.getProjects().then((projects: any) => {
       this.projects = projects;
@@ -196,31 +203,52 @@ export class AdDashboardComponent implements OnInit {
        *  otherwise they don't work
        */
       this.getTotalUsers().then((totalUsers: any) => {
-        this.getProjectMembers(totalUsers);
+        this.getProjectMembers(totalUsers).then((projects: any) => {
+          // split resolved member chart array
+          let splitArr = this.splitMemberChartArr(projects);
+          console.log(splitArr);
+          // draw the chart with result
+          this.createChart(splitArr);
+        });
       });
       this.getProjectDuration();
       console.log(this.projects);
     });
   }
 
-  /**Get project members */
+  /**Get project members ===> then
+   * resolves object pair array of project name and members
+   */
   getProjectMembers(totalUsers: number) {
-    if (this.projects.length > 0) {
-      for (let i = 0; i < this.projects.length; i++) {
-        this.projectService
-          .getProjectMembers(this.projects[i]._id)
-          .subscribe((members: any) => {
-            // console.log(members.length);
-            //push number of members to projects
-            this.projects[i].members = members.length;
-            // calculate user percentage
-            let userPerc = Math.round((members.length / totalUsers) * 100);
-            this.projects[i].userPerc = userPerc;
-          });
-        // adding the number of teams for UI
-        this.projects[i].teamCount = this.projects[i].teams.length;
+    return new Promise((resolve, reject) => {
+      if (this.projects.length > 0) {
+        let memberArr: any = [];
+        let x = 0;
+        for (let i = 0; i < this.projects.length; i++) {
+          this.projectService
+            .getProjectMembers(this.projects[i]._id)
+            .subscribe((members: any) => {
+              // console.log(members.length);
+              //push number of members to projects
+              this.projects[i].members = members.length;
+              // calculate user percentage
+              let userPerc = Math.round((members.length / totalUsers) * 100);
+              this.projects[i].userPerc = userPerc;
+              // prepare object to be used by chart
+              let obj = {
+                members: members.length,
+                projectName: this.projects[i].projectName,
+              };
+              memberArr.push(obj);
+              x++;
+              //resolve array from within here where its available
+              if (x === this.projects.length) resolve(memberArr);
+            });
+          // adding the number of teams for UI
+          this.projects[i].teamCount = this.projects[i].teams.length;
+        }
       }
-    }
+    });
   }
 
   /**getting and computing the total duration per project */
@@ -234,5 +262,65 @@ export class AdDashboardComponent implements OnInit {
           });
       }
     }
+  }
+
+  /**method to split memberChartArr */
+  splitMemberChartArr(memberChartArr: any[]) {
+    let array = memberChartArr,
+      result = array.reduce((r, o) => {
+        Object.entries(o).forEach(([k, v]) => (r[k] = r[k] || []).push(v));
+        return r;
+      }, Object.create(null));
+
+    return result;
+  }
+
+  /**Method to create chart */
+  createChart(dataObj: any) {
+    //required data
+    let labels = dataObj.projectName;
+    let data = dataObj.members;
+    let chartData = {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Users',
+          data: data,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)',
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)',
+          ],
+          borderWidth: 1,
+        },
+      ],
+    };
+
+    // implementation
+    this.chart = new Chart('MyChart', {
+      type: 'bar', //this denotes tha type of chart
+      data: chartData,
+      options: {
+        aspectRatio: 3.0,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
   }
 }
