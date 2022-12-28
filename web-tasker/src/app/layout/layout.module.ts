@@ -50,6 +50,7 @@ import { DispositionComponent } from './components/user/user_projects/dispositio
 import { UserStatusComponent } from './components/admin/addashboard/user-status/user-status.component';
 import { ManageComponent } from './components/admin/manage/manage/manage.component';
 import { UsersComponent } from './components/admin/manage/users/users.component';
+import { SessionsComponent } from './components/admin/manage/sessions/sessions.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { UsersComponent } from './components/admin/manage/users/users.component'
     UserStatusComponent,
     ManageComponent,
     UsersComponent,
+    SessionsComponent,
   ],
   imports: [
     CommonModule,
