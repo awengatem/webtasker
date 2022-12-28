@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SessionsComponent } from './sessions.component';
+import { MngSessionsComponent } from './mng-sessions.component';
 
-describe('SessionsComponent', () => {
-  let component: SessionsComponent;
-  let fixture: ComponentFixture<SessionsComponent>;
+describe('MngSessionsComponent', () => {
+  let component: MngSessionsComponent;
+  let fixture: ComponentFixture<MngSessionsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SessionsComponent ]
+      declarations: [ MngSessionsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SessionsComponent);
+    fixture = TestBed.createComponent(MngSessionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
