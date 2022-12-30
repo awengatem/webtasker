@@ -62,6 +62,7 @@ export class MngUsersComponent implements OnInit {
     });
   }
 
+  /**check whether all are selected */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = !!this.dataSource && this.dataSource.data.length;
@@ -81,5 +82,14 @@ export class MngUsersComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
       row.EmpId + 1
     }`;
+  }
+  /**method used by search filter */
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

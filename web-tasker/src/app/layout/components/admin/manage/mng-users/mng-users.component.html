@@ -22,7 +22,11 @@
                     <b>Search Records :</b> &nbsp;&nbsp;
                     <mat-form-field>
                       <!-- (keyup)="applyFilter($event.target.value)" -->
-                      <input matInput placeholder="Filter" />
+                      <input
+                        matInput
+                        (keyup)="applyFilter($event)"
+                        placeholder="Filter"
+                      />
                     </mat-form-field>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <b>Delete Selected Records :</b> &nbsp;&nbsp;
@@ -117,7 +121,7 @@
                             <!-- (click)="loadEmployeeToEdit(employee.EmpId)" -->
                             <button
                               mat-icon-button
-                              class="custom-button custom-button-edit"                              
+                              class="custom-button custom-button-edit"
                               aria-label="Example icon button with a vertical three dot icon"
                               type="button"
                               mat-raised-button
