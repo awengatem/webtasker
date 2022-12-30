@@ -1,5 +1,31 @@
 /**IMPORTING CSS FROM MANAGE COMPONENT.SCSS*/
 @use "../manage/manage.component.scss";
-.data-table{
-    max-height: 10px;
+.manage-container {
+  .manage {
+    .container {
+      margin-top: 20px;
+      .data-table {
+        min-height: calc(100vh - 600px);
+        max-height: calc(100vh - 600px);
+        overflow-y: auto;
+      }
+    }
+    .create {
+      padding: 24px;
+      button {
+        height: 50px;
+        width: 75px;
+        .btn-txt {
+          font-size: 20px;
+        }
+      }
+      h4 {
+        font-family: inherit;
+        font-weight: 400;
+        font-size: 16px;
+        margin-left: 1px;
+        position: absolute;
+      }
+    }
+  }
 }

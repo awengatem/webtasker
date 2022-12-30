@@ -20,7 +20,13 @@ export class MngUsersComponent implements OnInit {
   employeeForm: any;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
-  displayedColumns: string[] = ['select', 'FirstName'];
+  displayedColumns: string[] = [
+    'Select',
+    'Username',
+    'Email',
+    'Firstname',
+    'Lastname',
+  ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -38,7 +44,7 @@ export class MngUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUsers();
+    // this.getUsers();
   }
 
   /**Get the users */

@@ -38,11 +38,11 @@
                       <mat-icon>delete</mat-icon>
                     </button>
                     <div>
-                      <!-- [dataSource]="dataSource" -->
+                      <!-- TABLE BEGINS HERE-->
                       <mat-table
                         [dataSource]="dataSource"
                         matSort
-                        class="mat-elevation-z8"
+                        class="mat-elevation-z8 data-table"
                         style="
                           box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
                             0 6px 10px 0 rgba(0, 0, 0, 0.14),
@@ -50,7 +50,7 @@
                         "
                       >
                         <!-- Checkbox Column -->
-                        <ng-container matColumnDef="select">
+                        <ng-container matColumnDef="Select">
                           <mat-header-cell *matHeaderCellDef>
                             <mat-checkbox
                               (change)="$event ? masterToggle() : null"
@@ -71,7 +71,7 @@
                             ></mat-checkbox>
                           </mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="FirstName" class="">
+                        <ng-container matColumnDef="Username" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Username
                           </mat-header-cell>
@@ -87,12 +87,23 @@
                         ></mat-row
                       ></mat-table>
                       <mat-paginator
-                        [pageSizeOptions]="[5, 10]"
+                        [pageSizeOptions]="[10, 25,50]"
                       ></mat-paginator>
                     </div>
                   </form>
                 </mat-card-content>
               </mat-card>
+            </div>
+            <!-- BACK BUTTON -->
+            <div class="row centered create">
+              <div class="col-md-1">
+                <button class="btn btn-outline-custom" routerLink="/ad_manage">
+                  <div class="btn-txt">
+                    <i class="fa-solid fa-caret-left"></i>
+                  </div>
+                </button>
+              </div>
+              <div class="col"><h4>back</h4></div>
             </div>
           </div>
         </div>
