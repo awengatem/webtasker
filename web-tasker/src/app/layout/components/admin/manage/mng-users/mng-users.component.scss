@@ -1,3 +1,5 @@
+/**IMPORTING CSS FROM MANAGE COMPONENT.SCSS*/
+@use "../manage/manage.component.scss";
 .data-table{
     max-height: 10px;
 }
