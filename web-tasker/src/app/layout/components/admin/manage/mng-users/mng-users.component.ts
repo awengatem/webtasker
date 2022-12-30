@@ -36,6 +36,7 @@ export class MngUsersComponent implements OnInit {
         this.dataSource = new MatTableDataSource(users);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        console.log(users);
       },
       error: (err) => {
         console.log(err);

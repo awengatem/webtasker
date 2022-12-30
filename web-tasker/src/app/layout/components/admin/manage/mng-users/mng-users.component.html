@@ -42,7 +42,7 @@
                       <mat-table
                         [dataSource]="dataSource"
                         matSort
-                        class="mat-elevation-z8 data-table"
+                        class="mat-elevation-z8"
                         style="
                           box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
                             0 6px 10px 0 rgba(0, 0, 0, 0.14),
@@ -71,12 +71,40 @@
                             ></mat-checkbox>
                           </mat-cell>
                         </ng-container>
+                        <!-- Username Column -->
                         <ng-container matColumnDef="Username" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Username
                           </mat-header-cell>
                           <mat-cell *matCellDef="let document">
                             {{ document.username }}
+                          </mat-cell>
+                        </ng-container>
+                        <!-- Email Column -->
+                        <ng-container matColumnDef="Email" class="email">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Email
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            {{ document.email }}
+                          </mat-cell>
+                        </ng-container>
+                        <!-- Firstname Column -->
+                        <ng-container matColumnDef="Firstname" class="">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            First name
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            {{ document.firstName }}
+                          </mat-cell>
+                        </ng-container>
+                        <!-- Lastname Column -->
+                        <ng-container matColumnDef="Lastname" class="">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Last name
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            {{ document.lastName }}
                           </mat-cell>
                         </ng-container>
                         <mat-header-row
