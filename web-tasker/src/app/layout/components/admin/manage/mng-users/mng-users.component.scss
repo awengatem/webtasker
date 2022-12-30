@@ -8,7 +8,6 @@
         min-height: calc(100vh - 600px);
         max-height: calc(100vh - 600px);
         overflow-y: auto;
-
         // ng-container {
         //   mat-cell {
         //     button {
@@ -34,20 +33,14 @@
             color: white;
           }
         }
-        .email {
-          word-wrap: break-word !important;
-          white-space: unset !important;
-          flex: 0 0 28% !important;
-          width: 28% !important;
-          overflow-wrap: break-word;
-          word-wrap: break-word;
 
-          word-break: break-word;
-
-          -ms-hyphens: auto;
-          -moz-hyphens: auto;
-          -webkit-hyphens: auto;
-          hyphens: auto;
+        .mat-column-Select {
+          flex: none;
+          width: 50px;
+        }
+        .mat-column-Email {
+          flex: none;
+          width: 300px;
         }
       }
     }
