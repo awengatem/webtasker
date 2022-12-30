@@ -26,6 +26,8 @@ export class MngUsersComponent implements OnInit {
     'Email',
     'Firstname',
     'Lastname',
+    'Edit',
+    'Delete',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

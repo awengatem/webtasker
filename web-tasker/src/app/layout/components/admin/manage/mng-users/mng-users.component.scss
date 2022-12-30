@@ -9,6 +9,31 @@
         max-height: calc(100vh - 600px);
         overflow-y: auto;
 
+        // ng-container {
+        //   mat-cell {
+        //     button {
+        //       mat-icon {
+        //         font-size: 4px;
+        //         height: 4px;
+        //         width: 4px;
+        //       }
+        //     }
+        //   }
+        // }
+        .custom-button {
+          line-height: 30px;
+          height: 30px;
+          width: 30px;
+
+          &-edit {
+            background-color: #22b8f0;
+          }
+
+          mat-icon {
+            font-size: 14px;
+            color: white;
+          }
+        }
         .email {
           word-wrap: break-word !important;
           white-space: unset !important;

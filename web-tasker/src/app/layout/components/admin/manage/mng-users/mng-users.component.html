@@ -107,6 +107,46 @@
                             {{ document.lastName }}
                           </mat-cell>
                         </ng-container>
+                        <!-- Edit Icon -->
+                        <ng-container matColumnDef="Edit">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Edit
+                          </mat-header-cell>
+
+                          <mat-cell *matCellDef="let employee">
+                            <!-- (click)="loadEmployeeToEdit(employee.EmpId)" -->
+                            <button
+                              mat-icon-button
+                              class="custom-button custom-button-edit"                              
+                              aria-label="Example icon button with a vertical three dot icon"
+                              type="button"
+                              mat-raised-button
+                              matTooltip="Edit"
+                            >
+                              <mat-icon>edit</mat-icon>
+                            </button>
+                          </mat-cell>
+                        </ng-container>
+                        <!-- Delete Icon -->
+                        <ng-container matColumnDef="Delete">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Delete
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let employee">
+                            <!-- (click)="deleteEmployee(employee.EmpId)" -->
+                            <button
+                              mat-icon-button
+                              class="custom-button"
+                              aria-label="Example icon button with a delete icon"
+                              type="button"
+                              mat-raised-button
+                              color="accent"
+                              matTooltip="Delete"
+                            >
+                              <mat-icon>delete_forever</mat-icon>
+                            </button></mat-cell
+                          >
+                        </ng-container>
                         <mat-header-row
                           *matHeaderRowDef="displayedColumns"
                         ></mat-header-row>
@@ -115,7 +155,7 @@
                         ></mat-row
                       ></mat-table>
                       <mat-paginator
-                        [pageSizeOptions]="[10, 25,50]"
+                        [pageSizeOptions]="[10, 25, 50]"
                       ></mat-paginator>
                     </div>
                   </form>
