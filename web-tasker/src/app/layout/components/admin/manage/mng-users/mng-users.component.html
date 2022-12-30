@@ -1,6 +1,82 @@
 <div class="container-fluid page">
   <div class="page__box p-3 mt-2">Manage</div>
   <div class="page__content shadow p-3 position-relative">
-    <div class="page__content-data">Content here</div>
+    <div class="page__content-data">
+      <div class="container">
+        <mat-card class="mat-elevation-z8">
+          <mat-card-content>
+            <form>
+              <b>Search Records :</b> &nbsp;&nbsp;
+              <mat-form-field>
+                <!-- (keyup)="applyFilter($event.target.value)" -->
+                <input matInput placeholder="Filter" />
+              </mat-form-field>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <b>Delete Selected Records :</b> &nbsp;&nbsp;
+              <!-- (click)="DeleteData()" -->
+              <button
+                mat-icon-button
+                aria-label="Example icon button with a delete icon"
+                type="button"
+                mat-raised-button
+                color="accent"
+                matTooltip="Delete"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <div>
+                <!-- [dataSource]="dataSource" -->
+                <mat-table
+                  [dataSource]="dataSource"
+                  matSort
+                  class="mat-elevation-z8"
+                  style="
+                    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+                      0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                      0 1px 18px 0 rgba(0, 0, 0, 0.12);
+                  "
+                >
+                  <!-- Checkbox Column -->
+                  <ng-container matColumnDef="select">
+                    <mat-header-cell *matHeaderCellDef>
+                      <mat-checkbox
+                        (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="
+                          selection.hasValue() && !isAllSelected()
+                        "
+                      ></mat-checkbox>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" class="">
+                      <mat-checkbox
+                        (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)"
+                      ></mat-checkbox>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="FirstName" class="">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Username
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let document">
+                      {{ document.username }}
+                    </mat-cell>
+                  </ng-container>
+                  <mat-header-row
+                    *matHeaderRowDef="displayedColumns"
+                  ></mat-header-row>
+                  <mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                  ></mat-row
+                ></mat-table>
+                <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
   </div>
 </div>
