@@ -19,7 +19,7 @@ export class UserAccountService {
 
   /**Method to edit specified user */
   editUser(userId: string, userObj: any) {
-    return this.webReqService.patch(`users${userId}`, {
+    return this.webReqService.patch(`users/${userId}`, {
       username: userObj.username,
       email: userObj.email,
       firstName: userObj.firstName,
@@ -30,12 +30,12 @@ export class UserAccountService {
 
   /**Method to delete a specified user */
   deleteUser(userId: string) {
-    return this.webReqService.delete(`users${userId}`);
+    return this.webReqService.delete(`users/${userId}`);
   }
 
   /**Method to delete multiple users */
   deleteMultipleUsers(userId: string, userIdArr: any[]) {
-    return this.webReqService.deleteWithArgs(`users${userId}`,{
+    return this.webReqService.deleteWithArgs(`users/${userId}`,{
       userIdArr: userIdArr
   });
   }

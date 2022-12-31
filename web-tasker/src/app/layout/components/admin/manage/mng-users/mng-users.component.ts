@@ -120,20 +120,25 @@ export class MngUsersComponent implements OnInit {
   }
 
   /**Delete a specified user */
-  deleteUser(employeeId: string) {
+  deleteUser(userId: string) {
     if (confirm('Are you sure you want to delete this ?')) {
-      // this.employeeService.deleteEmployeeById(employeeId).subscribe(() => {
-      //   this.dataSaved = true;
-      //   this.SavedSuccessful(2);
-      //   this.loadAllUsers();
-      //   this.employeeIdUpdate = null;
-      //   this.employeeForm.reset();
-      // });
+      this.userAccountService.deleteUser(userId).subscribe({
+        next: (response: any) => {
+          this.dataSaved = true;
+          this.SavedSuccessful(2, response.message);
+          this.loadAllUsers();
+          this.employeeIdUpdate = null;
+          // this.employeeForm.reset();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     }
   }
 
   /**Multipurpose method for edits and updates */
-  SavedSuccessful(isUpdate: number) {
+  SavedSuccessful(isUpdate: number, message: any) {
     if (isUpdate == 0) {
       this._snackBar.open('Record Updated Successfully!', 'Close', {
         duration: 2000,
@@ -147,7 +152,7 @@ export class MngUsersComponent implements OnInit {
         verticalPosition: this.verticalPosition,
       });
     } else if (isUpdate == 2) {
-      this._snackBar.open('Record Deleted Successfully!', 'Close', {
+      this._snackBar.open(message, 'Close', {
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -157,10 +162,15 @@ export class MngUsersComponent implements OnInit {
 
   /**Method to reload user table */
   loadAllUsers() {
-    // this.employeeService.getAllEmployee().subscribe(data => {
-    //   this.dataSource = new MatTableDataSource(data);
-    //   this.dataSource.paginator = this.paginator;
-    //   this.dataSource.sort = this.sort;
-    // });
+    this.userAccountService.getUsers().subscribe({
+      next: (data) => {
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

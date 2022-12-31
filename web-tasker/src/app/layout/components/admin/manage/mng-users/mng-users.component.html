@@ -33,7 +33,7 @@
                 <mat-card-content>
                   <form>
                     <b>Search Records :</b> &nbsp;&nbsp;
-                    <mat-form-field>                      
+                    <mat-form-field>
                       <input
                         matInput
                         (keyup)="applyFilter($event)"
@@ -129,7 +129,7 @@
                             Edit
                           </mat-header-cell>
 
-                          <mat-cell *matCellDef="let employee">
+                          <mat-cell *matCellDef="let document">
                             <!-- (click)="loadEmployeeToEdit(employee.EmpId)" -->
                             <button
                               mat-icon-button
@@ -148,14 +148,14 @@
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Delete
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let employee">
-                            <!-- (click)="deleteEmployee(employee.EmpId)" -->
+                          <mat-cell *matCellDef="let document">
                             <button
                               mat-icon-button
                               class="custom-button"
                               aria-label="Example icon button with a delete icon"
                               type="button"
                               mat-raised-button
+                              (click)="deleteUser(document._id)"
                               color="accent"
                               matTooltip="Delete"
                             >
