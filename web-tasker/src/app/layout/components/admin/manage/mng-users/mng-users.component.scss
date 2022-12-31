@@ -5,11 +5,35 @@
     .count {
       h1 {
         font-weight: 400;
-
         span {
-          font-size: 24px;
+          font-size: 18px;
           color: #96281b;
         }
+      }
+    }
+
+    .add-button {
+      // padding: 24px;
+      //background: red;
+      height: 100%;
+      width: 100%;
+
+      button {
+        height: 75%;
+        width: 75px;
+        margin-bottom: 20px;
+        .btn-txt {
+          font-size: 20px;
+          color: white;
+        }
+      }
+      h4 {
+        font-family: inherit;
+        font-weight: 400;
+        font-size: 16px;
+        margin-left: 5%;
+        top: 60px;
+        position: absolute;
       }
     }
 
