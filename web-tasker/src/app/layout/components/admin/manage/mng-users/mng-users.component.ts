@@ -94,4 +94,21 @@ export class MngUsersComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  /**Delete a selected user */
+  deleteData() {
+    // debugger;
+    const numSelected = this.selection.selected;
+    console.log(numSelected);
+    // if (numSelected.length > 0) {
+    //   if (confirm("Are you sure to delete items ")) {
+    //     this.employeeService.deleteData(numSelected).subscribe(result => {
+    //       this.SavedSuccessful(2);
+    //       this.loadAllEmployees();
+    //     })
+    //   }
+    // } else {
+    //   alert("Select at least one row");
+    // }
+  }
 }
