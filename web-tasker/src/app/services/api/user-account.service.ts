@@ -13,7 +13,30 @@ export class UserAccountService {
   }
 
   /**Method to get all users */
-  getUsers(){
+  getUsers() {
     return this.webReqService.get('users');
+  }
+
+  /**Method to edit specified user */
+  editUser(userId: string, userObj: any) {
+    return this.webReqService.patch(`users${userId}`, {
+      username: userObj.username,
+      email: userObj.email,
+      firstName: userObj.firstName,
+      lastName: userObj.lastName,
+      isProjectManager: true, //hardcoded
+    });
+  }
+
+  /**Method to delete a specified user */
+  deleteUser(userId: string) {
+    return this.webReqService.delete(`users${userId}`);
+  }
+
+  /**Method to delete multiple users */
+  deleteMultipleUsers(userId: string, userIdArr: any[]) {
+    return this.webReqService.deleteWithArgs(`users${userId}`,{
+      userIdArr: userIdArr
+  });
   }
 }
