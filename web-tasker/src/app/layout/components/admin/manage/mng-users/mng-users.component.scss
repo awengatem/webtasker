@@ -1,0 +1,101 @@
+/**IMPORTING CSS FROM MANAGE COMPONENT.SCSS*/
+@use "../manage/manage.component.scss";
+.manage-container {
+  .manage {
+    .count {
+      h1 {
+        font-weight: 400;
+        span {
+          font-size: 18px;
+          color: #96281b;
+        }
+      }
+    }
+
+    .add-button {
+      // padding: 24px;
+      //background: red;
+      height: 100%;
+      width: 100%;
+
+      button {
+        height: 75%;
+        width: 75px;
+        margin-bottom: 20px;
+        .btn-txt {
+          font-size: 20px;
+          color: white;
+        }
+      }
+      h4 {
+        font-family: inherit;
+        font-weight: 400;
+        font-size: 16px;
+        margin-left: 5%;
+        top: 60px;
+        position: absolute;
+      }
+    }
+
+    .container {
+      margin-top: 20px;
+      mat-table {
+        min-height: calc(100vh - 600px);
+        max-height: calc(100vh - 600px);
+        overflow-y: auto;
+        // ng-container {
+        //   mat-cell {
+        //     button {
+        //       mat-icon {
+        //         font-size: 4px;
+        //         height: 4px;
+        //         width: 4px;
+        //       }
+        //     }
+        //   }
+        // }
+        .custom-button {
+          line-height: 30px;
+          height: 30px;
+          width: 30px;
+
+          &-edit {
+            background-color: #22b8f0;
+          }
+
+          mat-icon {
+            font-size: 14px;
+            color: white;
+          }
+        }
+
+        /*Styling columns*/
+        .mat-column-Select {
+          flex: none;
+          width: 50px;
+        }
+        .mat-column-Email {
+          flex: none;
+          width: 300px;
+        }
+      }
+    }
+    .create {
+      padding: 24px;
+      button {
+        height: 50px;
+        width: 75px;
+        .btn-txt {
+          font-size: 20px;
+        }
+      }
+      h4 {
+        font-family: inherit;
+        font-weight: 400;
+        font-size: 16px;
+        margin-left: 1px;
+        position: absolute;
+      }
+    }
+  }
+}
