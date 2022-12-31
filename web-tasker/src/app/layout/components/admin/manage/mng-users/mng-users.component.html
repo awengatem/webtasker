@@ -155,7 +155,7 @@
                               aria-label="Example icon button with a delete icon"
                               type="button"
                               mat-raised-button
-                              (click)="deleteUser(document._id)"
+                              (click)="confirmUserDeletion(document._id,document.username)"
                               color="accent"
                               matTooltip="Delete"
                             >

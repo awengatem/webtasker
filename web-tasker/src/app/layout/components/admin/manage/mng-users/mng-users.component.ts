@@ -10,6 +10,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mng-users',
@@ -24,7 +25,7 @@ export class MngUsersComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   displayedColumns: string[] = [
     'Select',
     'Username',
@@ -119,22 +120,50 @@ export class MngUsersComponent implements OnInit {
     // }
   }
 
+  /**Method to confirm user deletion */
+  confirmUserDeletion(userId: string, username: string) {
+    Swal.fire({
+      title: `Delete "${username}" from the database?`,
+      text: 'This process is irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      //delete team from db
+      if (result.value) {
+        this.deleteUser(userId);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this._snackBar.open('operation has been cancelled', 'Close', {
+          duration: 2000,
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
+        // Swal.fire(
+        //   'Cancelled',
+        //   `"${username}" is still in our database.)`,
+        //   'error'
+        // );
+      }
+    });
+  }
+
   /**Delete a specified user */
   deleteUser(userId: string) {
-    if (confirm('Are you sure you want to delete this ?')) {
-      this.userAccountService.deleteUser(userId).subscribe({
-        next: (response: any) => {
-          this.dataSaved = true;
-          this.SavedSuccessful(2, response.message);
-          this.loadAllUsers();
-          this.employeeIdUpdate = null;
-          // this.employeeForm.reset();
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-    }
+    this.userAccountService.deleteUser(userId).subscribe({
+      next: (response: any) => {
+        this.dataSaved = true;
+        this.SavedSuccessful(2, response.message);
+        this.loadAllUsers();
+        this.employeeIdUpdate = null;
+        // this.employeeForm.reset();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   /**Multipurpose method for edits and updates */
