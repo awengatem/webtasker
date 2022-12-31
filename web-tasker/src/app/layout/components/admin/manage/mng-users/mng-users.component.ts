@@ -18,6 +18,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class MngUsersComponent implements OnInit {
   employeeForm: any;
+  totalUsers = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
@@ -38,6 +39,7 @@ export class MngUsersComponent implements OnInit {
         this.dataSource = new MatTableDataSource(users);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.totalUsers = users.length;
         console.log(users);
       },
       error: (err) => {
