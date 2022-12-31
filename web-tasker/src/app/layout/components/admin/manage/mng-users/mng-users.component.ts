@@ -17,10 +17,14 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./mng-users.component.scss'],
 })
 export class MngUsersComponent implements OnInit {
+  dataSaved = false;
   employeeForm: any;
+  employeeIdUpdate = null;
   totalUsers = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   displayedColumns: string[] = [
     'Select',
     'Username',
@@ -33,7 +37,10 @@ export class MngUsersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private userAccountService: UserAccountService) {
+  constructor(
+    private userAccountService: UserAccountService,
+    private _snackBar: MatSnackBar
+  ) {
     this.userAccountService.getUsers().subscribe({
       next: (users) => {
         this.dataSource = new MatTableDataSource(users);
@@ -95,7 +102,7 @@ export class MngUsersComponent implements OnInit {
     }
   }
 
-  /**Delete a selected user */
+  /**Delete selected user(s) */
   deleteData() {
     // debugger;
     const numSelected = this.selection.selected;
@@ -104,11 +111,56 @@ export class MngUsersComponent implements OnInit {
     //   if (confirm("Are you sure to delete items ")) {
     //     this.employeeService.deleteData(numSelected).subscribe(result => {
     //       this.SavedSuccessful(2);
-    //       this.loadAllEmployees();
+    //       this.loadAllUsers();
     //     })
     //   }
     // } else {
     //   alert("Select at least one row");
     // }
+  }
+
+  /**Delete a specified user */
+  deleteUser(employeeId: string) {
+    if (confirm('Are you sure you want to delete this ?')) {
+      // this.employeeService.deleteEmployeeById(employeeId).subscribe(() => {
+      //   this.dataSaved = true;
+      //   this.SavedSuccessful(2);
+      //   this.loadAllUsers();
+      //   this.employeeIdUpdate = null;
+      //   this.employeeForm.reset();
+      // });
+    }
+  }
+
+  /**Multipurpose method for edits and updates */
+  SavedSuccessful(isUpdate: number) {
+    if (isUpdate == 0) {
+      this._snackBar.open('Record Updated Successfully!', 'Close', {
+        duration: 2000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+    } else if (isUpdate == 1) {
+      this._snackBar.open('Record Saved Successfully!', 'Close', {
+        duration: 2000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+    } else if (isUpdate == 2) {
+      this._snackBar.open('Record Deleted Successfully!', 'Close', {
+        duration: 2000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+    }
+  }
+
+  /**Method to reload user table */
+  loadAllUsers() {
+    // this.employeeService.getAllEmployee().subscribe(data => {
+    //   this.dataSource = new MatTableDataSource(data);
+    //   this.dataSource.paginator = this.paginator;
+    //   this.dataSource.sort = this.sort;
+    // });
   }
 }
