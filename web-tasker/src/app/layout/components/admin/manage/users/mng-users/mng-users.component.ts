@@ -216,7 +216,7 @@ export class MngUsersComponent implements OnInit {
   openModal() {
     this.addingUser = true;
     this.modalRef = this.modalService.open(NewUsermodalComponent, {
-      modalClass: 'modal-dialog-centered',
+      modalClass: 'modal-dialog-centered modal-xl',
     });
     //listen when closed
     this.modalRef.onClose.subscribe((message: any) => {

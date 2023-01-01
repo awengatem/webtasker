@@ -7,6 +7,9 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
   styleUrls: ['./new-usermodal.component.scss'],
 })
 export class NewUsermodalComponent implements OnInit {
+  form: any = {
+    projectName: null,
+  };
   constructor(public modalRef: MdbModalRef<NewUsermodalComponent>) {}
 
   ngOnInit(): void {}

@@ -55,6 +55,7 @@ import { MngTeamsComponent } from './components/admin/manage/teams/mng-teams/mng
 import { MngSessionsComponent } from './components/admin/manage/sessions/mng-sessions/mng-sessions.component';
 import { NewUsermodalComponent } from './components/admin/manage/users/new-usermodal/new-usermodal.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 
 @NgModule({
   declarations: [
@@ -121,9 +122,10 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
     AngularMaterialModule,
     NgMultiSelectDropDownModule.forRoot(),
     MdbDropdownModule,
+    MdbFormsModule,
 
     /**mdb modals */
-    MdbModalModule
+    MdbModalModule,
   ],
 })
 export class MyLayoutModule {}
