@@ -17,7 +17,7 @@
                 <div class="row centered-content add-button">
                   <div class="col-md-1">
                     <!-- routerLink="/new_team" -->
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" (click)="openModal()">
                       <div class="btn-txt">+</div>
                     </button>
                   </div>
@@ -155,7 +155,12 @@
                               aria-label="Example icon button with a delete icon"
                               type="button"
                               mat-raised-button
-                              (click)="confirmUserDeletion(document._id,document.username)"
+                              (click)="
+                                confirmUserDeletion(
+                                  document._id,
+                                  document.username
+                                )
+                              "
                               color="accent"
                               matTooltip="Delete"
                             >

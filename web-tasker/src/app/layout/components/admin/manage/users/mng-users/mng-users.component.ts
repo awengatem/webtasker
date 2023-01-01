@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NewUsermodalComponent } from '../new-usermodal/new-usermodal.component';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -16,8 +18,13 @@ import Swal from 'sweetalert2';
   selector: 'app-mng-users',
   templateUrl: './mng-users.component.html',
   styleUrls: ['./mng-users.component.scss'],
+  providers: [MdbModalService],
 })
 export class MngUsersComponent implements OnInit {
+  /**define modal */
+  modalRef: MdbModalRef<NewUsermodalComponent> | null = null;
+
+  /**variables */
   dataSaved = false;
   employeeForm: any;
   employeeIdUpdate = null;
@@ -40,7 +47,8 @@ export class MngUsersComponent implements OnInit {
 
   constructor(
     private userAccountService: UserAccountService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private modalService: MdbModalService
   ) {
     this.userAccountService.getUsers().subscribe({
       next: (users) => {
@@ -201,5 +209,10 @@ export class MngUsersComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  /**METHODS USED BY MODAL */
+  openModal() {
+    this.modalRef = this.modalService.open(NewUsermodalComponent);
   }
 }
