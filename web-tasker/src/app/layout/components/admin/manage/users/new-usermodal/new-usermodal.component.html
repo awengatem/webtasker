@@ -1,7 +1,7 @@
 <div class="centered-content">
   <div class="modal-box shadow">
     <h1>Create new user</h1>
-    <form>
+    <form [formGroup]="form">
       <!-- <div class="input-group mb-3">
         <input
           #project="ngModel"
@@ -20,9 +20,23 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
-        <input matInput placeholder="Placeholder" />
+        <input
+          matInput
+          placeholder="Placeholder"
+          maxlength="3"
+          inputmode="tel"
+          placeholder="enter username"
+          formControlName="username"
+          #usernameInput
+        />
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
         <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['username'].errors?.['required']"
+          >Username is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['username'].errors?.['minlength']">
+          Username should be more than 3 characters
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
