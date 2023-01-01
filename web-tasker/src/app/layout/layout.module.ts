@@ -49,10 +49,11 @@ import { RecentSessionsComponent } from './components/admin/addashboard/recent-s
 import { DispositionComponent } from './components/user/user_projects/disposition/disposition.component';
 import { UserStatusComponent } from './components/admin/addashboard/user-status/user-status.component';
 import { ManageComponent } from './components/admin/manage/manage/manage.component';
-import { MngUsersComponent } from './components/admin/manage/mng-users/mng-users.component';
+import { MngUsersComponent } from './components/admin/manage/users/mng-users/mng-users.component';
 import { MngProjectsComponent } from './components/admin/manage/mng-projects/mng-projects.component';
 import { MngTeamsComponent } from './components/admin/manage/mng-teams/mng-teams.component';
 import { MngSessionsComponent } from './components/admin/manage/mng-sessions/mng-sessions.component';
+import { NewUsermodalComponent } from './components/admin/manage/users/new-usermodal/new-usermodal.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { MngSessionsComponent } from './components/admin/manage/mng-sessions/mng
     MngProjectsComponent,
     MngTeamsComponent,
     MngSessionsComponent,
+    NewUsermodalComponent,
   ],
   imports: [
     CommonModule,
