@@ -23,6 +23,7 @@ import Swal from 'sweetalert2';
 export class MngUsersComponent implements OnInit {
   /**define modal */
   modalRef: MdbModalRef<NewUsermodalComponent> | null = null;
+  addingUser: boolean = false; //add background blur
 
   /**variables */
   dataSaved = false;
@@ -213,6 +214,14 @@ export class MngUsersComponent implements OnInit {
 
   /**METHODS USED BY MODAL */
   openModal() {
-    this.modalRef = this.modalService.open(NewUsermodalComponent);
+    this.addingUser = true;
+    this.modalRef = this.modalService.open(NewUsermodalComponent, {
+      modalClass: 'modal-dialog-centered',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.addingUser = false;
+    });
   }
 }

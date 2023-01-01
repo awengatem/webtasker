@@ -3,7 +3,10 @@
   <div class="page__content shadow p-3 position-relative">
     <div class="page__content-data">
       <div class="centered-content">
-        <div class="manage-container">
+        <div
+          class="manage-container"
+          [ngClass]="addingUser ? 'modal-blur' : ''"
+        >
           <div class="manage">
             <div class="row">
               <div class="col count">
@@ -16,7 +19,6 @@
               <div class="col-md-3">
                 <div class="row centered-content add-button">
                   <div class="col-md-1">
-                    <!-- routerLink="/new_team" -->
                     <button class="btn btn-primary" (click)="openModal()">
                       <div class="btn-txt">+</div>
                     </button>
