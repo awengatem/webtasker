@@ -30,10 +30,10 @@ import { DispositionComponent } from './components/user/user_projects/dispositio
 import { RecentSessionsComponent } from './components/admin/addashboard/recent-sessions/recent-sessions.component';
 import { UserStatusComponent } from './components/admin/addashboard/user-status/user-status.component';
 import { ManageComponent } from './components/admin/manage/manage/manage.component';
-import { MngUsersComponent } from './components/admin/manage/mng-users/mng-users.component';
-import { MngProjectsComponent } from './components/admin/manage/mng-projects/mng-projects.component';
-import { MngTeamsComponent } from './components/admin/manage/mng-teams/mng-teams.component';
-import { MngSessionsComponent } from './components/admin/manage/mng-sessions/mng-sessions.component';
+import { MngUsersComponent } from './components/admin/manage/users/mng-users/mng-users.component';
+import { MngProjectsComponent } from './components/admin/manage/projects/mng-projects/mng-projects.component';
+import { MngTeamsComponent } from './components/admin/manage/teams/mng-teams/mng-teams.component';
+import { MngSessionsComponent } from './components/admin/manage/sessions/mng-sessions/mng-sessions.component';
 
 const routes: Routes = [
   {

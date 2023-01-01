@@ -1,0 +1,92 @@
+<div class="centered-content">
+  <div class="modal-box shadow">
+    <h1>Create new user</h1>
+    <form [formGroup]="form">
+      <!-- <div class="input-group mb-3">
+        <input
+          #project="ngModel"
+          type="text"
+          name="project"
+          class="form-control bg-light input-custom"
+          required
+          autocomplete="off"
+          minlength="3"
+          [(ngModel)]="form.projectName"
+          placeholder="new project"
+          aria-label="new project"
+          aria-describedby="basic-addon2"
+        />
+      </div> -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          placeholder="Placeholder"
+          maxlength="3"
+          inputmode="tel"
+          placeholder="enter username"
+          formControlName="username"
+          #usernameInput
+        />
+        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['username'].errors?.['required']"
+          >Username is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['username'].errors?.['minlength']">
+          Username should be more than 3 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Placeholder" />
+        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <!-- <mat-hint>Hint</mat-hint> -->
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Firstname</mat-label>
+        <input matInput placeholder="Placeholder" />
+        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <!-- <mat-hint>Hint</mat-hint> -->
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Lastname</mat-label>
+        <input matInput placeholder="Placeholder" />
+        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <!-- <mat-hint>Hint</mat-hint> -->
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Placeholder" />
+        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <!-- <mat-hint>Hint</mat-hint> -->
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm password</mat-label>
+        <input matInput placeholder="Placeholder" />
+        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <!-- <mat-hint>Hint</mat-hint> -->
+      </mat-form-field>
+
+      <div class="modal-footer">
+        <div class="input-group-append row btm-rgt">
+          <button
+            class="btn btn-outline-secondary col me-2"
+            type="button"
+            (click)="close()"
+          >
+            Back
+          </button>
+          <!-- (click)="submit()" -->
+          <button class="btn btn-custom col" type="submit">Create</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
