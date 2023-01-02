@@ -22,8 +22,7 @@
         <mat-label>Username</mat-label>
         <input
           matInput
-          maxlength="3"
-          inputmode="tel"
+          type="text"
           placeholder="enter username"
           formControlName="username"
           #usernameInput
@@ -134,6 +133,20 @@
           Confirm Password does not match
         </mat-error>
       </mat-form-field>
+
+      <!-- error div for registration -->
+      <div
+        class="alert-style mt-2"
+        role="alert"
+        *ngIf="submitted && registerFailed"
+      >
+        <mat-error>
+          <h3 class="error mt-3">
+            <mat-icon matSuffix>error_outline</mat-icon>&nbsp;&nbsp;
+            Registration failed: {{ registerErrorMessage }}
+          </h3>
+        </mat-error>
+      </div>
 
       <div class="modal-footer">
         <div class="input-group-append row btm-rgt">

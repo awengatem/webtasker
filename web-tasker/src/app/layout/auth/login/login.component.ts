@@ -21,6 +21,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { WebRequestService } from 'src/app/services/api/web-request.service';
 import Swal from 'sweetalert2';
 import Validation from './validation';
+import { UserAccountService } from 'src/app/services/api/user-account.service';
 
 // /**directive helps detect form touched */
 // @Directive({
@@ -72,7 +73,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private accountService: AccountService,
     private tokenService: TokenService,
-    private webService: WebRequestService,
+    private userAccountService: UserAccountService,
     private generalService: GeneralService,
     private formBuilder: FormBuilder
   ) {}
@@ -261,7 +262,7 @@ export class LoginComponent implements OnInit {
     };
 
     /**post user to server*/
-    this.webService.post('register', user).subscribe({
+    this.userAccountService.registerUser(user).subscribe({
       next: (res: any) => {
         Swal.fire(res.message);
         this.resetSignup();

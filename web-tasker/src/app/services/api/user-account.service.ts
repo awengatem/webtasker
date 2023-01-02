@@ -7,6 +7,11 @@ import { WebRequestService } from './web-request.service';
 export class UserAccountService {
   constructor(private webReqService: WebRequestService) {}
 
+  /**Method to register a new user */
+  registerUser(user: object) {
+    return this.webReqService.post('register', user);
+  }
+
   /** Method to get a specified user*/
   getSpecificUser(userId: string) {
     return this.webReqService.get(`users/${userId}`);
@@ -35,8 +40,8 @@ export class UserAccountService {
 
   /**Method to delete multiple users */
   deleteMultipleUsers(userId: string, userIdArr: any[]) {
-    return this.webReqService.deleteWithArgs(`users/${userId}`,{
-      userIdArr: userIdArr
-  });
+    return this.webReqService.deleteWithArgs(`users/${userId}`, {
+      userIdArr: userIdArr,
+    });
   }
 }
