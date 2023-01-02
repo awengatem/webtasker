@@ -213,7 +213,22 @@ export class MngUsersComponent implements OnInit {
   }
 
   /**METHODS USED BY MODAL */
-  openModal() {
+  /**open new user modal */
+  openNewUserModal() {
+    this.addingUser = true;
+    this.modalRef = this.modalService.open(NewUsermodalComponent, {
+      modalClass: 'modal-dialog-centered modal-xl',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.addingUser = false;
+      // refresh data table
+      this.loadAllUsers();
+    });
+  }
+  /**open edit user modal */
+  openEditUserModal() {
     this.addingUser = true;
     this.modalRef = this.modalService.open(NewUsermodalComponent, {
       modalClass: 'modal-dialog-centered modal-xl',
