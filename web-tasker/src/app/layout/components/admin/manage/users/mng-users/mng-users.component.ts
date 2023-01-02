@@ -222,6 +222,8 @@ export class MngUsersComponent implements OnInit {
     this.modalRef.onClose.subscribe((message: any) => {
       console.log(message);
       this.addingUser = false;
+      // refresh data table
+      this.loadAllUsers();
     });
   }
 }
