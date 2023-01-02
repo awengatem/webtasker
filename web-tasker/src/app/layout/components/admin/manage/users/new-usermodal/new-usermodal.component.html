@@ -35,6 +35,9 @@
         <mat-error *ngIf="form.controls['username'].errors?.['minlength']">
           Username should be more than 3 characters
         </mat-error>
+        <mat-error *ngIf="form.controls['username'].errors?.['maxlength']">
+          Username should not exceed 10 characters
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -73,6 +76,9 @@
         <mat-error *ngIf="form.controls['firstName'].errors?.['minlength']">
           Firstname should be more than 3 characters
         </mat-error>
+        <mat-error *ngIf="form.controls['firstName'].errors?.['maxlength']">
+          Firstname should not exceed 20 characters
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -92,6 +98,9 @@
         <mat-error *ngIf="form.controls['lastName'].errors?.['minlength']">
           Lastname should be more than 3 characters
         </mat-error>
+        <mat-error *ngIf="form.controls['lastName'].errors?.['maxlength']">
+          Lastname should not exceed 20 characters
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -110,6 +119,9 @@
         >
         <mat-error *ngIf="form.controls['password'].errors?.['minlength']">
           Password should be more than 3 characters
+        </mat-error>
+        <mat-error *ngIf="form.controls['password'].errors?.['maxlength']">
+          Password should not exceed 20 characters
         </mat-error>
       </mat-form-field>
 
