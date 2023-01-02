@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NewUsermodalComponent } from '../new-usermodal/new-usermodal.component';
+import { EditUsermodalComponent } from '../edit-usermodal/edit-usermodal.component';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -23,7 +24,7 @@ import Swal from 'sweetalert2';
 export class MngUsersComponent implements OnInit {
   /**define modal */
   modalRef: MdbModalRef<NewUsermodalComponent> | null = null;
-  addingUser: boolean = false; //add background blur
+  isModalOpen: boolean = false; //add background blur
 
   /**variables */
   dataSaved = false;
@@ -215,28 +216,29 @@ export class MngUsersComponent implements OnInit {
   /**METHODS USED BY MODAL */
   /**open new user modal */
   openNewUserModal() {
-    this.addingUser = true;
+    this.isModalOpen = true;
     this.modalRef = this.modalService.open(NewUsermodalComponent, {
       modalClass: 'modal-dialog-centered modal-xl',
     });
     //listen when closed
     this.modalRef.onClose.subscribe((message: any) => {
       console.log(message);
-      this.addingUser = false;
+      this.isModalOpen = false;
       // refresh data table
       this.loadAllUsers();
     });
   }
   /**open edit user modal */
-  openEditUserModal() {
-    this.addingUser = true;
-    this.modalRef = this.modalService.open(NewUsermodalComponent, {
+  openEditUserModal(userId: string) {
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(EditUsermodalComponent, {
       modalClass: 'modal-dialog-centered modal-xl',
+      data: { userId: userId },
     });
     //listen when closed
     this.modalRef.onClose.subscribe((message: any) => {
       console.log(message);
-      this.addingUser = false;
+      this.isModalOpen = false;
       // refresh data table
       this.loadAllUsers();
     });

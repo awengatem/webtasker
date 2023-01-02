@@ -118,7 +118,7 @@ export class NewUsermodalComponent implements OnInit {
 
   /**Method to close modal */
   close(): void {
-    const closeMessage = 'Modal closed';
+    const closeMessage = 'New user modal closed';
     this.modalRef.close(closeMessage);
   }
 }

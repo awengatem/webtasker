@@ -2,22 +2,6 @@
   <div class="modal-box shadow">
     <h1><i class="fa-solid fa-user-plus"></i> Create new user</h1>
     <form [formGroup]="form" (ngSubmit)="form.valid && submitForm(form)">
-      <!-- <div class="input-group mb-3">
-        <input
-          #project="ngModel"
-          type="text"
-          name="project"
-          class="form-control bg-light input-custom"
-          required
-          autocomplete="off"
-          minlength="3"
-          [(ngModel)]="form.projectName"
-          placeholder="new project"
-          aria-label="new project"
-          aria-describedby="basic-addon2"
-        />
-      </div> -->
-
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
         <input

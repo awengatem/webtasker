@@ -1,1 +1,163 @@
-<p>edit-usermodal works!</p>
+<div class="centered-content">
+  <div class="modal-box shadow">
+    <h1><i class="fa-solid fa-user-pen"></i> Edit user</h1>
+    <form [formGroup]="form" (ngSubmit)="form.valid && submitForm(form)">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="enter username"
+          formControlName="username"
+          #usernameInput
+        />
+        <mat-icon matSuffix>account_circle</mat-icon>
+        <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['username'].errors?.['required']"
+          >Username is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['username'].errors?.['minlength']">
+          Username should be more than 3 characters
+        </mat-error>
+        <mat-error *ngIf="form.controls['username'].errors?.['maxlength']">
+          Username should not exceed 10 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="enter email"
+          type="email"
+          formControlName="email"
+          #emailInput
+        />
+        <mat-icon matSuffix>alternate_email</mat-icon>
+        <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['email'].errors?.['required']"
+          >Email is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['email'].errors?.['pattern']">
+          Please enter valid email
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Firstname</mat-label>
+        <input
+          matInput
+          placeholder="enter first name"
+          type="text"
+          formControlName="firstName"
+          #firstNameInput
+        />
+        <mat-icon matSuffix>person_add</mat-icon>
+        <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['firstName'].errors?.['required']"
+          >Firstname is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['firstName'].errors?.['minlength']">
+          Firstname should be more than 3 characters
+        </mat-error>
+        <mat-error *ngIf="form.controls['firstName'].errors?.['maxlength']">
+          Firstname should not exceed 20 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Lastname</mat-label>
+        <input
+          matInput
+          placeholder="enter last name"
+          type="text"
+          formControlName="lastName"
+          #lastNameInput
+        />
+        <mat-icon matSuffix>person_add</mat-icon>
+        <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['lastName'].errors?.['required']"
+          >Lastname is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['lastName'].errors?.['minlength']">
+          Lastname should be more than 3 characters
+        </mat-error>
+        <mat-error *ngIf="form.controls['lastName'].errors?.['maxlength']">
+          Lastname should not exceed 20 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          placeholder="set a password"
+          [type]="flag ? 'password' : 'text'"
+          formControlName="password"
+          #passwordInput
+        />
+        <mat-icon (click)="flag = !flag" matSuffix style="cursor: pointer">{{
+          flag ? "visibility" : "visibility_off"
+        }}</mat-icon>
+        <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['password'].errors?.['required']"
+          >Password is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['password'].errors?.['minlength']">
+          Password should be more than 3 characters
+        </mat-error>
+        <mat-error *ngIf="form.controls['password'].errors?.['maxlength']">
+          Password should not exceed 20 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm password</mat-label>
+        <input
+          matInput
+          placeholder="confirm password"
+          [type]="flag ? 'password' : 'text'"
+          formControlName="confirmPassword"
+          #confirmPasswordInput
+        />
+        <mat-icon matSuffix>keyboard</mat-icon>
+        <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['confirmPassword'].errors?.['required']"
+          >Confirm password is required</mat-error
+        >
+        <mat-error
+          *ngIf="form.controls['confirmPassword'].errors?.['matching']"
+        >
+          Confirm Password does not match
+        </mat-error>
+      </mat-form-field>
+
+      <!-- error div for registration -->
+      <div
+        class="alert-style mt-2"
+        role="alert"
+        *ngIf="submitted && registerFailed"
+      >
+        <mat-error>
+          <h3 class="error mt-3">
+            <mat-icon matSuffix>error_outline</mat-icon>&nbsp;&nbsp;
+            Registration failed: {{ registerErrorMessage }}
+          </h3>
+        </mat-error>
+      </div>
+
+      <div class="modal-footer">
+        <div class="input-group-append row btm-rgt">
+          <button
+            class="btn btn-outline-secondary col me-2"
+            type="button"
+            (click)="close()"
+          >
+            Back
+          </button>
+          <button class="btn btn-custom col" type="submit">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
