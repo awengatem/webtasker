@@ -71,17 +71,17 @@ export class EditUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(20),
-          ],
-        ],
-        confirmPassword: ['', [Validators.required]],
-      },
-      { validators: [Validation.match('password', 'confirmPassword')] }
+        // password: [
+        //   '',
+        //   [
+        //     Validators.required,
+        //     Validators.minLength(6),
+        //     Validators.maxLength(20),
+        //   ],
+        // ],
+        // confirmPassword: ['', [Validators.required]],
+      }
+      // { validators: [Validation.match('password', 'confirmPassword')] }
     );
 
     /**update received userId */
@@ -96,28 +96,12 @@ export class EditUsermodalComponent implements OnInit {
   /**Method to load the form with values to be patched */
   loadFieldsToEdit(userId: string) {
     this.userAccountService.getSpecificUser(userId).subscribe((user) => {
-      console.log(user);      
+      console.log(user);
       this.form.controls['username'].setValue(user.username);
       this.form.controls['email'].setValue(user.email);
       this.form.controls['firstName'].setValue(user.firstName);
       this.form.controls['lastName'].setValue(user.lastName);
       this.form.controls['role'].setValue(user.isProjectManager);
-      // this.employeeForm.controls['LastName'].setValue(employee.LastName);
-      // this.employeeForm.controls['DateofBirth'].setValue(employee.DateofBirth);
-      // this.employeeForm.controls['EmailId'].setValue(employee.EmailId);
-      // this.employeeForm.controls['Gender'].setValue(employee.Gender);
-      // this.employeeForm.controls['Address'].setValue(employee.Address);
-      // this.employeeForm.controls['Pincode'].setValue(employee.Pincode);
-      // this.employeeForm.controls['Country'].setValue(employee.CountryId);
-      // this.allState = this.employeeService.getState(employee.CountryId);
-      // this.CountryId = employee.CountryId;
-      // this.employeeForm.controls['State'].setValue(employee.StateId);
-      // this.allCity = this.employeeService.getCity(employee.StateId);
-      // this.StateId = employee.StateId;
-      // this.employeeForm.controls['City'].setValue(employee.Cityid);
-      // this.CityId = employee.Cityid;
-      // this.isMale = employee.Gender.trim() == '0' ? true : false;
-      // this.isFeMale = employee.Gender.trim() == '1' ? true : false;
     });
   }
 
@@ -147,20 +131,22 @@ export class EditUsermodalComponent implements OnInit {
     };
 
     /**patch the user to api*/
-    this.userAccountService.editUser(this.receivedUserId, user).subscribe({
-      next: (res: any) => {
-        Swal.fire('Success!', res.message, 'success');
-        this.form.reset();
-        console.log(res);
-        this.registerFailed = false;
-        this.close();
-      },
-      error: (err) => {
-        console.log(err.error.message);
-        this.registerErrorMessage = err.error.message;
-        this.registerFailed = true;
-      },
-    });
+    if (this.userId) {
+      this.userAccountService.editUser(this.userId, user).subscribe({
+        next: (res: any) => {
+          Swal.fire('Success!', res.message, 'success');
+          this.form.reset();
+          console.log(res);
+          this.registerFailed = false;
+          this.close();
+        },
+        error: (err) => {
+          console.log(err.error.message);
+          this.registerErrorMessage = err.error.message;
+          this.registerFailed = true;
+        },
+      });
+    }
   }
 
   /**Method to close modal */
