@@ -29,9 +29,7 @@ export class EditUsermodalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /**update received userId */
-    if (this.userId) this.receivedUserId = this.userId;
-    console.log(this.receivedUserId);
+    /**build form */
     this.form = this.fb.group(
       {
         username: [
@@ -65,6 +63,14 @@ export class EditUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
+        role: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(20),
+          ],
+        ],
         password: [
           '',
           [
@@ -77,16 +83,25 @@ export class EditUsermodalComponent implements OnInit {
       },
       { validators: [Validation.match('password', 'confirmPassword')] }
     );
+
+    /**update received userId */
+    if (this.userId) {
+      this.receivedUserId = this.userId;
+      // load form with data to be editted
+      this.loadFieldsToEdit(this.userId);
+    }
+    console.log(this.receivedUserId);
   }
 
   /**Method to load the form with values to be patched */
   loadFieldsToEdit(userId: string) {
     this.userAccountService.getSpecificUser(userId).subscribe((user) => {
-      console.log(user);
-      // this.massage = null;
-      // this.dataSaved = false;
-      // this.employeeIdUpdate = employee.EmpId;
-      // this.employeeForm.controls['FirstName'].setValue(employee.FirstName);
+      console.log(user);      
+      this.form.controls['username'].setValue(user.username);
+      this.form.controls['email'].setValue(user.email);
+      this.form.controls['firstName'].setValue(user.firstName);
+      this.form.controls['lastName'].setValue(user.lastName);
+      this.form.controls['role'].setValue(user.isProjectManager);
       // this.employeeForm.controls['LastName'].setValue(employee.LastName);
       // this.employeeForm.controls['DateofBirth'].setValue(employee.DateofBirth);
       // this.employeeForm.controls['EmailId'].setValue(employee.EmailId);
