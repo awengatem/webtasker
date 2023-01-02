@@ -64,6 +64,11 @@ export class NewUsermodalComponent implements OnInit {
     );
   }
 
+  /**Method to submit the form */
+  submitForm(form: any) {
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(form.value, null, 4));
+  }
+
   /**Method to close modal */
   close(): void {
     const closeMessage = 'Modal closed';

@@ -1,7 +1,7 @@
 <div class="centered-content">
   <div class="modal-box shadow">
     <h1>Create new user</h1>
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="form.valid && submitForm(form)">
       <!-- <div class="input-group mb-3">
         <input
           #project="ngModel"
