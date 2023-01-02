@@ -1,6 +1,6 @@
 <div class="centered-content">
   <div class="modal-box shadow">
-    <h1>Create new user</h1>
+    <h1><i class="fa-solid fa-user-plus"></i> Create new user</h1>
     <form [formGroup]="form" (ngSubmit)="form.valid && submitForm(form)">
       <!-- <div class="input-group mb-3">
         <input
@@ -27,7 +27,7 @@
           formControlName="username"
           #usernameInput
         />
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <mat-icon matSuffix>account_circle</mat-icon>
         <!-- <mat-hint>Hint</mat-hint> -->
         <mat-error *ngIf="form.controls['username'].errors?.['required']"
           >Username is required</mat-error
@@ -49,7 +49,7 @@
           formControlName="email"
           #emailInput
         />
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <mat-icon matSuffix>alternate_email</mat-icon>
         <!-- <mat-hint>Hint</mat-hint> -->
         <mat-error *ngIf="form.controls['email'].errors?.['required']"
           >Email is required</mat-error
@@ -68,7 +68,7 @@
           formControlName="firstName"
           #firstNameInput
         />
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <mat-icon matSuffix>person_add</mat-icon>
         <!-- <mat-hint>Hint</mat-hint> -->
         <mat-error *ngIf="form.controls['firstName'].errors?.['required']"
           >Firstname is required</mat-error
@@ -90,7 +90,7 @@
           formControlName="lastName"
           #lastNameInput
         />
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <mat-icon matSuffix>person_add</mat-icon>
         <!-- <mat-hint>Hint</mat-hint> -->
         <mat-error *ngIf="form.controls['lastName'].errors?.['required']"
           >Lastname is required</mat-error
@@ -108,11 +108,13 @@
         <input
           matInput
           placeholder="set a password"
-          type="password"
+          [type]="flag ? 'password' : 'text'"
           formControlName="password"
           #passwordInput
         />
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <mat-icon (click)="flag = !flag" matSuffix style="cursor: pointer">{{
+          flag ? "visibility" : "visibility_off"
+        }}</mat-icon>
         <!-- <mat-hint>Hint</mat-hint> -->
         <mat-error *ngIf="form.controls['password'].errors?.['required']"
           >Password is required</mat-error
@@ -130,11 +132,11 @@
         <input
           matInput
           placeholder="confirm password"
-          type="password"
+          [type]="flag ? 'password' : 'text'"
           formControlName="confirmPassword"
           #confirmPasswordInput
         />
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <mat-icon matSuffix>keyboard</mat-icon>
         <!-- <mat-hint>Hint</mat-hint> -->
         <mat-error *ngIf="form.controls['confirmPassword'].errors?.['required']"
           >Confirm password is required</mat-error

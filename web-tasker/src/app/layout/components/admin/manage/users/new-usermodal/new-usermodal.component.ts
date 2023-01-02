@@ -16,6 +16,7 @@ export class NewUsermodalComponent implements OnInit {
   registerErrorMessage = '';
   registerFailed = false;
   submitted = false;
+  flag: boolean = true;
 
   constructor(
     public modalRef: MdbModalRef<NewUsermodalComponent>,
