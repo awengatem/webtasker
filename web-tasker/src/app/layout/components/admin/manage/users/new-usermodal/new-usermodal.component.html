@@ -22,7 +22,6 @@
         <mat-label>Username</mat-label>
         <input
           matInput
-          placeholder="Placeholder"
           maxlength="3"
           inputmode="tel"
           placeholder="enter username"
@@ -41,37 +40,99 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput placeholder="Placeholder" />
+        <input
+          matInput
+          placeholder="enter email"
+          type="email"
+          formControlName="email"
+          #emailInput
+        />
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
         <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['email'].errors?.['required']"
+          >Email is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['email'].errors?.['pattern']">
+          Please enter valid email
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Firstname</mat-label>
-        <input matInput placeholder="Placeholder" />
+        <input
+          matInput
+          placeholder="enter first name"
+          type="text"
+          formControlName="firstName"
+          #firstNameInput
+        />
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
         <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['firstName'].errors?.['required']"
+          >Firstname is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['firstName'].errors?.['minlength']">
+          Firstname should be more than 3 characters
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Lastname</mat-label>
-        <input matInput placeholder="Placeholder" />
+        <input
+          matInput
+          placeholder="enter last name"
+          type="text"
+          formControlName="lastName"
+          #lastNameInput
+        />
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
         <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['lastName'].errors?.['required']"
+          >Lastname is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['lastName'].errors?.['minlength']">
+          Lastname should be more than 3 characters
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input matInput placeholder="Placeholder" />
+        <input
+          matInput
+          placeholder="set a password"
+          type="password"
+          formControlName="password"
+          #passwordInput
+        />
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
         <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['password'].errors?.['required']"
+          >Password is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['password'].errors?.['minlength']">
+          Password should be more than 3 characters
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Confirm password</mat-label>
-        <input matInput placeholder="Placeholder" />
+        <input
+          matInput
+          placeholder="confirm password"
+          type="password"
+          formControlName="confirmPassword"
+          #confirmPasswordInput
+        />
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
         <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-error *ngIf="form.controls['confirmPassword'].errors?.['required']"
+          >Confirm password is required</mat-error
+        >
+        <mat-error
+          *ngIf="form.controls['confirmPassword'].errors?.['matching']"
+        >
+          Confirm Password does not match
+        </mat-error>
       </mat-form-field>
 
       <div class="modal-footer">
