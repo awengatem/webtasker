@@ -5,7 +5,7 @@
       <div class="centered-content">
         <div
           class="manage-container"
-          [ngClass]="addingUser ? 'modal-blur' : ''"
+          [ngClass]="isModalOpen ? 'modal-blur' : ''"
         >
           <div class="manage">
             <div class="row">
@@ -19,7 +19,7 @@
               <div class="col-md-3">
                 <div class="row centered-content add-button">
                   <div class="col-md-1">
-                    <button class="btn btn-primary" (click)="openModal()">
+                    <button class="btn btn-primary" (click)="openNewUserModal()">
                       <div class="btn-txt">+</div>
                     </button>
                   </div>
@@ -131,14 +131,14 @@
                             Edit
                           </mat-header-cell>
 
-                          <mat-cell *matCellDef="let document">
-                            <!-- (click)="loadEmployeeToEdit(employee.EmpId)" -->
+                          <mat-cell *matCellDef="let document">                            
                             <button
                               mat-icon-button
                               class="custom-button custom-button-edit"
                               aria-label="Example icon button with a vertical three dot icon"
                               type="button"
                               mat-raised-button
+                              (click)="openEditUserModal(document._id)"
                               matTooltip="Edit"
                             >
                               <mat-icon>edit</mat-icon>

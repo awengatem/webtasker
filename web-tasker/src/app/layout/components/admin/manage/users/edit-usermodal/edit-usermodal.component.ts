@@ -7,25 +7,29 @@ import Swal from 'sweetalert2';
 import Validation from '../../../../../auth/login/validation';
 
 @Component({
-  selector: 'app-new-usermodal',
-  templateUrl: './new-usermodal.component.html',
-  styleUrls: ['./new-usermodal.component.scss'],
+  selector: 'app-edit-usermodal',
+  templateUrl: './edit-usermodal.component.html',
+  styleUrls: ['./edit-usermodal.component.scss'],
 })
-export class NewUsermodalComponent implements OnInit {
+export class EditUsermodalComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   registerErrorMessage = '';
   registerFailed = false;
   submitted = false;
   flag: boolean = true;
+  /**Data to be recieved from parent component */
+  userId: string | null = null;
+  receivedUserId!: string;
 
   constructor(
-    public modalRef: MdbModalRef<NewUsermodalComponent>,
+    public modalRef: MdbModalRef<EditUsermodalComponent>,
     private fb: FormBuilder,
     private generalService: GeneralService,
     private userAccountService: UserAccountService
   ) {}
 
   ngOnInit(): void {
+    /**build form */
     this.form = this.fb.group(
       {
         username: [
@@ -59,24 +63,51 @@ export class NewUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
-        password: [
+        role: [
           '',
           [
             Validators.required,
-            Validators.minLength(6),
+            Validators.minLength(3),
             Validators.maxLength(20),
           ],
         ],
-        confirmPassword: ['', [Validators.required]],
-      },
-      { validators: [Validation.match('password', 'confirmPassword')] }
+        // password: [
+        //   '',
+        //   [
+        //     Validators.required,
+        //     Validators.minLength(6),
+        //     Validators.maxLength(20),
+        //   ],
+        // ],
+        // confirmPassword: ['', [Validators.required]],
+      }
+      // { validators: [Validation.match('password', 'confirmPassword')] }
     );
+
+    /**update received userId */
+    if (this.userId) {
+      this.receivedUserId = this.userId;
+      // load form with data to be editted
+      this.loadFieldsToEdit(this.userId);
+    }
+    console.log(this.receivedUserId);
+  }
+
+  /**Method to load the form with values to be patched */
+  loadFieldsToEdit(userId: string) {
+    this.userAccountService.getSpecificUser(userId).subscribe((user) => {
+      console.log(user);
+      this.form.controls['username'].setValue(user.username);
+      this.form.controls['email'].setValue(user.email);
+      this.form.controls['firstName'].setValue(user.firstName);
+      this.form.controls['lastName'].setValue(user.lastName);
+      this.form.controls['role'].setValue(user.isProjectManager);
+    });
   }
 
   /**Method to submit the form */
   submitForm(form: any) {
     this.submitted = true;
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(form.value, null, 4));
     console.log(form.value);
     //get the form values
     const { username, email, firstName, lastName, password } = form.value;
@@ -93,32 +124,34 @@ export class NewUsermodalComponent implements OnInit {
     const user = {
       username: cUsername,
       email: cEmail,
-      password: password,
+      // password: password,
       firstName: cFirstname,
       lastName: cLastname,
       isProjectManager: false,
     };
 
-    /**post user to server*/
-    this.userAccountService.registerUser(user).subscribe({
-      next: (res: any) => {
-        Swal.fire('Success!', res.message, 'success');
-        this.form.reset();
-        console.log(res);
-        this.registerFailed = false;
-        this.close();
-      },
-      error: (err) => {
-        console.log(err.error.message);
-        this.registerErrorMessage = err.error.message;
-        this.registerFailed = true;
-      },
-    });
+    /**patch the user to api*/
+    if (this.userId) {
+      this.userAccountService.editUser(this.userId, user).subscribe({
+        next: (res: any) => {
+          Swal.fire('Success!', res.message, 'success');
+          this.form.reset();
+          console.log(res);
+          this.registerFailed = false;
+          this.close();
+        },
+        error: (err) => {
+          console.log(err.error.message);
+          this.registerErrorMessage = err.error.message;
+          this.registerFailed = true;
+        },
+      });
+    }
   }
 
   /**Method to close modal */
   close(): void {
-    const closeMessage = 'New user modal closed';
+    const closeMessage = 'Edit modal closed';
     this.modalRef.close(closeMessage);
   }
 }
