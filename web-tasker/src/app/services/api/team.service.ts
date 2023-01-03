@@ -31,17 +31,20 @@ export class TeamService {
     return this.webReqService.get('teams/myteams');
   }
 
+  /**Method to create a new team */
   createTeam(teamName: string) {
     //send a web request to create a team
     return this.webReqService.post('teams', { teamName });
   }
 
+  /**Method to patch a team */
   editTeam(teamId: string, newTeam: string) {
     return this.webReqService.patch(`teams/${teamId}`, {
       teamName: newTeam,
     });
   }
 
+  /**Method to delete a team */
   deleteTeam(teamId: string) {
     return this.webReqService.delete(`teams/${teamId}`);
   }

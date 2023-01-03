@@ -1,17 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-// import { NewUsermodalComponent } from '../../new-usermodal/new-usermodal.component';
-// import { EditUsermodalComponent } from '../edit-usermodal/edit-usermodal.component';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import Swal from 'sweetalert2';
 import { ProjectService } from 'src/app/services/api/project.service';
@@ -22,8 +17,6 @@ import { ProjectService } from 'src/app/services/api/project.service';
   styleUrls: ['./mng-projects.component.scss'],
 })
 export class MngProjectsComponent implements OnInit {
-  isModalOpen: boolean = false; //add background blur
-
   /**variables */
   totalProjects = 0;
   dataSource!: MatTableDataSource<any>;
@@ -44,8 +37,7 @@ export class MngProjectsComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private _snackBar: MatSnackBar,
-    private modalService: MdbModalService
+    private _snackBar: MatSnackBar
   ) {
     //load data on table
     this.loadAllProjects();
@@ -54,7 +46,7 @@ export class MngProjectsComponent implements OnInit {
   ngOnInit(): void {}
 
   /**Get the projects */
-  getUsers(): void {
+  getProjects(): void {
     this.projectService.getAllProjects().subscribe({
       next: (projects) => {
         console.log(projects);
@@ -96,21 +88,21 @@ export class MngProjectsComponent implements OnInit {
     }
   }
 
-  /**Delete selected user(s) */
+  /**Delete selected project(s) */ //change userIdArr
   deleteSelected() {
     // debugger;
-    const selectedUsersArr = this.selection.selected;
+    const selectedProjectsArr = this.selection.selected;
     let userIdArr: any = [];
-    console.log(selectedUsersArr);
-    if (selectedUsersArr.length > 0) {
+    console.log(selectedProjectsArr);
+    if (selectedProjectsArr.length > 0) {
       //push only user ids in an array
-      selectedUsersArr.forEach((item) => {
+      selectedProjectsArr.forEach((item) => {
         userIdArr.push(item._id);
       });
       console.log(userIdArr);
-      //confirm and delete users
+      //confirm and delete projects
       Swal.fire({
-        title: `Delete ${selectedUsersArr.length} users from the database?`,
+        title: `Delete ${selectedProjectsArr.length} users from the database?`,
         text: 'This process is irreversible.',
         icon: 'warning',
         showCancelButton: true,
@@ -119,7 +111,7 @@ export class MngProjectsComponent implements OnInit {
         cancelButtonText: 'No, let me think',
         cancelButtonColor: '#22b8f0',
       }).then((result) => {
-        //delete users from db
+        //delete projects from db
         if (result.value) {
           this.deleteMultipe(userIdArr);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -132,7 +124,7 @@ export class MngProjectsComponent implements OnInit {
   }
 
   /**Method to confirm project deletion */
-  confirmDeletion(userId: string, projectname: string) {
+  confirmDeletion(projectId: string, projectname: string) {
     Swal.fire({
       title: `Delete "${projectname}" from the database?`,
       text: 'This process is irreversible.',
@@ -145,7 +137,7 @@ export class MngProjectsComponent implements OnInit {
     }).then((result) => {
       //delete project from db
       if (result.value) {
-        this.deleteProject(userId);
+        this.deleteProject(projectId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.displaySnackbar(0, 'operation has been cancelled');
       }
@@ -218,7 +210,7 @@ export class MngProjectsComponent implements OnInit {
         console.log(err);
       },
     });
-  }  
+  }
 
   /**Method to convert timestamp to date */
   convertDate(timestamp: string): string {
