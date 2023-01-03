@@ -123,12 +123,7 @@ export class MngUsersComponent implements OnInit {
       });
       console.log(userIdArr);
     } else {
-      this._snackBar.open('no selected records', 'Close', {
-        duration: 2000,
-        panelClass: ['red-snackbar'],
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
+      this.displaySnackbar(0, 'no selected records');
     }
   }
 
@@ -148,12 +143,7 @@ export class MngUsersComponent implements OnInit {
       if (result.value) {
         this.deleteUser(userId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        this._snackBar.open('operation has been cancelled', 'Close', {
-          duration: 2000,
-          panelClass: ['red-snackbar'],
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-        });
+        this.displaySnackbar(0, 'operation has been cancelled');
         // Swal.fire(
         //   'Cancelled',
         //   `"${username}" is still in our database.)`,
