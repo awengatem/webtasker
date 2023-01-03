@@ -16,7 +16,7 @@
               <div class="col-md-3">
                 <div class="row centered-content add-button">
                   <div class="col-md-1">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" routerLink="/new_project">
                       <div class="btn-txt">+</div>
                     </button>
                   </div>
@@ -139,6 +139,7 @@
                               aria-label="Example icon button with a vertical three dot icon"
                               type="button"
                               mat-raised-button
+                              [routerLink]="['/edit_project', document._id]"
                               matTooltip="Edit"
                             >
                               <mat-icon>edit</mat-icon>

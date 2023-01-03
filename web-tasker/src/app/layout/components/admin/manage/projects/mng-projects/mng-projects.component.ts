@@ -218,7 +218,7 @@ export class MngProjectsComponent implements OnInit {
         console.log(err);
       },
     });
-  }
+  }  
 
   /**Method to convert timestamp to date */
   convertDate(timestamp: string): string {
