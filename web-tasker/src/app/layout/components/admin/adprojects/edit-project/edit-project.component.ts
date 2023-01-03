@@ -23,9 +23,6 @@ export class EditProjectComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  //getting capturedProject
-  capturedProject!: string;
-
   ngOnInit(): void {
     //subscribe to the route params
     this.route.params.subscribe((params: Params) => {
@@ -34,8 +31,10 @@ export class EditProjectComponent implements OnInit {
     });
 
     //get the selected project
-    this.capturedProject = this.projectService.getCapturedProject();
-    this.form.projectName = this.capturedProject;
+    if (this.projectId) {
+      this.loadFieldsToEdit(this.projectId);
+      document.getElementById("autofocus")!.focus();
+    }
   }
 
   /**edit method */
@@ -50,14 +49,26 @@ export class EditProjectComponent implements OnInit {
         this.projectService.setAddStatus(true);
         //console.log(this.projectService.getAddStatus());
         this.router.navigate(['/ad_projects']);
-        Swal.fire('Success!', `Project "${newProject}" updated successfully`, 'success');        
+        Swal.fire(
+          'Success!',
+          `Project "${newProject}" updated successfully`,
+          'success'
+        );
       },
       error: (err) => {
         console.log(err);
-        Swal.fire('Oops! Something went wrong',err.error.message, 'error');        
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
     });
-  }   
+  }
+
+  /**Method to load the form with values to be patched */
+  loadFieldsToEdit(projectId: string) {
+    this.projectService.getSpecificProject(projectId).subscribe((project) => {
+      console.log(project);
+      this.form.projectName = project.projectName;
+    });
+  }
 
   submit() {
     this.submitted = true;

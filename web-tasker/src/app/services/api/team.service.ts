@@ -13,6 +13,7 @@ export class TeamService {
 
   constructor(private webReqService: WebRequestService) {}
 
+  /**Get specific team from db */
   getSpecificTeam(teamId: string) {
     //send a web request to get a specified team
     return this.webReqService.get(`teams/${teamId}`);

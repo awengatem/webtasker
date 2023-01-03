@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit-team',
   templateUrl: './edit-team.component.html',
-  styleUrls: ['./edit-team.component.scss']
+  styleUrls: ['./edit-team.component.scss'],
 })
 export class EditTeamComponent implements OnInit {
   form: any = {
@@ -23,9 +23,6 @@ export class EditTeamComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  //getting capturedTeam
-  capturedTeam!: string;
-
   ngOnInit(): void {
     //subscribe to the route params
     this.route.params.subscribe((params: Params) => {
@@ -34,8 +31,10 @@ export class EditTeamComponent implements OnInit {
     });
 
     //get the selected team
-    this.capturedTeam = this.teamService.getCapturedTeam();
-    this.form.teamName = this.capturedTeam;
+    if (this.teamId) {
+      this.loadFieldsToEdit(this.teamId);
+      document.getElementById('autofocus')!.focus();
+    }
   }
 
   /**edit method */
@@ -50,12 +49,24 @@ export class EditTeamComponent implements OnInit {
         this.teamService.setAddStatus(true);
         //console.log(this.teamService.getAddStatus());
         this.router.navigate(['/ad_teams']);
-        Swal.fire('Success!', `team "${newTeam}" updated successfully`, 'success');        
+        Swal.fire(
+          'Success!',
+          `team "${newTeam}" updated successfully`,
+          'success'
+        );
       },
       error: (err: any) => {
         console.log(err);
-        Swal.fire('Oops! Something went wrong',err.error.message, 'error');        
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
+    });
+  }
+
+  /**Method to load the form with values to be patched */
+  loadFieldsToEdit(teamId: string) {
+    this.teamService.getSpecificTeam(teamId).subscribe((team) => {
+      console.log(team);
+      this.form.teamName = team.teamName;
     });
   }
 

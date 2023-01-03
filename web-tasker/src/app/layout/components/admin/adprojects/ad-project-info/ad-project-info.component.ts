@@ -74,11 +74,6 @@ export class AdProjectInfoComponent implements OnInit {
     }
   }
 
-  /**Capture project to help load it to edit component */
-  captureProject() {
-    this.projectService.setCapturedProject(this.projectName);
-  }
-
   /**ACTION METHODS USED BY ALERT*/
   alertConfirmation() {
     Swal.fire({
