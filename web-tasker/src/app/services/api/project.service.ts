@@ -67,13 +67,13 @@ export class ProjectService {
     return this.webReqService.get(`projects/${projectId}`);
   }
 
+  /**Get projects that are availale to a certain specified user */
   getUserProjects() {
-    //send a web request to get user projects
     return this.webReqService.get('projects/myprojects');
   }
 
+  /**Get all projects from db */
   getAllProjects() {
-    //send a web request to get all projects
     return this.webReqService.get('projects');
   }
 
@@ -82,17 +82,20 @@ export class ProjectService {
     return this.webReqService.get(`projects/members/${projectId}`);
   }
 
+  /**Create a project */
   createProject(projectName: string) {
     //send a web request to create a project
     return this.webReqService.post('projects', { projectName });
   }
 
+  /**Patch a project */
   editProject(projId: string, newProject: string) {
     return this.webReqService.patch(`projects/${projId}`, {
       projectName: newProject,
     });
   }
 
+  /**Delete a project */
   deleteProject(projId: string) {
     return this.webReqService.delete(`projects/${projId}`);
   }

@@ -61,11 +61,6 @@ export class AdTeamsComponent implements OnInit {
     //console.log(this.teamService.getAddStatus());
   }
 
-  /**Capture team to help load it to edit component */
-  captureTeam(team: string) {
-    this.teamService.setCapturedTeam(team);
-  }
-
   /**ACTION METHODS USED BY ALERT*/
   alertConfirmation(teamId: string, teamName: string) {
     Swal.fire({

@@ -27,9 +27,6 @@ export class MngUsersComponent implements OnInit {
   isModalOpen: boolean = false; //add background blur
 
   /**variables */
-  dataSaved = false;
-  employeeForm: any;
-  employeeIdUpdate = null;
   totalUsers = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
@@ -52,18 +49,8 @@ export class MngUsersComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private modalService: MdbModalService
   ) {
-    this.userAccountService.getUsers().subscribe({
-      next: (users) => {
-        this.dataSource = new MatTableDataSource(users);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.totalUsers = users.length;
-        console.log(users);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    //load data on table
+    this.loadAllUsers();
   }
 
   ngOnInit(): void {
@@ -114,20 +101,38 @@ export class MngUsersComponent implements OnInit {
   }
 
   /**Delete selected user(s) */
-  deleteData() {
+  deleteSelected() {
     // debugger;
-    const numSelected = this.selection.selected;
-    console.log(numSelected);
-    // if (numSelected.length > 0) {
-    //   if (confirm("Are you sure to delete items ")) {
-    //     this.employeeService.deleteData(numSelected).subscribe(result => {
-    //       this.SavedSuccessful(2);
-    //       this.loadAllUsers();
-    //     })
-    //   }
-    // } else {
-    //   alert("Select at least one row");
-    // }
+    const selectedUsersArr = this.selection.selected;
+    let userIdArr: any = [];
+    console.log(selectedUsersArr);
+    if (selectedUsersArr.length > 0) {
+      //push only user ids in an array
+      selectedUsersArr.forEach((item) => {
+        userIdArr.push(item._id);
+      });
+      console.log(userIdArr);
+      //confirm and delete users
+      Swal.fire({
+        title: `Delete ${selectedUsersArr.length} users from the database?`,
+        text: 'This process is irreversible.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, go ahead.',
+        confirmButtonColor: '#e74c3c',
+        cancelButtonText: 'No, let me think',
+        cancelButtonColor: '#22b8f0',
+      }).then((result) => {
+        //delete users from db
+        if (result.value) {
+          this.deleteMultipe(userIdArr);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          this.displaySnackbar(0, 'operation has been cancelled');
+        }
+      });
+    } else {
+      this.displaySnackbar(0, 'no selected records');
+    }
   }
 
   /**Method to confirm user deletion */
@@ -142,57 +147,59 @@ export class MngUsersComponent implements OnInit {
       cancelButtonText: 'No, let me think',
       cancelButtonColor: '#22b8f0',
     }).then((result) => {
-      //delete team from db
+      //delete user from db
       if (result.value) {
         this.deleteUser(userId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        this._snackBar.open('operation has been cancelled', 'Close', {
-          duration: 2000,
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-        });
-        // Swal.fire(
-        //   'Cancelled',
-        //   `"${username}" is still in our database.)`,
-        //   'error'
-        // );
+        this.displaySnackbar(0, 'operation has been cancelled');
       }
     });
+  }
+
+  /**Method to deletemultiple */
+  deleteMultipe(userIdArr: any[]) {
+    if (userIdArr.length > 0) {
+      this.userAccountService.deleteMultipleUsers(userIdArr).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.displaySnackbar(1, response.message);
+          this.loadAllUsers();
+        },
+        error: (err) => {
+          console.log(err);
+          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+        },
+      });
+    }
   }
 
   /**Delete a specified user */
   deleteUser(userId: string) {
     this.userAccountService.deleteUser(userId).subscribe({
       next: (response: any) => {
-        this.dataSaved = true;
-        this.SavedSuccessful(2, response.message);
+        this.displaySnackbar(1, response.message);
         this.loadAllUsers();
-        this.employeeIdUpdate = null;
-        // this.employeeForm.reset();
       },
       error: (err) => {
         console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
     });
   }
 
   /**Multipurpose method for edits and updates */
-  SavedSuccessful(isUpdate: number, message: any) {
-    if (isUpdate == 0) {
-      this._snackBar.open('Record Updated Successfully!', 'Close', {
-        duration: 2000,
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    } else if (isUpdate == 1) {
-      this._snackBar.open('Record Saved Successfully!', 'Close', {
-        duration: 2000,
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    } else if (isUpdate == 2) {
+  displaySnackbar(type: number, message: any) {
+    if (type == 0) {
       this._snackBar.open(message, 'Close', {
         duration: 2000,
+        panelClass: ['red-snackbar'],
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+    } else if (type == 1) {
+      this._snackBar.open(message, 'Close', {
+        duration: 2000,
+        panelClass: ['green-snackbar'],
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
       });
@@ -202,10 +209,13 @@ export class MngUsersComponent implements OnInit {
   /**Method to reload user table */
   loadAllUsers() {
     this.userAccountService.getUsers().subscribe({
-      next: (data) => {
-        this.dataSource = new MatTableDataSource(data);
+      next: (users) => {
+        this.dataSource = new MatTableDataSource(users);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        // refresh usercount
+        this.totalUsers = users.length;
+        console.log(users);
       },
       error: (err) => {
         console.log(err);

@@ -44,11 +44,6 @@ export class WebRequestService {
     return this.http.delete(`${this.ROOT_URL}/${uri}`);
   }
 
-  deleteWithArgs(uri: string,payload: object) {
-    return this.http.delete(`${this.ROOT_URL}/${uri}`,payload);
-  }
-
-
   login(username: string, password: string) {
     return this.http.post(
       `${this.ROOT_URL}/login`,
