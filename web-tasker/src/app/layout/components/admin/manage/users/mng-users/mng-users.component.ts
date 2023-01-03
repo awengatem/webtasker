@@ -49,18 +49,8 @@ export class MngUsersComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private modalService: MdbModalService
   ) {
-    this.userAccountService.getUsers().subscribe({
-      next: (users) => {
-        this.dataSource = new MatTableDataSource(users);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.totalUsers = users.length;
-        console.log(users);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    //load data on table
+    this.loadAllUsers();
   }
 
   ngOnInit(): void {
@@ -225,6 +215,7 @@ export class MngUsersComponent implements OnInit {
         this.dataSource.sort = this.sort;
         // refresh usercount
         this.totalUsers = users.length;
+        console.log(users);
       },
       error: (err) => {
         console.log(err);

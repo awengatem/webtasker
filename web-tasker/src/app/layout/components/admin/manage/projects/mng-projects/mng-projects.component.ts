@@ -14,27 +14,28 @@ import { MatSort } from '@angular/material/sort';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import Swal from 'sweetalert2';
+import { ProjectService } from 'src/app/services/api/project.service';
 
 @Component({
   selector: 'app-mng-projects',
   templateUrl: './mng-projects.component.html',
   styleUrls: ['./mng-projects.component.scss'],
 })
-export class MngProjectsComponent implements OnInit {  
+export class MngProjectsComponent implements OnInit {
   isModalOpen: boolean = false; //add background blur
 
   /**variables */
-  totalUsers = 0;
+  totalProjects = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   displayedColumns: string[] = [
     'Select',
-    'Username',
-    'Email',
-    'Firstname',
-    'Lastname',
+    'Projectname',
+    'Teams',
+    'CreatedAt',
+    'CreatedBy',
     'Edit',
     'Delete',
   ];
@@ -42,31 +43,21 @@ export class MngProjectsComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private userAccountService: UserAccountService,
+    private projectService: ProjectService,
     private _snackBar: MatSnackBar,
     private modalService: MdbModalService
   ) {
-    this.userAccountService.getUsers().subscribe({
-      next: (users) => {
-        this.dataSource = new MatTableDataSource(users);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.totalUsers = users.length;
-        console.log(users);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    //load data on table
+    this.loadAllProjects();
   }
 
   ngOnInit(): void {}
 
-  /**Get the users */
+  /**Get the projects */
   getUsers(): void {
-    this.userAccountService.getUsers().subscribe({
-      next: (users) => {
-        console.log(users);
+    this.projectService.getAllProjects().subscribe({
+      next: (projects) => {
+        console.log(projects);
       },
       error: (err) => {
         console.log(err);
@@ -140,10 +131,10 @@ export class MngProjectsComponent implements OnInit {
     }
   }
 
-  /**Method to confirm user deletion */
-  confirmUserDeletion(userId: string, username: string) {
+  /**Method to confirm project deletion */
+  confirmDeletion(userId: string, projectname: string) {
     Swal.fire({
-      title: `Delete "${username}" from the database?`,
+      title: `Delete "${projectname}" from the database?`,
       text: 'This process is irreversible.',
       icon: 'warning',
       showCancelButton: true,
@@ -152,9 +143,9 @@ export class MngProjectsComponent implements OnInit {
       cancelButtonText: 'No, let me think',
       cancelButtonColor: '#22b8f0',
     }).then((result) => {
-      //delete user from db
+      //delete project from db
       if (result.value) {
-        this.deleteUser(userId);
+        this.deleteProject(userId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.displaySnackbar(0, 'operation has been cancelled');
       }
@@ -162,28 +153,29 @@ export class MngProjectsComponent implements OnInit {
   }
 
   /**Method to deletemultiple */
-  deleteMultipe(userIdArr: any[]) {
-    if (userIdArr.length > 0) {
-      this.userAccountService.deleteMultipleUsers(userIdArr).subscribe({
-        next: (response: any) => {
-          console.log(response);
-          this.displaySnackbar(1, response.message);
-          this.loadAllUsers();
-        },
-        error: (err) => {
-          console.log(err);
-          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-        },
-      });
-    }
+  deleteMultipe(projectIdArr: any[]) {
+    // if (userIdArr.length > 0) {
+    //   this.userAccountService.deleteMultipleUsers(userIdArr).subscribe({
+    //     next: (response: any) => {
+    //       console.log(response);
+    //       this.displaySnackbar(1, response.message);
+    //       this.loadAllProjects();
+    //     },
+    //     error: (err) => {
+    //       console.log(err);
+    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+    //     },
+    //   });
+    // }
   }
 
-  /**Delete a specified user */
-  deleteUser(userId: string) {
-    this.userAccountService.deleteUser(userId).subscribe({
+  /**Delete a specified project */
+  deleteProject(projectId: string) {
+    this.projectService.deleteProject(projectId).subscribe({
       next: (response: any) => {
+        console.log(response);
         this.displaySnackbar(1, response.message);
-        this.loadAllUsers();
+        this.loadAllProjects();
       },
       error: (err) => {
         console.log(err);
@@ -212,18 +204,26 @@ export class MngProjectsComponent implements OnInit {
   }
 
   /**Method to reload user table */
-  loadAllUsers() {
-    this.userAccountService.getUsers().subscribe({
-      next: (users) => {
-        this.dataSource = new MatTableDataSource(users);
+  loadAllProjects() {
+    this.projectService.getAllProjects().subscribe({
+      next: (projects) => {
+        this.dataSource = new MatTableDataSource(projects);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         // refresh usercount
-        this.totalUsers = users.length;
+        this.totalProjects = projects.length;
+        console.log(projects);
       },
       error: (err) => {
         console.log(err);
       },
     });
-  }  
+  }
+
+  /**Method to convert timestamp to date */
+  convertDate(timestamp: string): string {
+    const date = new Date(timestamp);
+    // const newDate = date.toLocaleString();
+    return date.toLocaleString();
+  }
 }

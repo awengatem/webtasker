@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col count">
                 <h1 class="text-dark position-relative">
-                  <span class=""> {{ totalUsers }} </span>Projects
+                  <span class=""> {{ totalProjects }} </span>Projects
                   <i class="fa-solid fa-user-group opacity-10"></i>
                 </h1>
               </div>
@@ -87,39 +87,43 @@
                           </mat-cell>
                         </ng-container>
                         <!-- Username Column -->
-                        <ng-container matColumnDef="Username" class="">
+                        <ng-container matColumnDef="Projectname" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Username
+                            Project name
                           </mat-header-cell>
                           <mat-cell *matCellDef="let document">
-                            {{ document.username }}
+                            {{ document.projectName }}
                           </mat-cell>
                         </ng-container>
                         <!-- Email Column -->
-                        <ng-container matColumnDef="Email" class="">
+                        <ng-container matColumnDef="Teams" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Email
+                            Teams
                           </mat-header-cell>
                           <mat-cell *matCellDef="let document">
-                            {{ document.email }}
+                            {{ document.teams.length }}
                           </mat-cell>
                         </ng-container>
                         <!-- Firstname Column -->
-                        <ng-container matColumnDef="Firstname" class="">
+                        <ng-container matColumnDef="CreatedAt" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            First name
+                            Created at
                           </mat-header-cell>
                           <mat-cell *matCellDef="let document">
-                            {{ document.firstName }}
+                            {{ convertDate(document.createdAt) }}
                           </mat-cell>
                         </ng-container>
                         <!-- Lastname Column -->
-                        <ng-container matColumnDef="Lastname" class="">
+                        <ng-container matColumnDef="CreatedBy" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Last name
+                            Created by
                           </mat-header-cell>
                           <mat-cell *matCellDef="let document">
-                            {{ document.lastName }}
+                            {{
+                              document.createdBy
+                                ? document.createdBy
+                                : "Unknown"
+                            }}
                           </mat-cell>
                         </ng-container>
                         <!-- Edit Icon -->
@@ -154,9 +158,9 @@
                               type="button"
                               mat-raised-button
                               (click)="
-                                confirmUserDeletion(
+                                confirmDeletion(
                                   document._id,
-                                  document.username
+                                  document.projectName
                                 )
                               "
                               color="accent"
