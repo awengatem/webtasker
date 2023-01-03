@@ -27,9 +27,6 @@ export class MngUsersComponent implements OnInit {
   isModalOpen: boolean = false; //add background blur
 
   /**variables */
-  dataSaved = false;
-  employeeForm: any;
-  employeeIdUpdate = null;
   totalUsers = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
@@ -117,14 +114,14 @@ export class MngUsersComponent implements OnInit {
   deleteSelected() {
     // debugger;
     const numSelected = this.selection.selected;
+    let userIdArr: any = [];
     console.log(numSelected);
     if (numSelected.length > 0) {
-      //   if (confirm("Are you sure to delete items ")) {
-      //     this.employeeService.deleteData(numSelected).subscribe(result => {
-      //       this.SavedSuccessful(2);
-      //       this.loadAllUsers();
-      //     })
-      //   }
+      //push only user ids in an array
+      numSelected.forEach((item) => {
+        userIdArr.push(item._id);
+      });
+      console.log(userIdArr);
     } else {
       this._snackBar.open('no selected records', 'Close', {
         duration: 2000,
@@ -166,37 +163,47 @@ export class MngUsersComponent implements OnInit {
     });
   }
 
+  /**Method to deletemultiple */
+  deleteMultipe(userIdArr: any[]) {
+    if (userIdArr.length > 0) {
+      this.userAccountService.deleteMultipleUsers(userIdArr).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.displaySnackbar(1, response.message);
+          this.loadAllUsers();
+        },
+        error: (err) => {
+          console.log(err);
+          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+        },
+      });
+    }
+  }
+
   /**Delete a specified user */
   deleteUser(userId: string) {
     this.userAccountService.deleteUser(userId).subscribe({
       next: (response: any) => {
-        this.dataSaved = true;
-        this.SavedSuccessful(2, response.message);
+        this.displaySnackbar(1, response.message);
         this.loadAllUsers();
-        this.employeeIdUpdate = null;
-        // this.employeeForm.reset();
       },
       error: (err) => {
         console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
     });
   }
 
   /**Multipurpose method for edits and updates */
-  SavedSuccessful(isUpdate: number, message: any) {
-    if (isUpdate == 0) {
-      this._snackBar.open('Record Updated Successfully!', 'Close', {
+  displaySnackbar(type: number, message: any) {
+    if (type == 0) {
+      this._snackBar.open(message, 'Close', {
         duration: 2000,
+        panelClass: ['red-snackbar'],
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
       });
-    } else if (isUpdate == 1) {
-      this._snackBar.open('Record Saved Successfully!', 'Close', {
-        duration: 2000,
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    } else if (isUpdate == 2) {
+    } else if (type == 1) {
       this._snackBar.open(message, 'Close', {
         duration: 2000,
         panelClass: ['green-snackbar'],
