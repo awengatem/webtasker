@@ -113,15 +113,33 @@ export class MngUsersComponent implements OnInit {
   /**Delete selected user(s) */
   deleteSelected() {
     // debugger;
-    const numSelected = this.selection.selected;
+    const selectedUsersArr = this.selection.selected;
     let userIdArr: any = [];
-    console.log(numSelected);
-    if (numSelected.length > 0) {
+    console.log(selectedUsersArr);
+    if (selectedUsersArr.length > 0) {
       //push only user ids in an array
-      numSelected.forEach((item) => {
+      selectedUsersArr.forEach((item) => {
         userIdArr.push(item._id);
       });
       console.log(userIdArr);
+      //confirm and delete users
+      Swal.fire({
+        title: `Delete ${selectedUsersArr.length} users from the database?`,
+        text: 'This process is irreversible.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, go ahead.',
+        confirmButtonColor: '#e74c3c',
+        cancelButtonText: 'No, let me think',
+        cancelButtonColor: '#22b8f0',
+      }).then((result) => {
+        //delete users from db
+        if (result.value) {
+          this.deleteMultipe(userIdArr);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          this.displaySnackbar(0, 'operation has been cancelled');
+        }
+      });
     } else {
       this.displaySnackbar(0, 'no selected records');
     }
@@ -139,16 +157,11 @@ export class MngUsersComponent implements OnInit {
       cancelButtonText: 'No, let me think',
       cancelButtonColor: '#22b8f0',
     }).then((result) => {
-      //delete team from db
+      //delete user from db
       if (result.value) {
         this.deleteUser(userId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.displaySnackbar(0, 'operation has been cancelled');
-        // Swal.fire(
-        //   'Cancelled',
-        //   `"${username}" is still in our database.)`,
-        //   'error'
-        // );
       }
     });
   }
@@ -206,10 +219,12 @@ export class MngUsersComponent implements OnInit {
   /**Method to reload user table */
   loadAllUsers() {
     this.userAccountService.getUsers().subscribe({
-      next: (data) => {
-        this.dataSource = new MatTableDataSource(data);
+      next: (users) => {
+        this.dataSource = new MatTableDataSource(users);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        // refresh usercount
+        this.totalUsers = users.length;
       },
       error: (err) => {
         console.log(err);

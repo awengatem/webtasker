@@ -40,7 +40,7 @@ export class UserAccountService {
 
   /**Method to delete multiple users */
   deleteMultipleUsers(userIdArr: any[]) {
-    return this.webReqService.deleteWithPayload(`users`, {
+    return this.webReqService.post(`users/delete_multiple`, {
       userIdArr: userIdArr,
     });
   }
