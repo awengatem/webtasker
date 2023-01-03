@@ -114,20 +114,25 @@ export class MngUsersComponent implements OnInit {
   }
 
   /**Delete selected user(s) */
-  deleteData() {
+  deleteSelected() {
     // debugger;
     const numSelected = this.selection.selected;
     console.log(numSelected);
-    // if (numSelected.length > 0) {
-    //   if (confirm("Are you sure to delete items ")) {
-    //     this.employeeService.deleteData(numSelected).subscribe(result => {
-    //       this.SavedSuccessful(2);
-    //       this.loadAllUsers();
-    //     })
-    //   }
-    // } else {
-    //   alert("Select at least one row");
-    // }
+    if (numSelected.length > 0) {
+      //   if (confirm("Are you sure to delete items ")) {
+      //     this.employeeService.deleteData(numSelected).subscribe(result => {
+      //       this.SavedSuccessful(2);
+      //       this.loadAllUsers();
+      //     })
+      //   }
+    } else {
+      this._snackBar.open('no selected records', 'Close', {
+        duration: 2000,
+        panelClass: ['red-snackbar'],
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+    }
   }
 
   /**Method to confirm user deletion */
@@ -148,6 +153,7 @@ export class MngUsersComponent implements OnInit {
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         this._snackBar.open('operation has been cancelled', 'Close', {
           duration: 2000,
+          panelClass: ['red-snackbar'],
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
         });
@@ -193,6 +199,7 @@ export class MngUsersComponent implements OnInit {
     } else if (isUpdate == 2) {
       this._snackBar.open(message, 'Close', {
         duration: 2000,
+        panelClass: ['green-snackbar'],
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
       });

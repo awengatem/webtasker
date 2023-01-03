@@ -1,10 +1,10 @@
 /**IMPORTING CSS FROM MANAGE COMPONENT.SCSS*/
 @use "../../manage/manage.component.scss";
 /**styling when modal is opened*/
-.modal-blur{
+.modal-blur {
   opacity: 0.1;
 }
-.manage-container {  
+.manage-container {
   .manage {
     .count {
       h1 {
