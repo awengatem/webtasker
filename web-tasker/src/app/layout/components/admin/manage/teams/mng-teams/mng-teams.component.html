@@ -9,7 +9,7 @@
               <div class="col count">
                 <h1 class="text-dark position-relative">
                   <span class=""> {{ totalTeams }} </span>Teams
-                  <i class="fa-sharp fa-solid fa-folder-open"></i>
+                  <i class="fa-sharp fa-solid fa-people-group"></i>
                 </h1>
               </div>
               <div class="col"></div>
@@ -33,11 +33,8 @@
                   <form>
                     <b>Search Records :</b> &nbsp;&nbsp;
                     <mat-form-field>
-                      <input
-                        matInput
-                        (keyup)="applyFilter($event)"
-                        placeholder="Filter"
-                      />
+                      <mat-label>Filter</mat-label>
+                      <input matInput (keyup)="applyFilter($event)" />
                     </mat-form-field>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <b>Delete Selected Records :</b> &nbsp;&nbsp;
@@ -45,12 +42,12 @@
                       mat-icon-button
                       aria-label="Example icon button with a delete icon"
                       type="button"
-                      mat-raised-button
+                      class="mt-4 custom-delete mat-raised-button"
                       (click)="deleteSelected()"
                       color="accent"
-                      matTooltip="Delete"
+                      matTooltip="Delete selected"
                     >
-                      <mat-icon>delete</mat-icon>
+                      <mat-icon class="text-white">delete</mat-icon>
                     </button>
                     <div>
                       <!-- TABLE BEGINS HERE-->
@@ -135,12 +132,10 @@
                           <mat-cell *matCellDef="let document">
                             <button
                               mat-icon-button
-                              class="custom-button custom-button-edit"
+                              class="custom-button custom-button-edit mat-raised-button"
                               aria-label="Example icon button with a vertical three dot icon"
                               type="button"
-                              mat-raised-button
                               [routerLink]="['/edit_project', document._id]"
-                              matTooltip="Edit"
                             >
                               <mat-icon>edit</mat-icon>
                             </button>
@@ -154,10 +149,9 @@
                           <mat-cell *matCellDef="let document">
                             <button
                               mat-icon-button
-                              class="custom-button"
+                              class="custom-button custom-button-delete mat-raised-button"
                               aria-label="Example icon button with a delete icon"
                               type="button"
-                              mat-raised-button
                               (click)="
                                 confirmDeletion(
                                   document._id,
@@ -165,7 +159,6 @@
                                 )
                               "
                               color="accent"
-                              matTooltip="Delete"
                             >
                               <mat-icon>delete_forever</mat-icon>
                             </button></mat-cell
