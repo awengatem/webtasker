@@ -116,9 +116,9 @@ body {
   color: white;
   border: none;
 }
-.red-snackbar {
-  // background: #f44336;
-  background: rgb(248, 79, 49, 0.7);
+.red-snackbar * {
+  // background: transparent;
+  background-color: rgb(248, 79, 49, 0.5);
   color: white;
 }
 .red-snackbar button {
