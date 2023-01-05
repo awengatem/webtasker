@@ -16,7 +16,7 @@
               <div class="col-md-3">
                 <div class="row centered-content add-button">
                   <div class="col-md-1">
-                    <button class="btn btn-primary" routerLink="/new_project">
+                    <button class="btn btn-primary" routerLink="/new_team">
                       <div class="btn-txt">+</div>
                     </button>
                   </div>
@@ -28,7 +28,7 @@
             </div>
             <mat-divider></mat-divider>
             <div class="container">
-              <mat-card class="mat-elevation-z8">
+              <mat-card class="mat-elevation-z8 shadow">
                 <mat-card-content>
                   <form>
                     <b>Search Records :</b> &nbsp;&nbsp;
@@ -135,7 +135,7 @@
                               class="custom-button custom-button-edit mat-raised-button"
                               aria-label="Example icon button with a vertical three dot icon"
                               type="button"
-                              [routerLink]="['/edit_project', document._id]"
+                              [routerLink]="['/edit_team', document._id]"
                             >
                               <mat-icon>edit</mat-icon>
                             </button>
@@ -155,7 +155,7 @@
                               (click)="
                                 confirmDeletion(
                                   document._id,
-                                  document.projectName
+                                  document.teamName
                                 )
                               "
                               color="accent"
