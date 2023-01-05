@@ -57,8 +57,8 @@
         flex: 0 5px 50%; /* grow shrink basis */
       }
       mat-table {
-        min-height: calc(100vh - 600px);
-        max-height: calc(100vh - 600px);
+        min-height: calc(100vh - 800px);
+        max-height: calc(100vh - 650px);
         overflow-y: auto;
         // ng-container {
         //   mat-cell {

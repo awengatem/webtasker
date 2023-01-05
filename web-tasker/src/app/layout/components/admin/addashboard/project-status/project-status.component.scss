@@ -137,12 +137,14 @@ the card with data table*/
   .projects-inside {
     //margin-top: 10px;
     //overflow-y: auto;
+    min-height: calc(100vh - 800px);
+    max-height: calc(100vh - 650px);
     padding: 15px;
 
     /*styling the table data div*/
     .table-data {
-      min-height: 200px;
-      max-height: calc(100vh - 500px);
+      // min-height: calc(100vh - 800px);
+      // max-height: calc(100vh - 650px);
       //   min-height: 200px;
       //   max-height: 800px;
       padding-right: 0px;
