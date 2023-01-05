@@ -59,6 +59,7 @@ export class NewUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
+        role: ['', [Validators.required]],
         password: [
           '',
           [
@@ -79,7 +80,7 @@ export class NewUsermodalComponent implements OnInit {
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(form.value, null, 4));
     console.log(form.value);
     //get the form values
-    const { username, email, firstName, lastName, password } = form.value;
+    const { username, email, firstName, lastName, role, password } = form.value;
 
     /**creating user object to pass to server
      *properties name's should not be changed
@@ -97,6 +98,7 @@ export class NewUsermodalComponent implements OnInit {
       firstName: cFirstname,
       lastName: cLastname,
       isProjectManager: false,
+      role: role,
     };
 
     /**post user to server*/

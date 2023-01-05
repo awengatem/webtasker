@@ -38,6 +38,14 @@
       mat-form-field {
         width: 100%;
       }
+
+      .custom-flex {
+        display: flex;
+
+        mat-form-field {
+          width: 50%;
+        }
+      }
       .btm-rgt {
         margin-left: 69%;
         margin-right: 3px;
