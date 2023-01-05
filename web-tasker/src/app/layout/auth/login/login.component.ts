@@ -258,7 +258,7 @@ export class LoginComponent implements OnInit {
       password: password,
       firstName: cFirstname,
       lastName: cLastname,
-      isProjectManager: false,
+      role: "user",
     };
 
     /**post user to server*/

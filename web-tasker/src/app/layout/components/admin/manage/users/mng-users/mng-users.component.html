@@ -19,7 +19,10 @@
               <div class="col-md-3">
                 <div class="row centered-content add-button">
                   <div class="col-md-1">
-                    <button class="btn btn-primary" (click)="openNewUserModal()">
+                    <button
+                      class="btn btn-primary"
+                      (click)="openNewUserModal()"
+                    >
                       <div class="btn-txt">+</div>
                     </button>
                   </div>
@@ -31,16 +34,13 @@
             </div>
             <mat-divider></mat-divider>
             <div class="container">
-              <mat-card class="mat-elevation-z8">
+              <mat-card class="mat-elevation-z8 shadow">
                 <mat-card-content>
                   <form>
                     <b>Search Records :</b> &nbsp;&nbsp;
                     <mat-form-field>
-                      <input
-                        matInput
-                        (keyup)="applyFilter($event)"
-                        placeholder="Filter"
-                      />
+                      <mat-label>Filter</mat-label>
+                      <input matInput (keyup)="applyFilter($event)" />
                     </mat-form-field>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <b>Delete Selected Records :</b> &nbsp;&nbsp;
@@ -48,12 +48,12 @@
                       mat-icon-button
                       aria-label="Example icon button with a delete icon"
                       type="button"
-                      mat-raised-button
+                      class="mt-4 custom-delete mat-raised-button"
                       (click)="deleteSelected()"
                       color="accent"
-                      matTooltip="Delete"
+                      matTooltip="Delete selected"
                     >
-                      <mat-icon>delete</mat-icon>
+                      <mat-icon class="text-white">delete</mat-icon>
                     </button>
                     <div>
                       <!-- TABLE BEGINS HERE-->
@@ -125,21 +125,28 @@
                             {{ document.lastName }}
                           </mat-cell>
                         </ng-container>
+                        <!-- Role Column -->
+                        <ng-container matColumnDef="Role" class="">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Role
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            {{ document.role }}
+                          </mat-cell>
+                        </ng-container>
                         <!-- Edit Icon -->
                         <ng-container matColumnDef="Edit">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Edit
                           </mat-header-cell>
 
-                          <mat-cell *matCellDef="let document">                            
+                          <mat-cell *matCellDef="let document">
                             <button
                               mat-icon-button
-                              class="custom-button custom-button-edit"
+                              class="custom-button custom-button-edit mat-raised-button"
                               aria-label="Example icon button with a vertical three dot icon"
                               type="button"
-                              mat-raised-button
                               (click)="openEditUserModal(document._id)"
-                              matTooltip="Edit"
                             >
                               <mat-icon>edit</mat-icon>
                             </button>
@@ -153,10 +160,9 @@
                           <mat-cell *matCellDef="let document">
                             <button
                               mat-icon-button
-                              class="custom-button"
+                              class="custom-button custom-button-delete mat-raised-button"
                               aria-label="Example icon button with a delete icon"
                               type="button"
-                              mat-raised-button
                               (click)="
                                 confirmUserDeletion(
                                   document._id,
@@ -164,7 +170,6 @@
                                 )
                               "
                               color="accent"
-                              matTooltip="Delete"
                             >
                               <mat-icon>delete_forever</mat-icon>
                             </button></mat-cell

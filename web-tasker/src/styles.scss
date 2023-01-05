@@ -105,7 +105,7 @@ body {
 }
 
 /*MatSnackBar custom styling*/
-.green-snackbar {
+.green-snackbar * {
   // background: rgb(65, 252, 134);
   background: rgb(35, 197, 82, 0.7);
   color: white;
@@ -116,9 +116,9 @@ body {
   color: white;
   border: none;
 }
-.red-snackbar {
-  // background: #f44336;
-  background: rgb(248, 79, 49, 0.7);
+.red-snackbar * {
+  // background: transparent;
+  background-color: rgb(248, 79, 49, 0.5);
   color: white;
 }
 .red-snackbar button {
