@@ -97,7 +97,6 @@ export class NewUsermodalComponent implements OnInit {
       password: password,
       firstName: cFirstname,
       lastName: cLastname,
-      isProjectManager: false,
       role: role,
     };
 

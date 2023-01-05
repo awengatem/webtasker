@@ -127,7 +127,6 @@ export class EditUsermodalComponent implements OnInit {
       // password: password,
       firstName: cFirstname,
       lastName: cLastname,
-      isProjectManager: false,
     };
 
     /**patch the user to api*/
