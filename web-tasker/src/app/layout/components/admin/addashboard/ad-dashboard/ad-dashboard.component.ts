@@ -53,10 +53,13 @@ export class AdDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.init();
     // refresh data every 60 seconds
-    window.setInterval(() => {
+    const interval_id = window.setInterval(() => {
       this.chart.destroy();
       this.init();
     }, 60000);
+    /**save the interval-id to local storage for
+     * clearing after leaving page*/
+    localStorage.setItem('dashboard-interval', interval_id.toString());
   }
 
   /**Initialize fetching of data */

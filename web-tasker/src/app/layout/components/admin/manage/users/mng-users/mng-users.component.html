@@ -125,6 +125,15 @@
                             {{ document.lastName }}
                           </mat-cell>
                         </ng-container>
+                        <!-- Role Column -->
+                        <ng-container matColumnDef="Role" class="">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Role
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            {{ document.role }}
+                          </mat-cell>
+                        </ng-container>
                         <!-- Edit Icon -->
                         <ng-container matColumnDef="Edit">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>

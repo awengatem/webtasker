@@ -38,6 +38,7 @@ export class MngUsersComponent implements OnInit {
     'Email',
     'Firstname',
     'Lastname',
+    'Role',
     'Edit',
     'Delete',
   ];

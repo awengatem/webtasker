@@ -34,6 +34,7 @@ import { MngUsersComponent } from './components/admin/manage/users/mng-users/mng
 import { MngProjectsComponent } from './components/admin/manage/projects/mng-projects/mng-projects.component';
 import { MngTeamsComponent } from './components/admin/manage/teams/mng-teams/mng-teams.component';
 import { MngSessionsComponent } from './components/admin/manage/sessions/mng-sessions/mng-sessions.component';
+import { CanDeactivateGuard } from '../helpers/guards/canDeactivate.guard';
 
 const routes: Routes = [
   {
@@ -98,6 +99,7 @@ const routes: Routes = [
       {
         path: 'ad_dashboard',
         canActivate: [AuthGuard, AdminGuard],
+        canDeactivate: [CanDeactivateGuard],
         component: AdDashboardComponent,
       },
 
