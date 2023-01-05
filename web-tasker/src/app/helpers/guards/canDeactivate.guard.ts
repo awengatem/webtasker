@@ -22,7 +22,7 @@ export class CanDeactivateGuard
       window.clearInterval(dashInterval);
       console.log('refresh interval terminated');
     }
-    localStorage.removeItem('sublist');
+    localStorage.removeItem('dashboard-interval');
 
     return component.canDeactivate ? component.canDeactivate() : true;
   }
