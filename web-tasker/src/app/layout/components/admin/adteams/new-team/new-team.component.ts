@@ -26,14 +26,14 @@ export class NewTeamComponent implements OnInit {
   createTeam() {
     const { teamName } = this.form; //data comes from template not here
     //remove unnecessary whitespace
-    const newTeam = this.generalService.clean(teamName); 
+    const newTeam = this.generalService.clean(teamName);
     this.teamService.createTeam(newTeam).subscribe({
       next: (response: any) => {
         console.log(response);
         //setting status to true to help in scrolldown method
         this.teamService.setAddStatus(true);
         //console.log(this.teamService.getAddStatus());
-        this.router.navigate(['/ad_teams']);
+        this.navigateBack();
         Swal.fire(
           'Success!',
           `Team "${newTeam}" created successfully`,
@@ -45,6 +45,20 @@ export class NewTeamComponent implements OnInit {
         Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
     });
+  }
+
+  /**Method to navigate to previous route */
+  navigateBack() {
+    //check if previous location is from manage component
+    let fromMng = window.sessionStorage.getItem('fromMng');
+    if (fromMng === 'true') {
+      //navigate to manager
+      this.router.navigate(['ad_manage/teams']);
+      //clear previous location
+      window.sessionStorage.removeItem('fromMng');
+    } else {
+      this.router.navigate(['/ad_teams']);
+    }
   }
 
   submit() {
