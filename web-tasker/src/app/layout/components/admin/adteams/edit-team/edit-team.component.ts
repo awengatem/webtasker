@@ -48,7 +48,7 @@ export class EditTeamComponent implements OnInit {
         //setting status to true to help in scrolldown method
         this.teamService.setAddStatus(true);
         //console.log(this.teamService.getAddStatus());
-        this.router.navigate(['/ad_teams']);
+        this.navigateBack();
         Swal.fire(
           'Success!',
           `team "${newTeam}" updated successfully`,
@@ -68,6 +68,20 @@ export class EditTeamComponent implements OnInit {
       console.log(team);
       this.form.teamName = team.teamName;
     });
+  }
+
+  /**Method to navigate to previous route */
+  navigateBack() {
+    //check if previous location is from manage component
+    let fromMng = window.sessionStorage.getItem('fromMng');
+    if (fromMng === 'true') {
+      //navigate to manager
+      this.router.navigate(['ad_manage/teams']);
+      //clear previous location
+      window.sessionStorage.removeItem('fromMng');
+    } else {
+      this.router.navigate(['/ad_teams']);
+    }
   }
 
   submit() {

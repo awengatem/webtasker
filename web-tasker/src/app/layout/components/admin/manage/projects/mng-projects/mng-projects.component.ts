@@ -223,6 +223,6 @@ export class MngProjectsComponent implements OnInit {
    *  navigate back to previous route
    */
   setLocation() {
-    window.sessionStorage.setItem('fromMngProj', 'true');
+    window.sessionStorage.setItem('fromMng', 'true');
   }
 }

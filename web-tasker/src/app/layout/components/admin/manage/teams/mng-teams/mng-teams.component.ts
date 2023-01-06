@@ -218,4 +218,11 @@ export class MngTeamsComponent implements OnInit {
     // const newDate = date.toLocaleString();
     return date.toLocaleString();
   }
+
+  /**Method to set location to help
+   *  navigate back to previous route
+   */
+  setLocation() {
+    window.sessionStorage.setItem('fromMng', 'true');
+  }
 }

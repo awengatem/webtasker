@@ -73,12 +73,12 @@ export class EditProjectComponent implements OnInit {
   /**Method to navigate to previous route */
   navigateBack() {
     //check if previous location is from manage component
-    let fromMngProj = window.sessionStorage.getItem('fromMngProj');
-    if (fromMngProj === 'true') {
+    let fromMng = window.sessionStorage.getItem('fromMng');
+    if (fromMng === 'true') {
       //navigate to manager
       this.router.navigate(['ad_manage/projects']);
       //clear previous location
-      window.sessionStorage.removeItem('fromMngProj');
+      window.sessionStorage.removeItem('fromMng');
     } else {
       this.router.navigate(['/ad_projects']);
     }
