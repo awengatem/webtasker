@@ -172,6 +172,8 @@ export class MngUsersComponent implements OnInit {
         },
       });
     }
+    //reset the selection
+    this.selection = new SelectionModel<any>(true, []);
   }
 
   /**Delete a specified user */

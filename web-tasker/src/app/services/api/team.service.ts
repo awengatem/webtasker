@@ -49,6 +49,13 @@ export class TeamService {
     return this.webReqService.delete(`teams/${teamId}`);
   }
 
+  /**Method to delete multiple teams */
+  deleteMultipleTeams(teamIdArr: any[]) {
+    return this.webReqService.post(`teams/delete_multiple`, {
+      teamIdArr: teamIdArr,
+    });
+  }
+
   /**Methods used by teamAdded above */
   getAddStatus() {
     return this.teamAdded;

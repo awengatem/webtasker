@@ -102,7 +102,7 @@ export class MngTeamsComponent implements OnInit {
       console.log(teamIdArr);
       //confirm and delete teams
       Swal.fire({
-        title: `Delete ${selectedTeamsArr.length} users from the database?`,
+        title: `Delete ${selectedTeamsArr.length} teams from the database?`,
         text: 'This process is irreversible.',
         icon: 'warning',
         showCancelButton: true,
@@ -146,19 +146,21 @@ export class MngTeamsComponent implements OnInit {
 
   /**Method to deletemultiple */
   deleteMultipe(teamIdArr: any[]) {
-    // if (userIdArr.length > 0) {
-    //   this.userAccountService.deleteMultipleUsers(userIdArr).subscribe({
-    //     next: (response: any) => {
-    //       console.log(response);
-    //       this.displaySnackbar(1, response.message);
-    //       this.loadAllProjects();
-    //     },
-    //     error: (err) => {
-    //       console.log(err);
-    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //     },
-    //   });
-    // }
+    if (teamIdArr.length > 0) {
+      this.teamService.deleteMultipleTeams(teamIdArr).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.displaySnackbar(1, response.message);
+          this.loadAllTeams();
+        },
+        error: (err) => {
+          console.log(err);
+          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+        },
+      });
+    }
+    //reset the selection
+    this.selection = new SelectionModel<any>(true, []);
   }
 
   /**Delete a specified team */
