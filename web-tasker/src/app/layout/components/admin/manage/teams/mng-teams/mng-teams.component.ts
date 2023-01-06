@@ -95,7 +95,7 @@ export class MngTeamsComponent implements OnInit {
     let teamIdArr: any = [];
     console.log(selectedTeamsArr);
     if (selectedTeamsArr.length > 0) {
-      //push only user ids in an array
+      //push only team ids in an array
       selectedTeamsArr.forEach((item) => {
         teamIdArr.push(item._id);
       });

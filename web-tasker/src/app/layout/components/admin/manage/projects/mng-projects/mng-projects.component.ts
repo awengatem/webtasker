@@ -88,21 +88,21 @@ export class MngProjectsComponent implements OnInit {
     }
   }
 
-  /**Delete selected project(s) */ //change userIdArr
+  /**Delete selected project(s) */
   deleteSelected() {
     // debugger;
     const selectedProjectsArr = this.selection.selected;
-    let userIdArr: any = [];
+    let projectIdArr: any = [];
     console.log(selectedProjectsArr);
     if (selectedProjectsArr.length > 0) {
-      //push only user ids in an array
+      //push only project ids in an array
       selectedProjectsArr.forEach((item) => {
-        userIdArr.push(item._id);
+        projectIdArr.push(item._id);
       });
-      console.log(userIdArr);
+      console.log(projectIdArr);
       //confirm and delete projects
       Swal.fire({
-        title: `Delete ${selectedProjectsArr.length} users from the database?`,
+        title: `Delete ${selectedProjectsArr.length} projects from the database?`,
         text: 'This process is irreversible.',
         icon: 'warning',
         showCancelButton: true,
@@ -113,7 +113,7 @@ export class MngProjectsComponent implements OnInit {
       }).then((result) => {
         //delete projects from db
         if (result.value) {
-          this.deleteMultipe(userIdArr);
+          this.deleteMultipe(projectIdArr);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           this.displaySnackbar(0, 'operation has been cancelled');
         }
@@ -146,19 +146,19 @@ export class MngProjectsComponent implements OnInit {
 
   /**Method to deletemultiple */
   deleteMultipe(projectIdArr: any[]) {
-    // if (userIdArr.length > 0) {
-    //   this.userAccountService.deleteMultipleUsers(userIdArr).subscribe({
-    //     next: (response: any) => {
-    //       console.log(response);
-    //       this.displaySnackbar(1, response.message);
-    //       this.loadAllProjects();
-    //     },
-    //     error: (err) => {
-    //       console.log(err);
-    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //     },
-    //   });
-    // }
+    if (projectIdArr.length > 0) {
+      this.projectService.deleteMultipleProjects(projectIdArr).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.displaySnackbar(1, response.message);
+          this.loadAllProjects();
+        },
+        error: (err) => {
+          console.log(err);
+          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+        },
+      });
+    }
     //reset the selection
     this.selection = new SelectionModel<any>(true, []);
   }
