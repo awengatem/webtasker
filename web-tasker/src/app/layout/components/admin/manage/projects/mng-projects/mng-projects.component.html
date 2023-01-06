@@ -136,6 +136,7 @@
                               aria-label="Example icon button with a vertical three dot icon"
                               type="button"                             
                               [routerLink]="['/edit_project', document._id]"
+                              (click)="setLocation()"
                               matTooltip="Edit"
                             >
                               <mat-icon>edit</mat-icon>
