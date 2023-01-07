@@ -24,13 +24,7 @@ export class UserAccountService {
 
   /**Method to edit specified user */
   editUser(userId: string, userObj: any) {
-    return this.webReqService.patch(`users/${userId}`, {
-      username: userObj.username,
-      email: userObj.email,
-      firstName: userObj.firstName,
-      lastName: userObj.lastName,
-      isProjectManager: true, //hardcoded
-    });
+    return this.webReqService.patch(`users/${userId}`, userObj);
   }
 
   /**Method to delete a specified user */

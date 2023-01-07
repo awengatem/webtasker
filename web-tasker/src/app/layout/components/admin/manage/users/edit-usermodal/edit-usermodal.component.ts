@@ -13,10 +13,15 @@ import Validation from '../../../../../auth/login/validation';
 })
 export class EditUsermodalComponent implements OnInit {
   form: FormGroup = new FormGroup({});
+  defaultForm: FormGroup = new FormGroup({});
+  passwordForm: FormGroup = new FormGroup({});
   registerErrorMessage = '';
   registerFailed = false;
   submitted = false;
+  includePassword: boolean = false;
   flag: boolean = true;
+  /**variable used by checkbox*/
+  checkboxValue!: boolean;
   /**Data to be recieved from parent component */
   userId: string | null = null;
   receivedUserId!: string;
@@ -29,8 +34,44 @@ export class EditUsermodalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /**build form */
-    this.form = this.fb.group(
+    /**build first form */
+    this.defaultForm = this.fb.group({
+      username: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        ],
+      ],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+      role: ['', [Validators.required]],
+    });
+
+    /**build second form including passwords */
+    this.passwordForm = this.fb.group(
       {
         username: [
           '',
@@ -63,26 +104,22 @@ export class EditUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
-        role: [
+        role: ['', [Validators.required]],
+        password: [
           '',
           [
             Validators.required,
-            Validators.minLength(3),
+            Validators.minLength(6),
             Validators.maxLength(20),
           ],
         ],
-        // password: [
-        //   '',
-        //   [
-        //     Validators.required,
-        //     Validators.minLength(6),
-        //     Validators.maxLength(20),
-        //   ],
-        // ],
-        // confirmPassword: ['', [Validators.required]],
-      }
-      // { validators: [Validation.match('password', 'confirmPassword')] }
+        confirmPassword: ['', [Validators.required]],
+      },
+      { validators: [Validation.match('password', 'confirmPassword')] }
     );
+
+    /**initialize default form*/
+    this.form = this.defaultForm;
 
     /**update received userId */
     if (this.userId) {
@@ -101,8 +138,23 @@ export class EditUsermodalComponent implements OnInit {
       this.form.controls['email'].setValue(user.email);
       this.form.controls['firstName'].setValue(user.firstName);
       this.form.controls['lastName'].setValue(user.lastName);
-      this.form.controls['role'].setValue(user.isProjectManager);
+      this.form.controls['role'].setValue(user.role);
     });
+  }
+
+  /**Method used by checkbox */
+  showPasswordFields(event: any) {
+    // console.log(event.checked);
+    this.includePassword = event.checked;
+
+    /**Use form with password fields if checked*/
+    if (event.checked) {
+      this.form = this.passwordForm;
+      if (this.userId) this.loadFieldsToEdit(this.userId);
+    } else {
+      this.form = this.defaultForm;
+      if (this.userId) this.loadFieldsToEdit(this.userId);
+    }
   }
 
   /**Method to submit the form */
@@ -110,7 +162,7 @@ export class EditUsermodalComponent implements OnInit {
     this.submitted = true;
     console.log(form.value);
     //get the form values
-    const { username, email, firstName, lastName, password } = form.value;
+    const { username, email, firstName, lastName, role, password } = form.value;
 
     /**creating user object to pass to server
      *properties name's should not be changed
@@ -121,13 +173,27 @@ export class EditUsermodalComponent implements OnInit {
     let cFirstname = this.generalService.deepClean(firstName);
     let cLastname = this.generalService.deepClean(lastName);
 
-    const user = {
-      username: cUsername,
-      email: cEmail,
-      // password: password,
-      firstName: cFirstname,
-      lastName: cLastname,
-    };
+    let user = {};
+
+    /**check if password is available to include for patching */
+    if (password) {
+      user = {
+        username: cUsername,
+        email: cEmail,
+        firstName: cFirstname,
+        lastName: cLastname,
+        role: role,
+        password: password,
+      };
+    } else {
+      user = {
+        username: cUsername,
+        email: cEmail,
+        firstName: cFirstname,
+        lastName: cLastname,
+        role: role,
+      };
+    }
 
     /**patch the user to api*/
     if (this.userId) {

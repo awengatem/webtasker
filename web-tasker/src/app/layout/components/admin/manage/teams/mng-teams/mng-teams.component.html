@@ -16,7 +16,11 @@
               <div class="col-md-3">
                 <div class="row centered-content add-button">
                   <div class="col-md-1">
-                    <button class="btn btn-primary" routerLink="/new_team">
+                    <button
+                      class="btn btn-primary"
+                      routerLink="/new_team"
+                      (click)="setLocation()"
+                    >
                       <div class="btn-txt">+</div>
                     </button>
                   </div>
@@ -136,6 +140,7 @@
                               aria-label="Example icon button with a vertical three dot icon"
                               type="button"
                               [routerLink]="['/edit_team', document._id]"
+                              (click)="setLocation()"
                             >
                               <mat-icon>edit</mat-icon>
                             </button>
@@ -153,10 +158,7 @@
                               aria-label="Example icon button with a delete icon"
                               type="button"
                               (click)="
-                                confirmDeletion(
-                                  document._id,
-                                  document.teamName
-                                )
+                                confirmDeletion(document._id, document.teamName)
                               "
                               color="accent"
                             >

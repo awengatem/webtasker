@@ -16,7 +16,11 @@
               <div class="col-md-3">
                 <div class="row centered-content add-button">
                   <div class="col-md-1">
-                    <button class="btn btn-primary" routerLink="/new_project">
+                    <button
+                      class="btn btn-primary"
+                      routerLink="/new_project"
+                      (click)="setLocation()"
+                    >
                       <div class="btn-txt">+</div>
                     </button>
                   </div>
@@ -42,7 +46,7 @@
                       mat-icon-button
                       aria-label="Example icon button with a delete icon"
                       type="button"
-                      class="mt-4 custom-delete mat-raised-button"                      
+                      class="mt-4 custom-delete mat-raised-button"
                       (click)="deleteSelected()"
                       color="accent"
                       matTooltip="Delete selected"
@@ -134,8 +138,9 @@
                               mat-icon-button
                               class="custom-button custom-button-edit mat-raised-button"
                               aria-label="Example icon button with a vertical three dot icon"
-                              type="button"                             
+                              type="button"
                               [routerLink]="['/edit_project', document._id]"
+                              (click)="setLocation()"
                               matTooltip="Edit"
                             >
                               <mat-icon>edit</mat-icon>
@@ -152,7 +157,7 @@
                               mat-icon-button
                               class="custom-button custom-button-delete mat-raised-button"
                               aria-label="Example icon button with a delete icon"
-                              type="button"                             
+                              type="button"
                               (click)="
                                 confirmDeletion(
                                   document._id,

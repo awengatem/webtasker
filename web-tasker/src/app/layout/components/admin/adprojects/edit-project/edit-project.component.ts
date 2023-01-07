@@ -33,7 +33,7 @@ export class EditProjectComponent implements OnInit {
     //get the selected project
     if (this.projectId) {
       this.loadFieldsToEdit(this.projectId);
-      document.getElementById("autofocus")!.focus();
+      document.getElementById('autofocus')!.focus();
     }
   }
 
@@ -47,8 +47,8 @@ export class EditProjectComponent implements OnInit {
         console.log(response);
         //setting status to true to help in scrolldown method
         this.projectService.setAddStatus(true);
-        //console.log(this.projectService.getAddStatus());
-        this.router.navigate(['/ad_projects']);
+        //console.log(this.projectService.getAddStatus());       
+        this.navigateBack();
         Swal.fire(
           'Success!',
           `Project "${newProject}" updated successfully`,
@@ -68,6 +68,20 @@ export class EditProjectComponent implements OnInit {
       console.log(project);
       this.form.projectName = project.projectName;
     });
+  }
+
+  /**Method to navigate to previous route */
+  navigateBack() {
+    //check if previous location is from manage component
+    let fromMng = window.sessionStorage.getItem('fromMng');
+    if (fromMng === 'true') {
+      //navigate to manager
+      this.router.navigate(['ad_manage/projects']);
+      //clear previous location
+      window.sessionStorage.removeItem('fromMng');
+    } else {
+      this.router.navigate(['/ad_projects']);
+    }
   }
 
   submit() {

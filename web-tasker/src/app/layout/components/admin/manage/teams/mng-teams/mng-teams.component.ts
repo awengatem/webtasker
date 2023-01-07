@@ -95,14 +95,14 @@ export class MngTeamsComponent implements OnInit {
     let teamIdArr: any = [];
     console.log(selectedTeamsArr);
     if (selectedTeamsArr.length > 0) {
-      //push only user ids in an array
+      //push only team ids in an array
       selectedTeamsArr.forEach((item) => {
         teamIdArr.push(item._id);
       });
       console.log(teamIdArr);
       //confirm and delete teams
       Swal.fire({
-        title: `Delete ${selectedTeamsArr.length} users from the database?`,
+        title: `Delete ${selectedTeamsArr.length} teams from the database?`,
         text: 'This process is irreversible.',
         icon: 'warning',
         showCancelButton: true,
@@ -116,6 +116,8 @@ export class MngTeamsComponent implements OnInit {
           this.deleteMultipe(teamIdArr);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           this.displaySnackbar(0, 'operation has been cancelled');
+          //reset the selection
+          this.selection = new SelectionModel<any>(true, []);
         }
       });
     } else {
@@ -146,19 +148,21 @@ export class MngTeamsComponent implements OnInit {
 
   /**Method to deletemultiple */
   deleteMultipe(teamIdArr: any[]) {
-    // if (userIdArr.length > 0) {
-    //   this.userAccountService.deleteMultipleUsers(userIdArr).subscribe({
-    //     next: (response: any) => {
-    //       console.log(response);
-    //       this.displaySnackbar(1, response.message);
-    //       this.loadAllProjects();
-    //     },
-    //     error: (err) => {
-    //       console.log(err);
-    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //     },
-    //   });
-    // }
+    if (teamIdArr.length > 0) {
+      this.teamService.deleteMultipleTeams(teamIdArr).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.displaySnackbar(1, response.message);
+          this.loadAllTeams();
+        },
+        error: (err) => {
+          console.log(err);
+          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+        },
+      });
+    }
+    //reset the selection
+    this.selection = new SelectionModel<any>(true, []);
   }
 
   /**Delete a specified team */
@@ -217,5 +221,12 @@ export class MngTeamsComponent implements OnInit {
     const date = new Date(timestamp);
     // const newDate = date.toLocaleString();
     return date.toLocaleString();
+  }
+
+  /**Method to set location to help
+   *  navigate back to previous route
+   */
+  setLocation() {
+    window.sessionStorage.setItem('fromMng', 'true');
   }
 }

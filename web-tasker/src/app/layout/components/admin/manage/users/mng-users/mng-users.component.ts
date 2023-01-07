@@ -129,6 +129,8 @@ export class MngUsersComponent implements OnInit {
           this.deleteMultipe(userIdArr);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           this.displaySnackbar(0, 'operation has been cancelled');
+          //reset the selection
+          this.selection = new SelectionModel<any>(true, []);
         }
       });
     } else {
@@ -172,6 +174,8 @@ export class MngUsersComponent implements OnInit {
         },
       });
     }
+    //reset the selection
+    this.selection = new SelectionModel<any>(true, []);
   }
 
   /**Delete a specified user */

@@ -100,6 +100,13 @@ export class ProjectService {
     return this.webReqService.delete(`projects/${projId}`);
   }
 
+  /**Method to delete multiple projects */
+  deleteMultipleProjects(projectIdArr: any[]) {
+    return this.webReqService.post(`projects/delete_multiple`, {
+      projectIdArr: projectIdArr,
+    });
+  }
+
   /**Methods used by projectAdded above */
   getAddStatus() {
     return this.projectAdded;

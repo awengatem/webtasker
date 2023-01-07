@@ -71,6 +71,10 @@
       cursor: pointer;
       &:hover {
         color: #cb0c9f;
+
+        i {
+          color: #cb0c9f;
+        }
       }
     }
 
