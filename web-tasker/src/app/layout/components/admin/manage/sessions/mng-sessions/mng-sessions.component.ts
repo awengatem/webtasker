@@ -9,7 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import Swal from 'sweetalert2';
-import { ProjectService } from 'src/app/services/api/project.service';
+import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 
 @Component({
   selector: 'app-mng-sessions',
@@ -18,7 +18,7 @@ import { ProjectService } from 'src/app/services/api/project.service';
 })
 export class MngSessionsComponent implements OnInit {
   /**variables */
-  totalProjects = 0;
+  totalSessions = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -36,24 +36,19 @@ export class MngSessionsComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private projectService: ProjectService,
+    private projectStatusService: ProjectStatusService,
     private _snackBar: MatSnackBar
   ) {
     //load data on table
-    this.loadAllProjects();
+    this.loadAllSessions();
   }
 
   ngOnInit(): void {}
 
-  /**Get the projects */
+  /**Get the sessions */
   getProjects(): void {
-    this.projectService.getAllProjects().subscribe({
-      next: (projects) => {
-        console.log(projects);
-      },
-      error: (err) => {
-        console.log(err);
-      },
+    this.projectStatusService.getStatusDocs().then((sessions) => {
+      console.log(sessions);
     });
   }
 
@@ -88,21 +83,21 @@ export class MngSessionsComponent implements OnInit {
     }
   }
 
-  /**Delete selected project(s) */
+  /**Delete selected session(s) */
   deleteSelected() {
     // debugger;
-    const selectedProjectsArr = this.selection.selected;
-    let projectIdArr: any = [];
-    console.log(selectedProjectsArr);
-    if (selectedProjectsArr.length > 0) {
-      //push only project ids in an array
-      selectedProjectsArr.forEach((item) => {
-        projectIdArr.push(item._id);
+    const selectedSessionsArr = this.selection.selected;
+    let sessionIdArr: any = [];
+    console.log(selectedSessionsArr);
+    if (selectedSessionsArr.length > 0) {
+      //push only session ids in an array
+      selectedSessionsArr.forEach((item) => {
+        sessionIdArr.push(item._id);
       });
-      console.log(projectIdArr);
-      //confirm and delete projects
+      console.log(sessionIdArr);
+      //confirm and delete sessions
       Swal.fire({
-        title: `Delete ${selectedProjectsArr.length} projects from the database?`,
+        title: `Delete ${selectedSessionsArr.length} sessions from the database?`,
         text: 'This process is irreversible.',
         icon: 'warning',
         showCancelButton: true,
@@ -111,9 +106,9 @@ export class MngSessionsComponent implements OnInit {
         cancelButtonText: 'No, let me think',
         cancelButtonColor: '#22b8f0',
       }).then((result) => {
-        //delete projects from db
+        //delete sessions from db
         if (result.value) {
-          this.deleteMultipe(projectIdArr);
+          this.deleteMultipe(sessionIdArr);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           this.displaySnackbar(0, 'operation has been cancelled');
           //reset the selection
@@ -125,10 +120,10 @@ export class MngSessionsComponent implements OnInit {
     }
   }
 
-  /**Method to confirm project deletion */
-  confirmDeletion(projectId: string, projectname: string) {
+  /**Method to confirm session deletion */
+  confirmDeletion(sessionId: string) {
     Swal.fire({
-      title: `Delete "${projectname}" from the database?`,
+      title: `Delete session from the database?`,
       text: 'This process is irreversible.',
       icon: 'warning',
       showCancelButton: true,
@@ -137,9 +132,9 @@ export class MngSessionsComponent implements OnInit {
       cancelButtonText: 'No, let me think',
       cancelButtonColor: '#22b8f0',
     }).then((result) => {
-      //delete project from db
+      //delete session from db
       if (result.value) {
-        this.deleteProject(projectId);
+        this.deleteSession(sessionId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.displaySnackbar(0, 'operation has been cancelled');
       }
@@ -147,37 +142,37 @@ export class MngSessionsComponent implements OnInit {
   }
 
   /**Method to deletemultiple */
-  deleteMultipe(projectIdArr: any[]) {
-    if (projectIdArr.length > 0) {
-      this.projectService.deleteMultipleProjects(projectIdArr).subscribe({
-        next: (response: any) => {
-          console.log(response);
-          this.displaySnackbar(1, response.message);
-          this.loadAllProjects();
-        },
-        error: (err) => {
-          console.log(err);
-          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-        },
-      });
-    }
-    //reset the selection
-    this.selection = new SelectionModel<any>(true, []);
+  deleteMultipe(sessionIdArr: any[]) {
+    // if (projectIdArr.length > 0) {
+    //   this.projectService.deleteMultipleProjects(projectIdArr).subscribe({
+    //     next: (response: any) => {
+    //       console.log(response);
+    //       this.displaySnackbar(1, response.message);
+    //       this.loadAllProjects();
+    //     },
+    //     error: (err) => {
+    //       console.log(err);
+    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+    //     },
+    //   });
+    // }
+    // //reset the selection
+    // this.selection = new SelectionModel<any>(true, []);
   }
 
-  /**Delete a specified project */
-  deleteProject(projectId: string) {
-    this.projectService.deleteProject(projectId).subscribe({
-      next: (response: any) => {
-        console.log(response);
-        this.displaySnackbar(1, response.message);
-        this.loadAllProjects();
-      },
-      error: (err) => {
-        console.log(err);
-        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-      },
-    });
+  /**Delete a specified session */
+  deleteSession(sessionId: string) {
+    // this.projectService.deleteProject(projectId).subscribe({
+    //   next: (response: any) => {
+    //     console.log(response);
+    //     this.displaySnackbar(1, response.message);
+    //     this.loadAllProjects();
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //     Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+    //   },
+    // });
   }
 
   /**Multipurpose method for edits and updates */
@@ -200,20 +195,20 @@ export class MngSessionsComponent implements OnInit {
   }
 
   /**Method to reload user table */
-  loadAllProjects() {
-    this.projectService.getAllProjects().subscribe({
-      next: (projects) => {
-        this.dataSource = new MatTableDataSource(projects);
+  loadAllSessions() {
+    this.projectStatusService
+      .getStatusDocs()
+      .then((sessions: any) => {
+        this.dataSource = new MatTableDataSource(sessions);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         // refresh usercount
-        this.totalProjects = projects.length;
-        console.log(projects);
-      },
-      error: (err) => {
+        this.totalSessions = sessions.length;
+        console.log(sessions);
+      })
+      .catch((err) => {
         console.log(err);
-      },
-    });
+      });
   }
 
   /**Method to convert timestamp to date */
