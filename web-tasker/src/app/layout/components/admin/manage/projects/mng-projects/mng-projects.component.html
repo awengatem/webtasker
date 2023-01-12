@@ -87,7 +87,7 @@
                             ></mat-checkbox>
                           </mat-cell>
                         </ng-container>
-                        <!-- Username Column -->
+                        <!-- Projectname Column -->
                         <ng-container matColumnDef="Projectname" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Project name
@@ -96,7 +96,7 @@
                             {{ document.projectName }}
                           </mat-cell>
                         </ng-container>
-                        <!-- Email Column -->
+                        <!-- Teams Column -->
                         <ng-container matColumnDef="Teams" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Teams
@@ -105,7 +105,7 @@
                             {{ document.teams.length }}
                           </mat-cell>
                         </ng-container>
-                        <!-- Firstname Column -->
+                        <!-- Createdat Column -->
                         <ng-container matColumnDef="CreatedAt" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Created at
@@ -114,7 +114,7 @@
                             {{ convertDate(document.createdAt) }}
                           </mat-cell>
                         </ng-container>
-                        <!-- Lastname Column -->
+                        <!-- Createdby Column -->
                         <ng-container matColumnDef="CreatedBy" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Created by

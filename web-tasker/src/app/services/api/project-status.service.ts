@@ -388,7 +388,8 @@ export class ProjectStatusService {
         resolve('null');
       }
       const date = new Date(timestamp);
-      resolve(date);
+      // const newDate = date.toLocaleString();
+      resolve(date.toLocaleString());
     });
   }
 
