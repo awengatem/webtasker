@@ -26,11 +26,12 @@ export class MngSessionsComponent implements OnInit {
   displayedColumns: string[] = [
     'Select',
     'Username',
-    'Projectname',
-    'Teamname',
+    'ProjectName',
+    'TeamName',
+    'Status',
     'NewDuration',
-    'startTime',
-    'finishTime',
+    'StartTime',
+    'FinishTime',
     'Delete',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
