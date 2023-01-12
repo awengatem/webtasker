@@ -25,11 +25,12 @@ export class MngSessionsComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   displayedColumns: string[] = [
     'Select',
+    'Username',
     'Projectname',
-    'Teams',
-    'CreatedAt',
-    'CreatedBy',
-    'Edit',
+    'Teamname',
+    'NewDuration',
+    'startTime',
+    'finishTime',
     'Delete',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
