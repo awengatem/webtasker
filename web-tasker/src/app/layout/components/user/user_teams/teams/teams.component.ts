@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { TeamService } from 'src/app/services/team.service';
+import { TeamService } from 'src/app/services/api/team.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class TeamsComponent implements OnInit {
   teams!: any[];
+  teamsLength = 0;
   teamDiv: any;
   teamStatus: any;
   submitted: boolean = false;
@@ -36,6 +37,7 @@ export class TeamsComponent implements OnInit {
     this.teamService.getUserTeams().subscribe((teams: any) => {
       console.log(teams);
       this.teams = teams;
+      this.teamsLength = teams.length;
       //get team members for each
       this.getTeamMembers();
     });

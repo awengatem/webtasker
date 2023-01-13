@@ -28,13 +28,23 @@
 
       <mat-divider></mat-divider>
 
-      <h2 matSubheader class="mt-2" *ngIf="isExpanded">Applications</h2>
-      <h2 matSubheader class="h2-col mt-2" *ngIf="!isExpanded">Apps</h2>
+      <h2 matSubheader class="mt-3 mb-0 mat-subheader" *ngIf="isExpanded">
+        Applications
+      </h2>
+      <h2
+        matSubheader
+        class="h2-col mt-2 mb-0 mat-subheader"
+        *ngIf="!isExpanded"
+      >
+        Apps
+      </h2>
 
       <!-- user home -->
       <mat-list-item [routerLink]="'home'" routerLinkActive="list-item-active">
-        <mat-icon mat-list-icon class="">home</mat-icon>
-        <div class="content" *ngIf="isExpanded">Home</div>
+        <div class="mat-list-item-content">
+          <mat-icon mat-list-icon class="">home</mat-icon>
+          <div class="content" *ngIf="isExpanded">Home</div>
+        </div>
       </mat-list-item>
 
       <!-- user projects -->
@@ -42,20 +52,34 @@
         [routerLink]="'projects'"
         routerLinkActive="list-item-active"
       >
-        <mat-icon mat-list-icon class="">dashboard</mat-icon>
-        <div class="content" *ngIf="isExpanded">Projects</div>
+        <div class="mat-list-item-content">
+          <mat-icon mat-list-icon class="">dashboard</mat-icon>
+          <div class="content" *ngIf="isExpanded">Projects</div>
+        </div>
       </mat-list-item>
 
       <!-- user teams -->
       <mat-list-item [routerLink]="'teams'" routerLinkActive="list-item-active">
-        <mat-icon mat-list-icon>group</mat-icon>
-        <div class="content" *ngIf="isExpanded">My teams</div>
+        <div class="mat-list-item-content">
+          <mat-icon mat-list-icon>group</mat-icon>
+          <div class="content" *ngIf="isExpanded">My teams</div>
+        </div>
       </mat-list-item>
 
       <!-- ADMIN SECTION -->
-      <mat-list-item (click)="showSublist()" [ngClass]="sublist ? 'menu' : ''">
-        <mat-icon mat-list-icon>verified_user</mat-icon>
-        <div class="content" *ngIf="isExpanded">Admin</div>
+      <mat-list-item (click)="showSublist()" *ngIf="isAdmin">
+        <div class="mat-list-item-content">
+          <mat-icon mat-list-icon [ngClass]="sublist ? 'menu' : ''"
+            >verified_user</mat-icon
+          >
+          <div
+            class="content"
+            *ngIf="isExpanded"
+            [ngClass]="sublist ? 'menu' : ''"
+          >
+            Admin
+          </div>
+        </div>
       </mat-list-item>
 
       <!-- admin dashboard -->
@@ -63,15 +87,31 @@
         [routerLink]="'ad_dashboard'"
         routerLinkActive="list-item-active"
         *ngIf="sublist"
-      >
-        <!-- for children components -->
-        <div
-          [routerLink]="'project_status'"
-          routerLinkActive="list-item-active"
-          *ngIf="sublist"
-        ></div>
-        <i class="fa-solid fa-gauge-high"></i>
-        <div class="content" *ngIf="isExpanded">Dashboard</div>
+        ><div class="mat-list-item-content">
+          <!-- for children components -->
+          <div
+            [routerLink]="'project_status'"
+            routerLinkActive="list-item-active"
+            *ngIf="sublist"
+          ></div>
+          <div
+            [routerLink]="'active_sessions'"
+            routerLinkActive="list-item-active"
+            *ngIf="sublist"
+          ></div>
+          <div
+            [routerLink]="'recent_sessions'"
+            routerLinkActive="list-item-active"
+            *ngIf="sublist"
+          ></div>
+          <div
+            [routerLink]="'user_status'"
+            routerLinkActive="list-item-active"
+            *ngIf="sublist"
+          ></div>
+          <i class="fa-solid fa-gauge-high"></i>
+          <div class="content" *ngIf="isExpanded">Dashboard</div>
+        </div>
       </mat-list-item>
 
       <!-- admin projects -->
@@ -79,20 +119,21 @@
         [routerLink]="'ad_projects'"
         routerLinkActive="list-item-active"
         *ngIf="sublist"
-      >
-        <!-- for children components -->
-        <div
-          [routerLink]="'new_project'"
-          routerLinkActive="list-item-active"
-          *ngIf="sublist"
-        ></div>
-        <div
-          [routerLink]="'edit_project'"
-          routerLinkActive="list-item-active"
-          *ngIf="sublist"
-        ></div>
-        <i class="fa-solid fa-folder-open"></i>
-        <div class="content" *ngIf="isExpanded">Projects</div>
+        ><div class="mat-list-item-content">
+          <!-- for children components -->
+          <div
+            [routerLink]="'new_project'"
+            routerLinkActive="list-item-active"
+            *ngIf="sublist"
+          ></div>
+          <div
+            [routerLink]="'edit_project'"
+            routerLinkActive="list-item-active"
+            *ngIf="sublist"
+          ></div>
+          <i class="fa-solid fa-folder-open"></i>
+          <div class="content" *ngIf="isExpanded">Projects</div>
+        </div>
       </mat-list-item>
 
       <!-- admin teams -->
@@ -100,20 +141,32 @@
         [routerLink]="'ad_teams'"
         routerLinkActive="list-item-active"
         *ngIf="sublist"
-      >
-        <!-- for children components -->
-        <div
-          [routerLink]="'new_team'"
-          routerLinkActive="list-item-active"
-          *ngIf="sublist"
-        ></div>
-        <div
-          [routerLink]="'edit_team'"
-          routerLinkActive="list-item-active"
-          *ngIf="sublist"
-        ></div>
-        <i class="fa-solid fa-people-group"></i>
-        <div class="content" *ngIf="isExpanded">Teams</div>
+        ><div class="mat-list-item-content">
+          <!-- for children components -->
+          <div
+            [routerLink]="'new_team'"
+            routerLinkActive="list-item-active"
+            *ngIf="sublist"
+          ></div>
+          <div
+            [routerLink]="'edit_team'"
+            routerLinkActive="list-item-active"
+            *ngIf="sublist"
+          ></div>
+          <i class="fa-solid fa-people-group"></i>
+          <div class="content" *ngIf="isExpanded">Teams</div>
+        </div>
+      </mat-list-item>
+
+      <!-- admin management -->
+      <mat-list-item
+        [routerLink]="'ad_manage'"
+        routerLinkActive="list-item-active"
+        *ngIf="sublist && isManager"
+        ><div class="mat-list-item-content">
+          <i class="fa-solid fa-people-roof"></i>
+          <div class="content" *ngIf="isExpanded">Manage</div>
+        </div>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>

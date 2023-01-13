@@ -10,9 +10,9 @@
                 <h1 class="text-dark position-relative">
                   my projects <i class="fa-regular fa-folder-open"></i>
                   <span
-                    class="position-absolute top-0  start-99 translate-middle badge rounded-pill badge-danger count"
+                    class="position-absolute top-0 start-99 translate-middle badge rounded-pill badge-danger count"
                   >
-                    {{projects.length}}
+                    {{projectsLength}}
                   </span>
                 </h1>
               </div>
@@ -41,7 +41,7 @@
                 <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
                 <div
                   class="col-md-6"
-                  *ngFor="let project of projects | projectFilter: searchText"
+                  *ngFor="let project of projects | projectFilter : searchText"
                   (click)="saveProjectTeam(project.team, project._id)"
                   [routerLink]="['/projects', project._id]"
                 >
@@ -55,8 +55,8 @@
                           <div class="row">
                             <small
                               ><i class="uil uil-users-alt"></i>team:
-                              {{ project.teamName }}</small
-                            >
+                              {{ project.teamName }}
+                            </small>
                           </div>
                           <div class="row">
                             <small

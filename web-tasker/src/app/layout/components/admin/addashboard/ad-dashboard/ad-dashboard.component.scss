@@ -23,6 +23,20 @@
     }
   }
 
+  .active_icon {
+    img {
+      height: auto;
+      max-width: 50%;
+    }
+  }
+
+  .project-div {
+    height: 400px;
+  }
+  .chart-div {
+    min-height: 325px;
+  }
+
   /**general css default with template*/
   /*!
  * Bootstrap v5.2.0-beta1 (https://getbootstrap.com/)
@@ -436,7 +450,9 @@
     opacity: 1;
   }
 
-  [list]:not([type="date"]):not([type="datetime-local"]):not([type="month"]):not([type="week"]):not([type="time"])::-webkit-calendar-picker-indicator {
+  [list]:not([type="date"]):not([type="datetime-local"]):not(
+      [type="month"]
+    ):not([type="week"]):not([type="time"])::-webkit-calendar-picker-indicator {
     display: none !important;
   }
 
@@ -3373,7 +3389,9 @@
   }
 
   .input-group
-    > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(
+      .valid-feedback
+    ):not(.invalid-tooltip):not(.invalid-feedback) {
     margin-left: -1px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -24446,7 +24464,9 @@
 
   .rtl
     .input-group
-    > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(
+      .valid-feedback
+    ):not(.invalid-tooltip):not(.invalid-feedback) {
     margin-right: -1px;
     border-top-left-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;

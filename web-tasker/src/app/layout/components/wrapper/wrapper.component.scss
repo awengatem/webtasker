@@ -30,19 +30,19 @@ mat-sidenav-container {
         transform: rotate(180deg);
       }
 
-      //logo styling
+      /*logo styling*/
       .logo {
         text-align: center;
         padding: 2.6rem 1rem;
       }
 
-      //logo image customizing
+      /*logo image customizing*/
       img {
         width: 100px;
         height: auto;
       }
 
-      //logo colapsed image customizing
+      /*logo colapsed image customizing*/
       .logo-col {
         width: 35px;
         height: auto;
@@ -53,24 +53,63 @@ mat-sidenav-container {
         border-color: white;
       }
 
-      //subheader styling
+      /*subheader styling*/
       .mat-subheader {
         color: #22b8f0;
         font-size: 0.8rem;
         font-weight: 100;
         letter-spacing: 1px;
+        padding-left: 30px;
 
         &.h2-col {
           letter-spacing: 0px;
         }
       }
 
-      //item styling
+      /*item styling*/
       mat-list-item {
-        color: #94a3b8 !important;
-        font-size: 0.8rem;
-        height: 44px !important;
-        margin-bottom: 4px;
+        // color: #94a3b8 !important;
+        // font-size: 0.8rem;
+        // height: 44px !important;
+        // margin-bottom: 4px;
+        padding: 0px 5px 0px 5px;
+
+        .mat-list-item-content {
+          display: flex;
+          flex-direction: row;
+          border-radius: 5px;
+          color: #94a3b8 !important;
+          font-size: 0.8rem;
+          height: 44px !important;
+          padding-left: 10px;
+          padding-top: 10px;
+          // margin-bottom: 4px;
+          // margin: 0;
+          // margin: 0 8px;
+          &:hover {
+            background: #2c3344 !important;
+          }
+
+          /*material main menu icons styling*/
+          mat-icon {
+            vertical-align: center;
+            margin-right: 1rem;
+            // font-size: 30px;
+          }
+
+          /*submenu selected styling*/
+          .menu {
+            color: #22b8f0 !important;
+          }
+
+          /*submenu icons styling*/
+          i {
+            font-size: 18px;
+            vertical-align: center;
+            margin-right: 0.5rem;
+            margin-left: 1rem;
+          }
+        }
 
         &::ng-deep {
           .mat-list-item-content {
@@ -82,17 +121,10 @@ mat-sidenav-container {
           }
         }
 
-        mat-icon {
-          vertical-align: center;
-          margin-right: 1rem;
-        }
-
-        i {
-          font-size: 18px;
-          vertical-align: center;
-          margin-right: 0.5rem;
-          margin-left: 1rem;
-        }
+        // mat-icon {
+        //   vertical-align: center;
+        //   margin-right: 1rem;
+        // }
       }
 
       //selected styling
@@ -100,26 +132,26 @@ mat-sidenav-container {
         color: #f2f5f7 !important;
         &::ng-deep {
           .mat-list-item-content {
-            background: #2c3344 !important;            
+            background: #2c3344 !important;
             &:hover {
               background: #2c3344 !important;
-            }           
-          }         
+            }
+          }
         }
       }
 
       //submenu selected styling
-      .menu {
-        color: #22b8f0 !important;
-        &::ng-deep {
-          .mat-list-item-content {
-            background: transparent;            
-            &:hover {
-              background: #2c3344 !important;
-            }           
-          }         
-        }
-      }
+      //   .menu {
+      //     color: #22b8f0 !important;
+      //     &::ng-deep {
+      //       .mat-list-item-content {
+      //         background: transparent;
+      //         &:hover {
+      //           background: #2c3344 !important;
+      //         }
+      //       }
+      //     }
+      //   }
     }
 
     .content {
@@ -127,10 +159,11 @@ mat-sidenav-container {
       font-size: 0.8rem;
       margin: 0 8px;
       margin-top: 0.1rem;
+      transition: all 0.5s ease;
     }
   }
 
-  mat-sidenav-content{
-    overflow-x: hidden;    
+  mat-sidenav-content {
+    overflow-x: hidden;
   }
 }

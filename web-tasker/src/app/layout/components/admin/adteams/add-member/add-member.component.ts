@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { TeamService } from 'src/app/services/team.service';
+import { TeamService } from 'src/app/services/api/team.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -115,13 +115,13 @@ export class AddMemberComponent implements OnInit {
             this.dropdownList = tmp;
             this.userArr = userArr;
           },
-          error: (err) => {
+          error: (err: any) => {
             console.log(err);
             Swal.fire('Oops! Something went wrong', err.error.message, 'error');
           },
         });
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err);
         Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
@@ -153,7 +153,7 @@ export class AddMemberComponent implements OnInit {
           this.router.navigate([`/ad_teams/${this.teamId}`]);
           Swal.fire('Added!', `Members have been added`, 'success');
         },
-        error: (err) => {
+        error: (err: any) => {
           console.log(err);
           Swal.fire('Oops! Something went wrong', err.error.message, 'error');
         },

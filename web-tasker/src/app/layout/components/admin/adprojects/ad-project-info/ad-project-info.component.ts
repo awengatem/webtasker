@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ProjectService } from 'src/app/services/project.service';
+import { ProjectService } from 'src/app/services/api/project.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -72,11 +72,6 @@ export class AdProjectInfoComponent implements OnInit {
     }else{
       this.actionClicked = true;
     }
-  }
-
-  /**Capture project to help load it to edit component */
-  captureProject() {
-    this.projectService.setCapturedProject(this.projectName);
   }
 
   /**ACTION METHODS USED BY ALERT*/

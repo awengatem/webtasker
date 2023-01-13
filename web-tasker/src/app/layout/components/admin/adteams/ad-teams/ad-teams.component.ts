@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { TeamService } from 'src/app/services/team.service';
+import { TeamService } from 'src/app/services/api/team.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class AdTeamsComponent implements OnInit {
   teams!: any[];
+  teamsLength = 0;
   teamDiv: any;
   teamStatus: any;
   submitted: boolean = false;
@@ -35,6 +36,7 @@ export class AdTeamsComponent implements OnInit {
     this.teamService.getAllTeams().subscribe((teams: any) => {
       console.log(teams);
       this.teams = teams;
+      this.teamsLength = teams.length;
       //get team members for each
       this.getTeamMembers();
     });
@@ -57,11 +59,6 @@ export class AdTeamsComponent implements OnInit {
     //unsetting the condition
     this.teamService.setAddStatus(false);
     //console.log(this.teamService.getAddStatus());
-  }
-
-  /**Capture team to help load it to edit component */
-  captureTeam(team: string) {
-    this.teamService.setCapturedTeam(team);
   }
 
   /**ACTION METHODS USED BY ALERT*/
@@ -97,7 +94,7 @@ export class AdTeamsComponent implements OnInit {
         this.router.navigate(['/ad_teams']);
         Swal.fire('Removed!', `team "${teamName}" has been removed`, 'success');
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err);
         Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },

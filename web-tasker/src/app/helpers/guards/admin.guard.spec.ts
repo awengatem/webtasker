@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AdminGuard } from './admin.guard';
+import { AdminGuard } from './manager.guard';
 
 describe('AdminGuard', () => {
   let guard: AdminGuard;

@@ -12,7 +12,7 @@
                   <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger count"
                   >
-                    {{ teams.length }}
+                    {{ teamsLength }}
                   </span>
                 </h1>
               </div>
@@ -41,8 +41,7 @@
                 <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
                 <div
                   class="col-md-6"
-                  *ngFor="let team of teams | teamFilter: searchText"
-                  (click)="captureTeam(team.teamName)"
+                  *ngFor="let team of teams | teamFilter : searchText"
                 >
                   <div class="timetable-item shadow pointer">
                     <div class="timetable-item-main">
@@ -61,7 +60,6 @@
                             type="button"
                             class="col btn btn-outline-dark btn-sm me-2"
                             [routerLink]="['/edit_team', team._id]"
-                            (click)="captureTeam(team.teamName)"
                           >
                             <i class="fa-solid fa-pen-fancy"></i>
                           </button>

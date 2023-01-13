@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from 'src/app/services/project.service';
+import { ProjectService } from 'src/app/services/api/project.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class AdProjectsComponent implements OnInit {
   projects!: any[];
+  projectsLength = 0;
   projDiv: any;
   projectStatus: any;
   submitted: boolean = false;
@@ -35,6 +36,7 @@ export class AdProjectsComponent implements OnInit {
     this.projectService.getAllProjects().subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
+      this.projectsLength = projects.length;
       //get project members
       this.getProjectMembers();
     });
@@ -115,7 +117,7 @@ export class AdProjectsComponent implements OnInit {
         this.projectService
           .getProjectMembers(this.projects[i]._id)
           .subscribe((members: any) => {
-            console.log(members.length);
+            // console.log(members.length);
             //push number of members to projects
             this.projects[i].members = members.length;
           });

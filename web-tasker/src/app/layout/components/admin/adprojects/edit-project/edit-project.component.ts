@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GeneralService } from 'src/app/services/general.service';
-import { ProjectService } from 'src/app/services/project.service';
+import { ProjectService } from 'src/app/services/api/project.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,9 +23,6 @@ export class EditProjectComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  //getting capturedProject
-  capturedProject!: string;
-
   ngOnInit(): void {
     //subscribe to the route params
     this.route.params.subscribe((params: Params) => {
@@ -34,8 +31,10 @@ export class EditProjectComponent implements OnInit {
     });
 
     //get the selected project
-    this.capturedProject = this.projectService.getCapturedProject();
-    this.form.projectName = this.capturedProject;
+    if (this.projectId) {
+      this.loadFieldsToEdit(this.projectId);
+      document.getElementById('autofocus')!.focus();
+    }
   }
 
   /**edit method */
@@ -48,16 +47,42 @@ export class EditProjectComponent implements OnInit {
         console.log(response);
         //setting status to true to help in scrolldown method
         this.projectService.setAddStatus(true);
-        //console.log(this.projectService.getAddStatus());
-        this.router.navigate(['/ad_projects']);
-        Swal.fire('Success!', `Project "${newProject}" updated successfully`, 'success');        
+        //console.log(this.projectService.getAddStatus());       
+        this.navigateBack();
+        Swal.fire(
+          'Success!',
+          `Project "${newProject}" updated successfully`,
+          'success'
+        );
       },
       error: (err) => {
         console.log(err);
-        Swal.fire('Oops! Something went wrong',err.error.message, 'error');        
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
     });
-  }   
+  }
+
+  /**Method to load the form with values to be patched */
+  loadFieldsToEdit(projectId: string) {
+    this.projectService.getSpecificProject(projectId).subscribe((project) => {
+      console.log(project);
+      this.form.projectName = project.projectName;
+    });
+  }
+
+  /**Method to navigate to previous route */
+  navigateBack() {
+    //check if previous location is from manage component
+    let fromMng = window.sessionStorage.getItem('fromMng');
+    if (fromMng === 'true') {
+      //navigate to manager
+      this.router.navigate(['ad_manage/projects']);
+      //clear previous location
+      window.sessionStorage.removeItem('fromMng');
+    } else {
+      this.router.navigate(['/ad_projects']);
+    }
+  }
 
   submit() {
     this.submitted = true;

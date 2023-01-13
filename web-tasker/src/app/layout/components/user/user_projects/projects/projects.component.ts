@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from 'src/app/services/project.service';
+import { ProjectService } from 'src/app/services/api/project.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { TeamService } from 'src/app/services/team.service';
+import { TeamService } from 'src/app/services/api/team.service';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 
 @Component({
@@ -12,10 +12,11 @@ import { ProjectStatusService } from 'src/app/services/api/project-status.servic
 })
 export class ProjectsComponent implements OnInit {
   projects!: any[];
+  projectsLength = 0;
   projDiv: any;
   projectStatus: any;
   submitted: boolean = false;
-  /**used by search bar */
+  /**used by  the search bar */
   searchText = '';
 
   constructor(
@@ -32,7 +33,6 @@ export class ProjectsComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       console.log(params);
     });
-    this.scrollDown();
   }
 
   /**getting projects belonging to user */
@@ -40,6 +40,7 @@ export class ProjectsComponent implements OnInit {
     this.projectService.getUserProjects().subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
+      this.projectsLength = projects.length;
       /**pushs project status to projects*/
       this.projects.forEach((p) => (p.status = 'Unknown'));
       /**push teamname to each project */
@@ -59,25 +60,6 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
-  /**scrolldown immediately after adding new project */
-  scrollDown() {
-    //ensuring intervals only run once
-    if (this.projectService.getAddStatus() === true) {
-      const setInterval_ID = window.setInterval(() => {
-        this.projDiv = document.getElementById('projects');
-        this.projDiv.scrollTop = this.projDiv?.scrollHeight;
-      }, 100);
-
-      //stopping interval above after sometime
-      window.setTimeout(() => {
-        window.clearInterval(setInterval_ID);
-      }, 500);
-    }
-    //unsetting the condition
-    this.projectService.setAddStatus(false);
-    //console.log(this.projectService.getAddStatus());
-  }
-
   /**Get project members to add on icon*/
   getProjectMembers() {
     if (this.projects.length > 0) {
@@ -85,7 +67,7 @@ export class ProjectsComponent implements OnInit {
         this.projectService
           .getProjectMembers(this.projects[i]._id)
           .subscribe((members: any) => {
-            console.log(members.length);
+            // console.log(members.length);
             //push number of members to projects
             this.projects[i].members = members.length;
           });

@@ -1,8 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { ProjectService } from 'src/app/services/project.service';
-import { TeamService } from 'src/app/services/team.service';
+import { ProjectService } from 'src/app/services/api/project.service';
+import { TeamService } from 'src/app/services/api/team.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -119,7 +119,7 @@ export class AssignProjectComponent implements OnInit {
           },
         });
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err);
         Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
@@ -151,7 +151,7 @@ export class AssignProjectComponent implements OnInit {
           this.router.navigate([`/ad_teams/${this.teamId}`]);
           Swal.fire('Assigned!', `Projects have been assigned`, 'success');
         },
-        error: (err) => {
+        error: (err: any) => {
           console.log(err);
           Swal.fire('Oops! Something went wrong', err.error.message, 'error');
         },

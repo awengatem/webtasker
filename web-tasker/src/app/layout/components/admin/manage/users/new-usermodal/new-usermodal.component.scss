@@ -1,0 +1,59 @@
+.centered-content {
+  position: absolute;
+  .modal-box {
+    position: relative;
+    min-height: 200px;
+    width: 100%;
+    max-width: 580px;
+    background: #ffff;
+    border-radius: 5px;
+    padding: 35px;
+
+    h1 {
+      i {
+        color: #22b8f0;
+        font-size: 28px;
+      }
+    }
+
+    .input-custom {
+      border-radius: 5px;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+      //border: none;
+      &:focus {
+        outline: none;
+        box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
+      }
+      &:active {
+        outline: none;
+        box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
+      }
+      &.ng-invalid.ng-dirty {
+        border: 1px solid #e74c3c;
+      }
+    }
+
+    form {
+      mat-form-field {
+        width: 100%;
+      }
+
+      .custom-flex {
+        display: flex;
+
+        mat-form-field {
+          width: 50%;
+        }
+      }
+      .btm-rgt {
+        margin-left: 69%;
+        margin-right: 3px;
+
+        .btn-custom {
+          color: #ffff;
+        }
+      }
+    }
+  }
+}

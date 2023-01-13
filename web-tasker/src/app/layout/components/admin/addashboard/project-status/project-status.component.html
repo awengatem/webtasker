@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col-3">
                 <h1 class="text-dark position-relative heading">
-                  Timer data <i class="uil uil-database"></i>
+                  Project status <i class="uil uil-database"></i>
                   <!-- <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger count"
                   >
@@ -18,31 +18,31 @@
               </div>
               <div class="col count">
                 <h1 class="text-dark position-relative">
-                  Documents:
-                  <span class=""> 16 </span>
+                  Projects:
+                  <span class=""> {{ projectsLength }} </span>
                 </h1>
               </div>
               <div class="col selector">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend me-2">
-                    <label class="input-group-text" for="inputGroupSelect01"
+                    <label class="input-group-text" for="inputGroupSelect"
                       >Filter by</label
                     >
                   </div>
-                  <!-- <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select> -->
                   <div class="ui-dropdown shadow">
-                    <select class="custom-select" id="inputGroupSelect01">
-                      <option value="user">Username</option>
-                      <option value="project">Project name</option>
-                      <option value="Team">Team name</option>
-                      <option value="Status">Status</option>
-                      <option value="start">Start date</option>
-                      <option value="finish">Finish date</option>
+                    <select
+                      #fields
+                      class="custom-select"
+                      id="inputGroupSelect"
+                      (change)="onSelected()"
+                    >
+                      <!-- values here must match the object properties -->
+                      <option value="projectName" selected>Projectname</option>
+                      <option value="teamCount">Teams</option>
+                      <option value="members">Members</option>
+                      <option value="status">Status</option>
+                      <option value="duration">Duration</option>
+                      <option value="userPerc">User percentage</option>
                     </select>
                   </div>
                 </div>
@@ -52,10 +52,11 @@
                   <input
                     type="search"
                     class="form-control rounded shadow"
-                    placeholder="enter project name to search ..."
+                    [placeholder]="placeholder"
                     aria-label="Search"
                     aria-describedby="search-addon"
-                    [(ngModel)]="searchText"
+                    [(ngModel)]="filterFields[propName]"
+                    (ngModelChange)="updateFilters()"
                     autofocus
                   />
                   <span class="border-0 filter-icon" id="search-addon">
@@ -74,13 +75,13 @@
                         <h2>#</h2>
                       </div>
                       <div class="col-sm text-left">
-                        <h2>Username</h2>
-                      </div>
-                      <div class="col-sm">
                         <h2>Project</h2>
                       </div>
                       <div class="col-sm">
-                        <h2>Team</h2>
+                        <h2>Teams</h2>
+                      </div>
+                      <div class="col-sm">
+                        <h2>Members</h2>
                       </div>
                       <div class="col-sm">
                         <h2>Status</h2>
@@ -89,10 +90,7 @@
                         <h2>Duration</h2>
                       </div>
                       <div class="col-sm">
-                        <h2>Start time</h2>
-                      </div>
-                      <div class="col-sm">
-                        <h2>Finish time</h2>
+                        <h2>User Percentage</h2>
                       </div>
                     </div>
                   </div>
@@ -100,37 +98,57 @@
                     <div
                       class="row pt-3 pb-2 ps-3 border-bottom content-row"
                       style="align-items: center"
-                      *ngFor="let d of data"
+                      *ngFor="let project of projects | myFilter : filter"
                     >
                       <div class="col-1 centered-content">
-                        <p>1</p>
+                        <p>{{ projects.indexOf(project) + 1 }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>username</p>
+                        <p>{{ project.projectName }}</p>
+                      </div>
+                      <div class="col-sm team-count">
+                        <p>{{ project.teamCount }}</p>
+                      </div>
+                      <div class="col-sm members">
+                        <p>{{ project.members }}</p>
+                      </div>
+                      <div
+                        *ngIf="project.status != 'dormant'"
+                        class="col-sm"
+                        [ngClass]="
+                          project.status === 'active' ? 'running' : 'paused'
+                        "
+                      >
+                        <p>{{ project.status }}</p>
+                      </div>
+                      <div
+                        *ngIf="project.status === 'dormant'"
+                        class="col-sm default"
+                      >
+                        <p>{{ project.status }}</p>
                       </div>
                       <div class="col-sm">
-                        <p>project nameddhfhfhf hghg</p>
+                        <p>{{ project.duration }}</p>
                       </div>
-                      <div class="col-sm">
-                        <p>team name</p>
+                      <div
+                        *ngIf="project.userPerc > 70"
+                        class="col-sm members"
+                        [ngClass]="project.userPerc > 70 ? 'running' : ''"
+                      >
+                        <p>{{ project.userPerc }}%</p>
                       </div>
-                      <div class="col-sm">
-                        <p>status</p>
-                      </div>
-                      <div class="col-sm">
-                        <p>duration</p>
-                      </div>
-                      <div class="col-sm">
-                        <p>started</p>
-                      </div>
-                      <div class="col-sm">
-                        <p>finished</p>
+                      <div
+                        *ngIf="project.userPerc < 70"
+                        class="col-sm members"
+                        [ngClass]="project.userPerc < 20 ? 'default' : ''"
+                      >
+                        <p>{{ project.userPerc }}%</p>
                       </div>
                     </div>
-                    <!-- <div class="centered notify">
+                    <div class="centered notify" *ngIf="projectsLength === 0">
                       <i class="fa-solid fa-circle-exclamation me-2"></i>
                       <div>No data available at the moment</div>
-                    </div> -->
+                    </div>
                   </div>
                 </div>
               </mat-card>

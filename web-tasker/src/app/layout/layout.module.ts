@@ -38,11 +38,25 @@ import { SocketTestComponent } from './components/admin/socket-test/socket-test.
 import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
 /**Filters imported below */
 import {
+  MyFilterPipe,
   ProjectFilterPipe,
   TeamFilterPipe,
   UserFilterPipe,
 } from '../filter.pipe';
 import { ProjectStatusComponent } from './components/admin/addashboard/project-status/project-status.component';
+import { ActiveSessionsComponent } from './components/admin/addashboard/active-sessions/active-sessions.component';
+import { RecentSessionsComponent } from './components/admin/addashboard/recent-sessions/recent-sessions.component';
+import { DispositionComponent } from './components/user/user_projects/disposition/disposition.component';
+import { UserStatusComponent } from './components/admin/addashboard/user-status/user-status.component';
+import { ManageComponent } from './components/admin/manage/manage/manage.component';
+import { MngUsersComponent } from './components/admin/manage/users/mng-users/mng-users.component';
+import { MngProjectsComponent } from './components/admin/manage/projects/mng-projects/mng-projects.component';
+import { MngTeamsComponent } from './components/admin/manage/teams/mng-teams/mng-teams.component';
+import { MngSessionsComponent } from './components/admin/manage/sessions/mng-sessions/mng-sessions.component';
+import { NewUsermodalComponent } from './components/admin/manage/users/new-usermodal/new-usermodal.component';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { EditUsermodalComponent } from './components/admin/manage/users/edit-usermodal/edit-usermodal.component';
 
 @NgModule({
   declarations: [
@@ -80,12 +94,24 @@ import { ProjectStatusComponent } from './components/admin/addashboard/project-s
     AdProjectInfoComponent,
     SocketTestComponent,
     ProjectActionComponent,
+    ProjectStatusComponent,
+    ActiveSessionsComponent,
+    RecentSessionsComponent,
 
     /**added filter pipe to use it inside a component to filter*/
     ProjectFilterPipe,
     TeamFilterPipe,
     UserFilterPipe,
-    ProjectStatusComponent,
+    MyFilterPipe,
+    DispositionComponent,
+    UserStatusComponent,
+    ManageComponent,
+    MngUsersComponent,
+    MngProjectsComponent,
+    MngTeamsComponent,
+    MngSessionsComponent,
+    NewUsermodalComponent,
+    EditUsermodalComponent,
   ],
   imports: [
     CommonModule,
@@ -98,6 +124,10 @@ import { ProjectStatusComponent } from './components/admin/addashboard/project-s
     AngularMaterialModule,
     NgMultiSelectDropDownModule.forRoot(),
     MdbDropdownModule,
-  ], 
+    MdbFormsModule,
+
+    /**mdb modals */
+    MdbModalModule,
+  ],
 })
 export class MyLayoutModule {}

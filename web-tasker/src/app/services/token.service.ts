@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AccountService } from './account-service.service';
-import { WebRequestService } from './web-request.service';
+import { WebRequestService } from './api/web-request.service';
 //variables
 const TOKEN_KEY = 'auth-token';
 const REFRESHTOKEN_KEY = 'auth-refreshtoken';

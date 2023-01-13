@@ -23,8 +23,19 @@ import { AdProjectInfoComponent } from './components/admin/adprojects/ad-project
 import { SocketTestComponent } from './components/admin/socket-test/socket-test.component';
 import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
 import { TimerGuard } from '../helpers/guards/timer.guard';
-import { AdminGuard } from '../helpers/guards/admin.guard';
+import { ManagerGuard } from '../helpers/guards/manager.guard';
 import { ProjectStatusComponent } from './components/admin/addashboard/project-status/project-status.component';
+import { ActiveSessionsComponent } from './components/admin/addashboard/active-sessions/active-sessions.component';
+import { DispositionComponent } from './components/user/user_projects/disposition/disposition.component';
+import { RecentSessionsComponent } from './components/admin/addashboard/recent-sessions/recent-sessions.component';
+import { UserStatusComponent } from './components/admin/addashboard/user-status/user-status.component';
+import { ManageComponent } from './components/admin/manage/manage/manage.component';
+import { MngUsersComponent } from './components/admin/manage/users/mng-users/mng-users.component';
+import { MngProjectsComponent } from './components/admin/manage/projects/mng-projects/mng-projects.component';
+import { MngTeamsComponent } from './components/admin/manage/teams/mng-teams/mng-teams.component';
+import { MngSessionsComponent } from './components/admin/manage/sessions/mng-sessions/mng-sessions.component';
+import { CanDeactivateGuard } from '../helpers/guards/canDeactivate.guard';
+import { SupervisorGuard } from '../helpers/guards/supervisor.guard';
 
 const routes: Routes = [
   {
@@ -66,6 +77,11 @@ const routes: Routes = [
         canActivate: [AuthGuard, TimerGuard],
         component: ProjectActionComponent,
       },
+      {
+        path: 'projects/:projectId/action/disposition',
+        canActivate: [AuthGuard, TimerGuard],
+        component: DispositionComponent,
+      },
 
       /**TEAMS */
       {
@@ -83,74 +99,120 @@ const routes: Routes = [
       /**DASHBOARD */
       {
         path: 'ad_dashboard',
-        canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
+        canDeactivate: [CanDeactivateGuard],
         component: AdDashboardComponent,
       },
 
       {
         path: 'project_status',
-        canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
         component: ProjectStatusComponent,
+      },
+
+      {
+        path: 'active_sessions',
+        canActivate: [AuthGuard, SupervisorGuard],
+        component: ActiveSessionsComponent,
+      },
+
+      {
+        path: 'recent_sessions',
+        canActivate: [AuthGuard, SupervisorGuard],
+        component: RecentSessionsComponent,
+      },
+
+      {
+        path: 'user_status',
+        canActivate: [AuthGuard, SupervisorGuard],
+        component: UserStatusComponent,
       },
 
       /**PROJECTS */
       {
         path: 'ad_projects',
-        canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
         component: AdProjectsComponent,
       },
       {
         path: 'ad_projects/:projectId',
-        canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
         component: AdProjectInfoComponent,
       },
       {
         path: 'new_project',
-        canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
         component: NewProjectComponent,
       },
       {
         path: 'edit_project/:projectId',
-        canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
         component: EditProjectComponent,
       },
 
       /**TEAMS */
       {
         path: 'ad_teams',
-        canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
         component: AdTeamsComponent,
       },
       {
         path: 'ad_teams/:teamId',
-        canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
         component: TeamInfoComponent,
       },
       {
         path: 'ad_teams/:teamId/add_member',
-        canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
         component: AddMemberComponent,
       },
       {
         path: 'ad_teams/:teamId/assign_project',
-        canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
         component: AssignProjectComponent,
       },
       {
         path: 'new_team',
-        canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
         component: NewTeamComponent,
       },
       {
         path: 'edit_team/:teamId',
-        canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
         component: EditTeamComponent,
+      },
+
+      /**MANAGE*/
+      {
+        path: 'ad_manage',
+        canActivate: [AuthGuard, ManagerGuard],
+        component: ManageComponent,
+      },
+      {
+        path: 'ad_manage/users',
+        canActivate: [AuthGuard, ManagerGuard],
+        component: MngUsersComponent,
+      },
+      {
+        path: 'ad_manage/projects',
+        canActivate: [AuthGuard, ManagerGuard],
+        component: MngProjectsComponent,
+      },
+      {
+        path: 'ad_manage/teams',
+        canActivate: [AuthGuard, ManagerGuard],
+        component: MngTeamsComponent,
+      },
+      {
+        path: 'ad_manage/sessions',
+        canActivate: [AuthGuard,ManagerGuard],
+        component: MngSessionsComponent,
       },
 
       /**TESTING PURPOSE */
       {
         path: 'socketTest',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard,SupervisorGuard],
         component: SocketTestComponent,
       },
     ],

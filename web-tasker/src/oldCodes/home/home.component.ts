@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/account-service.service';
-import { ProjectService } from 'src/app/services/project.service';
+import { ProjectService } from 'src/app/services/api/project.service';
 import { StatusService } from 'src/app/services/status.service';
 import Swal from 'sweetalert2';
 

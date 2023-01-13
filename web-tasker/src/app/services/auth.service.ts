@@ -5,7 +5,7 @@ import { shareReplay, tap } from 'rxjs';
 import { AccountService } from './account-service.service';
 import { StatusService } from './status.service';
 import { TokenService } from './token.service';
-import { WebRequestService } from './web-request.service';
+import { WebRequestService } from './api/web-request.service';
 
 @Injectable({
   providedIn: 'root',
@@ -111,14 +111,41 @@ export class AuthService {
     return this.myBool;
   }
 
-  /**method used by admin guard to authorize admins */
-  verifyAdmin() {
+  /**method used by supervisor guard to authorize admins and supervisors */
+  verifySupervisor() {
     return new Promise((resolve, reject) => {
       /**check from db if user is an admin */
       this.webService.get('users/current').subscribe({
         next: (user) => {
-          const isProjectManager = user.isProjectManager;
-          resolve(isProjectManager);
+          const role = user.role;
+          //allow both supervisor and manager
+          if (role === 'supervisor' || role === 'manager') {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+    });
+  }
+
+  /**method used by manager guard to authorize managers */
+  verifyManager() {
+    return new Promise((resolve, reject) => {
+      /**check from db if user is an admin */
+      this.webService.get('users/current').subscribe({
+        next: (user) => {
+          const role = user.role;
+          //allow manager only
+          if (role === 'manager') {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
         },
         error: (err) => {
           console.log(err);
