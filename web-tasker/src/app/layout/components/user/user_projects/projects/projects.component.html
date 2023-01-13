@@ -12,7 +12,7 @@
                   <span
                     class="position-absolute top-0 start-99 translate-middle badge rounded-pill badge-danger count"
                   >
-                    {{projectsLength}}
+                    {{ projectsLength }}
                   </span>
                 </h1>
               </div>
@@ -81,6 +81,9 @@
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="centered-content text-danger" *ngIf="projectsLength === 0">
+                  <h2>no projects!</h2>
                 </div>
               </div>
             </div>
