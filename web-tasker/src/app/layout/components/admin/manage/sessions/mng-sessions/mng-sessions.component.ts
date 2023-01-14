@@ -145,36 +145,38 @@ export class MngSessionsComponent implements OnInit {
 
   /**Method to deletemultiple */
   deleteMultipe(sessionIdArr: any[]) {
-    // if (projectIdArr.length > 0) {
-    //   this.projectService.deleteMultipleProjects(projectIdArr).subscribe({
-    //     next: (response: any) => {
-    //       console.log(response);
-    //       this.displaySnackbar(1, response.message);
-    //       this.loadAllProjects();
-    //     },
-    //     error: (err) => {
-    //       console.log(err);
-    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //     },
-    //   });
-    // }
-    // //reset the selection
-    // this.selection = new SelectionModel<any>(true, []);
+    if (sessionIdArr.length > 0) {
+      this.projectStatusService
+        .deleteMultipleProjectStatus(sessionIdArr)
+        .subscribe({
+          next: (response: any) => {
+            console.log(response);
+            this.displaySnackbar(1, response.message);
+            this.loadAllSessions();
+          },
+          error: (err) => {
+            console.log(err);
+            Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+          },
+        });
+    }
+    //reset the selection
+    this.selection = new SelectionModel<any>(true, []);
   }
 
   /**Delete a specified session */
   deleteSession(sessionId: string) {
-    // this.projectService.deleteProject(projectId).subscribe({
-    //   next: (response: any) => {
-    //     console.log(response);
-    //     this.displaySnackbar(1, response.message);
-    //     this.loadAllProjects();
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //     Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //   },
-    // });
+    this.projectStatusService.deleteProjectStatus(sessionId).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.displaySnackbar(1, response.message);
+        this.loadAllSessions();
+      },
+      error: (err) => {
+        console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+      },
+    });
   }
 
   /**Multipurpose method for edits and updates */
