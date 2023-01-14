@@ -44,19 +44,6 @@
                       <mat-label>Filter</mat-label>
                       <input matInput (keyup)="applyFilter($event)" />
                     </mat-form-field>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <b>Delete Selected Records :</b> &nbsp;&nbsp;
-                    <button
-                      mat-icon-button
-                      aria-label="Example icon button with a delete icon"
-                      type="button"
-                      class="mt-4 custom-delete mat-raised-button"
-                      (click)="deleteSelected()"
-                      color="accent"
-                      matTooltip="Delete selected"
-                    >
-                      <mat-icon class="text-white">delete</mat-icon>
-                    </button>
                     <div>
                       <!-- TABLE BEGINS HERE-->
                       <mat-table
@@ -69,28 +56,6 @@
                             0 1px 18px 0 rgba(0, 0, 0, 0.12);
                         "
                       >
-                        <!-- Checkbox Column -->
-                        <ng-container matColumnDef="Select">
-                          <mat-header-cell *matHeaderCellDef>
-                            <mat-checkbox
-                              (change)="$event ? masterToggle() : null"
-                              [checked]="
-                                selection.hasValue() && isAllSelected()
-                              "
-                              [indeterminate]="
-                                selection.hasValue() && !isAllSelected()
-                              "
-                            ></mat-checkbox>
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let row" class="">
-                            <mat-checkbox
-                              (click)="$event.stopPropagation()"
-                              (change)="$event ? selection.toggle(row) : null"
-                              [checked]="selection.isSelected(row)"
-                              [aria-label]="checkboxLabel(row)"
-                            ></mat-checkbox>
-                          </mat-cell>
-                        </ng-container>
                         <!-- Username Column -->
                         <ng-container matColumnDef="Username" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -153,25 +118,6 @@
                           <mat-cell *matCellDef="let document">
                             {{ document.finishTime }}
                           </mat-cell>
-                        </ng-container>
-                        <!-- Delete Icon -->
-                        <ng-container matColumnDef="Delete">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Delete
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
-                            <button
-                              mat-icon-button
-                              class="custom-button custom-button-delete mat-raised-button"
-                              aria-label="Example icon button with a delete icon"
-                              type="button"
-                              (click)="confirmDeletion(document._id)"
-                              color="accent"
-                              matTooltip="Delete"
-                            >
-                              <mat-icon>delete_forever</mat-icon>
-                            </button></mat-cell
-                          >
                         </ng-container>
                         <mat-header-row
                           *matHeaderRowDef="displayedColumns"

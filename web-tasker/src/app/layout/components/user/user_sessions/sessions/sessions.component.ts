@@ -24,7 +24,6 @@ export class SessionsComponent {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   displayedColumns: string[] = [
-    'Select',
     'Username',
     'ProjectName',
     'TeamName',
@@ -32,7 +31,6 @@ export class SessionsComponent {
     'NewDuration',
     'StartTime',
     'FinishTime',
-    'Delete',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
