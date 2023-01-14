@@ -57,6 +57,7 @@ import { NewUsermodalComponent } from './components/admin/manage/users/new-userm
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { EditUsermodalComponent } from './components/admin/manage/users/edit-usermodal/edit-usermodal.component';
+import { UserSessionsComponent } from './components/user/user-sessions/user-sessions.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { EditUsermodalComponent } from './components/admin/manage/users/edit-use
     MngSessionsComponent,
     NewUsermodalComponent,
     EditUsermodalComponent,
+    UserSessionsComponent,
   ],
   imports: [
     CommonModule,
