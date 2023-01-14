@@ -12,7 +12,7 @@
                   <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger count"
                   >
-                    {{teamsLength}}
+                    {{ teamsLength }}
                   </span>
                 </h1>
               </div>
@@ -39,9 +39,9 @@
               <div class="row">
                 <!-- item 1 -->
                 <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
-                <div
+                 <div
                   class="col-md-6"
-                  *ngFor="let team of teams | teamFilter: searchText"
+                  *ngFor="let team of teams | teamFilter : searchText"
                   [routerLink]="['/teams', team._id]"
                 >
                   <div class="timetable-item shadow pointer">
@@ -59,6 +59,22 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div> 
+                <div class="row" *ngIf ="teamsLength === 0">
+                  <div class="centered">
+                    <img
+                      id=""
+                      src="../assets/images/arguement.png"
+                      width="200px"
+                      height="200px"
+                      alt="hoops"
+                    />
+                  </div>
+                  <div class="centered">
+                    <h1 class="project-color">
+                      Teams not available at the moment
+                    </h1>
                   </div>
                 </div>
               </div>
