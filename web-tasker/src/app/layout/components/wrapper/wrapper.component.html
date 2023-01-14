@@ -66,6 +66,17 @@
         </div>
       </mat-list-item>
 
+      <!-- user sessions -->
+      <mat-list-item
+        [routerLink]="'sessions'"
+        routerLinkActive="list-item-active"
+      >
+        <div class="mat-list-item-content">
+          <mat-icon mat-list-icon>timer</mat-icon>
+          <div class="content" *ngIf="isExpanded">My sessions</div>
+        </div>
+      </mat-list-item>
+
       <!-- ADMIN SECTION -->
       <mat-list-item (click)="showSublist()" *ngIf="isAdmin">
         <div class="mat-list-item-content">
