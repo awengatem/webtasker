@@ -36,6 +36,7 @@ import { MngTeamsComponent } from './components/admin/manage/teams/mng-teams/mng
 import { MngSessionsComponent } from './components/admin/manage/sessions/mng-sessions/mng-sessions.component';
 import { CanDeactivateGuard } from '../helpers/guards/canDeactivate.guard';
 import { SupervisorGuard } from '../helpers/guards/supervisor.guard';
+import { SessionsComponent } from './components/user/user_sessions/sessions/sessions.component';
 
 const routes: Routes = [
   {
@@ -93,6 +94,13 @@ const routes: Routes = [
         path: 'teams/:teamId',
         canActivate: [AuthGuard],
         component: UsTeamInfoComponent,
+      },
+
+      /**SESSIONS */
+      {
+        path: 'sessions',
+        canActivate: [AuthGuard],
+        component: SessionsComponent,
       },
 
       /**ADMIN ROUTES */
@@ -205,14 +213,14 @@ const routes: Routes = [
       },
       {
         path: 'ad_manage/sessions',
-        canActivate: [AuthGuard,ManagerGuard],
+        canActivate: [AuthGuard, ManagerGuard],
         component: MngSessionsComponent,
       },
 
       /**TESTING PURPOSE */
       {
         path: 'socketTest',
-        canActivate: [AuthGuard,SupervisorGuard],
+        canActivate: [AuthGuard, SupervisorGuard],
         component: SocketTestComponent,
       },
     ],
