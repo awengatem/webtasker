@@ -23,8 +23,7 @@ export class SessionsComponent {
   selection = new SelectionModel<any>(true, []);
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  displayedColumns: string[] = [
-    'Username',
+  displayedColumns: string[] = [   
     'ProjectName',
     'TeamName',
     'Status',
