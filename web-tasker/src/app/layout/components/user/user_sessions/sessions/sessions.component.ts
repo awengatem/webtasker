@@ -199,7 +199,7 @@ export class SessionsComponent {
     }
   }
 
-  /**Method to reload user table */
+  /**Method to load table data */
   loadUserSessions() {
     this.projectStatusService
       .getStatusDocs()
