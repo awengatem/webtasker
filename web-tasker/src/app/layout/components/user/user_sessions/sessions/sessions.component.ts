@@ -43,7 +43,7 @@ export class SessionsComponent {
     private _snackBar: MatSnackBar
   ) {
     //load data on table
-    this.loadAllSessions();
+    this.loadUserSessions();
   }
 
   ngOnInit(): void {}
@@ -153,7 +153,7 @@ export class SessionsComponent {
           next: (response: any) => {
             console.log(response);
             this.displaySnackbar(1, response.message);
-            this.loadAllSessions();
+            this.loadUserSessions();
           },
           error: (err) => {
             console.log(err);
@@ -171,7 +171,7 @@ export class SessionsComponent {
       next: (response: any) => {
         console.log(response);
         this.displaySnackbar(1, response.message);
-        this.loadAllSessions();
+        this.loadUserSessions();
       },
       error: (err) => {
         console.log(err);
@@ -200,7 +200,7 @@ export class SessionsComponent {
   }
 
   /**Method to reload user table */
-  loadAllSessions() {
+  loadUserSessions() {
     this.projectStatusService
       .getStatusDocs()
       .then((sessions: any) => {
