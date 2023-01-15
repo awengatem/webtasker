@@ -12,7 +12,7 @@
                   <span
                     class="position-absolute top-0 start-99 translate-middle badge rounded-pill badge-danger count"
                   >
-                    {{projectsLength}}
+                    {{ projectsLength }}
                   </span>
                 </h1>
               </div>
@@ -80,6 +80,23 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+                <!-- div to display when empty-->
+                <div class="row" *ngIf="projectsLength === 0">
+                  <div class="centered">
+                    <img
+                      id=""
+                      src="../assets/images/black.png"
+                      width="350px"
+                      height="300px"
+                      alt="hoops"
+                    />
+                  </div>
+                  <div class="centered">
+                    <h1 class="project-color">
+                      Projects are not available at the moment
+                    </h1>
                   </div>
                 </div>
               </div>

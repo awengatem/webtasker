@@ -432,4 +432,16 @@ export class ProjectStatusService {
   getUserStatusDocs() {
     return this.webService.get('users/status');
   }
+
+  /**delete project status document from db */
+  deleteProjectStatus(id: string) {
+    return this.webService.delete(`project_status/${id}`);
+  }
+
+  /**delete multiple project status documents from db */
+  deleteMultipleProjectStatus(idArr: any[]) {
+    return this.webService.post(`project_status/delete_multiple`, {
+      projectStatusIdArr: idArr,
+    });
+  }
 }

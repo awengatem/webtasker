@@ -12,19 +12,18 @@ import Swal from 'sweetalert2';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 
 @Component({
-  selector: 'app-mng-sessions',
-  templateUrl: './mng-sessions.component.html',
-  styleUrls: ['./mng-sessions.component.scss'],
+  selector: 'app-sessions',
+  templateUrl: './sessions.component.html',
+  styleUrls: ['./sessions.component.scss'],
 })
-export class MngSessionsComponent implements OnInit {
-  /**variables */
+export class SessionsComponent {
+  sessions!: any[];
   totalSessions = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   displayedColumns: string[] = [
-    'Select',
     'Username',
     'ProjectName',
     'TeamName',
@@ -32,10 +31,12 @@ export class MngSessionsComponent implements OnInit {
     'NewDuration',
     'StartTime',
     'FinishTime',
-    'Delete',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  /**used by  the search bar */
+  searchText = '';
 
   constructor(
     private projectStatusService: ProjectStatusService,
