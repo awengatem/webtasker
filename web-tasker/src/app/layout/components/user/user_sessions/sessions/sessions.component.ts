@@ -201,8 +201,10 @@ export class SessionsComponent {
 
   /**Method to load table data */
   loadUserSessions() {
+    /**get userId */
+    const userId: string = localStorage.getItem('user-id')!;
     this.projectStatusService
-      .getStatusDocs()
+      .getSpecUserStatusDocs(userId)
       .then((sessions: any) => {
         this.dataSource = new MatTableDataSource(sessions);
         this.dataSource.paginator = this.paginator;

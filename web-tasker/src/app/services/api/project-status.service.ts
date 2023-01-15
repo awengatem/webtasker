@@ -41,7 +41,7 @@ export class ProjectStatusService {
   /**get project status docs belonging to a specific user from api */
   getSpecUserStatusDocs(userId: string) {
     return new Promise((resolve, reject) => {
-      this.getUserProjectStatus(userId).subscribe({
+      this.getProjectStatusByUser(userId).subscribe({
         next: (documents) => {
           this.calibrateStatusDocs(documents).then((calibratedDocs) => {
             resolve(calibratedDocs);
@@ -339,8 +339,8 @@ export class ProjectStatusService {
   }
 
   /**get only specified user's project status docs  from db */
-  getUserProjectStatus(userId: string) {
-    return this.webService.get(`project_status${userId}`);
+  getProjectStatusByUser(userId: string) {
+    return this.webService.get(`project_status/user/${userId}`);
   }
 
   /**get recent finished (status) project status docs  from db */
