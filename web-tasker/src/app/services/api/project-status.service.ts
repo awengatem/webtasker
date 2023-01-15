@@ -10,8 +10,8 @@ import { UserAccountService } from './user-account.service';
 export class ProjectStatusService {
   /**Array used to getStatusDocs function */
   documents!: any[];
-  documents2!: any[];
-  documents3!: any[];
+  // documents2!: any[];
+  // documents3!: any[];
   documents4!: any[];
   constructor(
     private webService: WebRequestService,
@@ -46,61 +46,6 @@ export class ProjectStatusService {
           this.calibrateStatusDocs(documents).then((calibratedDocs) => {
             resolve(calibratedDocs);
           });
-          // //console.log(this.documents2);
-          // this.documents2 = documents;
-          // //push new fields to retrieved documents
-          // this.documents2.forEach(
-          //   (document) => (
-          //     (document.username = 'Unknown'),
-          //     (document.projectName = 'Unknown'),
-          //     (document.teamName = 'Unknown'),
-          //     (document.newDuration = 'Unknown'),
-          //     (document.startTime = 'Unknown'),
-          //     (document.finishTime = 'Unknown')
-          //   )
-          // );
-          // //console.log(this.documents2);
-          // //loop through the documents and assign new values
-          // for (let i = 0; i < this.documents2.length; i++) {
-          //   if (this.documents2[i] != null) {
-          //     //assign user name
-          //     this.getUserName(this.documents2[i].user_account_id).then(
-          //       (username) => {
-          //         this.documents2[i].username = username;
-          //       }
-          //     );
-          //     //assign project name
-          //     this.getProjectName(this.documents2[i].project_id).then(
-          //       (projectName) => {
-          //         this.documents2[i].projectName = projectName;
-          //       }
-          //     );
-          //     //assign team name
-          //     this.getTeamName(this.documents2[i].team_id).then((teamName) => {
-          //       this.documents2[i].teamName = teamName;
-          //     });
-          //     //assign new duration
-          //     this.durationConverter(this.documents2[i].duration).then(
-          //       (newDuration) => {
-          //         this.documents2[i].newDuration = newDuration;
-          //       }
-          //     );
-          //     //assign new start time
-          //     this.timestampConverter(this.documents2[i].started).then(
-          //       (startTime) => {
-          //         this.documents2[i].startTime = startTime;
-          //       }
-          //     );
-
-          //     //assign new finish time
-          //     this.timestampConverter(this.documents2[i].finished).then(
-          //       (finishTime) => {
-          //         this.documents2[i].finishTime = finishTime;
-          //       }
-          //     );
-          //   }
-          // }
-          // resolve(this.documents2);
         },
         error: (err) => {
           console.log(err);
@@ -118,59 +63,6 @@ export class ProjectStatusService {
           this.calibrateStatusDocs(documents).then((calibratedDocs) => {
             resolve(calibratedDocs);
           });
-          // //console.log(this.documents3);
-          // this.documents3 = documents;
-          // //push new fields to retrieved documents
-          // this.documents3.forEach(
-          //   (document) => (
-          //     (document.username = 'Unknown'),
-          //     (document.projectName = 'Unknown'),
-          //     (document.teamName = 'Unknown'),
-          //     (document.newDuration = 'Unknown'),
-          //     (document.startTime = 'Unknown'),
-          //     (document.finishTime = 'Unknown')
-          //   )
-          // );
-          // //console.log(this.documents3);
-          // //loop through the documents and assign new values
-          // for (let i = 0; i < this.documents3.length; i++) {
-          //   //assign user name
-          //   this.getUserName(this.documents3[i].user_account_id).then(
-          //     (username) => {
-          //       this.documents3[i].username = username;
-          //     }
-          //   );
-          //   //assign project name
-          //   this.getProjectName(this.documents3[i].project_id).then(
-          //     (projectName) => {
-          //       this.documents3[i].projectName = projectName;
-          //     }
-          //   );
-          //   //assign team name
-          //   this.getTeamName(this.documents3[i].team_id).then((teamName) => {
-          //     this.documents3[i].teamName = teamName;
-          //   });
-          //   //assign new duration
-          //   this.durationConverter(this.documents3[i].duration).then(
-          //     (newDuration) => {
-          //       this.documents3[i].newDuration = newDuration;
-          //     }
-          //   );
-          //   //assign new start time
-          //   this.timestampConverter(this.documents3[i].started).then(
-          //     (startTime) => {
-          //       this.documents3[i].startTime = startTime;
-          //     }
-          //   );
-
-          //   //assign new finish time
-          //   this.timestampConverter(this.documents3[i].finished).then(
-          //     (finishTime) => {
-          //       this.documents3[i].finishTime = finishTime;
-          //     }
-          //   );
-          // }
-          // resolve(this.documents3);
         },
         error: (err) => {
           console.log(err);
