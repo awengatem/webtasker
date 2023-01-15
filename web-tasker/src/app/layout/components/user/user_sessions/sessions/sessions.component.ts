@@ -23,8 +23,7 @@ export class SessionsComponent {
   selection = new SelectionModel<any>(true, []);
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  displayedColumns: string[] = [
-    'Username',
+  displayedColumns: string[] = [   
     'ProjectName',
     'TeamName',
     'Status',
@@ -43,7 +42,7 @@ export class SessionsComponent {
     private _snackBar: MatSnackBar
   ) {
     //load data on table
-    this.loadAllSessions();
+    this.loadUserSessions();
   }
 
   ngOnInit(): void {}
@@ -153,7 +152,7 @@ export class SessionsComponent {
           next: (response: any) => {
             console.log(response);
             this.displaySnackbar(1, response.message);
-            this.loadAllSessions();
+            this.loadUserSessions();
           },
           error: (err) => {
             console.log(err);
@@ -171,7 +170,7 @@ export class SessionsComponent {
       next: (response: any) => {
         console.log(response);
         this.displaySnackbar(1, response.message);
-        this.loadAllSessions();
+        this.loadUserSessions();
       },
       error: (err) => {
         console.log(err);
@@ -199,10 +198,12 @@ export class SessionsComponent {
     }
   }
 
-  /**Method to reload user table */
-  loadAllSessions() {
+  /**Method to load table data */
+  loadUserSessions() {
+    /**get userId */
+    const userId: string = localStorage.getItem('user-id')!;
     this.projectStatusService
-      .getStatusDocs()
+      .getSpecUserStatusDocs(userId)
       .then((sessions: any) => {
         this.dataSource = new MatTableDataSource(sessions);
         this.dataSource.paginator = this.paginator;
