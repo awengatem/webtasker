@@ -38,6 +38,23 @@ export class ProjectStatusService {
     });
   }
 
+  /**get project status docs belonging to a specific user from api */
+  getSpecUserStatusDocs(userId: string) {
+    return new Promise((resolve, reject) => {
+      this.getUserProjectStatus(userId).subscribe({
+        next: (documents) => {
+          this.calibrateStatusDocs(documents).then((calibratedDocs) => {
+            resolve(calibratedDocs);
+          });
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+    });
+  }
+
   /**get active project status docs from api */
   getActiveStatusDocs() {
     return new Promise((resolve, reject) => {
@@ -319,6 +336,11 @@ export class ProjectStatusService {
   /**get all project status docs  from db */
   getProjectStatus() {
     return this.webService.get('project_status');
+  }
+
+  /**get only specified user's project status docs  from db */
+  getUserProjectStatus(userId: string) {
+    return this.webService.get(`project_status${userId}`);
   }
 
   /**get recent finished (status) project status docs  from db */
