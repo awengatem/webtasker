@@ -120,7 +120,23 @@
                             Status
                           </mat-header-cell>
                           <mat-cell *matCellDef="let document">
-                            {{ document.status }}
+                            <div
+                              *ngIf="document.status != 'finished'"
+                              class="col-sm"
+                              [ngClass]="
+                                document.status === 'running'
+                                  ? 'running'
+                                  : 'paused'
+                              "
+                            >
+                              {{ document.status }}
+                            </div>
+                            <div
+                              *ngIf="document.status === 'finished'"
+                              class="col-sm default"
+                            >
+                              {{ document.status }}
+                            </div>
                           </mat-cell>
                         </ng-container>
                         <!-- NewDuration Column -->
