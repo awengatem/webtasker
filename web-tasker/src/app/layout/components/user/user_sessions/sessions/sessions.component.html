@@ -57,6 +57,15 @@
                         "
                       >
                         <!-- ProjectName Column -->
+                        <ng-container matColumnDef="Position" class="">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            #
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            {{ document.position }}
+                          </mat-cell>
+                        </ng-container>
+                        <!-- ProjectName Column -->
                         <ng-container matColumnDef="ProjectName" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Project name

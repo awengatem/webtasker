@@ -23,7 +23,8 @@ export class SessionsComponent {
   selection = new SelectionModel<any>(true, []);
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  displayedColumns: string[] = [   
+  displayedColumns: string[] = [
+    'Position',
     'ProjectName',
     'TeamName',
     'Status',
@@ -205,6 +206,10 @@ export class SessionsComponent {
     this.projectStatusService
       .getSpecUserStatusDocs(userId)
       .then((sessions: any) => {
+        // add numbering to the sessions
+        for (let session of sessions) {
+          session.position = sessions.indexOf(session) + 1;
+        }
         this.dataSource = new MatTableDataSource(sessions);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
