@@ -161,8 +161,6 @@ export class MngTeamsComponent implements OnInit {
         },
       });
     }
-    //reset the selection
-    this.selection = new SelectionModel<any>(true, []);
   }
 
   /**Delete a specified team */
@@ -201,6 +199,9 @@ export class MngTeamsComponent implements OnInit {
 
   /**Method to reload team table */
   loadAllTeams() {
+    //reset the selection
+    this.selection = new SelectionModel<any>(true, []);
+    //load data
     this.teamService.getAllTeams().subscribe({
       next: (teams) => {
         this.dataSource = new MatTableDataSource(teams);

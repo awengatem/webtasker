@@ -174,8 +174,6 @@ export class MngUsersComponent implements OnInit {
         },
       });
     }
-    //reset the selection
-    this.selection = new SelectionModel<any>(true, []);
   }
 
   /**Delete a specified user */
@@ -213,6 +211,9 @@ export class MngUsersComponent implements OnInit {
 
   /**Method to reload user table */
   loadAllUsers() {
+    //reset the selection
+    this.selection = new SelectionModel<any>(true, []);
+    //load data
     this.userAccountService.getUsers().subscribe({
       next: (users) => {
         this.dataSource = new MatTableDataSource(users);

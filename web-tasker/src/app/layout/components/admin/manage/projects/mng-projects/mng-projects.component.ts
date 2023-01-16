@@ -161,8 +161,6 @@ export class MngProjectsComponent implements OnInit {
         },
       });
     }
-    //reset the selection
-    this.selection = new SelectionModel<any>(true, []);
   }
 
   /**Delete a specified project */
@@ -201,6 +199,9 @@ export class MngProjectsComponent implements OnInit {
 
   /**Method to reload user table */
   loadAllProjects() {
+    //reset the selection
+    this.selection = new SelectionModel<any>(true, []);
+    //load data
     this.projectService.getAllProjects().subscribe({
       next: (projects) => {
         this.dataSource = new MatTableDataSource(projects);
