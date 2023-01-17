@@ -4,24 +4,34 @@
     <div class="page__content-data">
       <div class="centered-content">
         <div class="modal-box shadow">
-          <h1><i class="uil uil-edit-alt"></i> Choose a reason for the break</h1>
-          <mat-list>
-            <mat-list-item
-              ><mat-checkbox checked="true">Meal break</mat-checkbox>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item
-              ><mat-checkbox checked="true">Health break</mat-checkbox>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item
-              ><mat-checkbox checked="true">Checkbox Checked</mat-checkbox>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item
-              ><mat-checkbox checked="true">Other</mat-checkbox>
-            </mat-list-item>
-          </mat-list>
+          <h1>
+            <i class="uil uil-edit-alt"></i> Choose a reason for the break
+          </h1>
+          <form action="">
+            <mat-list>
+              <mat-radio-group
+                [(ngModel)]="reason"
+                [ngModelOptions]="{ standalone: true }"
+              >
+                <mat-list-item *ngFor="let reason of reasons"
+                  ><mat-radio-button [value]="reason">{{
+                    reason
+                  }}</mat-radio-button>
+                  <mat-divider></mat-divider>
+                </mat-list-item>
+              </mat-radio-group>
+            </mat-list>
+            <div class="input-group-append row btm-rgt">
+              <button
+                class="btn btn-outline-secondary col me-1"
+                type="button"
+                [routerLink]="['/projects', projectId, 'action']"
+              >
+                Cancel
+              </button>
+              <button class="btn btn-custom col" type="submit">Submit</button>
+            </div>
+          </form>
           <!-- <form
             name="form"
             (ngSubmit)="f.form.valid && createDisposition()"

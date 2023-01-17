@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./disposition.component.scss'],
 })
 export class DispositionComponent implements OnInit {
+  reason: string = 'Short break';
+  reasons: string[] = ['Tea break', 'Lunch break', 'Short break', 'Other'];
   form: any = {
     reason: null,
   };
