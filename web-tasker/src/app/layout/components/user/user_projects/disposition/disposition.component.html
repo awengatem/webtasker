@@ -4,8 +4,25 @@
     <div class="page__content-data">
       <div class="centered-content">
         <div class="modal-box shadow">
-          <h1><i class="uil uil-edit-alt"></i> Enter a reason for the break</h1>
-          <form
+          <h1><i class="uil uil-edit-alt"></i> Choose a reason for the break</h1>
+          <mat-list>
+            <mat-list-item
+              ><mat-checkbox checked="true">Meal break</mat-checkbox>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item
+              ><mat-checkbox checked="true">Health break</mat-checkbox>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item
+              ><mat-checkbox checked="true">Checkbox Checked</mat-checkbox>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item
+              ><mat-checkbox checked="true">Other</mat-checkbox>
+            </mat-list-item>
+          </mat-list>
+          <!-- <form
             name="form"
             (ngSubmit)="f.form.valid && createDisposition()"
             #f="ngForm"
@@ -61,7 +78,7 @@
                 Submit
               </button>
             </div>
-          </form>
+          </form> -->
         </div>
       </div>
     </div>
