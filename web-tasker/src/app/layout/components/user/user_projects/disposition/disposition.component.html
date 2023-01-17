@@ -13,17 +13,17 @@
                 [(ngModel)]="reason"
                 [ngModelOptions]="{ standalone: true }"
               >
-                <mat-list-item *ngFor="let reason of reasons"
+                <mat-list-item *ngFor="let val of reasons"
                   ><mat-radio-button
-                    [value]="reason"
+                    [value]="val"
                     (change)="toggleTextArea($event, form)"
-                    >{{ reason }}</mat-radio-button
+                    >{{ val }}</mat-radio-button
                   >
                   <mat-divider></mat-divider>
                 </mat-list-item>
                 <mat-list-item
                   ><mat-radio-button
-                    [value]="form.value.other"
+                    [value]="'other'"
                     (change)="toggleTextArea($event, form)"
                     >Other</mat-radio-button
                   >

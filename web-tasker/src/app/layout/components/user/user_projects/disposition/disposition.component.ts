@@ -13,9 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class DispositionComponent implements OnInit {
   form: FormGroup = new FormGroup({});
-  // form: any = {
-  //   other: null,
-  // };
+  defaultForm: FormGroup = new FormGroup({});
+  otherForm: FormGroup = new FormGroup({});
   reason: string = 'Short break';
   reasons: string[] = ['Tea break', 'Lunch break', 'Short break'];
   submitted: boolean = false;
@@ -37,8 +36,11 @@ export class DispositionComponent implements OnInit {
       this.projectId = projectId;
     });
 
-    /**build form */
-    this.form = this.fb.group({
+    /**build forms */
+    this.defaultForm = this.fb.group({
+      reason: this.reason,
+    });
+    this.otherForm = this.fb.group({
       other: [
         '',
         [
@@ -48,34 +50,43 @@ export class DispositionComponent implements OnInit {
         ],
       ],
     });
+    /**initialize default form*/
+    this.form = this.defaultForm;
   }
 
   /**method to post reasom for pause to db */
-  createDisposition() {
-    // const { reason } = this.form; //data from template not here
-    // //remove unneccessary whitespace
-    // const cleanReason = this.generalService.clean(reason);
-    // this.dispositionService.createDisposition(cleanReason).subscribe({
-    //   next: (response: any) => {
-    //     console.log(response);
-    //     this.pauseTimer()
-    //       .then(() => {
-    //         Swal.fire(
-    //           'Success!',
-    //           `Your reason has been submitted and session paused successfully.`,
-    //           'success'
-    //         );
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //     this.router.navigate([`/projects/${this.projectId}/action`]);
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //     Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //   },
-    // });
+  createDisposition(form: any) {
+    const { reason, other } = form.value;
+    let reasonTxt = '';
+    /**get the user input reason */
+    if (reason) {
+      reasonTxt = reason;
+    } else if (other) {
+      reasonTxt = other;
+    }
+    //remove unneccessary whitespace
+    const cleanReason = this.generalService.clean(reasonTxt);
+    this.dispositionService.createDisposition(cleanReason).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.pauseTimer()
+          .then(() => {
+            Swal.fire(
+              'Success!',
+              `Your reason has been submitted and session paused successfully.`,
+              'success'
+            );
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        this.router.navigate([`/projects/${this.projectId}/action`]);
+      },
+      error: (err) => {
+        console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+      },
+    });
   }
 
   /**method to pause timer */
@@ -89,12 +100,17 @@ export class DispositionComponent implements OnInit {
   /**method to show text area */
   toggleTextArea(event: any, form: any) {
     const { other } = form.value;
-    /**Show textarea if checked*/
-    if (event.value === other) {
-      console.log('other checked');
+    /**Swap forms if checked*/
+    if (event.value === 'other') {
       this.isTextAreaOpen = true;
+      this.form = this.otherForm;
     } else {
+      /**attach selected value to default form */
       this.isTextAreaOpen = false;
+      this.defaultForm = this.fb.group({
+        reason: event.value,
+      });
+      this.form = this.defaultForm;
     }
   }
 
