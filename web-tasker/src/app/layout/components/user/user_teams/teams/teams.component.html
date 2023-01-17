@@ -39,7 +39,7 @@
               <div class="row">
                 <!-- item 1 -->
                 <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
-                 <div
+                <div
                   class="col-md-6"
                   *ngFor="let team of teams | teamFilter : searchText"
                   [routerLink]="['/teams', team._id]"
@@ -60,12 +60,13 @@
                       </div>
                     </div>
                   </div>
-                </div> 
-                <div class="row" *ngIf ="teamsLength === 0">
+                </div>
+                <!-- div to display when empty-->
+                <div class="row" *ngIf="teamsLength === 0">
                   <div class="centered">
                     <img
                       id=""
-                      src="../assets/images/arguement.png"
+                      src="../assets/images/group.png"
                       width="200px"
                       height="200px"
                       alt="hoops"

@@ -3,8 +3,8 @@
   <div class="page__content shadow p-3 position-relative">
     <div class="page__content-data">
       <div class="centered-content">
-        <div class="sessions-container">
-          <div class="sessions">
+        <div class="manage-container">
+          <div class="manage">
             <div class="row">
               <div class="col-3">
                 <h1 class="text-dark position-relative">
@@ -57,6 +57,17 @@
                         "
                       >
                         <!-- ProjectName Column -->
+                        <ng-container matColumnDef="Position" class="">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            #
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            <div class="bold">
+                              {{ document.position }}
+                            </div>
+                          </mat-cell>
+                        </ng-container>
+                        <!-- ProjectName Column -->
                         <ng-container matColumnDef="ProjectName" class="">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Project name
@@ -80,7 +91,23 @@
                             Status
                           </mat-header-cell>
                           <mat-cell *matCellDef="let document">
-                            {{ document.status }}
+                            <div
+                              *ngIf="document.status != 'finished'"
+                              class="col-sm"
+                              [ngClass]="
+                                document.status === 'running'
+                                  ? 'running'
+                                  : 'paused'
+                              "
+                            >
+                              {{ document.status }}
+                            </div>
+                            <div
+                              *ngIf="document.status === 'finished'"
+                              class="col-sm default"
+                            >
+                              {{ document.status }}
+                            </div>
                           </mat-cell>
                         </ng-container>
                         <!-- NewDuration Column -->

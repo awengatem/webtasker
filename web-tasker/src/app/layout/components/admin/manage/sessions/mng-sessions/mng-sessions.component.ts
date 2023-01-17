@@ -160,8 +160,6 @@ export class MngSessionsComponent implements OnInit {
           },
         });
     }
-    //reset the selection
-    this.selection = new SelectionModel<any>(true, []);
   }
 
   /**Delete a specified session */
@@ -200,6 +198,9 @@ export class MngSessionsComponent implements OnInit {
 
   /**Method to reload user table */
   loadAllSessions() {
+    //reset selection list
+    this.selection = new SelectionModel<any>(true, []);
+    //load data
     this.projectStatusService
       .getStatusDocs()
       .then((sessions: any) => {

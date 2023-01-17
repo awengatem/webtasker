@@ -41,7 +41,7 @@
                 <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
                 <div
                   class="col-md-6"
-                  *ngFor="let project of projects | projectFilter: searchText"
+                  *ngFor="let project of projects | projectFilter : searchText"
                 >
                   <div class="timetable-item shadow pointer">
                     <div class="timetable-item-main">
@@ -56,25 +56,14 @@
                       </div>
                       <div class="col-sm action">
                         <div class="row">
+                          <div class="col"></div>
                           <button
                             type="button"
-                            class="col btn btn-outline-dark btn-sm me-2"
+                            class="col btn btn-outline-custom btn-sm"
                             [routerLink]="['/edit_project', project._id]"
                             (click)="captureProject(project.projectName)"
                           >
                             <i class="fa-solid fa-pen-fancy"></i>
-                          </button>
-                          <button
-                            type="button"
-                            class="col btn btn-outline-danger btn-sm"
-                            (click)="
-                              alertConfirmation(
-                                project._id,
-                                project.projectName
-                              )
-                            "
-                          >
-                            <i class="fa-solid fa-trash-can"></i>
                           </button>
                         </div>
                       </div>
