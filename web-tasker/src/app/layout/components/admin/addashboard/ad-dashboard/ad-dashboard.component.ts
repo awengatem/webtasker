@@ -117,8 +117,14 @@ export class AdDashboardComponent implements OnInit {
     });
   }
 
-  /**getting number of active users from service */
+  /**getting number of active users from service
+   * Also helps identify active teams and projects
+   */
   getActiveUsers() {
+    /**reset the active teams and projects variables */
+    this.uniqueProjects = [];
+    this.uniqueTeams = [];
+
     this.projectStatusService
       .getActiveStatusDocs()
       .then((documents: any) => {
