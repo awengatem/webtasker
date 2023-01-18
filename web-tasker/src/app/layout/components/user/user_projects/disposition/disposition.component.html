@@ -4,47 +4,60 @@
     <div class="page__content-data">
       <div class="centered-content">
         <div class="modal-box shadow">
-          <h1><i class="uil uil-edit-alt"></i> Enter a reason for the break</h1>
-          <form
-            name="form"
-            (ngSubmit)="f.form.valid && createDisposition()"
-            #f="ngForm"
-            novalidate
-          >
-            <div class="input-group mb-3">
-              <textarea
-                #reason="ngModel"
-                name="reason"
-                class="form-control z-depth-1"
-                required
-                minlength="4"
-                maxlength="200"
-                id="exampleFormControlTextarea6"
-                rows="3"
-                [(ngModel)]="form.reason"
-                placeholder="Write your reason here..."
-              ></textarea>
-            </div>
-            <i
-              class="vericon danger fas fa-exclamation-circle fa-xs"
-              *ngIf="
-                (reason.errors && reason.dirty) || (reason.errors && submitted)
-              "
-            ></i>
-            <div
-              class="alert-style"
-              role="alert"
-              *ngIf="
-                (reason.errors && reason.dirty) || (reason.errors && submitted)
-              "
+          <h1>
+            <i class="uil uil-edit-alt"></i> Choose a reason for the break
+          </h1>
+          <form [formGroup]="form" (ngSubmit)="form.valid && submitForm(form)">
+            <mat-list>
+              <mat-radio-group
+                [(ngModel)]="reason"
+                [ngModelOptions]="{ standalone: true }"
+              >
+                <mat-list-item *ngFor="let val of reasons"
+                  ><mat-radio-button
+                    [value]="val"
+                    (change)="toggleTextArea($event)"
+                    >{{ val }}</mat-radio-button
+                  >
+                  <mat-divider></mat-divider>
+                </mat-list-item>
+                <mat-list-item
+                  ><mat-radio-button
+                    [value]="'other'"
+                    (change)="toggleTextArea($event)"
+                    >Other</mat-radio-button
+                  >
+                  <mat-divider></mat-divider>
+                </mat-list-item>
+              </mat-radio-group>
+            </mat-list>
+            <!-- TEXT AREA FOR OTHER REASON -->
+            <mat-form-field
+              *ngIf="isTextAreaOpen"
+              appearance="outline"
+              class="text-field"
             >
-              <small *ngIf="reason.errors['required']">
-                Reason is required!
-              </small>
-              <small *ngIf="reason.errors['minlength']">
+              <mat-label>Reason</mat-label>
+              <textarea
+                matInput
+                type="text"
+                placeholder="Write your reason here..."
+                formControlName="other"
+                #other
+              ></textarea>
+              <!-- <mat-icon matSuffix>account_circle</mat-icon> -->
+              <!-- <mat-hint>Hint</mat-hint> -->
+              <mat-error *ngIf="form.controls['other'].errors?.['required']"
+                >Reason is required!</mat-error
+              >
+              <mat-error *ngIf="form.controls['other'].errors?.['minlength']">
                 Reason must be at least 4 characters
-              </small>
-            </div>
+              </mat-error>
+              <mat-error *ngIf="form.controls['other'].errors?.['maxlength']">
+                Reason should not exceed 50 characters
+              </mat-error>
+            </mat-form-field>
+            <!-- ACTION BUTTONS -->
             <div class="input-group-append row btm-rgt">
               <button
                 class="btn btn-outline-secondary col me-1"
@@ -53,13 +66,7 @@
               >
                 Cancel
               </button>
-              <button
-                class="btn btn-custom col"
-                type="submit"
-                (click)="submit()"
-              >
-                Submit
-              </button>
+              <button class="btn btn-custom col" type="submit">Submit</button>
             </div>
           </form>
         </div>

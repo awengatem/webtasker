@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DispositionService } from 'src/app/services/api/disposition.service';
 import { GeneralService } from 'src/app/services/general.service';
@@ -11,15 +12,19 @@ import Swal from 'sweetalert2';
   styleUrls: ['./disposition.component.scss'],
 })
 export class DispositionComponent implements OnInit {
-  form: any = {
-    reason: null,
-  };
+  form: FormGroup = new FormGroup({});
+  defaultForm: FormGroup = new FormGroup({});
+  otherForm: FormGroup = new FormGroup({});
+  reasons: string[] = ['Tea break', 'Lunch break', 'Short break'];
+  reason: string = this.reasons[2]; //this is used as default selected value
   submitted: boolean = false;
+  isTextAreaOpen: boolean = false;
   projectId!: string;
 
   constructor(
     private dispositionService: DispositionService,
     private generalService: GeneralService,
+    private fb: FormBuilder,
     private webSocketService: SocketIoService,
     private router: Router,
     private route: ActivatedRoute
@@ -30,13 +35,38 @@ export class DispositionComponent implements OnInit {
       const projectId = params['projectId'];
       this.projectId = projectId;
     });
+
+    /**build forms */
+    this.defaultForm = this.fb.group({
+      reason: this.reason,
+    });
+    this.otherForm = this.fb.group({
+      other: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(50),
+        ],
+      ],
+    });
+    /**initialize default form*/
+    this.form = this.defaultForm;
   }
 
   /**method to post reasom for pause to db */
-  createDisposition() {
-    const { reason } = this.form; //data from template not here
+  createDisposition(form: any) {
+    const { reason, other } = form.value;
+    let reasonTxt = '';
+    /**get the user input reason */
+    if (reason) {
+      reasonTxt = reason;
+    } else if (other) {
+      reasonTxt = other;
+    }
+    console.log(reasonTxt);
     //remove unneccessary whitespace
-    const cleanReason = this.generalService.clean(reason);
+    const cleanReason = this.generalService.clean(reasonTxt);
     this.dispositionService.createDisposition(cleanReason).subscribe({
       next: (response: any) => {
         console.log(response);
@@ -68,7 +98,27 @@ export class DispositionComponent implements OnInit {
     });
   }
 
-  submit() {
+  /**method to show text area */
+  toggleTextArea(event: any) {
+    /**Swap forms if checked*/
+    if (event.value === 'other') {
+      this.isTextAreaOpen = true;
+      this.form = this.otherForm;
+    } else {
+      /**attach selected value to default form */
+      this.isTextAreaOpen = false;
+      this.defaultForm = this.fb.group({
+        reason: event.value,
+      });
+      this.form = this.defaultForm;
+    }
+  }
+
+  /**Method to submit the form */
+  submitForm(form: any) {
     this.submitted = true;
+    console.log(form.value);
+    //proceed to submit form to db
+    this.createDisposition(form);
   }
 }
