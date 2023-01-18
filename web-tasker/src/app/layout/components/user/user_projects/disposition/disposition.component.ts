@@ -15,8 +15,8 @@ export class DispositionComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   defaultForm: FormGroup = new FormGroup({});
   otherForm: FormGroup = new FormGroup({});
-  reason: string = 'Short break';
   reasons: string[] = ['Tea break', 'Lunch break', 'Short break'];
+  reason: string = this.reasons[2]; //this is used as default selected value
   submitted: boolean = false;
   isTextAreaOpen: boolean = false;
   projectId!: string;
@@ -64,6 +64,7 @@ export class DispositionComponent implements OnInit {
     } else if (other) {
       reasonTxt = other;
     }
+    console.log(reasonTxt);
     //remove unneccessary whitespace
     const cleanReason = this.generalService.clean(reasonTxt);
     this.dispositionService.createDisposition(cleanReason).subscribe({
@@ -98,8 +99,7 @@ export class DispositionComponent implements OnInit {
   }
 
   /**method to show text area */
-  toggleTextArea(event: any, form: any) {
-    const { other } = form.value;
+  toggleTextArea(event: any) {
     /**Swap forms if checked*/
     if (event.value === 'other') {
       this.isTextAreaOpen = true;
@@ -118,5 +118,7 @@ export class DispositionComponent implements OnInit {
   submitForm(form: any) {
     this.submitted = true;
     console.log(form.value);
+    //proceed to submit form to db
+    this.createDisposition(form);
   }
 }

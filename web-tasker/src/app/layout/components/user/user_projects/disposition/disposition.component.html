@@ -16,7 +16,7 @@
                 <mat-list-item *ngFor="let val of reasons"
                   ><mat-radio-button
                     [value]="val"
-                    (change)="toggleTextArea($event, form)"
+                    (change)="toggleTextArea($event)"
                     >{{ val }}</mat-radio-button
                   >
                   <mat-divider></mat-divider>
@@ -24,7 +24,7 @@
                 <mat-list-item
                   ><mat-radio-button
                     [value]="'other'"
-                    (change)="toggleTextArea($event, form)"
+                    (change)="toggleTextArea($event)"
                     >Other</mat-radio-button
                   >
                   <mat-divider></mat-divider>
