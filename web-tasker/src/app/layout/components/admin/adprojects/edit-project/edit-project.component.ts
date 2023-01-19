@@ -47,7 +47,7 @@ export class EditProjectComponent implements OnInit {
         console.log(response);
         //setting status to true to help in scrolldown method
         this.projectService.setAddStatus(true);
-        //console.log(this.projectService.getAddStatus());       
+        //console.log(this.projectService.getAddStatus());
         this.navigateBack();
         Swal.fire(
           'Success!',
@@ -77,8 +77,6 @@ export class EditProjectComponent implements OnInit {
     if (fromMng === 'true') {
       //navigate to manager
       this.router.navigate(['ad_manage/projects']);
-      //clear previous location
-      window.sessionStorage.removeItem('fromMng');
     } else {
       this.router.navigate(['/ad_projects']);
     }

@@ -55,8 +55,6 @@ export class NewProjectComponent implements OnInit {
     if (fromMng === 'true') {
       //navigate to manager
       this.router.navigate(['ad_manage/projects']);
-      //clear previous location
-      window.sessionStorage.removeItem('fromMng');
     } else {
       this.router.navigate(['/ad_projects']);
     }
