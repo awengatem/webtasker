@@ -52,7 +52,27 @@
                         {{ project.projectName }}
                       </div>
                       <div class="timetable-item-time">
-                        <small>Last updated 3 mins ago</small>
+                        <div class="col">
+                          <div class="row">
+                            <small
+                              ><i class="uil uil-users-alt"></i>teams:
+                              {{ project.teams.length }}
+                            </small>
+                          </div>
+                          <div class="row">
+                            <small
+                              ><i class="uil uil-server"></i>status:
+                              <span>Unknown</span>
+                              <!-- <span
+                                [ngClass]="
+                                  project.status === 'Active'
+                                    ? 'active'
+                                    : 'break'
+                                "
+                                >{{ project.status }}</span> -->
+                            </small>
+                          </div>
+                        </div>
                       </div>
                       <div class="col-sm action">
                         <div class="row">

@@ -60,14 +60,13 @@
                           <div class="row">
                             <small
                               ><i class="uil uil-server"></i>status:
-                              <span>active</span>
-                              <!-- <span
+                              <!-- <span>active</span> -->
+                              <span
                                 [ngClass]="
-                                  project.status === 'Active'
-                                    ? 'active'
-                                    : 'break'
+                                  team.status === 'Active' ? 'active' : 'break'
                                 "
-                                >{{ project.status }}</span> -->
+                                >{{ team.status }}</span
+                              >
                             </small>
                           </div>
                         </div>
