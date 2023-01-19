@@ -75,7 +75,6 @@ export class AdDashboardComponent implements OnInit {
     this.getStatusDocs();
     this.getActiveUsers();
     this.composeProjectStatus();
-    // this.createChart();
   }
 
   /**Get the number of total users */

@@ -91,7 +91,7 @@
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Project name
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
+                          <mat-cell *matCellDef="let document" class="point">
                             {{ document.projectName }}
                           </mat-cell>
                         </ng-container>
@@ -100,7 +100,7 @@
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Teams
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
+                          <mat-cell *matCellDef="let document" class="bold">
                             {{ document.teams.length }}
                           </mat-cell>
                         </ng-container>
