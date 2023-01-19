@@ -10,26 +10,3 @@
 .project-color {
   color: #1c2833;
 }
-
-/**Custom private styling*/
-.projects {
-  .projects-inside {
-    .timetable-item {
-      &-time {
-        /**styling the status text*/
-        .active {
-          color: #027a34;
-          font-weight: 600;
-          font-size: 12px;
-        }
-        .break {
-          color: #ac1100;
-        }
-        /**icon color styling*/
-        i {
-          color: #22b8f0;
-        }
-      }
-    }
-  }
-}

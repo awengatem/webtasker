@@ -153,7 +153,6 @@ export class AdProjectsComponent implements OnInit {
         }
         //get unique projects
         this.uniqueProjects = [...new Set(this.projectidArr)];
-        console.log(this.uniqueProjects);
 
         //set status to active for each project in the unique array
         if (this.projects.length > 0) {
