@@ -24,7 +24,12 @@
             </div>
             <div class="child">
               <div class="label"><i class="uil uil-server"></i> Status:</div>
-              <div class="data">{{projectStatus}}</div>
+              <div
+                class="data"
+                [ngClass]="projectStatus === 'Active' ? 'active' : 'break'"
+              >
+                {{ projectStatus }}
+              </div>
             </div>
           </div>
           <div class="input-group-append row btm-rgt">

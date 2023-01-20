@@ -35,6 +35,16 @@
           padding-left: 10px;
           font-weight: 500;
         }
+
+        /**styling the status text*/
+        .active {
+          color: #027a34;
+          font-weight: 600;
+          font-size: 12px;
+        }
+        .break {
+          color: #ac1100;
+        }
       }
       h5 {
         font-size: 18px;
