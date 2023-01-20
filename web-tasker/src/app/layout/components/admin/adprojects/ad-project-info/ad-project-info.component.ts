@@ -14,7 +14,6 @@ export class AdProjectInfoComponent implements OnInit {
   createdBy: any;
   lastUpdated: any;
   teamCount: any;
-  selectedProject!: any[];
   projectId!: string;
   projectStatus = 'Unknown';
   actionClicked = false;
@@ -34,34 +33,31 @@ export class AdProjectInfoComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       const projectId = params['projectId'];
       this.projectId = projectId;
-      this.getProject(projectId).then(() => {
-        // this.getProjectStatus();
-      });
+      this.getProject(projectId);
     });
   }
 
-  //getting team name
+  //getting project document
   getProject(projectId: string) {
-    return new Promise((resolve, reject) => {
-      this.projectService
-        .getSpecificProject(projectId)
-        .subscribe((project: any) => {
-          console.log(project);
-          this.selectedProject = project;
-          project.projectName
-            ? (this.projectName = project.projectName)
-            : (this.projectName = 'Project name');
-          project.createdBy
-            ? (this.createdBy = project.createdBy)
-            : (this.createdBy = 'Unknown');
-          project.updatedAt
-            ? (this.lastUpdated = project.updatedAt)
-            : (this.lastUpdated = 'Unknown');
-          project.teams
-            ? (this.teamCount = project.teams.length)
-            : (this.teamCount = 0);
-        });
-      resolve(true);
+    this.projectService.getSpecificProject(projectId).subscribe({
+      next: (project) => {
+        if (project) {
+          this.projectName = project.projectName;
+          this.createdBy = project.createdBy;
+          this.lastUpdated = project.updatedAt;
+          this.teamCount = project.teams.length;
+          //get project status
+          this.getProjectStatus();
+        } else {
+          this.projectName = 'Project name';
+          this.createdBy = 'Unknown';
+          this.lastUpdated = 'Unknown';
+          this.teamCount = 0;
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
