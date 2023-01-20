@@ -100,6 +100,13 @@
           }
         }
 
+        .point {
+          &:hover {
+            cursor: pointer;
+            color: #cb0c9f;
+          }
+        }
+
         /*Styling columns*/
         .mat-column-Select {
           flex: none;

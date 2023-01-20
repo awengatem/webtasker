@@ -50,7 +50,25 @@
                         {{ team.teamName }}
                       </div>
                       <div class="timetable-item-time">
-                        <small>Last updated 3 mins ago</small>
+                        <div class="col">
+                          <div class="row">
+                            <small
+                              ><i class="uil uil-folder-open"></i>projects:
+                              {{ team.projects.length }}
+                            </small>
+                          </div>
+                          <div class="row">
+                            <small
+                              ><i class="uil uil-server"></i>status:
+                              <span
+                                [ngClass]="
+                                  team.status === 'Active' ? 'active' : 'break'
+                                "
+                                >{{ team.status }}</span
+                              >
+                            </small>
+                          </div>
+                        </div>
                       </div>
                       <div class="timetable-item-users">
                         <i class="fa-solid fa-users-line"></i>

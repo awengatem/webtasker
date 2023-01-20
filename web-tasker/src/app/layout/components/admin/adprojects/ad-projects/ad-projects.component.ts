@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/api/project.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 
 @Component({
   selector: 'app-ad-projects',
@@ -13,14 +14,19 @@ export class AdProjectsComponent implements OnInit {
   projectsLength = 0;
   projDiv: any;
   projectStatus: any;
-  submitted: boolean = false;
+  submitted: boolean = false; 
   /**used by search bar */
   searchText = '';
+
+  /**variables used in project status */
+  projectidArr: string[] = [];
+  uniqueProjects: string[] = [];
 
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private projectStatusService: ProjectStatusService
   ) {}
 
   ngOnInit(): void {
@@ -34,11 +40,13 @@ export class AdProjectsComponent implements OnInit {
 
   getProjects() {
     this.projectService.getAllProjects().subscribe((projects: any) => {
-      console.log(projects);
       this.projects = projects;
+      /**pushs project status to projects*/
+      this.projects.forEach((project) => (project.status = 'Unknown'));
       this.projectsLength = projects.length;
       //get project members
       this.getProjectMembers();
+      console.log(this.projects);
     });
   }
 
@@ -110,7 +118,7 @@ export class AdProjectsComponent implements OnInit {
     });
   }
 
-  /**Get project members */
+  /**Get project members and status*/
   getProjectMembers() {
     if (this.projects.length > 0) {
       for (let i = 0; i < this.projects.length; i++) {
@@ -123,6 +131,49 @@ export class AdProjectsComponent implements OnInit {
           });
       }
     }
+    //get the project status here
+    this.getProjectStatus();
+  }
+
+  /**Get the project status from active status docs
+   * identify active projects
+   */
+  getProjectStatus() {
+    /**reset the active projects and projects variables */
+    this.uniqueProjects = [];
+
+    this.projectStatusService
+      .getActiveStatusDocs()
+      .then((documents: any) => {
+        /**capture the project ids */
+        if (documents.length > 0) {
+          for (let doc of documents) {
+            this.projectidArr.push(doc.project_id);
+          }
+        }
+        //get unique projects
+        this.uniqueProjects = [...new Set(this.projectidArr)];
+
+        //set status to active for each project in the unique array
+        if (this.projects.length > 0) {
+          for (let project of this.projects) {
+            for (let id of this.uniqueProjects) {
+              if (id === project._id) {
+                project.status = 'Active';
+              }
+            }
+          }
+          //set others to unproductive
+          for (let project of this.projects) {
+            if (project.status != 'Active') {
+              project.status = 'Unproductive';
+            }
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   submit() {

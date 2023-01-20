@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/api/project.service';
 import Swal from 'sweetalert2';
 
@@ -13,14 +14,19 @@ export class AdProjectInfoComponent implements OnInit {
   createdBy: any;
   lastUpdated: any;
   teamCount: any;
-  selectedProject!: any[];
   projectId!: string;
+  projectStatus = 'Unknown';
   actionClicked = false;
+
+  /**variables used in project status */
+  projectidArr: string[] = [];
+  uniqueProjects: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
-    private router: Router
+    private router: Router,
+    private projectStatusService: ProjectStatusService
   ) {}
 
   ngOnInit(): void {
@@ -31,26 +37,28 @@ export class AdProjectInfoComponent implements OnInit {
     });
   }
 
-  //getting team name
+  //getting project document
   getProject(projectId: string) {
-    this.projectService
-      .getSpecificProject(projectId)
-      .subscribe((project: any) => {
-        console.log(project);
-        this.selectedProject = project;
-        project.projectName
-          ? (this.projectName = project.projectName)
-          : (this.projectName = 'Project name');
-        project.createdBy
-          ? (this.createdBy = project.createdBy)
-          : (this.createdBy = 'Unknown');
-        project.updatedAt
-          ? (this.lastUpdated = project.updatedAt)
-          : (this.lastUpdated = 'Unknown');
-        project.teams
-          ? (this.teamCount = project.teams.length)
-          : (this.teamCount = 0);
-      });
+    this.projectService.getSpecificProject(projectId).subscribe({
+      next: (project) => {
+        if (project) {
+          this.projectName = project.projectName;
+          this.createdBy = project.createdBy;
+          this.lastUpdated = project.updatedAt;
+          this.teamCount = project.teams.length;
+          //get project status
+          this.getProjectStatus();
+        } else {
+          this.projectName = 'Project name';
+          this.createdBy = 'Unknown';
+          this.lastUpdated = 'Unknown';
+          this.teamCount = 0;
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   //method to show action menu
@@ -67,9 +75,9 @@ export class AdProjectInfoComponent implements OnInit {
   }
 
   actionClick() {
-    if(this.actionClicked === true){
-    this.actionClicked = false;
-    }else{
+    if (this.actionClicked === true) {
+      this.actionClicked = false;
+    } else {
       this.actionClicked = true;
     }
   }
@@ -116,5 +124,41 @@ export class AdProjectInfoComponent implements OnInit {
         Swal.fire('Oops! Something went wrong', err.error, 'error');
       },
     });
+  }
+
+  /**Get the project status from active status docs
+   * identify if project is active
+   */
+  getProjectStatus() {
+    /**reset the projects array */
+    this.uniqueProjects = [];
+    this.projectidArr = [];
+
+    this.projectStatusService
+      .getActiveStatusDocs()
+      .then((documents: any) => {
+        /**capture the project ids */
+        if (documents.length > 0) {
+          for (let doc of documents) {
+            this.projectidArr.push(doc.project_id);
+          }
+        }
+        //get unique projects
+        this.uniqueProjects = [...new Set(this.projectidArr)];
+
+        //set status to active if project is in the unique array
+        console.log(this.projectId);
+        for (let id of this.uniqueProjects) {
+          if (id === this.projectId) {
+            this.projectStatus = 'Active';
+          }
+        }
+        if (this.projectStatus != 'Active') {
+          this.projectStatus = 'Unproductive';
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

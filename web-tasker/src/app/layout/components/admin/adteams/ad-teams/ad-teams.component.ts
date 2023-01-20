@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { TeamService } from 'src/app/services/api/team.service';
 import Swal from 'sweetalert2';
 
@@ -17,10 +18,15 @@ export class AdTeamsComponent implements OnInit {
   /**used by search bar */
   searchText = '';
 
+  /**variables used in team status */
+  teamidArr: string[] = [];
+  uniqueTeams: string[] = [];
+
   constructor(
     private teamService: TeamService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private projectStatusService: ProjectStatusService
   ) {}
 
   ngOnInit(): void {
@@ -34,11 +40,13 @@ export class AdTeamsComponent implements OnInit {
 
   getTeams() {
     this.teamService.getAllTeams().subscribe((teams: any) => {
-      console.log(teams);
       this.teams = teams;
+      /**pushs team status to teams*/
+      this.teams.forEach((team) => (team.status = 'Unknown'));
       this.teamsLength = teams.length;
       //get team members for each
       this.getTeamMembers();
+      console.log(this.teams);
     });
   }
 
@@ -108,12 +116,55 @@ export class AdTeamsComponent implements OnInit {
         this.teamService
           .getTeamMembersDoc(this.teams[i]._id)
           .subscribe((members: any) => {
-            console.log(members.length);
-            //push number of members to projects
+            // console.log(members.length);
+            //push number of members to teams
             this.teams[i].members = members.length;
           });
       }
     }
+    //get the team status here
+    this.getTeamStatus();
+  }
+
+  /**Get the team status from active status docs
+   * identify active teams
+   */
+  getTeamStatus() {
+    /**reset the active teams and teams variables */
+    this.uniqueTeams = [];
+
+    this.projectStatusService
+      .getActiveStatusDocs()
+      .then((documents: any) => {
+        /**capture the team ids */
+        if (documents.length > 0) {
+          for (let doc of documents) {
+            this.teamidArr.push(doc.team_id);
+          }
+        }
+        //get unique teams
+        this.uniqueTeams = [...new Set(this.teamidArr)];
+
+        //set status to active for each team in the unique array
+        if (this.teams.length > 0) {
+          for (let team of this.teams) {
+            for (let id of this.uniqueTeams) {
+              if (id === team._id) {
+                team.status = 'Active';
+              }
+            }
+          }
+          //set others to unproductive
+          for (let team of this.teams) {
+            if (team.status != 'Active') {
+              team.status = 'Unproductive';
+            }
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   submit() {

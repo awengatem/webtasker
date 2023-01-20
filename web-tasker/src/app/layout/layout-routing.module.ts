@@ -37,6 +37,7 @@ import { MngSessionsComponent } from './components/admin/manage/sessions/mng-ses
 import { CanDeactivateGuard } from '../helpers/guards/canDeactivate.guard';
 import { SupervisorGuard } from '../helpers/guards/supervisor.guard';
 import { SessionsComponent } from './components/user/user_sessions/sessions/sessions.component';
+import { ClearLocationGuard } from '../helpers/guards/clear-location.guard';
 
 const routes: Routes = [
   {
@@ -150,11 +151,13 @@ const routes: Routes = [
       {
         path: 'new_project',
         canActivate: [AuthGuard, SupervisorGuard],
+        canDeactivate: [ClearLocationGuard],
         component: NewProjectComponent,
       },
       {
         path: 'edit_project/:projectId',
         canActivate: [AuthGuard, SupervisorGuard],
+        canDeactivate: [ClearLocationGuard],
         component: EditProjectComponent,
       },
 
@@ -182,11 +185,13 @@ const routes: Routes = [
       {
         path: 'new_team',
         canActivate: [AuthGuard, SupervisorGuard],
+        canDeactivate: [ClearLocationGuard],
         component: NewTeamComponent,
       },
       {
         path: 'edit_team/:teamId',
         canActivate: [AuthGuard, SupervisorGuard],
+        canDeactivate: [ClearLocationGuard],
         component: EditTeamComponent,
       },
 

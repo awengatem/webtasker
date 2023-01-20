@@ -77,8 +77,6 @@ export class EditTeamComponent implements OnInit {
     if (fromMng === 'true') {
       //navigate to manager
       this.router.navigate(['ad_manage/teams']);
-      //clear previous location
-      window.sessionStorage.removeItem('fromMng');
     } else {
       this.router.navigate(['/ad_teams']);
     }
