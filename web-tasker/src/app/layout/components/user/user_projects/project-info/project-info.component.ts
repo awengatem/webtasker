@@ -12,6 +12,7 @@ import { TimerService } from 'src/app/services/timer.service';
 })
 export class ProjectInfoComponent implements OnInit {
   projectName: any;
+  project: any;
   teamId: any;
   createdBy: any;
   lastUpdated: any;
@@ -47,6 +48,7 @@ export class ProjectInfoComponent implements OnInit {
     this.projectService.getSpecificProject(projectId).subscribe({
       next: (project) => {
         if (project) {
+          this.project = project;
           this.projectName = project.projectName;
           this.createdBy = project.createdBy;
           this.lastUpdated = project.updatedAt;
@@ -138,5 +140,31 @@ export class ProjectInfoComponent implements OnInit {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  /**method to get the project status */
+  getStatus() {
+    this.projectStatusService.getActiveProjects().subscribe({
+      next: (documents) => {
+        //console.log(documents);
+        /**update status to productive or break */
+        if (documents) {
+          const document = documents[0];
+          //console.log(document);
+          /**update project status */
+          if (
+            this.projectId === document.project_id &&
+            this.project.team[0] === document.team_id
+          ) {
+            this.projectStatus = 'Active';
+          } else {
+            this.projectStatus = 'Unproductive';
+          }
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }
