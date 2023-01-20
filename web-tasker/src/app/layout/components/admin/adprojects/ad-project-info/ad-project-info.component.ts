@@ -35,7 +35,7 @@ export class AdProjectInfoComponent implements OnInit {
       const projectId = params['projectId'];
       this.projectId = projectId;
       this.getProject(projectId).then(() => {
-        this.getProjectStatus();
+        // this.getProjectStatus();
       });
     });
   }
@@ -155,9 +155,10 @@ export class AdProjectInfoComponent implements OnInit {
         for (let id of this.uniqueProjects) {
           if (id === this.projectId) {
             this.projectStatus = 'Active';
-          } else {
-            this.projectStatus = 'Unproductive';
           }
+        }
+        if (this.projectStatus != 'Active') {
+          this.projectStatus = 'Unproductive';
         }
       })
       .catch((error) => {
