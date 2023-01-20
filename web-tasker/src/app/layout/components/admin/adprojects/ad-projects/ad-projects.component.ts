@@ -14,7 +14,7 @@ export class AdProjectsComponent implements OnInit {
   projectsLength = 0;
   projDiv: any;
   projectStatus: any;
-  submitted: boolean = false;
+  submitted: boolean = false; 
   /**used by search bar */
   searchText = '';
 
