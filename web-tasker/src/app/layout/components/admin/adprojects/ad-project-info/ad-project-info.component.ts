@@ -42,10 +42,12 @@ export class AdProjectInfoComponent implements OnInit {
     this.projectService.getSpecificProject(projectId).subscribe({
       next: (project) => {
         if (project) {
-          this.projectName = project.projectName;
-          this.createdBy = project.createdBy;
-          this.lastUpdated = project.updatedAt;
-          this.teamCount = project.teams.length;
+          this.projectName = project.projectName
+            ? project.projectName
+            : 'Project name';
+          this.createdBy = project.createdBy ? project.createdBy : 'Unknown';
+          this.lastUpdated = project.updatedAt ? project.updatedAt : 'Unknown';
+          this.teamCount = project.teams.length ? project.teams.length : 0;
           //get project status
           this.getProjectStatus();
         } else {
@@ -147,7 +149,6 @@ export class AdProjectInfoComponent implements OnInit {
         this.uniqueProjects = [...new Set(this.projectidArr)];
 
         //set status to active if project is in the unique array
-        console.log(this.projectId);
         for (let id of this.uniqueProjects) {
           if (id === this.projectId) {
             this.projectStatus = 'Active';

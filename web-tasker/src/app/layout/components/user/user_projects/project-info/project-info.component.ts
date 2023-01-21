@@ -52,9 +52,11 @@ export class ProjectInfoComponent implements OnInit {
       next: (project) => {
         if (project) {
           this.project = project;
-          this.projectName = project.projectName;
-          this.createdBy = project.createdBy;
-          this.lastUpdated = project.updatedAt;
+          this.projectName = project.projectName
+            ? project.projectName
+            : 'Project name';
+          this.createdBy = project.createdBy ? project.createdBy : 'Unknown';
+          this.lastUpdated = project.updatedAt ? project.updatedAt : 'Unknown';
           //get project status
           this.getProjectStatus();
         } else {
@@ -116,6 +118,8 @@ export class ProjectInfoComponent implements OnInit {
           } else {
             this.projectStatus = 'Unproductive';
           }
+        } else {
+          this.projectStatus = 'Unproductive';
         }
       },
       error: (err) => {
