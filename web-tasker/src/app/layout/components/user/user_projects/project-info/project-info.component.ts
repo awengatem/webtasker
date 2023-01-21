@@ -36,9 +36,12 @@ export class ProjectInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
+      console.log(params);
       const projectId = params['projectId'];
+      const teamId = params['teamId'];
       this.projectId = projectId;
-      this.getTeamName();
+      this.teamId = teamId;
+      this.getTeamName(teamId);
       this.getProject(projectId);
     });
   }
@@ -67,21 +70,8 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   //getting the team name
-  getTeamName() {
-    /**get teamId first*/
-    let teamId = this.projectService.getCapturedProjectTeam();
-    /**check from localstorage if it is undefined*/
-    if (teamId === undefined) {
-      teamId = localStorage.getItem('capturedProjectTeam')!;
-    }
-    if (teamId != undefined) {
-      /**taking the value only if type returned is an array */
-      if (typeof teamId === 'object') {
-        this.teamId = teamId[0];
-      } else {
-        this.teamId = teamId;
-      }
-
+  getTeamName(teamId: string) {
+    if (teamId) {
       this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
         this.teamName = team.teamName;
       });
@@ -154,7 +144,7 @@ export class ProjectInfoComponent implements OnInit {
           /**update project status */
           if (
             this.projectId === document.project_id &&
-            this.project.team[0] === document.team_id
+            this.teamId === document.team_id
           ) {
             this.projectStatus = 'Active';
           } else {

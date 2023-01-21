@@ -70,7 +70,7 @@ const routes: Routes = [
         component: ProjectsComponent,
       },
       {
-        path: 'projects/:projectId',
+        path: 'projects/:projectId/:teamId',
         canActivate: [AuthGuard],
         component: ProjectInfoComponent,
       },

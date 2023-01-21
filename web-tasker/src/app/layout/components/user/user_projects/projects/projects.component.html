@@ -42,8 +42,7 @@
                 <div
                   class="col-md-6"
                   *ngFor="let project of projects | projectFilter : searchText"
-                  (click)="saveProjectTeam(project.team, project._id)"
-                  [routerLink]="['/projects', project._id]"
+                  [routerLink]="['/projects', project._id, project.team[0]]"
                 >
                   <div class="timetable-item shadow pointer">
                     <div class="timetable-item-main">
@@ -95,9 +94,9 @@
                   </div>
                   <div class="centered">
                     <div>
-                    <h1 class="project-color">
-                      Projects Unaivalable at the moment
-                    </h1>
+                      <h1 class="project-color">
+                        Projects Unaivalable at the moment
+                      </h1>
                     </div>
                   </div>
                 </div>
