@@ -96,48 +96,15 @@ export class ProjectInfoComponent implements OnInit {
     this.actionClicked = !this.actionClicked;
   }
 
-  /**Get the project status from active status docs
-   * identify if project is active
+  /**method to get the project status
+   * Identify if project is active
    */
   getProjectStatus() {
-    /**reset the projects array */
-    this.uniqueProjects = [];
-    this.projectidArr = [];
-
-    this.projectStatusService
-      .getActiveStatusDocs()
-      .then((documents: any) => {
-        /**capture the project ids */
-        if (documents.length > 0) {
-          for (let doc of documents) {
-            this.projectidArr.push(doc.project_id);
-          }
-        }
-        //get unique projects
-        this.uniqueProjects = [...new Set(this.projectidArr)];
-
-        //set status to active if project is in the unique array
-        for (let id of this.uniqueProjects) {
-          if (id === this.projectId) {
-            this.projectStatus = 'Active';
-          }
-        }
-        if (this.projectStatus != 'Active') {
-          this.projectStatus = 'Unproductive';
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  /**method to get the project status */
-  getStatus() {
     this.projectStatusService.getActiveProjects().subscribe({
       next: (documents) => {
         //console.log(documents);
         /**update status to productive or break */
-        if (documents) {
+        if (documents.length > 0) {
           const document = documents[0];
           //console.log(document);
           /**update project status */
