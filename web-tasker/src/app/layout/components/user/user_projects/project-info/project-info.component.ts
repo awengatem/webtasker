@@ -88,9 +88,7 @@ export class ProjectInfoComponent implements OnInit {
 
   /**authorize the user timer */
   authTimer() {
-    // if (this.projectId && this.teamId) {
     this.timerService.navigator(this.projectId, this.teamId);
-    // }
   }
 
   //method to show action menu

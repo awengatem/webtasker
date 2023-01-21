@@ -62,8 +62,8 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  /**Carry the project team to project-info through service */
-  saveProjectTeam(teamId: string, projectId: string) {
+  /**Set the project and team id in local storage to aid in timer guard */
+  saveProjectTeam(projectId: string, teamId: string) {
     /**store this in localstorage to aid in refresh */
     localStorage.setItem('capturedProjectTeam', teamId);
     localStorage.setItem('capturedProjectId', projectId);
