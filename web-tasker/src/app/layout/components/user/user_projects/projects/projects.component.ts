@@ -60,6 +60,14 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
+  /**Set the project and team id in local storage to aid in timer guard */
+  saveProjectTeam(projectId: string, teamId: string) {
+    /**store this in localstorage to aid in refresh */
+    localStorage.setItem('capturedProjectTeam', teamId);
+    localStorage.setItem('capturedProjectId', projectId);
+    // console.log(teamId);
+  }
+
   /**Get project members to add on icon*/
   getProjectMembers() {
     if (this.projects.length > 0) {
@@ -73,16 +81,6 @@ export class ProjectsComponent implements OnInit {
           });
       }
     }
-  }
-
-  /**Carry the project team to project-info through service */
-  saveProjectTeam(teamId: string, projectId: string) {
-    /**set the teamId to carry to the next window */
-    this.projectService.setCapturedProjectTeam(teamId);
-    /**store this in localstorage to aid in refresh */
-    localStorage.setItem('capturedProjectTeam', teamId);
-    localStorage.setItem('capturedProjectId', projectId);
-    // console.log(teamId);
   }
 
   /**method to get the project status */

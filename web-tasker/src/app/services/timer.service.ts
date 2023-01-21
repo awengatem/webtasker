@@ -30,7 +30,9 @@ export class TimerService {
         console.log(message);
         /**navigate user if allowed */
         if (message === 'allowed') {
-          return this.router.navigate([`/projects/${projectId}/action`]);
+          return this.router.navigate([
+            `/projects/${projectId}/${teamId}/action`,
+          ]);
         }
 
         if (message === 'denied') {

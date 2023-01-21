@@ -36,9 +36,12 @@ export class ProjectInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
+      console.log(params);
       const projectId = params['projectId'];
+      const teamId = params['teamId'];
       this.projectId = projectId;
-      this.getTeamName();
+      this.teamId = teamId;
+      this.getTeamName(teamId);
       this.getProject(projectId);
     });
   }
@@ -49,9 +52,11 @@ export class ProjectInfoComponent implements OnInit {
       next: (project) => {
         if (project) {
           this.project = project;
-          this.projectName = project.projectName;
-          this.createdBy = project.createdBy;
-          this.lastUpdated = project.updatedAt;
+          this.projectName = project.projectName
+            ? project.projectName
+            : 'Project name';
+          this.createdBy = project.createdBy ? project.createdBy : 'Unknown';
+          this.lastUpdated = project.updatedAt ? project.updatedAt : 'Unknown';
           //get project status
           this.getProjectStatus();
         } else {
@@ -67,21 +72,8 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   //getting the team name
-  getTeamName() {
-    /**get teamId first*/
-    let teamId = this.projectService.getCapturedProjectTeam();
-    /**check from localstorage if it is undefined*/
-    if (teamId === undefined) {
-      teamId = localStorage.getItem('capturedProjectTeam')!;
-    }
-    if (teamId != undefined) {
-      /**taking the value only if type returned is an array */
-      if (typeof teamId === 'object') {
-        this.teamId = teamId[0];
-      } else {
-        this.teamId = teamId;
-      }
-
+  getTeamName(teamId: string) {
+    if (teamId) {
       this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
         this.teamName = team.teamName;
       });
@@ -106,60 +98,28 @@ export class ProjectInfoComponent implements OnInit {
     this.actionClicked = !this.actionClicked;
   }
 
-  /**Get the project status from active status docs
-   * identify if project is active
+  /**method to get the project status
+   * Identify if project is active
    */
   getProjectStatus() {
-    /**reset the projects array */
-    this.uniqueProjects = [];
-    this.projectidArr = [];
-
-    this.projectStatusService
-      .getActiveStatusDocs()
-      .then((documents: any) => {
-        /**capture the project ids */
-        if (documents.length > 0) {
-          for (let doc of documents) {
-            this.projectidArr.push(doc.project_id);
-          }
-        }
-        //get unique projects
-        this.uniqueProjects = [...new Set(this.projectidArr)];
-
-        //set status to active if project is in the unique array
-        console.log(this.projectId);
-        for (let id of this.uniqueProjects) {
-          if (id === this.projectId) {
-            this.projectStatus = 'Active';
-          }
-        }
-        if (this.projectStatus != 'Active') {
-          this.projectStatus = 'Unproductive';
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  /**method to get the project status */
-  getStatus() {
     this.projectStatusService.getActiveProjects().subscribe({
       next: (documents) => {
         //console.log(documents);
         /**update status to productive or break */
-        if (documents) {
+        if (documents.length > 0) {
           const document = documents[0];
           //console.log(document);
           /**update project status */
           if (
             this.projectId === document.project_id &&
-            this.project.team[0] === document.team_id
+            this.teamId === document.team_id
           ) {
             this.projectStatus = 'Active';
           } else {
             this.projectStatus = 'Unproductive';
           }
+        } else {
+          this.projectStatus = 'Unproductive';
         }
       },
       error: (err) => {

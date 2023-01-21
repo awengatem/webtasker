@@ -14,9 +14,6 @@ export class ProjectService {
   //variable to contain selected project to aid in edit component
   private capturedProject!: string;
 
-  //variable to contain selected project's team to aid in deciding teamId for timer
-  private capturedProjectTeam!: string;
-
   //variable to help if user was assigning projects and then show projects next
   private fromAssignProject!: boolean;
 
@@ -123,15 +120,6 @@ export class ProjectService {
 
   setCapturedProject(project: string) {
     this.capturedProject = project;
-  }
-
-  /**Methods used by capturedProjectTeam above */
-  getCapturedProjectTeam() {
-    return this.capturedProjectTeam;
-  }
-
-  setCapturedProjectTeam(teamId: string) {
-    this.capturedProjectTeam = teamId;
   }
 
   /**Methods used to check whether user comes from assign projects component */
