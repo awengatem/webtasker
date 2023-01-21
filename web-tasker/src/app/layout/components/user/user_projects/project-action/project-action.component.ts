@@ -13,6 +13,7 @@ export class ProjectActionComponent implements OnInit {
   /**local variables */
   projectName: any;
   projectId!: string;
+  teamId!: string;
   /**controls timer buttons */
   stopwatchStarted!: boolean;
   stopwatchPaused!: boolean;
@@ -34,7 +35,9 @@ export class ProjectActionComponent implements OnInit {
     //get the project from params
     this.route.params.subscribe((params: Params) => {
       const projectId = params['projectId'];
+      const teamId = params['teamId'];
       this.projectId = projectId;
+      this.teamId = teamId;
       this.getProject(projectId);
     });
 
@@ -207,11 +210,10 @@ export class ProjectActionComponent implements OnInit {
 
   /**Timer control methods */
   startTimer(mode: string): void {
-    const teamId = localStorage.getItem('capturedProjectTeam');
-    if (mode === 'start' && teamId != null) {
+    if (mode === 'start' && this.teamId != null) {
       this.webSocketService.emit('start', {
         projectId: this.projectId,
-        teamId: teamId,
+        teamId: this.teamId,
       });
       Swal.fire('started', 'Session started successfully', 'success');
     } else if (mode === 'continue') {

@@ -75,7 +75,7 @@ const routes: Routes = [
         component: ProjectInfoComponent,
       },
       {
-        path: 'projects/:projectId/action',
+        path: 'projects/:projectId/:teamId/action',
         canActivate: [AuthGuard, TimerGuard],
         component: ProjectActionComponent,
       },

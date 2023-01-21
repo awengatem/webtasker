@@ -88,7 +88,9 @@ export class ProjectInfoComponent implements OnInit {
 
   /**authorize the user timer */
   authTimer() {
+    // if (this.projectId && this.teamId) {
     this.timerService.navigator(this.projectId, this.teamId);
+    // }
   }
 
   //method to show action menu
@@ -117,7 +119,6 @@ export class ProjectInfoComponent implements OnInit {
         this.uniqueProjects = [...new Set(this.projectidArr)];
 
         //set status to active if project is in the unique array
-        console.log(this.projectId);
         for (let id of this.uniqueProjects) {
           if (id === this.projectId) {
             this.projectStatus = 'Active';
