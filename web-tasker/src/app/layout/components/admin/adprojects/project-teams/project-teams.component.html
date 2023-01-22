@@ -47,30 +47,19 @@
                         <div class="col">
                           <div class="row">
                             <small
-                              ><i class="uil uil-users-alt"></i>teams: 0
+                              ><i class="uil uil-users-alt"></i>members: 0
                             </small>
                           </div>
                           <div class="row">
                             <small
-                              ><i class="uil uil-server"></i>status:
-                              <span>status</span>
+                              ><i class="uil uil-folder-open"></i>projects:
+                              <span>0</span>
                             </small>
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm action">
-                        <div class="row">
-                          <div class="col"></div>
-                          <button
-                            type="button"
-                            class="col btn btn-outline-custom btn-sm"
-                          >
-                            <i class="fa-solid fa-pen-fancy"></i>
-                          </button>
-                        </div>
-                      </div>
                       <div class="timetable-item-users">
-                        <i class="fa-solid fa-users-viewfinder"></i>
+                        <i class="fa-solid fa-users-line"></i>
                         <div class="timetable-item-users-count">0</div>
                       </div>
                     </div>
@@ -80,6 +69,18 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="row centered-content create">
+        <div class="col-md-1">
+          <!-- routerLink="/new-project" -->
+          <button
+            class="btn btn-outline-custom medium"
+            [routerLink]="['/ad_projects', projectId]"
+          >
+            <div class="btn-txt">back</div>
+          </button>
+        </div>
+        <div class="col"><h4></h4></div>
       </div>
     </div>
   </div>

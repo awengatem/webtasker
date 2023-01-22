@@ -162,7 +162,7 @@ const routes: Routes = [
         component: EditProjectComponent,
       },
       {
-        path: 'project_teams',
+        path: 'project_teams/:projectId',
         canActivate: [AuthGuard, SupervisorGuard],
         component: ProjectTeamsComponent,
       },

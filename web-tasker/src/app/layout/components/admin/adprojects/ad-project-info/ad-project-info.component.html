@@ -20,7 +20,10 @@
             </div>
             <div class="child">
               <div class="label"><i class="uil uil-users-alt"></i> Teams:</div>
-              <div class="data point" routerLink="/project_teams">
+              <div
+                class="data point"
+                [routerLink]="['/project_teams', projectId]"
+              >
                 {{ teamCount }}
               </div>
             </div>

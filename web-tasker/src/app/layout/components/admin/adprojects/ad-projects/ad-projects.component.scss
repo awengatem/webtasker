@@ -185,4 +185,11 @@
     margin-left: 1px;
     position: absolute;
   }
+  .medium {
+    height: 40px;
+    width: auto;
+    .btn-txt {
+      font-size: 18px;
+    }
+  }
 }
