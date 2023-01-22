@@ -18,10 +18,17 @@
               </div>
               <div class="data">{{ lastUpdated }}</div>
             </div>
-            <div class="child">
-              <div class="label"><i class="uil uil-users-alt"></i> Teams:</div>
+            <div class="child point">
+              <div class="label">
+                <i class="uil uil-users-alt"></i>
+                <span
+                  class="point-link"
+                  [routerLink]="['/project_teams', projectId]"
+                  >Teams:</span
+                >
+              </div>
               <div
-                class="data point"
+                class="data point-link count"
                 [routerLink]="['/project_teams', projectId]"
               >
                 {{ teamCount }}
