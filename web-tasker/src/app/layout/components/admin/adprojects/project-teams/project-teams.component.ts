@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-project-teams',
   templateUrl: './project-teams.component.html',
-  styleUrls: ['./project-teams.component.scss']
+  styleUrls: ['./project-teams.component.scss'],
 })
-export class ProjectTeamsComponent {
+export class ProjectTeamsComponent implements OnInit {
+  /**used by search bar */
+  searchText = '';
 
+  constructor() {}
+
+  ngOnInit(): void {}
 }

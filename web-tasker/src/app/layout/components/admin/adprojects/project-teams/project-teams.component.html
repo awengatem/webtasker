@@ -1,1 +1,86 @@
-<p>project-teams works!</p>
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Projects</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <div class="centered-content">
+        <div class="projects-container">
+          <div class="projects">
+            <div class="row">
+              <div class="col-2">
+                <h1 class="text-dark position-relative">
+                  projects <i class="fa-regular fa-folder-open"></i>
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger count"
+                  >
+                    0
+                  </span>
+                </h1>
+              </div>
+              <div class="col"></div>
+              <div class="col">
+                <div class="input-group rounded search-bar">
+                  <input
+                    type="search"
+                    class="form-control rounded shadow"
+                    placeholder="enter team name to search ..."
+                    aria-label="Search"
+                    aria-describedby="search-addon"
+                    [(ngModel)]="searchText"
+                    autofocus
+                  />
+                  <span class="border-0 filter-icon" id="search-addon">
+                    <i class="uil uil-filter"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="projects-inside" id="projects">
+              <div class="row">
+                <!-- item 1 -->
+                <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
+                <div class="col-md-6">
+                  <div class="timetable-item shadow pointer">
+                    <div class="timetable-item-main">
+                      <div class="timetable-item-name">projectName</div>
+                      <div class="timetable-item-time">
+                        <div class="col">
+                          <div class="row">
+                            <small
+                              ><i class="uil uil-users-alt"></i>teams: 0
+                            </small>
+                          </div>
+                          <div class="row">
+                            <small
+                              ><i class="uil uil-server"></i>status:
+                              <span>status</span>
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm action">
+                        <div class="row">
+                          <div class="col"></div>
+                          <button
+                            type="button"
+                            class="col btn btn-outline-custom btn-sm"
+                          >
+                            <i class="fa-solid fa-pen-fancy"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="timetable-item-users">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                        <div class="timetable-item-users-count">0</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

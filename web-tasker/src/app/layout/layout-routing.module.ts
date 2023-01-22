@@ -38,6 +38,7 @@ import { CanDeactivateGuard } from '../helpers/guards/canDeactivate.guard';
 import { SupervisorGuard } from '../helpers/guards/supervisor.guard';
 import { SessionsComponent } from './components/user/user_sessions/sessions/sessions.component';
 import { ClearLocationGuard } from '../helpers/guards/clear-location.guard';
+import { ProjectTeamsComponent } from './components/admin/adprojects/project-teams/project-teams.component';
 
 const routes: Routes = [
   {
@@ -159,6 +160,11 @@ const routes: Routes = [
         canActivate: [AuthGuard, SupervisorGuard],
         canDeactivate: [ClearLocationGuard],
         component: EditProjectComponent,
+      },
+      {
+        path: 'project_teams',
+        canActivate: [AuthGuard, SupervisorGuard],
+        component: ProjectTeamsComponent,
       },
 
       /**TEAMS */
