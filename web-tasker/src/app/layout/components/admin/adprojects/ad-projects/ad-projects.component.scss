@@ -165,6 +165,18 @@
       transform: scale(1.05);
     }
   }
+
+  /*use by project teamscomponent*/
+  .count {
+    h1 {
+      font-weight: 400;
+
+      span {
+        font-size: 24px;
+        color: #96281b;
+      }
+    }
+  }
 }
 
 .create {

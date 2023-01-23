@@ -21,4 +21,9 @@ export class ProjectTeamsComponent implements OnInit {
       this.projectId = projectId;
     });
   }
+
+  /**get teams */
+  getProjectTeams(projectId: string){
+
+  }
 }
