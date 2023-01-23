@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col">
                 <h1 class="text-dark position-relative">
-                  projectName <i class="fa-regular fa-folder-open"></i>
+                  {{ projectName }} <i class="fa-regular fa-folder-open"></i>
                   <!-- <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger count"
                   >
@@ -20,7 +20,7 @@
                 <div class="col count">
                   <h1 class="text-dark position-relative">
                     Teams:
-                    <span class="">0 </span>
+                    <span class="">{{ teamCount }} </span>
                   </h1>
                 </div>
               </div>
@@ -46,10 +46,13 @@
               <div class="row">
                 <!-- item 1 -->
                 <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
-                <div class="col-md-6">
+                <div
+                  class="col-md-6"
+                  *ngFor="let team of teams | teamFilter : searchText"
+                >
                   <div class="timetable-item shadow pointer">
                     <div class="timetable-item-main">
-                      <div class="timetable-item-name">teamName</div>
+                      <div class="timetable-item-name">{{ team.teamName }}</div>
                       <div class="timetable-item-time">
                         <div class="col">
                           <div class="row">
@@ -60,7 +63,7 @@
                           <div class="row">
                             <small
                               ><i class="uil uil-folder-open"></i>projects:
-                              <span>0</span>
+                              <span>{{ team.projects.length }}</span>
                             </small>
                           </div>
                         </div>
