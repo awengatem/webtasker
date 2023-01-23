@@ -172,6 +172,7 @@ const routes: Routes = [
       {
         path: 'ad_teams/:teamId',
         canActivate: [SupervisorGuard],
+        canDeactivate: [ClearLocationGuard],
         component: TeamInfoComponent,
       },
       {
