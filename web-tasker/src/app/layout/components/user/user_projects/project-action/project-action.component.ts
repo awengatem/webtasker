@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/api/project.service';
+import { SnackBarService } from 'src/app/services/snackbar.service';
 import { SocketIoService } from 'src/app/services/socket.io.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -27,6 +28,7 @@ export class ProjectActionComponent implements OnInit {
     private webSocketService: SocketIoService,
     private projectService: ProjectService,
     private projectStatusService: ProjectStatusService,
+    private snackBarService: SnackBarService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -181,7 +183,7 @@ export class ProjectActionComponent implements OnInit {
           this.stopwatchnotPaused = false;
           /**navigate to disposition page */
           this.router.navigate([
-            `/projects/${this.projectId}/action/disposition`,
+            `/projects/${this.projectId}/${this.teamId}/disposition`,
           ]);
         }
         //continue timer if continued
@@ -215,10 +217,18 @@ export class ProjectActionComponent implements OnInit {
         projectId: this.projectId,
         teamId: this.teamId,
       });
-      Swal.fire('started', 'Session started successfully', 'success');
+      this.snackBarService.displaySnackbar(
+        'success',
+        'Session started successfully'
+      );
+      // Swal.fire('started', 'Session started successfully', 'success');
     } else if (mode === 'continue') {
       this.webSocketService.emit('continue', {});
-      Swal.fire('resumed', 'Session resumed successfully', 'success');
+      this.snackBarService.displaySnackbar(
+        'success',
+        'Session resumed successfully'
+      );
+      // Swal.fire('resumed', 'Session resumed successfully', 'success');
     }
     //update button control variables
     this.stopwatchStarted = true;

@@ -79,7 +79,7 @@ const routes: Routes = [
         component: ProjectActionComponent,
       },
       {
-        path: 'projects/:projectId/action/disposition',
+        path: 'projects/:projectId/:teamId/disposition',
         canActivate: [TimerGuard],
         component: DispositionComponent,
       },

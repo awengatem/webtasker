@@ -20,6 +20,7 @@ export class DispositionComponent implements OnInit {
   submitted: boolean = false;
   isTextAreaOpen: boolean = false;
   projectId!: string;
+  teamId!: string;
 
   constructor(
     private dispositionService: DispositionService,
@@ -33,7 +34,9 @@ export class DispositionComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       const projectId = params['projectId'];
+      const teamId = params['teamId'];
       this.projectId = projectId;
+      this.teamId = teamId;
     });
 
     /**build forms */
@@ -81,7 +84,9 @@ export class DispositionComponent implements OnInit {
           .catch((err) => {
             console.log(err);
           });
-        this.router.navigate([`/projects/${this.projectId}/action`]);
+        this.router.navigate([
+          `/projects/${this.projectId}/${this.teamId}/action`,
+        ]);
       },
       error: (err) => {
         console.log(err);
