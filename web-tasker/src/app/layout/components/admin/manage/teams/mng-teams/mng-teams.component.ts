@@ -1,15 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import Swal from 'sweetalert2';
 import { TeamService } from 'src/app/services/api/team.service';
+import { SnackBarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-mng-teams',
@@ -21,8 +17,6 @@ export class MngTeamsComponent implements OnInit {
   totalTeams = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   displayedColumns: string[] = [
     'Select',
     'Teamname',
@@ -37,7 +31,7 @@ export class MngTeamsComponent implements OnInit {
 
   constructor(
     private teamService: TeamService,
-    private _snackBar: MatSnackBar
+    private snackBarService: SnackBarService
   ) {
     //load data on table
     this.loadAllTeams();
@@ -115,13 +109,16 @@ export class MngTeamsComponent implements OnInit {
         if (result.value) {
           this.deleteMultipe(teamIdArr);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          this.displaySnackbar(0, 'operation has been cancelled');
+          this.snackBarService.displaySnackbar(
+            'error',
+            'operation has been cancelled'
+          );
           //reset the selection
           this.selection = new SelectionModel<any>(true, []);
         }
       });
     } else {
-      this.displaySnackbar(0, 'no selected records');
+      this.snackBarService.displaySnackbar('error', 'no selected records');
     }
   }
 
@@ -141,7 +138,10 @@ export class MngTeamsComponent implements OnInit {
       if (result.value) {
         this.deleteTeam(teamId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        this.displaySnackbar(0, 'operation has been cancelled');
+        this.snackBarService.displaySnackbar(
+          'error',
+          'operation has been cancelled'
+        );
       }
     });
   }
@@ -152,7 +152,7 @@ export class MngTeamsComponent implements OnInit {
       this.teamService.deleteMultipleTeams(teamIdArr).subscribe({
         next: (response: any) => {
           console.log(response);
-          this.displaySnackbar(1, response.message);
+          this.snackBarService.displaySnackbar('success', response.message);
           this.loadAllTeams();
         },
         error: (err) => {
@@ -168,7 +168,7 @@ export class MngTeamsComponent implements OnInit {
     this.teamService.deleteTeam(teamId).subscribe({
       next: (response: any) => {
         console.log(response);
-        this.displaySnackbar(1, response.message);
+        this.snackBarService.displaySnackbar('success', response.message);
         this.loadAllTeams();
       },
       error: (err) => {
@@ -176,25 +176,6 @@ export class MngTeamsComponent implements OnInit {
         Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
     });
-  }
-
-  /**Method to display snackbar */
-  displaySnackbar(type: number, message: any) {
-    if (type == 0) {
-      this._snackBar.open(message, 'Close', {
-        duration: 2000,
-        panelClass: ['red-snackbar'],
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    } else if (type == 1) {
-      this._snackBar.open(message, 'Close', {
-        duration: 2000,
-        panelClass: ['green-snackbar'],
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    }
   }
 
   /**Method to reload team table */

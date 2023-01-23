@@ -45,6 +45,23 @@
           color: #ac1100;
         }
       }
+
+      .point {
+        &-link {
+          color: #22b8f0;
+
+          &:hover {
+            cursor: pointer;
+            color: #cb0c9f;
+          }
+        }
+
+        .count {
+          font-weight: 600;
+          font-size: 18px;
+        }
+      }
+
       h5 {
         font-size: 18px;
       }

@@ -18,9 +18,21 @@
               </div>
               <div class="data">{{ lastUpdated }}</div>
             </div>
-            <div class="child">
-              <div class="label"><i class="uil uil-users-alt"></i> Teams:</div>
-              <div class="data">{{ teamCount }}</div>
+            <div class="child point">
+              <div class="label">
+                <i class="uil uil-users-alt"></i>
+                <span
+                  class="point-link"
+                  [routerLink]="['/project_teams', projectId]"
+                  >Teams:</span
+                >
+              </div>
+              <div
+                class="data point-link count"
+                [routerLink]="['/project_teams', projectId]"
+              >
+                {{ teamCount }}
+              </div>
             </div>
             <div class="child">
               <div class="label"><i class="uil uil-server"></i> Status:</div>
@@ -36,7 +48,7 @@
             <button
               class="btn btn-outline-secondary col me-2"
               type="button"
-              routerLink="/ad_projects"
+              (click)="navigateBack()"
             >
               Back
             </button>

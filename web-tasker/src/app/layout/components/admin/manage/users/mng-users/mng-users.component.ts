@@ -1,11 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NewUsermodalComponent } from '../new-usermodal/new-usermodal.component';
 import { EditUsermodalComponent } from '../edit-usermodal/edit-usermodal.component';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -14,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import Swal from 'sweetalert2';
+import { SnackBarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-mng-users',
@@ -30,8 +26,6 @@ export class MngUsersComponent implements OnInit {
   totalUsers = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   displayedColumns: string[] = [
     'Select',
     'Username',
@@ -47,7 +41,7 @@ export class MngUsersComponent implements OnInit {
 
   constructor(
     private userAccountService: UserAccountService,
-    private _snackBar: MatSnackBar,
+    private snackBarService: SnackBarService,
     private modalService: MdbModalService
   ) {
     //load data on table
@@ -128,13 +122,16 @@ export class MngUsersComponent implements OnInit {
         if (result.value) {
           this.deleteMultipe(userIdArr);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          this.displaySnackbar(0, 'operation has been cancelled');
+          this.snackBarService.displaySnackbar(
+            'error',
+            'operation has been cancelled'
+          );
           //reset the selection
           this.selection = new SelectionModel<any>(true, []);
         }
       });
     } else {
-      this.displaySnackbar(0, 'no selected records');
+      this.snackBarService.displaySnackbar('error', 'no selected records');
     }
   }
 
@@ -154,7 +151,10 @@ export class MngUsersComponent implements OnInit {
       if (result.value) {
         this.deleteUser(userId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        this.displaySnackbar(0, 'operation has been cancelled');
+        this.snackBarService.displaySnackbar(
+          'error',
+          'operation has been cancelled'
+        );
       }
     });
   }
@@ -165,7 +165,7 @@ export class MngUsersComponent implements OnInit {
       this.userAccountService.deleteMultipleUsers(userIdArr).subscribe({
         next: (response: any) => {
           console.log(response);
-          this.displaySnackbar(1, response.message);
+          this.snackBarService.displaySnackbar('success', response.message);
           this.loadAllUsers();
         },
         error: (err) => {
@@ -180,7 +180,7 @@ export class MngUsersComponent implements OnInit {
   deleteUser(userId: string) {
     this.userAccountService.deleteUser(userId).subscribe({
       next: (response: any) => {
-        this.displaySnackbar(1, response.message);
+        this.snackBarService.displaySnackbar('success', response.message);
         this.loadAllUsers();
       },
       error: (err) => {
@@ -188,25 +188,6 @@ export class MngUsersComponent implements OnInit {
         Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
     });
-  }
-
-  /**Multipurpose method for edits and updates */
-  displaySnackbar(type: number, message: any) {
-    if (type == 0) {
-      this._snackBar.open(message, 'Close', {
-        duration: 2000,
-        panelClass: ['red-snackbar'],
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    } else if (type == 1) {
-      this._snackBar.open(message, 'Close', {
-        duration: 2000,
-        panelClass: ['green-snackbar'],
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    }
   }
 
   /**Method to reload user table */

@@ -140,11 +140,14 @@ export class TeamInfoComponent implements OnInit {
   //getting members for team
   getTeamMembers(teamId: string) {
     this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
-      // members.forEach((member: any) => {
-      //   console.log(member.username);
-      // });
-      this.members = members;
-      //console.log(this.members);
+      let membersArr: any = [];
+      members.forEach((member: any) => {
+        if (member) {
+          membersArr.push(member);
+        }
+      });
+      this.members = membersArr;
+      // console.log(this.members);
     });
   }
 
@@ -271,6 +274,18 @@ export class TeamInfoComponent implements OnInit {
             this.projects[i].members = members.length;
           });
       }
+    }
+  }
+
+  /**Method to navigate to previous route */
+  navigateBack() {
+    //check if previous location is from manage component
+    let fromMng = window.sessionStorage.getItem('fromMng');
+    if (fromMng === 'true') {
+      //navigate to manager
+      this.router.navigate(['ad_manage/teams']);
+    } else {
+      this.router.navigate(['/ad_teams']);
     }
   }
 }

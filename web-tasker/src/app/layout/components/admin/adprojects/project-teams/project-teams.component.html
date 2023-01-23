@@ -1,0 +1,100 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Projects</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <div class="centered-content">
+        <div class="projects-container">
+          <div class="projects">
+            <div class="row">
+              <div class="col">
+                <h1 class="text-dark position-relative">
+                  {{ projectName }} <i class="fa-regular fa-folder-open"></i>
+                  <!-- <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger count"
+                  >
+                    0
+                  </span> -->
+                </h1>
+              </div>
+              <div class="col">
+                <div class="col count">
+                  <h1 class="text-dark position-relative">
+                    Teams:
+                    <span class="">{{ teamCount }} </span>
+                  </h1>
+                </div>
+              </div>
+              <div class="col">
+                <div class="input-group rounded search-bar">
+                  <input
+                    type="search"
+                    class="form-control rounded shadow"
+                    placeholder="enter team name to search ..."
+                    aria-label="Search"
+                    aria-describedby="search-addon"
+                    [(ngModel)]="searchText"
+                    autofocus
+                  />
+                  <span class="border-0 filter-icon" id="search-addon">
+                    <i class="uil uil-filter"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="projects-inside" id="projects">
+              <div class="row">
+                <!-- item 1 -->
+                <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
+                <div
+                  class="col-md-6"
+                  *ngFor="let team of teams | teamFilter : searchText"
+                >
+                  <div class="timetable-item shadow">
+                    <div class="timetable-item-main">
+                      <div class="timetable-item-name">{{ team.teamName }}</div>
+                      <div class="timetable-item-time">
+                        <div class="col">
+                          <div class="row">
+                            <small
+                              ><i class="uil uil-users-alt"></i>members:
+                              {{ team.members }}
+                            </small>
+                          </div>
+                          <div class="row">
+                            <small
+                              ><i class="uil uil-folder-open"></i>projects:
+                              <span>{{ team.projects.length }}</span>
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="timetable-item-users">
+                        <i class="fa-solid fa-users-line"></i>
+                        <div class="timetable-item-users-count">
+                          {{ team.members }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row centered-content create">
+        <div class="col-md-1">
+          <!-- routerLink="/new-project" -->
+          <button
+            class="btn btn-outline-custom medium"
+            [routerLink]="['/ad_projects', projectId]"
+          >
+            <div class="btn-txt">back</div>
+          </button>
+        </div>
+        <div class="col"><h4></h4></div>
+      </div>
+    </div>
+  </div>
+</div>

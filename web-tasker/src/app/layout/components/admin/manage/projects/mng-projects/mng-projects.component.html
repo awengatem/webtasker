@@ -91,7 +91,12 @@
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Project name
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let document" class="point">
+                          <mat-cell
+                            *matCellDef="let document"
+                            class="point"
+                            (click)="setLocation()"
+                            [routerLink]="['/ad_projects', document._id]"
+                          >
                             {{ document.projectName }}
                           </mat-cell>
                         </ng-container>

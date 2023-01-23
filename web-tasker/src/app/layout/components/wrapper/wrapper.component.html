@@ -142,6 +142,11 @@
             routerLinkActive="list-item-active"
             *ngIf="sublist"
           ></div>
+          <div
+            [routerLink]="'project_teams'"
+            routerLinkActive="list-item-active"
+            *ngIf="sublist"
+          ></div>
           <i class="fa-solid fa-folder-open"></i>
           <div class="content" *ngIf="isExpanded">Projects</div>
         </div>

@@ -22,6 +22,7 @@ import { WebRequestService } from 'src/app/services/api/web-request.service';
 import Swal from 'sweetalert2';
 import Validation from './validation';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
+import { SnackBarService } from 'src/app/services/snackbar.service';
 
 // /**directive helps detect form touched */
 // @Directive({
@@ -75,7 +76,8 @@ export class LoginComponent implements OnInit {
     private tokenService: TokenService,
     private userAccountService: UserAccountService,
     private generalService: GeneralService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {
@@ -258,13 +260,13 @@ export class LoginComponent implements OnInit {
       password: password,
       firstName: cFirstname,
       lastName: cLastname,
-      role: "user",
+      role: 'user',
     };
 
     /**post user to server*/
     this.userAccountService.registerUser(user).subscribe({
       next: (res: any) => {
-        Swal.fire(res.message);
+        this.snackBarService.displaySnackbar('success', res.message);
         this.resetSignup();
         console.log(res);
         this.signupFailed = false;

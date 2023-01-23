@@ -80,7 +80,7 @@
                     <!-- Member Item  -->
                     <div
                       class="col-md-6"
-                      *ngFor="let member of members | userFilter: searchText"
+                      *ngFor="let member of members | userFilter : searchText"
                     >
                       <div class="timetable-item member shadow">
                         <div class="timetable-item-main-member">
@@ -113,7 +113,7 @@
                     <div
                       class="col-md-6"
                       *ngFor="
-                        let project of projects | projectFilter: searchText
+                        let project of projects | projectFilter : searchText
                       "
                     >
                       <div class="timetable-item shadow">
@@ -157,7 +157,7 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-outline-custom back" routerLink="/ad_teams">
+      <button class="btn btn-custom text-white back" (click)="navigateBack()">
         <div class="btn-txt">Back</div>
       </button>
     </div>

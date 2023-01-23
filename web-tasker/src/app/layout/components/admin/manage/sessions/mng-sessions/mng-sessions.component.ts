@@ -1,15 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import Swal from 'sweetalert2';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
+import { SnackBarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-mng-sessions',
@@ -21,8 +17,6 @@ export class MngSessionsComponent implements OnInit {
   totalSessions = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   displayedColumns: string[] = [
     'Select',
     'Username',
@@ -39,7 +33,7 @@ export class MngSessionsComponent implements OnInit {
 
   constructor(
     private projectStatusService: ProjectStatusService,
-    private _snackBar: MatSnackBar
+    private snackBarService: SnackBarService
   ) {
     //load data on table
     this.loadAllSessions();
@@ -112,13 +106,16 @@ export class MngSessionsComponent implements OnInit {
         if (result.value) {
           this.deleteMultipe(sessionIdArr);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          this.displaySnackbar(0, 'operation has been cancelled');
+          this.snackBarService.displaySnackbar(
+            'error',
+            'operation has been cancelled'
+          );
           //reset the selection
           this.selection = new SelectionModel<any>(true, []);
         }
       });
     } else {
-      this.displaySnackbar(0, 'no selected records');
+      this.snackBarService.displaySnackbar('error', 'no selected records');
     }
   }
 
@@ -138,7 +135,10 @@ export class MngSessionsComponent implements OnInit {
       if (result.value) {
         this.deleteSession(sessionId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        this.displaySnackbar(0, 'operation has been cancelled');
+        this.snackBarService.displaySnackbar(
+          'error',
+          'operation has been cancelled'
+        );
       }
     });
   }
@@ -151,7 +151,7 @@ export class MngSessionsComponent implements OnInit {
         .subscribe({
           next: (response: any) => {
             console.log(response);
-            this.displaySnackbar(1, response.message);
+            this.snackBarService.displaySnackbar('success', response.message);
             this.loadAllSessions();
           },
           error: (err) => {
@@ -167,7 +167,7 @@ export class MngSessionsComponent implements OnInit {
     this.projectStatusService.deleteProjectStatus(sessionId).subscribe({
       next: (response: any) => {
         console.log(response);
-        this.displaySnackbar(1, response.message);
+        this.snackBarService.displaySnackbar('success', response.message);
         this.loadAllSessions();
       },
       error: (err) => {
@@ -175,25 +175,6 @@ export class MngSessionsComponent implements OnInit {
         Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
     });
-  }
-
-  /**Multipurpose method for edits and updates */
-  displaySnackbar(type: number, message: any) {
-    if (type == 0) {
-      this._snackBar.open(message, 'Close', {
-        duration: 2000,
-        panelClass: ['red-snackbar'],
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    } else if (type == 1) {
-      this._snackBar.open(message, 'Close', {
-        duration: 2000,
-        panelClass: ['green-snackbar'],
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    }
   }
 
   /**Method to reload user table */
