@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProjectService } from 'src/app/services/api/project.service';
+import { TeamService } from 'src/app/services/api/team.service';
 
 @Component({
   selector: 'app-project-teams',
@@ -17,7 +18,8 @@ export class ProjectTeamsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private teamService: TeamService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +30,10 @@ export class ProjectTeamsComponent implements OnInit {
       this.projectId = projectId;
       if (projectId) {
         this.getProject(projectId);
-        this.getProjectTeams(projectId);
+        this.getProjectTeams(projectId).then(() => {
+          //get team members for each team
+          this.getTeamMembers();
+        });
       }
     });
   }
@@ -55,16 +60,34 @@ export class ProjectTeamsComponent implements OnInit {
 
   /**get teams */
   getProjectTeams(projectId: string) {
-    this.projectService.getProjectTeams(projectId).subscribe({
-      next: (teams) => {
-        console.log(teams);
-        if (teams) {
-          this.teams = teams;
-        }
-      },
-      error: (err) => {
-        console.log(err);
-      },
+    return new Promise((resolve, reject) => {
+      this.projectService.getProjectTeams(projectId).subscribe({
+        next: (teams) => {
+          console.log(teams);
+          if (teams) {
+            this.teams = teams;
+          }
+          resolve(true);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     });
+  }
+
+  /**Get team members for each */
+  getTeamMembers() {
+    if (this.teams.length > 0) {
+      for (let i = 0; i < this.teams.length; i++) {
+        this.teamService
+          .getTeamMembersDoc(this.teams[i]._id)
+          .subscribe((members: any) => {
+            // console.log(members.length);
+            //push number of members to teams
+            this.teams[i].members = members.length;
+          });
+      }
+    }
   }
 }
