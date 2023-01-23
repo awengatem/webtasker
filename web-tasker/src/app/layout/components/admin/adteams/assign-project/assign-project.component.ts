@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ProjectService } from 'src/app/services/api/project.service';
@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-assign-project',
   templateUrl: './assign-project.component.html',
-  styleUrls: ['./assign-project.component.scss']
+  styleUrls: ['./assign-project.component.scss'],
 })
 export class AssignProjectComponent implements OnInit {
   //used by dropdown list
@@ -43,7 +43,7 @@ export class AssignProjectComponent implements OnInit {
       const teamId = params['teamId'];
       this.teamId = teamId;
     });
-    
+
     //record where you are
     this.projectService.setFromAssigning(true);
 
@@ -61,6 +61,7 @@ export class AssignProjectComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 10,
       allowSearchFilter: true,
+      defaultOpen: true,
     };
   }
   onItemSelect(item: any) {
@@ -125,7 +126,7 @@ export class AssignProjectComponent implements OnInit {
       },
     });
   }
-  
+
   assignProject() {
     let teamProjects: any = [];
     //ensure members are selected
@@ -144,8 +145,8 @@ export class AssignProjectComponent implements OnInit {
       });
       //console.log(teamProjects);
 
-      //post them to db 
-      this.teamService.assignTeamProjects(this.teamId,teamProjects).subscribe({
+      //post them to db
+      this.teamService.assignTeamProjects(this.teamId, teamProjects).subscribe({
         next: (res: any) => {
           console.log(res);
           this.router.navigate([`/ad_teams/${this.teamId}`]);
