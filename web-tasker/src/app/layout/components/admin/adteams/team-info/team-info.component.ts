@@ -276,4 +276,16 @@ export class TeamInfoComponent implements OnInit {
       }
     }
   }
+
+  /**Method to navigate to previous route */
+  navigateBack() {
+    //check if previous location is from manage component
+    let fromMng = window.sessionStorage.getItem('fromMng');
+    if (fromMng === 'true') {
+      //navigate to manager
+      this.router.navigate(['ad_manage/teams']);
+    } else {
+      this.router.navigate(['/ad_teams']);
+    }
+  }
 }

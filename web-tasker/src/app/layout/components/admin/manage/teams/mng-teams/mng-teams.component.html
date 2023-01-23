@@ -91,7 +91,12 @@
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Team name
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
+                          <mat-cell
+                            *matCellDef="let document"
+                            class="point"
+                            (click)="setLocation()"
+                            [routerLink]="['/ad_teams', document._id]"
+                          >
                             {{ document.teamName }}
                           </mat-cell>
                         </ng-container>
@@ -100,7 +105,7 @@
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
                             Projects
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
+                          <mat-cell *matCellDef="let document" class="bold">
                             {{ document.projects.length }}
                           </mat-cell>
                         </ng-container>
