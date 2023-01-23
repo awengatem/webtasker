@@ -140,11 +140,14 @@ export class TeamInfoComponent implements OnInit {
   //getting members for team
   getTeamMembers(teamId: string) {
     this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
-      // members.forEach((member: any) => {
-      //   console.log(member.username);
-      // });
-      this.members = members;
-      //console.log(this.members);
+      let membersArr: any = [];
+      members.forEach((member: any) => {
+        if (member) {
+          membersArr.push(member);
+        }
+      });
+      this.members = membersArr;
+      // console.log(this.members);
     });
   }
 
