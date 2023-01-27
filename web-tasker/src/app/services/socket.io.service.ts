@@ -41,7 +41,7 @@ export class SocketIoService {
   /**method used to recover running timers */
   emitOuter() {
     /*rejoin new socket to room*/
-    this.socket.emit('create', this.roomId);
+    // this.socket.emit('create', this.roomId);
     // this.socket.emit('recover', {});
   }
 

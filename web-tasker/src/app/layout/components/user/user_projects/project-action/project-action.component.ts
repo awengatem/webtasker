@@ -4,6 +4,7 @@ import { ProjectStatusService } from 'src/app/services/api/project-status.servic
 import { ProjectService } from 'src/app/services/api/project.service';
 import { SnackBarService } from 'src/app/services/snackbar.service';
 import { SocketIoService } from 'src/app/services/socket.io.service';
+import { TimerService } from 'src/app/services/timer.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-project-action',
@@ -28,6 +29,7 @@ export class ProjectActionComponent implements OnInit {
     private webSocketService: SocketIoService,
     private projectService: ProjectService,
     private projectStatusService: ProjectStatusService,
+    private timerService: TimerService,
     private snackBarService: SnackBarService,
     private route: ActivatedRoute,
     private router: Router
@@ -68,6 +70,11 @@ export class ProjectActionComponent implements OnInit {
     this.webSocketService.listen('recoverTimer').subscribe((data) => {
       console.log('trying to recover');
       this.webSocketService.emitOuter();
+    });
+
+    //listening the confirm progress event
+    this.webSocketService.listen('confirmProgress').subscribe((data) => {
+      this.timerService.confirmProgress();
     });
 
     /**get project status */
