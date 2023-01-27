@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { WebRequestService } from './api/web-request.service';
+import { SnackBarService } from './snackbar.service';
+import { SocketIoService } from './socket.io.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +11,8 @@ import { WebRequestService } from './api/web-request.service';
 export class TimerService {
   constructor(
     private webReqService: WebRequestService,
+    private webSocketService: SocketIoService,
+    private snackBarService: SnackBarService,
     private router: Router
   ) {}
 
@@ -78,6 +82,28 @@ export class TimerService {
   }
 
   confirmProgress() {
-    Swal.fire('hey!');
+    Swal.fire({
+      title: 'Confirm progress',
+      text: 'Are you still running the current session?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#22b8f0',
+      cancelButtonText: 'No, end session.',
+      cancelButtonColor: '#e74c3c',
+    }).then((result) => {
+      if (result.value) {
+        /**Continue the session */
+        this.webSocketService.emit('continue', {});
+        this.snackBarService.displaySnackbar(
+          'success',
+          'Session resumed successfully'
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        /**end the session */
+        this.webSocketService.emit('stop', {});
+        Swal.fire('ended', 'Session ended successfully', 'success');
+      }
+    });
   }
 }

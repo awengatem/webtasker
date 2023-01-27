@@ -74,7 +74,7 @@ export class ProjectActionComponent implements OnInit {
 
     //listening the confirm progress event
     this.webSocketService.listen('confirmProgress').subscribe((data) => {
-      this.timerService.confirmProgress();
+      this.confirmProgress();
     });
 
     /**get project status */
@@ -301,6 +301,28 @@ export class ProjectActionComponent implements OnInit {
     } else if (timerStatus === 'stopped') {
       this.stopwatchnotStarted = true;
     }
+  }
+
+  /**Method to confirm progress */
+  confirmProgress() {
+    Swal.fire({
+      title: 'Confirm progress',
+      text: 'Are you still running the current session?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#22b8f0',
+      cancelButtonText: 'No, end session.',
+      cancelButtonColor: '#e74c3c',
+    }).then((result) => {
+      if (result.value) {
+        /**Continue the session */
+        this.startTimer('continue');
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        /**end the session */
+        this.stopTimer();
+      }
+    });
   }
 
   /**getting project name*/
