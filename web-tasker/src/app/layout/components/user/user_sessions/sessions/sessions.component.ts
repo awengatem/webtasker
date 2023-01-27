@@ -35,9 +35,6 @@ export class SessionsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  /**used by  the search bar */
-  searchText = '';
-
   constructor(
     private projectStatusService: ProjectStatusService,
     private _snackBar: MatSnackBar
