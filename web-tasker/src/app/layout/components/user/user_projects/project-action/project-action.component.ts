@@ -54,13 +54,19 @@ export class ProjectActionComponent implements OnInit {
       this.showTimerButtons(data);
     });
 
+    //listening the timer buttonStatus event to decide on buttons to display
+    this.webSocketService.listen('refreshButtons').subscribe((data) => {
+      this.refreshTimerButtons(data);
+    });
+
     //listening the timer tick event from server
     this.webSocketService.listen('tick').subscribe((data) => {
       this.updateTimer(data);
     });
 
     //listening the refresh event from server
-    this.webSocketService.listen('recovertimer').subscribe((data) => {
+    this.webSocketService.listen('recoverTimer').subscribe((data) => {
+      console.log('trying to recover');
       this.webSocketService.emitOuter();
     });
 
@@ -110,6 +116,22 @@ export class ProjectActionComponent implements OnInit {
     }
   }
 
+  /**Method to refresh timer buttons*/
+  refreshTimerButtons(data: any) {
+    //reset variables
+    this.stopwatchPaused = false;
+    this.stopwatchPaused = false;
+    this.stopwatchnotStarted = false;
+    this.stopwatchnotPaused = false;
+    //show buttons
+    this.showTimerButtons(data);
+    /**get project status */
+    window.setTimeout(() => {
+      this.getStatus();
+    }, 2000);
+  }
+
+  /**Method to update timer value */
   updateTimer(data: any) {
     if (!!!data) return;
     const count = data.timer;

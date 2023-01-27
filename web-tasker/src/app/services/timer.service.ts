@@ -76,4 +76,8 @@ export class TimerService {
       });
     });
   }
+
+  confirmProgress() {
+    Swal.fire('hey!');
+  }
 }
