@@ -80,30 +80,4 @@ export class TimerService {
       });
     });
   }
-
-  confirmProgress() {
-    Swal.fire({
-      title: 'Confirm progress',
-      text: 'Are you still running the current session?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, go ahead.',
-      confirmButtonColor: '#22b8f0',
-      cancelButtonText: 'No, end session.',
-      cancelButtonColor: '#e74c3c',
-    }).then((result) => {
-      if (result.value) {
-        /**Continue the session */
-        this.webSocketService.emit('continue', {});
-        this.snackBarService.displaySnackbar(
-          'success',
-          'Session resumed successfully'
-        );
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        /**end the session */
-        this.webSocketService.emit('stop', {});
-        Swal.fire('ended', 'Session ended successfully', 'success');
-      }
-    });
-  }
 }
