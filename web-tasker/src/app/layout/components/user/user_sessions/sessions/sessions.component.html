@@ -6,7 +6,7 @@
         <div class="manage-container">
           <div class="manage">
             <div class="row">
-              <div class="col-3">
+              <div class="col">
                 <h1 class="text-dark position-relative">
                   my sessions <i class="fa-regular fa-folder-open"></i>
                   <span
@@ -18,139 +18,133 @@
               </div>
               <div class="col"></div>
               <div class="col">
-                <div class="input-group rounded search-bar">
-                  <input
-                    type="search"
-                    class="form-control rounded shadow"
-                    placeholder="enter project name to search ..."
-                    aria-label="Search"
-                    aria-describedby="search-addon"
-                    [(ngModel)]="searchText"
-                    autofocus
-                  />
-                  <span class="border-0 filter-icon" id="search-addon">
-                    <i class="uil uil-filter"></i>
-                  </span>
+                <div class="view">
+                  <button
+                    class="btn btn-primary centered-content"
+                    routerLink="/projects"
+                  >
+                    <i class="fa-regular fa-folder-open"></i>
+                  </button>
                 </div>
               </div>
-            </div>
-            <mat-divider></mat-divider>
-            <div class="container">
-              <mat-card class="mat-elevation-z8 shadow">
-                <mat-card-content>
-                  <form>
-                    <b>Search Records :</b> &nbsp;&nbsp;
-                    <mat-form-field>
-                      <mat-label>Filter</mat-label>
-                      <input matInput (keyup)="applyFilter($event)" />
-                    </mat-form-field>
-                    <div>
-                      <!-- TABLE BEGINS HERE-->
-                      <mat-table
-                        [dataSource]="dataSource"
-                        matSort
-                        class="mat-elevation-z8"
-                        style="
-                          box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
-                            0 6px 10px 0 rgba(0, 0, 0, 0.14),
-                            0 1px 18px 0 rgba(0, 0, 0, 0.12);
-                        "
-                      >
-                        <!-- ProjectName Column -->
-                        <ng-container matColumnDef="Position" class="">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            #
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
-                            <div class="bold">
-                              {{ document.position }}
-                            </div>
-                          </mat-cell>
-                        </ng-container>
-                        <!-- ProjectName Column -->
-                        <ng-container matColumnDef="ProjectName" class="">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Project name
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
-                            {{ document.projectName }}
-                          </mat-cell>
-                        </ng-container>
-                        <!-- TeamName Column -->
-                        <ng-container matColumnDef="TeamName" class="">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Team name
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
-                            {{ document.teamName }}
-                          </mat-cell>
-                        </ng-container>
-                        <!-- Status Column -->
-                        <ng-container matColumnDef="Status" class="">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Status
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
-                            <div
-                              *ngIf="document.status != 'finished'"
-                              class="col-sm"
-                              [ngClass]="
-                                document.status === 'running'
-                                  ? 'running'
-                                  : 'paused'
-                              "
-                            >
-                              {{ document.status }}
-                            </div>
-                            <div
-                              *ngIf="document.status === 'finished'"
-                              class="col-sm default"
-                            >
-                              {{ document.status }}
-                            </div>
-                          </mat-cell>
-                        </ng-container>
-                        <!-- NewDuration Column -->
-                        <ng-container matColumnDef="NewDuration" class="">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Duration
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
-                            {{ document.newDuration }}
-                          </mat-cell>
-                        </ng-container>
-                        <!-- StartTime Column -->
-                        <ng-container matColumnDef="StartTime" class="">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Started
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
-                            {{ document.startTime }}
-                          </mat-cell>
-                        </ng-container>
-                        <!-- FinishTime Column -->
-                        <ng-container matColumnDef="FinishTime" class="">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Finished
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
-                            {{ document.finishTime }}
-                          </mat-cell>
-                        </ng-container>
-                        <mat-header-row
-                          *matHeaderRowDef="displayedColumns"
-                        ></mat-header-row>
-                        <mat-row
-                          *matRowDef="let row; columns: displayedColumns"
-                        ></mat-row
-                      ></mat-table>
-                      <mat-paginator
-                        [pageSizeOptions]="[10, 25, 50]"
-                      ></mat-paginator>
-                    </div>
-                  </form>
-                </mat-card-content>
-              </mat-card>
+              <mat-divider></mat-divider>
+              <div class="container">
+                <mat-card class="mat-elevation-z8 shadow">
+                  <mat-card-content>
+                    <form>
+                      <b>Search Records :</b> &nbsp;&nbsp;
+                      <mat-form-field>
+                        <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" />
+                      </mat-form-field>
+                      <div>
+                        <!-- TABLE BEGINS HERE-->
+                        <mat-table
+                          [dataSource]="dataSource"
+                          matSort
+                          class="mat-elevation-z8"
+                          style="
+                            box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+                              0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                              0 1px 18px 0 rgba(0, 0, 0, 0.12);
+                          "
+                        >
+                          <!-- ProjectName Column -->
+                          <ng-container matColumnDef="Position" class="">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                              #
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let document">
+                              <div class="bold">
+                                {{ document.position }}
+                              </div>
+                            </mat-cell>
+                          </ng-container>
+                          <!-- ProjectName Column -->
+                          <ng-container matColumnDef="ProjectName" class="">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                              Project name
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let document">
+                              {{ document.projectName }}
+                            </mat-cell>
+                          </ng-container>
+                          <!-- TeamName Column -->
+                          <ng-container matColumnDef="TeamName" class="">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                              Team name
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let document">
+                              {{ document.teamName }}
+                            </mat-cell>
+                          </ng-container>
+                          <!-- Status Column -->
+                          <ng-container matColumnDef="Status" class="">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                              Status
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let document">
+                              <div
+                                *ngIf="document.status != 'finished'"
+                                class="col-sm"
+                                [ngClass]="
+                                  document.status === 'running'
+                                    ? 'running'
+                                    : 'paused'
+                                "
+                              >
+                                {{ document.status }}
+                              </div>
+                              <div
+                                *ngIf="document.status === 'finished'"
+                                class="col-sm default"
+                              >
+                                {{ document.status }}
+                              </div>
+                            </mat-cell>
+                          </ng-container>
+                          <!-- NewDuration Column -->
+                          <ng-container matColumnDef="NewDuration" class="">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                              Duration
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let document">
+                              {{ document.newDuration }}
+                            </mat-cell>
+                          </ng-container>
+                          <!-- StartTime Column -->
+                          <ng-container matColumnDef="StartTime" class="">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                              Started
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let document">
+                              {{ document.startTime }}
+                            </mat-cell>
+                          </ng-container>
+                          <!-- FinishTime Column -->
+                          <ng-container matColumnDef="FinishTime" class="">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                              Finished
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let document">
+                              {{ document.finishTime }}
+                            </mat-cell>
+                          </ng-container>
+                          <mat-header-row
+                            *matHeaderRowDef="displayedColumns"
+                          ></mat-header-row>
+                          <mat-row
+                            *matRowDef="let row; columns: displayedColumns"
+                          ></mat-row
+                        ></mat-table>
+                        <mat-paginator
+                          [pageSizeOptions]="[10, 25, 50]"
+                        ></mat-paginator>
+                      </div>
+                    </form>
+                  </mat-card-content>
+                </mat-card>
+              </div>
             </div>
           </div>
         </div>

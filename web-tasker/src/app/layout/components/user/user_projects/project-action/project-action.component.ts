@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/api/project.service';
+import { SnackBarService } from 'src/app/services/snackbar.service';
 import { SocketIoService } from 'src/app/services/socket.io.service';
+import { TimerService } from 'src/app/services/timer.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-project-action',
@@ -27,6 +29,8 @@ export class ProjectActionComponent implements OnInit {
     private webSocketService: SocketIoService,
     private projectService: ProjectService,
     private projectStatusService: ProjectStatusService,
+    private timerService: TimerService,
+    private snackBarService: SnackBarService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -52,14 +56,25 @@ export class ProjectActionComponent implements OnInit {
       this.showTimerButtons(data);
     });
 
+    //listening the timer buttonStatus event to decide on buttons to display
+    this.webSocketService.listen('refreshButtons').subscribe((data) => {
+      this.refreshTimerButtons(data);
+    });
+
     //listening the timer tick event from server
     this.webSocketService.listen('tick').subscribe((data) => {
       this.updateTimer(data);
     });
 
     //listening the refresh event from server
-    this.webSocketService.listen('recovertimer').subscribe((data) => {
+    this.webSocketService.listen('recoverTimer').subscribe((data) => {
+      console.log('trying to recover');
       this.webSocketService.emitOuter();
+    });
+
+    //listening the confirm progress event
+    this.webSocketService.listen('confirmProgress').subscribe((data) => {
+      this.confirmProgress();
     });
 
     /**get project status */
@@ -108,6 +123,22 @@ export class ProjectActionComponent implements OnInit {
     }
   }
 
+  /**Method to refresh timer buttons*/
+  refreshTimerButtons(data: any) {
+    //reset variables
+    this.stopwatchPaused = false;
+    this.stopwatchPaused = false;
+    this.stopwatchnotStarted = false;
+    this.stopwatchnotPaused = false;
+    //show buttons
+    this.showTimerButtons(data);
+    /**get project status */
+    window.setTimeout(() => {
+      this.getStatus();
+    }, 2000);
+  }
+
+  /**Method to update timer value */
   updateTimer(data: any) {
     if (!!!data) return;
     const count = data.timer;
@@ -181,7 +212,7 @@ export class ProjectActionComponent implements OnInit {
           this.stopwatchnotPaused = false;
           /**navigate to disposition page */
           this.router.navigate([
-            `/projects/${this.projectId}/action/disposition`,
+            `/projects/${this.projectId}/${this.teamId}/disposition`,
           ]);
         }
         //continue timer if continued
@@ -215,10 +246,18 @@ export class ProjectActionComponent implements OnInit {
         projectId: this.projectId,
         teamId: this.teamId,
       });
-      Swal.fire('started', 'Session started successfully', 'success');
+      this.snackBarService.displaySnackbar(
+        'success',
+        'Session started successfully'
+      );
+      // Swal.fire('started', 'Session started successfully', 'success');
     } else if (mode === 'continue') {
       this.webSocketService.emit('continue', {});
-      Swal.fire('resumed', 'Session resumed successfully', 'success');
+      this.snackBarService.displaySnackbar(
+        'success',
+        'Session resumed successfully'
+      );
+      // Swal.fire('resumed', 'Session resumed successfully', 'success');
     }
     //update button control variables
     this.stopwatchStarted = true;
@@ -262,6 +301,28 @@ export class ProjectActionComponent implements OnInit {
     } else if (timerStatus === 'stopped') {
       this.stopwatchnotStarted = true;
     }
+  }
+
+  /**Method to confirm progress */
+  confirmProgress() {
+    Swal.fire({
+      title: 'Confirm progress',
+      text: 'Are you still running the current session?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#22b8f0',
+      cancelButtonText: 'No, end session.',
+      cancelButtonColor: '#e74c3c',
+    }).then((result) => {
+      if (result.value) {
+        /**Continue the session */
+        this.startTimer('continue');
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        /**end the session */
+        this.stopTimer();
+      }
+    });
   }
 
   /**getting project name*/

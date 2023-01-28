@@ -10,7 +10,7 @@
     flex-direction: column;
     width: 100%;
     background: transparent;
-    //background: red;
+    // background: red;
     padding: 24px;
     border-radius: 2px;
     justify-content: center;
@@ -80,11 +80,7 @@
     }
 
     .timetable {
-      max-width: 900px;
-      max-height: 400px;
-      //background: blue;
-      margin-left: 5%;
-
+      margin-top: 20px;
       .nav-tabs {
         //border-bottom: 2px solid #104455;
         border-bottom: 2px solid #d674cb; /* fallback for old browsers */
@@ -175,6 +171,7 @@
         padding: 15px;
         //background: transparent;
         border-radius: 2px;
+        overflow-x: hidden;
         overflow-y: auto;
 
         .tab-pane {

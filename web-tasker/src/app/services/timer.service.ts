@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { WebRequestService } from './api/web-request.service';
+import { SnackBarService } from './snackbar.service';
+import { SocketIoService } from './socket.io.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +11,8 @@ import { WebRequestService } from './api/web-request.service';
 export class TimerService {
   constructor(
     private webReqService: WebRequestService,
+    private webSocketService: SocketIoService,
+    private snackBarService: SnackBarService,
     private router: Router
   ) {}
 

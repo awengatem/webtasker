@@ -9,6 +9,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { AccountService } from 'src/app/services/account-service.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { SidenavService } from 'src/app/services/sidenav.service';
+import { TimerService } from 'src/app/services/timer.service';
 import Swal from 'sweetalert2';
 import {
   sideNavAnimation,
@@ -34,7 +35,8 @@ export class WrapperComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private accountService: AccountService,
-    private sidenavService: SidenavService
+    private sidenavService: SidenavService,
+    private timerService: TimerService
   ) {}
 
   ngOnInit(): void {
