@@ -3,6 +3,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { url } from 'src/app/configs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,15 +13,7 @@ export class WebRequestService {
   readonly ROOT_URL;
 
   constructor(private http: HttpClient) {
-    /**for development purpose
-     * also accepts cookies
-     */
-    this.ROOT_URL = 'http://127.0.0.1:3000';
-
-    /**for production testing purpose
-     * rejects cookies but will fix later
-     */
-    // this.ROOT_URL = 'http://192.168.5.120:3000';
+    this.ROOT_URL = url.ROOT_URL;
   }
 
   get(uri: string): Observable<any> {
