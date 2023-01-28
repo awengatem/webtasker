@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as io from 'socket.io-client';
-import { WebRequestService } from './api/web-request.service';
-
+import { url } from 'src/app/configs';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,11 +9,13 @@ export class SocketIoService {
   socket: io.Socket;
   roomId: any;
 
-  constructor(private webReqService: WebRequestService) {
+  constructor() {
     const roomId = localStorage.getItem('user-id');
     this.roomId = roomId;
+    /**get the root url*/
+    const ROOT_URL = url.ROOT_URL;
 
-    this.socket = io.connect(this.ROOT_URL, {
+    this.socket = io.connect(ROOT_URL, {
       withCredentials: true,
       extraHeaders: {
         'socket-header': 'abcd',
@@ -34,9 +35,6 @@ export class SocketIoService {
     //   };
     // });
   }
-
-  /**get the root url*/
-  readonly ROOT_URL = this.webReqService.ROOT_URL;
 
   /**method used to recover running timers */
   emitOuter() {
