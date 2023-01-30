@@ -17,8 +17,8 @@ mat-toolbar {
       color: #22b8f0;
       margin-left: 120px;
 
-      h5{
-        font-family:  "Ubuntu" !important;
+      h5 {
+        font-family: "Ubuntu" !important;
       }
     }
 
@@ -110,15 +110,6 @@ mat-toolbar {
           background-clip: text;
           -webkit-text-fill-color: transparent;
         }
-      }
-
-      .btn-outline-custom {
-        // &:hover {
-        //   color: #010001;
-        // }
-        // &:focus {
-        //   color: #010001;
-        // }
       }
     }
   }
