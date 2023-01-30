@@ -15,10 +15,10 @@ mat-toolbar {
     .appname {
       position: absolute;
       color: #22b8f0;
-      margin-left: 120px;
+      margin-left: 47%;
 
-      h5{
-        font-family:  "Ubuntu" !important;
+      h5 {
+        font-family: "Ubuntu" !important;
       }
     }
 
@@ -109,15 +109,6 @@ mat-toolbar {
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
-        }
-      }
-
-      .btn-outline-custom {
-        &:hover {
-          color: #010001;
-        }
-        &:focus {
-          color: #010001;
         }
       }
     }
