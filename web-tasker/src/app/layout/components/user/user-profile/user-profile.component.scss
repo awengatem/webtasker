@@ -2,11 +2,11 @@
   position: absolute;
   .modal-box {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 380px;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+    max-width: 450px;
     width: 100%;
     background: #ffff;
     border-radius: 15px;
@@ -15,16 +15,17 @@
 
     .avatar {
       /* Rounded border */
-      border-radius: 50%;
+      //   border-radius: 50%;
 
       /* Center the content */
-      align-items: center;
+      //   align-items: center;
       display: flex;
-      justify-content: center;
+      //   justify-content: center;
+      padding-left: 0px;
 
       /* Size */
       height: 4rem;
-      width: 4rem;
+      //   width: 4rem;
 
       &__image {
         /* Size */
@@ -34,14 +35,18 @@
     }
 
     .title {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 500;
     }
 
     .details {
-      font-size: 16px;
-      font-weight: 500;
+      font-size: 18px;
+      font-weight: 600;
       padding-bottom: 15px;
+
+      i {
+        color: #22b8f0;
+      }
     }
 
     &:hover {
