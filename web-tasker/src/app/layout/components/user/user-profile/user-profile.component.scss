@@ -2,15 +2,40 @@
   position: absolute;
   .modal-box {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     max-width: 580px;
     width: 100%;
     background: #ffff;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 35px;
     opacity: 0.8;
 
+    .avatar {
+      /* Rounded border */
+      border-radius: 50%;
+
+      /* Center the content */
+      align-items: center;
+      display: flex;
+      justify-content: center;
+
+      /* Size */
+      height: 4rem;
+      width: 4rem;
+
+      &__image {
+        /* Size */
+        height: 50%;
+        width: 50%;
+      }
+    }
+
     .title {
-      font-size: 26px;
+      font-size: 18px;
+      font-weight: 500;
     }
 
     .child {
@@ -27,10 +52,10 @@
       }
     }
 
-    &:hover{
-        opacity: 1;
-        transition: transform 0.2s ease;
-        transform: scale(1.05);
+    &:hover {
+      opacity: 1;
+      transition: transform 0.2s ease;
+      transform: scale(1.05);
     }
   }
 }
