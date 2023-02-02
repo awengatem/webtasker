@@ -2,10 +2,6 @@
   position: absolute;
   .modal-box {
     position: relative;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // justify-content: center;
     max-width: 450px;
     width: 100%;
     background: #ffff;
@@ -14,18 +10,13 @@
     opacity: 0.8;
 
     .avatar {
-      /* Rounded border */
-      //   border-radius: 50%;
-
-      /* Center the content */
-      //   align-items: center;
       display: flex;
-      //   justify-content: center;
-      padding-left: 0px;
+      padding-bottom: 0;
+      margin-bottom: 0;
 
-      /* Size */
-      height: 4rem;
-      //   width: 4rem;
+      .icon {
+        color: #22b8f0;
+      }
 
       &__image {
         /* Size */
@@ -40,12 +31,12 @@
     }
 
     .details {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
       padding-bottom: 15px;
 
       i {
-        color: #22b8f0;
+        color: #cb0c9f;
       }
     }
 
