@@ -59,6 +59,7 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { EditUsermodalComponent } from './components/admin/manage/users/edit-usermodal/edit-usermodal.component';
 import { SessionsComponent } from './components/user/user_sessions/sessions/sessions.component';
 import { ProjectTeamsComponent } from './components/admin/adprojects/project-teams/project-teams.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { ProjectTeamsComponent } from './components/admin/adprojects/project-tea
     EditUsermodalComponent,
     SessionsComponent,
     ProjectTeamsComponent,
+    UserProfileComponent,
   ],
   imports: [
     CommonModule,

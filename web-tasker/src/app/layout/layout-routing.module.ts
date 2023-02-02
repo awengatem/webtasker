@@ -39,6 +39,7 @@ import { SupervisorGuard } from '../helpers/guards/supervisor.guard';
 import { SessionsComponent } from './components/user/user_sessions/sessions/sessions.component';
 import { ClearLocationGuard } from '../helpers/guards/clear-location.guard';
 import { ProjectTeamsComponent } from './components/admin/adprojects/project-teams/project-teams.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -98,6 +99,12 @@ const routes: Routes = [
       {
         path: 'sessions',
         component: SessionsComponent,
+      },
+
+      /**PROFILE */
+      {
+        path: 'profile',
+        component: UserProfileComponent,
       },
 
       /**ADMIN ROUTES */
