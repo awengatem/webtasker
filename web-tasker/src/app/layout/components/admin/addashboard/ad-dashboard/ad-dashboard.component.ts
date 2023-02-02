@@ -25,6 +25,7 @@ export class AdDashboardComponent implements OnInit {
   statusDocs = [];
   activeUserDocs = [];
   projects!: any[];
+  teams!: any[];
   memberChartArr!: any[];
   projectidArr: string[] = [];
   teamidArr: string[] = [];
@@ -70,7 +71,7 @@ export class AdDashboardComponent implements OnInit {
     // initiate methods
     this.getTotalUsers();
     this.getTotalProjects();
-    this.getTotalTeams();
+    this.getTeams();
     this.getRecentDocs();
     this.getStatusDocs();
     this.getActiveUsers();
@@ -105,9 +106,10 @@ export class AdDashboardComponent implements OnInit {
   }
 
   /**Get the number of total teams */
-  getTotalTeams() {
+  getTeams() {
     this.teamService.getAllTeams().subscribe({
       next: (teams) => {
+        if (teams) this.teams = teams;
         this.totalTeams = teams.length;
       },
       error: (err) => {
