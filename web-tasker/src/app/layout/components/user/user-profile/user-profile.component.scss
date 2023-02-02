@@ -26,5 +26,11 @@
         padding-left: 10px;
       }
     }
+
+    &:hover{
+        opacity: 1;
+        transition: transform 0.2s ease;
+        transform: scale(1.05);
+    }
   }
 }
