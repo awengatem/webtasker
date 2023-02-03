@@ -194,7 +194,9 @@
       (toggleSidebarForMe)="toggle()"
       (logout)="logout()"
     ></app-header>
-    <router-outlet></router-outlet>
+    <div [ngClass]="isModalOpen ? 'modal-blur' : ''">
+      <router-outlet></router-outlet>
+    </div>
     <footer>footer</footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
