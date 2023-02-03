@@ -81,7 +81,7 @@ export class HeaderComponent implements OnInit {
 
   /**METHODS USED BY MODAL */
   /**open user profile modal */
-  openNewUserModal() {
+  openUserProfileModal() {
     this.isModalOpen = true;
     this.modalRef = this.modalService.open(UserProfileComponent, {
       modalClass: 'modal-dialog-centered modal-xl',
