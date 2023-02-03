@@ -1,27 +1,22 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+
 import { AccountService } from 'src/app/services/account-service.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
-import { UserProfileComponent } from '../components/user/user-profile/user-profile.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  providers: [MdbModalService],
 })
 export class HeaderComponent implements OnInit {
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
   @Output() logout: EventEmitter<any> = new EventEmitter();
-  /**define modal */
-  modalRef: MdbModalRef<UserProfileComponent> | null = null;
-  isModalOpen: boolean = false; //add background blur
+  @Output() openModal: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private account: AccountService,
-    private modalService: MdbModalService,
     private tokenService: TokenService
   ) {}
 
@@ -33,14 +28,22 @@ export class HeaderComponent implements OnInit {
     this.getUsername();
   }
 
+  /**Emit sidenav toggle */
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
   }
 
+  /**Emit logout */
   logger() {
     this.logout.emit();
   }
 
+  /**Emit show Modal */
+  showModal() {
+    this.openModal.emit();
+  }
+
+  /**Get the username to set in label */
   private getUsername(): any {
     this.username = this.account.getUser().username;
   }
@@ -77,18 +80,5 @@ export class HeaderComponent implements OnInit {
   //methods used by github and help icons in header
   goToLink(url: string) {
     window.open(url, '_blank');
-  }
-
-  /**METHODS USED BY MODAL */
-  /**open user profile modal */
-  openUserProfileModal() {
-    this.isModalOpen = true;
-    this.modalRef = this.modalService.open(UserProfileComponent, {
-      modalClass: 'modal-dialog-centered modal-xl',
-    });
-    //listen when closed
-    this.modalRef.onClose.subscribe(() => {
-      this.isModalOpen = false;
-    });
   }
 }

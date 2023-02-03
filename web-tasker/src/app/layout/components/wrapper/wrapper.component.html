@@ -193,6 +193,7 @@
     <app-header
       (toggleSidebarForMe)="toggle()"
       (logout)="logout()"
+      (openModal)="openUserProfileModal()"
     ></app-header>
     <div [ngClass]="isModalOpen ? 'modal-blur' : ''">
       <router-outlet></router-outlet>

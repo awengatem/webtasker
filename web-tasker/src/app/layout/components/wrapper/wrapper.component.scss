@@ -165,8 +165,8 @@ mat-sidenav-container {
 
   mat-sidenav-content {
     overflow-x: hidden;
-    .blur {
-      opacity: 0.1;
+    .modal-blur {
+      opacity: 0.3;
     }
   }
 }
