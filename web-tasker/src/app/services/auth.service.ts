@@ -34,10 +34,11 @@ export class AuthService {
         const token = res.headers.get('x-token');
 
         /**get the user from token */
-        this.getUser(token);
+        const user = this.getUser(token);
+
         //the auth tokens will be in the header of this response
         this.setSession(
-          res.body.user._id,
+          user._id,
           token
           //res.body.authTokens //aka refreshtoken
         );
@@ -104,9 +105,10 @@ export class AuthService {
     // localStorage.removeItem('sublist');
   }
 
+  /**Getting the user from access token */
   private getUser(token: any) {
-    const user = JSON.parse(window.atob(token.split('.')[1]));
-    return user;
+    const document = JSON.parse(window.atob(token.split('.')[1]));
+    return document.user;
   }
 
   /**method used by auth guard to check if the user is authorized*/
