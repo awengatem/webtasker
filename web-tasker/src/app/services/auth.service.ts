@@ -126,23 +126,20 @@ export class AuthService {
   verifySupervisor() {
     return new Promise((resolve, reject) => {
       /**check from db if user is an admin */
-      this.webService.get('users/current').subscribe({
-        next: (user) => {
-          if (user) {
-            const role = user.role;
-            //allow both supervisor and manager
-            if (role === 'supervisor' || role === 'manager') {
-              resolve(true);
-            } else {
-              resolve(false);
-            }
-          }
-        },
-        error: (err) => {
-          console.log(err);
-          reject();
-        },
-      });
+      const token = localStorage.getItem('access-token');
+      /**Get the user from token */
+      const user = this.getUser(token);
+      if (user) {
+        const role = user.role;
+        //allow both supervisor and manager
+        if (role === 'supervisor' || role === 'manager') {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      } else {
+        reject();
+      }
     });
   }
 
@@ -150,23 +147,20 @@ export class AuthService {
   verifyManager() {
     return new Promise((resolve, reject) => {
       /**check from db if user is an admin */
-      this.webService.get('users/current').subscribe({
-        next: (user) => {
-          if (user) {
-            const role = user.role;
-            //allow manager only
-            if (role === 'manager') {
-              resolve(true);
-            } else {
-              resolve(false);
-            }
-          }
-        },
-        error: (err) => {
-          console.log(err);
-          reject();
-        },
-      });
+      const token = localStorage.getItem('access-token');
+      /**Get the user from token */
+      const user = this.getUser(token);
+      if (user) {
+        const role = user.role;
+        //allow manager only
+        if (role === 'manager') {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      } else {
+        reject();
+      }
     });
   }
 }
