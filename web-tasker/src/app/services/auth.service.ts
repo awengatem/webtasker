@@ -31,10 +31,14 @@ export class AuthService {
     return this.webService.login(username, password).pipe(
       shareReplay(), //avoid multiple execution by multiple subscribers
       tap((res: HttpResponse<any>) => {
+        const token = res.headers.get('x-token');
+
+        /**get the user from token */
+        this.getUser(token);
         //the auth tokens will be in the header of this response
         this.setSession(
           res.body.user._id,
-          res.headers.get('x-token')
+          token
           //res.body.authTokens //aka refreshtoken
         );
         //set sidenav statuses
@@ -100,6 +104,11 @@ export class AuthService {
     // localStorage.removeItem('sublist');
   }
 
+  private getUser(token: any) {
+    const user = JSON.parse(window.atob(token.split('.')[1]));
+    return user;
+  }
+
   /**method used by auth guard to check if the user is authorized*/
   verifyUser() {
     this.myBool = false;
@@ -117,12 +126,14 @@ export class AuthService {
       /**check from db if user is an admin */
       this.webService.get('users/current').subscribe({
         next: (user) => {
-          const role = user.role;
-          //allow both supervisor and manager
-          if (role === 'supervisor' || role === 'manager') {
-            resolve(true);
-          } else {
-            resolve(false);
+          if (user) {
+            const role = user.role;
+            //allow both supervisor and manager
+            if (role === 'supervisor' || role === 'manager') {
+              resolve(true);
+            } else {
+              resolve(false);
+            }
           }
         },
         error: (err) => {
@@ -139,12 +150,14 @@ export class AuthService {
       /**check from db if user is an admin */
       this.webService.get('users/current').subscribe({
         next: (user) => {
-          const role = user.role;
-          //allow manager only
-          if (role === 'manager') {
-            resolve(true);
-          } else {
-            resolve(false);
+          if (user) {
+            const role = user.role;
+            //allow manager only
+            if (role === 'manager') {
+              resolve(true);
+            } else {
+              resolve(false);
+            }
           }
         },
         error: (err) => {

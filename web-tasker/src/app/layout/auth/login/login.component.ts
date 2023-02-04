@@ -230,7 +230,8 @@ export class LoginComponent implements OnInit {
         //this.reloadPage();
       },
       error: (err) => {
-        this.loginErrorMessage = err.error.message;
+        // this.loginErrorMessage = err.error.message;
+        console.log(err);
         this.isLoginFailed = true;
       },
     });
