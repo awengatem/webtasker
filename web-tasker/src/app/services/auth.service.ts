@@ -34,7 +34,7 @@ export class AuthService {
         const token = res.headers.get('x-token');
 
         /**get the user from token */
-        const user = this.getUser(token);
+        const user = this.getLoginUser(token);
 
         //the auth tokens will be in the header of this response
         this.setSession(
@@ -106,32 +106,39 @@ export class AuthService {
   }
 
   /**Getting the user from access token */
-  public getUser(token: any) {
-    const document = JSON.parse(window.atob(token.split('.')[1]));
-    return document.user;
+  private getLoginUser(token: any) {
+    if (token) {
+      const document = JSON.parse(window.atob(token.split('.')[1]));
+      return document.user;
+    }
+  }
+  /**Getting the user from access token */
+  public getUser() {
+    /**Get access token from storage */
+    const token = localStorage.getItem('access-token');
+    if (token) {
+      const document = JSON.parse(window.atob(token.split('.')[1]));
+      return document.user;
+    }
   }
 
   /**method used by auth guard to check if the user is authorized*/
   verifyUser() {
     return new Promise((resolve, reject) => {
-      /**check from db if user is an admin */
-      const token = localStorage.getItem('access-token');
-      if (token) {
-        /**Get the user from token */
-        const user = this.getUser(token);
-        if (user) {
-          const role = user.role;
-          //allow both supervisor and manager
-          if (role === 'supervisor' || role === 'manager' || role === 'user') {
-            resolve(true);
-          } else {
-            resolve(false);
-          }
+      /**check from db if user is authenticated */
+      /**Get the user from token */
+      const user = this.getUser();
+      if (user) {
+        const role = user.role;
+        //allow both supervisor and manager
+        if (role === 'supervisor' || role === 'manager' || role === 'user') {
+          resolve(true);
         } else {
-          reject();
+          resolve(false);
         }
       } else {
         this.logout();
+        reject();
       }
     });
   }
@@ -139,10 +146,9 @@ export class AuthService {
   /**method used by supervisor guard to authorize admins and supervisors */
   verifySupervisor() {
     return new Promise((resolve, reject) => {
-      /**check from db if user is an admin */
-      const token = localStorage.getItem('access-token');
+      /**check if user is an admin */
       /**Get the user from token */
-      const user = this.getUser(token);
+      const user = this.getUser();
       if (user) {
         const role = user.role;
         //allow both supervisor and manager
@@ -160,10 +166,9 @@ export class AuthService {
   /**method used by manager guard to authorize managers */
   verifyManager() {
     return new Promise((resolve, reject) => {
-      /**check from db if user is an admin */
-      const token = localStorage.getItem('access-token');
+      /**check if user is an admin */
       /**Get the user from token */
-      const user = this.getUser(token);
+      const user = this.getUser();
       if (user) {
         const role = user.role;
         //allow manager only
