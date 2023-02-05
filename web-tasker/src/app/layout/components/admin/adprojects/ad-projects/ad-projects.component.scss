@@ -77,9 +77,18 @@
       margin-right: auto;
     }
 
-    //styling for empty
-    .project-color {
-      color: #1c2833;
+    /*Used by no projects div*/
+    .empty {
+      position: relative;
+      .no-content {
+        h1 {
+          position: absolute;
+          bottom: 40px;
+          font-weight: 500;
+          font-size: 18px;
+          color: #80050c;
+        }
+      }
     }
   }
 
@@ -164,12 +173,6 @@
       overflow: hidden;
       transition: transform 0.5s ease;
       transform: scale(1.05);
-    }
-
-    /*Used by no projects div*/
-    .no-content {
-      width: 40%;
-      height: auto;
     }
   }
 
