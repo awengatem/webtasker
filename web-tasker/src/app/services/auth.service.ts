@@ -106,7 +106,7 @@ export class AuthService {
   }
 
   /**Getting the user from access token */
-  private getUser(token: any) {
+  public getUser(token: any) {
     const document = JSON.parse(window.atob(token.split('.')[1]));
     return document.user;
   }
