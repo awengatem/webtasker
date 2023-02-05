@@ -12,8 +12,6 @@ import { AuthService } from '../../services/auth.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  isUserVerified!: boolean;
-
   constructor(private authService: AuthService) {}
 
   canActivate(
@@ -25,14 +23,19 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     return new Promise((resolve, reject) => {
-      this.isUserVerified = this.authService.verifyUser();
-
-      if (this.isUserVerified) {
-        resolve(true);
-      } else {
-        this.authService.logout();
-        resolve(false);
-      }
+      this.authService
+        .verifyUser()
+        .then((result) => {
+          if (result === true) {
+            resolve(true);
+          } else {
+            this.authService.logout();
+            resolve(false);
+          }
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
   }
 }

@@ -113,13 +113,27 @@ export class AuthService {
 
   /**method used by auth guard to check if the user is authorized*/
   verifyUser() {
-    this.myBool = false;
-    const token1 = this.tokenService.getAccessTokenSession();
-    const token2 = this.tokenService.getAccessTokenLocal();
-    if (token1 === token2 && token1 !== null) {
-      this.myBool = true;
-    }
-    return this.myBool;
+    return new Promise((resolve, reject) => {
+      /**check from db if user is an admin */
+      const token = localStorage.getItem('access-token');
+      if (token) {
+        /**Get the user from token */
+        const user = this.getUser(token);
+        if (user) {
+          const role = user.role;
+          //allow both supervisor and manager
+          if (role === 'supervisor' || role === 'manager' || role === 'user') {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        } else {
+          reject();
+        }
+      } else {
+        this.logout();
+      }
+    });
   }
 
   /**method used by supervisor guard to authorize admins and supervisors */
