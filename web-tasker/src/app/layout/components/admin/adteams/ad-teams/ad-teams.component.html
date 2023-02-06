@@ -116,6 +116,13 @@
                     </div>
                   </div>
                 </div>
+                <!-- div to display when empty-->
+                <div class="empty" *ngIf="teamsLength === 0">
+                  <div class="no-content centered">
+                    <img id="" src="../assets/images/not-found.png" alt="" />
+                    <h1>Teams unavailable at the moment :)</h1>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
