@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
+  user: any;
+
   constructor(
     public modalRef: MdbModalRef<UserProfileComponent>,
     private authService: AuthService
@@ -21,6 +23,7 @@ export class UserProfileComponent implements OnInit {
   getUserDetails() {
     const user = this.authService.getUser();
     console.log(user);
+    this.user = user;
   }
 
   /**Method to close modal */

@@ -9,17 +9,19 @@
         <!-- Avatar image -->
         <img class="avatar__image" src="/assets/icons/user.svg" />
       </div>
-      <h1 class="username"><i class="uil uil-at"></i>username</h1>
+      <h1 class="username"><i class="uil uil-at"></i>{{ user.username }}</h1>
     </div>
     <div class="details">
-      <i class="fa-solid fa-face-smile"></i> Joseph Karanja
+      <i class="fa-solid fa-face-smile"></i> {{ user.firstName }}
     </div>
     <div class="details"><i class="fa-solid fa-envelope"></i> info@joe.com</div>
     <div class="details"><i class="fa-solid fa-phone"></i> +254 798260636</div>
     <div class="details"><i class="fa-regular fa-id-card"></i> 398123455</div>
     <div class="details"><i class="fa-solid fa-venus-mars"></i> male</div>
     <div class="details"><i class="fa-solid fa-location-dot"></i> Nakuru</div>
-    <div class="details"><i class="fa-solid fa-circle-user"></i> user</div>
+    <div class="details">
+      <i class="fa-solid fa-circle-user"></i> {{ user.role }}
+    </div>
   </div>
   <!-- </div>
     </div>
