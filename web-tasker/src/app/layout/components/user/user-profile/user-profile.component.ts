@@ -11,6 +11,11 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**get user details */
+  getUserDEtails(){
+
+  }
+  
   /**Method to close modal */
   close(): void {
     this.modalRef.close();
