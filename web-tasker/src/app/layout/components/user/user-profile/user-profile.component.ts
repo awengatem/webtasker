@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -7,12 +8,20 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  constructor(public modalRef: MdbModalRef<UserProfileComponent>) {}
+  constructor(
+    public modalRef: MdbModalRef<UserProfileComponent>,
+    private authService: AuthService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getUserDetails();
+  }
 
   /**get user details */
-  getUserDetails() {}
+  getUserDetails() {
+    const user = this.authService.getUser();
+    console.log(user);
+  }
 
   /**Method to close modal */
   close(): void {
