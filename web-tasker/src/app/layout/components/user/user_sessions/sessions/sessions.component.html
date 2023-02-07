@@ -135,8 +135,12 @@
                           ></mat-header-row>
                           <mat-row
                             *matRowDef="let row; columns: displayedColumns"
-                          ></mat-row
-                        ></mat-table>
+                          ></mat-row>
+                          <!-- <div class="centered notify" *matNoDataRow>
+                            <i class="fa-solid fa-circle-exclamation me-2"></i>
+                            <div>No projects available at the moment</div>
+                          </div> -->
+                        </mat-table>
                         <mat-paginator
                           [pageSizeOptions]="[10, 25, 50]"
                         ></mat-paginator>
