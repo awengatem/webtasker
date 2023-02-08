@@ -38,7 +38,6 @@
             <div class="projects-inside" id="projects">
               <div class="row">
                 <!-- item 1 -->
-                <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
                 <div
                   class="col-md-6"
                   *ngFor="let project of projects | projectFilter : searchText"
@@ -94,15 +93,6 @@
           </div>
         </div>
       </div>
-      <!-- NOT BEING USED AT THE MOMENT -->
-      <!-- <div class="row centered-content create">
-        <div class="col-md-1">          
-          <button class="btn btn-outline-custom">
-            <div class="btn-txt">+</div>
-          </button>
-        </div>
-        <div class="col"><h4>Create new project</h4></div>
-      </div> -->
     </div>
   </div>
 </div>
