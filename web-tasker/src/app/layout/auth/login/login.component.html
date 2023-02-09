@@ -11,9 +11,13 @@
         <div class="section pb-5 pt-5 pt-sm-2 text-center">
           <h5 class="mb-0 pb-2" [ngClass]="isChecked ? 'spanner' : ''">
             <span class="spanner_checked" *ngIf="!isChecked">Log In </span>
-            <span class="spanner" *ngIf="isChecked" (click)="login()">Log In </span>
+            <span class="spanner" *ngIf="isChecked" (click)="login()"
+              >Log In
+            </span>
             <span class="spanner_checked" *ngIf="isChecked">Sign Up</span>
-            <span class="spanner" *ngIf="!isChecked" (click)="signUp()">Sign Up</span>
+            <span class="spanner" *ngIf="!isChecked" (click)="signUp()"
+              >Sign Up</span
+            >
           </h5>
           <input
             class="checkbox"
@@ -26,6 +30,7 @@
           <label for="reg-log"></label>
           <div class="card-3d-wrap mx-auto">
             <div class="card-3d-wrapper">
+              <!-- Sign In  page -->
               <div class="card-front">
                 <div class="center-wrap">
                   <div class="section text-center">
@@ -144,6 +149,7 @@
                   </div>
                 </div>
               </div>
+              <!-- Sign Up page -->
               <div class="card-back">
                 <div class="center-wrap">
                   <div class="section text-center">
@@ -241,7 +247,9 @@
                           <i class="input-icon uil uil-at"></i>
                           <i
                             class="vericon success fas fa-check-circle fa-xs"
-                            *ngIf="email?.dirty && !email?.errors && !email?.invalid"
+                            *ngIf="
+                              email?.dirty && !email?.errors && !email?.invalid
+                            "
                           ></i>
 
                           <div
