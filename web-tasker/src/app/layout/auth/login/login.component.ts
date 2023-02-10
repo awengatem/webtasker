@@ -58,11 +58,24 @@ export class LoginComponent implements OnInit {
     password: null,
   };
 
+  //test
+  currentPage = 1;
+  name = '';
+  email2 = '';
+  phone = '';
+  address = '';
+
+  nextPage() {
+    this.currentPage++;
+  }
+
   /**form used in signup part */
   fSignup: FormGroup = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
     email: new FormControl(''),
+    gender: new FormControl(''),
+    dob: new FormControl(''),
     username: new FormControl(''),
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
@@ -102,6 +115,8 @@ export class LoginComponent implements OnInit {
           ],
         ],
         email: ['', [Validators.required, Validators.email]],
+        gender: ['', []],
+        dob: ['', []],
         password: [
           '',
           [
@@ -184,6 +199,14 @@ export class LoginComponent implements OnInit {
 
   get email() {
     return this.fSignup.get('email');
+  }
+
+  get gender() {
+    return this.fSignup.get('gender');
+  }
+
+  get dob() {
+    return this.fSignup.get('dob');
   }
 
   get password() {

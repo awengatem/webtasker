@@ -156,7 +156,125 @@
                 <div class="center-wrap">
                   <div class="section text-center">
                     <h4 class="mb-2 pb-1 text-white">Sign Up</h4>
-                    <form
+                    <div [ngSwitch]="currentPage">
+                      <div *ngSwitchCase="1">
+                        <!-- <h1>Page 1: Basic Information</h1> -->
+                        <form>
+                          <div class="custom-form-row row">
+                            <div class="form-group col me-2">
+                              <input
+                                type="text"
+                                formControlName="firstname"
+                                class="form-style form-control"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    (firstname?.dirty && firstname?.errors) ||
+                                    (submitted && firstname?.errors)
+                                }"
+                                placeholder="Your First Name"
+                                autocomplete="off"
+                              />
+                              <i class="input-icon uil uil-user-plus"></i>
+                            </div>
+                            <div class="form-group col">
+                              <input
+                                type="text"
+                                formControlName="lastname"
+                                class="form-style form-control"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    (lastname?.dirty && lastname?.errors) ||
+                                    (submitted && lastname?.errors)
+                                }"
+                                placeholder="Your Last Name"
+                                autocomplete="off"
+                              />
+                              <i class="input-icon uil uil-user-plus"></i>
+                            </div>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input
+                              type="email"
+                              formControlName="email"
+                              class="form-style form-control"
+                              [ngClass]="{
+                                'is-invalid':
+                                  (email?.dirty && email?.errors) ||
+                                  (submitted && email?.errors)
+                              }"
+                              placeholder="Your Email"
+                              autocomplete="off"
+                            />
+                            <i class="input-icon uil uil-at"></i>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input
+                              type="text"
+                              formControlName="gender"
+                              class="form-style form-control"
+                              placeholder="Set gender"
+                              autocomplete="off"
+                              [ngClass]="{
+                                'is-invalid':
+                                  (gender?.dirty && gender?.errors) ||
+                                  (submitted && gender?.errors)
+                              }"
+                            />
+                            <i class="input-icon uil uil-mars"></i>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input
+                              type="text"
+                              formControlName="dob"
+                              class="form-style form-control"
+                              placeholder="Set dob"
+                              autocomplete="off"
+                              [ngClass]="{
+                                'is-invalid':
+                                  (dob?.dirty && dob?.errors) ||
+                                  (submitted && dob?.errors)
+                              }"
+                            />
+                            <i class="input-icon uil uil-calender"></i>
+                          </div>
+                          <div class="form-group">
+                            <button class="btn mt-3 a" (click)="nextPage()">
+                              Next
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+
+                      <div *ngSwitchCase="2">
+                        <h1>Page 2: Contact Information</h1>
+                        <form>
+                          <div>
+                            <label for="phone">Phone:</label>
+                            <input
+                              type="tel"
+                              id="phone"
+                              [(ngModel)]="phone"
+                              name="phone"
+                            />
+                          </div>
+                          <div>
+                            <div>
+                              <label for="address">Address:</label>
+                              <input
+                                type="text"
+                                id="address"
+                                [(ngModel)]="address"
+                                name="address"
+                              />
+                            </div>
+                            <button (click)="nextPage()">Next</button>
+                          </div>
+                        </form>
+                      </div>
+                      <!-- add additional pages as needed -->
+                    </div>
+
+                    <!-- <form
                       [formGroup]="fSignup"
                       (ngSubmit)="fSignup.valid && onSignup()"
                     >
@@ -409,7 +527,7 @@
                           </h5>
                         </div>
                       </div>
-                    </form>
+                    </form> -->
                   </div>
                 </div>
               </div>
