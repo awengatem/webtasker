@@ -230,7 +230,7 @@ export class LoginComponent implements OnInit {
         //this.reloadPage();
       },
       error: (err) => {
-        // this.loginErrorMessage = err.error.message;
+        this.loginErrorMessage = err.error.message;
         console.log(err);
         this.isLoginFailed = true;
       },
@@ -273,7 +273,7 @@ export class LoginComponent implements OnInit {
         this.signupFailed = false;
       },
       error: (err) => {
-        console.log(err.error.message);
+        console.log(err);
         this.signupErrorMessage = err.error.message;
         this.signupFailed = true;
       },

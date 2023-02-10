@@ -52,9 +52,7 @@ export class WebReqInterceptor implements HttpInterceptor {
           this.handle403Error(req);
         }
 
-        return throwError(() => {
-          new Error();
-        });
+        return throwError(error);
       })
     );
   }
