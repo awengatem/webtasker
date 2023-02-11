@@ -79,6 +79,8 @@ export class LoginComponent implements OnInit {
     dob: new FormControl(''),
     telNo: new FormControl(''),
     idNo: new FormControl(''),
+    area: new FormControl(''),
+    county: new FormControl(''),
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
   });
@@ -121,6 +123,8 @@ export class LoginComponent implements OnInit {
         dob: ['', []],
         telNo: ['', []],
         idNo: ['', []],
+        area: ['', []],
+        county: ['', []],
         password: [
           '',
           [
@@ -214,11 +218,19 @@ export class LoginComponent implements OnInit {
   }
 
   get telNo() {
-    return this.fSignup.get('dob');
+    return this.fSignup.get('telNo');
   }
 
   get idNo() {
-    return this.fSignup.get('dob');
+    return this.fSignup.get('idNo');
+  }
+
+  get area() {
+    return this.fSignup.get('area');
+  }
+
+  get county() {
+    return this.fSignup.get('county');
   }
 
   get password() {

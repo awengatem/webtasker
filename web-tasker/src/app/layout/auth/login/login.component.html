@@ -237,10 +237,18 @@
                             />
                             <i class="input-icon uil uil-calender"></i>
                           </div>
-                          <div class="form-group">
-                            <button class="btn mt-3 a" (click)="nextPage()">
-                              Next
-                            </button>
+
+                          <div class="custom-form-row row">
+                            <div class="form-group col">
+                              <button class="btn mt-3 a" (click)="nextPage()">
+                                <i class="uil uil-arrow-left"></i>
+                              </button>
+                            </div>
+                            <div class="form-group col">
+                              <button class="btn mt-3 a" (click)="nextPage()">
+                                <i class="uil uil-arrow-right"></i>
+                              </button>
+                            </div>
                           </div>
                         </form>
                       </div>
@@ -302,7 +310,77 @@
                           </div>
                         </form>
                       </div>
-                      <!-- add additional pages as needed -->
+
+                      <div *ngSwitchCase="3">
+                        <!-- <h1>Page 3: Contact Information</h1> -->
+                        <form>
+                          <div class="form-group mt-2">
+                            <input
+                              type="text"
+                              formControlName="area"
+                              class="form-style form-control"
+                              placeholder="Set job center location"
+                              autocomplete="off"
+                              [ngClass]="{
+                                'is-invalid':
+                                  (area?.dirty && area?.errors) ||
+                                  (submitted && area?.errors)
+                              }"
+                            />
+                            <i class="input-icon uil uil-location-point"></i>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input
+                              type="text"
+                              formControlName="county"
+                              class="form-style form-control"
+                              placeholder="Set your county..."
+                              autocomplete="off"
+                              [ngClass]="{
+                                'is-invalid':
+                                  (county?.dirty && county?.errors) ||
+                                  (submitted && county?.errors)
+                              }"
+                            />
+                            <i class="input-icon uil uil-map-pin-alt"></i>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input
+                              type="password"
+                              formControlName="password"
+                              class="form-style form-control"
+                              placeholder="Set Password"
+                              autocomplete="off"
+                              [ngClass]="{
+                                'is-invalid':
+                                  (password?.dirty && password?.errors) ||
+                                  (submitted && password?.errors)
+                              }"
+                            />
+                            <i class="input-icon uil uil-lock-alt"></i>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input
+                              type="password"
+                              formControlName="confirmPassword"
+                              class="form-style form-control"
+                              placeholder="Confirm Password"
+                              autocomplete="off"
+                              [ngClass]="{
+                                'is-invalid':
+                                  (confirmPassword?.dirty &&
+                                    confirmPassword?.errors) ||
+                                  (submitted && confirmPassword?.errors)
+                              }"
+                            />
+                            <i class="input-icon uil uil-keyboard"></i>
+                          </div>
+
+                          <div class="form-group">
+                            <button class="btn mt-3 a">Submit</button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
 
                     <!-- <form
