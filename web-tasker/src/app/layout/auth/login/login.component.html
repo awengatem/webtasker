@@ -297,23 +297,16 @@
                             </div>
                           </div>
                           <div class="form-group mt-2">
-                            <!-- <input
-                              type="text"
-                              formControlName="gender"
-                              class="form-style form-control"
-                              placeholder="Set gender"
-                              autocomplete="off"
-                              [ngClass]="{
-                                'is-invalid':
-                                  (gender?.dirty && gender?.errors) ||
-                                  (submitted && gender?.errors)
-                              }"
-                            /> -->
                             <div class="ui-dropdown">
                               <select
                                 class="form-style form-control"
                                 (change)="changeGender($event)"
                                 formControlName="gender"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    (gender?.touched && gender?.invalid) ||
+                                    (submitted && gender?.invalid)
+                                }"
                               >
                                 <option value="">Choose Gender</option>
                                 <option

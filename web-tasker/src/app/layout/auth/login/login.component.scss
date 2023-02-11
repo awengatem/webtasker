@@ -183,7 +183,7 @@ h4 {
 }
 .card-back {
   width: 120%;
-  height: 110%;
+  height: 120%;
   background-color: #2a2b38;
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg");
   background-position: bottom center;
@@ -295,13 +295,13 @@ h4 {
   font-size: 20px;
 }
 .ui-dropdown:after {
-  background-color: #369;
+  // background-color: #369;
   -moz-border-radius: 0 3px 3px 0;
   border-radius: 0 3px 3px 0;
-  color: #fff;
+  color: #cb0c9f;
   content: "▼";
   display: block;
-  font-size: 14px;
+  font-size: 16px;
   width: 8%;
   padding: 7px 0;
   position: absolute;
