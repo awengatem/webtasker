@@ -151,7 +151,7 @@
                         <!-- <h1>Page 1: Basic Information</h1> -->
                         <form
                           [formGroup]="fSignup"
-                          (ngSubmit)="fSignup.valid && onSignup()"
+                          (ngSubmit)="fSignup.valid && nextPage()"
                         >
                           <!-- <h5 class="subtitle">Personal details</h5> -->
                           <div class="custom-form-row row">
@@ -334,7 +334,7 @@
                           <div class="form-group">
                             <button
                               class="btn mt-3 a btn-nav"
-                              (click)="nextPage()"
+                              (click)="validate()"
                             >
                               <i class="navigation uil uil-arrow-right"></i>
                             </button>
@@ -348,9 +348,8 @@
                           </div>
                         </form>
                       </div>
-
+                      <!-- FORM 2: CONTACT INFO -->
                       <div *ngSwitchCase="2">
-                        <!-- <h1>Page 2: Contact Information</h1> -->
                         <form>
                           <h5 class="subtitle">Contact details</h5>
                           <div class="form-group mt-2">
