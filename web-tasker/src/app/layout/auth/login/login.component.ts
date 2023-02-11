@@ -105,6 +105,7 @@ export class LoginComponent implements OnInit {
   minDate = new Date(1930, 0, 1);
   maxDate = new Date();
   date: any;
+  genders: any = ['male', 'female', 'other'];
 
   ngOnInit(): void {
     /**helps during login */
@@ -174,6 +175,13 @@ export class LoginComponent implements OnInit {
     const status = this.checkbox.nativeElement.checked;
     this.checkbox.nativeElement.checked = !status;
     this.isChecked = !this.isChecked;
+  }
+
+  /**Method to detect selection of gender */
+  changeGender(e: any) {
+    this.gender?.setValue(e.target.value, {
+      onlySelf: true,
+    });
   }
 
   /*methods used by header buttons*/

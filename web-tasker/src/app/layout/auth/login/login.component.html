@@ -310,11 +310,31 @@
                               }"
                             /> -->
                             <div class="ui-dropdown">
-                              <select class="form-style form-control">
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Rather not say</option>
+                              <select
+                                class="form-style form-control"
+                                (change)="changeGender($event)"
+                                formControlName="gender"
+                              >
+                                <option value="">Choose Gender</option>
+                                <option
+                                  *ngFor="let gender of genders"
+                                  [ngValue]="gender"
+                                >
+                                  {{ gender }}
+                                </option>
                               </select>
+                            </div>
+                            <!-- error block -->
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (gender?.touched && gender?.invalid) ||
+                                (submitted && gender?.invalid)
+                              "
+                            >
+                              <small> Please choose your gender </small>
+                              <!-- <sup>*</sup>Please provide city name -->
                             </div>
                             <i class="input-icon uil uil-mars"></i>
                           </div>
