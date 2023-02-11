@@ -123,7 +123,7 @@
                       </div>
                       <div class="form-group">
                         <button class="btn mt-4 a" (click)="validateLogin()">
-                          submit
+                          Sign In
                         </button>
                       </div>
                       <div class="form-group">
@@ -140,7 +140,7 @@
                       <div class="form-group">
                         <p class="mb-0 mt-4 text-center">
                           <a class="link" (click)="signUp()"
-                            >Don't have an account?</a
+                            >Create an account?</a
                           >
                         </p>
                       </div>
@@ -160,6 +160,7 @@
                       <div *ngSwitchCase="1">
                         <!-- <h1>Page 1: Basic Information</h1> -->
                         <form>
+                          <h5 class="subtitle">Personal details</h5>
                           <div class="custom-form-row row">
                             <div class="form-group col me-2">
                               <input
@@ -174,7 +175,7 @@
                                 placeholder="Your First Name"
                                 autocomplete="off"
                               />
-                              <i class="input-icon uil uil-user-plus"></i>
+                              <i class="input-icon uil uil-smile"></i>
                             </div>
                             <div class="form-group col">
                               <input
@@ -189,23 +190,38 @@
                                 placeholder="Your Last Name"
                                 autocomplete="off"
                               />
-                              <i class="input-icon uil uil-user-plus"></i>
+                              <i class="input-icon uil uil-smile"></i>
                             </div>
                           </div>
                           <div class="form-group mt-2">
                             <input
-                              type="email"
-                              formControlName="email"
+                              type="text"
+                              formControlName="dob"
                               class="form-style form-control"
+                              placeholder="Enter your date of birth"
+                              autocomplete="off"
                               [ngClass]="{
                                 'is-invalid':
-                                  (email?.dirty && email?.errors) ||
-                                  (submitted && email?.errors)
+                                  (dob?.dirty && dob?.errors) ||
+                                  (submitted && dob?.errors)
                               }"
-                              placeholder="Your Email"
-                              autocomplete="off"
                             />
-                            <i class="input-icon uil uil-at"></i>
+                            <i class="input-icon uil uil-calendar-alt"></i>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input
+                              type="text"
+                              formControlName="idNo"
+                              class="form-style form-control"
+                              placeholder="Set Id Number..."
+                              autocomplete="off"
+                              [ngClass]="{
+                                'is-invalid':
+                                  (idNo?.dirty && idNo?.errors) ||
+                                  (submitted && idNo?.errors)
+                              }"
+                            />
+                            <i class="input-icon uil uil-credit-card"></i>
                           </div>
                           <div class="form-group mt-2">
                             <input
@@ -222,33 +238,20 @@
                             />
                             <i class="input-icon uil uil-mars"></i>
                           </div>
-                          <div class="form-group mt-2">
-                            <input
-                              type="text"
-                              formControlName="dob"
-                              class="form-style form-control"
-                              placeholder="Set dob"
-                              autocomplete="off"
-                              [ngClass]="{
-                                'is-invalid':
-                                  (dob?.dirty && dob?.errors) ||
-                                  (submitted && dob?.errors)
-                              }"
-                            />
-                            <i class="input-icon uil uil-calender"></i>
+                          <div class="form-group">
+                            <button
+                              class="btn mt-3 a btn-nav"
+                              (click)="nextPage()"
+                            >
+                              <i class="navigation uil uil-arrow-right"></i>
+                            </button>
                           </div>
-
-                          <div class="custom-form-row row">
-                            <div class="form-group col">
-                              <button class="btn mt-3 a" (click)="nextPage()">
-                                <i class="uil uil-arrow-left"></i>
-                              </button>
-                            </div>
-                            <div class="form-group col">
-                              <button class="btn mt-3 a" (click)="nextPage()">
-                                <i class="uil uil-arrow-right"></i>
-                              </button>
-                            </div>
+                          <div class="form-group">
+                            <p class="mb-0 mt-4 text-center">
+                              <a class="link" (click)="login()"
+                                >Already have an account?</a
+                              >
+                            </p>
                           </div>
                         </form>
                       </div>
@@ -256,6 +259,7 @@
                       <div *ngSwitchCase="2">
                         <!-- <h1>Page 2: Contact Information</h1> -->
                         <form>
+                          <h5 class="subtitle">Contact details</h5>
                           <div class="form-group mt-2">
                             <input
                               type="text"
@@ -275,6 +279,21 @@
                           </div>
                           <div class="form-group mt-2">
                             <input
+                              type="email"
+                              formControlName="email"
+                              class="form-style form-control"
+                              [ngClass]="{
+                                'is-invalid':
+                                  (email?.dirty && email?.errors) ||
+                                  (submitted && email?.errors)
+                              }"
+                              placeholder="Your Email"
+                              autocomplete="off"
+                            />
+                            <i class="input-icon uil uil-at"></i>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input
                               type="text"
                               formControlName="telNo"
                               class="form-style form-control"
@@ -288,25 +307,24 @@
                             />
                             <i class="input-icon uil uil-phone"></i>
                           </div>
-                          <div class="form-group mt-2">
-                            <input
-                              type="text"
-                              formControlName="idNo"
-                              class="form-style form-control"
-                              placeholder="Set Id Number..."
-                              autocomplete="off"
-                              [ngClass]="{
-                                'is-invalid':
-                                  (idNo?.dirty && idNo?.errors) ||
-                                  (submitted && idNo?.errors)
-                              }"
-                            />
-                            <i class="input-icon uil uil-credit-card"></i>
-                          </div>
-                          <div class="form-group">
-                            <button class="btn mt-3 a" (click)="nextPage()">
-                              Next
-                            </button>
+
+                          <div class="custom-form-row row">
+                            <div class="form-group col">
+                              <button
+                                class="btn mt-3 a btn-nav"
+                                (click)="prevPage()"
+                              >
+                                <i class="navigation uil uil-arrow-left"></i>
+                              </button>
+                            </div>
+                            <div class="form-group col">
+                              <button
+                                class="btn mt-3 a btn-nav"
+                                (click)="nextPage()"
+                              >
+                                <i class="navigation uil uil-arrow-right"></i>
+                              </button>
+                            </div>
                           </div>
                         </form>
                       </div>
@@ -314,6 +332,7 @@
                       <div *ngSwitchCase="3">
                         <!-- <h1>Page 3: Contact Information</h1> -->
                         <form>
+                          <h5 class="subtitle">Location and password</h5>
                           <div class="form-group mt-2">
                             <input
                               type="text"
@@ -375,9 +394,18 @@
                             />
                             <i class="input-icon uil uil-keyboard"></i>
                           </div>
-
-                          <div class="form-group">
-                            <button class="btn mt-3 a">Submit</button>
+                          <div class="custom-form-row row">
+                            <div class="form-group col">
+                              <button
+                                class="btn mt-3 a btn-nav"
+                                (click)="prevPage()"
+                              >
+                                <i class="navigation uil uil-arrow-left"></i>
+                              </button>
+                            </div>
+                            <div class="form-group col">
+                              <button class="btn mt-3 a btn-nav">Submit</button>
+                            </div>
                           </div>
                         </form>
                       </div>

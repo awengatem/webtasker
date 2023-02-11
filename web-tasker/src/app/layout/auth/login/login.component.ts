@@ -69,6 +69,10 @@ export class LoginComponent implements OnInit {
     this.currentPage++;
   }
 
+  prevPage() {
+    this.currentPage--;
+  }
+
   /**form used in signup part */
   fSignup: FormGroup = new FormGroup({
     firstname: new FormControl(''),
