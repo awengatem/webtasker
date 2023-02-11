@@ -153,7 +153,7 @@
                           [formGroup]="fSignup"
                           (ngSubmit)="fSignup.valid && onSignup()"
                         >
-                          <h5 class="subtitle">Personal details</h5>
+                          <!-- <h5 class="subtitle">Personal details</h5> -->
                           <div class="custom-form-row row">
                             <div class="form-group col me-2">
                               <input
@@ -309,41 +309,13 @@
                                   (submitted && gender?.errors)
                               }"
                             /> -->
-                            <mat-select
-                              class="form-style form-control"
-                              disableOptionCentering
-                              panelClass="select-class"
-                              matNativeControl
-                              name="gender"
-                              formControlName="gender"
-                            >
-                              <mat-option
-                                value="male"
-                                style="
-                                  background-color: #2c3344;
-                                  font-size: 10px;
-                                  color: #c4c3ca;
-                                "
-                                >Male</mat-option
-                              >
-                              <mat-option
-                                value="female"
-                                style="
-                                  background-color: #2c3344;
-                                  color: #c4c3ca;
-                                "
-                                >Female</mat-option
-                              >
-                              <mat-option
-                                value="other"
-                                style="
-                                  background-color: #2c3344;
-                                  font-size: 10px;
-                                  color: #c4c3ca;
-                                "
-                                >Rather not say</mat-option
-                              >
-                            </mat-select>
+                            <div class="ui-dropdown">
+                              <select class="form-style form-control">
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Rather not say</option>
+                              </select>
+                            </div>
                             <i class="input-icon uil uil-mars"></i>
                           </div>
                           <div class="form-group">

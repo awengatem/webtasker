@@ -25,20 +25,6 @@ a {
     color: #22b8f0;
   }
 }
-/*select styling*/
-.common-style {
-  letter-spacing: 1px;
-  font-size: 22px;
-  color: #55595c;
-}
-.selection {
-  // label
-  @extend .common-style;
-  .mat-select-value-text {
-    // select
-    @extend .common-style;
-  }
-}
 
 p {
   font-weight: 500;
@@ -295,6 +281,37 @@ h4 {
   }
 }
 
+/*gender dropdown*/
+.ui-dropdown {
+  // margin: 100px auto;
+  position: relative;
+  // width: 300px;
+}
+.ui-dropdown:before {
+  content: "Custom Dropdown Demo";
+  position: absolute;
+  top: -25px;
+  left: 0;
+  font-size: 20px;
+}
+.ui-dropdown:after {
+  background-color: #369;
+  -moz-border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0;
+  color: #fff;
+  content: "▼";
+  display: block;
+  font-size: 14px;
+  width: 8%;
+  padding: 7px 0;
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  right: 0;
+}
+
 /*Avoid white bg on autofill*/
 input:-webkit-autofill,
 textarea:-webkit-autofill,
@@ -335,6 +352,22 @@ select:-webkit-autofill {
   }
   &-custom {
     width: 80%;
+  }
+  &-select {
+    background-color: gray;
+    padding: 13px 20px;
+    padding-left: 55px;
+    height: 48px;
+    width: 100%;
+    font-weight: 500;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
   }
 }
 .alert-style {
