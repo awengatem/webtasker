@@ -314,6 +314,9 @@ select:-webkit-autofill {
     outline: none;
     box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
   }
+  &-custom {
+    width: 80%;
+  }
 }
 .alert-style {
   padding: 13px 20px;

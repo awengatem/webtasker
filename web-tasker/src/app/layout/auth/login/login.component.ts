@@ -126,7 +126,7 @@ export class LoginComponent implements OnInit {
         gender: ['', []],
         dob: ['', []],
         telNo: ['', []],
-        idNo: ['', []],
+        idNo: ['', [Validators.required, Validators.minLength(8)]],
         area: ['', []],
         county: ['', []],
         password: [

@@ -159,7 +159,10 @@
                     <div [ngSwitch]="currentPage">
                       <div *ngSwitchCase="1">
                         <!-- <h1>Page 1: Basic Information</h1> -->
-                        <form>
+                        <form
+                          [formGroup]="fSignup"
+                          (ngSubmit)="fSignup.valid && onSignup()"
+                        >
                           <h5 class="subtitle">Personal details</h5>
                           <div class="custom-form-row row">
                             <div class="form-group col me-2">
@@ -176,6 +179,26 @@
                                 autocomplete="off"
                               />
                               <i class="input-icon uil uil-smile"></i>
+                              <i
+                                class="vericon success fas fa-check-circle fa-xs"
+                                *ngIf="firstname?.dirty && !firstname?.errors"
+                              ></i>
+
+                              <div
+                                class="alert-style"
+                                role="alert"
+                                *ngIf="
+                                  (firstname?.dirty && firstname?.errors) ||
+                                  (submitted && firstname?.errors)
+                                "
+                              >
+                                <small *ngIf="firstname?.errors?.['required']">
+                                  Firstame is required!
+                                </small>
+                                <small *ngIf="firstname?.errors?.['minlength']">
+                                  Firstname must be at least 3 characters
+                                </small>
+                              </div>
                             </div>
                             <div class="form-group col">
                               <input
@@ -191,11 +214,31 @@
                                 autocomplete="off"
                               />
                               <i class="input-icon uil uil-smile"></i>
+                              <i
+                                class="vericon success fas fa-check-circle fa-xs"
+                                *ngIf="lastname?.dirty && !lastname?.errors"
+                              ></i>
+
+                              <div
+                                class="alert-style"
+                                role="alert"
+                                *ngIf="
+                                  (lastname?.dirty && lastname?.errors) ||
+                                  (submitted && lastname?.errors)
+                                "
+                              >
+                                <small *ngIf="lastname?.errors?.['required']">
+                                  Lastame is required!
+                                </small>
+                                <small *ngIf="lastname?.errors?.['minlength']">
+                                  Lastname must be at least 3 characters
+                                </small>
+                              </div>
                             </div>
                           </div>
                           <div class="form-group mt-2">
-                            <input
-                              type="text"
+                            <!-- <input
+                              type="date"
                               formControlName="dob"
                               class="form-style form-control"
                               placeholder="Enter your date of birth"
@@ -205,7 +248,20 @@
                                   (dob?.dirty && dob?.errors) ||
                                   (submitted && dob?.errors)
                               }"
+                            /> -->
+                            <input
+                              class="form-style form-style-custom"
+                              [matDatepicker]="basicDatepicker"
                             />
+                            <mat-datepicker-toggle [for]="basicDatepicker"
+                              ><mat-icon
+                                class="text-white"
+                                matDatepickerToggleIcon
+                              >
+                                mouse
+                              </mat-icon></mat-datepicker-toggle
+                            >
+                            <mat-datepicker #basicDatepicker></mat-datepicker>
                             <i class="input-icon uil uil-calendar-alt"></i>
                           </div>
                           <div class="form-group mt-2">
@@ -222,6 +278,26 @@
                               }"
                             />
                             <i class="input-icon uil uil-credit-card"></i>
+                            <i
+                              class="vericon success fas fa-check-circle fa-xs"
+                              *ngIf="idNo?.dirty && !idNo?.errors"
+                            ></i>
+
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (idNo?.dirty && idNo?.errors) ||
+                                (submitted && idNo?.errors)
+                              "
+                            >
+                              <small *ngIf="idNo?.errors?.['required']">
+                                Id number is required!
+                              </small>
+                              <small *ngIf="idNo?.errors?.['minlength']">
+                                Id number must be at least 8 characters
+                              </small>
+                            </div>
                           </div>
                           <div class="form-group mt-2">
                             <input
