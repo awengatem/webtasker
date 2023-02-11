@@ -5,7 +5,8 @@
   width: 100%;
   height: 100%;
   max-width: 1280px;
-  max-height: 500px;
+  max-height: calc(90vh - 170px);
+  // max-height: 500px;
   background: transparent;
 }
 
@@ -76,9 +77,18 @@
       margin-right: auto;
     }
 
-    //styling for empty
-    .project-color {
-      color: #1c2833;
+    /*Used by no projects div*/
+    .empty {
+      position: relative;
+      .no-content {
+        h1 {
+          position: absolute;
+          bottom: 25px;
+          font-weight: 500;
+          font-size: 18px;
+          color: #80050c;
+        }
+      }
     }
   }
 

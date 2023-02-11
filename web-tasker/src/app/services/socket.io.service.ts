@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as io from 'socket.io-client';
 import { url } from 'src/app/configs';
+import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -9,9 +10,14 @@ export class SocketIoService {
   socket: io.Socket;
   roomId: any;
 
-  constructor() {
-    const roomId = localStorage.getItem('user-id');
-    this.roomId = roomId;
+  constructor(private authService: AuthService) {
+    /**Get the user from token */
+    const user = this.authService.getUser();
+    /**set roomId from userId */
+    if (user) {
+      this.roomId = user._id;
+    }
+
     /**get the root url*/
     const ROOT_URL = url.ROOT_URL;
 
@@ -26,7 +32,7 @@ export class SocketIoService {
     });
 
     /**emit room as userID*/
-    this.socket.emit('create', roomId);
+    this.socket.emit('create', this.roomId);
 
     /**To be used with custom ID */
     // this.socket.on('reconnect_attempt', () => {

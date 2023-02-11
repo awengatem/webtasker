@@ -38,7 +38,6 @@
             <div class="projects-inside" id="projects">
               <div class="row">
                 <!-- item 1 -->
-                <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
                 <div
                   class="col-md-6"
                   *ngFor="let project of projects | projectFilter : searchText"
@@ -83,22 +82,10 @@
                   </div>
                 </div>
                 <!-- div to display when empty-->
-                <div class="row" *ngIf="projectsLength === 0">
-                  <div class="centered">
-                    <img
-                      id=""
-                      src="../assets/images/color.png"
-                      width="150px"
-                      height="150px"
-                      alt="Ooops"
-                    />
-                  </div>
-                  <div class="centered">
-                    <div>
-                      <h1 class="project-color">
-                        Projects Unaivalable at the moment
-                      </h1>
-                    </div>
+                <div class="empty" *ngIf="projectsLength === 0">
+                  <div class="no-content centered">
+                    <img id="" src="../assets/images/no-projects.png" alt="" />
+                    <h1>Projects unavailable at the moment :)</h1>
                   </div>
                 </div>
               </div>
@@ -106,15 +93,6 @@
           </div>
         </div>
       </div>
-      <!-- NOT BEING USED AT THE MOMENT -->
-      <!-- <div class="row centered-content create">
-        <div class="col-md-1">          
-          <button class="btn btn-outline-custom">
-            <div class="btn-txt">+</div>
-          </button>
-        </div>
-        <div class="col"><h4>Create new project</h4></div>
-      </div> -->
     </div>
   </div>
 </div>

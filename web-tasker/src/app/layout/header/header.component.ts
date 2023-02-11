@@ -1,5 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
 import { AccountService } from 'src/app/services/account-service.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -12,10 +13,10 @@ import { TokenService } from 'src/app/services/token.service';
 export class HeaderComponent implements OnInit {
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
   @Output() logout: EventEmitter<any> = new EventEmitter();
+  @Output() openModal: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private account: AccountService,
-    private authService: AuthService,
     private tokenService: TokenService
   ) {}
 
@@ -27,14 +28,22 @@ export class HeaderComponent implements OnInit {
     this.getUsername();
   }
 
+  /**Emit sidenav toggle */
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
   }
 
+  /**Emit logout */
   logger() {
     this.logout.emit();
   }
 
+  /**Emit show Modal */
+  showModal() {
+    this.openModal.emit();
+  }
+
+  /**Get the username to set in label */
   private getUsername(): any {
     this.username = this.account.getUser().username;
   }
@@ -61,7 +70,6 @@ export class HeaderComponent implements OnInit {
         console.log(response.body);
         const token = response.body.accessToken;
         console.log(token);
-
       },
       error: (err: any) => {
         console.log(err.error.message);
@@ -70,7 +78,7 @@ export class HeaderComponent implements OnInit {
   }
 
   //methods used by github and help icons in header
-  goToLink(url: string){
-    window.open(url, "_blank");
-}
+  goToLink(url: string) {
+    window.open(url, '_blank');
+  }
 }

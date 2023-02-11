@@ -6,6 +6,7 @@ import {
   HostListener,
   OnInit,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -58,12 +59,33 @@ export class LoginComponent implements OnInit {
     password: null,
   };
 
+  //test
+  currentPage = 1;
+  name = '';
+  email2 = '';
+  phone = '';
+  address = '';
+
+  nextPage() {
+    this.currentPage++;
+  }
+
+  prevPage() {
+    this.currentPage--;
+  }
+
   /**form used in signup part */
   fSignup: FormGroup = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
     email: new FormControl(''),
+    gender: new FormControl(''),
     username: new FormControl(''),
+    dob: new FormControl(''),
+    telNo: new FormControl(''),
+    idNo: new FormControl(''),
+    area: new FormControl(''),
+    county: new FormControl(''),
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
   });
@@ -79,6 +101,11 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBarService: SnackBarService
   ) {}
+
+  minDate = new Date(1930, 0, 1);
+  maxDate = new Date();
+  date: any;
+  genders: any = ['male', 'female', 'other'];
 
   ngOnInit(): void {
     /**helps during login */
@@ -102,6 +129,12 @@ export class LoginComponent implements OnInit {
           ],
         ],
         email: ['', [Validators.required, Validators.email]],
+        gender: ['', [Validators.required]],
+        dob: ['', [Validators.required]],
+        telNo: ['', []],
+        idNo: ['', [Validators.required, Validators.minLength(8)]],
+        area: ['', []],
+        county: ['', []],
         password: [
           '',
           [
@@ -144,6 +177,13 @@ export class LoginComponent implements OnInit {
     this.isChecked = !this.isChecked;
   }
 
+  /**Method to detect selection of gender */
+  changeGender(e: any) {
+    this.gender?.setValue(e.target.value, {
+      onlySelf: true,
+    });
+  }
+
   /*methods used by header buttons*/
   signUp() {
     console.log('signing up');
@@ -184,6 +224,30 @@ export class LoginComponent implements OnInit {
 
   get email() {
     return this.fSignup.get('email');
+  }
+
+  get gender() {
+    return this.fSignup.get('gender');
+  }
+
+  get dob() {
+    return this.fSignup.get('dob');
+  }
+
+  get telNo() {
+    return this.fSignup.get('telNo');
+  }
+
+  get idNo() {
+    return this.fSignup.get('idNo');
+  }
+
+  get area() {
+    return this.fSignup.get('area');
+  }
+
+  get county() {
+    return this.fSignup.get('county');
   }
 
   get password() {
@@ -231,6 +295,7 @@ export class LoginComponent implements OnInit {
       },
       error: (err) => {
         this.loginErrorMessage = err.error.message;
+        console.log(err);
         this.isLoginFailed = true;
       },
     });
@@ -272,7 +337,7 @@ export class LoginComponent implements OnInit {
         this.signupFailed = false;
       },
       error: (err) => {
-        console.log(err.error.message);
+        console.log(err);
         this.signupErrorMessage = err.error.message;
         this.signupFailed = true;
       },

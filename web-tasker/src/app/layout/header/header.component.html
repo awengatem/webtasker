@@ -30,7 +30,7 @@
               ></i>
             </div>
             <button mat-button [matMenuTriggerFor]="menu" class="">
-              <img              
+              <img
                 src="../../assets/username.png"
                 alt=""
                 class="user-image mr-1 p-2"
@@ -40,7 +40,11 @@
                 >keyboard_arrow_down</mat-icon
               >
             </button>
-            <mat-menu #menu="matMenu">
+            <mat-menu #menu="matMenu" backdropClass="customize">
+              <button mat-menu-item (click)="showModal()">
+                <mat-icon>account_circle</mat-icon>
+                Profile
+              </button>
               <button mat-menu-item (click)="logger()">
                 <mat-icon>exit_to_app</mat-icon>
                 Logout
