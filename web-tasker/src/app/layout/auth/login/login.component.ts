@@ -103,7 +103,7 @@ export class LoginComponent implements OnInit {
 
   minDate = new Date(1930, 0, 1);
   maxDate = new Date();
-  date : any;
+  date: any;
 
   ngOnInit(): void {
     /**helps during login */
@@ -127,8 +127,8 @@ export class LoginComponent implements OnInit {
           ],
         ],
         email: ['', [Validators.required, Validators.email]],
-        gender: ['', []],
-        dob: ['', []],
+        gender: ['', [Validators.required]],
+        dob: ['', [Validators.required]],
         telNo: ['', []],
         idNo: ['', [Validators.required, Validators.minLength(8)]],
         area: ['', []],

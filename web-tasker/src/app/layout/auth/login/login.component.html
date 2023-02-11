@@ -9,16 +9,6 @@
       </div> -->
       <div class="col-12 text-center align-self-center py-3 mt-1">
         <div class="section pb-5 pt-5 pt-sm-2 text-center">
-          <!-- <h5 class="mb-0 pb-2" [ngClass]="isChecked ? 'spanner' : ''">
-            <span class="spanner_checked" *ngIf="!isChecked">Log In </span>
-            <span class="spanner" *ngIf="isChecked" (click)="login()"
-              >Log In
-            </span>
-            <span class="spanner_checked" *ngIf="isChecked">Sign Up</span>
-            <span class="spanner" *ngIf="!isChecked" (click)="signUp()"
-              >Sign Up</span
-            >
-          </h5> -->
           <input
             class="checkbox"
             type="checkbox"
@@ -237,18 +227,6 @@
                             </div>
                           </div>
                           <div class="form-group mt-2">
-                            <!-- <input
-                              type="date"
-                              formControlName="dob"
-                              class="form-style form-control"
-                              placeholder="Enter your date of birth"
-                              autocomplete="off"
-                              [ngClass]="{
-                                'is-invalid':
-                                  (dob?.dirty && dob?.errors) ||
-                                  (submitted && dob?.errors)
-                              }"
-                            /> -->
                             <input
                               class="form-style form-style-custom"
                               formControlName="dob"
@@ -266,31 +244,21 @@
                               </mat-icon></mat-datepicker-toggle
                             >
                             <mat-datepicker #basicDatepicker></mat-datepicker>
-                            <!-- <mat-error
-                              *ngIf="
-                                basicDatepicker.hasError('matDatepickerParse')
-                              "
+                            <mat-error
+                              *ngIf="dob?.hasError('matDatepickerParse')"
                             >
-                              "{{
-                                basicDatePickerModel.getError("matDatepickerParse")
-                                  .text
-                              }}" is not a valid date!
+                              Please pick a valid date.
                             </mat-error>
                             <mat-error
-                              *ngIf="
-                                .hasError('matDatepickerMin')
-                              "
+                              *ngIf="dob?.hasError('matDatepickerMin')"
                             >
-                              Minimum date should be
-                              {{ maxDate | date }}</mat-error
-                            >
+                              Invalid minimum date.
+                            </mat-error>
                             <mat-error
-                              *ngIf="
-                              basicDatePickerModel.hasError('matDatepickerMax')
-                              "
+                              *ngIf="dob?.hasError('matDatepickerMax')"
                             >
-                              Maximum date should be {{ maxDate | date }}
-                            </mat-error> -->
+                              Invalid maximum date.
+                            </mat-error>
                             <i class="input-icon uil uil-calendar-alt"></i>
                           </div>
                           <div class="form-group mt-2">
