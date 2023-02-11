@@ -6,6 +6,7 @@ import {
   HostListener,
   OnInit,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import {
   AbstractControl,

@@ -25,6 +25,21 @@ a {
     color: #22b8f0;
   }
 }
+/*select styling*/
+.common-style {
+  letter-spacing: 1px;
+  font-size: 22px;
+  color: #55595c;
+}
+.selection {
+  // label
+  @extend .common-style;
+  .mat-select-value-text {
+    // select
+    @extend .common-style;
+  }
+}
+
 p {
   font-weight: 500;
   font-size: 14px;
