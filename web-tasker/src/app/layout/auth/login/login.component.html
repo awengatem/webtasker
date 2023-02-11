@@ -251,17 +251,46 @@
                             /> -->
                             <input
                               class="form-style form-style-custom"
+                              formControlName="dob"
+                              [min]="minDate"
+                              [max]="maxDate"
                               [matDatepicker]="basicDatepicker"
+                              placeholder="Pick your date of birth"
                             />
                             <mat-datepicker-toggle [for]="basicDatepicker"
                               ><mat-icon
-                                class="text-white"
+                                class="pinkish"
                                 matDatepickerToggleIcon
                               >
-                                mouse
+                                date_range
                               </mat-icon></mat-datepicker-toggle
                             >
                             <mat-datepicker #basicDatepicker></mat-datepicker>
+                            <!-- <mat-error
+                              *ngIf="
+                                basicDatepicker.hasError('matDatepickerParse')
+                              "
+                            >
+                              "{{
+                                basicDatePickerModel.getError("matDatepickerParse")
+                                  .text
+                              }}" is not a valid date!
+                            </mat-error>
+                            <mat-error
+                              *ngIf="
+                                .hasError('matDatepickerMin')
+                              "
+                            >
+                              Minimum date should be
+                              {{ maxDate | date }}</mat-error
+                            >
+                            <mat-error
+                              *ngIf="
+                              basicDatePickerModel.hasError('matDatepickerMax')
+                              "
+                            >
+                              Maximum date should be {{ maxDate | date }}
+                            </mat-error> -->
                             <i class="input-icon uil uil-calendar-alt"></i>
                           </div>
                           <div class="form-group mt-2">

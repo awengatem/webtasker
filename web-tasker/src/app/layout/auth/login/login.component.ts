@@ -101,6 +101,10 @@ export class LoginComponent implements OnInit {
     private snackBarService: SnackBarService
   ) {}
 
+  minDate = new Date(1930, 0, 1);
+  maxDate = new Date();
+  date : any;
+
   ngOnInit(): void {
     /**helps during login */
     if (this.accountService.isLoggedIn()) {
