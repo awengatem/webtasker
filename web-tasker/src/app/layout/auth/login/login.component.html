@@ -135,9 +135,6 @@
                         </p>
                       </div>
                     </form>
-                    <!-- <div class="alert alert-success" *ngIf="!isLoggedIn">
-                      Logged in as {{ user.username }}.
-                    </div> -->
                   </div>
                 </div>
               </div>
@@ -147,8 +144,8 @@
                   <div class="section text-center">
                     <h4 class="mb-2 pb-1 text-white">Sign Up</h4>
                     <div [ngSwitch]="currentPage">
+                      <!-- FORM 1: BASIC INFO -->
                       <div *ngSwitchCase="1">
-                        <!-- <h1>Page 1: Basic Information</h1> -->
                         <form
                           [formGroup]="fSignup"
                           (ngSubmit)="fSignup.valid && nextPage()"
