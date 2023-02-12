@@ -83,28 +83,11 @@ export class LoginComponent implements OnInit {
     gender: new FormControl(''),
   });
   fSignup2: FormGroup = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    dob: new FormControl(''),
-    email: new FormControl(''),
-    gender: new FormControl(''),
     username: new FormControl(''),
+    email: new FormControl(''),
     telNo: new FormControl(''),
-    idNo: new FormControl(''),
-    area: new FormControl(''),
-    county: new FormControl(''),
-    password: new FormControl(''),
-    confirmPassword: new FormControl(''),
   });
   fSignup3: FormGroup = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    email: new FormControl(''),
-    gender: new FormControl(''),
-    username: new FormControl(''),
-    dob: new FormControl(''),
-    telNo: new FormControl(''),
-    idNo: new FormControl(''),
     area: new FormControl(''),
     county: new FormControl(''),
     password: new FormControl(''),
@@ -144,54 +127,20 @@ export class LoginComponent implements OnInit {
       idNo: ['', [Validators.required, Validators.minLength(8)]],
       gender: ['', [Validators.required]],
     });
-    this.fSignup2 = this.formBuilder.group(
-      {
-        firstname: ['', [Validators.required, Validators.minLength(3)]],
-        lastname: ['', [Validators.required, Validators.minLength(3)]],
-        username: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(20),
-          ],
+    this.fSignup2 = this.formBuilder.group({
+      username: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
         ],
-        email: ['', [Validators.required, Validators.email]],
-        gender: ['', [Validators.required]],
-        dob: ['', [Validators.required]],
-        telNo: ['', []],
-        idNo: ['', [Validators.required, Validators.minLength(8)]],
-        area: ['', []],
-        county: ['', []],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(20),
-          ],
-        ],
-        confirmPassword: ['', Validators.required],
-      },
-      { validators: [Validation.match('password', 'confirmPassword')] }
-    );
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      telNo: ['', []],
+    });
     this.fSignup3 = this.formBuilder.group(
       {
-        firstname: ['', [Validators.required, Validators.minLength(3)]],
-        lastname: ['', [Validators.required, Validators.minLength(3)]],
-        username: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(20),
-          ],
-        ],
-        email: ['', [Validators.required, Validators.email]],
-        gender: ['', [Validators.required]],
-        dob: ['', [Validators.required]],
-        telNo: ['', []],
-        idNo: ['', [Validators.required, Validators.minLength(8)]],
         area: ['', []],
         county: ['', []],
         password: [
