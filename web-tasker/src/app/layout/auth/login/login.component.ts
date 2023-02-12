@@ -43,7 +43,9 @@ import { SnackBarService } from 'src/app/services/snackbar.service';
 export class LoginComponent implements OnInit {
   /**local variables */
   status: boolean = true;
-  submitted: boolean = false;
+  submitted1: boolean = false;
+  submitted2: boolean = false;
+  submitted3: boolean = false;
   logsubmitted: boolean = false;
   isLoggedIn = false;
   isLoginFailed = false;
@@ -159,8 +161,20 @@ export class LoginComponent implements OnInit {
     /**helps detect form touched */
     this.fSignup1.valueChanges.subscribe((res) => {
       //console.log('touching signup form');
-      if (this.submitted === true) {
-        this.submitted = false;
+      if (this.submitted1 === true) {
+        this.submitted1 = false;
+      }
+    });
+    this.fSignup2.valueChanges.subscribe((res) => {
+      //console.log('touching signup form');
+      if (this.submitted2 === true) {
+        this.submitted2 = false;
+      }
+    });
+    this.fSignup3.valueChanges.subscribe((res) => {
+      //console.log('touching signup form');
+      if (this.submitted3 === true) {
+        this.submitted3 = false;
       }
     });
   }
@@ -352,9 +366,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  validate() {
+  validate(formNo: number) {
     console.log('sign up button okay');
-    this.submitted = true;
+    if (formNo === 1) {
+      this.submitted1 = true;
+    } else if (formNo === 2) {
+      this.submitted2 = true;
+    } else if (formNo === 3) {
+      this.submitted3 = true;
+    }
   }
 
   validateLogin() {
@@ -363,7 +383,7 @@ export class LoginComponent implements OnInit {
   }
 
   resetSignup() {
-    this.submitted = false;
+    this.submitted1 = false;
     this.fSignup1.reset();
     this.flapCard();
   }
