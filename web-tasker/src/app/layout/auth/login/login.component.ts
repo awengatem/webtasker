@@ -75,7 +75,28 @@ export class LoginComponent implements OnInit {
   }
 
   /**form used in signup part */
-  fSignup: FormGroup = new FormGroup({
+  fSignup1: FormGroup = new FormGroup({
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    dob: new FormControl(''),
+    idNo: new FormControl(''),
+    gender: new FormControl(''),
+  });
+  fSignup2: FormGroup = new FormGroup({
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    dob: new FormControl(''),
+    email: new FormControl(''),
+    gender: new FormControl(''),
+    username: new FormControl(''),
+    telNo: new FormControl(''),
+    idNo: new FormControl(''),
+    area: new FormControl(''),
+    county: new FormControl(''),
+    password: new FormControl(''),
+    confirmPassword: new FormControl(''),
+  });
+  fSignup3: FormGroup = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
     email: new FormControl(''),
@@ -116,7 +137,45 @@ export class LoginComponent implements OnInit {
     }
 
     /**building form */
-    this.fSignup = this.formBuilder.group(
+    this.fSignup1 = this.formBuilder.group({
+      firstname: ['', [Validators.required, Validators.minLength(3)]],
+      lastname: ['', [Validators.required, Validators.minLength(3)]],
+      dob: ['', [Validators.required]],
+      idNo: ['', [Validators.required, Validators.minLength(8)]],
+      gender: ['', [Validators.required]],
+    });
+    this.fSignup2 = this.formBuilder.group(
+      {
+        firstname: ['', [Validators.required, Validators.minLength(3)]],
+        lastname: ['', [Validators.required, Validators.minLength(3)]],
+        username: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(20),
+          ],
+        ],
+        email: ['', [Validators.required, Validators.email]],
+        gender: ['', [Validators.required]],
+        dob: ['', [Validators.required]],
+        telNo: ['', []],
+        idNo: ['', [Validators.required, Validators.minLength(8)]],
+        area: ['', []],
+        county: ['', []],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(20),
+          ],
+        ],
+        confirmPassword: ['', Validators.required],
+      },
+      { validators: [Validation.match('password', 'confirmPassword')] }
+    );
+    this.fSignup3 = this.formBuilder.group(
       {
         firstname: ['', [Validators.required, Validators.minLength(3)]],
         lastname: ['', [Validators.required, Validators.minLength(3)]],
@@ -149,7 +208,7 @@ export class LoginComponent implements OnInit {
     );
 
     /**helps detect form touched */
-    this.fSignup.valueChanges.subscribe((res) => {
+    this.fSignup1.valueChanges.subscribe((res) => {
       //console.log('touching signup form');
       if (this.submitted === true) {
         this.submitted = false;
@@ -207,55 +266,55 @@ export class LoginComponent implements OnInit {
 
   /**getter to access form.controls */
   get f(): { [key: string]: AbstractControl } {
-    return this.fSignup.controls;
+    return this.fSignup1.controls;
   }
 
   get firstname() {
-    return this.fSignup.get('firstname');
+    return this.fSignup1.get('firstname');
   }
 
   get lastname() {
-    return this.fSignup.get('lastname');
-  }
-
-  get username() {
-    return this.fSignup.get('username');
-  }
-
-  get email() {
-    return this.fSignup.get('email');
-  }
-
-  get gender() {
-    return this.fSignup.get('gender');
+    return this.fSignup1.get('lastname');
   }
 
   get dob() {
-    return this.fSignup.get('dob');
-  }
-
-  get telNo() {
-    return this.fSignup.get('telNo');
+    return this.fSignup1.get('dob');
   }
 
   get idNo() {
-    return this.fSignup.get('idNo');
+    return this.fSignup1.get('idNo');
+  }
+
+  get gender() {
+    return this.fSignup1.get('gender');
+  }
+
+  get username() {
+    return this.fSignup2.get('username');
+  }
+
+  get email() {
+    return this.fSignup2.get('email');
+  }
+
+  get telNo() {
+    return this.fSignup2.get('telNo');
   }
 
   get area() {
-    return this.fSignup.get('area');
+    return this.fSignup3.get('area');
   }
 
   get county() {
-    return this.fSignup.get('county');
+    return this.fSignup3.get('county');
   }
 
   get password() {
-    return this.fSignup.get('password');
+    return this.fSignup3.get('password');
   }
 
   get confirmPassword() {
-    return this.fSignup.get('confirmPassword');
+    return this.fSignup3.get('confirmPassword');
   }
 
   /*login methods*/
@@ -304,11 +363,11 @@ export class LoginComponent implements OnInit {
   /**sign up methods */
   onSignup() {
     console.log('submission successful!!');
-    console.log(this.fSignup.value);
+    console.log(this.fSignup1.value);
 
     //get the form values
     const { email, firstname, lastname, username, password } =
-      this.fSignup.value;
+      this.fSignup1.value;
 
     /**creating user object to pass to server
      *properties name's should not be changed
@@ -356,7 +415,7 @@ export class LoginComponent implements OnInit {
 
   resetSignup() {
     this.submitted = false;
-    this.fSignup.reset();
+    this.fSignup1.reset();
     this.flapCard();
   }
 
