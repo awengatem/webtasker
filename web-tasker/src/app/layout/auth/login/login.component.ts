@@ -139,12 +139,26 @@ export class LoginComponent implements OnInit {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
-      telNo: ['', []],
+      telNo: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
     });
     this.fSignup3 = this.formBuilder.group(
       {
-        area: ['', []],
-        county: ['', []],
+        area: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(20),
+          ],
+        ],
+        county: ['', [Validators.required]],
         password: [
           '',
           [
@@ -375,6 +389,10 @@ export class LoginComponent implements OnInit {
     } else if (formNo === 3) {
       this.submitted3 = true;
     }
+  }
+
+  subTest() {
+    console.log('test accomplished!!');
   }
 
   validateLogin() {
