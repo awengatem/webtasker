@@ -25,16 +25,6 @@ import Validation from './validation';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { SnackBarService } from 'src/app/services/snackbar.service';
 
-// /**directive helps detect form touched */
-// @Directive({
-//   selector: '[focus-field]',
-// })
-// export class FocusDirective {
-//   @HostListener('focusin', ['$event']) onFocus() {
-//     console.log('a field was focused!');
-//   }
-// }
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
