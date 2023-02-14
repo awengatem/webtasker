@@ -539,7 +539,7 @@
                             </div>
                           </div>
                           <div class="form-group mt-2">
-                            <input
+                            <!-- <input
                               type="text"
                               formControlName="county"
                               class="form-style form-control"
@@ -550,15 +550,15 @@
                                   (county?.dirty && county?.errors) ||
                                   (submitted3 && county?.errors)
                               }"
-                            />
-                            <!-- <ngx-select-dropdown
+                            /> -->
+                            <ngx-select-dropdown
                               [instanceId]="'instance1'"
                               (change)="selectionChanged($event)"
                               [multiple]="true"
                               [(ngModel)]="dataModel"
                               [config]="config"
                               [options]="dropdownOptions"
-                            ></ngx-select-dropdown> -->
+                            ></ngx-select-dropdown>
                             <i class="input-icon uil uil-map-pin-alt"></i>
                           </div>
                           <div class="form-group mt-2">
