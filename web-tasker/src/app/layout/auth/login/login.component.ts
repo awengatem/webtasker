@@ -51,6 +51,8 @@ export class LoginComponent implements OnInit {
     password: null,
   };
 
+  datamodel: any = [];
+
   //test
   currentPage = 1;
   name = '';
@@ -224,6 +226,11 @@ export class LoginComponent implements OnInit {
     this.gender?.setValue(e.target.value, {
       onlySelf: true,
     });
+  }
+
+  /**used by dropdown */
+  searchChange(e: any) {
+    console.log(e);
   }
 
   /*methods used by header buttons*/
