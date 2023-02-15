@@ -8,6 +8,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 
 import { AngularMaterialModule } from '../angular-material.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 
 import { LayoutRoutingModule } from './layout-routing.module';
@@ -125,6 +126,7 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
     LayoutRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    SelectDropDownModule,
 
     /*material imports*/
     AngularMaterialModule,

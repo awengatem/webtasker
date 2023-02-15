@@ -20,7 +20,7 @@
           <label for="reg-log"></label>
           <div class="card-3d-wrap mx-auto">
             <div class="card-3d-wrapper">
-              <!-- Sign In  page -->
+              <!-- SIGN IN  PAGE -->
               <div class="card-front">
                 <div class="center-wrap">
                   <div class="section text-center">
@@ -135,23 +135,20 @@
                         </p>
                       </div>
                     </form>
-                    <!-- <div class="alert alert-success" *ngIf="!isLoggedIn">
-                      Logged in as {{ user.username }}.
-                    </div> -->
                   </div>
                 </div>
               </div>
-              <!-- Sign Up page -->
+              <!-- SIGN UP PAGE -->
               <div class="card-back">
                 <div class="center-wrap">
                   <div class="section text-center">
                     <h4 class="mb-2 pb-1 text-white">Sign Up</h4>
                     <div [ngSwitch]="currentPage">
+                      <!-- FORM 1: BASIC INFO -->
                       <div *ngSwitchCase="1">
-                        <!-- <h1>Page 1: Basic Information</h1> -->
                         <form
-                          [formGroup]="fSignup"
-                          (ngSubmit)="fSignup.valid && nextPage()"
+                          [formGroup]="fSignup1"
+                          (ngSubmit)="fSignup1.valid && nextPage()"
                         >
                           <!-- <h5 class="subtitle">Personal details</h5> -->
                           <div class="custom-form-row row">
@@ -163,7 +160,7 @@
                                 [ngClass]="{
                                   'is-invalid':
                                     (firstname?.dirty && firstname?.errors) ||
-                                    (submitted && firstname?.errors)
+                                    (submitted1 && firstname?.errors)
                                 }"
                                 placeholder="Your First Name"
                                 autocomplete="off"
@@ -179,7 +176,7 @@
                                 role="alert"
                                 *ngIf="
                                   (firstname?.dirty && firstname?.errors) ||
-                                  (submitted && firstname?.errors)
+                                  (submitted1 && firstname?.errors)
                                 "
                               >
                                 <small *ngIf="firstname?.errors?.['required']">
@@ -198,7 +195,7 @@
                                 [ngClass]="{
                                   'is-invalid':
                                     (lastname?.dirty && lastname?.errors) ||
-                                    (submitted && lastname?.errors)
+                                    (submitted1 && lastname?.errors)
                                 }"
                                 placeholder="Your Last Name"
                                 autocomplete="off"
@@ -214,7 +211,7 @@
                                 role="alert"
                                 *ngIf="
                                   (lastname?.dirty && lastname?.errors) ||
-                                  (submitted && lastname?.errors)
+                                  (submitted1 && lastname?.errors)
                                 "
                               >
                                 <small *ngIf="lastname?.errors?.['required']">
@@ -271,7 +268,7 @@
                               [ngClass]="{
                                 'is-invalid':
                                   (idNo?.dirty && idNo?.errors) ||
-                                  (submitted && idNo?.errors)
+                                  (submitted1 && idNo?.errors)
                               }"
                             />
                             <i class="input-icon uil uil-credit-card"></i>
@@ -285,7 +282,7 @@
                               role="alert"
                               *ngIf="
                                 (idNo?.dirty && idNo?.errors) ||
-                                (submitted && idNo?.errors)
+                                (submitted1 && idNo?.errors)
                               "
                             >
                               <small *ngIf="idNo?.errors?.['required']">
@@ -305,7 +302,7 @@
                                 [ngClass]="{
                                   'is-invalid':
                                     (gender?.touched && gender?.invalid) ||
-                                    (submitted && gender?.invalid)
+                                    (submitted1 && gender?.invalid)
                                 }"
                               >
                                 <option value="">Choose Gender</option>
@@ -323,7 +320,7 @@
                               role="alert"
                               *ngIf="
                                 (gender?.touched && gender?.invalid) ||
-                                (submitted && gender?.invalid)
+                                (submitted1 && gender?.invalid)
                               "
                             >
                               <small> Please choose your gender </small>
@@ -334,7 +331,7 @@
                           <div class="form-group">
                             <button
                               class="btn mt-3 a btn-nav"
-                              (click)="validate()"
+                              (click)="validate(1)"
                             >
                               <i class="navigation uil uil-arrow-right"></i>
                             </button>
@@ -350,7 +347,10 @@
                       </div>
                       <!-- FORM 2: CONTACT INFO -->
                       <div *ngSwitchCase="2">
-                        <form>
+                        <form
+                          [formGroup]="fSignup2"
+                          (ngSubmit)="fSignup2.valid && nextPage()"
+                        >
                           <h5 class="subtitle">Contact details</h5>
                           <div class="form-group mt-2">
                             <input
@@ -362,12 +362,35 @@
                               [ngClass]="{
                                 'is-invalid':
                                   (username?.dirty && username?.errors) ||
-                                  (submitted && username?.errors)
+                                  (submitted2 && username?.errors)
                               }"
                             />
                             <i
                               class="input-icon uil uil-google-hangouts-alt"
                             ></i>
+                            <i
+                              class="vericon success fas fa-check-circle fa-xs"
+                              *ngIf="username?.dirty && !username?.errors"
+                            ></i>
+
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (username?.dirty && username?.errors) ||
+                                (submitted2 && username?.errors)
+                              "
+                            >
+                              <small *ngIf="username?.errors?.['required']">
+                                Username is required!
+                              </small>
+                              <small *ngIf="username?.errors?.['minlength']">
+                                Username must be at least 3 characters
+                              </small>
+                              <small *ngIf="username?.errors?.['maxlength']">
+                                Username must not exceed 20 characters
+                              </small>
+                            </div>
                           </div>
                           <div class="form-group mt-2">
                             <input
@@ -377,12 +400,36 @@
                               [ngClass]="{
                                 'is-invalid':
                                   (email?.dirty && email?.errors) ||
-                                  (submitted && email?.errors)
+                                  (submitted2 && email?.errors)
                               }"
                               placeholder="Your Email"
                               autocomplete="off"
                             />
                             <i class="input-icon uil uil-at"></i>
+                            <i
+                              class="vericon success fas fa-check-circle fa-xs"
+                              *ngIf="
+                                email?.dirty &&
+                                !email?.errors &&
+                                !email?.invalid
+                              "
+                            ></i>
+
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (email?.dirty && email?.errors) ||
+                                (submitted2 && email?.errors)
+                              "
+                            >
+                              <small *ngIf="email?.errors?.['required']">
+                                email is required!
+                              </small>
+                              <small *ngIf="email?.errors?.['email']">
+                                email is invalid!
+                              </small>
+                            </div>
                           </div>
                           <div class="form-group mt-2">
                             <input
@@ -394,12 +441,38 @@
                               [ngClass]="{
                                 'is-invalid':
                                   (telNo?.dirty && telNo?.errors) ||
-                                  (submitted && telNo?.errors)
+                                  (submitted2 && telNo?.errors)
                               }"
                             />
                             <i class="input-icon uil uil-phone"></i>
-                          </div>
+                            <i
+                              class="vericon success fas fa-check-circle fa-xs"
+                              *ngIf="
+                                telNo?.dirty &&
+                                !telNo?.errors &&
+                                !telNo?.invalid
+                              "
+                            ></i>
 
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (telNo?.dirty && telNo?.errors) ||
+                                (submitted2 && telNo?.errors)
+                              "
+                            >
+                              <small *ngIf="telNo?.errors?.['required']">
+                                Telephone number is required!
+                              </small>
+                              <small *ngIf="telNo?.errors?.['minlength']">
+                                Telephone number must be at least 3 characters
+                              </small>
+                              <small *ngIf="telNo?.errors?.['maxlength']">
+                                Telephone number must not exceed 20 characters
+                              </small>
+                            </div>
+                          </div>
                           <div class="custom-form-row row">
                             <div class="form-group col">
                               <button
@@ -412,7 +485,7 @@
                             <div class="form-group col">
                               <button
                                 class="btn mt-3 a btn-nav"
-                                (click)="nextPage()"
+                                (click)="validate(2)"
                               >
                                 <i class="navigation uil uil-arrow-right"></i>
                               </button>
@@ -420,10 +493,12 @@
                           </div>
                         </form>
                       </div>
-
+                      <!-- FORM 3: LOCATION INFO -->
                       <div *ngSwitchCase="3">
-                        <!-- <h1>Page 3: Contact Information</h1> -->
-                        <form>
+                        <form
+                          [formGroup]="fSignup3"
+                          (ngSubmit)="fSignup2.valid && subTest()"
+                        >
                           <h5 class="subtitle">Location and password</h5>
                           <div class="form-group mt-2">
                             <input
@@ -435,13 +510,36 @@
                               [ngClass]="{
                                 'is-invalid':
                                   (area?.dirty && area?.errors) ||
-                                  (submitted && area?.errors)
+                                  (submitted3 && area?.errors)
                               }"
                             />
                             <i class="input-icon uil uil-location-point"></i>
+                            <i
+                              class="vericon success fas fa-check-circle fa-xs"
+                              *ngIf="area?.dirty && !area?.errors"
+                            ></i>
+
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (area?.dirty && area?.errors) ||
+                                (submitted3 && area?.errors)
+                              "
+                            >
+                              <small *ngIf="area?.errors?.['required']">
+                                Job center is required!
+                              </small>
+                              <small *ngIf="area?.errors?.['minlength']">
+                                Job center name must be at least 3 characters
+                              </small>
+                              <small *ngIf="area?.errors?.['maxlength']">
+                                Job center name must not exceed 20 characters
+                              </small>
+                            </div>
                           </div>
                           <div class="form-group mt-2">
-                            <input
+                            <!-- <input
                               type="text"
                               formControlName="county"
                               class="form-style form-control"
@@ -450,9 +548,17 @@
                               [ngClass]="{
                                 'is-invalid':
                                   (county?.dirty && county?.errors) ||
-                                  (submitted && county?.errors)
+                                  (submitted3 && county?.errors)
                               }"
-                            />
+                            /> -->
+                            <ngx-select-dropdown
+                              [instanceId]="'instance1'"
+                              (change)="selectionChanged($event)"
+                              [multiple]="true"
+                              [(ngModel)]="dataModel"
+                              [config]="config"
+                              [options]="dropdownOptions"
+                            ></ngx-select-dropdown>
                             <i class="input-icon uil uil-map-pin-alt"></i>
                           </div>
                           <div class="form-group mt-2">
@@ -465,10 +571,33 @@
                               [ngClass]="{
                                 'is-invalid':
                                   (password?.dirty && password?.errors) ||
-                                  (submitted && password?.errors)
+                                  (submitted3 && password?.errors)
                               }"
                             />
                             <i class="input-icon uil uil-lock-alt"></i>
+                            <i
+                              class="vericon success fas fa-check-circle fa-xs"
+                              *ngIf="password?.dirty && !password?.errors"
+                            ></i>
+
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (password?.dirty && password?.errors) ||
+                                (submitted3 && password?.errors)
+                              "
+                            >
+                              <small *ngIf="password?.errors?.['required']">
+                                Password is required!
+                              </small>
+                              <small *ngIf="password?.errors?.['minlength']">
+                                Password must be at least 6 characters
+                              </small>
+                              <small *ngIf="password?.errors?.['maxlength']">
+                                Password must not exceed 20 characters
+                              </small>
+                            </div>
                           </div>
                           <div class="form-group mt-2">
                             <input
@@ -481,10 +610,38 @@
                                 'is-invalid':
                                   (confirmPassword?.dirty &&
                                     confirmPassword?.errors) ||
-                                  (submitted && confirmPassword?.errors)
+                                  (submitted3 && confirmPassword?.errors)
                               }"
                             />
                             <i class="input-icon uil uil-keyboard"></i>
+                            <i
+                              class="vericon success fas fa-check-circle fa-xs"
+                              *ngIf="
+                                confirmPassword?.dirty &&
+                                !confirmPassword?.errors
+                              "
+                            ></i>
+
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (confirmPassword?.dirty &&
+                                  confirmPassword?.errors) ||
+                                (submitted3 && confirmPassword?.errors)
+                              "
+                            >
+                              <small
+                                *ngIf="confirmPassword?.errors?.['required']"
+                              >
+                                Confirm Password is required!
+                              </small>
+                              <small
+                                *ngIf="confirmPassword?.errors?.['matching']"
+                              >
+                                Confirm Password does not match
+                              </small>
+                            </div>
                           </div>
                           <div class="custom-form-row row">
                             <div class="form-group col">
@@ -496,7 +653,12 @@
                               </button>
                             </div>
                             <div class="form-group col">
-                              <button class="btn mt-3 a btn-nav">Submit</button>
+                              <button
+                                class="btn mt-3 a btn-nav"
+                                (click)="validate(3)"
+                              >
+                                Submit
+                              </button>
                             </div>
                           </div>
                         </form>

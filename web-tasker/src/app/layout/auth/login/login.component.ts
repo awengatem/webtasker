@@ -25,16 +25,6 @@ import Validation from './validation';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { SnackBarService } from 'src/app/services/snackbar.service';
 
-// /**directive helps detect form touched */
-// @Directive({
-//   selector: '[focus-field]',
-// })
-// export class FocusDirective {
-//   @HostListener('focusin', ['$event']) onFocus() {
-//     console.log('a field was focused!');
-//   }
-// }
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -43,7 +33,9 @@ import { SnackBarService } from 'src/app/services/snackbar.service';
 export class LoginComponent implements OnInit {
   /**local variables */
   status: boolean = true;
-  submitted: boolean = false;
+  submitted1: boolean = false;
+  submitted2: boolean = false;
+  submitted3: boolean = false;
   logsubmitted: boolean = false;
   isLoggedIn = false;
   isLoginFailed = false;
@@ -58,6 +50,8 @@ export class LoginComponent implements OnInit {
     username: null,
     password: null,
   };
+
+  datamodel: any = [];
 
   //test
   currentPage = 1;
@@ -74,16 +68,36 @@ export class LoginComponent implements OnInit {
     this.currentPage--;
   }
 
+  config = {
+    displayFn: (item: any) => {
+      return item.hello.world;
+    }, //a replacement ofr displayKey to support flexible text displaying for each item
+    displayKey: 'description', //if objects array passed which key to be displayed defaults to description
+    search: true, //true/false for the search functionlity defaults to false,
+    height: 'auto', //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
+    placeholder: 'Select', // text to be displayed when no item is selected defaults to Select,
+    customComparator: () => {}, // a custom function using which user wants to sort the items. default is undefined and Array.sort() will be used in that case,
+    limitTo: 0, // number thats limits the no of options displayed in the UI (if zero, options will not be limited)
+    moreText: 'more', // text to be displayed whenmore than one items are selected like Option 1 + 5 more
+    noResultsFound: 'No results found!', // text to be displayed when no items are found while searching
+    searchPlaceholder: 'Search', // label thats displayed in search input,
+    searchOnKey: 'name', // key on which search should be performed this will be selective search. if undefined this will be extensive search on all keys
+  };
+
   /**form used in signup part */
-  fSignup: FormGroup = new FormGroup({
+  fSignup1: FormGroup = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
-    email: new FormControl(''),
-    gender: new FormControl(''),
-    username: new FormControl(''),
     dob: new FormControl(''),
-    telNo: new FormControl(''),
     idNo: new FormControl(''),
+    gender: new FormControl(''),
+  });
+  fSignup2: FormGroup = new FormGroup({
+    username: new FormControl(''),
+    email: new FormControl(''),
+    telNo: new FormControl(''),
+  });
+  fSignup3: FormGroup = new FormGroup({
     area: new FormControl(''),
     county: new FormControl(''),
     password: new FormControl(''),
@@ -116,11 +130,35 @@ export class LoginComponent implements OnInit {
     }
 
     /**building form */
-    this.fSignup = this.formBuilder.group(
+    this.fSignup1 = this.formBuilder.group({
+      firstname: ['', [Validators.required, Validators.minLength(3)]],
+      lastname: ['', [Validators.required, Validators.minLength(3)]],
+      dob: ['', [Validators.required]],
+      idNo: ['', [Validators.required, Validators.minLength(8)]],
+      gender: ['', [Validators.required]],
+    });
+    this.fSignup2 = this.formBuilder.group({
+      username: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      telNo: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+    });
+    this.fSignup3 = this.formBuilder.group(
       {
-        firstname: ['', [Validators.required, Validators.minLength(3)]],
-        lastname: ['', [Validators.required, Validators.minLength(3)]],
-        username: [
+        area: [
           '',
           [
             Validators.required,
@@ -128,13 +166,7 @@ export class LoginComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
-        email: ['', [Validators.required, Validators.email]],
-        gender: ['', [Validators.required]],
-        dob: ['', [Validators.required]],
-        telNo: ['', []],
-        idNo: ['', [Validators.required, Validators.minLength(8)]],
-        area: ['', []],
-        county: ['', []],
+        county: ['', [Validators.required]],
         password: [
           '',
           [
@@ -149,10 +181,22 @@ export class LoginComponent implements OnInit {
     );
 
     /**helps detect form touched */
-    this.fSignup.valueChanges.subscribe((res) => {
+    this.fSignup1.valueChanges.subscribe((res) => {
       //console.log('touching signup form');
-      if (this.submitted === true) {
-        this.submitted = false;
+      if (this.submitted1 === true) {
+        this.submitted1 = false;
+      }
+    });
+    this.fSignup2.valueChanges.subscribe((res) => {
+      //console.log('touching signup form');
+      if (this.submitted2 === true) {
+        this.submitted2 = false;
+      }
+    });
+    this.fSignup3.valueChanges.subscribe((res) => {
+      //console.log('touching signup form');
+      if (this.submitted3 === true) {
+        this.submitted3 = false;
       }
     });
   }
@@ -184,6 +228,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**used by dropdown */
+  searchChange(e: any) {
+    console.log(e);
+  }
+
   /*methods used by header buttons*/
   signUp() {
     console.log('signing up');
@@ -207,55 +256,55 @@ export class LoginComponent implements OnInit {
 
   /**getter to access form.controls */
   get f(): { [key: string]: AbstractControl } {
-    return this.fSignup.controls;
+    return this.fSignup1.controls;
   }
 
   get firstname() {
-    return this.fSignup.get('firstname');
+    return this.fSignup1.get('firstname');
   }
 
   get lastname() {
-    return this.fSignup.get('lastname');
-  }
-
-  get username() {
-    return this.fSignup.get('username');
-  }
-
-  get email() {
-    return this.fSignup.get('email');
-  }
-
-  get gender() {
-    return this.fSignup.get('gender');
+    return this.fSignup1.get('lastname');
   }
 
   get dob() {
-    return this.fSignup.get('dob');
-  }
-
-  get telNo() {
-    return this.fSignup.get('telNo');
+    return this.fSignup1.get('dob');
   }
 
   get idNo() {
-    return this.fSignup.get('idNo');
+    return this.fSignup1.get('idNo');
+  }
+
+  get gender() {
+    return this.fSignup1.get('gender');
+  }
+
+  get username() {
+    return this.fSignup2.get('username');
+  }
+
+  get email() {
+    return this.fSignup2.get('email');
+  }
+
+  get telNo() {
+    return this.fSignup2.get('telNo');
   }
 
   get area() {
-    return this.fSignup.get('area');
+    return this.fSignup3.get('area');
   }
 
   get county() {
-    return this.fSignup.get('county');
+    return this.fSignup3.get('county');
   }
 
   get password() {
-    return this.fSignup.get('password');
+    return this.fSignup3.get('password');
   }
 
   get confirmPassword() {
-    return this.fSignup.get('confirmPassword');
+    return this.fSignup3.get('confirmPassword');
   }
 
   /*login methods*/
@@ -304,11 +353,11 @@ export class LoginComponent implements OnInit {
   /**sign up methods */
   onSignup() {
     console.log('submission successful!!');
-    console.log(this.fSignup.value);
+    console.log(this.fSignup1.value);
 
     //get the form values
     const { email, firstname, lastname, username, password } =
-      this.fSignup.value;
+      this.fSignup1.value;
 
     /**creating user object to pass to server
      *properties name's should not be changed
@@ -344,9 +393,19 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  validate() {
+  validate(formNo: number) {
     console.log('sign up button okay');
-    this.submitted = true;
+    if (formNo === 1) {
+      this.submitted1 = true;
+    } else if (formNo === 2) {
+      this.submitted2 = true;
+    } else if (formNo === 3) {
+      this.submitted3 = true;
+    }
+  }
+
+  subTest() {
+    console.log('test accomplished!!');
   }
 
   validateLogin() {
@@ -355,8 +414,8 @@ export class LoginComponent implements OnInit {
   }
 
   resetSignup() {
-    this.submitted = false;
-    this.fSignup.reset();
+    this.submitted1 = false;
+    this.fSignup1.reset();
     this.flapCard();
   }
 
