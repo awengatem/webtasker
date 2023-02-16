@@ -552,12 +552,12 @@
                               }"
                             /> -->
                             <ngx-select-dropdown
-                              [instanceId]="'instance1'"
+                              class="form-style"
                               (change)="selectionChanged($event)"
-                              [multiple]="true"
+                              [multiple]="false"
                               [(ngModel)]="dataModel"
                               [config]="config"
-                              [options]="counties"
+                              [options]="options"
                             ></ngx-select-dropdown>
                             <i class="input-icon uil uil-map-pin-alt"></i>
                           </div>

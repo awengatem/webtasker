@@ -54,32 +54,13 @@ export class LoginComponent implements OnInit {
   dataModel: any = [];
 
   //test
-  currentPage = 1;
+  currentPage = 3;
   name = '';
   email2 = '';
   phone = '';
   address = '';
-
-  nextPage() {
-    this.currentPage++;
-  }
-
-  prevPage() {
-    this.currentPage--;
-  }
-
-  config = {
-    displayKey: 'description', //if objects array passed which key to be displayed defaults to description
-    search: true, //true/false for the search functionlity defaults to false,
-    height: 'auto', //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
-    placeholder: 'Select', // text to be displayed when no item is selected defaults to Select,
-    customComparator: () => {}, // a custom function using which user wants to sort the items. default is undefined and Array.sort() will be used in that case,
-    limitTo: 0, // number thats limits the no of options displayed in the UI (if zero, options will not be limited)
-    moreText: 'more', // text to be displayed whenmore than one items are selected like Option 1 + 5 more
-    noResultsFound: 'No results found!', // text to be displayed when no items are found while searching
-    searchPlaceholder: 'Search', // label thats displayed in search input,
-    searchOnKey: 'name', // key on which search should be performed this will be selective search. if undefined this will be extensive search on all keys
-  };
+  /*property to control styling of login and signup span elements*/
+  isChecked: boolean = false;
 
   /**form used in signup part */
   fSignup1: FormGroup = new FormGroup({
@@ -117,29 +98,23 @@ export class LoginComponent implements OnInit {
   maxDate = new Date();
   date: any;
   genders: any = ['male', 'female', 'other'];
-  counties = [
-    {
-      _id: '5a66d6c31d5e4e36c7711b7a',
-      index: 0,
-      balance: '$2,806.37',
-      picture: 'http://placehold.it/32x32',
-      name: 'Burns Dalton',
-    },
-    {
-      _id: '5a66d6c3657e60c6073a2d22',
-      index: 1,
-      balance: '$2,984.98',
-      picture: 'http://placehold.it/32x32',
-      name: 'Mcintyre Lawson',
-    },
-    {
-      _id: '5a66d6c376be165a5a7fae33',
-      index: 2,
-      balance: '$2,794.16',
-      picture: 'http://placehold.it/32x32',
-      name: 'Amie Franklin',
-    },
-  ];
+  options = ['broo1', 'broo2', 'broo3', 'broo4', 'broo5', 'broo6'];
+  config = {
+    displayKey: 'description', //if objects array passed which key to be displayed defaults to description
+    search: true, //true/false for the search functionlity defaults to false,
+    height: 'auto', //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
+    placeholder: 'Select', // text to be displayed when no item is selected defaults to Select,
+    customComparator: () => {
+      return 0;
+    }, // a custom function using which user wants to sort the items. default is undefined and Array.sort() will be used in that case,
+    limitTo: this.options.length, // a number thats limits the no of options displayed in the UI similar to angular's limitTo pipe
+    moreText: 'more', // text to be displayed whenmore than one items are selected like Option 1 + 5 more
+    noResultsFound: 'No results found!', // text to be displayed when no items are found while searching
+    searchPlaceholder: 'Search', // label thats displayed in search input,
+    searchOnKey: 'name', // key on which search should be performed this will be selective search. if undefined this will be extensive search on all keys
+    clearOnSelection: false, // clears search criteria when an option is selected if set to true, default is false
+    inputDirection: 'ltr', // the direction of the search input can be rtl or ltr(default)
+  };
 
   ngOnInit(): void {
     /**helps during login */
@@ -220,9 +195,13 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+  nextPage() {
+    this.currentPage++;
+  }
 
-  /*property to control styling of login and signup span elements*/
-  isChecked: boolean = false;
+  prevPage() {
+    this.currentPage--;
+  }
 
   /*method used by checkbox*/
   toggleCheck() {
