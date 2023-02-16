@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     password: null,
   };
 
-  datamodel: any = [];
+  dataModel: any = [];
 
   //test
   currentPage = 1;
@@ -69,9 +69,6 @@ export class LoginComponent implements OnInit {
   }
 
   config = {
-    displayFn: (item: any) => {
-      return item.hello.world;
-    }, //a replacement ofr displayKey to support flexible text displaying for each item
     displayKey: 'description', //if objects array passed which key to be displayed defaults to description
     search: true, //true/false for the search functionlity defaults to false,
     height: 'auto', //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
@@ -120,6 +117,29 @@ export class LoginComponent implements OnInit {
   maxDate = new Date();
   date: any;
   genders: any = ['male', 'female', 'other'];
+  counties = [
+    {
+      _id: '5a66d6c31d5e4e36c7711b7a',
+      index: 0,
+      balance: '$2,806.37',
+      picture: 'http://placehold.it/32x32',
+      name: 'Burns Dalton',
+    },
+    {
+      _id: '5a66d6c3657e60c6073a2d22',
+      index: 1,
+      balance: '$2,984.98',
+      picture: 'http://placehold.it/32x32',
+      name: 'Mcintyre Lawson',
+    },
+    {
+      _id: '5a66d6c376be165a5a7fae33',
+      index: 2,
+      balance: '$2,794.16',
+      picture: 'http://placehold.it/32x32',
+      name: 'Amie Franklin',
+    },
+  ];
 
   ngOnInit(): void {
     /**helps during login */
@@ -229,7 +249,7 @@ export class LoginComponent implements OnInit {
   }
 
   /**used by dropdown */
-  searchChange(e: any) {
+  selectionChanged(e: any) {
     console.log(e);
   }
 
