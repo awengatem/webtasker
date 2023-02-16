@@ -551,14 +551,15 @@
                                   (submitted3 && county?.errors)
                               }"
                             /> -->
-                            <ngx-select-dropdown
-                              class="form-style"
-                              (change)="selectionChanged($event)"
-                              [multiple]="false"
-                              [(ngModel)]="dataModel"
-                              [config]="config"
-                              [options]="options"
-                            ></ngx-select-dropdown>
+                            <div class="form-style form-style-dropDn">
+                              <ngx-select-dropdown
+                                (change)="selectionChanged($event)"
+                                [multiple]="false"
+                                [(ngModel)]="dataModel"
+                                [config]="config"
+                                [options]="options"
+                              ></ngx-select-dropdown>
+                            </div>
                             <i class="input-icon uil uil-map-pin-alt"></i>
                           </div>
                           <div class="form-group mt-2">

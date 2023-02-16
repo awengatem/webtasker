@@ -102,7 +102,7 @@ export class LoginComponent implements OnInit {
   config = {
     displayKey: 'description', //if objects array passed which key to be displayed defaults to description
     search: true, //true/false for the search functionlity defaults to false,
-    height: 'auto', //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
+    height: '600%', //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
     placeholder: 'Select', // text to be displayed when no item is selected defaults to Select,
     customComparator: () => {
       return 0;
