@@ -229,7 +229,12 @@ export class LoginComponent implements OnInit {
 
   /**used by dropdown */
   selectionChanged(e: any) {
-    console.log(e);
+    this.dataModel = e.value;
+    console.log(this.dataModel);
+  }
+
+  myFunction() {
+    document.getElementById('myDropdown')!.classList.toggle('show');
   }
 
   /*methods used by header buttons*/
@@ -405,6 +410,7 @@ export class LoginComponent implements OnInit {
 
   subTest() {
     console.log('test accomplished!!');
+    console.log(this.dataModel);
   }
 
   validateLogin() {
