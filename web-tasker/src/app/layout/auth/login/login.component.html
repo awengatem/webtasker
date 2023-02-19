@@ -309,6 +309,7 @@
                                 <option
                                   *ngFor="let gender of genders"
                                   [ngValue]="gender"
+                                  style="text-transform: capitalize"
                                 >
                                   {{ gender }}
                                 </option>
@@ -572,10 +573,11 @@
                               >
                                 <option value="">Choose County</option>
                                 <option
-                                  *ngFor="let gender of genders"
-                                  [ngValue]="gender"
+                                  *ngFor="let county of counties"
+                                  [ngValue]="county"
+                                  style="text-transform: capitalize"
                                 >
-                                  {{ gender }}
+                                  {{ county }}
                                 </option>
                               </select>
                             </div>
