@@ -551,13 +551,45 @@
                                   (submitted3 && county?.errors)
                               }"
                             /> -->
-                            <div class="form-style form-style-dropDn">
+                            <!-- <div class="form-style form-style-dropDn">
                               <ngx-select-dropdown
                                 (change)="selectionChanged($event)"
                                 [multiple]="false"
                                 [config]="config"
                                 [options]="options"
                               ></ngx-select-dropdown>
+                            </div> -->
+                            <div class="ui-dropdown">
+                              <select
+                                class="form-style form-control"
+                                (change)="changeCounty($event)"
+                                formControlName="county"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    (county?.touched && county?.invalid) ||
+                                    (submitted3 && county?.invalid)
+                                }"
+                              >
+                                <option value="">Choose County</option>
+                                <option
+                                  *ngFor="let gender of genders"
+                                  [ngValue]="gender"
+                                >
+                                  {{ gender }}
+                                </option>
+                              </select>
+                            </div>
+                            <!-- error block -->
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (county?.touched && county?.invalid) ||
+                                (submitted3 && county?.invalid)
+                              "
+                            >
+                              <small> Please choose your gender </small>
+                              <!-- <sup>*</sup>Please provide city name -->
                             </div>
                             <i class="input-icon uil uil-map-pin-alt"></i>
                           </div>
