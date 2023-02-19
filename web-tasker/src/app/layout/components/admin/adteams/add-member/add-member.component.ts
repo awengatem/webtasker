@@ -28,13 +28,6 @@ export class AddMemberComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.dropdownList = [
-    //   { item_id: 1, item_text: 'Joe' },
-    //   { item_id: 2, item_text: 'Frank' },
-    //   { item_id: 3, item_text: 'Joy' },
-    //   { item_id: 4, item_text: 'Purity' },
-    //   { item_id: 5, item_text: 'John' }
-    // ];
     //Subscribe first
     this.route.params.subscribe((params: Params) => {
       console.log(params);
@@ -47,10 +40,7 @@ export class AddMemberComponent implements OnInit {
 
     //then get dropdown list data
     this.getUsers();
-    this.selectedItems = [
-      //{ item_id: 3, item_text: 'Pune' },
-      //{ item_id: 4, item_text: 'Navsari' }
-    ];
+    this.selectedItems = [];
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'item_id',
