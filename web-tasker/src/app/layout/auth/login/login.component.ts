@@ -44,6 +44,9 @@ export class LoginComponent implements OnInit {
   signupErrorMessage = '';
   roles: string[] = [];
   user: any;
+  currentPage = 1;
+
+  userDetails: Record<string, any> = {};
 
   /**form used in login part */
   form: any = {
@@ -51,16 +54,13 @@ export class LoginComponent implements OnInit {
     password: null,
   };
 
-  //test
-  currentPage = 3;
-  name = '';
-  email2 = '';
-  phone = '';
-  address = '';
   /*property to control styling of login and signup span elements*/
   isChecked: boolean = false;
 
-  /**form used in signup part */
+  /**combined signup array */
+  // userDetails: any;
+
+  /**forms used in signup part */
   fSignup1: FormGroup = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
@@ -225,8 +225,28 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-  nextPage() {
-    this.currentPage++;
+  nextPage(val: number) {
+    if (val === 1) {
+      this.currentPage++;
+      // console.log(this.fSignup1.value.dob.toLocaleDateString());
+      const { firstname, lastname, dob, idNo, gender } = this.fSignup1.value;
+      this.userDetails['firstname'] = firstname;
+      this.userDetails['lastname'] = lastname;
+      this.userDetails['dob'] = dob;
+      this.userDetails['idNo'] = idNo;
+      this.userDetails['gender'] = gender;
+      // log output
+      console.log(this.userDetails);
+    } else if (val === 2) {
+      this.currentPage++;
+      // console.log(this.fSignup1.value.dob.toLocaleDateString());
+      const { username, email, telNo } = this.fSignup2.value;
+      this.userDetails['username'] = username;
+      this.userDetails['email'] = email;
+      this.userDetails['telNo'] = telNo;
+      //log output
+      console.log(this.userDetails);
+    }
   }
 
   prevPage() {

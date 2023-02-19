@@ -148,7 +148,7 @@
                       <div *ngSwitchCase="1">
                         <form
                           [formGroup]="fSignup1"
-                          (ngSubmit)="fSignup1.valid && nextPage()"
+                          (ngSubmit)="fSignup1.valid && nextPage(1)"
                         >
                           <!-- <h5 class="subtitle">Personal details</h5> -->
                           <div class="custom-form-row row">
@@ -349,7 +349,7 @@
                       <div *ngSwitchCase="2">
                         <form
                           [formGroup]="fSignup2"
-                          (ngSubmit)="fSignup2.valid && nextPage()"
+                          (ngSubmit)="fSignup2.valid && nextPage(2)"
                         >
                           <h5 class="subtitle">Contact details</h5>
                           <div class="form-group mt-2">
@@ -497,7 +497,7 @@
                       <div *ngSwitchCase="3">
                         <form
                           [formGroup]="fSignup3"
-                          (ngSubmit)="fSignup2.valid && subTest()"
+                          (ngSubmit)="fSignup2.valid && nextPage(3)"
                         >
                           <h5 class="subtitle">Location and password</h5>
                           <div class="form-group mt-2">
