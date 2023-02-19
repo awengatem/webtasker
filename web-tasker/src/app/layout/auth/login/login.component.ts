@@ -225,30 +225,39 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+  /**Method to store values and navigate forward */
   nextPage(val: number) {
     if (val === 1) {
-      this.currentPage++;
-      // console.log(this.fSignup1.value.dob.toLocaleDateString());
       const { firstname, lastname, dob, idNo, gender } = this.fSignup1.value;
       this.userDetails['firstname'] = firstname;
       this.userDetails['lastname'] = lastname;
-      this.userDetails['dob'] = dob;
+      this.userDetails['dob'] = dob.toLocaleDateString();
       this.userDetails['idNo'] = idNo;
       this.userDetails['gender'] = gender;
       // log output
       console.log(this.userDetails);
-    } else if (val === 2) {
       this.currentPage++;
-      // console.log(this.fSignup1.value.dob.toLocaleDateString());
+    } else if (val === 2) {
       const { username, email, telNo } = this.fSignup2.value;
       this.userDetails['username'] = username;
       this.userDetails['email'] = email;
       this.userDetails['telNo'] = telNo;
       //log output
       console.log(this.userDetails);
+      this.currentPage++;
+    } else if (val === 3) {
+      // form is finished complete and submit it
+      const { area, county, password } = this.fSignup2.value;
+      this.userDetails['area'] = area;
+      this.userDetails['county'] = county;
+      this.userDetails['password'] = password;
+      //log output
+      console.log(this.userDetails);
     }
   }
 
+  /**Method to navigate backward */
   prevPage() {
     this.currentPage--;
   }
