@@ -18,6 +18,11 @@ export class NewUsermodalComponent implements OnInit {
   submitted = false;
   flag: boolean = true;
 
+  /**used by datepicker */
+  minDate = new Date(1930, 0, 1);
+  maxDate = new Date();
+  date: any;
+
   constructor(
     public modalRef: MdbModalRef<NewUsermodalComponent>,
     private fb: FormBuilder,
@@ -59,6 +64,7 @@ export class NewUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
+        dob: ['', [Validators.required]],
         role: ['', [Validators.required]],
         password: [
           '',
