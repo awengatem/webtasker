@@ -94,61 +94,65 @@
         </mat-form-field>
       </div>
 
-      <!-- DATE OF BIRTH FIELD -->
-      <mat-form-field appearance="outline">
-        <mat-label>Date of Birth</mat-label>
-        <input
-          matInput
-          formControlName="dob"
-          [min]="minDate"
-          [max]="maxDate"
-          [matDatepicker]="basicDatepicker"
-          placeholder="Pick your date of birth"
-          #dobInput
-        />
-        <mat-datepicker-toggle matSuffix [for]="basicDatepicker"
-          ><mat-icon class="pinkish" matDatepickerToggleIcon>
-            date_range
-          </mat-icon></mat-datepicker-toggle
-        >
-        <mat-datepicker #basicDatepicker></mat-datepicker>
-        <!-- Error block -->
-        <mat-error *ngIf="form.controls['dob'].errors?.['required']"
-          >Date of birth is required</mat-error
-        >
-        <mat-error *ngIf="form.controls['dob']?.hasError('matDatepickerParse')">
-          Please pick a valid date.
-        </mat-error>
-        <mat-error *ngIf="form.controls['dob']?.hasError('matDatepickerMin')">
-          Invalid minimum date.
-        </mat-error>
-        <mat-error *ngIf="form.controls['dob']?.hasError('matDatepickerMax')">
-          Invalid maximum date.
-        </mat-error>
-      </mat-form-field>
+      <div class="row custom-flex">
+        <!-- DATE OF BIRTH FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Date of Birth</mat-label>
+          <input
+            matInput
+            formControlName="dob"
+            [min]="minDate"
+            [max]="maxDate"
+            [matDatepicker]="basicDatepicker"
+            placeholder="Pick your date of birth"
+            #dobInput
+          />
+          <mat-datepicker-toggle matSuffix [for]="basicDatepicker"
+            ><mat-icon class="pinkish" matDatepickerToggleIcon>
+              date_range
+            </mat-icon></mat-datepicker-toggle
+          >
+          <mat-datepicker #basicDatepicker></mat-datepicker>
+          <!-- Error block -->
+          <mat-error *ngIf="form.controls['dob'].errors?.['required']"
+            >Date of birth is required</mat-error
+          >
+          <mat-error
+            *ngIf="form.controls['dob']?.hasError('matDatepickerParse')"
+          >
+            Please pick a valid date.
+          </mat-error>
+          <mat-error *ngIf="form.controls['dob']?.hasError('matDatepickerMin')">
+            Invalid minimum date.
+          </mat-error>
+          <mat-error *ngIf="form.controls['dob']?.hasError('matDatepickerMax')">
+            Invalid maximum date.
+          </mat-error>
+        </mat-form-field>
 
-      <!-- ID NUMBER FIELD -->
-      <mat-form-field appearance="outline">
-        <mat-label>Id number</mat-label>
-        <input
-          matInput
-          placeholder="enter Id number"
-          type="number"
-          formControlName="idNo"
-          #idNoInput
-        />
-        <mat-icon matSuffix>credit_card</mat-icon>
-        <!-- Error block -->
-        <mat-error *ngIf="form.controls['idNo'].errors?.['required']"
-          >Id number is required</mat-error
-        >
-        <mat-error *ngIf="form.controls['idNo'].errors?.['minlength']">
-          Id number should be more than 6 numbers
-        </mat-error>
-        <mat-error *ngIf="form.controls['idNo'].errors?.['maxlength']">
-          Id number should not exceed 20 numbers
-        </mat-error>
-      </mat-form-field>
+        <!-- ID NUMBER FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Id number</mat-label>
+          <input
+            matInput
+            placeholder="enter Id number"
+            type="number"
+            formControlName="idNo"
+            #idNoInput
+          />
+          <mat-icon matSuffix>credit_card</mat-icon>
+          <!-- Error block -->
+          <mat-error *ngIf="form.controls['idNo'].errors?.['required']"
+            >Id number is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['idNo'].errors?.['minlength']">
+            Id number should be more than 6 numbers
+          </mat-error>
+          <mat-error *ngIf="form.controls['idNo'].errors?.['maxlength']">
+            Id number should not exceed 20 numbers
+          </mat-error>
+        </mat-form-field>
+      </div>
 
       <!-- ROLE FIELD -->
       <mat-form-field appearance="outline">
