@@ -2,94 +2,97 @@
   <div class="modal-box shadow">
     <h1><i class="fa-solid fa-user-plus"></i> Create new user</h1>
     <form [formGroup]="form" (ngSubmit)="form.valid && submitForm(form)">
-      <!-- USERNAME FIELD -->
-      <mat-form-field appearance="outline">
-        <mat-label>Username</mat-label>
-        <input
-          matInput
-          type="text"
-          placeholder="enter username"
-          formControlName="username"
-          #usernameInput
-        />
-        <mat-icon matSuffix>account_circle</mat-icon>
-        <!-- <mat-hint>Hint</mat-hint> -->
-        <mat-error *ngIf="form.controls['username'].errors?.['required']"
-          >Username is required</mat-error
-        >
-        <mat-error *ngIf="form.controls['username'].errors?.['minlength']">
-          Username should be more than 3 characters
-        </mat-error>
-        <mat-error *ngIf="form.controls['username'].errors?.['maxlength']">
-          Username should not exceed 10 characters
-        </mat-error>
-      </mat-form-field>
+      <div class="row custom-flex">
+        <!-- USERNAME FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="enter username"
+            formControlName="username"
+            #usernameInput
+          />
+          <mat-icon matSuffix>account_circle</mat-icon>
+          <!-- <mat-hint>Hint</mat-hint> -->
+          <mat-error *ngIf="form.controls['username'].errors?.['required']"
+            >Username is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['username'].errors?.['minlength']">
+            Username should be more than 3 characters
+          </mat-error>
+          <mat-error *ngIf="form.controls['username'].errors?.['maxlength']">
+            Username should not exceed 10 characters
+          </mat-error>
+        </mat-form-field>
 
-      <!-- EMAIL FIELD -->
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input
-          matInput
-          placeholder="enter email"
-          type="email"
-          formControlName="email"
-          #emailInput
-        />
-        <mat-icon matSuffix>alternate_email</mat-icon>
-        <!-- <mat-hint>Hint</mat-hint> -->
-        <mat-error *ngIf="form.controls['email'].errors?.['required']"
-          >Email is required</mat-error
-        >
-        <mat-error *ngIf="form.controls['email'].errors?.['pattern']">
-          Please enter valid email
-        </mat-error>
-      </mat-form-field>
+        <!-- EMAIL FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="enter email"
+            type="email"
+            formControlName="email"
+            #emailInput
+          />
+          <mat-icon matSuffix>alternate_email</mat-icon>
+          <!-- <mat-hint>Hint</mat-hint> -->
+          <mat-error *ngIf="form.controls['email'].errors?.['required']"
+            >Email is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['email'].errors?.['pattern']">
+            Please enter valid email
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row custom-flex">
+        <!-- FIRSTNAME FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Firstname</mat-label>
+          <input
+            matInput
+            placeholder="enter first name"
+            type="text"
+            formControlName="firstName"
+            #firstNameInput
+          />
+          <mat-icon matSuffix>person_add</mat-icon>
+          <!-- <mat-hint>Hint</mat-hint> -->
+          <mat-error *ngIf="form.controls['firstName'].errors?.['required']"
+            >Firstname is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['firstName'].errors?.['minlength']">
+            Firstname should be more than 3 characters
+          </mat-error>
+          <mat-error *ngIf="form.controls['firstName'].errors?.['maxlength']">
+            Firstname should not exceed 20 characters
+          </mat-error>
+        </mat-form-field>
 
-      <!-- FIRSTNAME FIELD -->
-      <mat-form-field appearance="outline">
-        <mat-label>Firstname</mat-label>
-        <input
-          matInput
-          placeholder="enter first name"
-          type="text"
-          formControlName="firstName"
-          #firstNameInput
-        />
-        <mat-icon matSuffix>person_add</mat-icon>
-        <!-- <mat-hint>Hint</mat-hint> -->
-        <mat-error *ngIf="form.controls['firstName'].errors?.['required']"
-          >Firstname is required</mat-error
-        >
-        <mat-error *ngIf="form.controls['firstName'].errors?.['minlength']">
-          Firstname should be more than 3 characters
-        </mat-error>
-        <mat-error *ngIf="form.controls['firstName'].errors?.['maxlength']">
-          Firstname should not exceed 20 characters
-        </mat-error>
-      </mat-form-field>
-
-      <!-- LASTNAME FIELD -->
-      <mat-form-field appearance="outline">
-        <mat-label>Lastname</mat-label>
-        <input
-          matInput
-          placeholder="enter last name"
-          type="text"
-          formControlName="lastName"
-          #lastNameInput
-        />
-        <mat-icon matSuffix>person_add</mat-icon>
-        <!-- <mat-hint>Hint</mat-hint> -->
-        <mat-error *ngIf="form.controls['lastName'].errors?.['required']"
-          >Lastname is required</mat-error
-        >
-        <mat-error *ngIf="form.controls['lastName'].errors?.['minlength']">
-          Lastname should be more than 3 characters
-        </mat-error>
-        <mat-error *ngIf="form.controls['lastName'].errors?.['maxlength']">
-          Lastname should not exceed 20 characters
-        </mat-error>
-      </mat-form-field>
+        <!-- LASTNAME FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Lastname</mat-label>
+          <input
+            matInput
+            placeholder="enter last name"
+            type="text"
+            formControlName="lastName"
+            #lastNameInput
+          />
+          <mat-icon matSuffix>person_add</mat-icon>
+          <!-- <mat-hint>Hint</mat-hint> -->
+          <mat-error *ngIf="form.controls['lastName'].errors?.['required']"
+            >Lastname is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['lastName'].errors?.['minlength']">
+            Lastname should be more than 3 characters
+          </mat-error>
+          <mat-error *ngIf="form.controls['lastName'].errors?.['maxlength']">
+            Lastname should not exceed 20 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
 
       <!-- ROLE FIELD -->
       <mat-form-field appearance="outline">
