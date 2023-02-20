@@ -82,6 +82,15 @@ export class NewUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
+        area: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(20),
+          ],
+        ],
+        county: ['', [Validators.required]],
         role: ['', [Validators.required]],
         password: [
           '',
