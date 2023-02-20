@@ -241,6 +241,12 @@
                               </mat-icon></mat-datepicker-toggle
                             >
                             <mat-datepicker #basicDatepicker></mat-datepicker>
+                            <!-- error block -->
+                            <mat-error
+                              class="alert-style"
+                              *ngIf="fSignup1.controls['dob'].errors?.['required']"
+                              >Date of birth is required</mat-error
+                            >
                             <mat-error
                               *ngIf="dob?.hasError('matDatepickerParse')"
                             >
