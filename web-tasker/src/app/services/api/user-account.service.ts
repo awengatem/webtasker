@@ -12,6 +12,11 @@ export class UserAccountService {
     return this.webReqService.post('register', user);
   }
 
+  /**Method to check duplicates inorder to facilitate signup */
+  checkDuplicates(details: object) {
+    return this.webReqService.post('register/check_duplicates', details);
+  }
+
   /** Method to get a specified user*/
   getSpecificUser(userId: string) {
     return this.webReqService.get(`users/${userId}`);

@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   signupErrorMessage = '';
   roles: string[] = [];
   user: any;
-  currentPage = 3;
+  currentPage = 2;
 
   userDetails: Record<string, any> = {};
 
@@ -428,17 +428,17 @@ export class LoginComponent implements OnInit {
     };
 
     /**post user to server*/
-    this.userAccountService.registerUser(details).subscribe({
+    this.userAccountService.checkDuplicates(details).subscribe({
       next: (res: any) => {
         this.snackBarService.displaySnackbar('success', res.message);
         console.log(res);
         this.signupFailed = false;
+        this.currentPage++;
       },
       error: (err) => {
         console.log(err);
         this.signupErrorMessage = err.error.message;
         this.signupFailed = true;
-        this.submitted2 = false;
       },
     });
   }
