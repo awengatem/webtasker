@@ -231,10 +231,15 @@ export class LoginComponent implements OnInit {
   nextPage(val: number) {
     if (val === 1) {
       const { firstname, lastname, dob, idNo, gender } = this.fSignup1.value;
-      this.userDetails['firstname'] = firstname;
-      this.userDetails['lastname'] = lastname;
+      //cleaning
+      let cFirstname = this.generalService.deepClean(firstname);
+      let cLastname = this.generalService.deepClean(lastname);
+      let cIdNo = this.generalService.deepClean(idNo);
+      //push new data
+      this.userDetails['firstname'] = cFirstname;
+      this.userDetails['lastname'] = cLastname;
       this.userDetails['dob'] = dob.toLocaleDateString();
-      this.userDetails['idNo'] = idNo;
+      this.userDetails['idNo'] = cIdNo;
       this.userDetails['gender'] = gender;
       // log output
       console.log(this.userDetails);
@@ -247,15 +252,20 @@ export class LoginComponent implements OnInit {
     } else if (val === 3) {
       // form is finished complete and submit it
       const { area, county, password } = this.fSignup3.value;
-      this.userDetails['area'] = area;
       //getting rid of index numbering
       const countyArr = county.split(' ');
       let countyNew = county;
       countyArr[1] ? (countyNew = countyArr[1]) : (countyNew = county);
+      //cleaning
+      let cArea = this.generalService.deepClean(area);
+      //push new data
+      this.userDetails['area'] = cArea;
       this.userDetails['county'] = countyNew;
       this.userDetails['password'] = password;
       //log output
       console.log(this.userDetails);
+      //sign up user
+      this.onSignup(this.userDetails);
     }
   }
 
@@ -414,11 +424,12 @@ export class LoginComponent implements OnInit {
 
   /**Method to check duplicates from db first */
   checkDuplicates() {
-    const { username, email } = this.fSignup2.value;
+    const { username, email, telNo } = this.fSignup2.value;
 
-    /**trim off white space before sending to server */
+    /**clean before sending to server */
     let cUsername = this.generalService.deepClean(username);
     let cEmail = this.generalService.deepClean(email);
+    let cTelNo = this.generalService.deepClean(telNo);
 
     const details = {
       username: cUsername,
@@ -431,16 +442,17 @@ export class LoginComponent implements OnInit {
         this.snackBarService.displaySnackbar('success', res.message);
         console.log(res);
         this.signupFailed = false;
-        const { username, email, telNo } = this.fSignup2.value;
-        this.userDetails['username'] = username;
-        this.userDetails['email'] = email;
-        this.userDetails['telNo'] = telNo;
+        //push new data
+        this.userDetails['username'] = cUsername;
+        this.userDetails['email'] = cEmail;
+        this.userDetails['telNo'] = cTelNo;
+        //show next page
         this.currentPage++;
       },
       error: (err) => {
         console.log(err);
         this.signupErrorMessage = err.error.message;
-        //check the duplicate based on message
+        //check the duplicate based on message and highlight for user
         let sliceText = this.signupErrorMessage.slice(0, 5);
         console.log(sliceText);
         if (sliceText === 'Usern') {
@@ -454,29 +466,40 @@ export class LoginComponent implements OnInit {
   }
 
   /**sign up methods */
-  onSignup() {
+  onSignup(userDetails: any) {
     console.log('submission successful!!');
     console.log(this.fSignup1.value);
 
     //get the form values
-    const { email, firstname, lastname, username, password } =
-      this.fSignup1.value;
+    const {
+      firstname,
+      lastname,
+      dob,
+      idNo,
+      gender,
+      username,
+      email,
+      telNo,
+      area,
+      county,
+      password,
+    } = userDetails;
 
     /**creating user object to pass to server
      *properties name's should not be changed
      */
-    /**trim off white space before sending to server */
-    let cUsername = this.generalService.deepClean(username);
-    let cEmail = this.generalService.deepClean(email);
-    let cFirstname = this.generalService.deepClean(firstname);
-    let cLastname = this.generalService.deepClean(lastname);
-
     const user = {
-      username: cUsername,
-      email: cEmail,
+      firstName: firstname,
+      lastName: lastname,
+      dob: dob,
+      idNumber: idNo,
+      gender: gender,
+      username: username,
+      email: email,
+      telNumber: telNo,
+      area: area,
+      county: county,
       password: password,
-      firstName: cFirstname,
-      lastName: cLastname,
       role: 'user',
     };
 
@@ -496,6 +519,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**Method attached to next buttons to trigger sign Upvalidation */
   validate(formNo: number) {
     console.log('sign up button okay');
     if (formNo === 1) {
@@ -507,18 +531,21 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  subTest() {
-    console.log('test accomplished!!');
-  }
-
+  /**Method to trigger log in validation */
   validateLogin() {
     console.log('sign in button okay');
     this.logsubmitted = true;
   }
 
+  /**Resets sign up form */
   resetSignup() {
     this.submitted1 = false;
+    this.submitted2 = false;
+    this.submitted3 = false;
     this.fSignup1.reset();
+    this.fSignup2.reset();
+    this.fSignup3.reset();
+    this.currentPage = 1;
     this.flapCard();
   }
 
