@@ -107,7 +107,7 @@
           #dobInput
         />
         <mat-datepicker-toggle matSuffix [for]="basicDatepicker"
-          ><mat-icon matDatepickerToggleIcon>
+          ><mat-icon class="pinkish" matDatepickerToggleIcon>
             date_range
           </mat-icon></mat-datepicker-toggle
         >
@@ -124,6 +124,29 @@
         </mat-error>
         <mat-error *ngIf="form.controls['dob']?.hasError('matDatepickerMax')">
           Invalid maximum date.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- ID NUMBER FIELD -->
+      <mat-form-field appearance="outline">
+        <mat-label>Id number</mat-label>
+        <input
+          matInput
+          placeholder="enter Id number"
+          type="number"
+          formControlName="idNo"
+          #idNoInput
+        />
+        <mat-icon matSuffix>credit_card</mat-icon>
+        <!-- Error block -->
+        <mat-error *ngIf="form.controls['idNo'].errors?.['required']"
+          >Id number is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['idNo'].errors?.['minlength']">
+          Id number should be more than 6 numbers
+        </mat-error>
+        <mat-error *ngIf="form.controls['idNo'].errors?.['maxlength']">
+          Id number should not exceed 20 numbers
         </mat-error>
       </mat-form-field>
 

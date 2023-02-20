@@ -66,6 +66,14 @@ export class NewUsermodalComponent implements OnInit {
         ],
         dob: ['', [Validators.required]],
         role: ['', [Validators.required]],
+        idNo: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(20),
+          ],
+        ],
         password: [
           '',
           [
