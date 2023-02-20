@@ -349,7 +349,7 @@
                       <div *ngSwitchCase="2">
                         <form
                           [formGroup]="fSignup2"
-                          (ngSubmit)="fSignup2.valid && checkDuplicates()"
+                          (ngSubmit)="fSignup2.valid && nextPage(2)"
                         >
                           <h5 class="subtitle">Contact details</h5>
                           <div class="form-group mt-2">
@@ -504,6 +504,7 @@
                               </button>
                             </div>
                           </div>
+                          <!-- error block -->
                           <div class="form-group">
                             <div
                               class="alert-style mt-2"

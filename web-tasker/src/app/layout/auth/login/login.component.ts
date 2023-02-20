@@ -240,13 +240,10 @@ export class LoginComponent implements OnInit {
       console.log(this.userDetails);
       this.currentPage++;
     } else if (val === 2) {
-      const { username, email, telNo } = this.fSignup2.value;
-      this.userDetails['username'] = username;
-      this.userDetails['email'] = email;
-      this.userDetails['telNo'] = telNo;
+      //confirm with db first
+      this.checkDuplicates();
       //log output
       console.log(this.userDetails);
-      this.currentPage++;
     } else if (val === 3) {
       // form is finished complete and submit it
       const { area, county, password } = this.fSignup3.value;
@@ -434,6 +431,10 @@ export class LoginComponent implements OnInit {
         this.snackBarService.displaySnackbar('success', res.message);
         console.log(res);
         this.signupFailed = false;
+        const { username, email, telNo } = this.fSignup2.value;
+        this.userDetails['username'] = username;
+        this.userDetails['email'] = email;
+        this.userDetails['telNo'] = telNo;
         this.currentPage++;
       },
       error: (err) => {
