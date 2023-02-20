@@ -414,6 +414,35 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**Method to check duplicates from db first */
+  checkDuplicates() {
+    const { username, email } = this.fSignup2.value;
+
+    /**trim off white space before sending to server */
+    let cUsername = this.generalService.deepClean(username);
+    let cEmail = this.generalService.deepClean(email);
+
+    const details = {
+      username: cUsername,
+      email: cEmail,
+    };
+
+    /**post user to server*/
+    this.userAccountService.registerUser(details).subscribe({
+      next: (res: any) => {
+        this.snackBarService.displaySnackbar('success', res.message);
+        console.log(res);
+        this.signupFailed = false;
+      },
+      error: (err) => {
+        console.log(err);
+        this.signupErrorMessage = err.error.message;
+        this.signupFailed = true;
+        this.submitted2 = false;
+      },
+    });
+  }
+
   /**sign up methods */
   onSignup() {
     console.log('submission successful!!');
