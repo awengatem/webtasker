@@ -269,9 +269,9 @@ h4 {
       border: 1px solid #e74c3c;
     }
 
-    &.ng-valid.ng-dirty {
-      //border: 1px solid #2ecc71;
-    }
+    // &.ng-valid.ng-dirty {
+    //   //border: 1px solid #2ecc71;
+    // }
   }
 
   &_group {
@@ -369,10 +369,10 @@ select:-webkit-autofill {
     -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
   }
-  &-dropDn {
-    // position: relative;
-    // z-index: 2;
-  }
+}
+
+.ngx-dropdown-list-container {
+  background: red;
 }
 .alert-style {
   padding: 13px 20px;

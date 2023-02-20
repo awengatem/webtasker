@@ -148,7 +148,7 @@
                       <div *ngSwitchCase="1">
                         <form
                           [formGroup]="fSignup1"
-                          (ngSubmit)="fSignup1.valid && nextPage()"
+                          (ngSubmit)="fSignup1.valid && nextPage(1)"
                         >
                           <!-- <h5 class="subtitle">Personal details</h5> -->
                           <div class="custom-form-row row">
@@ -309,6 +309,7 @@
                                 <option
                                   *ngFor="let gender of genders"
                                   [ngValue]="gender"
+                                  style="text-transform: capitalize"
                                 >
                                   {{ gender }}
                                 </option>
@@ -324,7 +325,6 @@
                               "
                             >
                               <small> Please choose your gender </small>
-                              <!-- <sup>*</sup>Please provide city name -->
                             </div>
                             <i class="input-icon uil uil-mars"></i>
                           </div>
@@ -349,7 +349,7 @@
                       <div *ngSwitchCase="2">
                         <form
                           [formGroup]="fSignup2"
-                          (ngSubmit)="fSignup2.valid && nextPage()"
+                          (ngSubmit)="fSignup2.valid && nextPage(2)"
                         >
                           <h5 class="subtitle">Contact details</h5>
                           <div class="form-group mt-2">
@@ -362,7 +362,8 @@
                               [ngClass]="{
                                 'is-invalid':
                                   (username?.dirty && username?.errors) ||
-                                  (submitted2 && username?.errors)
+                                  (submitted2 && username?.errors) ||
+                                  userErr
                               }"
                             />
                             <i
@@ -370,7 +371,9 @@
                             ></i>
                             <i
                               class="vericon success fas fa-check-circle fa-xs"
-                              *ngIf="username?.dirty && !username?.errors"
+                              *ngIf="
+                                username?.dirty && !username?.errors && !userErr
+                              "
                             ></i>
 
                             <div
@@ -378,7 +381,8 @@
                               role="alert"
                               *ngIf="
                                 (username?.dirty && username?.errors) ||
-                                (submitted2 && username?.errors)
+                                (submitted2 && username?.errors) ||
+                                userErr
                               "
                             >
                               <small *ngIf="username?.errors?.['required']">
@@ -390,6 +394,9 @@
                               <small *ngIf="username?.errors?.['maxlength']">
                                 Username must not exceed 20 characters
                               </small>
+                              <small *ngIf="userErr">
+                                enter a different username!
+                              </small>
                             </div>
                           </div>
                           <div class="form-group mt-2">
@@ -400,7 +407,8 @@
                               [ngClass]="{
                                 'is-invalid':
                                   (email?.dirty && email?.errors) ||
-                                  (submitted2 && email?.errors)
+                                  (submitted2 && email?.errors) ||
+                                  emailErr
                               }"
                               placeholder="Your Email"
                               autocomplete="off"
@@ -411,7 +419,8 @@
                               *ngIf="
                                 email?.dirty &&
                                 !email?.errors &&
-                                !email?.invalid
+                                !email?.invalid &&
+                                !emailErr
                               "
                             ></i>
 
@@ -420,7 +429,8 @@
                               role="alert"
                               *ngIf="
                                 (email?.dirty && email?.errors) ||
-                                (submitted2 && email?.errors)
+                                (submitted2 && email?.errors) ||
+                                emailErr
                               "
                             >
                               <small *ngIf="email?.errors?.['required']">
@@ -428,6 +438,9 @@
                               </small>
                               <small *ngIf="email?.errors?.['email']">
                                 email is invalid!
+                              </small>
+                              <small *ngIf="emailErr">
+                                enter a different email!
                               </small>
                             </div>
                           </div>
@@ -466,7 +479,7 @@
                                 Telephone number is required!
                               </small>
                               <small *ngIf="telNo?.errors?.['minlength']">
-                                Telephone number must be at least 3 characters
+                                Telephone number must be at least 10 characters
                               </small>
                               <small *ngIf="telNo?.errors?.['maxlength']">
                                 Telephone number must not exceed 20 characters
@@ -491,13 +504,25 @@
                               </button>
                             </div>
                           </div>
+                          <!-- error block -->
+                          <div class="form-group">
+                            <div
+                              class="alert-style mt-2"
+                              role="alert"
+                              *ngIf="submitted2 && signupFailed"
+                            >
+                              <h5 class="error mt-3">
+                                Registration failed: {{ signupErrorMessage }}
+                              </h5>
+                            </div>
+                          </div>
                         </form>
                       </div>
                       <!-- FORM 3: LOCATION INFO -->
                       <div *ngSwitchCase="3">
                         <form
                           [formGroup]="fSignup3"
-                          (ngSubmit)="fSignup2.valid && subTest()"
+                          (ngSubmit)="fSignup3.valid && nextPage(3)"
                         >
                           <h5 class="subtitle">Location and password</h5>
                           <div class="form-group mt-2">
@@ -539,26 +564,37 @@
                             </div>
                           </div>
                           <div class="form-group mt-2">
-                            <!-- <input
-                              type="text"
-                              formControlName="county"
-                              class="form-style form-control"
-                              placeholder="Set your county..."
-                              autocomplete="off"
-                              [ngClass]="{
-                                'is-invalid':
-                                  (county?.dirty && county?.errors) ||
-                                  (submitted3 && county?.errors)
-                              }"
-                            /> -->
-                            <div class="form-style form-style-dropDn">
-                              <ngx-select-dropdown
-                                (change)="selectionChanged($event)"
-                                [multiple]="false"
-                                [(ngModel)]="dataModel"
-                                [config]="config"
-                                [options]="options"
-                              ></ngx-select-dropdown>
+                            <div class="ui-dropdown">
+                              <select
+                                class="form-style form-control"
+                                (change)="changeCounty($event)"
+                                formControlName="county"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    (county?.touched && county?.invalid) ||
+                                    (submitted3 && county?.invalid)
+                                }"
+                              >
+                                <option value="">Choose County</option>
+                                <option
+                                  *ngFor="let county of counties"
+                                  [ngValue]="county"
+                                  style="text-transform: capitalize"
+                                >
+                                  {{ county }}
+                                </option>
+                              </select>
+                            </div>
+                            <!-- error block -->
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (county?.touched && county?.invalid) ||
+                                (submitted3 && county?.invalid)
+                              "
+                            >
+                              <small> Please choose your county </small>
                             </div>
                             <i class="input-icon uil uil-map-pin-alt"></i>
                           </div>
@@ -662,264 +698,21 @@
                               </button>
                             </div>
                           </div>
+                          <!-- error block -->
+                          <div class="form-group">
+                            <div
+                              class="alert-style mt-2"
+                              role="alert"
+                              *ngIf="submitted3 && signupFailed"
+                            >
+                              <h5 class="error mt-3">
+                                Registration failed: {{ signupErrorMessage }}
+                              </h5>
+                            </div>
+                          </div>
                         </form>
                       </div>
                     </div>
-
-                    <!-- <form
-                      [formGroup]="fSignup"
-                      (ngSubmit)="fSignup.valid && onSignup()"
-                    >
-                      <div class="custom-form-row row">
-                        <div class="form-group col me-2">
-                          <input
-                            type="text"
-                            formControlName="firstname"
-                            class="form-style form-control"
-                            [ngClass]="{
-                              'is-invalid':
-                                (firstname?.dirty && firstname?.errors) ||
-                                (submitted && firstname?.errors)
-                            }"
-                            placeholder="Your First Name"
-                            autocomplete="off"
-                          />
-                          <i class="input-icon uil uil-user-plus"></i>
-                          <i
-                            class="vericon success fas fa-check-circle fa-xs"
-                            *ngIf="firstname?.dirty && !firstname?.errors"
-                          ></i>
-
-                          <div
-                            class="alert-style"
-                            role="alert"
-                            *ngIf="
-                              (firstname?.dirty && firstname?.errors) ||
-                              (submitted && firstname?.errors)
-                            "
-                          >
-                            <small *ngIf="firstname?.errors?.['required']">
-                              Firstame is required!
-                            </small>
-                            <small *ngIf="firstname?.errors?.['minlength']">
-                              Firstname must be at least 3 characters
-                            </small>
-                          </div>
-                        </div>
-                        <div class="form-group col">
-                          <input
-                            type="text"
-                            formControlName="lastname"
-                            class="form-style form-control"
-                            [ngClass]="{
-                              'is-invalid':
-                                (lastname?.dirty && lastname?.errors) ||
-                                (submitted && lastname?.errors)
-                            }"
-                            placeholder="Your Last Name"
-                            autocomplete="off"
-                          />
-                          <i class="input-icon uil uil-user-plus"></i>
-                          <i
-                            class="vericon success fas fa-check-circle fa-xs"
-                            *ngIf="lastname?.dirty && !lastname?.errors"
-                          ></i>
-
-                          <div
-                            class="alert-style"
-                            role="alert"
-                            *ngIf="
-                              (lastname?.dirty && lastname?.errors) ||
-                              (submitted && lastname?.errors)
-                            "
-                          >
-                            <small *ngIf="lastname?.errors?.['required']">
-                              Lastame is required!
-                            </small>
-                            <small *ngIf="lastname?.errors?.['minlength']">
-                              Lastname must be at least 3 characters
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="custom-form-row row">
-                        <div class="form-group mt-2 col me-2">
-                          <input
-                            type="email"
-                            formControlName="email"
-                            class="form-style form-control"
-                            [ngClass]="{
-                              'is-invalid':
-                                (email?.dirty && email?.errors) ||
-                                (submitted && email?.errors)
-                            }"
-                            placeholder="Your Email"
-                            autocomplete="off"
-                          />
-                          <i class="input-icon uil uil-at"></i>
-                          <i
-                            class="vericon success fas fa-check-circle fa-xs"
-                            *ngIf="
-                              email?.dirty && !email?.errors && !email?.invalid
-                            "
-                          ></i>
-
-                          <div
-                            class="alert-style"
-                            role="alert"
-                            *ngIf="
-                              (email?.dirty && email?.errors) ||
-                              (submitted && email?.errors)
-                            "
-                          >
-                            <small *ngIf="email?.errors?.['required']">
-                              email is required!
-                            </small>
-                            <small *ngIf="email?.errors?.['email']">
-                              email is invalid!
-                            </small>
-                          </div>
-                        </div>
-                        <div class="form-group mt-2 col">
-                          <input
-                            type="text"
-                            formControlName="username"
-                            class="form-style form-control"
-                            placeholder="Set username"
-                            autocomplete="off"
-                            [ngClass]="{
-                              'is-invalid':
-                                (username?.dirty && username?.errors) ||
-                                (submitted && username?.errors)
-                            }"
-                          />
-                          <i class="input-icon uil uil-google-hangouts-alt"></i>
-                          <i
-                            class="vericon success fas fa-check-circle fa-xs"
-                            *ngIf="username?.dirty && !username?.errors"
-                          ></i>
-
-                          <div
-                            class="alert-style"
-                            role="alert"
-                            *ngIf="
-                              (username?.dirty && username?.errors) ||
-                              (submitted && username?.errors)
-                            "
-                          >
-                            <small *ngIf="username?.errors?.['required']">
-                              Username is required!
-                            </small>
-                            <small *ngIf="username?.errors?.['minlength']">
-                              Username must be at least 3 characters
-                            </small>
-                            <small *ngIf="username?.errors?.['maxlength']">
-                              Username must not exceed 20 characters
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group mt-2">
-                        <input
-                          type="password"
-                          formControlName="password"
-                          class="form-style form-control"
-                          placeholder="Set Password"
-                          autocomplete="off"
-                          [ngClass]="{
-                            'is-invalid':
-                              (password?.dirty && password?.errors) ||
-                              (submitted && password?.errors)
-                          }"
-                        />
-                        <i class="input-icon uil uil-lock-alt"></i>
-                        <i
-                          class="vericon success fas fa-check-circle fa-xs"
-                          *ngIf="password?.dirty && !password?.errors"
-                        ></i>
-
-                        <div
-                          class="alert-style"
-                          role="alert"
-                          *ngIf="
-                            (password?.dirty && password?.errors) ||
-                            (submitted && password?.errors)
-                          "
-                        >
-                          <small *ngIf="password?.errors?.['required']">
-                            Password is required!
-                          </small>
-                          <small *ngIf="password?.errors?.['minlength']">
-                            Password must be at least 6 characters
-                          </small>
-                          <small *ngIf="password?.errors?.['maxlength']">
-                            Password must not exceed 20 characters
-                          </small>
-                        </div>
-                      </div>
-                      <div class="form-group mt-2">
-                        <input
-                          type="password"
-                          formControlName="confirmPassword"
-                          class="form-style form-control"
-                          placeholder="Confirm Password"
-                          autocomplete="off"
-                          [ngClass]="{
-                            'is-invalid':
-                              (confirmPassword?.dirty &&
-                                confirmPassword?.errors) ||
-                              (submitted && confirmPassword?.errors)
-                          }"
-                        />
-                        <i class="input-icon uil uil-keyboard"></i>
-                        <i
-                          class="vericon success fas fa-check-circle fa-xs"
-                          *ngIf="
-                            confirmPassword?.dirty && !confirmPassword?.errors
-                          "
-                        ></i>
-
-                        <div
-                          class="alert-style"
-                          role="alert"
-                          *ngIf="
-                            (confirmPassword?.dirty &&
-                              confirmPassword?.errors) ||
-                            (submitted && confirmPassword?.errors)
-                          "
-                        >
-                          <small *ngIf="confirmPassword?.errors?.['required']">
-                            Confirm Password is required!
-                          </small>
-                          <small *ngIf="confirmPassword?.errors?.['matching']">
-                            Confirm Password does not match
-                          </small>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <button class="btn mt-3 a" (click)="validate()">
-                          submit
-                        </button>
-                      </div>
-                      <div class="form-group">
-                        <p class="mb-0 mt-4 text-center">
-                          <a class="link" (click)="login()"
-                            >Already have an account?</a
-                          >
-                        </p>
-                      </div>
-                      <div class="form-group">
-                        <div
-                          class="alert-style mt-2"
-                          role="alert"
-                          *ngIf="submitted && signupFailed"
-                        >
-                          <h5 class="error mt-3">
-                            Registration failed: {{ signupErrorMessage }}
-                          </h5>
-                        </div>
-                      </div>
-                    </form> -->
                   </div>
                 </div>
               </div>

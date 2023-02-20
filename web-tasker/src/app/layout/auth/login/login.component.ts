@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
   submitted1: boolean = false;
   submitted2: boolean = false;
   submitted3: boolean = false;
+  userErr: boolean = false;
+  emailErr: boolean = false;
   logsubmitted: boolean = false;
   isLoggedIn = false;
   isLoginFailed = false;
@@ -44,6 +46,9 @@ export class LoginComponent implements OnInit {
   signupErrorMessage = '';
   roles: string[] = [];
   user: any;
+  currentPage = 1;
+  /**combined signup array */
+  userDetails: Record<string, any> = {};
 
   /**form used in login part */
   form: any = {
@@ -51,18 +56,10 @@ export class LoginComponent implements OnInit {
     password: null,
   };
 
-  dataModel: any = [];
-
-  //test
-  currentPage = 3;
-  name = '';
-  email2 = '';
-  phone = '';
-  address = '';
   /*property to control styling of login and signup span elements*/
   isChecked: boolean = false;
 
-  /**form used in signup part */
+  /**forms used in signup part */
   fSignup1: FormGroup = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
@@ -98,23 +95,55 @@ export class LoginComponent implements OnInit {
   maxDate = new Date();
   date: any;
   genders: any = ['male', 'female', 'other'];
-  options = ['broo1', 'broo2', 'broo3', 'broo4', 'broo5', 'broo6'];
-  config = {
-    displayKey: 'description', //if objects array passed which key to be displayed defaults to description
-    search: true, //true/false for the search functionlity defaults to false,
-    height: '600%', //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
-    placeholder: 'Select', // text to be displayed when no item is selected defaults to Select,
-    customComparator: () => {
-      return 0;
-    }, // a custom function using which user wants to sort the items. default is undefined and Array.sort() will be used in that case,
-    limitTo: this.options.length, // a number thats limits the no of options displayed in the UI similar to angular's limitTo pipe
-    moreText: 'more', // text to be displayed whenmore than one items are selected like Option 1 + 5 more
-    noResultsFound: 'No results found!', // text to be displayed when no items are found while searching
-    searchPlaceholder: 'Search', // label thats displayed in search input,
-    searchOnKey: 'name', // key on which search should be performed this will be selective search. if undefined this will be extensive search on all keys
-    clearOnSelection: false, // clears search criteria when an option is selected if set to true, default is false
-    inputDirection: 'ltr', // the direction of the search input can be rtl or ltr(default)
-  };
+  counties: any = [
+    'Baringo',
+    'Bomet',
+    'Bungoma',
+    'Busia',
+    'Elgeyo-Marakwet',
+    'Embu',
+    'Garissa',
+    'HomaBay',
+    'Isiolo',
+    'Kajiado',
+    'Kakamega',
+    'Kericho',
+    'Kiambu',
+    'Kilifi',
+    'Kirinyaga',
+    'Kisii',
+    'Kisumu',
+    'Kitui',
+    'Kwale',
+    'Laikipia',
+    'Lamu',
+    'Machakos',
+    'Makueni',
+    'Mandera',
+    'Marsabit',
+    'Meru',
+    'Migori',
+    'Mombasa',
+    "Murang'a",
+    'Nairobi',
+    'Nakuru',
+    'Nandi',
+    'Narok',
+    'Nyamira',
+    'Nyandarua',
+    'Nyeri',
+    'Samburu',
+    'Siaya',
+    'Taita-Taveta',
+    'TanaRiver',
+    'Tharaka-Nithi',
+    'TransNzoia',
+    'Turkana',
+    'UasinGishu',
+    'Vihiga',
+    'Wajir',
+    'WestPokot',
+  ];
 
   ngOnInit(): void {
     /**helps during login */
@@ -124,7 +153,7 @@ export class LoginComponent implements OnInit {
       this.user = this.accountService.getUserAccount();
     }
 
-    /**building form */
+    /**building forms */
     this.fSignup1 = this.formBuilder.group({
       firstname: ['', [Validators.required, Validators.minLength(3)]],
       lastname: ['', [Validators.required, Validators.minLength(3)]],
@@ -146,7 +175,7 @@ export class LoginComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(10),
           Validators.maxLength(20),
         ],
       ],
@@ -186,6 +215,8 @@ export class LoginComponent implements OnInit {
       //console.log('touching signup form');
       if (this.submitted2 === true) {
         this.submitted2 = false;
+        this.userErr = false;
+        this.emailErr = false;
       }
     });
     this.fSignup3.valueChanges.subscribe((res) => {
@@ -195,10 +226,50 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-  nextPage() {
-    this.currentPage++;
+
+  /**Method to store values and navigate forward */
+  nextPage(val: number) {
+    if (val === 1) {
+      const { firstname, lastname, dob, idNo, gender } = this.fSignup1.value;
+      //cleaning
+      let cFirstname = this.generalService.deepClean(firstname);
+      let cLastname = this.generalService.deepClean(lastname);
+      let cIdNo = this.generalService.deepClean(idNo);
+      //push new data
+      this.userDetails['firstname'] = cFirstname;
+      this.userDetails['lastname'] = cLastname;
+      this.userDetails['dob'] = dob.toLocaleDateString();
+      this.userDetails['idNo'] = cIdNo;
+      this.userDetails['gender'] = gender;
+      // log output
+      console.log(this.userDetails);
+      this.currentPage++;
+    } else if (val === 2) {
+      //confirm with db first
+      this.checkDuplicates();
+      //log output
+      console.log(this.userDetails);
+    } else if (val === 3) {
+      // form is finished complete and submit it
+      const { area, county, password } = this.fSignup3.value;
+      //getting rid of index numbering
+      const countyArr = county.split(' ');
+      let countyNew = county;
+      countyArr[1] ? (countyNew = countyArr[1]) : (countyNew = county);
+      //cleaning
+      let cArea = this.generalService.deepClean(area);
+      //push new data
+      this.userDetails['area'] = cArea;
+      this.userDetails['county'] = countyNew;
+      this.userDetails['password'] = password;
+      //log output
+      console.log(this.userDetails);
+      //sign up user
+      this.onSignup(this.userDetails);
+    }
   }
 
+  /**Method to navigate backward */
   prevPage() {
     this.currentPage--;
   }
@@ -227,9 +298,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  /**used by dropdown */
-  selectionChanged(e: any) {
-    console.log(e);
+  /**Method to detect selection of county */
+  changeCounty(e: any) {
+    this.county?.setValue(e.target.value, {
+      onlySelf: true,
+    });
   }
 
   /*methods used by header buttons*/
@@ -349,30 +422,84 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**Method to check duplicates from db first */
+  checkDuplicates() {
+    const { username, email, telNo } = this.fSignup2.value;
+
+    /**clean before sending to server */
+    let cUsername = this.generalService.deepClean(username);
+    let cEmail = this.generalService.deepClean(email);
+    let cTelNo = this.generalService.deepClean(telNo);
+
+    const details = {
+      username: cUsername,
+      email: cEmail,
+    };
+
+    /**post user to server*/
+    this.userAccountService.checkDuplicates(details).subscribe({
+      next: (res: any) => {
+        this.snackBarService.displaySnackbar('success', res.message);
+        console.log(res);
+        this.signupFailed = false;
+        //push new data
+        this.userDetails['username'] = cUsername;
+        this.userDetails['email'] = cEmail;
+        this.userDetails['telNo'] = cTelNo;
+        //show next page
+        this.currentPage++;
+      },
+      error: (err) => {
+        console.log(err);
+        this.signupErrorMessage = err.error.message;
+        //check the duplicate based on message and highlight for user
+        let sliceText = this.signupErrorMessage.slice(0, 5);
+        console.log(sliceText);
+        if (sliceText === 'Usern') {
+          this.userErr = true;
+        } else if (sliceText === 'Email') {
+          this.emailErr = true;
+        }
+        this.signupFailed = true;
+      },
+    });
+  }
+
   /**sign up methods */
-  onSignup() {
+  onSignup(userDetails: any) {
     console.log('submission successful!!');
     console.log(this.fSignup1.value);
 
     //get the form values
-    const { email, firstname, lastname, username, password } =
-      this.fSignup1.value;
+    const {
+      firstname,
+      lastname,
+      dob,
+      idNo,
+      gender,
+      username,
+      email,
+      telNo,
+      area,
+      county,
+      password,
+    } = userDetails;
 
     /**creating user object to pass to server
      *properties name's should not be changed
      */
-    /**trim off white space before sending to server */
-    let cUsername = this.generalService.deepClean(username);
-    let cEmail = this.generalService.deepClean(email);
-    let cFirstname = this.generalService.deepClean(firstname);
-    let cLastname = this.generalService.deepClean(lastname);
-
     const user = {
-      username: cUsername,
-      email: cEmail,
+      firstName: firstname,
+      lastName: lastname,
+      dob: dob,
+      idNumber: idNo,
+      gender: gender,
+      username: username,
+      email: email,
+      telNumber: telNo,
+      area: area,
+      county: county,
       password: password,
-      firstName: cFirstname,
-      lastName: cLastname,
       role: 'user',
     };
 
@@ -392,6 +519,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**Method attached to next buttons to trigger sign Upvalidation */
   validate(formNo: number) {
     console.log('sign up button okay');
     if (formNo === 1) {
@@ -403,18 +531,21 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  subTest() {
-    console.log('test accomplished!!');
-  }
-
+  /**Method to trigger log in validation */
   validateLogin() {
     console.log('sign in button okay');
     this.logsubmitted = true;
   }
 
+  /**Resets sign up form */
   resetSignup() {
     this.submitted1 = false;
+    this.submitted2 = false;
+    this.submitted3 = false;
     this.fSignup1.reset();
+    this.fSignup2.reset();
+    this.fSignup3.reset();
+    this.currentPage = 1;
     this.flapCard();
   }
 
