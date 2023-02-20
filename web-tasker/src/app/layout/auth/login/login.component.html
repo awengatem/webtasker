@@ -362,7 +362,8 @@
                               [ngClass]="{
                                 'is-invalid':
                                   (username?.dirty && username?.errors) ||
-                                  (submitted2 && username?.errors)
+                                  (submitted2 && username?.errors) ||
+                                  userErr
                               }"
                             />
                             <i
@@ -370,7 +371,9 @@
                             ></i>
                             <i
                               class="vericon success fas fa-check-circle fa-xs"
-                              *ngIf="username?.dirty && !username?.errors"
+                              *ngIf="
+                                username?.dirty && !username?.errors && !userErr
+                              "
                             ></i>
 
                             <div
@@ -378,7 +381,8 @@
                               role="alert"
                               *ngIf="
                                 (username?.dirty && username?.errors) ||
-                                (submitted2 && username?.errors)
+                                (submitted2 && username?.errors) ||
+                                userErr
                               "
                             >
                               <small *ngIf="username?.errors?.['required']">
@@ -390,6 +394,9 @@
                               <small *ngIf="username?.errors?.['maxlength']">
                                 Username must not exceed 20 characters
                               </small>
+                              <small *ngIf="userErr">
+                                enter a different username!
+                              </small>
                             </div>
                           </div>
                           <div class="form-group mt-2">
@@ -400,7 +407,8 @@
                               [ngClass]="{
                                 'is-invalid':
                                   (email?.dirty && email?.errors) ||
-                                  (submitted2 && email?.errors)
+                                  (submitted2 && email?.errors) ||
+                                  emailErr
                               }"
                               placeholder="Your Email"
                               autocomplete="off"
@@ -411,7 +419,8 @@
                               *ngIf="
                                 email?.dirty &&
                                 !email?.errors &&
-                                !email?.invalid
+                                !email?.invalid &&
+                                !emailErr
                               "
                             ></i>
 
@@ -420,7 +429,8 @@
                               role="alert"
                               *ngIf="
                                 (email?.dirty && email?.errors) ||
-                                (submitted2 && email?.errors)
+                                (submitted2 && email?.errors) ||
+                                emailErr
                               "
                             >
                               <small *ngIf="email?.errors?.['required']">
@@ -428,6 +438,9 @@
                               </small>
                               <small *ngIf="email?.errors?.['email']">
                                 email is invalid!
+                              </small>
+                              <small *ngIf="emailErr">
+                                enter a different email!
                               </small>
                             </div>
                           </div>

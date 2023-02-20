@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
   submitted1: boolean = false;
   submitted2: boolean = false;
   submitted3: boolean = false;
+  userErr: boolean = false;
+  emailErr: boolean = false;
   logsubmitted: boolean = false;
   isLoggedIn = false;
   isLoginFailed = false;
@@ -44,8 +46,8 @@ export class LoginComponent implements OnInit {
   signupErrorMessage = '';
   roles: string[] = [];
   user: any;
-  currentPage = 2;
-
+  currentPage = 1;
+  /**combined signup array */
   userDetails: Record<string, any> = {};
 
   /**form used in login part */
@@ -56,9 +58,6 @@ export class LoginComponent implements OnInit {
 
   /*property to control styling of login and signup span elements*/
   isChecked: boolean = false;
-
-  /**combined signup array */
-  // userDetails: any;
 
   /**forms used in signup part */
   fSignup1: FormGroup = new FormGroup({
@@ -154,7 +153,7 @@ export class LoginComponent implements OnInit {
       this.user = this.accountService.getUserAccount();
     }
 
-    /**building form */
+    /**building forms */
     this.fSignup1 = this.formBuilder.group({
       firstname: ['', [Validators.required, Validators.minLength(3)]],
       lastname: ['', [Validators.required, Validators.minLength(3)]],
@@ -216,6 +215,8 @@ export class LoginComponent implements OnInit {
       //console.log('touching signup form');
       if (this.submitted2 === true) {
         this.submitted2 = false;
+        this.userErr = false;
+        this.emailErr = false;
       }
     });
     this.fSignup3.valueChanges.subscribe((res) => {
@@ -438,6 +439,14 @@ export class LoginComponent implements OnInit {
       error: (err) => {
         console.log(err);
         this.signupErrorMessage = err.error.message;
+        //check the duplicate based on message
+        let sliceText = this.signupErrorMessage.slice(0, 5);
+        console.log(sliceText);
+        if (sliceText === 'Usern') {
+          this.userErr = true;
+        } else if (sliceText === 'Email') {
+          this.emailErr = true;
+        }
         this.signupFailed = true;
       },
     });
