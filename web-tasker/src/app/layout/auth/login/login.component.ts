@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   signupErrorMessage = '';
   roles: string[] = [];
   user: any;
-  currentPage = 1;
+  currentPage = 3;
 
   userDetails: Record<string, any> = {};
 
@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
     'Elgeyo-Marakwet',
     'Embu',
     'Garissa',
-    'Homa Bay',
+    'HomaBay',
     'Isiolo',
     'Kajiado',
     'Kakamega',
@@ -136,14 +136,14 @@ export class LoginComponent implements OnInit {
     'Samburu',
     'Siaya',
     'Taita-Taveta',
-    'Tana River',
+    'TanaRiver',
     'Tharaka-Nithi',
-    'Trans Nzoia',
+    'TransNzoia',
     'Turkana',
-    'Uasin Gishu',
+    'UasinGishu',
     'Vihiga',
     'Wajir',
-    'West Pokot',
+    'WestPokot',
   ];
 
   ngOnInit(): void {
@@ -176,7 +176,7 @@ export class LoginComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(10),
           Validators.maxLength(20),
         ],
       ],
@@ -248,9 +248,13 @@ export class LoginComponent implements OnInit {
       this.currentPage++;
     } else if (val === 3) {
       // form is finished complete and submit it
-      const { area, county, password } = this.fSignup2.value;
+      const { area, county, password } = this.fSignup3.value;
       this.userDetails['area'] = area;
-      this.userDetails['county'] = county;
+      //getting rid of index numbering
+      const countyArr = county.split(' ');
+      let countyNew = county;
+      countyArr[1] ? (countyNew = countyArr[1]) : (countyNew = county);
+      this.userDetails['county'] = countyNew;
       this.userDetails['password'] = password;
       //log output
       console.log(this.userDetails);

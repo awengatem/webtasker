@@ -466,7 +466,7 @@
                                 Telephone number is required!
                               </small>
                               <small *ngIf="telNo?.errors?.['minlength']">
-                                Telephone number must be at least 3 characters
+                                Telephone number must be at least 10 characters
                               </small>
                               <small *ngIf="telNo?.errors?.['maxlength']">
                                 Telephone number must not exceed 20 characters
@@ -497,7 +497,7 @@
                       <div *ngSwitchCase="3">
                         <form
                           [formGroup]="fSignup3"
-                          (ngSubmit)="fSignup2.valid && nextPage(3)"
+                          (ngSubmit)="fSignup3.valid && nextPage(3)"
                         >
                           <h5 class="subtitle">Location and password</h5>
                           <div class="form-group mt-2">
