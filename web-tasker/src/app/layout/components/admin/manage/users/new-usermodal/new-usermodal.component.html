@@ -154,6 +154,46 @@
         </mat-form-field>
       </div>
 
+      <div class="row custom-flex">
+        <!-- GENDER FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Gender</mat-label>
+          <mat-select matNativeControl name="gender" formControlName="gender">
+            <mat-option value="user">User</mat-option>
+            <mat-option value="supervisor">Supervisor</mat-option>
+            <mat-option value="manager">Manager</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>verified_user</mat-icon>
+          <!-- <mat-hint>Hint</mat-hint> -->
+          <mat-error *ngIf="form.controls['gender'].errors?.['required']"
+            >Gender is required</mat-error
+          >
+        </mat-form-field>
+
+        <!-- TEL NUMBER FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Tel number</mat-label>
+          <input
+            matInput
+            placeholder="enter tel number"
+            type="text"
+            formControlName="telNo"
+            #telNoInput
+          />
+          <mat-icon matSuffix>phone</mat-icon>
+          <!-- Error block -->
+          <mat-error *ngIf="form.controls['telNo'].errors?.['required']"
+            >Tel number is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['telNo'].errors?.['minlength']">
+            Tel number should be more than 6 numbers
+          </mat-error>
+          <mat-error *ngIf="form.controls['telNo'].errors?.['maxlength']">
+            Tel number should not exceed 20 numbers
+          </mat-error>
+        </mat-form-field>
+      </div>
+
       <!-- ROLE FIELD -->
       <mat-form-field appearance="outline">
         <mat-label>Role</mat-label>
