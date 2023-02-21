@@ -2,94 +2,237 @@
   <div class="modal-box shadow">
     <h1><i class="fa-solid fa-user-plus"></i> Create new user</h1>
     <form [formGroup]="form" (ngSubmit)="form.valid && submitForm(form)">
-      <!-- USERNAME FIELD -->
-      <mat-form-field appearance="outline">
-        <mat-label>Username</mat-label>
-        <input
-          matInput
-          type="text"
-          placeholder="enter username"
-          formControlName="username"
-          #usernameInput
-        />
-        <mat-icon matSuffix>account_circle</mat-icon>
-        <!-- <mat-hint>Hint</mat-hint> -->
-        <mat-error *ngIf="form.controls['username'].errors?.['required']"
-          >Username is required</mat-error
-        >
-        <mat-error *ngIf="form.controls['username'].errors?.['minlength']">
-          Username should be more than 3 characters
-        </mat-error>
-        <mat-error *ngIf="form.controls['username'].errors?.['maxlength']">
-          Username should not exceed 10 characters
-        </mat-error>
-      </mat-form-field>
+      <div class="row custom-flex">
+        <!-- USERNAME FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="enter username"
+            formControlName="username"
+            #usernameInput
+          />
+          <mat-icon matSuffix>account_circle</mat-icon>
+          <!-- <mat-hint>Hint</mat-hint> -->
+          <mat-error *ngIf="form.controls['username'].errors?.['required']"
+            >Username is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['username'].errors?.['minlength']">
+            Username should be more than 3 characters
+          </mat-error>
+          <mat-error *ngIf="form.controls['username'].errors?.['maxlength']">
+            Username should not exceed 10 characters
+          </mat-error>
+        </mat-form-field>
 
-      <!-- EMAIL FIELD -->
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input
-          matInput
-          placeholder="enter email"
-          type="email"
-          formControlName="email"
-          #emailInput
-        />
-        <mat-icon matSuffix>alternate_email</mat-icon>
-        <!-- <mat-hint>Hint</mat-hint> -->
-        <mat-error *ngIf="form.controls['email'].errors?.['required']"
-          >Email is required</mat-error
-        >
-        <mat-error *ngIf="form.controls['email'].errors?.['pattern']">
-          Please enter valid email
-        </mat-error>
-      </mat-form-field>
+        <!-- EMAIL FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="enter email"
+            type="email"
+            formControlName="email"
+            #emailInput
+          />
+          <mat-icon matSuffix>alternate_email</mat-icon>
+          <!-- <mat-hint>Hint</mat-hint> -->
+          <mat-error *ngIf="form.controls['email'].errors?.['required']"
+            >Email is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['email'].errors?.['pattern']">
+            Please enter valid email
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row custom-flex">
+        <!-- FIRSTNAME FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Firstname</mat-label>
+          <input
+            matInput
+            placeholder="enter first name"
+            type="text"
+            formControlName="firstName"
+            #firstNameInput
+          />
+          <mat-icon matSuffix>person_add</mat-icon>
+          <!-- <mat-hint>Hint</mat-hint> -->
+          <mat-error *ngIf="form.controls['firstName'].errors?.['required']"
+            >Firstname is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['firstName'].errors?.['minlength']">
+            Firstname should be more than 3 characters
+          </mat-error>
+          <mat-error *ngIf="form.controls['firstName'].errors?.['maxlength']">
+            Firstname should not exceed 20 characters
+          </mat-error>
+        </mat-form-field>
 
-      <!-- FIRSTNAME FIELD -->
-      <mat-form-field appearance="outline">
-        <mat-label>Firstname</mat-label>
-        <input
-          matInput
-          placeholder="enter first name"
-          type="text"
-          formControlName="firstName"
-          #firstNameInput
-        />
-        <mat-icon matSuffix>person_add</mat-icon>
-        <!-- <mat-hint>Hint</mat-hint> -->
-        <mat-error *ngIf="form.controls['firstName'].errors?.['required']"
-          >Firstname is required</mat-error
-        >
-        <mat-error *ngIf="form.controls['firstName'].errors?.['minlength']">
-          Firstname should be more than 3 characters
-        </mat-error>
-        <mat-error *ngIf="form.controls['firstName'].errors?.['maxlength']">
-          Firstname should not exceed 20 characters
-        </mat-error>
-      </mat-form-field>
+        <!-- LASTNAME FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Lastname</mat-label>
+          <input
+            matInput
+            placeholder="enter last name"
+            type="text"
+            formControlName="lastName"
+            #lastNameInput
+          />
+          <mat-icon matSuffix>person_add</mat-icon>
+          <!-- <mat-hint>Hint</mat-hint> -->
+          <mat-error *ngIf="form.controls['lastName'].errors?.['required']"
+            >Lastname is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['lastName'].errors?.['minlength']">
+            Lastname should be more than 3 characters
+          </mat-error>
+          <mat-error *ngIf="form.controls['lastName'].errors?.['maxlength']">
+            Lastname should not exceed 20 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-      <!-- LASTNAME FIELD -->
-      <mat-form-field appearance="outline">
-        <mat-label>Lastname</mat-label>
-        <input
-          matInput
-          placeholder="enter last name"
-          type="text"
-          formControlName="lastName"
-          #lastNameInput
-        />
-        <mat-icon matSuffix>person_add</mat-icon>
-        <!-- <mat-hint>Hint</mat-hint> -->
-        <mat-error *ngIf="form.controls['lastName'].errors?.['required']"
-          >Lastname is required</mat-error
-        >
-        <mat-error *ngIf="form.controls['lastName'].errors?.['minlength']">
-          Lastname should be more than 3 characters
-        </mat-error>
-        <mat-error *ngIf="form.controls['lastName'].errors?.['maxlength']">
-          Lastname should not exceed 20 characters
-        </mat-error>
-      </mat-form-field>
+      <div class="row custom-flex">
+        <!-- DATE OF BIRTH FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Date of Birth</mat-label>
+          <input
+            matInput
+            formControlName="dob"
+            [min]="minDate"
+            [max]="maxDate"
+            [matDatepicker]="basicDatepicker"
+            placeholder="Pick your date of birth"
+            #dobInput
+          />
+          <mat-datepicker-toggle matSuffix [for]="basicDatepicker"
+            ><mat-icon class="pinkish" matDatepickerToggleIcon>
+              date_range
+            </mat-icon></mat-datepicker-toggle
+          >
+          <mat-datepicker #basicDatepicker></mat-datepicker>
+          <!-- Error block -->
+          <mat-error *ngIf="form.controls['dob'].errors?.['required']"
+            >Date of birth is required</mat-error
+          >
+          <mat-error
+            *ngIf="form.controls['dob']?.hasError('matDatepickerParse')"
+          >
+            Please pick a valid date.
+          </mat-error>
+          <mat-error *ngIf="form.controls['dob']?.hasError('matDatepickerMin')">
+            Invalid minimum date.
+          </mat-error>
+          <mat-error *ngIf="form.controls['dob']?.hasError('matDatepickerMax')">
+            Invalid maximum date.
+          </mat-error>
+        </mat-form-field>
+
+        <!-- ID NUMBER FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Id number</mat-label>
+          <input
+            matInput
+            placeholder="enter Id number"
+            type="number"
+            formControlName="idNo"
+            #idNoInput
+          />
+          <mat-icon matSuffix>credit_card</mat-icon>
+          <!-- Error block -->
+          <mat-error *ngIf="form.controls['idNo'].errors?.['required']"
+            >Id number is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['idNo'].errors?.['minlength']">
+            Id number should be more than 6 numbers
+          </mat-error>
+          <mat-error *ngIf="form.controls['idNo'].errors?.['maxlength']">
+            Id number should not exceed 20 numbers
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row custom-flex">
+        <!-- GENDER FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Gender</mat-label>
+          <mat-select matNativeControl name="gender" formControlName="gender">
+            <mat-option *ngFor="let x of genders" value="x">{{ x }}</mat-option>
+          </mat-select>
+          <mat-icon matSuffix
+            ><i class="fa-solid fa-venus-mars" style="font-size: 18px"></i
+          ></mat-icon>
+          <!-- error block -->
+          <mat-error *ngIf="form.controls['gender'].errors?.['required']"
+            >Gender is required</mat-error
+          >
+        </mat-form-field>
+
+        <!-- TEL NUMBER FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Tel number</mat-label>
+          <input
+            matInput
+            placeholder="enter tel number"
+            type="text"
+            formControlName="telNo"
+            #telNoInput
+          />
+          <mat-icon matSuffix>phone</mat-icon>
+          <!-- Error block -->
+          <mat-error *ngIf="form.controls['telNo'].errors?.['required']"
+            >Tel number is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['telNo'].errors?.['minlength']">
+            Tel number should be more than 6 numbers
+          </mat-error>
+          <mat-error *ngIf="form.controls['telNo'].errors?.['maxlength']">
+            Tel number should not exceed 20 numbers
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row custom-flex">
+        <!-- AREA FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Area</mat-label>
+          <input
+            matInput
+            placeholder="enter area name"
+            type="text"
+            formControlName="area"
+            #areaInput
+          />
+          <mat-icon matSuffix>my_location</mat-icon>
+          <!-- Error block -->
+          <mat-error *ngIf="form.controls['area'].errors?.['required']"
+            >Area name is required</mat-error
+          >
+          <mat-error *ngIf="form.controls['area'].errors?.['minlength']">
+            Area name should be more than 3 characters
+          </mat-error>
+          <mat-error *ngIf="form.controls['area'].errors?.['maxlength']">
+            Area name should not exceed 20 characters
+          </mat-error>
+        </mat-form-field>
+
+        <!-- COUNTY FIELD -->
+        <mat-form-field appearance="outline">
+          <mat-label>County</mat-label>
+          <mat-select matNativeControl name="county" formControlName="county">
+            <mat-option value="user">User</mat-option>
+            <mat-option value="supervisor">Supervisor</mat-option>
+            <mat-option value="manager">Manager</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>place</mat-icon>
+          <!-- error block -->
+          <mat-error *ngIf="form.controls['county'].errors?.['required']"
+            >County is required</mat-error
+          >
+        </mat-form-field>
+      </div>
 
       <!-- ROLE FIELD -->
       <mat-form-field appearance="outline">

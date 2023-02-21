@@ -5,6 +5,11 @@ import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
 import Validation from '../../../../../auth/login/validation';
+import {
+  counties,
+  genders,
+  roles,
+} from '../../../../../../helpers/common/store';
 
 @Component({
   selector: 'app-new-usermodal',
@@ -17,6 +22,14 @@ export class NewUsermodalComponent implements OnInit {
   registerFailed = false;
   submitted = false;
   flag: boolean = true;
+
+  /**used by datepicker */
+  minDate = new Date(1930, 0, 1);
+  maxDate = new Date();
+  date: any;
+  genders = genders;
+  counties = counties;
+  roles = roles;
 
   constructor(
     public modalRef: MdbModalRef<NewUsermodalComponent>,
@@ -59,6 +72,33 @@ export class NewUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
+        dob: ['', [Validators.required]],
+        idNo: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(20),
+          ],
+        ],
+        gender: ['', [Validators.required]],
+        telNo: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(20),
+          ],
+        ],
+        area: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(20),
+          ],
+        ],
+        county: ['', [Validators.required]],
         role: ['', [Validators.required]],
         password: [
           '',
@@ -80,7 +120,20 @@ export class NewUsermodalComponent implements OnInit {
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(form.value, null, 4));
     console.log(form.value);
     //get the form values
-    const { username, email, firstName, lastName, role, password } = form.value;
+    const {
+      username,
+      email,
+      firstName,
+      lastName,
+      dob,
+      idNo,
+      gender,
+      telNo,
+      area,
+      county,
+      role,
+      password,
+    } = form.value;
 
     /**creating user object to pass to server
      *properties name's should not be changed
@@ -90,6 +143,8 @@ export class NewUsermodalComponent implements OnInit {
     let cEmail = this.generalService.deepClean(email);
     let cFirstname = this.generalService.deepClean(firstName);
     let cLastname = this.generalService.deepClean(lastName);
+    let cArea = this.generalService.deepClean(area);
+    const cDob = dob.toLocaleDateString();
 
     const user = {
       username: cUsername,
@@ -97,6 +152,12 @@ export class NewUsermodalComponent implements OnInit {
       password: password,
       firstName: cFirstname,
       lastName: cLastname,
+      dob: cDob,
+      idNumber: idNo,
+      gender: gender,
+      telNumber: telNo,
+      area: cArea,
+      county: county,
       role: role,
     };
 
