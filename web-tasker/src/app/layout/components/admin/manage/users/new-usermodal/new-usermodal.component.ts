@@ -112,7 +112,20 @@ export class NewUsermodalComponent implements OnInit {
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(form.value, null, 4));
     console.log(form.value);
     //get the form values
-    const { username, email, firstName, lastName, role, password } = form.value;
+    const {
+      username,
+      email,
+      firstName,
+      lastName,
+      dob,
+      idNo,
+      gender,
+      telNo,
+      area,
+      county,
+      role,
+      password,
+    } = form.value;
 
     /**creating user object to pass to server
      *properties name's should not be changed
@@ -122,6 +135,7 @@ export class NewUsermodalComponent implements OnInit {
     let cEmail = this.generalService.deepClean(email);
     let cFirstname = this.generalService.deepClean(firstName);
     let cLastname = this.generalService.deepClean(lastName);
+    let cArea = this.generalService.deepClean(area);
 
     const user = {
       username: cUsername,
