@@ -48,7 +48,7 @@ const counties: any = [
   'Wajir',
   'WestPokot',
 ];
-
 const genders = ['male', 'female', 'other'];
+const roles = ['user', 'supervisor', 'manager'];
 
-export { counties, genders };
+export { counties, genders, roles };
