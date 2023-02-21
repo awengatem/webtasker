@@ -22,6 +22,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { WebRequestService } from 'src/app/services/api/web-request.service';
 import Swal from 'sweetalert2';
 import Validation from './validation';
+import { counties, genders } from '../../../helpers/common/store';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { SnackBarService } from 'src/app/services/snackbar.service';
 
@@ -94,56 +95,8 @@ export class LoginComponent implements OnInit {
   minDate = new Date(1930, 0, 1);
   maxDate = new Date();
   date: any;
-  genders: any = ['male', 'female', 'other'];
-  counties: any = [
-    'Baringo',
-    'Bomet',
-    'Bungoma',
-    'Busia',
-    'Elgeyo-Marakwet',
-    'Embu',
-    'Garissa',
-    'HomaBay',
-    'Isiolo',
-    'Kajiado',
-    'Kakamega',
-    'Kericho',
-    'Kiambu',
-    'Kilifi',
-    'Kirinyaga',
-    'Kisii',
-    'Kisumu',
-    'Kitui',
-    'Kwale',
-    'Laikipia',
-    'Lamu',
-    'Machakos',
-    'Makueni',
-    'Mandera',
-    'Marsabit',
-    'Meru',
-    'Migori',
-    'Mombasa',
-    "Murang'a",
-    'Nairobi',
-    'Nakuru',
-    'Nandi',
-    'Narok',
-    'Nyamira',
-    'Nyandarua',
-    'Nyeri',
-    'Samburu',
-    'Siaya',
-    'Taita-Taveta',
-    'TanaRiver',
-    'Tharaka-Nithi',
-    'TransNzoia',
-    'Turkana',
-    'UasinGishu',
-    'Vihiga',
-    'Wajir',
-    'WestPokot',
-  ];
+  genders = genders;
+  counties = counties;
 
   ngOnInit(): void {
     /**helps during login */
