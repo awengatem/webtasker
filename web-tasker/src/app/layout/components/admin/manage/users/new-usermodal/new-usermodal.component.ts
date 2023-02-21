@@ -140,10 +140,16 @@ export class NewUsermodalComponent implements OnInit {
     const user = {
       username: cUsername,
       email: cEmail,
-      password: password,
       firstName: cFirstname,
       lastName: cLastname,
+      dob: dob,
+      idNo: idNo,
+      gender: gender,
+      telNumber: telNo,
+      area: cArea,
+      county: county,
       role: role,
+      password: password,
     };
 
     /**post user to server*/
