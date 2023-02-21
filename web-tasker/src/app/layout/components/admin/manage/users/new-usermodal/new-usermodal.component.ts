@@ -5,6 +5,11 @@ import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
 import Validation from '../../../../../auth/login/validation';
+import {
+  counties,
+  genders,
+  roles,
+} from '../../../../../../helpers/common/store';
 
 @Component({
   selector: 'app-new-usermodal',
@@ -22,6 +27,9 @@ export class NewUsermodalComponent implements OnInit {
   minDate = new Date(1930, 0, 1);
   maxDate = new Date();
   date: any;
+  genders = genders;
+  counties = counties;
+  roles = roles;
 
   constructor(
     public modalRef: MdbModalRef<NewUsermodalComponent>,

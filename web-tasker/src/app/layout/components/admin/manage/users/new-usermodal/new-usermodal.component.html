@@ -159,9 +159,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Gender</mat-label>
           <mat-select matNativeControl name="gender" formControlName="gender">
-            <mat-option value="user">User</mat-option>
-            <mat-option value="supervisor">Supervisor</mat-option>
-            <mat-option value="manager">Manager</mat-option>
+            <mat-option *ngFor="let x of genders" value="x">{{ x }}</mat-option>
           </mat-select>
           <mat-icon matSuffix
             ><i class="fa-solid fa-venus-mars" style="font-size: 18px"></i

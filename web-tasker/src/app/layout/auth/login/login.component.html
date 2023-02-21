@@ -244,7 +244,7 @@
                             <!-- error block -->
                             <mat-error
                               class="alert-style"
-                              *ngIf="fSignup1.controls['dob'].errors?.['required']"
+                              *ngIf="fSignup1.controls['dob'].errors?.['required'] && submitted1"
                               >Date of birth is required</mat-error
                             >
                             <mat-error
