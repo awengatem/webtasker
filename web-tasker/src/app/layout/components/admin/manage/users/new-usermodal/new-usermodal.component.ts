@@ -136,20 +136,21 @@ export class NewUsermodalComponent implements OnInit {
     let cFirstname = this.generalService.deepClean(firstName);
     let cLastname = this.generalService.deepClean(lastName);
     let cArea = this.generalService.deepClean(area);
+    const cDob = dob.toLocaleDateString();
 
     const user = {
       username: cUsername,
       email: cEmail,
+      password: password,
       firstName: cFirstname,
       lastName: cLastname,
-      dob: dob,
-      idNo: idNo,
+      dob: cDob,
+      idNumber: idNo,
       gender: gender,
       telNumber: telNo,
       area: cArea,
       county: county,
       role: role,
-      password: password,
     };
 
     /**post user to server*/
