@@ -227,7 +227,12 @@
         <mat-form-field appearance="outline">
           <mat-label>County</mat-label>
           <mat-select matNativeControl name="county" formControlName="county">
-            <mat-option value="user">User</mat-option>
+            <mat-option
+              *ngFor="let x of counties"
+              [value]="x"
+              style="text-transform: capitalize"
+              >{{ x }}</mat-option
+            >
           </mat-select>
           <mat-icon matSuffix>place</mat-icon>
           <!-- error block -->
