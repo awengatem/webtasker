@@ -159,7 +159,9 @@
         <mat-form-field appearance="outline">
           <mat-label>Gender</mat-label>
           <mat-select matNativeControl name="gender" formControlName="gender">
-            <mat-option *ngFor="let x of genders" value="x">{{ x }}</mat-option>
+            <mat-option *ngFor="let x of genders" [value]="x">{{
+              x
+            }}</mat-option>
           </mat-select>
           <mat-icon matSuffix
             ><i class="fa-solid fa-venus-mars" style="font-size: 18px"></i
