@@ -204,6 +204,12 @@ export class EditUsermodalComponent implements OnInit {
       this.form.controls['email'].setValue(user.email);
       this.form.controls['firstName'].setValue(user.firstName);
       this.form.controls['lastName'].setValue(user.lastName);
+      this.form.controls['dob'].setValue(user.dob);
+      this.form.controls['idNo'].setValue(user.idNumber);
+      this.form.controls['gender'].setValue(user.gender);
+      this.form.controls['telNo'].setValue(user.telNumber);
+      this.form.controls['area'].setValue(user.area);
+      this.form.controls['county'].setValue(user.county);
       this.form.controls['role'].setValue(user.role);
     });
   }
