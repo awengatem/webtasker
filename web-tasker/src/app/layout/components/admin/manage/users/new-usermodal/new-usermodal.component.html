@@ -205,7 +205,7 @@
           <mat-label>Area</mat-label>
           <input
             matInput
-            placeholder="enter area name"
+            placeholder="enter job center name"
             type="text"
             formControlName="area"
             #areaInput
@@ -213,13 +213,13 @@
           <mat-icon matSuffix>my_location</mat-icon>
           <!-- Error block -->
           <mat-error *ngIf="form.controls['area'].errors?.['required']"
-            >Area name is required</mat-error
+            >Job center name is required</mat-error
           >
           <mat-error *ngIf="form.controls['area'].errors?.['minlength']">
-            Area name should be more than 3 characters
+            Job center name should be more than 3 characters
           </mat-error>
           <mat-error *ngIf="form.controls['area'].errors?.['maxlength']">
-            Area name should not exceed 20 characters
+            Job center name should not exceed 20 characters
           </mat-error>
         </mat-form-field>
 
