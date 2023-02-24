@@ -234,7 +234,20 @@ export class EditUsermodalComponent implements OnInit {
     this.submitted = true;
     console.log(form.value);
     //get the form values
-    const { username, email, firstName, lastName, role, password } = form.value;
+    const {
+      username,
+      email,
+      firstName,
+      lastName,
+      dob,
+      idNo,
+      gender,
+      telNo,
+      area,
+      county,
+      role,
+      password,
+    } = form.value;
 
     /**creating user object to pass to server
      *properties name's should not be changed
@@ -244,6 +257,8 @@ export class EditUsermodalComponent implements OnInit {
     let cEmail = this.generalService.deepClean(email);
     let cFirstname = this.generalService.deepClean(firstName);
     let cLastname = this.generalService.deepClean(lastName);
+    let cArea = this.generalService.deepClean(area);
+    const cDob = dob.toLocaleDateString();
 
     let user = {};
 
@@ -254,6 +269,12 @@ export class EditUsermodalComponent implements OnInit {
         email: cEmail,
         firstName: cFirstname,
         lastName: cLastname,
+        dob: cDob,
+        idNumber: idNo,
+        gender: gender,
+        telNumber: telNo,
+        area: area,
+        county: county,
         role: role,
         password: password,
       };
@@ -263,6 +284,12 @@ export class EditUsermodalComponent implements OnInit {
         email: cEmail,
         firstName: cFirstname,
         lastName: cLastname,
+        dob: dob,
+        idNumber: idNo,
+        gender: gender,
+        telNumber: telNo,
+        area: area,
+        county: county,
         role: role,
       };
     }
