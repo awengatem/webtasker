@@ -117,8 +117,8 @@ export class NewUsermodalComponent implements OnInit {
   /**Method to submit the form */
   submitForm(form: any) {
     this.submitted = true;
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(form.value, null, 4));
-    console.log(form.value);
+    // show form
+    // console.log(form.value);
     //get the form values
     const {
       username,
@@ -160,22 +160,22 @@ export class NewUsermodalComponent implements OnInit {
       county: county,
       role: role,
     };
-
-    /**post user to server*/
-    this.userAccountService.registerUser(user).subscribe({
-      next: (res: any) => {
-        Swal.fire('Success!', res.message, 'success');
-        this.form.reset();
-        console.log(res);
-        this.registerFailed = false;
-        this.close();
-      },
-      error: (err) => {
-        console.log(err.error.message);
-        this.registerErrorMessage = err.error.message;
-        this.registerFailed = true;
-      },
-    });
+    console.log(user);
+    // /**post user to server*/
+    // this.userAccountService.registerUser(user).subscribe({
+    //   next: (res: any) => {
+    //     Swal.fire('Success!', res.message, 'success');
+    //     this.form.reset();
+    //     console.log(res);
+    //     this.registerFailed = false;
+    //     this.close();
+    //   },
+    //   error: (err) => {
+    //     console.log(err.error.message);
+    //     this.registerErrorMessage = err.error.message;
+    //     this.registerFailed = true;
+    //   },
+    // });
   }
 
   /**Method to close modal */
