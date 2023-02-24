@@ -266,7 +266,7 @@
                           </div>
                           <div class="form-group mt-2">
                             <input
-                              type="text"
+                              type="number"
                               formControlName="idNo"
                               class="form-style form-control"
                               placeholder="Set Id Number..."
@@ -295,7 +295,10 @@
                                 Id number is required!
                               </small>
                               <small *ngIf="idNo?.errors?.['minlength']">
-                                Id number must be at least 8 characters
+                                Id number must be at least 7 digits
+                              </small>
+                              <small *ngIf="idNo?.errors?.['maxlength']">
+                                Id number must not exceed 10 digits
                               </small>
                             </div>
                           </div>
