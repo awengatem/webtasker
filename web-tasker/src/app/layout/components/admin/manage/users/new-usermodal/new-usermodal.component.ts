@@ -161,21 +161,21 @@ export class NewUsermodalComponent implements OnInit {
       role: role,
     };
     console.log(user);
-    // /**post user to server*/
-    // this.userAccountService.registerUser(user).subscribe({
-    //   next: (res: any) => {
-    //     Swal.fire('Success!', res.message, 'success');
-    //     this.form.reset();
-    //     console.log(res);
-    //     this.registerFailed = false;
-    //     this.close();
-    //   },
-    //   error: (err) => {
-    //     console.log(err.error.message);
-    //     this.registerErrorMessage = err.error.message;
-    //     this.registerFailed = true;
-    //   },
-    // });
+    /**post user to server*/
+    this.userAccountService.registerUser(user).subscribe({
+      next: (res: any) => {
+        Swal.fire('Success!', res.message, 'success');
+        this.form.reset();
+        console.log(res);
+        this.registerFailed = false;
+        this.close();
+      },
+      error: (err) => {
+        console.log(err.error.message);
+        this.registerErrorMessage = err.error.message;
+        this.registerFailed = true;
+      },
+    });
   }
 
   /**Method to close modal */
