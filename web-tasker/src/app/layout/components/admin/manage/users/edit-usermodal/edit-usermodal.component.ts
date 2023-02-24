@@ -5,6 +5,11 @@ import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
 import Validation from '../../../../../auth/login/validation';
+import {
+  counties,
+  genders,
+  roles,
+} from '../../../../../../helpers/common/store';
 
 @Component({
   selector: 'app-edit-usermodal',
@@ -25,6 +30,13 @@ export class EditUsermodalComponent implements OnInit {
   /**Data to be recieved from parent component */
   userId: string | null = null;
   receivedUserId!: string;
+  /**used by datepicker */
+  minDate = new Date(1930, 0, 1);
+  maxDate = new Date();
+  date: any;
+  genders = genders;
+  counties = counties;
+  roles = roles;
 
   constructor(
     public modalRef: MdbModalRef<EditUsermodalComponent>,
@@ -41,7 +53,7 @@ export class EditUsermodalComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(20),
+          Validators.maxLength(10),
         ],
       ],
       email: [
@@ -67,6 +79,33 @@ export class EditUsermodalComponent implements OnInit {
           Validators.maxLength(20),
         ],
       ],
+      dob: ['', [Validators.required]],
+      idNo: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(20),
+        ],
+      ],
+      gender: ['', [Validators.required]],
+      telNo: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(20),
+        ],
+      ],
+      area: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+      county: ['', [Validators.required]],
       role: ['', [Validators.required]],
     });
 
@@ -78,7 +117,7 @@ export class EditUsermodalComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(3),
-            Validators.maxLength(20),
+            Validators.maxLength(10),
           ],
         ],
         email: [
@@ -104,6 +143,33 @@ export class EditUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
+        dob: ['', [Validators.required]],
+        idNo: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(20),
+          ],
+        ],
+        gender: ['', [Validators.required]],
+        telNo: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(20),
+          ],
+        ],
+        area: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(20),
+          ],
+        ],
+        county: ['', [Validators.required]],
         role: ['', [Validators.required]],
         password: [
           '',
