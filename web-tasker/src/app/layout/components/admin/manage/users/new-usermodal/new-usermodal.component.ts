@@ -117,8 +117,8 @@ export class NewUsermodalComponent implements OnInit {
   /**Method to submit the form */
   submitForm(form: any) {
     this.submitted = true;
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(form.value, null, 4));
-    console.log(form.value);
+    // show form
+    // console.log(form.value);
     //get the form values
     const {
       username,
@@ -160,7 +160,7 @@ export class NewUsermodalComponent implements OnInit {
       county: county,
       role: role,
     };
-
+    console.log(user);
     /**post user to server*/
     this.userAccountService.registerUser(user).subscribe({
       next: (res: any) => {

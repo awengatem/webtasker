@@ -111,7 +111,14 @@ export class LoginComponent implements OnInit {
       firstname: ['', [Validators.required, Validators.minLength(3)]],
       lastname: ['', [Validators.required, Validators.minLength(3)]],
       dob: ['', [Validators.required]],
-      idNo: ['', [Validators.required, Validators.minLength(8)]],
+      idNo: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(7),
+          Validators.maxLength(10),
+        ],
+      ],
       gender: ['', [Validators.required]],
     });
     this.fSignup2 = this.formBuilder.group({

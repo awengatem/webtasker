@@ -5,6 +5,11 @@ import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
 import Validation from '../../../../../auth/login/validation';
+import {
+  counties,
+  genders,
+  roles,
+} from '../../../../../../helpers/common/store';
 
 @Component({
   selector: 'app-edit-usermodal',
@@ -25,6 +30,13 @@ export class EditUsermodalComponent implements OnInit {
   /**Data to be recieved from parent component */
   userId: string | null = null;
   receivedUserId!: string;
+  /**used by datepicker */
+  minDate = new Date(1930, 0, 1);
+  maxDate = new Date();
+  date: any;
+  genders = genders;
+  counties = counties;
+  roles = roles;
 
   constructor(
     public modalRef: MdbModalRef<EditUsermodalComponent>,
@@ -41,7 +53,7 @@ export class EditUsermodalComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(20),
+          Validators.maxLength(10),
         ],
       ],
       email: [
@@ -67,6 +79,33 @@ export class EditUsermodalComponent implements OnInit {
           Validators.maxLength(20),
         ],
       ],
+      dob: ['', [Validators.required]],
+      idNo: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(20),
+        ],
+      ],
+      gender: ['', [Validators.required]],
+      telNo: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(20),
+        ],
+      ],
+      area: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+      county: ['', [Validators.required]],
       role: ['', [Validators.required]],
     });
 
@@ -78,7 +117,7 @@ export class EditUsermodalComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(3),
-            Validators.maxLength(20),
+            Validators.maxLength(10),
           ],
         ],
         email: [
@@ -104,6 +143,33 @@ export class EditUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
+        dob: ['', [Validators.required]],
+        idNo: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(20),
+          ],
+        ],
+        gender: ['', [Validators.required]],
+        telNo: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(20),
+          ],
+        ],
+        area: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(20),
+          ],
+        ],
+        county: ['', [Validators.required]],
         role: ['', [Validators.required]],
         password: [
           '',
@@ -138,6 +204,12 @@ export class EditUsermodalComponent implements OnInit {
       this.form.controls['email'].setValue(user.email);
       this.form.controls['firstName'].setValue(user.firstName);
       this.form.controls['lastName'].setValue(user.lastName);
+      this.form.controls['dob'].setValue(new Date(user.dob));
+      this.form.controls['idNo'].setValue(user.idNumber);
+      this.form.controls['gender'].setValue(user.gender);
+      this.form.controls['telNo'].setValue(user.telNumber);
+      this.form.controls['area'].setValue(user.area);
+      this.form.controls['county'].setValue(user.county);
       this.form.controls['role'].setValue(user.role);
     });
   }
@@ -162,7 +234,20 @@ export class EditUsermodalComponent implements OnInit {
     this.submitted = true;
     console.log(form.value);
     //get the form values
-    const { username, email, firstName, lastName, role, password } = form.value;
+    const {
+      username,
+      email,
+      firstName,
+      lastName,
+      dob,
+      idNo,
+      gender,
+      telNo,
+      area,
+      county,
+      role,
+      password,
+    } = form.value;
 
     /**creating user object to pass to server
      *properties name's should not be changed
@@ -172,6 +257,8 @@ export class EditUsermodalComponent implements OnInit {
     let cEmail = this.generalService.deepClean(email);
     let cFirstname = this.generalService.deepClean(firstName);
     let cLastname = this.generalService.deepClean(lastName);
+    let cArea = this.generalService.deepClean(area);
+    const cDob = dob.toLocaleDateString();
 
     let user = {};
 
@@ -182,6 +269,12 @@ export class EditUsermodalComponent implements OnInit {
         email: cEmail,
         firstName: cFirstname,
         lastName: cLastname,
+        dob: cDob,
+        idNumber: idNo,
+        gender: gender,
+        telNumber: telNo,
+        area: area,
+        county: county,
         role: role,
         password: password,
       };
@@ -191,6 +284,12 @@ export class EditUsermodalComponent implements OnInit {
         email: cEmail,
         firstName: cFirstname,
         lastName: cLastname,
+        dob: dob,
+        idNumber: idNo,
+        gender: gender,
+        telNumber: telNo,
+        area: area,
+        county: county,
         role: role,
       };
     }

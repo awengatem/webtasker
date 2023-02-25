@@ -13,10 +13,12 @@
     <div class="details">
       <i class="fa-solid fa-envelope"></i> {{ user.email }}
     </div>
-    <div class="details"><i class="fa-solid fa-phone"></i> +254 798260636</div>
-    <div class="details"><i class="fa-regular fa-id-card"></i> 398123455</div>
-    <div class="details"><i class="fa-solid fa-venus-mars"></i> male</div>
-    <div class="details"><i class="fa-solid fa-location-dot"></i> Nakuru</div>
+    <div class="details">
+      <i class="fa-solid fa-phone"></i>{{ user.telNumber }}
+    </div>
+    <div class="details"><i class="fa-regular fa-id-card"></i>{{user.idNumber}}</div>
+    <div class="details"><i class="fa-solid fa-venus-mars"></i>{{user.gender}}</div>
+    <div class="details"><i class="fa-solid fa-location-dot"></i>{{user.county}}</div>
     <div class="details">
       <i class="fa-solid fa-circle-user"></i> {{ user.role }}
     </div>

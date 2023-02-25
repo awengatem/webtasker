@@ -159,7 +159,12 @@
         <mat-form-field appearance="outline">
           <mat-label>Gender</mat-label>
           <mat-select matNativeControl name="gender" formControlName="gender">
-            <mat-option *ngFor="let x of genders" value="x">{{ x }}</mat-option>
+            <mat-option
+              *ngFor="let x of genders"
+              [value]="x"
+              style="text-transform: capitalize"
+              >{{ x }}</mat-option
+            >
           </mat-select>
           <mat-icon matSuffix
             ><i class="fa-solid fa-venus-mars" style="font-size: 18px"></i
@@ -197,10 +202,10 @@
       <div class="row custom-flex">
         <!-- AREA FIELD -->
         <mat-form-field appearance="outline">
-          <mat-label>Area</mat-label>
+          <mat-label>Job center</mat-label>
           <input
             matInput
-            placeholder="enter area name"
+            placeholder="enter job center name"
             type="text"
             formControlName="area"
             #areaInput
@@ -208,13 +213,13 @@
           <mat-icon matSuffix>my_location</mat-icon>
           <!-- Error block -->
           <mat-error *ngIf="form.controls['area'].errors?.['required']"
-            >Area name is required</mat-error
+            >Job center name is required</mat-error
           >
           <mat-error *ngIf="form.controls['area'].errors?.['minlength']">
-            Area name should be more than 3 characters
+            Job center name should be more than 3 characters
           </mat-error>
           <mat-error *ngIf="form.controls['area'].errors?.['maxlength']">
-            Area name should not exceed 20 characters
+            Job center name should not exceed 20 characters
           </mat-error>
         </mat-form-field>
 
@@ -222,9 +227,12 @@
         <mat-form-field appearance="outline">
           <mat-label>County</mat-label>
           <mat-select matNativeControl name="county" formControlName="county">
-            <mat-option value="user">User</mat-option>
-            <mat-option value="supervisor">Supervisor</mat-option>
-            <mat-option value="manager">Manager</mat-option>
+            <mat-option
+              *ngFor="let x of counties"
+              [value]="x"
+              style="text-transform: capitalize"
+              >{{ x }}</mat-option
+            >
           </mat-select>
           <mat-icon matSuffix>place</mat-icon>
           <!-- error block -->
@@ -238,9 +246,12 @@
       <mat-form-field appearance="outline">
         <mat-label>Role</mat-label>
         <mat-select matNativeControl name="role" formControlName="role">
-          <mat-option value="user">User</mat-option>
-          <mat-option value="supervisor">Supervisor</mat-option>
-          <mat-option value="manager">Manager</mat-option>
+          <mat-option
+            *ngFor="let x of roles"
+            [value]="x"
+            style="text-transform: capitalize"
+            >{{ x }}</mat-option
+          >
         </mat-select>
         <mat-icon matSuffix>verified_user</mat-icon>
         <!-- Error block -->
