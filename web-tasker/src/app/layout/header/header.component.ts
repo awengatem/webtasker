@@ -17,7 +17,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private account: AccountService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private authService: AuthService
   ) {}
 
   username!: string;
@@ -45,7 +46,7 @@ export class HeaderComponent implements OnInit {
 
   /**Get the username to set in label */
   private getUsername(): any {
-    this.username = this.account.getUser().username;
+    this.username = this.authService.getUser().username;
   }
 
   //establihing only authorized users can access the application
