@@ -7,8 +7,10 @@
       </div>
       <h1 class="username"><i class="uil uil-at"></i>{{ user.username }}</h1>
     </div>
-    <div class="details">
-      <i class="fa-solid fa-face-smile"></i>&nbsp;&nbsp;{{ user.firstName }}
+    <div class="details" style="text-transform: capitalize">
+      <i class="fa-solid fa-face-smile"></i>&nbsp;&nbsp;{{
+        user.firstName + " " + user.lastName
+      }}
     </div>
     <div class="details">
       <i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;{{ user.email }}
