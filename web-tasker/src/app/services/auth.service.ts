@@ -58,7 +58,7 @@ export class AuthService {
     const username = this.accountService.getUser().username;
     this.removeSession();
     //request timerbuttons from server
-    this.webSocketService.emit('end', {});
+    // this.webSocketService.emit('end', {});
 
     this.router.navigate(['/login']);
     if (username) {
