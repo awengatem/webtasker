@@ -6,6 +6,7 @@ import { AccountService } from './account-service.service';
 import { StatusService } from './status.service';
 import { TokenService } from './token.service';
 import { WebRequestService } from './api/web-request.service';
+import { SocketIoService } from './socket.io.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private webService: WebRequestService,
+    private webSocketService: SocketIoService,
     private router: Router,
     private accountService: AccountService,
     private tokenService: TokenService,
@@ -56,6 +58,9 @@ export class AuthService {
   logout() {
     const username = this.accountService.getUser().username;
     this.removeSession();
+    //request timerbuttons from server
+    this.webSocketService.emit('end', {});
+
     this.router.navigate(['/login']);
     if (username) {
       console.log(`${username} Logged out!`);
@@ -95,6 +100,7 @@ export class AuthService {
     this.statusService.setPaused('false');
   }
 
+  /**method to clear Local and session storage */
   private removeSession() {
     localStorage.clear();
     this.accountService.clean();

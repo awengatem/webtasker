@@ -23,12 +23,22 @@ export class AccountService {
     window.sessionStorage.setItem('user-id', user._id);
   }
 
-  public getUser(): any {
+  public getUserOld(): any {
     const user = window.sessionStorage.getItem(USER_KEY);
     if (user) {
       return JSON.parse(user);
     }
     return {};
+  }
+
+  /**Getting the user from access token */
+  public getUser() {
+    /**Get access token from storage */
+    const token = localStorage.getItem('access-token');
+    if (token) {
+      const document = JSON.parse(window.atob(token.split('.')[1]));
+      return document.user;
+    }
   }
 
   public isLoggedIn(): boolean {
