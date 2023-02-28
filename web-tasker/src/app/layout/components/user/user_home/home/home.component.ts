@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/app/services/account-service.service';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/api/project.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { StatusService } from 'src/app/services/status.service';
 import { TimerService } from 'src/app/services/timer.service';
 import Swal from 'sweetalert2';
@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   started!: any; //controls statusText styling
 
   constructor(
-    private account: AccountService,
+    private authService: AuthService,
     private projectService: ProjectService,
     private timerService: TimerService,
     private projectStatusService: ProjectStatusService
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   }
 
   private getUsername(): any {
-    this.username = this.account.getUser().username;
+    this.username = this.authService.getUser().username;
   }
 
   getProjects() {

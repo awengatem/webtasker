@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as io from 'socket.io-client';
 import { url } from 'src/app/configs';
-import { AuthService } from './auth.service';
+import { AccountService } from './account-service.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,9 +10,9 @@ export class SocketIoService {
   socket: io.Socket;
   roomId: any;
 
-  constructor(private authService: AuthService) {
+  constructor(private accountService: AccountService) {
     /**Get the user from token */
-    const user = this.authService.getUser();
+    const user = this.accountService.getUser();
     /**set roomId from userId */
     if (user) {
       this.roomId = user._id;
