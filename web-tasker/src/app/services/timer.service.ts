@@ -80,4 +80,9 @@ export class TimerService {
       });
     });
   }
+
+  /**Method to disconnect timer session */
+  disconnectTimer() {
+    this.webSocketService.emit('end', {});
+  }
 }

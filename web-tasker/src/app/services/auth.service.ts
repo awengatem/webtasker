@@ -56,7 +56,6 @@ export class AuthService {
   logout() {
     const username = this.accountService.getUser().username;
     this.removeSession();
-    this.accountService.clean();
     this.router.navigate(['/login']);
     if (username) {
       console.log(`${username} Logged out!`);
@@ -98,11 +97,7 @@ export class AuthService {
 
   private removeSession() {
     localStorage.clear();
-    // localStorage.removeItem('user-id');
-    // localStorage.removeItem('access-token');
-    // //clear sidenav statuses
-    // localStorage.removeItem('isExpanded');
-    // localStorage.removeItem('sublist');
+    this.accountService.clean();
   }
 
   /**Getting the user from access token */
