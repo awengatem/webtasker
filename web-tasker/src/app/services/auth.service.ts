@@ -23,7 +23,6 @@ export class AuthService {
     private webSocketService: SocketIoService,
     private router: Router,
     private accountService: AccountService,
-    private tokenService: TokenService,
     private statusService: StatusService
   ) {}
 
