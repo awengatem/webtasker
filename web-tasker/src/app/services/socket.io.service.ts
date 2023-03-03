@@ -45,6 +45,11 @@ export class SocketIoService {
     // });
   }
 
+  /**method to close socket*/
+  closeSocket() {
+    this.socket.emit('end', {});
+  }
+
   /**method used to recover running timers */
   emitOuter() {
     /*rejoin new socket to room*/

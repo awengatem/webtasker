@@ -54,15 +54,10 @@ export class AuthService {
   }
 
   logout() {
-    const username = this.accountService.getUser().username;
     this.removeSession();
-    //request timerbuttons from server
-    this.webSocketService.emit('end', {});
-
+    //close socket connection
     this.router.navigate(['/login']);
-    if (username) {
-      console.log(`${username} Logged out!`);
-    }
+    this.webSocketService.closeSocket();
     return this.webService.get('logout').subscribe({
       next: (res) => {
         //console.log(res);
