@@ -7,10 +7,13 @@ import { AccountService } from './account-service.service';
   providedIn: 'root',
 })
 export class SocketIoService {
-  socket: io.Socket;
+  socket!: io.Socket;
   roomId: any;
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService) {}
+
+  /**method to initialize socket connection */
+  init() {
     /**Get the user from token */
     const user = this.accountService.getUser();
     /**set roomId from userId */

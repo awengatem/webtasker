@@ -18,7 +18,6 @@ export class AuthService {
   readonly negative: string = 'false';
 
   constructor(
-    private http: HttpClient,
     private webService: WebRequestService,
     private webSocketService: SocketIoService,
     private router: Router,

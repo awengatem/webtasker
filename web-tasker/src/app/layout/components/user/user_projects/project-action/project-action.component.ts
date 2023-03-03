@@ -44,6 +44,8 @@ export class ProjectActionComponent implements OnInit {
       this.teamId = teamId;
       this.getProject(projectId);
     });
+    //initialize socket connection
+    this.webSocketService.init();
 
     //request timerbuttons from server
     this.webSocketService.emit('sendButtonStatus', {});
