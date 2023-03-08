@@ -46,7 +46,8 @@ export class AuthService {
         this.setSidenavValues();
         //set home action button status defaults
         //this.setButtonStatus();
-
+        /**Connect the timer socket */
+        this.webSocketService.openSocket();
         console.log(`${res.body.user.username} Logged in!`);
         this.router.navigate(['/home']);
       })
@@ -54,6 +55,7 @@ export class AuthService {
   }
 
   logout() {
+    // close the timer socket
     this.webSocketService.closeSocket();
     this.removeSession();
     //close socket connection
