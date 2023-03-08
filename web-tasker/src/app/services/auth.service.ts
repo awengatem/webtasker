@@ -54,10 +54,10 @@ export class AuthService {
   }
 
   logout() {
+    this.webSocketService.closeSocket();
     this.removeSession();
     //close socket connection
     this.router.navigate(['/login']);
-    this.webSocketService.closeSocket();
     return this.webService.get('logout').subscribe({
       next: (res) => {
         //console.log(res);
