@@ -44,8 +44,8 @@ export class SocketIoService {
     // });
   }
 
-  /**Method to reconnect socket */
-  reconnect() {
+  /**Method to open socket */
+  openSocket() {
     this.socket = io.connect(url.ROOT_URL, {
       withCredentials: true,
       extraHeaders: {
