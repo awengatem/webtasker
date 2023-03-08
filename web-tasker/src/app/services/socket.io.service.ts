@@ -44,6 +44,19 @@ export class SocketIoService {
     // });
   }
 
+  /**Method to reconnect socket */
+  reconnect() {
+    this.socket = io.connect(url.ROOT_URL, {
+      withCredentials: true,
+      extraHeaders: {
+        'socket-header': 'abcd',
+      },
+      query: {
+        socketId: localStorage.getItem('user-id') || '',
+      },
+    });
+  }
+
   /**method to close socket*/
   closeSocket() {
     this.socket.emit('end', {});
