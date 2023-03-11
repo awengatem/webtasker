@@ -46,15 +46,15 @@ export class SocketIoService {
 
   /**Method to open socket */
   openSocket() {
-    this.socket = io.connect(url.ROOT_URL, {
-      withCredentials: true,
-      extraHeaders: {
-        'socket-header': 'abcd',
-      },
-      query: {
-        socketId: localStorage.getItem('user-id') || '',
-      },
-    });
+    // this.socket = io.connect(url.ROOT_URL, {
+    //   withCredentials: true,
+    //   extraHeaders: {
+    //     'socket-header': 'abcd',
+    //   },
+    //   query: {
+    //     socketId: localStorage.getItem('user-id') || '',
+    //   },
+    // });
   }
 
   /**method to close socket*/
