@@ -50,6 +50,8 @@ export class WrapperComponent implements OnInit {
     // check whether user is admin(supervisor) or manager to update menu
     this.checkAdmin();
     this.checkManager();
+    /**Connect the timer socket */
+    // this.webSocketService.openSocket();
 
     const expanded = this.sidenavService.getIsExpanded();
     const sublist = this.sidenavService.getSublist();
