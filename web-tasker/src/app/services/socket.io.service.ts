@@ -7,20 +7,12 @@ import { AccountService } from './account-service.service';
   providedIn: 'root',
 })
 export class SocketIoService {
-  socket: io.Socket;
+  socket!: io.Socket;
   roomId: any;
 
   constructor(private accountService: AccountService) {
-    /**Get the user from token */
-    const user = this.accountService.getUser();
-    /**set roomId from userId */
-    if (user) {
-      this.roomId = user._id;
-    }
-
     /**get the root url*/
     const ROOT_URL = url.ROOT_URL;
-
     this.socket = io.connect(ROOT_URL, {
       withCredentials: true,
       extraHeaders: {
@@ -30,9 +22,19 @@ export class SocketIoService {
         socketId: localStorage.getItem('user-id') || '',
       },
     });
+  }
 
-    /**emit room as userID*/
-    this.socket.emit('create', this.roomId);
+  /**method to initialize socket connection */
+  init() {
+    // this.openSocket();
+    /**Get the user from token */
+    const user = this.accountService.getUser();
+    /**set roomId from userId */
+    if (user) {
+      this.roomId = user._id;
+      /**emit room as userID*/
+      this.socket.emit('create', this.roomId);
+    }
 
     /**To be used with custom ID */
     // this.socket.on('reconnect_attempt', () => {
@@ -40,6 +42,26 @@ export class SocketIoService {
     //     socketId: localStorage.getItem('user-id') || '',
     //   };
     // });
+  }
+
+  /**Method to open socket */
+  openSocket() {
+    // this.socket = io.connect(url.ROOT_URL, {
+    //   withCredentials: true,
+    //   extraHeaders: {
+    //     'socket-header': 'abcd',
+    //   },
+    //   query: {
+    //     socketId: localStorage.getItem('user-id') || '',
+    //   },
+    // });
+  }
+
+  /**method to close socket*/
+  closeSocket() {
+    if (this.socket) {
+      this.socket.emit('end', {});
+    }
   }
 
   /**method used to recover running timers */

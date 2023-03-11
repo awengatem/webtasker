@@ -44,6 +44,8 @@ export class ProjectActionComponent implements OnInit {
       this.teamId = teamId;
       this.getProject(projectId);
     });
+    //initialize socket connection
+    this.webSocketService.init();
 
     //request timerbuttons from server
     this.webSocketService.emit('sendButtonStatus', {});
@@ -268,6 +270,19 @@ export class ProjectActionComponent implements OnInit {
     window.setTimeout(() => {
       this.getStatus();
     }, 2000);
+  }
+
+  /**Timer control methods */
+  startTimerHttp(mode: string): void {
+    const data = { mode: mode, projectId: this.projectId, teamId: this.teamId };
+    this.timerService.startTimer(data).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   /**method to stop timer */

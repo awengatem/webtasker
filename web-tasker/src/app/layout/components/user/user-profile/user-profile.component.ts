@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
-import { AuthService } from 'src/app/services/auth.service';
+import { AccountService } from 'src/app/services/account-service.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,7 +12,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     public modalRef: MdbModalRef<UserProfileComponent>,
-    private authService: AuthService
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
 
   /**get user details */
   getUserDetails() {
-    const user = this.authService.getUser();
+    const user = this.accountService.getUser();
     console.log(user);
     this.user = user;
   }

@@ -18,7 +18,6 @@ export class AuthService {
   readonly negative: string = 'false';
 
   constructor(
-    private http: HttpClient,
     private webService: WebRequestService,
     private webSocketService: SocketIoService,
     private router: Router,
@@ -47,7 +46,8 @@ export class AuthService {
         this.setSidenavValues();
         //set home action button status defaults
         //this.setButtonStatus();
-
+        /**Connect the timer socket */
+        // this.webSocketService.openSocket();
         console.log(`${res.body.user.username} Logged in!`);
         this.router.navigate(['/home']);
       })
@@ -55,15 +55,11 @@ export class AuthService {
   }
 
   logout() {
-    const username = this.accountService.getUser().username;
+    // close the timer socket
+    this.webSocketService.closeSocket();
     this.removeSession();
-    //request timerbuttons from server
-    // this.webSocketService.emit('end', {});
-
+    //close socket connection
     this.router.navigate(['/login']);
-    if (username) {
-      console.log(`${username} Logged out!`);
-    }
     return this.webService.get('logout').subscribe({
       next: (res) => {
         //console.log(res);
@@ -113,21 +109,21 @@ export class AuthService {
     }
   }
   /**Getting the user from access token */
-  public getUser() {
-    /**Get access token from storage */
-    const token = localStorage.getItem('access-token');
-    if (token) {
-      const document = JSON.parse(window.atob(token.split('.')[1]));
-      return document.user;
-    }
-  }
+  // public getUser() {
+  //   /**Get access token from storage */
+  //   const token = localStorage.getItem('access-token');
+  //   if (token) {
+  //     const document = JSON.parse(window.atob(token.split('.')[1]));
+  //     return document.user;
+  //   }
+  // }
 
   /**method used by auth guard to check if the user is authorized*/
   verifyUser() {
     return new Promise((resolve, reject) => {
       /**check from db if user is authenticated */
       /**Get the user from token */
-      const user = this.getUser();
+      const user = this.accountService.getUser();
       if (user) {
         const role = user.role;
         //allow both supervisor and manager
@@ -148,7 +144,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       /**check if user is an admin */
       /**Get the user from token */
-      const user = this.getUser();
+      const user = this.accountService.getUser();
       if (user) {
         const role = user.role;
         //allow both supervisor and manager
@@ -168,7 +164,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       /**check if user is an admin */
       /**Get the user from token */
-      const user = this.getUser();
+      const user = this.accountService.getUser();
       if (user) {
         const role = user.role;
         //allow manager only
