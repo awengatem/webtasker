@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
     this.getUsername();
     this.getProjects();
     this.greetUser();
+    this.getUserSessions();
   }
 
   private getUsername(): any {
@@ -92,8 +93,8 @@ export class HomeComponent implements OnInit {
     const userId = user._id;
     this.projectStatusService
       .getSpecUserStatusDocs(userId)
-      .then((sessions: any) => {        
-        this.totalSessions = sessions.length;        
+      .then((sessions: any) => {
+        this.totalSessions = sessions.length;
       })
       .catch((err) => {
         console.log(err);
