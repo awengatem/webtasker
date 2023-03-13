@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   greeting!: string;
   projects!: any[];
   totalProjects: number = 0;
+  totalSessions: number = 0;
   projectStatus: any = 'Unknown';
   idle = true; //controls statusText styling(must be true by default)
   started!: any; //controls statusText styling
@@ -31,6 +32,7 @@ export class HomeComponent implements OnInit {
     this.getUsername();
     this.getProjects();
     this.greetUser();
+    this.getUserSessions();
   }
 
   private getUsername(): any {
@@ -82,6 +84,21 @@ export class HomeComponent implements OnInit {
     } else if (hours < 24) {
       this.greeting = `Good evening ${this.username}`;
     }
+  }
+
+  /**method to load the number of total user sessions */
+  getUserSessions() {
+    /**get userId */
+    const user = this.accountService.getUser();
+    const userId = user._id;
+    this.projectStatusService
+      .getSpecUserStatusDocs(userId)
+      .then((sessions: any) => {
+        this.totalSessions = sessions.length;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   /**method to get the project status */
