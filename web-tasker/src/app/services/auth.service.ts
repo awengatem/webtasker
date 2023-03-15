@@ -107,16 +107,7 @@ export class AuthService {
       const document = JSON.parse(window.atob(token.split('.')[1]));
       return document.user;
     }
-  }
-  /**Getting the user from access token */
-  // public getUser() {
-  //   /**Get access token from storage */
-  //   const token = localStorage.getItem('access-token');
-  //   if (token) {
-  //     const document = JSON.parse(window.atob(token.split('.')[1]));
-  //     return document.user;
-  //   }
-  // }
+  }  
 
   /**method used by auth guard to check if the user is authorized*/
   verifyUser() {
