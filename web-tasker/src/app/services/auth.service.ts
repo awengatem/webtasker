@@ -47,7 +47,7 @@ export class AuthService {
         //set home action button status defaults
         //this.setButtonStatus();
         /**Connect the timer socket */
-        // this.webSocketService.openSocket();
+        this.webSocketService.openSocket();
         console.log(`${res.body.user.username} Logged in!`);
         this.router.navigate(['/home']);
       })
@@ -107,7 +107,7 @@ export class AuthService {
       const document = JSON.parse(window.atob(token.split('.')[1]));
       return document.user;
     }
-  }  
+  }
 
   /**method used by auth guard to check if the user is authorized*/
   verifyUser() {
