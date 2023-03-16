@@ -25,8 +25,7 @@ export class SocketIoService {
   }
 
   /**method to initialize socket connection */
-  init() {
-    // this.openSocket();
+  init() {    
     /**Get the user from token */
     const user = this.accountService.getUser();
     /**set roomId from userId */
@@ -46,15 +45,16 @@ export class SocketIoService {
 
   /**Method to open socket */
   openSocket() {
-    // this.socket = io.connect(url.ROOT_URL, {
-    //   withCredentials: true,
-    //   extraHeaders: {
-    //     'socket-header': 'abcd',
-    //   },
-    //   query: {
-    //     socketId: localStorage.getItem('user-id') || '',
-    //   },
-    // });
+    this.closeSocket();
+    this.socket = io.connect(url.ROOT_URL, {
+      withCredentials: true,
+      extraHeaders: {
+        'socket-header': 'abcd',
+      },
+      query: {
+        socketId: localStorage.getItem('user-id') || '',
+      },
+    });
   }
 
   /**method to close socket*/
