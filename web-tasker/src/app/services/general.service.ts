@@ -16,7 +16,8 @@ export class GeneralService {
 
   /**Method to clean sign up credentials */
   deepClean(input: string) {
-    return input.split(' ').join('');
+    return input;
+    // return input.split(' ').join('');
     //return input.replace(/\s/g,'');
   }
 }

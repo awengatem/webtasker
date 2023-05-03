@@ -244,7 +244,7 @@ export class ProjectActionComponent implements OnInit {
   /**Timer control methods */
   startTimer(mode: string): void {
     if (mode === 'start' && this.teamId != null) {
-      this.webSocketService.emit('start', {
+      this.webSocketService.emit('test', {
         projectId: this.projectId,
         teamId: this.teamId,
       });
@@ -273,17 +273,17 @@ export class ProjectActionComponent implements OnInit {
   }
 
   /**Timer control methods */
-  startTimerHttp(mode: string): void {
-    const data = { mode: mode, projectId: this.projectId, teamId: this.teamId };
-    this.timerService.startTimer(data).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
+  // startTimerHttp(mode: string): void {
+  //   const data = { mode: mode, projectId: this.projectId, teamId: this.teamId };
+  //   this.timerService.startTimer(data).subscribe({
+  //     next: (res) => {
+  //       console.log(res);
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
 
   /**method to stop timer */
   stopTimer() {
