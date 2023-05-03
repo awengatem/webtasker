@@ -44,10 +44,8 @@ export class AuthService {
         );
         //set sidenav statuses
         this.setSidenavValues();
-        //set home action button status defaults
-        //this.setButtonStatus();
         /**Connect the timer socket */
-        this.webSocketService.openSocket();
+        // this.webSocketService.openSocket();
         console.log(`${res.body.user.username} Logged in!`);
         this.router.navigate(['/home']);
       })
@@ -84,15 +82,6 @@ export class AuthService {
   private setSidenavValues() {
     localStorage.setItem('isExpanded', this.positive);
     localStorage.setItem('sublist', this.negative);
-  }
-
-  /**Sets session button defaults to local storage
-   * Helps control the start and end buttons
-   */
-  private setButtonStatus() {
-    this.statusService.setEnded('false');
-    this.statusService.setStarted('false');
-    this.statusService.setPaused('false');
   }
 
   /**method to clear Local and session storage */

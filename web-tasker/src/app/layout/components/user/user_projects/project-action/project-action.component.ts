@@ -243,7 +243,7 @@ export class ProjectActionComponent implements OnInit {
   /**Timer control methods */
   startTimer(mode: string): void {
     if (mode === 'start' && this.teamId != null) {
-      this.webSocketService.emit('test', {
+      this.webSocketService.emit('start', {
         projectId: this.projectId,
         teamId: this.teamId,
       });

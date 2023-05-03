@@ -12,16 +12,16 @@ export class SocketIoService {
 
   constructor(private accountService: AccountService) {
     /**get the root url*/
-    const ROOT_URL = url.ROOT_URL;
-    this.socket = io.connect(ROOT_URL, {
-      withCredentials: true,
-      extraHeaders: {
-        'socket-header': 'abcd',
-      },
-      query: {
-        socketId: localStorage.getItem('user-id') || '',
-      },
-    });
+    // const ROOT_URL = url.ROOT_URL;
+    // this.socket = io.connect(ROOT_URL, {
+    //   withCredentials: true,
+    //   extraHeaders: {
+    //     'socket-header': 'abcd',
+    //   },
+    //   query: {
+    //     socketId: localStorage.getItem('user-id') || '',
+    //   },
+    // });
   }
 
   /**method to initialize socket connection */
