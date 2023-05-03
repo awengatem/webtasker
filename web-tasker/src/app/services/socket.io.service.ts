@@ -26,6 +26,8 @@ export class SocketIoService {
 
   /**method to initialize socket connection */
   init() {
+    /**Refresh socket on initialization */
+    this.openSocket();
     /**Get the user from token */
     const user = this.accountService.getUser();
     /**set roomId from userId */
