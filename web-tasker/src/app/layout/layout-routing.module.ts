@@ -40,6 +40,7 @@ import { SessionsComponent } from './components/user/user_sessions/sessions/sess
 import { ClearLocationGuard } from '../helpers/guards/clear-location.guard';
 import { ProjectTeamsComponent } from './components/admin/adprojects/project-teams/project-teams.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { ClearUsessionsintervalGuard } from '../helpers/guards/clear-usessionsinterval.guard';
 
 const routes: Routes = [
   {
@@ -98,6 +99,7 @@ const routes: Routes = [
       /**SESSIONS */
       {
         path: 'sessions',
+        canDeactivate: [ClearUsessionsintervalGuard],
         component: SessionsComponent,
       },
 
