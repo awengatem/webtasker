@@ -34,7 +34,7 @@ import { MngUsersComponent } from './components/admin/manage/users/mng-users/mng
 import { MngProjectsComponent } from './components/admin/manage/projects/mng-projects/mng-projects.component';
 import { MngTeamsComponent } from './components/admin/manage/teams/mng-teams/mng-teams.component';
 import { MngSessionsComponent } from './components/admin/manage/sessions/mng-sessions/mng-sessions.component';
-import { CanDeactivateGuard } from '../helpers/guards/canDeactivate.guard';
+import { ClearDashintervalGuard } from '../helpers/guards/clear-dashinterval.guard';
 import { SupervisorGuard } from '../helpers/guards/supervisor.guard';
 import { SessionsComponent } from './components/user/user_sessions/sessions/sessions.component';
 import { ClearLocationGuard } from '../helpers/guards/clear-location.guard';
@@ -112,7 +112,7 @@ const routes: Routes = [
       {
         path: 'ad_dashboard',
         canActivate: [SupervisorGuard],
-        canDeactivate: [CanDeactivateGuard],
+        canDeactivate: [ClearDashintervalGuard],
         component: AdDashboardComponent,
       },
 

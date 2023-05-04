@@ -9,7 +9,7 @@ export interface CanComponentDeactivate {
 @Injectable({
   providedIn: 'root',
 })
-export class CanDeactivateGuard
+export class ClearDashintervalGuard
   implements CanDeactivate<CanComponentDeactivate>
 {
   canDeactivate(
@@ -20,7 +20,7 @@ export class CanDeactivateGuard
     const dashInterval = parseInt(localStorage.getItem('dashboard-interval')!);
     if (dashInterval) {
       window.clearInterval(dashInterval);
-      console.log('refresh interval terminated');
+      console.log('Dashboard refresh interval terminated');
     }
     localStorage.removeItem('dashboard-interval');
 
