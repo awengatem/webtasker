@@ -47,7 +47,7 @@ export class SessionsComponent {
     //reload the data periodically
     const interval_id = window.setInterval(() => {
       this.loadUserSessions();
-    }, 3000);
+    }, 60000);
     /**save the interval-id to local storage for
      * clearing after leaving page*/
     localStorage.setItem('user-sessions-interval', interval_id.toString());
