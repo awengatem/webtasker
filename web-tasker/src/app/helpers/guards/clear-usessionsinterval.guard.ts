@@ -9,7 +9,7 @@ export interface CanComponentDeactivate {
 @Injectable({
   providedIn: 'root',
 })
-export class CanDeactivateGuard
+export class ClearUsessionsintervalGuard
   implements CanDeactivate<CanComponentDeactivate>
 {
   canDeactivate(
@@ -17,12 +17,14 @@ export class CanDeactivateGuard
   ): Observable<boolean> | Promise<boolean> | boolean {
     /**Perform the action here before the user leaves the route*/
     //capture the dashboard interval to terminate
-    const dashInterval = parseInt(localStorage.getItem('dashboard-interval')!);
-    if (dashInterval) {
-      window.clearInterval(dashInterval);
-      console.log('refresh interval terminated');
+    const sessionInterval = parseInt(
+      localStorage.getItem('user-sessions-interval')!
+    );
+    if (sessionInterval) {
+      window.clearInterval(sessionInterval);
+      console.log('Sessions refresh interval terminated');
     }
-    localStorage.removeItem('dashboard-interval');
+    localStorage.removeItem('user-sessions-interval');
 
     return component.canDeactivate ? component.canDeactivate() : true;
   }

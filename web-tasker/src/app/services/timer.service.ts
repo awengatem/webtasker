@@ -81,11 +81,6 @@ export class TimerService {
     });
   }
 
-  /**Method to test timer start */
-  startTimer(data: any) {
-    return this.webReqService.post('timer/start', { data });
-  }
-
   /**Method to disconnect timer session */
   disconnectTimer() {
     this.webSocketService.emit('end', {});

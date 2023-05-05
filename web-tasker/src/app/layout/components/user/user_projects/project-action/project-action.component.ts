@@ -29,7 +29,6 @@ export class ProjectActionComponent implements OnInit {
     private webSocketService: SocketIoService,
     private projectService: ProjectService,
     private projectStatusService: ProjectStatusService,
-    private timerService: TimerService,
     private snackBarService: SnackBarService,
     private route: ActivatedRoute,
     private router: Router
@@ -270,19 +269,6 @@ export class ProjectActionComponent implements OnInit {
     window.setTimeout(() => {
       this.getStatus();
     }, 2000);
-  }
-
-  /**Timer control methods */
-  startTimerHttp(mode: string): void {
-    const data = { mode: mode, projectId: this.projectId, teamId: this.teamId };
-    this.timerService.startTimer(data).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
   }
 
   /**method to stop timer */
