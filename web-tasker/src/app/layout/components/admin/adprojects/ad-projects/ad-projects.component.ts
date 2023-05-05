@@ -30,7 +30,7 @@ export class AdProjectsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProjects();
+    // this.getProjects();
     //subscribe to the route params
     this.route.params.subscribe((params: Params) => {
       console.log(params);

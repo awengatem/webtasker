@@ -315,6 +315,19 @@
               opacity: 0.8;
             }
           }
+          /*Used by no content div*/
+          .empty {
+            position: relative;
+            .no-content {
+              h1 {
+                position: absolute;
+                bottom: 25px;
+                font-weight: 500;
+                font-size: 18px;
+                color: #80050c;
+              }
+            }
+          }
         }
       }
     }
