@@ -36,9 +36,9 @@ export class SessionsComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private projectStatusService: ProjectStatusService,
-    private _snackBar: MatSnackBar
-  ) {
+    private projectStatusService: ProjectStatusService
+  ) // private _snackBar: MatSnackBar
+  {
     //load data on table
     this.loadUserSessions();
   }
@@ -91,119 +91,6 @@ export class SessionsComponent {
     }
   }
 
-  /**Delete selected session(s) */
-  deleteSelected() {
-    // debugger;
-    const selectedSessionsArr = this.selection.selected;
-    let sessionIdArr: any = [];
-    console.log(selectedSessionsArr);
-    if (selectedSessionsArr.length > 0) {
-      //push only session ids in an array
-      selectedSessionsArr.forEach((item) => {
-        sessionIdArr.push(item._id);
-      });
-      console.log(sessionIdArr);
-      //confirm and delete sessions
-      Swal.fire({
-        title: `Delete ${selectedSessionsArr.length} sessions from the database?`,
-        text: 'This process is irreversible.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, go ahead.',
-        confirmButtonColor: '#e74c3c',
-        cancelButtonText: 'No, let me think',
-        cancelButtonColor: '#22b8f0',
-      }).then((result) => {
-        //delete sessions from db
-        if (result.value) {
-          this.deleteMultipe(sessionIdArr);
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          this.displaySnackbar(0, 'operation has been cancelled');
-          //reset the selection
-          this.selection = new SelectionModel<any>(true, []);
-        }
-      });
-    } else {
-      this.displaySnackbar(0, 'no selected records');
-    }
-  }
-
-  /**Method to confirm session deletion */
-  confirmDeletion(sessionId: string) {
-    Swal.fire({
-      title: `Delete session from the database?`,
-      text: 'This process is irreversible.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, go ahead.',
-      confirmButtonColor: '#e74c3c',
-      cancelButtonText: 'No, let me think',
-      cancelButtonColor: '#22b8f0',
-    }).then((result) => {
-      //delete session from db
-      if (result.value) {
-        this.deleteSession(sessionId);
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        this.displaySnackbar(0, 'operation has been cancelled');
-      }
-    });
-  }
-
-  /**Method to deletemultiple */
-  deleteMultipe(sessionIdArr: any[]) {
-    if (sessionIdArr.length > 0) {
-      this.projectStatusService
-        .deleteMultipleProjectStatus(sessionIdArr)
-        .subscribe({
-          next: (response: any) => {
-            console.log(response);
-            this.displaySnackbar(1, response.message);
-            this.loadUserSessions();
-          },
-          error: (err) => {
-            console.log(err);
-            Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-          },
-        });
-    }
-    //reset the selection
-    this.selection = new SelectionModel<any>(true, []);
-  }
-
-  /**Delete a specified session */
-  deleteSession(sessionId: string) {
-    this.projectStatusService.deleteProjectStatus(sessionId).subscribe({
-      next: (response: any) => {
-        console.log(response);
-        this.displaySnackbar(1, response.message);
-        this.loadUserSessions();
-      },
-      error: (err) => {
-        console.log(err);
-        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-      },
-    });
-  }
-
-  /**Multipurpose method for edits and updates */
-  displaySnackbar(type: number, message: any) {
-    if (type == 0) {
-      this._snackBar.open(message, 'Close', {
-        duration: 2000,
-        panelClass: ['red-snackbar'],
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    } else if (type == 1) {
-      this._snackBar.open(message, 'Close', {
-        duration: 2000,
-        panelClass: ['green-snackbar'],
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    }
-  }
-
   /**Method to load table data */
   loadUserSessions() {
     /**get userId */
@@ -232,12 +119,5 @@ export class SessionsComponent {
     const date = new Date(timestamp);
     // const newDate = date.toLocaleString();
     return date.toLocaleString();
-  }
-
-  /**Method to set location to help
-   *  navigate back to previous route
-   */
-  setLocation() {
-    window.sessionStorage.setItem('fromMng', 'true');
   }
 }
