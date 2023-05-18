@@ -48,6 +48,7 @@ export class ProjSessionsComponent {
   loadUserSessions() {
     /**get userId */
     const userId: string = localStorage.getItem('user-id')!;
+    const projectId: string = localStorage.getItem('project-id')!;
     this.projectStatusService
       .getSpecUserStatusDocs(userId)
       .then((sessions: any) => {
