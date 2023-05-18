@@ -15,6 +15,7 @@ export class TeamInfoComponent implements OnInit {
   projects!: any[];
   members!: any[];
   teamId!: string;
+  projectsLength = 0;
   /**variable for search parameter */
   searchText = '';
   placeholder = 'enter username to search ...';
@@ -131,6 +132,7 @@ export class TeamInfoComponent implements OnInit {
     this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
+      this.projectsLength = projects.length;
       /**get project members immediately
        * after filling projects array*/
       this.getProjectMembers();
