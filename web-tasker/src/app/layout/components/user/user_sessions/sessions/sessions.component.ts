@@ -1,14 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
-import Swal from 'sweetalert2';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 
 @Component({
@@ -21,8 +15,6 @@ export class SessionsComponent {
   totalSessions = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   displayedColumns: string[] = [
     'Position',
     'ProjectName',
@@ -36,9 +28,8 @@ export class SessionsComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private projectStatusService: ProjectStatusService
-  ) // private _snackBar: MatSnackBar
-  {
+    private projectStatusService: ProjectStatusService // private _snackBar: MatSnackBar
+  ) {
     //load data on table
     this.loadUserSessions();
   }
