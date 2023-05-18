@@ -34,34 +34,6 @@ export class ProjSessionsComponent {
 
   ngOnInit(): void {}
 
-  /**Get the sessions */
-  getProjects(): void {
-    this.projectStatusService.getStatusDocs().then((sessions) => {
-      console.log(sessions);
-    });
-  }
-
-  /**check whether all are selected */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = !!this.dataSource && this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected()
-      ? this.selection.clear()
-      : this.dataSource.data.forEach((r) => this.selection.select(r));
-  }
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row: any): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
-      row.EmpId + 1
-    }`;
-  }
   /**method used by search filter */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
