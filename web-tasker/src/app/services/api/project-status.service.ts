@@ -344,7 +344,7 @@ export class ProjectStatusService {
     return this.webService.get('project_status/recent');
   }
 
-  /**get all project status docs  from db */
+  /**get project status docs belonging from db */
   getProjectStatusByProjId(projectId: string) {
     return this.webService.get(`project_status/project/${projectId}`);
   }
