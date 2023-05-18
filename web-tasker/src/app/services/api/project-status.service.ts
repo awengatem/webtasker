@@ -339,6 +339,11 @@ export class ProjectStatusService {
     return this.webService.get(`project_status/user/${userId}`);
   }
 
+  /**get only specified user's status docs from specified project from db */
+  getProjectStatusByUsernProject(userId: string, projectId: string) {
+    return this.webService.get(`project_status/user/${userId}/${projectId}`);
+  }
+
   /**get recent finished (status) project status docs  from db */
   getRFinishedProjects() {
     return this.webService.get('project_status/recent');
