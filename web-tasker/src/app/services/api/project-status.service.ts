@@ -55,6 +55,23 @@ export class ProjectStatusService {
     });
   }
 
+  /**get project status docs belonging to a specific user from api */
+  getSpecUsernProjStatusDocs(userId: string, projectId: string) {
+    return new Promise((resolve, reject) => {
+      this.getProjectStatusByUsernProject(userId, projectId).subscribe({
+        next: (documents) => {
+          this.calibrateStatusDocs(documents).then((calibratedDocs) => {
+            resolve(calibratedDocs);
+          });
+        },
+        error: (err) => {
+          console.log(err);
+          reject();
+        },
+      });
+    });
+  }
+
   /**get active project status docs from api */
   getActiveStatusDocs() {
     return new Promise((resolve, reject) => {

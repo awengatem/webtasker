@@ -50,7 +50,7 @@ export class ProjSessionsComponent {
     const userId: string = localStorage.getItem('user-id')!;
     const projectId: string = localStorage.getItem('project-id')!;
     this.projectStatusService
-      .getSpecUserStatusDocs(userId)
+      .getSpecUsernProjStatusDocs(userId, projectId)
       .then((sessions: any) => {
         // add numbering to the sessions
         for (let session of sessions) {
