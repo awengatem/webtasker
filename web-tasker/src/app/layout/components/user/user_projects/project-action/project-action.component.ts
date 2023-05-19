@@ -37,12 +37,18 @@ export class ProjectActionComponent implements OnInit {
   ngOnInit(): void {
     //get the project from params
     this.route.params.subscribe((params: Params) => {
-      const projectId = params['projectId'];
-      const teamId = params['teamId'];
-      this.projectId = projectId;
-      this.teamId = teamId;
-      this.getProject(projectId);
+      // const projectId = params['projectId'];
+      // const teamId = params['teamId'];
+      // this.projectId = projectId;
+      // this.teamId = teamId;
+      // this.getProject(projectId);
     });
+    const projectId = localStorage.getItem('capturedProjectId')!;
+    const teamId = localStorage.getItem('capturedProjectTeam')!;
+    this.projectId = projectId;
+    this.teamId = teamId;
+    this.getProject(projectId);
+
     //initialize socket connection
     this.webSocketService.init();
 
