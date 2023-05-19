@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-proj-sessions',
@@ -30,7 +31,10 @@ export class ProjSessionsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private projectStatusService: ProjectStatusService) {
+  constructor(
+    private projectStatusService: ProjectStatusService,
+    private router: Router
+  ) {
     //load data on table
     this.loadUserSessions();
   }
@@ -84,6 +88,12 @@ export class ProjSessionsComponent {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  loadProjectInfo() {
+    const projectId = localStorage.getItem('capturedProjectId')!;
+    const teamId = localStorage.getItem('capturedProjectTeam')!;
+    this.router;
   }
 
   /**Method to convert timestamp to date */
