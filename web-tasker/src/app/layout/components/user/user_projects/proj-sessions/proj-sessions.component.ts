@@ -15,7 +15,7 @@ export class ProjSessionsComponent {
   totalSessions = 0;
   projectId!: string;
   userId!: string;
-  projectName: any;
+  projectName: any = 'projectName';
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
