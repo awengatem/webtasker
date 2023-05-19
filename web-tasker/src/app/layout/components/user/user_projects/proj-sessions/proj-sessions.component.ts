@@ -93,7 +93,7 @@ export class ProjSessionsComponent {
   loadProjectInfo() {
     const projectId = localStorage.getItem('capturedProjectId')!;
     const teamId = localStorage.getItem('capturedProjectTeam')!;
-    this.router;
+    this.router.navigate([`/projects/${projectId}/${teamId}`]);
   }
 
   /**Method to convert timestamp to date */
