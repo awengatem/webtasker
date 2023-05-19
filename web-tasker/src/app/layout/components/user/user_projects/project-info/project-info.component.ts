@@ -44,8 +44,12 @@ export class ProjectInfoComponent implements OnInit {
       // this.getTeamName(teamId);
       // this.getProject(projectId);
     });
-    const projectId = localStorage.getItem('project-id')!;
-    const userId = localStorage.getItem('user-id')!;
+    const projectId = localStorage.getItem('capturedProjectId')!;
+    const teamId = localStorage.getItem('capturedProjectTeam')!;
+    this.projectId = projectId;
+    this.teamId = teamId;
+    this.getTeamName(teamId);
+    this.getProject(projectId);
   }
 
   //getting project document
