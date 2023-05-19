@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -6,13 +6,16 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 
 @Component({
-  selector: 'app-sessions',
-  templateUrl: './sessions.component.html',
-  styleUrls: ['./sessions.component.scss'],
+  selector: 'app-proj-sessions',
+  templateUrl: './proj-sessions.component.html',
+  styleUrls: ['./proj-sessions.component.scss'],
 })
-export class SessionsComponent {
+export class ProjSessionsComponent {
   sessions!: any[];
   totalSessions = 0;
+  projectId!: string;
+  userId!: string;
+  projectName: any = 'projectName';
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
@@ -27,21 +30,26 @@ export class SessionsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(
-    private projectStatusService: ProjectStatusService // private _snackBar: MatSnackBar
-  ) {
+  constructor(private projectStatusService: ProjectStatusService) {
     //load data on table
     this.loadUserSessions();
   }
 
   ngOnInit(): void {
-    //reload the data periodically
-    const interval_id = window.setInterval(() => {
-      this.loadUserSessions();
-    }, 60000);
-    /**save the interval-id to local storage for
-     * clearing after leaving page*/
-    localStorage.setItem('user-sessions-interval', interval_id.toString());
+    //imitialize userId and projectId
+    this.projectId = localStorage.getItem('project-id')!;
+    this.userId = localStorage.getItem('user-id')!;
+    //get project name
+    this.getProjectName();
+  }
+
+  /**get project name */
+  getProjectName() {
+    this.projectStatusService
+      .getProjectName(this.projectId)
+      .then((projectName) => {
+        this.projectName = projectName;
+      });
   }
 
   /**method used by search filter */
@@ -56,10 +64,11 @@ export class SessionsComponent {
 
   /**Method to load table data */
   loadUserSessions() {
-    /**get userId */
-    const userId: string = localStorage.getItem('user-id')!;
+    const projectId = localStorage.getItem('project-id')!;
+    const userId = localStorage.getItem('user-id')!;
+
     this.projectStatusService
-      .getSpecUserStatusDocs(userId)
+      .getSpecUsernProjStatusDocs(userId, projectId)
       .then((sessions: any) => {
         // add numbering to the sessions
         for (let session of sessions) {

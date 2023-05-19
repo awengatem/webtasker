@@ -61,6 +61,7 @@ import { EditUsermodalComponent } from './components/admin/manage/users/edit-use
 import { SessionsComponent } from './components/user/user_sessions/sessions/sessions.component';
 import { ProjectTeamsComponent } from './components/admin/adprojects/project-teams/project-teams.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { ProjSessionsComponent } from './components/user/user_projects/proj-sessions/proj-sessions.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +120,7 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
     SessionsComponent,
     ProjectTeamsComponent,
     UserProfileComponent,
+    ProjSessionsComponent,
   ],
   imports: [
     CommonModule,

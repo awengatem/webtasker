@@ -127,4 +127,11 @@ export class ProjectInfoComponent implements OnInit {
       },
     });
   }
+
+  /**Method to set project id to local storage */
+  setProjectId() {
+    //set to local storage
+    localStorage.setItem('project-id', this.projectId);
+    this.router.navigate(['/projects/sessions']);
+  }
 }
