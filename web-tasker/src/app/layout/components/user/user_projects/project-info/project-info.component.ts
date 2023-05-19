@@ -36,14 +36,16 @@ export class ProjectInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      console.log(params);
-      const projectId = params['projectId'];
-      const teamId = params['teamId'];
-      this.projectId = projectId;
-      this.teamId = teamId;
-      this.getTeamName(teamId);
-      this.getProject(projectId);
+      // console.log(params);
+      // const projectId = params['projectId'];
+      // const teamId = params['teamId'];
+      // this.projectId = projectId;
+      // this.teamId = teamId;
+      // this.getTeamName(teamId);
+      // this.getProject(projectId);
     });
+    const projectId = localStorage.getItem('project-id')!;
+    const userId = localStorage.getItem('user-id')!;
   }
 
   //getting project document
