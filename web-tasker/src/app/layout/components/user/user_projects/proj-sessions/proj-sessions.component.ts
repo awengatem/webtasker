@@ -13,6 +13,9 @@ import { ProjectStatusService } from 'src/app/services/api/project-status.servic
 export class ProjSessionsComponent {
   sessions!: any[];
   totalSessions = 0;
+  projectId!: string;
+  userId!: string;
+  projectName: any;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
@@ -32,7 +35,22 @@ export class ProjSessionsComponent {
     this.loadUserSessions();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    //imitialize userId and projectId
+    this.projectId = localStorage.getItem('project-id')!;
+    this.userId = localStorage.getItem('user-id')!;
+    //get project name
+    this.getProjectName();
+  }
+
+  /**get project name */
+  getProjectName() {
+    this.projectStatusService
+      .getProjectName(this.projectId)
+      .then((projectName) => {
+        this.projectName = projectName;
+      });
+  }
 
   /**method used by search filter */
   applyFilter(event: Event) {
@@ -46,9 +64,9 @@ export class ProjSessionsComponent {
 
   /**Method to load table data */
   loadUserSessions() {
-    /**get userId */
-    const userId: string = localStorage.getItem('user-id')!;
-    const projectId: string = localStorage.getItem('project-id')!;
+    const projectId = localStorage.getItem('project-id')!;
+    const userId = localStorage.getItem('user-id')!;
+
     this.projectStatusService
       .getSpecUsernProjStatusDocs(userId, projectId)
       .then((sessions: any) => {
