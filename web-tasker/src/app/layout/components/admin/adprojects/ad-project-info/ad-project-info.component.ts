@@ -31,10 +31,13 @@ export class AdProjectInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      const projectId = params['projectId'];
-      this.projectId = projectId;
-      this.getProject(projectId);
+      // const projectId = params['projectId'];
+      // this.projectId = projectId;
+      // this.getProject(projectId);
     });
+    const projectId = localStorage.getItem('capturedProjectId')!;
+    this.projectId = projectId;
+    this.getProject(projectId);
   }
 
   //getting project document
