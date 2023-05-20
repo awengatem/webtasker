@@ -42,6 +42,7 @@ import { ProjectTeamsComponent } from './components/admin/adprojects/project-tea
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { ClearUsessionsintervalGuard } from '../helpers/guards/clear-usessionsinterval.guard';
 import { ProjSessionsComponent } from './components/user/user_projects/proj-sessions/proj-sessions.component';
+import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
 
 const routes: Routes = [
   {
@@ -227,6 +228,11 @@ const routes: Routes = [
         path: 'ad_manage/projects',
         canActivate: [ManagerGuard],
         component: MngProjectsComponent,
+      },
+      {
+        path: 'ad_manage/projects/sessions',
+        canActivate: [ManagerGuard],
+        component: AdProjSessionsComponent,
       },
       {
         path: 'ad_manage/teams',
