@@ -67,7 +67,7 @@
                   [routerLink]="['/edit_project', projectId]"
                   ><i class="fa-solid fa-pen-fancy"></i> edit</a
                 >
-                <a class="dropdown-item"
+                <a class="dropdown-item" (click)="showSessions()"
                   ><i class="fa-solid fa-stopwatch"></i> view sessions</a
                 >
               </div>

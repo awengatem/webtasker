@@ -177,4 +177,9 @@ export class AdProjectInfoComponent implements OnInit {
       this.router.navigate(['/ad_projects']);
     }
   }
+
+  /**Method to navigate to sessions */
+  showSessions() {
+    this.router.navigate([`/ad_projects/${this.projectId}/sessions`]);
+  }
 }
