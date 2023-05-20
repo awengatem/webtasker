@@ -80,7 +80,7 @@ export class EditProjectComponent implements OnInit {
       //navigate to manager
       this.router.navigate(['ad_manage/projects']);
     } else {
-      this.router.navigate(['/ad_projects']);
+      this.router.navigate([`/ad_projects/${this.projectId}`]);
     }
   }
 
