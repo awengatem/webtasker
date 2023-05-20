@@ -132,5 +132,12 @@ export class ProjectInfoComponent implements OnInit {
         console.log(err);
       },
     });
-  } 
+  }
+
+  /**Method to navigate to sessions */
+  showSessions() {
+    this.router.navigate([
+      `/projects/${this.projectId}/${this.teamId}/sessions`,
+    ]);
+  }
 }
