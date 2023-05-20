@@ -68,9 +68,9 @@ export class ProjSessionsComponent {
 
   /**Method to load table data */
   loadUserSessions() {
-    const projectId = localStorage.getItem('project-id')!;
     const userId = localStorage.getItem('user-id')!;
-
+    const projectId = localStorage.getItem('capturedProjectId')!;
+    
     this.projectStatusService
       .getSpecUsernProjStatusDocs(userId, projectId)
       .then((sessions: any) => {
