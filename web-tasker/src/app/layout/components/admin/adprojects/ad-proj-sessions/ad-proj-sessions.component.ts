@@ -68,11 +68,11 @@ export class AdProjSessionsComponent {
 
   /**Method to load table data */
   loadUserSessions() {
-    const userId = localStorage.getItem('user-id')!;
     const projectId = localStorage.getItem('capturedProjectId')!;
 
+    //get the status docs
     this.projectStatusService
-      .getSpecUsernProjStatusDocs(userId, projectId)
+      .getSpecProjStatusDocs(projectId)
       .then((sessions: any) => {
         // add numbering to the sessions
         for (let session of sessions) {
@@ -92,7 +92,6 @@ export class AdProjSessionsComponent {
 
   loadProjectInfo() {
     const projectId = localStorage.getItem('capturedProjectId')!;
-    const teamId = localStorage.getItem('capturedProjectTeam')!;
     this.router.navigate([`/ad_projects/${projectId}`]);
   }
 

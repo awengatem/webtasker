@@ -107,7 +107,7 @@ export class ProjectStatusService {
   }
 
   /**get calibrated status docs by project Id */
-  getCalStatusDocsByProjId(projectId: string) {
+  getSpecProjStatusDocs(projectId: string) {
     return new Promise((resolve, reject) => {
       this.getStatusDocsByProjId(projectId)
         .then((statusDocs) => {
