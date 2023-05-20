@@ -25,17 +25,26 @@ export class ProjectTeamsComponent implements OnInit {
   ngOnInit(): void {
     //subscribe to the route params
     this.route.params.subscribe((params: Params) => {
-      console.log(params);
-      const projectId = params['projectId'];
-      this.projectId = projectId;
-      if (projectId) {
-        this.getProject(projectId);
-        this.getProjectTeams(projectId).then(() => {
-          //get team members for each team
-          this.getTeamMembers();
-        });
-      }
+      // console.log(params);
+      // const projectId = params['projectId'];
+      // this.projectId = projectId;
+      // if (projectId) {
+      //   this.getProject(projectId);
+      //   this.getProjectTeams(projectId).then(() => {
+      //     //get team members for each team
+      //     this.getTeamMembers();
+      //   });
+      // }
     });
+    const projectId = localStorage.getItem('capturedProjectId')!;
+    this.projectId = projectId;
+    if (projectId) {
+      this.getProject(projectId);
+      this.getProjectTeams(projectId).then(() => {
+        //get team members for each team
+        this.getTeamMembers();
+      });
+    }
   }
 
   /**Get project name */
