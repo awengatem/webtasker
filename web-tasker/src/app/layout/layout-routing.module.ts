@@ -161,6 +161,11 @@ const routes: Routes = [
         component: AdProjectInfoComponent,
       },
       {
+        path: 'ad_projects/:projectId/sessions',
+        canActivate: [ManagerGuard],
+        component: AdProjSessionsComponent,
+      },
+      {
         path: 'new_project',
         canActivate: [SupervisorGuard],
         canDeactivate: [ClearLocationGuard],
@@ -228,11 +233,6 @@ const routes: Routes = [
         path: 'ad_manage/projects',
         canActivate: [ManagerGuard],
         component: MngProjectsComponent,
-      },
-      {
-        path: 'ad_manage/projects/sessions',
-        canActivate: [ManagerGuard],
-        component: AdProjSessionsComponent,
       },
       {
         path: 'ad_manage/teams',
