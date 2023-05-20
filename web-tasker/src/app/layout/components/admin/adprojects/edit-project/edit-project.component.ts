@@ -26,9 +26,11 @@ export class EditProjectComponent implements OnInit {
   ngOnInit(): void {
     //subscribe to the route params
     this.route.params.subscribe((params: Params) => {
-      this.projectId = params['projectId'];
-      console.log(this.projectId);
+      // this.projectId = params['projectId'];
+      // console.log(this.projectId);
     });
+    this.projectId = localStorage.getItem('capturedProjectId')!;
+    console.log(this.projectId);
 
     //get the selected project
     if (this.projectId) {
