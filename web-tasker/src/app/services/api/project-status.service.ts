@@ -106,6 +106,22 @@ export class ProjectStatusService {
     });
   }
 
+  /**get calibrated status docs by project Id */
+  getSpecProjStatusDocs(projectId: string) {
+    return new Promise((resolve, reject) => {
+      this.getStatusDocsByProjId(projectId)
+        .then((statusDocs) => {
+          this.calibrateStatusDocs(statusDocs).then((calibratedDocs) => {
+            resolve(calibratedDocs);
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          reject();
+        });
+    });
+  }
+
   /**get user status statistics for all users from api */
   getUserStatus() {
     return new Promise((resolve, reject) => {
@@ -174,7 +190,7 @@ export class ProjectStatusService {
   }
 
   /**get project status docs from api specified by Projectid*/
-  getStatusDocsById(projectId: string) {
+  getStatusDocsByProjId(projectId: string) {
     return new Promise((resolve, reject) => {
       this.getProjectStatusByProjId(projectId).subscribe({
         next: (statusDocs) => {
@@ -192,7 +208,7 @@ export class ProjectStatusService {
   getProjectDuration(projectId: string) {
     return new Promise((resolve, reject) => {
       //work on docs with specified project Id
-      this.getStatusDocsById(projectId).then((statusDocs: any) => {
+      this.getStatusDocsByProjId(projectId).then((statusDocs: any) => {
         let totalDuration = this.computeDurationOnStatusDocs(statusDocs);
         //convert to string
         this.durationConverter(totalDuration).then((duration) => {

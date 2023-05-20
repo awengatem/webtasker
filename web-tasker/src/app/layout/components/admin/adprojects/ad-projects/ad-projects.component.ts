@@ -176,6 +176,11 @@ export class AdProjectsComponent implements OnInit {
       });
   }
 
+  /**save the project id to local storage*/
+  saveProjectId(projectId: string){
+    localStorage.setItem('capturedProjectId', projectId);
+  }
+
   submit() {
     this.submitted = true;
   }

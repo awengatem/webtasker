@@ -7,12 +7,12 @@ import { ProjectStatusService } from 'src/app/services/api/project-status.servic
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-proj-sessions',
-  templateUrl: './proj-sessions.component.html',
-  styleUrls: ['./proj-sessions.component.scss'],
+  selector: 'app-ad-proj-sessions',
+  templateUrl: './ad-proj-sessions.component.html',
+  styleUrls: ['./ad-proj-sessions.component.scss'],
 })
-export class ProjSessionsComponent {
-  sessions!: any[];
+export class AdProjSessionsComponent {
+  essions!: any[];
   totalSessions = 0;
   projectId!: string;
   userId!: string;
@@ -68,11 +68,11 @@ export class ProjSessionsComponent {
 
   /**Method to load table data */
   loadUserSessions() {
-    const userId = localStorage.getItem('user-id')!;
     const projectId = localStorage.getItem('capturedProjectId')!;
 
+    //get the status docs
     this.projectStatusService
-      .getSpecUsernProjStatusDocs(userId, projectId)
+      .getSpecProjStatusDocs(projectId)
       .then((sessions: any) => {
         // add numbering to the sessions
         for (let session of sessions) {
@@ -92,8 +92,7 @@ export class ProjSessionsComponent {
 
   loadProjectInfo() {
     const projectId = localStorage.getItem('capturedProjectId')!;
-    const teamId = localStorage.getItem('capturedProjectTeam')!;
-    this.router.navigate([`/projects/${projectId}/${teamId}`]);
+    this.router.navigate([`/ad_projects/${projectId}`]);
   }
 
   /**Method to convert timestamp to date */

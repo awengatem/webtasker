@@ -36,14 +36,20 @@ export class ProjectInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      console.log(params);
-      const projectId = params['projectId'];
-      const teamId = params['teamId'];
-      this.projectId = projectId;
-      this.teamId = teamId;
-      this.getTeamName(teamId);
-      this.getProject(projectId);
+      // console.log(params);
+      // const projectId = params['projectId'];
+      // const teamId = params['teamId'];
+      // this.projectId = projectId;
+      // this.teamId = teamId;
+      // this.getTeamName(teamId);
+      // this.getProject(projectId);
     });
+    const projectId = localStorage.getItem('capturedProjectId')!;
+    const teamId = localStorage.getItem('capturedProjectTeam')!;
+    this.projectId = projectId;
+    this.teamId = teamId;
+    this.getTeamName(teamId);
+    this.getProject(projectId);
   }
 
   //getting project document
@@ -128,10 +134,10 @@ export class ProjectInfoComponent implements OnInit {
     });
   }
 
-  /**Method to set project id to local storage */
-  setProjectId() {
-    //set to local storage
-    localStorage.setItem('project-id', this.projectId);
-    this.router.navigate(['/projects/sessions']);
+  /**Method to navigate to sessions */
+  showSessions() {
+    this.router.navigate([
+      `/projects/${this.projectId}/${this.teamId}/sessions`,
+    ]);
   }
 }
