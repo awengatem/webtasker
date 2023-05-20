@@ -41,7 +41,7 @@ export class ProjSessionsComponent {
 
   ngOnInit(): void {
     //imitialize userId and projectId
-    this.projectId = localStorage.getItem('project-id')!;
+    this.projectId = localStorage.getItem('capturedProjectId')!;
     this.userId = localStorage.getItem('user-id')!;
     //get project name
     this.getProjectName();
@@ -70,7 +70,7 @@ export class ProjSessionsComponent {
   loadUserSessions() {
     const userId = localStorage.getItem('user-id')!;
     const projectId = localStorage.getItem('capturedProjectId')!;
-    
+
     this.projectStatusService
       .getSpecUsernProjStatusDocs(userId, projectId)
       .then((sessions: any) => {
