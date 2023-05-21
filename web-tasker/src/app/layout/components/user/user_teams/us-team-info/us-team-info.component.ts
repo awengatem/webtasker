@@ -39,7 +39,12 @@ export class UsTeamInfoComponent implements OnInit {
       // this.getTeamProjects(teamId);
       // this.getTeamMembers(teamId);
     });
+    
     const teamId = localStorage.getItem('capturedTeamId')!;
+    this.teamId = teamId;
+    this.getTeamName(teamId);
+    this.getTeamProjects(teamId);
+    this.getTeamMembers(teamId);
   }
 
   //navigation of schedule
