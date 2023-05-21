@@ -21,6 +21,7 @@ export class AdProjSessionsComponent {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     'Position',
+    'Username',
     'ProjectName',
     'TeamName',
     'Status',

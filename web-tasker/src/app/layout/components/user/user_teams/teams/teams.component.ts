@@ -130,4 +130,10 @@ export class TeamsComponent implements OnInit {
         console.log(error);
       });
   }
+
+  /**Set the team id in local storage to aid in the team-info component */
+  captureTeamId(teamId: string) {
+    /**store this in localstorage to aid in next compomnent */
+    localStorage.setItem('capturedTeamId', teamId);    
+  }
 }

@@ -30,10 +30,13 @@ export class AddMemberComponent implements OnInit {
   ngOnInit(): void {
     //Subscribe first
     this.route.params.subscribe((params: Params) => {
-      console.log(params);
-      const teamId = params['teamId'];
-      this.teamId = teamId;
+      // console.log(params);
+      // const teamId = params['teamId'];
+      // this.teamId = teamId;
     });
+
+    const teamId = localStorage.getItem('capturedTeamId')!;
+    this.teamId = teamId;
 
     //get team members first
     //this.getTeamMembers(this.teamId);

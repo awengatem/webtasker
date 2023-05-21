@@ -46,6 +46,7 @@
                   <div class="timetable-item shadow pointer">
                     <div class="timetable-item-main">
                       <div
+                        (click)="captureTeamId(team._id)"
                         [routerLink]="['/ad_teams', team._id]"
                         class="timetable-item-name"
                       >
