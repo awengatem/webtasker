@@ -39,10 +39,13 @@ export class AssignProjectComponent implements OnInit {
     // ];
     //Subscribe first
     this.route.params.subscribe((params: Params) => {
-      console.log(params);
-      const teamId = params['teamId'];
-      this.teamId = teamId;
+      // console.log(params);
+      // const teamId = params['teamId'];
+      // this.teamId = teamId;
     });
+
+    const teamId = localStorage.getItem('capturedTeamId')!;
+    this.teamId = teamId;
 
     //record where you are
     this.projectService.setFromAssigning(true);
