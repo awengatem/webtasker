@@ -37,12 +37,18 @@ export class TeamInfoComponent implements OnInit {
     //get respective projects from route params id
     //subscribe to the route params
     this.route.params.subscribe((params: Params) => {
-      const teamId = params['teamId'];
-      this.teamId = teamId;
-      this.getTeamName(teamId);
-      this.getTeamProjects(teamId);
-      this.getTeamMembers(teamId);
+      // const teamId = params['teamId'];
+      // this.teamId = teamId;
+      // this.getTeamName(teamId);
+      // this.getTeamProjects(teamId);
+      // this.getTeamMembers(teamId);
     });
+
+    const teamId = localStorage.getItem('capturedTeamId')!;
+    this.teamId = teamId;
+    this.getTeamName(teamId);
+    this.getTeamProjects(teamId);
+    this.getTeamMembers(teamId);
 
     //check where from and decide which tab to display
     if (this.projectService.getFromAssigning()) {
