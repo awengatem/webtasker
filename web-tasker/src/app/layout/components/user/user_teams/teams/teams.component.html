@@ -42,6 +42,7 @@
                 <div
                   class="col-md-6"
                   *ngFor="let team of teams | teamFilter : searchText"
+                  (click)="captureTeamId(team._id)"
                   [routerLink]="['/teams', team._id]"
                 >
                   <div class="timetable-item shadow pointer">
