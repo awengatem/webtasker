@@ -94,7 +94,7 @@
                           <mat-cell
                             *matCellDef="let document"
                             class="point"
-                            (click)="setLocation()"
+                            (click)="navigate(document._id)"
                             [routerLink]="['/ad_teams', document._id]"
                           >
                             {{ document.teamName }}

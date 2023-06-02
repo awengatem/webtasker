@@ -211,4 +211,16 @@ export class MngProjectsComponent implements OnInit {
   setLocation() {
     window.sessionStorage.setItem('fromMng', 'true');
   }
+
+  /**save the project id to local storage*/
+  saveProjectId(projectId: string) {
+    localStorage.setItem('capturedProjectId', projectId);
+  }
+
+  /**Method to navigate to project info */
+  navigate(projectId: string) {
+    //set location then save id to local storage
+    this.setLocation();
+    this.saveProjectId(projectId);
+  }
 }
