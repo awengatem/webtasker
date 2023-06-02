@@ -1,23 +1,22 @@
+import { Injectable } from '@angular/core';
 import {
-  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
   HttpResponse,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Subject, catchError, Observable, throwError} from 'rxjs';
+import { Subject, Observable, throwError } from 'rxjs';
+import { catchError, mergeMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { TokenService } from '../services/token.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class WebReqInterceptor implements HttpInterceptor {
   constructor(
-    private authService: AuthService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private authService: AuthService
   ) {}
 
   refreshingAccessToken!: boolean;
@@ -48,10 +47,40 @@ export class WebReqInterceptor implements HttpInterceptor {
           !req.url.includes('login') &&
           error.status === 403
         ) {
-          this.handle403Error(req);
+          this.handle403Error(req, next);
         }
 
         return throwError(error);
+      })
+    );
+  }
+
+  handle403Error(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    return this.tokenService.getNewToken().pipe(
+      mergeMap((response: HttpResponse<any>) => {
+        const accessToken = response.body.accessToken;
+
+        // Reset the access token
+        this.tokenService.saveAccessToken(accessToken); // Save to session storage
+        this.tokenService.setAccessTokenLocal(accessToken); // Save to local storage
+
+        // Clone the request and add the new access token
+        const clonedRequest = req.clone({
+          headers: req.headers.set('Authorization', `Bearer ${accessToken}`),
+        });
+
+        // Resend the request with the new access token
+        return next.handle(clonedRequest);
+      }),
+      catchError((err) => {
+        console.log(err.error.message);
+        if (err.status === 403) {
+          this.authService.logout();
+        }
+        return throwError(err);
       })
     );
   }
@@ -71,63 +100,6 @@ export class WebReqInterceptor implements HttpInterceptor {
     }
     return req;
   }
-
-  handle403Error(req: HttpRequest<any>) {
-    //get refreshed access token and reset it
-    return this.tokenService.getNewToken().subscribe({
-      next: (response: HttpResponse<any>) => {
-        const accessToken = response.body.accessToken;
-
-        //reset the access token
-        this.tokenService.saveAccessToken(accessToken); //saves to session storage
-        this.tokenService.setAccessTokenLocal(accessToken); //saves to local storage
-        //window.location.reload();
-        //localStorage['access-token'] = accessToken;
-      },
-      error: (err) => {
-        console.log(err.error.message);
-        if (err.status === 403) {
-          this.authService.logout();
-        }
-      },
-    });
-  }
-
-  /*
-  *suggested method to handle resending of request after refreshing token
-  handle403Error(req: HttpRequest<any>) {
-    if (this.refreshingAccessToken) {
-      return new Observable((observer)=>{
-        this.accessTokenRefreshed.subscribe(()=>{
-          //this code will run when the access token has been refreshed
-          observer.next();
-          observer.complete();
-        })
-      })
-    } else {
-      this.refreshingAccessToken = true;
-      //get refreshed access token and reset it
-      return this.tokenService.getNewToken().subscribe({
-        next: (response: HttpResponse<any>) => {
-          const accessToken = response.body.accessToken;
-
-          //reset the access token
-          this.tokenService.saveAccessToken(accessToken); //saves to session storage
-          this.tokenService.setAccessTokenLocal(accessToken); //saves to local storage
-          //window.location.reload();
-          //localStorage['access-token'] = accessToken;
-          this.accessTokenRefreshed.next;
-        },
-        error: (err) => {
-          console.log(err.error.message);
-          if (err.status === 403) {
-            this.authService.logout();
-          }
-        },
-      });
-    }    
-  }
-  */
 
   //method to set credentials to true on all requests
   addCredentials(req: HttpRequest<any>) {
