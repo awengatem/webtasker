@@ -7,8 +7,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { error } from 'jquery';
-import { Subject, catchError, Observable, throwError } from 'rxjs';
+import { Subject, catchError, Observable, throwError} from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { TokenService } from '../services/token.service';
 
