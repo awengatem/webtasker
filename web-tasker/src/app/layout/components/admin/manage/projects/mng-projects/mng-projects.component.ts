@@ -209,7 +209,7 @@ export class MngProjectsComponent implements OnInit {
    *  navigate back to previous route
    */
   setLocation() {
-    window.sessionStorage.setItem('fromMng', 'true');   
+    window.sessionStorage.setItem('fromMng', 'true');
   }
 
   /**save the project id to local storage*/
@@ -218,7 +218,9 @@ export class MngProjectsComponent implements OnInit {
   }
 
   /**Method to navigate to project info */
-  navigate(){
-    
+  navigate(projectId: string) {
+    //set location then save id to local storage
+    this.setLocation();
+    this.saveProjectId(projectId);
   }
 }
