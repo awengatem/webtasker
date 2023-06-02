@@ -217,4 +217,11 @@ export class MngTeamsComponent implements OnInit {
     /**store this in localstorage to aid in next compomnent */
     localStorage.setItem('capturedTeamId', teamId);
   }
+
+   /**Method to navigate to team info */
+   navigate(teamId: string) {
+    //set location then save id to local storage
+    this.setLocation();
+    this.captureTeamId(teamId);
+  }
 }
