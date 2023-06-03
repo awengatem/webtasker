@@ -47,7 +47,7 @@ export class WebReqInterceptor implements HttpInterceptor {
           !req.url.includes('login') &&
           error.status === 403
         ) {
-          this.handle403Error(req,next);
+          this.handle403Error(req, next);
         }
 
         return throwError(error);
@@ -67,7 +67,7 @@ export class WebReqInterceptor implements HttpInterceptor {
         //window.location.reload();
         //localStorage['access-token'] = accessToken;
         req = this.addAuthHeader(req);
-        next.handle(req);
+        return next.handle(req);
       },
       error: (err: any) => {
         console.log(err.error.message);
