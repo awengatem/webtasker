@@ -47,7 +47,7 @@ export class WebReqInterceptor implements HttpInterceptor {
           !req.url.includes('login') &&
           error.status === 403
         ) {
-          this.handle403Error(req);
+          this.handle403Error(req,next);
         }
 
         return throwError(error);
@@ -55,7 +55,7 @@ export class WebReqInterceptor implements HttpInterceptor {
     );
   }
 
-  handle403Error(req: HttpRequest<any>) {
+  handle403Error(req: HttpRequest<any>, next: HttpHandler) {
     //get refreshed access token and reset it
     return this.tokenService.getNewToken().subscribe({
       next: (response: HttpResponse<any>) => {
@@ -66,6 +66,8 @@ export class WebReqInterceptor implements HttpInterceptor {
         this.tokenService.setAccessTokenLocal(accessToken); //saves to local storage
         //window.location.reload();
         //localStorage['access-token'] = accessToken;
+        req = this.addAuthHeader(req);
+        next.handle(req);
       },
       error: (err: any) => {
         console.log(err.error.message);
