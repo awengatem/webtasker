@@ -8,7 +8,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Subject, Observable, throwError } from 'rxjs';
-import { catchError, mergeMap } from 'rxjs/operators';
+import { catchError, mergeMap, switchMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { TokenService } from '../services/token.service';
 
@@ -47,7 +47,7 @@ export class WebReqInterceptor implements HttpInterceptor {
           !req.url.includes('login') &&
           error.status === 403
         ) {
-          this.handle403Error(req, next);
+          this.handle403Error(req);
         }
 
         return throwError(error);
@@ -55,34 +55,25 @@ export class WebReqInterceptor implements HttpInterceptor {
     );
   }
 
-  handle403Error(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    return this.tokenService.getNewToken().pipe(
-      mergeMap((response: HttpResponse<any>) => {
+  handle403Error(req: HttpRequest<any>) {
+    //get refreshed access token and reset it
+    return this.tokenService.getNewToken().subscribe({
+      next: (response: HttpResponse<any>) => {
         const accessToken = response.body.accessToken;
 
-        // Reset the access token
-        this.tokenService.saveAccessToken(accessToken); // Save to session storage
-        this.tokenService.setAccessTokenLocal(accessToken); // Save to local storage
-
-        // Clone the request and add the new access token
-        const clonedRequest = req.clone({
-          headers: req.headers.set('Authorization', `Bearer ${accessToken}`),
-        });
-
-        // Resend the request with the new access token
-        return next.handle(clonedRequest);
-      }),
-      catchError((err) => {
+        //reset the access token
+        this.tokenService.saveAccessToken(accessToken); //saves to session storage
+        this.tokenService.setAccessTokenLocal(accessToken); //saves to local storage
+        //window.location.reload();
+        //localStorage['access-token'] = accessToken;
+      },
+      error: (err: any) => {
         console.log(err.error.message);
         if (err.status === 403) {
           this.authService.logout();
         }
-        return throwError(err);
-      })
-    );
+      },
+    });
   }
 
   addAuthHeader(req: HttpRequest<any>) {
