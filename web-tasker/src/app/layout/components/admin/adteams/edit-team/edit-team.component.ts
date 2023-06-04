@@ -26,9 +26,11 @@ export class EditTeamComponent implements OnInit {
   ngOnInit(): void {
     //subscribe to the route params
     this.route.params.subscribe((params: Params) => {
-      this.teamId = params['teamId'];
-      console.log(this.teamId);
+      // this.teamId = params['teamId'];
+      // console.log(this.teamId);
     });
+    const teamId = localStorage.getItem('capturedTeamId')!;
+    this.teamId = teamId;
 
     //get the selected team
     if (this.teamId) {

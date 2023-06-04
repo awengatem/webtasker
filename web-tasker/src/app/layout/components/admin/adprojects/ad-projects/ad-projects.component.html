@@ -82,7 +82,7 @@
                             type="button"
                             class="col btn btn-outline-custom btn-sm"
                             [routerLink]="['/edit_project', project._id]"
-                            (click)="captureProject(project.projectName)"
+                            (click)="saveProjectId(project._id)"
                           >
                             <i class="fa-solid fa-pen-fancy"></i>
                           </button>
