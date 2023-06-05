@@ -43,6 +43,7 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
 import { ClearUsessionsintervalGuard } from '../helpers/guards/clear-usessionsinterval.guard';
 import { ProjSessionsComponent } from './components/user/user_projects/proj-sessions/proj-sessions.component';
 import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
+import { SuperviseComponent } from './components/admin/supervise/supervise/supervise.component';
 
 const routes: Routes = [
   {
@@ -216,6 +217,13 @@ const routes: Routes = [
         canActivate: [SupervisorGuard],
         canDeactivate: [ClearLocationGuard],
         component: EditTeamComponent,
+      },
+
+      /**SUPERVISE*/
+      {
+        path: 'supervise',
+        canActivate: [SupervisorGuard],
+        component: SuperviseComponent,
       },
 
       /**MANAGE*/
