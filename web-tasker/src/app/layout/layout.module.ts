@@ -64,6 +64,7 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
 import { ProjSessionsComponent } from './components/user/user_projects/proj-sessions/proj-sessions.component';
 import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
 import { SuperviseComponent } from './components/admin/supervise/supervise/supervise.component';
+import { SupervisorSessionsComponent } from './components/admin/supervise/supervisor-sessions/supervisor-sessions.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { SuperviseComponent } from './components/admin/supervise/supervise/super
     ProjSessionsComponent,
     AdProjSessionsComponent,
     SuperviseComponent,
+    SupervisorSessionsComponent,
   ],
   imports: [
     CommonModule,
