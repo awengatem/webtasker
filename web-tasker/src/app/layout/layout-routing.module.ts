@@ -45,6 +45,7 @@ import { ProjSessionsComponent } from './components/user/user_projects/proj-sess
 import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
 import { SuperviseComponent } from './components/admin/supervise/supervise/supervise.component';
 import { SupervisorSessionsComponent } from './components/admin/supervise/supervisor-sessions/supervisor-sessions.component';
+import { FillEarningsComponent } from './components/admin/supervise/supervise/fill_earnings/fill-earnings/fill-earnings.component';
 
 const routes: Routes = [
   {
@@ -225,6 +226,11 @@ const routes: Routes = [
         path: 'supervise',
         canActivate: [SupervisorGuard],
         component: SuperviseComponent,
+      },
+      {
+        path: 'fill_earnings',
+        canActivate: [SupervisorGuard],
+        component: FillEarningsComponent,
       },
       {
         path: 'supervise_sessions',
