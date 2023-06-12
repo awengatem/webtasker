@@ -75,6 +75,7 @@ export class AssignProjectComponent implements OnInit {
     //get projects already assigned to team first
     this.teamService.getTeamProjects(this.teamId).subscribe({
       next: (projects: any) => {
+        console.log(projects);
         //pushing team projects to respective array
         for (let i = 0; i < projects.length; i++) {
           tmp2.push(projects[i]);

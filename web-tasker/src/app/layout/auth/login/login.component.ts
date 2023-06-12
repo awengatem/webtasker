@@ -414,6 +414,7 @@ export class LoginComponent implements OnInit {
         this.signupErrorMessage = err.error.message;
         //check the duplicate based on message and highlight for user
         let sliceText = this.signupErrorMessage.slice(0, 5);
+        sliceText = sliceText.toString();
         console.log(sliceText);
         if (sliceText === 'Usern') {
           this.userErr = true;
