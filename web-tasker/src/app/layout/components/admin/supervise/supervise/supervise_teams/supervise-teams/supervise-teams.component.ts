@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./supervise-teams.component.scss']
 })
 export class SuperviseTeamsComponent {
+  constructor() { }
 
+  ngOnInit(): void {
+  }
 }
