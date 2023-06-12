@@ -45,9 +45,9 @@ import { ProjSessionsComponent } from './components/user/user_projects/proj-sess
 import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
 import { SuperviseComponent } from './components/admin/supervise/supervise/supervise.component';
 import { SupervisorSessionsComponent } from './components/admin/supervise/supervisor-sessions/supervisor-sessions.component';
-import { FillEarningsComponent } from './components/admin/supervise/supervise/fill_earnings/fill-earnings/fill-earnings.component';
-import { ViewEarningsComponent } from './components/admin/supervise/supervise/view_earnings/view-earnings/view-earnings.component';
-import { SuperviseTeamsComponent } from './components/admin/supervise/supervise/supervise_teams/supervise-teams/supervise-teams.component';
+import { FillEarningsComponent } from './components/admin/supervise/fill-earnings/fill-earnings.component';
+import { ViewEarningsComponent } from './components/admin/supervise/view-earnings/view-earnings.component';
+import { SuperviseTeamsComponent } from './components/admin/supervise/supervise-teams/supervise-teams.component';
 
 const routes: Routes = [
   {
