@@ -66,6 +66,8 @@ import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-s
 import { SuperviseComponent } from './components/admin/supervise/supervise/supervise.component';
 import { SupervisorSessionsComponent } from './components/admin/supervise/supervisor-sessions/supervisor-sessions.component';
 import { FillEarningsComponent } from './components/admin/supervise/supervise/fill_earnings/fill-earnings/fill-earnings.component';
+import { ViewEarningsComponent } from './components/admin/supervise/supervise/view_earnings/view-earnings/view-earnings.component';
+import { SuperviseTeamsComponent } from './components/admin/supervise/supervise/supervise_teams/supervise-teams/supervise-teams.component';
 
 @NgModule({
   declarations: [
@@ -129,6 +131,8 @@ import { FillEarningsComponent } from './components/admin/supervise/supervise/fi
     SuperviseComponent,
     SupervisorSessionsComponent,
     FillEarningsComponent,
+    ViewEarningsComponent,
+    SuperviseTeamsComponent,
   ],
   imports: [
     CommonModule,
