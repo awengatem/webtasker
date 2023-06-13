@@ -46,6 +46,8 @@ export class AdTeamsComponent implements OnInit {
       this.teamsLength = teams.length;
       //get team members for each
       this.getTeamMembers();
+      //get team projects for each
+      this.getTeamProjects();
       console.log(this.teams);
     });
   }
@@ -165,6 +167,21 @@ export class AdTeamsComponent implements OnInit {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  /**Get team projects for each */
+  getTeamProjects() {
+    if (this.teams.length > 0) {
+      for (let i = 0; i < this.teams.length; i++) {
+        this.teamService
+          .getTeamProjects(this.teams[i]._id)
+          .subscribe((projects: any) => {
+            // console.log(projects.length);
+            //push number of projects to teams
+            this.teams[i].projects = projects.length;
+          });
+      }
+    }
   }
 
   submit() {

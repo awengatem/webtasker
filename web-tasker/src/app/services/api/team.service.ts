@@ -76,7 +76,7 @@ export class TeamService {
 
   /**Method to get team projects */
   getTeamProjects(teamId: string) {
-    return this.webReqService.get(`teams/projects/${teamId}`);
+    return this.webReqService.get(`team_projects/${teamId}`);
   }
 
   /**Method to get team members */
