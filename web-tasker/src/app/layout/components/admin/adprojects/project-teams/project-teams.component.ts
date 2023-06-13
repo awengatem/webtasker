@@ -11,7 +11,7 @@ import { TeamService } from 'src/app/services/api/team.service';
 export class ProjectTeamsComponent implements OnInit {
   projectId!: string;
   projectName: any;
-  teamCount: any;
+  projectTeams: any;
   teams!: any[];
   /**used by search bar */
   searchText = '';
@@ -55,10 +55,8 @@ export class ProjectTeamsComponent implements OnInit {
           this.projectName = project.projectName
             ? project.projectName
             : 'Project name';
-          this.teamCount = project.teams.length ? project.teams.length : 0;
         } else {
           this.projectName = 'Project name';
-          this.teamCount = 0;
         }
       },
       error: (err) => {
@@ -75,6 +73,7 @@ export class ProjectTeamsComponent implements OnInit {
           console.log(teams);
           if (teams) {
             this.teams = teams;
+            this.projectTeams = teams.length;
           }
           resolve(true);
         },
