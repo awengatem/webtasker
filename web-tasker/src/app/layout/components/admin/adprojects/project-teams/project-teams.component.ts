@@ -43,6 +43,8 @@ export class ProjectTeamsComponent implements OnInit {
       this.getProjectTeams(projectId).then(() => {
         //get team members for each team
         this.getTeamMembers();
+        //get team projects for each team
+        this.getTeamProjects();
       });
     }
   }
@@ -94,6 +96,21 @@ export class ProjectTeamsComponent implements OnInit {
             // console.log(members.length);
             //push number of members to teams
             this.teams[i].members = members.length;
+          });
+      }
+    }
+  }
+
+  /**Get team projects for each */
+  getTeamProjects() {
+    if (this.teams.length > 0) {
+      for (let i = 0; i < this.teams.length; i++) {
+        this.teamService
+          .getTeamProjects(this.teams[i]._id)
+          .subscribe((projects: any) => {
+            // console.log(projects.length);
+            //push number of projects to teams
+            this.teams[i].projects = projects.length;
           });
       }
     }
