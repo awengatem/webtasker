@@ -13,9 +13,9 @@ export class AdProjectInfoComponent implements OnInit {
   projectName: any;
   createdBy: any;
   lastUpdated: any;
-  teamCount: any;
   projectId!: string;
   projectStatus = 'Unknown';
+  projectTeams!: any;
   actionClicked = false;
 
   /**variables used in project status */
@@ -50,14 +50,14 @@ export class AdProjectInfoComponent implements OnInit {
             : 'Project name';
           this.createdBy = project.createdBy ? project.createdBy : 'Unknown';
           this.lastUpdated = project.updatedAt ? project.updatedAt : 'Unknown';
-          this.teamCount = project.teams.length ? project.teams.length : 0;
-          //get project status
+          //get project status and project teams
           this.getProjectStatus();
+          this.getProjectTeams();
         } else {
           this.projectName = 'Project name';
           this.createdBy = 'Unknown';
           this.lastUpdated = 'Unknown';
-          this.teamCount = 0;
+          this.projectTeams = 0;
         }
       },
       error: (err) => {
@@ -163,6 +163,17 @@ export class AdProjectInfoComponent implements OnInit {
       })
       .catch((error) => {
         console.log(error);
+      });
+  }
+
+  /**Get team projects for project */
+  getProjectTeams() {
+    this.projectService
+      .getProjectTeams(this.projectId)
+      .subscribe((teams: any) => {
+        // console.log(teams.length);
+        //push number of teams to projects
+        this.projectTeams = teams.length;
       });
   }
 
