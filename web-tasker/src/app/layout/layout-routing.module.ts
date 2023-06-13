@@ -48,6 +48,7 @@ import { SupervisorSessionsComponent } from './components/admin/supervise/superv
 import { FillEarningsComponent } from './components/admin/supervise/fill-earnings/fill-earnings.component';
 import { ViewEarningsComponent } from './components/admin/supervise/view-earnings/view-earnings.component';
 import { SuperviseTeamsComponent } from './components/admin/supervise/supervise-teams/supervise-teams.component';
+import { TeamsPageComponent } from './components/admin/supervise/teams-page/teams-page.component';
 
 const routes: Routes = [
   {
@@ -249,6 +250,11 @@ const routes: Routes = [
         canActivate: [SupervisorGuard],
         component: SupervisorSessionsComponent,
       },
+      {
+        path: 'teams_page',
+        canActivate: [SupervisorGuard],
+        component: TeamsPageComponent,
+      }
 
       /**MANAGE*/
       {
