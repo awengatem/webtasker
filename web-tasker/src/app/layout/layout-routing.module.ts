@@ -254,7 +254,7 @@ const routes: Routes = [
         path: 'teams_page',
         canActivate: [SupervisorGuard],
         component: TeamsPageComponent,
-      }
+      },
 
       /**MANAGE*/
       {
