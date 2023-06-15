@@ -185,6 +185,19 @@ export class MngProjectsComponent implements OnInit {
     //load data
     this.projectService.getAllProjects().subscribe({
       next: (projects) => {
+        //add project teams
+        if (projects) {
+          for (let project of projects) {
+            this.projectService
+              .getProjectTeams(project._id)
+              .subscribe((teams: any) => {
+                // console.log(teams.length);
+                //push number of teams to projects
+                project.teams = teams.length;
+              });
+          }
+        }
+        //add projects to table
         this.dataSource = new MatTableDataSource(projects);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
