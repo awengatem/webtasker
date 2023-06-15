@@ -191,8 +191,8 @@ export class MngTeamsComponent implements OnInit {
             this.teamService
               .getTeamProjects(team._id)
               .subscribe((projects: any) => {
-                // console.log(teams.length);
-                //push number of teams to projects
+                // console.log(projects.length);
+                //push number of projects to teams
                 team.projects = projects.length;
               });
           }
