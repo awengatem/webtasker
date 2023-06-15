@@ -121,7 +121,7 @@ export class AdProjectsComponent implements OnInit {
   }
 
   /**Get project members and status*/
-  getProjectMembers() {
+  getProjectMembers() { 
     if (this.projects.length > 0) {
       for (let i = 0; i < this.projects.length; i++) {
         this.projectService
