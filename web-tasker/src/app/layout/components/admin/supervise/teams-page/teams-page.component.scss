@@ -23,24 +23,13 @@
   padding: 24px;
   border-radius: 2px;
 
-  .wrapperHeader {
-    display: flex;
-
-    .header {
-      display: flex;
-
-      .headerIcon {
-        height: 150px;
-        width: 1300px;
-      }
-    }
-  }
   mat-divider {
     border-color: grey;
     margin-top: 10px;
     margin-bottom: 10px;
   }
   .teams-inside {
+    overflow-x: 1000px;
     display: flex-start;
     .btn {
       width: 23rem;
@@ -48,6 +37,16 @@
     }
     .card {
       width: auto;
+      .card {
+        margin-left: 6px;
+      }
+      .data-name:hover {
+        scale: 1.2;
+      }
+      .list-container {
+        max-height: 200px; /* Set the desired height for the scrollable list */
+        overflow-y: auto; /* Add vertical scrollbar when needed */
+      }
     }
   }
 }
