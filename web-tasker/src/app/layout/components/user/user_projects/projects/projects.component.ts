@@ -91,13 +91,13 @@ export class ProjectsComponent implements OnInit {
         /**update status to productive or break */
         if (documents.length > 0) {
           const document = documents[0];
-          //console.log(document);
+          // console.log(document);
           /**update project status */
           if (this.projects) {
             for (let i = 0; i < this.projects.length; i++) {
               if (
                 this.projects[i]._id === document.project_id &&
-                this.projects[i].team[0] === document.team_id
+                this.projects[i].team === document.team_id
               ) {
                 this.projects[i].status = 'Active';
               } else {
