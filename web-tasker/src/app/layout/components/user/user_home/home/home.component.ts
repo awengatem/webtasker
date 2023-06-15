@@ -126,7 +126,7 @@ export class HomeComponent implements OnInit {
             for (let i = 0; i < this.projects.length; i++) {
               if (
                 this.projects[i]._id === document.project_id &&
-                this.projects[i].team[0] === document.team_id
+                this.projects[i].team === document.team_id
               ) {
                 this.projects[i].status = 'Active';
               } else {
@@ -158,6 +158,6 @@ export class HomeComponent implements OnInit {
     /**store this in localstorage to aid in timer guard authorization*/
     localStorage.setItem('capturedProjectTeam', teamId);
     localStorage.setItem('capturedProjectId', projectId);
-    this.timerService.navigator(projectId, teamId[0]);
+    this.timerService.navigator(projectId, teamId);
   }
 }
