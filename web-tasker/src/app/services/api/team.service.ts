@@ -76,7 +76,7 @@ export class TeamService {
 
   /**Method to get team projects */
   getTeamProjects(teamId: string) {
-    return this.webReqService.get(`teams/projects/${teamId}`);
+    return this.webReqService.get(`team_projects/${teamId}`);
   }
 
   /**Method to get team members */
@@ -94,11 +94,8 @@ export class TeamService {
     return this.webReqService.post(`team_members`, members);
   }
 
-  /**Method to add team projects */
-  assignTeamProjects(teamId: string, projects: any[]) {
-    return this.webReqService.patch(`teams/projects/${teamId}`, {
-      projects: projects,
-    });
+  assignTeamProjects(projects: any[]) {
+    return this.webReqService.post(`team_projects`, projects);
   }
 
   /**Method to get users */

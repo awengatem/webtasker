@@ -41,11 +41,13 @@ export class AdProjectsComponent implements OnInit {
   getProjects() {
     this.projectService.getAllProjects().subscribe((projects: any) => {
       this.projects = projects;
-      /**pushs project status to projects*/
+      /**pushs project status and teams to projects*/
       this.projects.forEach((project) => (project.status = 'Unknown'));
       this.projectsLength = projects.length;
       //get project members
       this.getProjectMembers();
+      //get team projects for each
+      this.getProjectTeams();
       console.log(this.projects);
     });
   }
@@ -119,7 +121,7 @@ export class AdProjectsComponent implements OnInit {
   }
 
   /**Get project members and status*/
-  getProjectMembers() {
+  getProjectMembers() { 
     if (this.projects.length > 0) {
       for (let i = 0; i < this.projects.length; i++) {
         this.projectService
@@ -176,8 +178,23 @@ export class AdProjectsComponent implements OnInit {
       });
   }
 
+  /**Get team projects for each */
+  getProjectTeams() {
+    if (this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectService
+          .getProjectTeams(this.projects[i]._id)
+          .subscribe((teams: any) => {
+            // console.log(teams.length);
+            //push number of teams to projects
+            this.projects[i].teams = teams.length;
+          });
+      }
+    }
+  }
+
   /**save the project id to local storage*/
-  saveProjectId(projectId: string){
+  saveProjectId(projectId: string) {
     localStorage.setItem('capturedProjectId', projectId);
   }
 

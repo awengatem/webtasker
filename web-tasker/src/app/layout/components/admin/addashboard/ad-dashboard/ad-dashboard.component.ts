@@ -213,7 +213,9 @@ export class AdDashboardComponent implements OnInit {
        *  otherwise they don't work
        */
       this.getTotalUsers().then((totalUsers: any) => {
+        console.log(totalUsers);
         this.getProjectMembers(totalUsers).then((projects: any) => {
+          console.log(projects);
           // split resolved member chart array
           let splitArr = this.splitMemberChartArr(projects);
           console.log(splitArr);
@@ -234,6 +236,7 @@ export class AdDashboardComponent implements OnInit {
       if (this.projects.length > 0) {
         let memberArr: any = [];
         let x = 0;
+        console.log(this.projects);
         for (let i = 0; i < this.projects.length; i++) {
           this.projectService
             .getProjectMembers(this.projects[i]._id)
@@ -250,15 +253,33 @@ export class AdDashboardComponent implements OnInit {
                 projectName: this.projects[i].projectName,
               };
               memberArr.push(obj);
+              console.log(memberArr);
               x++;
               //resolve array from within here where its available
-              if (x === this.projects.length) resolve(memberArr);
+              if (x === this.projects.length) {
+                resolve(memberArr);
+              }
             });
           // adding the number of teams for UI
-          this.projects[i].teamCount = this.projects[i].teams.length;
+          // this.projects[i].teamCount = this.projects[i].teams.length;
         }
       }
     });
+  }
+
+  /**Get team projects for each */
+  getProjectTeams() {
+    if (this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectService
+          .getProjectTeams(this.projects[i]._id)
+          .subscribe((teams: any) => {
+            // console.log(teams.length);
+            //push number of teams to projects
+            this.projects[i].teams = teams.length;
+          });
+      }
+    }
   }
 
   /**getting and computing the total duration per project */

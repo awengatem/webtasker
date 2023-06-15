@@ -49,6 +49,7 @@ export class TeamsComponent implements OnInit {
       this.getTeamMembers().then(() => {
         this.getTeamStatus();
       });
+      this.getTeamProjects();
       console.log(this.teams);
     });
   }
@@ -131,9 +132,24 @@ export class TeamsComponent implements OnInit {
       });
   }
 
+  /**Get team projects for each */
+  getTeamProjects() {
+    if (this.teams.length > 0) {
+      for (let i = 0; i < this.teams.length; i++) {
+        this.teamService
+          .getTeamProjects(this.teams[i]._id)
+          .subscribe((projects: any) => {
+            // console.log(projects.length);
+            //push number of projects to teams
+            this.teams[i].projects = projects.length;
+          });
+      }
+    }
+  }
+
   /**Set the team id in local storage to aid in the team-info component */
   captureTeamId(teamId: string) {
     /**store this in localstorage to aid in next compomnent */
-    localStorage.setItem('capturedTeamId', teamId);    
+    localStorage.setItem('capturedTeamId', teamId);
   }
 }

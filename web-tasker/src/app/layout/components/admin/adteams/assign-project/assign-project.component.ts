@@ -134,12 +134,12 @@ export class AssignProjectComponent implements OnInit {
         }
         //hardcode object to match api
         //get the patch team projects payload
-        teamProjects.push(projectId);
+        teamProjects.push({ team_id: this.teamId, project_id: projectId });
       });
       //console.log(teamProjects);
 
       //post them to db
-      this.teamService.assignTeamProjects(this.teamId, teamProjects).subscribe({
+      this.teamService.assignTeamProjects(teamProjects).subscribe({
         next: (res: any) => {
           console.log(res);
           this.router.navigate([`/ad_teams/${this.teamId}`]);
