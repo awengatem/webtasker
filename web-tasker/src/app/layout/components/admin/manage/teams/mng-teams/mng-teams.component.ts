@@ -185,6 +185,19 @@ export class MngTeamsComponent implements OnInit {
     //load data
     this.teamService.getAllTeams().subscribe({
       next: (teams) => {
+        //add team projects
+        if (teams) {
+          for (let team of teams) {
+            this.teamService
+              .getTeamProjects(team._id)
+              .subscribe((projects: any) => {
+                // console.log(projects.length);
+                //push number of projects to teams
+                team.projects = projects.length;
+              });
+          }
+        }
+        //add projects to table
         this.dataSource = new MatTableDataSource(teams);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -218,8 +231,8 @@ export class MngTeamsComponent implements OnInit {
     localStorage.setItem('capturedTeamId', teamId);
   }
 
-   /**Method to navigate to team info */
-   navigate(teamId: string) {
+  /**Method to navigate to team info */
+  navigate(teamId: string) {
     //set location then save id to local storage
     this.setLocation();
     this.captureTeamId(teamId);

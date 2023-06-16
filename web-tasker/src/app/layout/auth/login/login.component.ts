@@ -392,8 +392,8 @@ export class LoginComponent implements OnInit {
     let cTelNo = this.generalService.deepClean(telNo);
 
     const details = {
-      username: cUsername,
-      email: cEmail,
+      username: cUsername.toLowerCase(),
+      email: cEmail.toLowerCase(),
     };
 
     /**post user to server*/

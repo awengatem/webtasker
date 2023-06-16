@@ -83,6 +83,8 @@ export class ProjectStatusComponent implements OnInit {
         this.getProjectMembers(totalUsers);
       });
       this.getProjectDuration();
+      //get project teams
+      this.getProjectTeams();
       console.log(this.projects);
     });
   }
@@ -101,8 +103,6 @@ export class ProjectStatusComponent implements OnInit {
             let userPerc = Math.round((members.length / totalUsers) * 100);
             this.projects[i].userPerc = userPerc;
           });
-        // adding the number of teams for UI
-        this.projects[i].teamCount = this.projects[i].teams.length;
       }
     }
   }
@@ -148,6 +148,21 @@ export class ProjectStatusComponent implements OnInit {
           .getProjectDuration(this.projects[i]._id)
           .then((duration) => {
             this.projects[i].duration = duration;
+          });
+      }
+    }
+  }
+
+  /**Get team projects for each */
+  getProjectTeams() {
+    if (this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectService
+          .getProjectTeams(this.projects[i]._id)
+          .subscribe((teams: any) => {
+            // console.log(teams.length);
+            //push number of teams to projects
+            this.projects[i].teams = teams.length;
           });
       }
     }

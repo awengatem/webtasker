@@ -41,8 +41,8 @@
                 <div
                   class="col-md-6"
                   *ngFor="let project of projects | projectFilter : searchText"
-                  (click)="saveProjectTeam(project._id, project.team[0])"
-                  [routerLink]="['/projects', project._id, project.team[0]]"
+                  (click)="saveProjectTeam(project._id, project.team)"
+                  [routerLink]="['/projects', project._id, project.team]"
                 >
                   <div class="timetable-item shadow pointer">
                     <div class="timetable-item-main">
