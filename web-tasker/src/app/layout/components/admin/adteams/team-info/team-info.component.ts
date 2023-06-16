@@ -229,7 +229,7 @@ export class TeamInfoComponent implements OnInit {
           'Removed!',
           `${username} has been removed from this team.`,
           'success'
-        ).then((result) => window.location.reload());
+        ).then((result) => this.getTeamMembers(this.teamId));
       },
       error: (err: any) => {
         console.log(err);
