@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
   signupErrorMessage = '';
   roles: string[] = [];
   user: any;
-  currentPage = 1;
+  currentPage = 3;
   /**combined signup array */
   userDetails: Record<string, any> = {};
 

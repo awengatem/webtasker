@@ -535,6 +535,41 @@
                         >
                           <h5 class="subtitle">Location and password</h5>
                           <div class="form-group mt-2">
+                            <div class="ui-dropdown">
+                              <select
+                                class="form-style form-control"
+                                (change)="changeCounty($event)"
+                                formControlName="county"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    (county?.touched && county?.invalid) ||
+                                    (submitted3 && county?.invalid)
+                                }"
+                              >
+                                <option value="">Choose County</option>
+                                <option
+                                  *ngFor="let county of counties"
+                                  [ngValue]="county"
+                                  style="text-transform: capitalize"
+                                >
+                                  {{ county }}
+                                </option>
+                              </select>
+                            </div>
+                            <!-- error block -->
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (county?.touched && county?.invalid) ||
+                                (submitted3 && county?.invalid)
+                              "
+                            >
+                              <small> Please choose your county </small>
+                            </div>
+                            <i class="input-icon uil uil-map-pin-alt"></i>
+                          </div>
+                          <div class="form-group mt-2">
                             <input
                               type="text"
                               formControlName="area"
@@ -571,41 +606,6 @@
                                 Job center name must not exceed 20 characters
                               </small>
                             </div>
-                          </div>
-                          <div class="form-group mt-2">
-                            <div class="ui-dropdown">
-                              <select
-                                class="form-style form-control"
-                                (change)="changeCounty($event)"
-                                formControlName="county"
-                                [ngClass]="{
-                                  'is-invalid':
-                                    (county?.touched && county?.invalid) ||
-                                    (submitted3 && county?.invalid)
-                                }"
-                              >
-                                <option value="">Choose County</option>
-                                <option
-                                  *ngFor="let county of counties"
-                                  [ngValue]="county"
-                                  style="text-transform: capitalize"
-                                >
-                                  {{ county }}
-                                </option>
-                              </select>
-                            </div>
-                            <!-- error block -->
-                            <div
-                              class="alert-style"
-                              role="alert"
-                              *ngIf="
-                                (county?.touched && county?.invalid) ||
-                                (submitted3 && county?.invalid)
-                              "
-                            >
-                              <small> Please choose your county </small>
-                            </div>
-                            <i class="input-icon uil uil-map-pin-alt"></i>
                           </div>
                           <div class="form-group mt-2">
                             <input
