@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
+import { WebRequestService } from './web-request.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CountyService {
+  constructor(private webService: WebRequestService) {}
 
-  constructor() { }
+  /**API CONNECTION METHODS */
+  /**get all counties */
+  getCounties() {
+    return this.webService.get('counties');
+  }
 }
