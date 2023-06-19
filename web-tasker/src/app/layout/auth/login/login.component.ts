@@ -25,6 +25,7 @@ import Validation from './validation';
 import { counties, genders } from '../../../helpers/common/store';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { SnackBarService } from 'src/app/services/snackbar.service';
+import { CountyService } from 'src/app/services/api/county.service';
 
 @Component({
   selector: 'app-login',
@@ -86,6 +87,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private accountService: AccountService,
     private tokenService: TokenService,
+    private countyService: CountyService,
     private userAccountService: UserAccountService,
     private generalService: GeneralService,
     private formBuilder: FormBuilder,
