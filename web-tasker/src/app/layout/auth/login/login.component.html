@@ -587,7 +587,6 @@
                               class="vericon success fas fa-check-circle fa-xs"
                               *ngIf="area?.dirty && !area?.errors"
                             ></i>
-
                             <div
                               class="alert-style"
                               role="alert"
@@ -607,6 +606,12 @@
                               </small>
                             </div>
                           </div>
+
+                          <!-- Prevent autofill -->
+                          <div class="">
+                            <input style="display: none" />
+                          </div>
+
                           <div class="form-group mt-2">
                             <input
                               type="password"
@@ -645,6 +650,7 @@
                               </small>
                             </div>
                           </div>
+
                           <div class="form-group mt-2">
                             <input
                               type="password"
@@ -667,7 +673,6 @@
                                 !confirmPassword?.errors
                               "
                             ></i>
-
                             <div
                               class="alert-style"
                               role="alert"
