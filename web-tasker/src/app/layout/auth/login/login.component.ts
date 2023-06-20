@@ -273,10 +273,13 @@ export class LoginComponent implements OnInit {
     });
 
     const selectedIndex = e.target.options.selectedIndex;
-    console.log(this.counties[selectedIndex - 1]);
-
-    /**Get the county sites */
-    // this.getCountySites()
+    const county = this.counties[selectedIndex - 1];
+    
+    if (county) {
+      console.log(county);
+      /**Get the county sites */
+      this.getCountySites(county.countyNumber);
+    }
   }
 
   /**Method to detect selection of site */
