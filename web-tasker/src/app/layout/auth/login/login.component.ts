@@ -26,6 +26,7 @@ import { genders } from '../../../helpers/common/store';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { SnackBarService } from 'src/app/services/snackbar.service';
 import { CountyService } from 'src/app/services/api/county.service';
+import { SiteService } from 'src/app/services/api/site.service';
 
 @Component({
   selector: 'app-login',
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
   signupErrorMessage = '';
   roles: string[] = [];
   counties: any;
+  countySites: any;
   user: any;
   currentPage = 3;
   /**combined signup array */
@@ -89,6 +91,7 @@ export class LoginComponent implements OnInit {
     private accountService: AccountService,
     private tokenService: TokenService,
     private countyService: CountyService,
+    private siteService: SiteService,
     private userAccountService: UserAccountService,
     private generalService: GeneralService,
     private formBuilder: FormBuilder,
@@ -528,6 +531,20 @@ export class LoginComponent implements OnInit {
         console.log(data);
         /**push county names to counies array */
         this.counties = data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  /**Get county sites from db */
+  getCountySites(countyNumber: string) {
+    this.siteService.getCountySites(countyNumber).subscribe({
+      next: (data) => {
+        console.log(data);
+        /**push county names to sites array */
+        this.countySites = data;
       },
       error: (err) => {
         console.log(err);

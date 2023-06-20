@@ -583,11 +583,11 @@
                               >
                                 <option value="">Choose Site</option>
                                 <option
-                                  *ngFor="let site of counties"
+                                  *ngFor="let site of countySites"
                                   [ngValue]="site"
                                   style="text-transform: capitalize"
                                 >
-                                  {{ site.countyName }}
+                                  {{ site.siteName }}
                                 </option>
                               </select>
                             </div>
