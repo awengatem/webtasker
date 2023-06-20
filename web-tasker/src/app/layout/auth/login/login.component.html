@@ -569,7 +569,7 @@
                             </div>
                             <i class="input-icon uil uil-map-pin-alt"></i>
                           </div>
-                          <div class="form-group mt-2">
+                          <div class="form-group mt-2" *ngIf="!county?.invalid">
                             <input
                               type="text"
                               formControlName="area"
