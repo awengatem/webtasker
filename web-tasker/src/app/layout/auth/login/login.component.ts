@@ -271,6 +271,12 @@ export class LoginComponent implements OnInit {
     this.county?.setValue(e.target.value, {
       onlySelf: true,
     });
+
+    const selectedIndex = e.target.options.selectedIndex;
+    console.log(this.counties[selectedIndex - 1]);
+
+    /**Get the county sites */
+    // this.getCountySites()
   }
 
   /**Method to detect selection of site */
