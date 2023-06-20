@@ -22,7 +22,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { WebRequestService } from 'src/app/services/api/web-request.service';
 import Swal from 'sweetalert2';
 import Validation from './validation';
-import { counties, genders } from '../../../helpers/common/store';
+import { genders } from '../../../helpers/common/store';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { SnackBarService } from 'src/app/services/snackbar.service';
 import { CountyService } from 'src/app/services/api/county.service';
@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
   loginErrorMessage = '';
   signupErrorMessage = '';
   roles: string[] = [];
+  counties: any;
   user: any;
   currentPage = 3;
   /**combined signup array */
@@ -98,7 +99,6 @@ export class LoginComponent implements OnInit {
   maxDate = new Date();
   date: any;
   genders = genders;
-  counties = counties;
 
   ngOnInit(): void {
     /**helps during login */
@@ -107,6 +107,9 @@ export class LoginComponent implements OnInit {
       //this.roles = this.accountService.getUser().roles;
       this.user = this.accountService.getUserAccount();
     }
+
+    /**get Counties from db */
+    this.getCounties();
 
     /**building forms */
     this.fSignup1 = this.formBuilder.group({
@@ -509,6 +512,20 @@ export class LoginComponent implements OnInit {
     this.fSignup3.reset();
     this.currentPage = 1;
     this.flapCard();
+  }
+
+  /**Get counties from db */
+  getCounties() {
+    this.countyService.getCounties().subscribe({
+      next: (data) => {
+        console.log(data);
+        /**push county names to counies array */
+        this.counties = data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   reloadPage() {
