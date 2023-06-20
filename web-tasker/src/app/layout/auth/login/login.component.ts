@@ -270,6 +270,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**Method to detect selection of site */
+  changeSite(e: any) {
+    this.area?.setValue(e.target.value, {
+      onlySelf: true,
+    });
+  }
+
   /*methods used by header buttons*/
   signUp() {
     console.log('signing up');

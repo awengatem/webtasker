@@ -570,7 +570,28 @@
                             <i class="input-icon uil uil-map-pin-alt"></i>
                           </div>
                           <div class="form-group mt-2" *ngIf="!county?.invalid">
-                            <input
+                            <div class="ui-dropdown">
+                              <select
+                                class="form-style form-control"
+                                (change)="changeSite($event)"
+                                formControlName="area"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    (area?.touched && area?.invalid) ||
+                                    (submitted3 && area?.invalid)
+                                }"
+                              >
+                                <option value="">Choose Site</option>
+                                <option
+                                  *ngFor="let site of counties"
+                                  [ngValue]="site"
+                                  style="text-transform: capitalize"
+                                >
+                                  {{ site.countyName }}
+                                </option>
+                              </select>
+                            </div>
+                            <!-- <input
                               type="text"
                               formControlName="area"
                               class="form-style form-control"
@@ -582,11 +603,10 @@
                                   (submitted3 && area?.errors)
                               }"
                             />
-                            <i class="input-icon uil uil-location-point"></i>
                             <i
                               class="vericon success fas fa-check-circle fa-xs"
                               *ngIf="area?.dirty && !area?.errors"
-                            ></i>
+                            ></i> 
                             <div
                               class="alert-style"
                               role="alert"
@@ -595,16 +615,28 @@
                                 (submitted3 && area?.errors)
                               "
                             >
-                              <small *ngIf="area?.errors?.['required']">
-                                Job center is required!
-                              </small>
-                              <small *ngIf="area?.errors?.['minlength']">
-                                Job center name must be at least 3 characters
-                              </small>
-                              <small *ngIf="area?.errors?.['maxlength']">
-                                Job center name must not exceed 20 characters
-                              </small>
+                            <small *ngIf="area?.errors?.['required']">
+                              Job center is required!
+                            </small>
+                            <small *ngIf="area?.errors?.['minlength']">
+                              Job center name must be at least 3 characters
+                            </small>
+                            <small *ngIf="area?.errors?.['maxlength']">
+                              Job center name must not exceed 20 characters
+                            </small>
+                          </div>-->
+                            <!-- error block -->
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (area?.touched && area?.invalid) ||
+                                (submitted3 && area?.invalid)
+                              "
+                            >
+                              <small> Please choose your site </small>
                             </div>
+                            <i class="input-icon uil uil-location-point"></i>
                           </div>
 
                           <!-- Prevent autofill -->
