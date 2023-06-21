@@ -272,9 +272,9 @@ export class LoginComponent implements OnInit {
       onlySelf: true,
     });
 
+    /**populate the sites options immediately after county change */
     const selectedIndex = e.target.options.selectedIndex;
     const county = this.counties[selectedIndex - 1];
-    
     if (county) {
       console.log(county);
       /**Get the county sites */
