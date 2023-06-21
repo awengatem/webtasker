@@ -200,27 +200,22 @@
       </div>
 
       <div class="row custom-flex">
-        <!-- AREA FIELD -->
+        <!-- SITE FIELD -->
         <mat-form-field appearance="outline">
-          <mat-label>Job center</mat-label>
-          <input
-            matInput
-            placeholder="enter job center name"
-            type="text"
-            formControlName="area"
-            #areaInput
-          />
+          <mat-label>Site</mat-label>
+          <mat-select matNativeControl name="site" formControlName="site">
+            <mat-option
+              *ngFor="let x of countySites"
+              [value]="x"
+              style="text-transform: capitalize"
+              >{{ x.siteName }}</mat-option
+            >
+          </mat-select>
           <mat-icon matSuffix>my_location</mat-icon>
-          <!-- Error block -->
-          <mat-error *ngIf="form.controls['area'].errors?.['required']"
-            >Job center name is required</mat-error
+          <!-- error block -->
+          <mat-error *ngIf="form.controls['site'].errors?.['required']"
+            >Site is required</mat-error
           >
-          <mat-error *ngIf="form.controls['area'].errors?.['minlength']">
-            Job center name should be more than 3 characters
-          </mat-error>
-          <mat-error *ngIf="form.controls['area'].errors?.['maxlength']">
-            Job center name should not exceed 20 characters
-          </mat-error>
         </mat-form-field>
 
         <!-- COUNTY FIELD -->

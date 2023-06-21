@@ -26,6 +26,7 @@ export class NewUsermodalComponent implements OnInit {
   date: any;
   genders = genders;
   counties: any;
+  countySites: any;
   roles = roles;
 
   constructor(
@@ -91,7 +92,7 @@ export class NewUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
-        area: [
+        site: [
           '',
           [
             Validators.required,
