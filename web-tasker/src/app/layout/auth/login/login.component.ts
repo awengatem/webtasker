@@ -233,7 +233,7 @@ export class LoginComponent implements OnInit {
       //log output
       console.log(this.userDetails);
       //sign up user
-      // this.onSignup(this.userDetails);
+      this.onSignup(this.userDetails);
     }
   }
 
