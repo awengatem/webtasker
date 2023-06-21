@@ -5,11 +5,8 @@ import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
 import Validation from '../../../../../auth/login/validation';
-import {
-  counties,
-  genders,
-  roles,
-} from '../../../../../../helpers/common/store';
+import { genders, roles } from '../../../../../../helpers/common/store';
+import { CountyService } from 'src/app/services/api/county.service';
 
 @Component({
   selector: 'app-new-usermodal',
@@ -28,17 +25,21 @@ export class NewUsermodalComponent implements OnInit {
   maxDate = new Date();
   date: any;
   genders = genders;
-  counties = counties;
+  counties: any;
   roles = roles;
 
   constructor(
     public modalRef: MdbModalRef<NewUsermodalComponent>,
     private fb: FormBuilder,
     private generalService: GeneralService,
+    private countyService: CountyService,
     private userAccountService: UserAccountService
   ) {}
 
   ngOnInit(): void {
+    /**get Counties from db */
+    this.getCounties();
+
     this.form = this.fb.group(
       {
         username: [
@@ -174,6 +175,20 @@ export class NewUsermodalComponent implements OnInit {
         console.log(err.error.message);
         this.registerErrorMessage = err.error.message;
         this.registerFailed = true;
+      },
+    });
+  }
+
+  /**Get counties from db */
+  getCounties() {
+    this.countyService.getCounties().subscribe({
+      next: (data) => {
+        // console.log(data);
+        /**push county names to counies array */
+        this.counties = data;
+      },
+      error: (err) => {
+        console.log(err);
       },
     });
   }
