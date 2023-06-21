@@ -574,11 +574,11 @@
                               <select
                                 class="form-style form-control"
                                 (change)="changeSite($event)"
-                                formControlName="area"
+                                formControlName="site"
                                 [ngClass]="{
                                   'is-invalid':
-                                    (area?.touched && area?.invalid) ||
-                                    (submitted3 && area?.invalid)
+                                    (site?.touched && site?.invalid) ||
+                                    (submitted3 && site?.invalid)
                                 }"
                               >
                                 <option value="">Choose Site</option>
@@ -596,8 +596,8 @@
                               class="alert-style"
                               role="alert"
                               *ngIf="
-                                (area?.touched && area?.invalid) ||
-                                (submitted3 && area?.invalid)
+                                (site?.touched && site?.invalid) ||
+                                (submitted3 && site?.invalid)
                               "
                             >
                               <small> Please choose your site </small>

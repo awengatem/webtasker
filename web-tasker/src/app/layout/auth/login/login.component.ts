@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
     telNo: new FormControl(''),
   });
   fSignup3: FormGroup = new FormGroup({
-    area: new FormControl(''),
+    site: new FormControl(''),
     county: new FormControl(''),
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
@@ -151,7 +151,7 @@ export class LoginComponent implements OnInit {
     });
     this.fSignup3 = this.formBuilder.group(
       {
-        area: [
+        site: [
           '',
           [
             Validators.required,
@@ -220,7 +220,7 @@ export class LoginComponent implements OnInit {
       console.log(this.userDetails);
     } else if (val === 3) {
       // form is finished complete and submit it
-      const { area, county, password } = this.fSignup3.value;
+      const { site, county, password } = this.fSignup3.value;
 
       //getting rid of index numbering
       // const countyArr = county.split(' ');
@@ -285,7 +285,7 @@ export class LoginComponent implements OnInit {
 
   /**Method to detect selection of site */
   changeSite(e: any) {
-    this.area?.setValue(e.target.value, {
+    this.site?.setValue(e.target.value, {
       onlySelf: true,
     });
 
@@ -353,8 +353,8 @@ export class LoginComponent implements OnInit {
     return this.fSignup2.get('telNo');
   }
 
-  get area() {
-    return this.fSignup3.get('area');
+  get site() {
+    return this.fSignup3.get('site');
   }
 
   get county() {
@@ -470,7 +470,7 @@ export class LoginComponent implements OnInit {
       username,
       email,
       telNo,
-      area,
+      siteId,
       county,
       password,
     } = userDetails;
@@ -487,7 +487,7 @@ export class LoginComponent implements OnInit {
       username: username,
       email: email,
       telNumber: telNo,
-      area: area,
+      site_id: siteId,
       county: county,
       password: password,
       role: 'user',
