@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
   countySites: any;
   siteId = '';
   user: any;
-  currentPage = 3;
+  currentPage = 1;
   /**combined signup array */
   userDetails: Record<string, any> = {};
 
@@ -471,7 +471,6 @@ export class LoginComponent implements OnInit {
       email,
       telNo,
       siteId,
-      county,
       password,
     } = userDetails;
 
@@ -488,7 +487,6 @@ export class LoginComponent implements OnInit {
       email: email,
       telNumber: telNo,
       site_id: siteId,
-      county: county,
       password: password,
       role: 'user',
     };
