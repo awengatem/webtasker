@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   counties: any;
   countySites: any;
+  siteId = '';
   user: any;
   currentPage = 3;
   /**combined signup array */
@@ -220,20 +221,19 @@ export class LoginComponent implements OnInit {
     } else if (val === 3) {
       // form is finished complete and submit it
       const { area, county, password } = this.fSignup3.value;
+
       //getting rid of index numbering
-      const countyArr = county.split(' ');
-      let countyNew = county;
-      countyArr[1] ? (countyNew = countyArr[1]) : (countyNew = county);
-      //cleaning
-      let cArea = this.generalService.deepClean(area);
+      // const countyArr = county.split(' ');
+      // let countyNew = county;
+      // countyArr[1] ? (countyNew = countyArr[1]) : (countyNew = county);
+
       //push new data
-      this.userDetails['area'] = cArea;
-      this.userDetails['county'] = countyNew;
+      this.userDetails['siteId'] = this.siteId;
       this.userDetails['password'] = password;
       //log output
       console.log(this.userDetails);
       //sign up user
-      this.onSignup(this.userDetails);
+      // this.onSignup(this.userDetails);
     }
   }
 
@@ -275,6 +275,7 @@ export class LoginComponent implements OnInit {
     /**populate the sites options immediately after county change */
     const selectedIndex = e.target.options.selectedIndex;
     const county = this.counties[selectedIndex - 1];
+
     if (county) {
       console.log(county);
       /**Get the county sites */
@@ -287,6 +288,11 @@ export class LoginComponent implements OnInit {
     this.area?.setValue(e.target.value, {
       onlySelf: true,
     });
+
+    /**Capture the siteId for signup form */
+    const selectedIndex = e.target.options.selectedIndex;
+    const site = this.countySites[selectedIndex - 1];
+    this.siteId = site._id;
   }
 
   /*methods used by header buttons*/
