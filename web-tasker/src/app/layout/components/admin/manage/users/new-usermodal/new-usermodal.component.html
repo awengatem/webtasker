@@ -228,7 +228,12 @@
           *ngIf="!form.controls['county'].errors?.['required']"
         >
           <mat-label>Site</mat-label>
-          <mat-select matNativeControl name="site" formControlName="site">
+          <mat-select
+            matNativeControl
+            name="site"
+            formControlName="site"
+            (selectionChange)="changeSite($event)"
+          >
             <mat-option
               *ngFor="let x of countySites"
               [value]="x"

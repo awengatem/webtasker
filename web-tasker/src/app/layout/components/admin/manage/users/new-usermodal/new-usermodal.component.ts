@@ -139,7 +139,6 @@ export class NewUsermodalComponent implements OnInit {
 
     /**populate the sites options immediately after county change */
     if (site) {
-      console.log(site);
       this.siteId = site._id;
     }
   }
