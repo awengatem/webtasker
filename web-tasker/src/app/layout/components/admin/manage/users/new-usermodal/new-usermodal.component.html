@@ -221,7 +221,12 @@
         <!-- COUNTY FIELD -->
         <mat-form-field appearance="outline">
           <mat-label>County</mat-label>
-          <mat-select matNativeControl name="county" formControlName="county">
+          <mat-select
+            matNativeControl
+            name="county"
+            formControlName="county"
+            (selectionChange)="changeCounty($event)"
+          >
             <mat-option
               *ngFor="let x of counties"
               [value]="x"
