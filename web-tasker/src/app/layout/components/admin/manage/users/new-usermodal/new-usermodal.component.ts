@@ -29,6 +29,7 @@ export class NewUsermodalComponent implements OnInit {
   counties: any;
   countySites: any;
   roles = roles;
+  siteId = '';
 
   constructor(
     public modalRef: MdbModalRef<NewUsermodalComponent>,
@@ -119,8 +120,7 @@ export class NewUsermodalComponent implements OnInit {
   }
 
   /**Method to detect selection of county */
-  changeCounty(e: any) {    
-
+  changeCounty(e: any) {
     console.log(e.value);
     const county = e.value;
 
@@ -131,6 +131,19 @@ export class NewUsermodalComponent implements OnInit {
       this.getCountySites(county.countyNumber);
     }
   }
+
+  /**Method to detect selection of site */
+  changeSite(e: any) {
+    console.log(e.value);
+    const site = e.value;
+
+    /**populate the sites options immediately after county change */
+    if (site) {
+      console.log(site);
+      this.siteId = site._id;
+    }
+  }
+
   /**Method to submit the form */
   submitForm(form: any) {
     this.submitted = true;
