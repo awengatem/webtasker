@@ -126,7 +126,6 @@ export class NewUsermodalComponent implements OnInit {
 
     /**populate the sites options immediately after county change */
     if (county) {
-      console.log(county);
       /**Get the county sites */
       this.getCountySites(county.countyNumber);
     }
@@ -158,8 +157,6 @@ export class NewUsermodalComponent implements OnInit {
       idNo,
       gender,
       telNo,
-      area,
-      county,
       role,
       password,
     } = form.value;
@@ -171,8 +168,7 @@ export class NewUsermodalComponent implements OnInit {
     let cUsername = this.generalService.deepClean(username);
     let cEmail = this.generalService.deepClean(email);
     let cFirstname = this.generalService.deepClean(firstName);
-    let cLastname = this.generalService.deepClean(lastName);
-    let cArea = this.generalService.deepClean(area);
+    let cLastname = this.generalService.deepClean(lastName);    
     const cDob = dob.toLocaleDateString();
 
     const user = {
@@ -185,8 +181,7 @@ export class NewUsermodalComponent implements OnInit {
       idNumber: idNo,
       gender: gender,
       telNumber: telNo,
-      area: cArea,
-      county: county,
+      site_id: this.siteId,
       role: role,
     };
     console.log(user);
@@ -223,8 +218,6 @@ export class NewUsermodalComponent implements OnInit {
 
   /**Get county sites from db */
   getCountySites(countyNumber: string) {
-    console.log(this.form.value.site);
-
     this.siteService.getCountySites(countyNumber).subscribe({
       next: (data) => {
         console.log(data);
