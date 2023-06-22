@@ -119,7 +119,8 @@ export class NewUsermodalComponent implements OnInit {
   }
 
   /**Method to detect selection of county */
-  changeCounty(e: any) {
+  changeCounty(e: any) {    
+
     console.log(e.value);
     const county = e.value;
 
@@ -210,7 +211,8 @@ export class NewUsermodalComponent implements OnInit {
 
   /**Get county sites from db */
   getCountySites(countyNumber: string) {
-    this.form.value.site = null;
+    console.log(this.form.value.site);
+
     this.siteService.getCountySites(countyNumber).subscribe({
       next: (data) => {
         console.log(data);
