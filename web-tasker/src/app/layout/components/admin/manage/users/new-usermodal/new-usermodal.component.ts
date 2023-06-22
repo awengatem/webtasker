@@ -210,6 +210,7 @@ export class NewUsermodalComponent implements OnInit {
 
   /**Get county sites from db */
   getCountySites(countyNumber: string) {
+    this.form.value.site = null;
     this.siteService.getCountySites(countyNumber).subscribe({
       next: (data) => {
         console.log(data);

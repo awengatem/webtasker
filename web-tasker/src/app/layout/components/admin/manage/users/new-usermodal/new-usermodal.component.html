@@ -200,24 +200,6 @@
       </div>
 
       <div class="row custom-flex">
-        <!-- SITE FIELD -->
-        <mat-form-field appearance="outline">
-          <mat-label>Site</mat-label>
-          <mat-select matNativeControl name="site" formControlName="site">
-            <mat-option
-              *ngFor="let x of countySites"
-              [value]="x"
-              style="text-transform: capitalize"
-              >{{ x.siteName }}</mat-option
-            >
-          </mat-select>
-          <mat-icon matSuffix>my_location</mat-icon>
-          <!-- error block -->
-          <mat-error *ngIf="form.controls['site'].errors?.['required']"
-            >Site is required</mat-error
-          >
-        </mat-form-field>
-
         <!-- COUNTY FIELD -->
         <mat-form-field appearance="outline">
           <mat-label>County</mat-label>
@@ -238,6 +220,26 @@
           <!-- error block -->
           <mat-error *ngIf="form.controls['county'].errors?.['required']"
             >County is required</mat-error
+          >
+        </mat-form-field>
+        <!-- SITE FIELD -->
+        <mat-form-field
+          appearance="outline"
+          *ngIf="!form.controls['county'].errors?.['required']"
+        >
+          <mat-label>Site</mat-label>
+          <mat-select matNativeControl name="site" formControlName="site">
+            <mat-option
+              *ngFor="let x of countySites"
+              [value]="x"
+              style="text-transform: capitalize"
+              >{{ x.siteName }}</mat-option
+            >
+          </mat-select>
+          <mat-icon matSuffix>my_location</mat-icon>
+          <!-- error block -->
+          <mat-error *ngIf="form.controls['site'].errors?.['required']"
+            >Site is required</mat-error
           >
         </mat-form-field>
       </div>
