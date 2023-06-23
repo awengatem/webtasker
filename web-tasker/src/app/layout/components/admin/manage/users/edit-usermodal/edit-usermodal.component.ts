@@ -52,6 +52,9 @@ export class EditUsermodalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    /**get Counties from db */
+    this.getCounties();
+
     /**build first form */
     this.defaultForm = this.fb.group({
       username: [
@@ -103,7 +106,7 @@ export class EditUsermodalComponent implements OnInit {
           Validators.maxLength(20),
         ],
       ],
-      area: [
+      site: [
         '',
         [
           Validators.required,
@@ -167,7 +170,7 @@ export class EditUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
-        area: [
+        site: [
           '',
           [
             Validators.required,
@@ -237,7 +240,7 @@ export class EditUsermodalComponent implements OnInit {
       this.form.controls['idNo'].setValue(user.idNumber);
       this.form.controls['gender'].setValue(user.gender);
       this.form.controls['telNo'].setValue(user.telNumber);
-      this.form.controls['area'].setValue(user.area);
+      this.form.controls['site'].setValue(user.site);
       this.form.controls['county'].setValue(user.county);
       this.form.controls['role'].setValue(user.role);
     });
@@ -272,7 +275,7 @@ export class EditUsermodalComponent implements OnInit {
       idNo,
       gender,
       telNo,
-      area,
+      site,
       county,
       role,
       password,
@@ -286,7 +289,6 @@ export class EditUsermodalComponent implements OnInit {
     let cEmail = this.generalService.deepClean(email);
     let cFirstname = this.generalService.deepClean(firstName);
     let cLastname = this.generalService.deepClean(lastName);
-    let cArea = this.generalService.deepClean(area);
     const cDob = dob.toLocaleDateString();
 
     let user = {};
@@ -302,8 +304,7 @@ export class EditUsermodalComponent implements OnInit {
         idNumber: idNo,
         gender: gender,
         telNumber: telNo,
-        area: area,
-        county: county,
+        site_id: this.siteId,
         role: role,
         password: password,
       };
@@ -317,8 +318,7 @@ export class EditUsermodalComponent implements OnInit {
         idNumber: idNo,
         gender: gender,
         telNumber: telNo,
-        area: area,
-        county: county,
+        site_id: this.siteId,
         role: role,
       };
     }
@@ -342,8 +342,8 @@ export class EditUsermodalComponent implements OnInit {
     }
   }
 
-   /**Get counties from db */
-   getCounties() {
+  /**Get counties from db */
+  getCounties() {
     this.countyService.getCounties().subscribe({
       next: (data) => {
         // console.log(data);
