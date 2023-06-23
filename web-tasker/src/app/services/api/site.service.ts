@@ -13,6 +13,11 @@ export class SiteService {
     return this.webService.get('sites');
   }
 
+  /**get specified site */
+  getSpecifiedSite(siteId: string) {
+    return this.webService.get(`sites/${siteId}`);
+  }
+
   /**get county sites */
   getCountySites(countyNumber: string) {
     return this.webService.post('sites/county', { countyNumber });
