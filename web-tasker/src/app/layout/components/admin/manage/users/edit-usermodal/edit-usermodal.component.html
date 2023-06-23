@@ -201,29 +201,6 @@
       </div>
 
       <div class="row custom-flex">
-        <!-- AREA FIELD -->
-        <mat-form-field appearance="outline">
-          <mat-label>Job center</mat-label>
-          <input
-            matInput
-            placeholder="enter job center name"
-            type="text"
-            formControlName="area"
-            #areaInput
-          />
-          <mat-icon matSuffix>my_location</mat-icon>
-          <!-- Error block -->
-          <mat-error *ngIf="form.controls['area'].errors?.['required']"
-            >Job center name is required</mat-error
-          >
-          <mat-error *ngIf="form.controls['area'].errors?.['minlength']">
-            Job center name should be more than 3 characters
-          </mat-error>
-          <mat-error *ngIf="form.controls['area'].errors?.['maxlength']">
-            Job center name should not exceed 20 characters
-          </mat-error>
-        </mat-form-field>
-
         <!-- COUNTY FIELD -->
         <mat-form-field appearance="outline">
           <mat-label>County</mat-label>
@@ -242,6 +219,29 @@
           >
         </mat-form-field>
       </div>
+
+      <!-- AREA FIELD -->
+      <mat-form-field appearance="outline">
+        <mat-label>Job center</mat-label>
+        <input
+          matInput
+          placeholder="enter job center name"
+          type="text"
+          formControlName="area"
+          #areaInput
+        />
+        <mat-icon matSuffix>my_location</mat-icon>
+        <!-- Error block -->
+        <mat-error *ngIf="form.controls['area'].errors?.['required']"
+          >Job center name is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['area'].errors?.['minlength']">
+          Job center name should be more than 3 characters
+        </mat-error>
+        <mat-error *ngIf="form.controls['area'].errors?.['maxlength']">
+          Job center name should not exceed 20 characters
+        </mat-error>
+      </mat-form-field>
 
       <!-- ROLE FIELD -->
       <mat-form-field appearance="outline">

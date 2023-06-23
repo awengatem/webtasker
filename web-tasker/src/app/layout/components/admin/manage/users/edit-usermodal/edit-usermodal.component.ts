@@ -10,6 +10,8 @@ import {
   genders,
   roles,
 } from '../../../../../../helpers/common/store';
+import { CountyService } from 'src/app/services/api/county.service';
+import { SiteService } from 'src/app/services/api/site.service';
 
 @Component({
   selector: 'app-edit-usermodal',
@@ -36,12 +38,16 @@ export class EditUsermodalComponent implements OnInit {
   date: any;
   genders = genders;
   counties = counties;
+  countySites: any;
   roles = roles;
+  siteId = '';
 
   constructor(
     public modalRef: MdbModalRef<EditUsermodalComponent>,
     private fb: FormBuilder,
     private generalService: GeneralService,
+    private countyService: CountyService,
+    private siteService: SiteService,
     private userAccountService: UserAccountService
   ) {}
 
@@ -196,6 +202,29 @@ export class EditUsermodalComponent implements OnInit {
     console.log(this.receivedUserId);
   }
 
+  /**Method to detect selection of county */
+  changeCounty(e: any) {
+    console.log(e.value);
+    const county = e.value;
+
+    /**populate the sites options immediately after county change */
+    if (county) {
+      /**Get the county sites */
+      this.getCountySites(county.countyNumber);
+    }
+  }
+
+  /**Method to detect selection of site */
+  changeSite(e: any) {
+    console.log(e.value);
+    const site = e.value;
+
+    /**populate the sites options immediately after county change */
+    if (site) {
+      this.siteId = site._id;
+    }
+  }
+
   /**Method to load the form with values to be patched */
   loadFieldsToEdit(userId: string) {
     this.userAccountService.getSpecificUser(userId).subscribe((user) => {
@@ -311,6 +340,34 @@ export class EditUsermodalComponent implements OnInit {
         },
       });
     }
+  }
+
+   /**Get counties from db */
+   getCounties() {
+    this.countyService.getCounties().subscribe({
+      next: (data) => {
+        // console.log(data);
+        /**push county names to counies array */
+        this.counties = data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  /**Get county sites from db */
+  getCountySites(countyNumber: string) {
+    this.siteService.getCountySites(countyNumber).subscribe({
+      next: (data) => {
+        console.log(data);
+        /**push county names to sites array */
+        this.countySites = data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   /**Method to close modal */
