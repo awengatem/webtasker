@@ -223,33 +223,33 @@
             >County is required</mat-error
           >
         </mat-form-field>
-      </div>
 
-      <!-- SITE FIELD -->
-      <mat-form-field
-        appearance="outline"
-        *ngIf="!form.controls['county'].errors?.['required']"
-      >
-        <mat-label>Site</mat-label>
-        <mat-select
-          matNativeControl
-          name="site"
-          formControlName="site"
-          (selectionChange)="changeSite($event)"
+        <!-- SITE FIELD -->
+        <mat-form-field
+          appearance="outline"
+          *ngIf="!form.controls['county'].errors?.['required']"
         >
-          <mat-option
-            *ngFor="let x of countySites"
-            [value]="x"
-            style="text-transform: capitalize"
-            >{{ x.siteName }}</mat-option
+          <mat-label>Site</mat-label>
+          <mat-select
+            matNativeControl
+            name="site"
+            formControlName="site"
+            (selectionChange)="changeSite($event)"
           >
-        </mat-select>
-        <mat-icon matSuffix>my_location</mat-icon>
-        <!-- error block -->
-        <mat-error *ngIf="form.controls['site'].errors?.['required']"
-          >Site is required</mat-error
-        >
-      </mat-form-field>
+            <mat-option
+              *ngFor="let x of countySites"
+              [value]="x"
+              style="text-transform: capitalize"
+              >{{ x.siteName }}</mat-option
+            >
+          </mat-select>
+          <mat-icon matSuffix>my_location</mat-icon>
+          <!-- error block -->
+          <mat-error *ngIf="form.controls['site'].errors?.['required']"
+            >Site is required</mat-error
+          >
+        </mat-form-field>
+      </div>
 
       <!-- ROLE FIELD -->
       <mat-form-field appearance="outline">
