@@ -5,11 +5,7 @@ import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
 import Validation from '../../../../../auth/login/validation';
-import {
-  counties,
-  genders,
-  roles,
-} from '../../../../../../helpers/common/store';
+import { genders, roles } from '../../../../../../helpers/common/store';
 import { CountyService } from 'src/app/services/api/county.service';
 import { SiteService } from 'src/app/services/api/site.service';
 
@@ -37,7 +33,7 @@ export class EditUsermodalComponent implements OnInit {
   maxDate = new Date();
   date: any;
   genders = genders;
-  counties = counties;
+  counties: any;
   countySites: any;
   roles = roles;
   siteId = '';
@@ -275,8 +271,6 @@ export class EditUsermodalComponent implements OnInit {
       idNo,
       gender,
       telNo,
-      site,
-      county,
       role,
       password,
     } = form.value;
@@ -322,6 +316,7 @@ export class EditUsermodalComponent implements OnInit {
         role: role,
       };
     }
+    console.log(user);
 
     /**patch the user to api*/
     if (this.userId) {
