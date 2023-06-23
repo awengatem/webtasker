@@ -236,9 +236,13 @@ export class EditUsermodalComponent implements OnInit {
       this.form.controls['idNo'].setValue(user.idNumber);
       this.form.controls['gender'].setValue(user.gender);
       this.form.controls['telNo'].setValue(user.telNumber);
+      this.form.controls['role'].setValue(user.role);
       this.form.controls['site'].setValue(user.site);
       this.form.controls['county'].setValue(user.county);
-      this.form.controls['role'].setValue(user.role);
+
+      this.getSite(user.site_id).then((site) => {
+        // this.getCountyOfSite(site.countyNumber);
+      });
     });
   }
 
@@ -335,6 +339,22 @@ export class EditUsermodalComponent implements OnInit {
         },
       });
     }
+  }
+
+  /**Get site from db */
+  getSite(siteId: string) {
+    return new Promise((resolve, reject) => {
+      this.siteService.getSpecifiedSite(siteId).subscribe({
+        next: (site) => {
+          console.log(site);
+          resolve(site);
+        },
+        error: (err) => {
+          console.log(err);
+          reject(err);
+        },
+      });
+    });
   }
 
   /**Get counties from db */
