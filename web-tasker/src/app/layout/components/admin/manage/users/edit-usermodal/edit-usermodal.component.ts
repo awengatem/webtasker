@@ -104,14 +104,7 @@ export class EditUsermodalComponent implements OnInit {
           Validators.maxLength(20),
         ],
       ],
-      site: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-        ],
-      ],
+      site: ['', [Validators.required]],
       county: ['', [Validators.required]],
       role: ['', [Validators.required]],
     });
@@ -168,14 +161,7 @@ export class EditUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
-        site: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(20),
-          ],
-        ],
+        site: ['', [Validators.required]],
         county: ['', [Validators.required]],
         role: ['', [Validators.required]],
         password: [
@@ -207,6 +193,8 @@ export class EditUsermodalComponent implements OnInit {
   changeCounty(e: any) {
     console.log(e.value);
     const countyName = e.value;
+    /**reset the site field */
+    this.form.controls['site'].setValue(null);
 
     /**populate the sites options immediately after county change */
     if (countyName) {
@@ -342,22 +330,22 @@ export class EditUsermodalComponent implements OnInit {
     console.log(user);
 
     /**patch the user to api*/
-    //   if (this.userId) {
-    //     this.userAccountService.editUser(this.userId, user).subscribe({
-    //       next: (res: any) => {
-    //         Swal.fire('Success!', res.message, 'success');
-    //         this.form.reset();
-    //         console.log(res);
-    //         this.registerFailed = false;
-    //         this.close();
-    //       },
-    //       error: (err) => {
-    //         console.log(err.error.message);
-    //         this.registerErrorMessage = err.error.message;
-    //         this.registerFailed = true;
-    //       },
-    //     });
-    //   }
+    if (this.userId) {
+      this.userAccountService.editUser(this.userId, user).subscribe({
+        next: (res: any) => {
+          Swal.fire('Success!', res.message, 'success');
+          this.form.reset();
+          console.log(res);
+          this.registerFailed = false;
+          this.close();
+        },
+        error: (err) => {
+          console.log(err.error.message);
+          this.registerErrorMessage = err.error.message;
+          this.registerFailed = true;
+        },
+      });
+    }
   }
 
   /**Get site from db */
@@ -397,7 +385,7 @@ export class EditUsermodalComponent implements OnInit {
     this.countyService.getCounties().subscribe({
       next: (data) => {
         // console.log(data);
-        /**push county names to counties array */
+        /**push county objects to counties array */
         this.counties = data;
         /**push county names to county names array */
         this.counties.forEach((county: any) => {
@@ -415,8 +403,10 @@ export class EditUsermodalComponent implements OnInit {
     this.siteService.getCountySites(countyNumber).subscribe({
       next: (data) => {
         console.log(data);
-        /**push county names to sites array */
+        /**push county site objects to county sites array */
         this.countySites = data;
+        /**empty county site names array first*/
+        this.countySiteNames = [];
         /**push county site names to county site names array */
         this.countySites.forEach((site: any) => {
           this.countySiteNames.push(site.siteName);
