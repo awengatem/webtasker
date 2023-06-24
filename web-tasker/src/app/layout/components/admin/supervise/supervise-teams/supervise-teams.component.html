@@ -1,0 +1,58 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Projects</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <div class="centered-content">
+        <div class="teams-container">
+          <div class="teams">
+            <div class="row">
+              <div class="col-1">
+                <h1>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary"
+                    (click)="goBack()"
+                  >
+                    Back
+                  </button>
+                </h1>
+              </div>
+              <div class="col"><h1>Choose and Create new Teams</h1></div>
+              <div class="col-3">
+                <button type="button" class="btn btn-outline-primary me-2">
+                  Create Team
+                </button>
+                <button type="button" class="btn btn-primary">
+                  Add Project
+                </button>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="teams-inside">
+              <div class="row">
+                <h2>Your Teams</h2>
+                <div class="card" style="width: 13rem; height: 15rem">
+                  <img class="card-img-top" src="..." alt="" />
+                  <div class="card-body">
+                    <h3 class="card-title">Card title</h3>
+                    <a href="/teams_page" class="btn btn-primary">New Team</a>
+                  </div>
+                </div>
+                <div
+                  class="card"
+                  *ngFor="let team of teams"
+                  style="width: 13rem; height: 15rem"
+                >
+                  <img class="card-img-top" src="..." alt="Card image cap" />
+                  <div class="card-body">
+                    <h3 class="card-title">Four</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

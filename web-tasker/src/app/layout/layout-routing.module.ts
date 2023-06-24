@@ -43,6 +43,12 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
 import { ClearUsessionsintervalGuard } from '../helpers/guards/clear-usessionsinterval.guard';
 import { ProjSessionsComponent } from './components/user/user_projects/proj-sessions/proj-sessions.component';
 import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
+import { SuperviseComponent } from './components/admin/supervise/supervise/supervise.component';
+import { SupervisorSessionsComponent } from './components/admin/supervise/supervisor-sessions/supervisor-sessions.component';
+import { FillEarningsComponent } from './components/admin/supervise/fill-earnings/fill-earnings.component';
+import { ViewEarningsComponent } from './components/admin/supervise/view-earnings/view-earnings.component';
+import { SuperviseTeamsComponent } from './components/admin/supervise/supervise-teams/supervise-teams.component';
+import { TeamsPageComponent } from './components/admin/supervise/teams-page/teams-page.component';
 
 const routes: Routes = [
   {
@@ -216,6 +222,38 @@ const routes: Routes = [
         canActivate: [SupervisorGuard],
         canDeactivate: [ClearLocationGuard],
         component: EditTeamComponent,
+      },
+
+      /**SUPERVISE*/
+      {
+        path: 'supervise',
+        canActivate: [SupervisorGuard],
+        component: SuperviseComponent,
+      },
+      {
+        path: 'fill_earnings',
+        canActivate: [SupervisorGuard],
+        component: FillEarningsComponent,
+      },
+      {
+        path: 'view_earnings',
+        canActivate: [SupervisorGuard],
+        component: ViewEarningsComponent,
+      },
+      {
+        path: 'supervise_teams',
+        canActivate: [SupervisorGuard],
+        component: SuperviseTeamsComponent,
+      },
+      {
+        path: 'supervise_sessions',
+        canActivate: [SupervisorGuard],
+        component: SupervisorSessionsComponent,
+      },
+      {
+        path: 'teams_page',
+        canActivate: [SupervisorGuard],
+        component: TeamsPageComponent,
       },
 
       /**MANAGE*/

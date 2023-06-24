@@ -1,0 +1,179 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Teams page</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <div class="centered-content">
+        <div class="teams-container">
+          <div class="teams">
+            <div class="row">
+              <div class="col">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary"
+                  (click)="goBack()"
+                >
+                  Back
+                </button>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="teams-inside">
+              <div class="row">
+                <div class="col-3">
+                  <button type="button" class="btn btn-primary">
+                    Add Team Member
+                  </button>
+                  <div class="card">
+                    <div class="card-header">
+                      <h1 class="text-center">Active members</h1>
+                    </div>
+                    <div class="list-container">
+                      <ul class="list-group list-group-flush">
+                        <li
+                          class="list-group-item"
+                          *ngFor="let member of members"
+                        >
+                          <h2>
+                            <span
+                              class="position-absolute translate-middle p-2 bg-success border border-light rounded-circle"
+                            >
+                              <span class="visually-hidden">New alerts</span>
+                            </span>
+                            <img
+                              class="rounded-4 shadow-4"
+                              src="https://mdbootstrap.com/img/Photos/Avatars/man2.jpg"
+                              alt="Avatar"
+                              style="width: 50px; height: 50px"
+                            />
+                            Hope Mumbi
+                          </h2>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!--                   <div class="card">
+                    <div class="card-header">
+                      <h1 class="text-center">Active members</h1>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li
+                        class="list-group-item"
+                        *ngFor="let member of members"
+                      >
+                        <h2>
+                          <span
+                            class="position-absolute translate-middle p-2 bg-success border border-light rounded-circle"
+                          >
+                            <span class="visually-hidden">New alerts</span>
+                          </span>
+                          <img
+                            class="rounded-4 shadow-4"
+                            src="https://mdbootstrap.com/img/Photos/Avatars/man2.jpg"
+                            alt="Avatar"
+                            style="width: 50px; height: 50px"
+                          />
+                          Hope Mumbi
+                        </h2>
+                      </li>
+                    </ul>
+                  </div> -->
+                </div>
+                <div class="col-9">
+                  <div class="card" style="width: auto">
+                    <div class="card-header"><h1>Team Overview</h1></div>
+                    <div class="card-body">
+                      <div class="row d-flex justify-content-center">
+                        <div class="col-3">
+                          <h2 class="data-name" routerLink="/ad_manage/users">
+                            Team Members
+                            <h1>20</h1>
+                            <span class="text-success mr-2"
+                              ><h3>90% active</h3></span
+                            >
+                          </h2>
+                        </div>
+                        <div class="col-3">
+                          <h2 class="data-name" routerLink="/projects">
+                            Team projects
+                            <h1>3</h1>
+                            <span class="text-success mr-2"
+                              ><h3>60% done</h3></span
+                            >
+                          </h2>
+                        </div>
+                        <div class="col-3">
+                          <h2 class="data-name" routerLink="/view_earnings">
+                            Team Earnings
+                            <h1>200$</h1>
+                            <span class="text-danger mr-2"><h3>-20%</h3></span>
+                          </h2>
+                        </div>
+                      </div>
+                      <div class="row mt-3">
+                        <h1 class="card-text">Projects:</h1>
+                      </div>
+                      <a href="#" class="btn btn-primary" style="width: 7rem"
+                        >add Project</a
+                      >
+                      <div
+                        class="row-project d-flex flex-row justify-content-start"
+                      >
+                        <div
+                          class="card text-white bg-secondary mb-3"
+                          style="max-width: 7rem; height: 7rem"
+                          *ngFor="let Project of projects"
+                        >
+                          <div class="card-body">
+                            <h5>Info-Space</h5>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-3"></div>
+                <div class="col-2">
+                  <div
+                    class="card text-white bg-primary mb-3 pointer"
+                    routerLink="/ad_manage/users"
+                    style="max-width: 18rem; cursor: pointer"
+                  >
+                    <div class="card-body">
+                      <h1>View Team Member</h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div
+                    class="card text-white bg-primary mb-3 pointer"
+                    routerLink="/view_earnings"
+                    style="max-width: 18rem; cursor: pointer"
+                  >
+                    <div class="card-body">
+                      <h1>View Team Earnings</h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div
+                    class="card text-white bg-primary mb-3 pointer"
+                    routerLink="/supervise_sessions"
+                    style="max-width: 18rem; cursor: pointer"
+                  >
+                    <div class="card-body">
+                      <h1>View Team Sessions</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

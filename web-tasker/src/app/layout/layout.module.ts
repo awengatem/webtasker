@@ -63,6 +63,12 @@ import { ProjectTeamsComponent } from './components/admin/adprojects/project-tea
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { ProjSessionsComponent } from './components/user/user_projects/proj-sessions/proj-sessions.component';
 import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
+import { SuperviseComponent } from './components/admin/supervise/supervise/supervise.component';
+import { SupervisorSessionsComponent } from './components/admin/supervise/supervisor-sessions/supervisor-sessions.component';
+import { FillEarningsComponent } from './components/admin/supervise/fill-earnings/fill-earnings.component';
+import { ViewEarningsComponent } from './components/admin/supervise/view-earnings/view-earnings.component';
+import { SuperviseTeamsComponent } from './components/admin/supervise/supervise-teams/supervise-teams.component';
+import { TeamsPageComponent } from './components/admin/supervise/teams-page/teams-page.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +129,12 @@ import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-s
     UserProfileComponent,
     ProjSessionsComponent,
     AdProjSessionsComponent,
+    SuperviseComponent,
+    SupervisorSessionsComponent,
+    FillEarningsComponent,
+    ViewEarningsComponent,
+    SuperviseTeamsComponent,
+    TeamsPageComponent,
   ],
   imports: [
     CommonModule,
