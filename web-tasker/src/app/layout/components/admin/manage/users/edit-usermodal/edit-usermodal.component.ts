@@ -5,11 +5,9 @@ import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
 import Validation from '../../../../../auth/login/validation';
-import {
-  counties,
-  genders,
-  roles,
-} from '../../../../../../helpers/common/store';
+import { genders, roles } from '../../../../../../helpers/common/store';
+import { CountyService } from 'src/app/services/api/county.service';
+import { SiteService } from 'src/app/services/api/site.service';
 
 @Component({
   selector: 'app-edit-usermodal',
@@ -35,17 +33,26 @@ export class EditUsermodalComponent implements OnInit {
   maxDate = new Date();
   date: any;
   genders = genders;
-  counties = counties;
+  counties: any;
+  countyNames: any = [];
+  countySites: any;
+  countySiteNames: any = [];
   roles = roles;
+  siteId = '';
 
   constructor(
     public modalRef: MdbModalRef<EditUsermodalComponent>,
     private fb: FormBuilder,
     private generalService: GeneralService,
+    private countyService: CountyService,
+    private siteService: SiteService,
     private userAccountService: UserAccountService
   ) {}
 
   ngOnInit(): void {
+    /**get Counties from db */
+    this.getCounties();
+
     /**build first form */
     this.defaultForm = this.fb.group({
       username: [
@@ -97,14 +104,7 @@ export class EditUsermodalComponent implements OnInit {
           Validators.maxLength(20),
         ],
       ],
-      area: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-        ],
-      ],
+      site: ['', [Validators.required]],
       county: ['', [Validators.required]],
       role: ['', [Validators.required]],
     });
@@ -161,14 +161,7 @@ export class EditUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
-        area: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(20),
-          ],
-        ],
+        site: ['', [Validators.required]],
         county: ['', [Validators.required]],
         role: ['', [Validators.required]],
         password: [
@@ -196,6 +189,42 @@ export class EditUsermodalComponent implements OnInit {
     console.log(this.receivedUserId);
   }
 
+  /**Method to detect selection of county */
+  changeCounty(e: any) {
+    console.log(e.value);
+    const countyName = e.value;
+    /**reset the site field */
+    this.form.controls['site'].setValue(null);
+
+    /**populate the sites options immediately after county change */
+    if (countyName) {
+      /**loop through the county objects array and find countyNumber */
+      for (let county of this.counties) {
+        if (countyName === county.countyName) {
+          /**Get the county sites */
+          this.getCountySites(county.countyNumber);
+        }
+      }
+    }
+  }
+
+  /**Method to detect selection of site */
+  changeSite(e: any) {
+    console.log(e.value);
+    const siteName = e.value;
+
+    /**populate the sites options immediately after county change */
+    if (siteName) {
+      /**loop through the site objects array and find siteNumber */
+      for (let site of this.countySites) {
+        if (siteName === site.siteName) {
+          /**Set the site_id */
+          this.siteId = site._id;
+        }
+      }
+    }
+  }
+
   /**Method to load the form with values to be patched */
   loadFieldsToEdit(userId: string) {
     this.userAccountService.getSpecificUser(userId).subscribe((user) => {
@@ -208,9 +237,19 @@ export class EditUsermodalComponent implements OnInit {
       this.form.controls['idNo'].setValue(user.idNumber);
       this.form.controls['gender'].setValue(user.gender);
       this.form.controls['telNo'].setValue(user.telNumber);
-      this.form.controls['area'].setValue(user.area);
-      this.form.controls['county'].setValue(user.county);
       this.form.controls['role'].setValue(user.role);
+      this.siteId = user.site_id;
+
+      /**get the rest of the fields from db */
+      this.getSite(user.site_id).then((site: any) => {
+        this.form.controls['site'].setValue(site.siteName);
+        /**get the county of user's site */
+        this.getCountyOfSite(site.countyNumber).then((county: any) => {
+          this.form.controls['county'].setValue(county.countyName);
+          /**Get the county sites */
+          this.getCountySites(county.countyNumber);
+        });
+      });
     });
   }
 
@@ -243,8 +282,6 @@ export class EditUsermodalComponent implements OnInit {
       idNo,
       gender,
       telNo,
-      area,
-      county,
       role,
       password,
     } = form.value;
@@ -257,7 +294,6 @@ export class EditUsermodalComponent implements OnInit {
     let cEmail = this.generalService.deepClean(email);
     let cFirstname = this.generalService.deepClean(firstName);
     let cLastname = this.generalService.deepClean(lastName);
-    let cArea = this.generalService.deepClean(area);
     const cDob = dob.toLocaleDateString();
 
     let user = {};
@@ -273,8 +309,7 @@ export class EditUsermodalComponent implements OnInit {
         idNumber: idNo,
         gender: gender,
         telNumber: telNo,
-        area: area,
-        county: county,
+        site_id: this.siteId,
         role: role,
         password: password,
       };
@@ -288,11 +323,11 @@ export class EditUsermodalComponent implements OnInit {
         idNumber: idNo,
         gender: gender,
         telNumber: telNo,
-        area: area,
-        county: county,
+        site_id: this.siteId,
         role: role,
       };
     }
+    console.log(user);
 
     /**patch the user to api*/
     if (this.userId) {
@@ -313,6 +348,80 @@ export class EditUsermodalComponent implements OnInit {
     }
   }
 
+  /**Get site from db */
+  getSite(siteId: string) {
+    return new Promise((resolve, reject) => {
+      this.siteService.getSpecifiedSite(siteId).subscribe({
+        next: (site) => {
+          console.log(site);
+          resolve(site);
+        },
+        error: (err) => {
+          console.log(err);
+          reject(err);
+        },
+      });
+    });
+  }
+
+  /**Get county of site */
+  getCountyOfSite(countyNumber: string) {
+    return new Promise((resolve, reject) => {
+      this.countyService.getCountyOfSite(countyNumber).subscribe({
+        next: (county) => {
+          console.log(county);
+          resolve(county);
+        },
+        error: (err) => {
+          console.log(err);
+          reject(err);
+        },
+      });
+    });
+  }
+
+  /**Get counties from db */
+  getCounties() {
+    this.countyService.getCounties().subscribe({
+      next: (data) => {
+        // console.log(data);
+        /**push county objects to counties array */
+        this.counties = data;
+        /**push county names to county names array */
+        this.counties.forEach((county: any) => {
+          this.countyNames.push(county.countyName);
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  /**Get county sites from db */
+  getCountySites(countyNumber: string) {
+    this.siteService.getCountySites(countyNumber).subscribe({
+      next: (data) => {
+        console.log(data);
+        /**push county site objects to county sites array */
+        this.countySites = data;
+        /**empty county site names array first*/
+        this.countySiteNames = [];
+        /**push county site names to county site names array */
+        this.countySites.forEach((site: any) => {
+          this.countySiteNames.push(site.siteName);
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  /**capitalize a word */
+  capitalize(text: string) {
+    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  }
   /**Method to close modal */
   close(): void {
     const closeMessage = 'Edit modal closed';

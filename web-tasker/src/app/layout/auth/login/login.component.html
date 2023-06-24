@@ -535,44 +535,6 @@
                         >
                           <h5 class="subtitle">Location and password</h5>
                           <div class="form-group mt-2">
-                            <input
-                              type="text"
-                              formControlName="area"
-                              class="form-style form-control"
-                              placeholder="Set job center location"
-                              autocomplete="off"
-                              [ngClass]="{
-                                'is-invalid':
-                                  (area?.dirty && area?.errors) ||
-                                  (submitted3 && area?.errors)
-                              }"
-                            />
-                            <i class="input-icon uil uil-location-point"></i>
-                            <i
-                              class="vericon success fas fa-check-circle fa-xs"
-                              *ngIf="area?.dirty && !area?.errors"
-                            ></i>
-
-                            <div
-                              class="alert-style"
-                              role="alert"
-                              *ngIf="
-                                (area?.dirty && area?.errors) ||
-                                (submitted3 && area?.errors)
-                              "
-                            >
-                              <small *ngIf="area?.errors?.['required']">
-                                Job center is required!
-                              </small>
-                              <small *ngIf="area?.errors?.['minlength']">
-                                Job center name must be at least 3 characters
-                              </small>
-                              <small *ngIf="area?.errors?.['maxlength']">
-                                Job center name must not exceed 20 characters
-                              </small>
-                            </div>
-                          </div>
-                          <div class="form-group mt-2">
                             <div class="ui-dropdown">
                               <select
                                 class="form-style form-control"
@@ -590,7 +552,7 @@
                                   [ngValue]="county"
                                   style="text-transform: capitalize"
                                 >
-                                  {{ county }}
+                                  {{ county.countyName }}
                                 </option>
                               </select>
                             </div>
@@ -607,6 +569,47 @@
                             </div>
                             <i class="input-icon uil uil-map-pin-alt"></i>
                           </div>
+                          <div class="form-group mt-2" *ngIf="!county?.invalid">
+                            <div class="ui-dropdown">
+                              <select
+                                class="form-style form-control"
+                                (change)="changeSite($event)"
+                                formControlName="site"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    (site?.touched && site?.invalid) ||
+                                    (submitted3 && site?.invalid)
+                                }"
+                              >
+                                <option value="">Choose Site</option>
+                                <option
+                                  *ngFor="let site of countySites"
+                                  [ngValue]="site"
+                                  style="text-transform: capitalize"
+                                >
+                                  {{ site.siteName }}
+                                </option>
+                              </select>
+                            </div>
+                            <!-- error block -->
+                            <div
+                              class="alert-style"
+                              role="alert"
+                              *ngIf="
+                                (site?.touched && site?.invalid) ||
+                                (submitted3 && site?.invalid)
+                              "
+                            >
+                              <small> Please choose your site </small>
+                            </div>
+                            <i class="input-icon uil uil-location-point"></i>
+                          </div>
+
+                          <!-- Prevent autofill -->
+                          <div class="">
+                            <input style="display: none" />
+                          </div>
+
                           <div class="form-group mt-2">
                             <input
                               type="password"
@@ -645,6 +648,7 @@
                               </small>
                             </div>
                           </div>
+
                           <div class="form-group mt-2">
                             <input
                               type="password"
@@ -667,7 +671,6 @@
                                 !confirmPassword?.errors
                               "
                             ></i>
-
                             <div
                               class="alert-style"
                               role="alert"
