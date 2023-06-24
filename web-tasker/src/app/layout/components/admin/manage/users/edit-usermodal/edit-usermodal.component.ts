@@ -34,7 +34,9 @@ export class EditUsermodalComponent implements OnInit {
   date: any;
   genders = genders;
   counties: any;
+  countyNames: any = [];
   countySites: any;
+  countySiteNames: any = [];
   roles = roles;
   siteId = '';
 
@@ -204,23 +206,34 @@ export class EditUsermodalComponent implements OnInit {
   /**Method to detect selection of county */
   changeCounty(e: any) {
     console.log(e.value);
-    const county = e.value;
+    const countyName = e.value;
 
     /**populate the sites options immediately after county change */
-    if (county) {
-      /**Get the county sites */
-      this.getCountySites(county.countyNumber);
+    if (countyName) {
+      /**loop through the county objects array and find countyNumber */
+      for (let county of this.counties) {
+        if (countyName === county.countyName) {
+          /**Get the county sites */
+          this.getCountySites(county.countyNumber);
+        }
+      }
     }
   }
 
   /**Method to detect selection of site */
   changeSite(e: any) {
     console.log(e.value);
-    const site = e.value;
+    const siteName = e.value;
 
     /**populate the sites options immediately after county change */
-    if (site) {
-      this.siteId = site._id;
+    if (siteName) {
+      /**loop through the site objects array and find siteNumber */
+      for (let site of this.countySites) {
+        if (siteName === site.siteName) {
+          /**Set the site_id */
+          this.siteId = site._id;
+        }
+      }
     }
   }
 
@@ -237,11 +250,17 @@ export class EditUsermodalComponent implements OnInit {
       this.form.controls['gender'].setValue(user.gender);
       this.form.controls['telNo'].setValue(user.telNumber);
       this.form.controls['role'].setValue(user.role);
-      this.form.controls['site'].setValue(user.site);
-      this.form.controls['county'].setValue(user.county);
+      this.siteId = user.site_id;
 
-      this.getSite(user.site_id).then((site) => {
-        // this.getCountyOfSite(site.countyNumber);
+      /**get the rest of the fields from db */
+      this.getSite(user.site_id).then((site: any) => {
+        this.form.controls['site'].setValue(site.siteName);
+        /**get the county of user's site */
+        this.getCountyOfSite(site.countyNumber).then((county: any) => {
+          this.form.controls['county'].setValue(county.countyName);
+          /**Get the county sites */
+          this.getCountySites(county.countyNumber);
+        });
       });
     });
   }
@@ -323,22 +342,22 @@ export class EditUsermodalComponent implements OnInit {
     console.log(user);
 
     /**patch the user to api*/
-    if (this.userId) {
-      this.userAccountService.editUser(this.userId, user).subscribe({
-        next: (res: any) => {
-          Swal.fire('Success!', res.message, 'success');
-          this.form.reset();
-          console.log(res);
-          this.registerFailed = false;
-          this.close();
-        },
-        error: (err) => {
-          console.log(err.error.message);
-          this.registerErrorMessage = err.error.message;
-          this.registerFailed = true;
-        },
-      });
-    }
+    //   if (this.userId) {
+    //     this.userAccountService.editUser(this.userId, user).subscribe({
+    //       next: (res: any) => {
+    //         Swal.fire('Success!', res.message, 'success');
+    //         this.form.reset();
+    //         console.log(res);
+    //         this.registerFailed = false;
+    //         this.close();
+    //       },
+    //       error: (err) => {
+    //         console.log(err.error.message);
+    //         this.registerErrorMessage = err.error.message;
+    //         this.registerFailed = true;
+    //       },
+    //     });
+    //   }
   }
 
   /**Get site from db */
@@ -357,13 +376,33 @@ export class EditUsermodalComponent implements OnInit {
     });
   }
 
+  /**Get county of site */
+  getCountyOfSite(countyNumber: string) {
+    return new Promise((resolve, reject) => {
+      this.countyService.getCountyOfSite(countyNumber).subscribe({
+        next: (county) => {
+          console.log(county);
+          resolve(county);
+        },
+        error: (err) => {
+          console.log(err);
+          reject(err);
+        },
+      });
+    });
+  }
+
   /**Get counties from db */
   getCounties() {
     this.countyService.getCounties().subscribe({
       next: (data) => {
         // console.log(data);
-        /**push county names to counies array */
+        /**push county names to counties array */
         this.counties = data;
+        /**push county names to county names array */
+        this.counties.forEach((county: any) => {
+          this.countyNames.push(county.countyName);
+        });
       },
       error: (err) => {
         console.log(err);
@@ -378,6 +417,10 @@ export class EditUsermodalComponent implements OnInit {
         console.log(data);
         /**push county names to sites array */
         this.countySites = data;
+        /**push county site names to county site names array */
+        this.countySites.forEach((site: any) => {
+          this.countySiteNames.push(site.siteName);
+        });
       },
       error: (err) => {
         console.log(err);
@@ -385,6 +428,10 @@ export class EditUsermodalComponent implements OnInit {
     });
   }
 
+  /**capitalize a word */
+  capitalize(text: string) {
+    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  }
   /**Method to close modal */
   close(): void {
     const closeMessage = 'Edit modal closed';

@@ -211,10 +211,10 @@
             (selectionChange)="changeCounty($event)"
           >
             <mat-option
-              *ngFor="let x of counties"
+              *ngFor="let x of countyNames"
               [value]="x"
               style="text-transform: capitalize"
-              >{{ x.countyName }}</mat-option
+              >{{ x }}</mat-option
             >
           </mat-select>
           <mat-icon matSuffix>place</mat-icon>
@@ -237,10 +237,10 @@
             (selectionChange)="changeSite($event)"
           >
             <mat-option
-              *ngFor="let x of countySites"
+              *ngFor="let x of countySiteNames"
               [value]="x"
               style="text-transform: capitalize"
-              >{{ x.siteName }}</mat-option
+              >{{ x }}</mat-option
             >
           </mat-select>
           <mat-icon matSuffix>my_location</mat-icon>

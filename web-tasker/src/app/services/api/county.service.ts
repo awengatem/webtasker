@@ -12,4 +12,9 @@ export class CountyService {
   getCounties() {
     return this.webService.get('counties');
   }
+
+  /**get county of a given site */
+  getCountyOfSite(countyNumber: string) {
+    return this.webService.get(`counties/county/${countyNumber}`);
+  }
 }
