@@ -5,11 +5,9 @@ import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
 import Validation from '../../../../../auth/login/validation';
-import {
-  counties,
-  genders,
-  roles,
-} from '../../../../../../helpers/common/store';
+import { genders, roles } from '../../../../../../helpers/common/store';
+import { CountyService } from 'src/app/services/api/county.service';
+import { SiteService } from 'src/app/services/api/site.service';
 
 @Component({
   selector: 'app-new-usermodal',
@@ -28,17 +26,24 @@ export class NewUsermodalComponent implements OnInit {
   maxDate = new Date();
   date: any;
   genders = genders;
-  counties = counties;
+  counties: any;
+  countySites: any;
   roles = roles;
+  siteId = '';
 
   constructor(
     public modalRef: MdbModalRef<NewUsermodalComponent>,
     private fb: FormBuilder,
     private generalService: GeneralService,
+    private countyService: CountyService,
+    private siteService: SiteService,
     private userAccountService: UserAccountService
   ) {}
 
   ngOnInit(): void {
+    /**get Counties from db */
+    this.getCounties();
+
     this.form = this.fb.group(
       {
         username: [
@@ -90,7 +95,7 @@ export class NewUsermodalComponent implements OnInit {
             Validators.maxLength(20),
           ],
         ],
-        area: [
+        site: [
           '',
           [
             Validators.required,
@@ -114,6 +119,29 @@ export class NewUsermodalComponent implements OnInit {
     );
   }
 
+  /**Method to detect selection of county */
+  changeCounty(e: any) {
+    console.log(e.value);
+    const county = e.value;
+
+    /**populate the sites options immediately after county change */
+    if (county) {
+      /**Get the county sites */
+      this.getCountySites(county.countyNumber);
+    }
+  }
+
+  /**Method to detect selection of site */
+  changeSite(e: any) {
+    console.log(e.value);
+    const site = e.value;
+
+    /**populate the sites options immediately after county change */
+    if (site) {
+      this.siteId = site._id;
+    }
+  }
+
   /**Method to submit the form */
   submitForm(form: any) {
     this.submitted = true;
@@ -129,8 +157,6 @@ export class NewUsermodalComponent implements OnInit {
       idNo,
       gender,
       telNo,
-      area,
-      county,
       role,
       password,
     } = form.value;
@@ -142,8 +168,7 @@ export class NewUsermodalComponent implements OnInit {
     let cUsername = this.generalService.deepClean(username);
     let cEmail = this.generalService.deepClean(email);
     let cFirstname = this.generalService.deepClean(firstName);
-    let cLastname = this.generalService.deepClean(lastName);
-    let cArea = this.generalService.deepClean(area);
+    let cLastname = this.generalService.deepClean(lastName);    
     const cDob = dob.toLocaleDateString();
 
     const user = {
@@ -156,8 +181,7 @@ export class NewUsermodalComponent implements OnInit {
       idNumber: idNo,
       gender: gender,
       telNumber: telNo,
-      area: cArea,
-      county: county,
+      site_id: this.siteId,
       role: role,
     };
     console.log(user);
@@ -174,6 +198,34 @@ export class NewUsermodalComponent implements OnInit {
         console.log(err.error.message);
         this.registerErrorMessage = err.error.message;
         this.registerFailed = true;
+      },
+    });
+  }
+
+  /**Get counties from db */
+  getCounties() {
+    this.countyService.getCounties().subscribe({
+      next: (data) => {
+        // console.log(data);
+        /**push county names to counies array */
+        this.counties = data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  /**Get county sites from db */
+  getCountySites(countyNumber: string) {
+    this.siteService.getCountySites(countyNumber).subscribe({
+      next: (data) => {
+        console.log(data);
+        /**push county names to sites array */
+        this.countySites = data;
+      },
+      error: (err) => {
+        console.log(err);
       },
     });
   }
