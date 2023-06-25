@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { AccountService } from 'src/app/services/account-service.service';
+import { SiteService } from 'src/app/services/api/site.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,10 +10,12 @@ import { AccountService } from 'src/app/services/account-service.service';
 })
 export class UserProfileComponent implements OnInit {
   user: any;
+  siteName!: string;
 
   constructor(
     public modalRef: MdbModalRef<UserProfileComponent>,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private siteService: SiteService
   ) {}
 
   ngOnInit(): void {
@@ -23,7 +26,21 @@ export class UserProfileComponent implements OnInit {
   getUserDetails() {
     const user = this.accountService.getUser();
     console.log(user);
-    this.user = user;
+    if (user) {
+      this.user = user;
+      this.getSiteName(user.site_id);
+    }
+  }
+
+  /**Get the site name */
+  getSiteName(siteId: string) {
+    this.siteService.getSpecifiedSite(siteId).subscribe({
+      next: (site) => {
+        console.log(site);
+        this.siteName = site.siteName;
+      },
+      error: () => {},
+    });
   }
 
   /**Method to close modal */
