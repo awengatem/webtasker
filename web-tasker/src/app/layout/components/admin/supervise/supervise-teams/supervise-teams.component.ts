@@ -16,6 +16,9 @@ export class SuperviseTeamsComponent implements OnInit {
   gotoList() {
     this.router.navigate(['/supervise']);
   }
+  goToPage() {
+    this.router.navigate(['/teams_page'])
+  }
 
   ngOnInit(): void {
     this.teams = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
