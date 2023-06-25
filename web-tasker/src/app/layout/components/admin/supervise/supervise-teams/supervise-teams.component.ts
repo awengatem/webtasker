@@ -10,13 +10,6 @@ export class SuperviseTeamsComponent implements OnInit {
   teams: any = [];
   constructor(private router: Router) {}
 
-  goBack() {
-    this.router.navigate(['/supervise']);
-  }
-  gotoList() {
-    this.router.navigate(['/supervise']);
-  }
-
   ngOnInit(): void {
     this.teams = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
   }

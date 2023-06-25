@@ -11,7 +11,7 @@
                   <button
                     type="button"
                     class="btn btn-outline-primary"
-                    (click)="goBack()"
+                    routerLink="/teams_page"
                   >
                     Back
                   </button>
@@ -35,7 +35,9 @@
                   <img class="card-img-top" src="..." alt="" />
                   <div class="card-body">
                     <h3 class="card-title">Card title</h3>
-                    <a href="/teams_page" class="btn btn-primary">New Team</a>
+                    <a class="btn btn-primary" routerLink="/teams_page"
+                      >New Team</a
+                    >
                   </div>
                 </div>
                 <div

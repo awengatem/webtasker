@@ -22,4 +22,9 @@ export class SiteService {
   getCountySites(countyNumber: string) {
     return this.webService.post('sites/county', { countyNumber });
   }
+
+  /**get county sites for user registration ("no access token required") */
+  getRegisterCountySites(countyNumber: string) {
+    return this.webService.post('register/county_sites', { countyNumber });
+  }
 }
