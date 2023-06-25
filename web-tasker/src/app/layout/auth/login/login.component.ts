@@ -540,7 +540,7 @@ export class LoginComponent implements OnInit {
 
   /**Get counties from db */
   getCounties() {
-    this.countyService.getCounties().subscribe({
+    this.countyService.getRegisterCounties().subscribe({
       next: (data) => {
         console.log(data);
         /**push county names to counies array */
@@ -554,7 +554,7 @@ export class LoginComponent implements OnInit {
 
   /**Get county sites from db */
   getCountySites(countyNumber: string) {
-    this.siteService.getCountySites(countyNumber).subscribe({
+    this.siteService.getRegisterCountySites(countyNumber).subscribe({
       next: (data) => {
         console.log(data);
         /**push county names to sites array */

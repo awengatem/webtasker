@@ -17,4 +17,9 @@ export class CountyService {
   getCountyOfSite(countyNumber: string) {
     return this.webService.get(`counties/county/${countyNumber}`);
   }
+
+  /**get counties for user registration ("no access token required") */
+  getRegisterCounties() {
+    return this.webService.get('register/counties');
+  }
 }
