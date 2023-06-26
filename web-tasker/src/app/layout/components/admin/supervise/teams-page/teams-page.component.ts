@@ -11,10 +11,6 @@ export class TeamsPageComponent {
   projects: any = [];
   constructor(private router: Router) {}
 
-  goBack() {
-    this.router.navigate(['/supervise_teams']);
-  }
-
   ngOnInit(): void {
     this.members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
     this.projects = [1, 1, 1, 1, 1, 1];
