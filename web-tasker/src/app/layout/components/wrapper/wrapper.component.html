@@ -183,6 +183,16 @@
           <i class="fa-solid fa-people-roof"></i>
           <div class="content" *ngIf="isExpanded">Supervise</div>
         </div>
+        <div
+          [routerLink]="'supervise_teams'"
+          routerLinkActive="list-item-active"
+          *ngIf="sublist"
+        ></div>
+        <div
+          [routerLink]="'teams_page'"
+          routerLinkActive="list-item-active"
+          *ngIf="sublist"
+        ></div>
       </mat-list-item>
 
       <!-- admin management -->
