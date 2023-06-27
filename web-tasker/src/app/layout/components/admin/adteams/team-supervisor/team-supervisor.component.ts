@@ -9,6 +9,7 @@ import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import Swal from 'sweetalert2';
 import { SnackBarService } from 'src/app/services/snackbar.service';
+import { TeamService } from 'src/app/services/api/team.service';
 
 @Component({
   selector: 'app-team-supervisor',
@@ -17,7 +18,7 @@ import { SnackBarService } from 'src/app/services/snackbar.service';
 })
 export class TeamSupervisorComponent implements OnInit {
   /**variables */
-  totalUsers = 0;
+  teamName!: string;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
@@ -36,6 +37,7 @@ export class TeamSupervisorComponent implements OnInit {
   constructor(
     private userAccountService: UserAccountService,
     private snackBarService: SnackBarService,
+    private teamService: TeamService,
     private modalService: MdbModalService
   ) {
     //load data on table
@@ -46,6 +48,7 @@ export class TeamSupervisorComponent implements OnInit {
     /**Get the teamId */
     const teamId = localStorage.getItem('capturedTeamId')!;
     this.teamId = teamId;
+    this.getTeamName(teamId);
   }
 
   /**Get the users */
@@ -57,6 +60,14 @@ export class TeamSupervisorComponent implements OnInit {
       error: (err) => {
         console.log(err);
       },
+    });
+  }
+
+  //getting team name
+  getTeamName(teamId: string) {
+    this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
+      console.log(team);
+      this.teamName = team.teamName;
     });
   }
 
@@ -196,7 +207,7 @@ export class TeamSupervisorComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         // refresh usercount
-        this.totalUsers = users.length;
+        // this.totalUsers = users.length;
         console.log(users);
       },
       error: (err) => {
