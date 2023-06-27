@@ -41,7 +41,7 @@ export class TeamSupervisorComponent implements OnInit {
     private modalService: MdbModalService
   ) {
     //load data on table
-    this.loadAllUsers();
+    this.loadAllSupervisors();
   }
 
   ngOnInit(): void {
@@ -51,19 +51,7 @@ export class TeamSupervisorComponent implements OnInit {
     this.getTeamName(teamId);
   }
 
-  /**Get the users */
-  getUsers(): void {
-    this.userAccountService.getUsers().subscribe({
-      next: (users) => {
-        console.log(users);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-
-  //getting team name
+  /**getting team name*/
   getTeamName(teamId: string) {
     this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
       console.log(team);
@@ -102,8 +90,8 @@ export class TeamSupervisorComponent implements OnInit {
     }
   }
 
-  /**Delete selected user(s) */
-  deleteSelected() {
+  /**Remove selected supervisor(s) */
+  removeSelected() {
     // debugger;
     const selectedUsersArr = this.selection.selected;
     let userIdArr: any = [];
@@ -142,8 +130,8 @@ export class TeamSupervisorComponent implements OnInit {
     }
   }
 
-  /**Method to confirm user deletion */
-  confirmUserDeletion(userId: string, username: string) {
+  /**Method to confirm supervisor removal */
+  confirmSupervisorRemoval(userId: string, username: string) {
     Swal.fire({
       title: `Delete "${username}" from the database?`,
       text: 'This process is irreversible.',
@@ -156,7 +144,7 @@ export class TeamSupervisorComponent implements OnInit {
     }).then((result) => {
       //delete user from db
       if (result.value) {
-        this.deleteUser(userId);
+        this.removeSupervisor(userId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.snackBarService.displaySnackbar(
           'error',
@@ -182,8 +170,8 @@ export class TeamSupervisorComponent implements OnInit {
     // }
   }
 
-  /**Delete a specified user */
-  deleteUser(userId: string) {
+  /**Remove a specified supervisor */
+  removeSupervisor(userId: string) {
     // this.userAccountService.deleteUser(userId).subscribe({
     //   next: (response: any) => {
     //     this.snackBarService.displaySnackbar('success', response.message);
@@ -196,8 +184,8 @@ export class TeamSupervisorComponent implements OnInit {
     // });
   }
 
-  /**Method to reload user table */
-  loadAllUsers() {
+  /**Method to reload supervisor table */
+  loadAllSupervisors() {
     //reset the selection
     this.selection = new SelectionModel<any>(true, []);
     //load data

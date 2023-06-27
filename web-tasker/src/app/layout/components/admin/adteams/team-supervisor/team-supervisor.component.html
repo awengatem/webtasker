@@ -44,7 +44,7 @@
                       aria-label="Example icon button with a delete icon"
                       type="button"
                       class="mt-4 custom-delete mat-raised-button"
-                      (click)="deleteSelected()"
+                      (click)="removeSelected()"
                       color="accent"
                     >
                       <mat-icon class="text-white">delete</mat-icon>
@@ -131,7 +131,7 @@
                               aria-label="Example icon button with a delete icon"
                               type="button"
                               (click)="
-                                confirmUserDeletion(
+                                confirmSupervisorRemoval(
                                   document._id,
                                   document.username
                                 )
