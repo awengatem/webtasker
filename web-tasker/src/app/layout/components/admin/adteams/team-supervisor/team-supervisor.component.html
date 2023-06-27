@@ -1,6 +1,201 @@
 <div class="container-fluid page">
   <div class="page__box p-3 mt-2">Teams</div>
   <div class="page__content shadow p-3 position-relative">
-    <div class="page__content-data">Content here</div>
+    <div class="page__content-data">
+      <div class="centered-content">
+        <div class="manage-container">
+          <div class="manage">
+            <div class="row">
+              <div class="col count">
+                <h1 class="text-dark position-relative">
+                  <span class=""> {{ totalUsers }} </span>Users
+                  <i class="fa-solid fa-user-group opacity-10"></i>
+                </h1>
+              </div>
+              <div class="col"></div>
+              <div class="col-md-3">
+                <div class="row centered-content add-button">
+                  <div class="col-md-1">
+                    <button class="btn btn-primary">
+                      <div class="btn-txt">+</div>
+                    </button>
+                  </div>
+                  <div class="col">
+                    <h4>New user</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="container">
+              <mat-card class="mat-elevation-z8 shadow">
+                <mat-card-content>
+                  <form>
+                    <b>Search Records :</b> &nbsp;&nbsp;
+                    <mat-form-field>
+                      <mat-label>Filter</mat-label>
+                      <input matInput (keyup)="applyFilter($event)" />
+                    </mat-form-field>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <b>Delete Selected Records :</b> &nbsp;&nbsp;
+                    <button
+                      mat-icon-button
+                      aria-label="Example icon button with a delete icon"
+                      type="button"
+                      class="mt-4 custom-delete mat-raised-button"
+                      (click)="deleteSelected()"
+                      color="accent"
+                    >
+                      <mat-icon class="text-white">delete</mat-icon>
+                    </button>
+                    <div>
+                      <!-- TABLE BEGINS HERE-->
+                      <mat-table
+                        [dataSource]="dataSource"
+                        matSort
+                        class="mat-elevation-z8"
+                        style="
+                          box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+                            0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                            0 1px 18px 0 rgba(0, 0, 0, 0.12);
+                        "
+                      >
+                        <!-- Checkbox Column -->
+                        <ng-container matColumnDef="Select">
+                          <mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox
+                              (change)="$event ? masterToggle() : null"
+                              [checked]="
+                                selection.hasValue() && isAllSelected()
+                              "
+                              [indeterminate]="
+                                selection.hasValue() && !isAllSelected()
+                              "
+                            ></mat-checkbox>
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" class="">
+                            <mat-checkbox
+                              (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)"
+                              [aria-label]="checkboxLabel(row)"
+                            ></mat-checkbox>
+                          </mat-cell>
+                        </ng-container>
+                        <!-- Username Column -->
+                        <ng-container matColumnDef="Username" class="">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Username
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            {{ document.username }}
+                          </mat-cell>
+                        </ng-container>
+                        <!-- Email Column -->
+                        <ng-container matColumnDef="Email" class="">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Email
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            {{ document.email }}
+                          </mat-cell>
+                        </ng-container>
+                        <!-- Firstname Column -->
+                        <ng-container matColumnDef="Firstname" class="">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            First name
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            {{ document.firstName }}
+                          </mat-cell>
+                        </ng-container>
+                        <!-- Lastname Column -->
+                        <ng-container matColumnDef="Lastname" class="">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Last name
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            {{ document.lastName }}
+                          </mat-cell>
+                        </ng-container>
+                        <!-- Role Column -->
+                        <ng-container matColumnDef="Role" class="">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Role
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            {{ document.role }}
+                          </mat-cell>
+                        </ng-container>
+                        <!-- Edit Icon -->
+                        <ng-container matColumnDef="Edit">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Edit
+                          </mat-header-cell>
+
+                          <mat-cell *matCellDef="let document">
+                            <button
+                              mat-icon-button
+                              class="custom-button custom-button-edit mat-raised-button"
+                              aria-label="Example icon button with a vertical three dot icon"
+                              type="button"
+                            >
+                              <mat-icon>edit</mat-icon>
+                            </button>
+                          </mat-cell>
+                        </ng-container>
+                        <!-- Delete Icon -->
+                        <ng-container matColumnDef="Delete">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Delete
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let document">
+                            <button
+                              mat-icon-button
+                              class="custom-button custom-button-delete mat-raised-button"
+                              aria-label="Example icon button with a delete icon"
+                              type="button"
+                              (click)="
+                                confirmUserDeletion(
+                                  document._id,
+                                  document.username
+                                )
+                              "
+                              color="accent"
+                            >
+                              <mat-icon>delete_forever</mat-icon>
+                            </button></mat-cell
+                          >
+                        </ng-container>
+                        <mat-header-row
+                          *matHeaderRowDef="displayedColumns"
+                        ></mat-header-row>
+                        <mat-row
+                          *matRowDef="let row; columns: displayedColumns"
+                        ></mat-row
+                      ></mat-table>
+                      <mat-paginator
+                        [pageSizeOptions]="[10, 25, 50]"
+                      ></mat-paginator>
+                    </div>
+                  </form>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <!-- BACK BUTTON -->
+            <div class="row centered create">
+              <div class="col-md-1">
+                <button class="btn btn-outline-custom" routerLink="/ad_manage">
+                  <div class="btn-txt">
+                    <i class="fa-solid fa-caret-left"></i>
+                  </div>
+                </button>
+              </div>
+              <div class="col"><h4>back</h4></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
