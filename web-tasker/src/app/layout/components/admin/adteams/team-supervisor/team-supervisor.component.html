@@ -6,13 +6,19 @@
         <div class="manage-container">
           <div class="manage">
             <div class="row">
-              <div class="col count">
-                <h1 class="text-dark position-relative">
-                  <span class=""> {{ totalUsers }} </span>Users
-                  <i class="fa-solid fa-user-group opacity-10"></i>
-                </h1>
+              <div class="col">
+                <h2 data-aos="zoom-in-up" class="col aos-init aos-animate">
+                  team <i class="fa-solid fa-people-group"></i>
+                </h2>
               </div>
-              <div class="col"></div>
+              <div class="col">
+                <div class="">
+                  <h4>
+                    <i class="fa-solid fa-crown custom-color"></i> Supervisors:
+                    <span class="">5</span>
+                  </h4>
+                </div>
+              </div>
               <div class="col-md-3">
                 <div class="assign me-2">
                   <button class="btn btn-primary">
@@ -26,13 +32,13 @@
               <mat-card class="mat-elevation-z8 shadow">
                 <mat-card-content>
                   <form>
-                    <b>Search Records :</b> &nbsp;&nbsp;
+                    <b>Search Supervisors :</b> &nbsp;&nbsp;
                     <mat-form-field>
                       <mat-label>Filter</mat-label>
                       <input matInput (keyup)="applyFilter($event)" />
                     </mat-form-field>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <b>Delete Selected Records :</b> &nbsp;&nbsp;
+                    <b>Remove Selected Supervisors :</b> &nbsp;&nbsp;
                     <button
                       mat-icon-button
                       aria-label="Example icon button with a delete icon"
