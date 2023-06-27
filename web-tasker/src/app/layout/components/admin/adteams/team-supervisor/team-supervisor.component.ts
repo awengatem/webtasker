@@ -7,6 +7,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import Swal from 'sweetalert2';
 import { SnackBarService } from 'src/app/services/snackbar.service';
 import { TeamService } from 'src/app/services/api/team.service';
+import { SupervisorService } from 'src/app/services/api/supervisor.service';
 
 @Component({
   selector: 'app-team-supervisor',
@@ -16,6 +17,7 @@ import { TeamService } from 'src/app/services/api/team.service';
 export class TeamSupervisorComponent implements OnInit {
   /**variables */
   teamName!: string;
+  supervisorCount: any;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
@@ -32,19 +34,19 @@ export class TeamSupervisorComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private userAccountService: UserAccountService,
+    private supervisorService: SupervisorService,
     private snackBarService: SnackBarService,
     private teamService: TeamService
   ) {
-    //load data on table
-    this.loadAllSupervisors();
-  }
-
-  ngOnInit(): void {
     /**Get the teamId */
     const teamId = localStorage.getItem('capturedTeamId')!;
     this.teamId = teamId;
-    this.getTeamName(teamId);
+    //load data on table
+    this.loadAllSupervisors(this.teamId);
+  }
+
+  ngOnInit(): void {
+    this.getTeamName(this.teamId);
   }
 
   /**getting team name*/
@@ -181,18 +183,18 @@ export class TeamSupervisorComponent implements OnInit {
   }
 
   /**Method to reload supervisor table */
-  loadAllSupervisors() {
+  loadAllSupervisors(teamId: string) {
     //reset the selection
     this.selection = new SelectionModel<any>(true, []);
     //load data
-    this.userAccountService.getUsers().subscribe({
-      next: (users) => {
-        this.dataSource = new MatTableDataSource(users);
+    this.supervisorService.getTeamSupervisors(teamId).subscribe({
+      next: (supervisors) => {
+        this.dataSource = new MatTableDataSource(supervisors);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        // refresh usercount
-        // this.totalUsers = users.length;
-        console.log(users);
+        // refresh supervisor count
+        this.supervisorCount = supervisors.length;
+        console.log(supervisors);
       },
       error: (err) => {
         console.log(err);

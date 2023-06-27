@@ -6,4 +6,9 @@ import { WebRequestService } from './web-request.service';
 })
 export class SupervisorService {
   constructor(private webReqService: WebRequestService) {}
+
+  /**Get supervisors belonging to a certain team */
+  getTeamSupervisors(teamId: string) {
+    return this.webReqService.get(`supervisors/${teamId}`);
+  }
 }
