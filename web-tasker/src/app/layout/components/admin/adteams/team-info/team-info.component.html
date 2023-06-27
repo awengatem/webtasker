@@ -40,10 +40,22 @@
                   </span>
                 </div>
               </div>
-              <div class="col-md-3">
-                <div class="row centered-content create">
+              <div class="col-md-2">
+                <div class="create me-2">
+                  <button
+                    class="btn btn-primary"
+                    [routerLink]="
+                      tab1
+                        ? ['/ad_teams', teamId, 'add_member']
+                        : ['/ad_teams', teamId, 'assign_project']
+                    "
+                    (click)="addRespective()"
+                  >
+                    <span class="">+ {{ addButtonText }}</span>
+                  </button>
+                </div>
+                <!-- <div class="row centered-content create">
                   <div class="col-md-1">
-                    <!-- routerLink="/new_team" -->
                     <button
                       class="btn btn-primary"
                       [routerLink]="
@@ -59,7 +71,7 @@
                   <div class="col">
                     <h4>{{ addButtonText }}</h4>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
 
