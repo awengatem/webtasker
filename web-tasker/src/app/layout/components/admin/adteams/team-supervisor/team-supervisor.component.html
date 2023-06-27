@@ -154,7 +154,10 @@
             <!-- BACK BUTTON -->
             <div class="row centered create">
               <div class="col-md-1">
-                <button class="btn btn-outline-custom" routerLink="/ad_manage">
+                <button
+                  class="btn btn-outline-custom"
+                  [routerLink]="['/ad_teams', teamId]"
+                >
                   <div class="btn-txt">
                     <i class="fa-solid fa-caret-left"></i>
                   </div>

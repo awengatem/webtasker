@@ -28,6 +28,8 @@ export class TeamSupervisorComponent implements OnInit {
     'Lastname',
     'Remove',
   ];
+  teamId!: string;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -41,7 +43,9 @@ export class TeamSupervisorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getUsers();
+    /**Get the teamId */
+    const teamId = localStorage.getItem('capturedTeamId')!;
+    this.teamId = teamId;
   }
 
   /**Get the users */
@@ -152,33 +156,33 @@ export class TeamSupervisorComponent implements OnInit {
   }
   /**Method to deletemultiple */
   deleteMultipe(userIdArr: any[]) {
-    if (userIdArr.length > 0) {
-      this.userAccountService.deleteMultipleUsers(userIdArr).subscribe({
-        next: (response: any) => {
-          console.log(response);
-          this.snackBarService.displaySnackbar('success', response.message);
-          this.loadAllUsers();
-        },
-        error: (err) => {
-          console.log(err);
-          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-        },
-      });
-    }
+    // if (userIdArr.length > 0) {
+    //   this.userAccountService.deleteMultipleUsers(userIdArr).subscribe({
+    //     next: (response: any) => {
+    //       console.log(response);
+    //       this.snackBarService.displaySnackbar('success', response.message);
+    //       this.loadAllUsers();
+    //     },
+    //     error: (err) => {
+    //       console.log(err);
+    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+    //     },
+    //   });
+    // }
   }
 
   /**Delete a specified user */
   deleteUser(userId: string) {
-    this.userAccountService.deleteUser(userId).subscribe({
-      next: (response: any) => {
-        this.snackBarService.displaySnackbar('success', response.message);
-        this.loadAllUsers();
-      },
-      error: (err) => {
-        console.log(err);
-        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-      },
-    });
+    // this.userAccountService.deleteUser(userId).subscribe({
+    //   next: (response: any) => {
+    //     this.snackBarService.displaySnackbar('success', response.message);
+    //     this.loadAllUsers();
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //     Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+    //   },
+    // });
   }
 
   /**Method to reload user table */
