@@ -228,7 +228,10 @@ export class EditUsermodalComponent implements OnInit {
   /**Method to detect selection of role */
   changeRole(e: any) {
     console.log(e.value);
-    const role = e.value;
+    const role = e.value.toLowerCase();
+    /**check if role changed to supervisor */
+    if (role === 'supervisor') {
+    }
   }
 
   /**Method to load the form with values to be patched */
