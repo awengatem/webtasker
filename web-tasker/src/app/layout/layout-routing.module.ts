@@ -49,6 +49,7 @@ import { FillEarningsComponent } from './components/admin/supervise/fill-earning
 import { ViewEarningsComponent } from './components/admin/supervise/view-earnings/view-earnings.component';
 import { SuperviseTeamsComponent } from './components/admin/supervise/supervise-teams/supervise-teams.component';
 import { TeamsPageComponent } from './components/admin/supervise/teams-page/teams-page.component';
+import { TeamSupervisorComponent } from './components/admin/adteams/team-supervisor/team-supervisor.component';
 
 const routes: Routes = [
   {
@@ -210,6 +211,11 @@ const routes: Routes = [
         path: 'ad_teams/:teamId/assign_project',
         canActivate: [SupervisorGuard],
         component: AssignProjectComponent,
+      },
+      {
+        path: 'ad_teams/:teamId/supervisor',
+        canActivate: [SupervisorGuard],
+        component: TeamSupervisorComponent,
       },
       {
         path: 'new_team',

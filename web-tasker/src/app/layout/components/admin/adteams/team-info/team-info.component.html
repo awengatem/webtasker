@@ -16,7 +16,10 @@
                     {{ teamName }}<i class="fa-solid fa-people-group"></i>
                   </h2>
                   <div class="col">
-                    <button class="btn btn-outline-custom">
+                    <button
+                      class="btn btn-outline-custom"
+                      [routerLink]="['/ad_teams', teamId, 'supervisor']"
+                    >
                       <i class="fa-solid fa-crown"></i>
                       Supervisor
                     </button>
