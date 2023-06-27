@@ -225,6 +225,12 @@ export class EditUsermodalComponent implements OnInit {
     }
   }
 
+  /**Method to detect selection of role */
+  changeRole(e: any) {
+    console.log(e.value);
+    const role = e.value;
+  }
+
   /**Method to load the form with values to be patched */
   loadFieldsToEdit(userId: string) {
     this.userAccountService.getSpecificUser(userId).subscribe((user) => {

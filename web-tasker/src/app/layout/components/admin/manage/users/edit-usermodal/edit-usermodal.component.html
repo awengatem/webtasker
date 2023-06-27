@@ -254,7 +254,12 @@
       <!-- ROLE FIELD -->
       <mat-form-field appearance="outline">
         <mat-label>Role</mat-label>
-        <mat-select matNativeControl name="role" formControlName="role">
+        <mat-select
+          matNativeControl
+          name="role"
+          formControlName="role"
+          (selectionChange)="changeRole($event)"
+        >
           <mat-option value="user">User</mat-option>
           <mat-option value="supervisor">Supervisor</mat-option>
           <mat-option value="manager">Manager</mat-option>
