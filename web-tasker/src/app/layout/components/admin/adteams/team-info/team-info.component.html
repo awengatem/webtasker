@@ -11,10 +11,19 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <h2 data-aos="zoom-in-up" class="aos-init aos-animate">
-                  {{ teamName }} <i class="fa-solid fa-people-group"></i>
-                </h2>
+                <div class="row">
+                  <h2 data-aos="zoom-in-up" class="col aos-init aos-animate">
+                    {{ teamName }}<i class="fa-solid fa-people-group"></i>
+                  </h2>
+                  <div class="col">
+                    <button class="btn btn-outline-custom">
+                      <i class="fa-solid fa-crown"></i>
+                      Supervisor
+                    </button>
+                  </div>
+                </div>
               </div>
+
               <div class="col">
                 <div class="input-group rounded search-bar">
                   <input
@@ -55,7 +64,7 @@
             </div>
 
             <div class="timetable">
-              <!-- Schedule Top Navigation -->
+              <!-- Schedule Top Navigation  -->
               <nav class="nav nav-tabs">
                 <button
                   class="nav-link active"
