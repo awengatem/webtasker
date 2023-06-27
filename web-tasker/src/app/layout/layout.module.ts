@@ -69,6 +69,7 @@ import { FillEarningsComponent } from './components/admin/supervise/fill-earning
 import { ViewEarningsComponent } from './components/admin/supervise/view-earnings/view-earnings.component';
 import { SuperviseTeamsComponent } from './components/admin/supervise/supervise-teams/supervise-teams.component';
 import { TeamsPageComponent } from './components/admin/supervise/teams-page/teams-page.component';
+import { TeamSupervisorComponent } from './components/admin/adteams/team-supervisor/team-supervisor.component';
 
 @NgModule({
   declarations: [
@@ -135,6 +136,7 @@ import { TeamsPageComponent } from './components/admin/supervise/teams-page/team
     ViewEarningsComponent,
     SuperviseTeamsComponent,
     TeamsPageComponent,
+    TeamSupervisorComponent,
   ],
   imports: [
     CommonModule,
