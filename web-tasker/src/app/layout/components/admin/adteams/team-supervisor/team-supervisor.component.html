@@ -113,36 +113,10 @@
                             {{ document.lastName }}
                           </mat-cell>
                         </ng-container>
-                        <!-- Role Column -->
-                        <ng-container matColumnDef="Role" class="">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Role
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let document">
-                            {{ document.role }}
-                          </mat-cell>
-                        </ng-container>
-                        <!-- Edit Icon -->
-                        <ng-container matColumnDef="Edit">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Edit
-                          </mat-header-cell>
-
-                          <mat-cell *matCellDef="let document">
-                            <button
-                              mat-icon-button
-                              class="custom-button custom-button-edit mat-raised-button"
-                              aria-label="Example icon button with a vertical three dot icon"
-                              type="button"
-                            >
-                              <mat-icon>edit</mat-icon>
-                            </button>
-                          </mat-cell>
-                        </ng-container>
                         <!-- Delete Icon -->
-                        <ng-container matColumnDef="Delete">
+                        <ng-container matColumnDef="Remove">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Delete
+                            Remove
                           </mat-header-cell>
                           <mat-cell *matCellDef="let document">
                             <button

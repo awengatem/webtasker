@@ -26,9 +26,7 @@ export class TeamSupervisorComponent implements OnInit {
     'Email',
     'Firstname',
     'Lastname',
-    'Role',
-    'Edit',
-    'Delete',
+    'Remove',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
