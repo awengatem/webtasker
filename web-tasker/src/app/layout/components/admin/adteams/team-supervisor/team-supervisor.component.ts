@@ -1,7 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -37,8 +34,7 @@ export class TeamSupervisorComponent implements OnInit {
   constructor(
     private userAccountService: UserAccountService,
     private snackBarService: SnackBarService,
-    private teamService: TeamService,
-    private modalService: MdbModalService
+    private teamService: TeamService
   ) {
     //load data on table
     this.loadAllSupervisors();
