@@ -11,4 +11,9 @@ export class SupervisorService {
   getTeamSupervisors(teamId: string) {
     return this.webReqService.get(`supervisors/${teamId}`);
   }
+
+  /**Delete supevisor */
+  deleteSupervisor(userId: string) {
+    return this.webReqService.delete(`supervisors/user/${userId}`);
+  }
 }
