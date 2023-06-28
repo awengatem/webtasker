@@ -32,6 +32,7 @@ export class EditUsermodalComponent implements OnInit {
   minDate = new Date(1930, 0, 1);
   maxDate = new Date();
   date: any;
+  userRole!: string;
   genders = genders;
   counties: any;
   countyNames: any = [];
@@ -238,6 +239,11 @@ export class EditUsermodalComponent implements OnInit {
   loadFieldsToEdit(userId: string) {
     this.userAccountService.getSpecificUser(userId).subscribe((user) => {
       console.log(user);
+
+      /**Record the user's role */
+      this.userRole = user.role;
+      console.log(this.userRole);
+
       this.form.controls['username'].setValue(user.username);
       this.form.controls['email'].setValue(user.email);
       this.form.controls['firstName'].setValue(user.firstName);
