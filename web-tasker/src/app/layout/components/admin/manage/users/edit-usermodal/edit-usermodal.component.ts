@@ -315,8 +315,12 @@ export class EditUsermodalComponent implements OnInit {
 
     let user = {};
 
+    /**Detect whether role has changed */
     if (this.hasRoleChanged(role)) {
       console.log('Imechange');
+      /**remove supervisor from supervisors table */
+      if (this.userRole === 'supervisor') {
+      }
     }
 
     // /**check if password is available to include for patching */
