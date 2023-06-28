@@ -241,7 +241,7 @@ export class EditUsermodalComponent implements OnInit {
       console.log(user);
 
       /**Record the user's role */
-      this.userRole = user.role;
+      this.userRole = user.role.toLowerCase();
       console.log(this.userRole);
 
       this.form.controls['username'].setValue(user.username);
@@ -320,10 +320,6 @@ export class EditUsermodalComponent implements OnInit {
       console.log('Imechange');
       /**remove supervisor from supervisors table */
       if (this.userRole === 'supervisor') {
-      }
-      /**add user to supervisors table if role changed to supervisor */
-      if (role === 'supervisor') {
-        
       }
     }
 
