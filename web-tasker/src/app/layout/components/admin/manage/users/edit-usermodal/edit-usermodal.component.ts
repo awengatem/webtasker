@@ -321,6 +321,10 @@ export class EditUsermodalComponent implements OnInit {
       /**remove supervisor from supervisors table */
       if (this.userRole === 'supervisor') {
       }
+      /**add user to supervisors table if role changed to supervisor */
+      if (role === 'supervisor') {
+        
+      }
     }
 
     // /**check if password is available to include for patching */
