@@ -315,54 +315,58 @@ export class EditUsermodalComponent implements OnInit {
 
     let user = {};
 
-    /**check if password is available to include for patching */
-    if (password) {
-      user = {
-        username: cUsername,
-        email: cEmail,
-        firstName: cFirstname,
-        lastName: cLastname,
-        dob: cDob,
-        idNumber: idNo,
-        gender: gender,
-        telNumber: telNo,
-        site_id: this.siteId,
-        role: role,
-        password: password,
-      };
-    } else {
-      user = {
-        username: cUsername,
-        email: cEmail,
-        firstName: cFirstname,
-        lastName: cLastname,
-        dob: dob,
-        idNumber: idNo,
-        gender: gender,
-        telNumber: telNo,
-        site_id: this.siteId,
-        role: role,
-      };
+    if (this.hasRoleChanged(role)) {
+      console.log('Imechange');
     }
-    console.log(user);
 
-    /**patch the user to api*/
-    if (this.userId) {
-      this.userAccountService.editUser(this.userId, user).subscribe({
-        next: (res: any) => {
-          Swal.fire('Success!', res.message, 'success');
-          this.form.reset();
-          console.log(res);
-          this.registerFailed = false;
-          this.close();
-        },
-        error: (err) => {
-          console.log(err.error.message);
-          this.registerErrorMessage = err.error.message;
-          this.registerFailed = true;
-        },
-      });
-    }
+    // /**check if password is available to include for patching */
+    // if (password) {
+    //   user = {
+    //     username: cUsername,
+    //     email: cEmail,
+    //     firstName: cFirstname,
+    //     lastName: cLastname,
+    //     dob: cDob,
+    //     idNumber: idNo,
+    //     gender: gender,
+    //     telNumber: telNo,
+    //     site_id: this.siteId,
+    //     role: role,
+    //     password: password,
+    //   };
+    // } else {
+    //   user = {
+    //     username: cUsername,
+    //     email: cEmail,
+    //     firstName: cFirstname,
+    //     lastName: cLastname,
+    //     dob: dob,
+    //     idNumber: idNo,
+    //     gender: gender,
+    //     telNumber: telNo,
+    //     site_id: this.siteId,
+    //     role: role,
+    //   };
+    // }
+    // console.log(user);
+
+    // /**patch the user to api*/
+    // if (this.userId) {
+    //   this.userAccountService.editUser(this.userId, user).subscribe({
+    //     next: (res: any) => {
+    //       Swal.fire('Success!', res.message, 'success');
+    //       this.form.reset();
+    //       console.log(res);
+    //       this.registerFailed = false;
+    //       this.close();
+    //     },
+    //     error: (err) => {
+    //       console.log(err.error.message);
+    //       this.registerErrorMessage = err.error.message;
+    //       this.registerFailed = true;
+    //     },
+    //   });
+    // }
   }
 
   /**Get site from db */
@@ -437,8 +441,8 @@ export class EditUsermodalComponent implements OnInit {
 
   /**Check if role has changed */
   hasRoleChanged(role: string) {
-    if (this.userRole === role) return true;
-    return false;
+    if (this.userRole === role) return false;
+    return true;
   }
 
   /**capitalize a word */
