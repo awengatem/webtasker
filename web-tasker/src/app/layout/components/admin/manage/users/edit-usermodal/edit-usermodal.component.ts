@@ -8,6 +8,7 @@ import Validation from '../../../../../auth/login/validation';
 import { genders, roles } from '../../../../../../helpers/common/store';
 import { CountyService } from 'src/app/services/api/county.service';
 import { SiteService } from 'src/app/services/api/site.service';
+import { SupervisorService } from 'src/app/services/api/supervisor.service';
 
 @Component({
   selector: 'app-edit-usermodal',
@@ -45,6 +46,7 @@ export class EditUsermodalComponent implements OnInit {
     public modalRef: MdbModalRef<EditUsermodalComponent>,
     private fb: FormBuilder,
     private generalService: GeneralService,
+    private supervisorService: SupervisorService,
     private countyService: CountyService,
     private siteService: SiteService,
     private userAccountService: UserAccountService
@@ -226,15 +228,6 @@ export class EditUsermodalComponent implements OnInit {
     }
   }
 
-  /**Method to detect selection of role */
-  changeRole(e: any) {
-    console.log(e.value);
-    const role = e.value.toLowerCase();
-    /**check if role changed to supervisor */
-    if (role === 'supervisor') {
-    }
-  }
-
   /**Method to load the form with values to be patched */
   loadFieldsToEdit(userId: string) {
     this.userAccountService.getSpecificUser(userId).subscribe((user) => {
@@ -242,7 +235,6 @@ export class EditUsermodalComponent implements OnInit {
 
       /**Record the user's role */
       this.userRole = user.role.toLowerCase();
-      console.log(this.userRole);
 
       this.form.controls['username'].setValue(user.username);
       this.form.controls['email'].setValue(user.email);
@@ -317,9 +309,16 @@ export class EditUsermodalComponent implements OnInit {
 
     /**Detect whether role has changed */
     if (this.hasRoleChanged(role)) {
-      console.log('Imechange');
       /**remove supervisor from supervisors table */
       if (this.userRole === 'supervisor') {
+        this.supervisorService.deleteSupervisor(this.receivedUserId).subscribe({
+          next: (res: any) => {
+            console.log(res.message);
+          },
+          error: (err) => {
+            console.log(err.message);
+          },
+        });
       }
     }
 
@@ -378,7 +377,7 @@ export class EditUsermodalComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.siteService.getSpecifiedSite(siteId).subscribe({
         next: (site) => {
-          console.log(site);
+          // console.log(site);
           resolve(site);
         },
         error: (err) => {
@@ -394,7 +393,7 @@ export class EditUsermodalComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.countyService.getCountyOfSite(countyNumber).subscribe({
         next: (county) => {
-          console.log(county);
+          // console.log(county);
           resolve(county);
         },
         error: (err) => {
@@ -427,7 +426,7 @@ export class EditUsermodalComponent implements OnInit {
   getCountySites(countyNumber: string) {
     this.siteService.getCountySites(countyNumber).subscribe({
       next: (data) => {
-        console.log(data);
+        // console.log(data);
         /**push county site objects to county sites array */
         this.countySites = data;
         /**empty county site names array first*/
