@@ -301,6 +301,8 @@ export class EditUsermodalComponent implements OnInit {
       password,
     } = form.value;
 
+    /** */
+
     /**creating user object to pass to server
      *properties name's should not be changed
      */
@@ -431,6 +433,12 @@ export class EditUsermodalComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  /**Check if role has changed */
+  hasRoleChanged(role: string) {
+    if (this.userRole === role) return true;
+    return false;
   }
 
   /**capitalize a word */
