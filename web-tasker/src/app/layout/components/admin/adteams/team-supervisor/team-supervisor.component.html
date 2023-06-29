@@ -21,7 +21,10 @@
               </div>
               <div class="col-md-3">
                 <div class="assign me-2">
-                  <button class="btn btn-primary">
+                  <button
+                    class="btn btn-primary"
+                    [routerLink]="['/ad_teams', teamId, 'assign_supervisor']"
+                  >
                     <span class="">+ Assign supervisor</span>
                   </button>
                 </div>
