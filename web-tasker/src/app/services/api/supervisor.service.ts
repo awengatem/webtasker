@@ -26,4 +26,11 @@ export class SupervisorService {
   deleteSupervisor(userId: string) {
     return this.webReqService.delete(`supervisors/user/${userId}`);
   }
+
+  /**Delete multiple supevisors */
+  deleteMultipleSupervisors(supervisorDocs: any[]) {
+    return this.webReqService.post(`supervisors/delete_multiple`, {
+      supervisorDocs: supervisorDocs,
+    });
+  }
 }
