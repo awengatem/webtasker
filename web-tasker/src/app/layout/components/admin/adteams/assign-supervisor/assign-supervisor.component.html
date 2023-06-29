@@ -1,1 +1,53 @@
-<p>assign-supervisor works!</p>
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Teams</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <div class="centered-content">
+        <div class="members-container">
+          <div class="members">
+            <div class="row">
+              <div class="col">
+                <h1 class="text-dark">
+                  add members <i class="uil uil-user-plus"></i>
+                </h1>
+              </div>
+              <div class="col-md-3">
+                <div class="row centered-content add">
+                  <div class="col-md-1">
+                    <button class="btn btn-primary" (click)="addMember()">
+                      <div class="btn-txt">+</div>
+                    </button>
+                  </div>
+                  <div class="col">
+                    <h4>Add members</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <mat-divider></mat-divider>
+            <div class="members-inside" id="teams">
+              <ng-multiselect-dropdown
+                [placeholder]="'Click to select members to add 👇'"
+                [settings]="dropdownSettings"
+                [data]="dropdownList"
+                [(ngModel)]="selectedItems"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+              >
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="back">
+        <button
+          class="btn btn-outline-custom"
+          [routerLink]="['/ad_teams', teamId]"
+        >
+          <div class="btn-txt">Back</div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
