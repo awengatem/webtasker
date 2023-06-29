@@ -13,7 +13,6 @@ import Swal from 'sweetalert2';
 export class AssignSupervisorComponent {
   //used by dropdown list
   dropdownList: any = [];
-  userArr: any = [];
   supervisorArr: any = [];
   selectedItems: any = [];
   dropdownSettings!: IDropdownSettings;
@@ -124,30 +123,31 @@ export class AssignSupervisorComponent {
     });
   }
 
-  addMember() {
-    let teamMembers: any = [];
-    //ensure members are selected
+  /**Method to assign supervisors to team */
+  assignSupervisor() {
+    let teamSupervisors: any = [];
+    //ensure supervisors are selected
     if (this.selectedItems.length > 0) {
       this.selectedItems.forEach((item: any) => {
         let userId;
         //get user account id
-        for (let i = 0; i < this.userArr.length; i++) {
-          if (this.userArr[i].username === item.item_text) {
-            userId = this.userArr[i]._id;
+        for (let i = 0; i < this.supervisorArr.length; i++) {
+          if (this.supervisorArr[i].username === item.item_text) {
+            userId = this.supervisorArr[i]._id;
           }
         }
         //hardcode object to match api
-        //get the post team members payload
-        teamMembers.push({ user_account_id: userId, team_id: this.teamId });
+        //get the post supervisors payload
+        teamSupervisors.push({ user_account_id: userId, team_id: this.teamId });
       });
-      //console.log(teamMembers);
+      //console.log(teamSupervisors);
 
       //post them to db
-      this.teamService.addTeamMembers(teamMembers).subscribe({
+      this.supervisorService.addTeamSupervisors(teamSupervisors).subscribe({
         next: (res: any) => {
           console.log(res);
-          this.router.navigate([`/ad_teams/${this.teamId}`]);
-          Swal.fire('Added!', `Members have been added`, 'success');
+          this.router.navigate([`/ad_teams/${this.teamId}/supervisor`]);
+          Swal.fire('Added!', `Supervisors have been assigned`, 'success');
         },
         error: (err: any) => {
           console.log(err);
@@ -155,7 +155,7 @@ export class AssignSupervisorComponent {
         },
       });
     } else if (this.selectedItems.length <= 0) {
-      Swal.fire('Alert!', `Please select a member to add`, 'warning');
+      Swal.fire('Alert!', `Please select a supervisor to assign`, 'warning');
     }
   }
 }

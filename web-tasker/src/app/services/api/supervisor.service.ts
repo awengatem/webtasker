@@ -17,6 +17,11 @@ export class SupervisorService {
     return this.webReqService.get(`supervisors/${teamId}`);
   }
 
+  /**Method to add team supervisors */
+  addTeamSupervisors(supervisors: any[]) {
+    return this.webReqService.post(`supervisors`, supervisors);
+  }
+
   /**Delete supevisor */
   deleteSupervisor(userId: string) {
     return this.webReqService.delete(`supervisors/user/${userId}`);
