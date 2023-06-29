@@ -102,7 +102,7 @@ export class TeamSupervisorComponent implements OnInit {
       console.log(userIdArr);
       //confirm and delete users
       Swal.fire({
-        title: `Delete ${selectedUsersArr.length} users from the database?`,
+        title: `Remove ${selectedUsersArr.length} supervisors from this team?`,
         text: 'This process is irreversible.',
         icon: 'warning',
         showCancelButton: true,
@@ -131,7 +131,7 @@ export class TeamSupervisorComponent implements OnInit {
   /**Method to confirm supervisor removal */
   confirmSupervisorRemoval(userId: string, username: string) {
     Swal.fire({
-      title: `Delete "${username}" from the database?`,
+      title: `Remove "${username}" from this team's supervisors?`,
       text: 'This process is irreversible.',
       icon: 'warning',
       showCancelButton: true,
