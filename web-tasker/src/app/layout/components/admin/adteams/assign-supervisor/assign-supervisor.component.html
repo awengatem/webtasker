@@ -28,7 +28,7 @@
             <mat-divider></mat-divider>
             <div class="members-inside" id="teams">
               <ng-multiselect-dropdown
-                [placeholder]="'Click to select members to add 👇'"
+                [placeholder]="'Click to select supervisors to assign 👇'"
                 [settings]="dropdownSettings"
                 [data]="dropdownList"
                 [(ngModel)]="selectedItems"
@@ -43,7 +43,7 @@
       <div class="back">
         <button
           class="btn btn-outline-custom"
-          [routerLink]="['/ad_teams', teamId]"
+          [routerLink]="['/ad_teams', teamId, 'supervisor']"
         >
           <div class="btn-txt">Back</div>
         </button>
