@@ -91,18 +91,23 @@ export class TeamSupervisorComponent implements OnInit {
   /**Remove selected supervisor(s) */
   removeSelected() {
     // debugger;
-    const selectedUsersArr = this.selection.selected;
-    let userIdArr: any = [];
-    console.log(selectedUsersArr);
-    if (selectedUsersArr.length > 0) {
+    const selectedSupervisorsArr = this.selection.selected;
+    let supervisorDocArr: any = [];
+
+    console.log(selectedSupervisorsArr);
+    if (selectedSupervisorsArr.length > 0) {
       //push only user ids in an array
-      selectedUsersArr.forEach((item) => {
-        userIdArr.push(item._id);
+      selectedSupervisorsArr.forEach((item) => {
+        const supervisorDoc = {
+          user_account_id: item._id,
+          team_id: this.teamId,
+        };
+        supervisorDocArr.push(supervisorDoc);
       });
-      console.log(userIdArr);
+      console.log(supervisorDocArr);
       //confirm and delete users
       Swal.fire({
-        title: `Remove ${selectedUsersArr.length} supervisors from this team?`,
+        title: `Remove ${selectedSupervisorsArr.length} supervisors from this team?`,
         text: 'This process is irreversible.',
         icon: 'warning',
         showCancelButton: true,
@@ -113,7 +118,7 @@ export class TeamSupervisorComponent implements OnInit {
       }).then((result) => {
         //delete users from db
         if (result.value) {
-          this.deleteMultipe(userIdArr);
+          this.deleteMultipe(supervisorDocArr);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           this.snackBarService.displaySnackbar(
             'error',
@@ -152,20 +157,22 @@ export class TeamSupervisorComponent implements OnInit {
     });
   }
   /**Method to deletemultiple */
-  deleteMultipe(userIdArr: any[]) {
-    // if (userIdArr.length > 0) {
-    //   this.userAccountService.deleteMultipleUsers(userIdArr).subscribe({
-    //     next: (response: any) => {
-    //       console.log(response);
-    //       this.snackBarService.displaySnackbar('success', response.message);
-    //       this.loadAllUsers();
-    //     },
-    //     error: (err) => {
-    //       console.log(err);
-    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //     },
-    //   });
-    // }
+  deleteMultipe(supervisorDocArr: any[]) {
+    if (supervisorDocArr.length > 0) {
+      this.supervisorService
+        .deleteMultipleSupervisors(supervisorDocArr)
+        .subscribe({
+          next: (response: any) => {
+            console.log(response);
+            this.snackBarService.displaySnackbar('success', response.message);
+            this.loadAllSupervisors(this.teamId);
+          },
+          error: (err) => {
+            console.log(err);
+            Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+          },
+        });
+    }
   }
 
   /**Remove a specified supervisor */
