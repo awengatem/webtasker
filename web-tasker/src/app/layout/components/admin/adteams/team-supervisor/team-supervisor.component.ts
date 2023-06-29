@@ -177,16 +177,16 @@ export class TeamSupervisorComponent implements OnInit {
 
   /**Remove a specified supervisor */
   removeSupervisor(userId: string) {
-    // this.userAccountService.deleteUser(userId).subscribe({
-    //   next: (response: any) => {
-    //     this.snackBarService.displaySnackbar('success', response.message);
-    //     this.loadAllUsers();
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //     Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //   },
-    // });
+    this.supervisorService.deleteSupervisor(userId).subscribe({
+      next: (response: any) => {
+        this.snackBarService.displaySnackbar('success', response.message);
+        this.loadAllSupervisors(this.teamId);
+      },
+      error: (err) => {
+        console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+      },
+    });
   }
 
   /**Method to reload supervisor table */
