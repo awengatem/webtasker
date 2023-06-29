@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { SupervisorService } from 'src/app/services/api/supervisor.service';
 import { TeamService } from 'src/app/services/api/team.service';
 import Swal from 'sweetalert2';
 
@@ -13,16 +14,18 @@ export class AssignSupervisorComponent {
   //used by dropdown list
   dropdownList: any = [];
   userArr: any = [];
+  supervisorArr: any = [];
   selectedItems: any = [];
   dropdownSettings!: IDropdownSettings;
 
   teamId!: string;
 
-  //members already in team
-  members: any = [];
+  /** supervisors already assigned to team*/
+  supervisors: any = [];
 
   constructor(
     private teamService: TeamService,
+    private supervisorService: SupervisorService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -42,7 +45,7 @@ export class AssignSupervisorComponent {
     //this.getTeamMembers(this.teamId);
 
     //then get dropdown list data
-    this.getUsers();
+    this.getSupervisors();
     this.selectedItems = [];
     this.dropdownSettings = {
       singleSelection: false,
@@ -64,39 +67,39 @@ export class AssignSupervisorComponent {
   }
 
   //populating the dropdown list
-  getUsers() {
+  getSupervisors() {
     let tmp: any = [];
-    let memberUsernames: any = [];
+    let usernames: any = [];
     let tmp2: any = [];
-    let userArr: any = [];
+    let supervisorArr: any = [];
     let usernameArr: any = [];
 
-    //get members already in team first
-    this.teamService.getTeamMembers(this.teamId).subscribe({
-      next: (members: any) => {
-        // members.forEach((member: any) => {
-        //   console.log(member.username);
+    //get supervisors already in team first
+    this.supervisorService.getTeamSupervisors(this.teamId).subscribe({
+      next: (supervisors: any) => {
+        // supervisors.forEach((supervisor: any) => {
+        //   console.log(supervisor.username);
         // });
-        for (let i = 0; i < members.length; i++) {
-          tmp2.push(members[i]);
-          //get only the usernames of members
-          memberUsernames.push(members[i].username);
+        for (let i = 0; i < supervisors.length; i++) {
+          tmp2.push(supervisors[i]);
+          //get only the usernames of supervisors
+          usernames.push(supervisors[i].username);
         }
-        this.members = tmp2;
-        //console.log(this.members);
+        this.supervisors = tmp2;
+        //console.log(this.supervisors);
 
-        //get all users in db
-        this.teamService.getUsers().subscribe({
-          next: (users: any) => {
-            //push usernames and users to respective array
-            for (let i = 0; i < users.length; i++) {
-              usernameArr.push(users[i].username);
-              userArr.push(users[i]);
+        //get all supervisors in db
+        this.supervisorService.getSupervisors().subscribe({
+          next: (supervisors: any) => {
+            //push usernames and supervisors to respective array
+            for (let i = 0; i < supervisors.length; i++) {
+              usernameArr.push(supervisors[i].username);
+              supervisorArr.push(supervisors[i]);
             }
 
-            //filter out members already in team
+            //filter out supervisors already assigned to team
             let filtered = usernameArr.filter(
-              (item: any) => !memberUsernames.includes(item)
+              (item: any) => !usernames.includes(item)
             );
             //console.log(filtered);
 
@@ -106,7 +109,7 @@ export class AssignSupervisorComponent {
             }
             //add usernames to dropdown list and users to array
             this.dropdownList = tmp;
-            this.userArr = userArr;
+            this.supervisorArr = supervisorArr;
           },
           error: (err: any) => {
             console.log(err);
