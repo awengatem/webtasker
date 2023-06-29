@@ -50,6 +50,7 @@ import { ViewEarningsComponent } from './components/admin/supervise/view-earning
 import { SuperviseTeamsComponent } from './components/admin/supervise/supervise-teams/supervise-teams.component';
 import { TeamsPageComponent } from './components/admin/supervise/teams-page/teams-page.component';
 import { TeamSupervisorComponent } from './components/admin/adteams/team-supervisor/team-supervisor.component';
+import { UserInfoComponent } from './components/admin/manage/users/user-info/user-info.component';
 
 const routes: Routes = [
   {
@@ -272,6 +273,11 @@ const routes: Routes = [
         path: 'ad_manage/users',
         canActivate: [ManagerGuard],
         component: MngUsersComponent,
+      },
+      {
+        path: 'ad_manage/user_info',
+        canActivate: [ManagerGuard],
+        component: UserInfoComponent
       },
       {
         path: 'ad_manage/projects',

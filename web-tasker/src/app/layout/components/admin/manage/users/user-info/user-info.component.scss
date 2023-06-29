@@ -1,0 +1,14 @@
+.centered-content {
+  position: absolute;
+  .modal-box {
+    position: relative;
+    width: 1000px;
+    background: #ffff;
+    border-radius: 5px;
+    padding: 35px;
+    .ml {
+      margin-left: 1rem;
+      color: #ffffff;
+    }
+  }
+}
