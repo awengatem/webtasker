@@ -37,7 +37,7 @@ export class SupervisorSessionsComponent {
     private router: Router
   ) {
     //load data on table
-    this.loadUserSessions();
+    // this.loadUserSessions();
   }
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class SupervisorSessionsComponent {
     this.projectId = localStorage.getItem('capturedProjectId')!;
     this.userId = localStorage.getItem('user-id')!;
     //get project name
-    this.getProjectName();
+    // this.getProjectName();
   }
 
   /**get project name */

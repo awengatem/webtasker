@@ -177,6 +177,16 @@
         position: absolute;
       }
     }
+
+    .assign {
+      button {
+        // height: 35px;
+        width: 80%;
+        .btn-txt {
+          font-size: 20px;
+        }
+      }
+    }
   }
 }
 

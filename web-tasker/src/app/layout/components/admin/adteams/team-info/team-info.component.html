@@ -11,10 +11,22 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <h2 data-aos="zoom-in-up" class="aos-init aos-animate">
-                  {{ teamName }} <i class="fa-solid fa-people-group"></i>
-                </h2>
+                <div class="row">
+                  <h2 data-aos="zoom-in-up" class="col aos-init aos-animate">
+                    {{ teamName }}<i class="fa-solid fa-people-group"></i>
+                  </h2>
+                  <div class="col">
+                    <button
+                      class="btn btn-outline-custom"
+                      [routerLink]="['/ad_teams', teamId, 'supervisor']"
+                    >
+                      <i class="fa-solid fa-crown"></i>
+                      Supervisor
+                    </button>
+                  </div>
+                </div>
               </div>
+
               <div class="col">
                 <div class="input-group rounded search-bar">
                   <input
@@ -31,31 +43,25 @@
                   </span>
                 </div>
               </div>
-              <div class="col-md-3">
-                <div class="row centered-content create">
-                  <div class="col-md-1">
-                    <!-- routerLink="/new_team" -->
-                    <button
-                      class="btn btn-primary"
-                      [routerLink]="
-                        tab1
-                          ? ['/ad_teams', teamId, 'add_member']
-                          : ['/ad_teams', teamId, 'assign_project']
-                      "
-                      (click)="addRespective()"
-                    >
-                      <div class="btn-txt">+</div>
-                    </button>
-                  </div>
-                  <div class="col">
-                    <h4>{{ addButtonText }}</h4>
-                  </div>
+              <div class="col-md-2">
+                <div class="create me-2">
+                  <button
+                    class="btn btn-primary"
+                    [routerLink]="
+                      tab1
+                        ? ['/ad_teams', teamId, 'add_member']
+                        : ['/ad_teams', teamId, 'assign_project']
+                    "
+                    (click)="addRespective()"
+                  >
+                    <span class="">+ {{ addButtonText }}</span>
+                  </button>
                 </div>
               </div>
             </div>
 
             <div class="timetable">
-              <!-- Schedule Top Navigation -->
+              <!-- Schedule Top Navigation  -->
               <nav class="nav nav-tabs">
                 <button
                   class="nav-link active"
