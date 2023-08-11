@@ -253,10 +253,10 @@ export class AdDashboardComponent implements OnInit {
                 projectName: this.projects[i].projectName,
               };
               memberArr.push(obj);
-              console.log(memberArr);
               x++;
               //resolve array from within here where its available
               if (x === this.projects.length) {
+                console.log(memberArr);
                 resolve(memberArr);
               }
             });
