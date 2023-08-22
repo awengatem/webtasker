@@ -38,7 +38,7 @@ export class TeamsComponent implements OnInit {
     this.scrollDown();
   }
 
-  /**getting the teams */
+  /**method to get teams */
   getTeams() {
     this.teamService.getUserTeams().subscribe((teams: any) => {
       this.teams = teams;
