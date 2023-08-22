@@ -132,7 +132,7 @@ export class TeamsComponent implements OnInit {
       });
   }
 
-  /**Get team projects for each */
+  /**Get team projects for each team */
   getTeamProjects() {
     if (this.teams.length > 0) {
       for (let i = 0; i < this.teams.length; i++) {
