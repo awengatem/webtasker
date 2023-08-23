@@ -69,6 +69,7 @@ import { UserInfoComponent } from './components/admin/manage/users/user-info/use
 import { AssignSupervisorComponent } from './components/admin/adteams/assign-supervisor/assign-supervisor.component';
 import { SuperviseMainPageComponent } from './components/admin/supervise/supervise-main-page/supervise-main-page.component';
 import { SuperviseTeamPageComponent } from './components/admin/supervise/supervise-team-page/supervise-team-page.component';
+import { SuperviseEarningPageComponent } from './components/admin/supervise/supervise-earning-page/supervise-earning-page.component';
 
 @NgModule({
   declarations: [
@@ -135,6 +136,7 @@ import { SuperviseTeamPageComponent } from './components/admin/supervise/supervi
     AssignSupervisorComponent,
     SuperviseMainPageComponent,
     SuperviseTeamPageComponent,
+    SuperviseEarningPageComponent,
   ],
   imports: [
     CommonModule,
