@@ -65,7 +65,6 @@ import { ProjSessionsComponent } from './components/user/user_projects/proj-sess
 import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
 import { SuperviseComponent } from './components/admin/supervise/supervise/supervise.component';
 import { SupervisorSessionsComponent } from './components/admin/supervise/supervisor-sessions/supervisor-sessions.component';
-import { TeamsPageComponent } from './components/admin/supervise/teams-page/teams-page.component';
 import { TeamSupervisorComponent } from './components/admin/adteams/team-supervisor/team-supervisor.component';
 import { UserInfoComponent } from './components/admin/manage/users/user-info/user-info.component';
 import { AssignSupervisorComponent } from './components/admin/adteams/assign-supervisor/assign-supervisor.component';
@@ -131,7 +130,6 @@ import { AssignSupervisorComponent } from './components/admin/adteams/assign-sup
     AdProjSessionsComponent,
     SuperviseComponent,
     SupervisorSessionsComponent,
-    TeamsPageComponent,
     TeamSupervisorComponent,
     UserInfoComponent,
     AssignSupervisorComponent,
