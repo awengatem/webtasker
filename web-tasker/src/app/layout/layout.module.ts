@@ -65,7 +65,6 @@ import { ProjSessionsComponent } from './components/user/user_projects/proj-sess
 import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
 import { SuperviseComponent } from './components/admin/supervise/supervise/supervise.component';
 import { SupervisorSessionsComponent } from './components/admin/supervise/supervisor-sessions/supervisor-sessions.component';
-import { FillEarningsComponent } from './components/admin/supervise/fill-earnings/fill-earnings.component';
 import { ViewEarningsComponent } from './components/admin/supervise/view-earnings/view-earnings.component';
 import { SuperviseTeamsComponent } from './components/admin/supervise/supervise-teams/supervise-teams.component';
 import { TeamsPageComponent } from './components/admin/supervise/teams-page/teams-page.component';
@@ -134,14 +133,12 @@ import { AssignSupervisorComponent } from './components/admin/adteams/assign-sup
     AdProjSessionsComponent,
     SuperviseComponent,
     SupervisorSessionsComponent,
-    FillEarningsComponent,
     ViewEarningsComponent,
     SuperviseTeamsComponent,
     TeamsPageComponent,
     TeamSupervisorComponent,
     UserInfoComponent,
     AssignSupervisorComponent,
-    
   ],
   imports: [
     CommonModule,
