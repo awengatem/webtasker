@@ -1,6 +1,83 @@
 <div class="container-fluid page">
-  <div class="page__box p-3 mt-2">Title</div>
+  <div class="page__box p-3 mt-2">Teams page</div>
   <div class="page__content shadow p-3 position-relative">
-    <div class="page__content-data">Content here</div>
+    <div class="page__content-data">
+      <div class="centered-content">
+        <div class="teams-container">
+          <div class="teams">
+            <div class="row">
+              <div class="col">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary"
+                  routerLink="/supervise_teams"
+                >
+                  Back
+                </button>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="card-body">
+              <div class="row d-flex justify-content-center">
+                <div class="col-3">
+                  <h2 class="data-name" routerLink="/ad_manage/users">
+                    My Teams
+                    <h1>20</h1>
+                    <span class="text-success mr-2"><h3>90% active</h3></span>
+                  </h2>
+                </div>
+                <div class="col-3">
+                  <h2 class="data-name" routerLink="/projects">
+                    Active projects
+                    <h1>3</h1>
+                    <span class="text-success mr-2"><h3>60% done</h3></span>
+                  </h2>
+                </div>
+                <div class="col-3">
+                  <h2 class="data-name" routerLink="/view_earnings">
+                    Team Earnings
+                    <h1>200$</h1>
+                    <span class="text-danger mr-2"><h3>-20%</h3></span>
+                  </h2>
+                </div>
+                <div class="col-3">
+                  <h2 class="data-name" routerLink="/view_earnings">
+                    Team Sessions
+                    <h1>TOTAL</h1>
+                    <span class="text-danger mr-2"><h3>20:00:04</h3></span>
+                  </h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="teams-inside">
+              <div class="row">
+                <h2>Your Teams</h2>
+                <div class="card" style="width: 13rem; height: 15rem">
+                  <!-- <img class="card-img-top" src="..." alt="" /> -->
+                  <div class="card-body">
+                    <h3 class="card-title">Card title</h3>
+                    <a class="btn btn-primary" routerLink="/teams_page"
+                      >New Team</a
+                    >
+                  </div>
+                </div>
+                <div
+                  class="card"
+                  *ngFor="let team of teams"
+                  style="width: 13rem; height: 15rem"
+                >
+                  <!-- <img class="card-img-top" src="..." alt="Card image cap" /> -->
+                  <div class="card-body">
+                    <h3 class="card-title">Four</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
