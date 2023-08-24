@@ -239,12 +239,12 @@ const routes: Routes = [
       {
         path: 'supervise',
         canActivate: [SupervisorGuard],
-        component: SuperviseComponent,
+        component: SuperviseMainPageComponent,
       },
       {
-        path: 'supervise/main',
+        path: 'supervise/old',
         canActivate: [SupervisorGuard],
-        component: SuperviseMainPageComponent,
+        component: SuperviseComponent,
       },
       {
         path: 'supervise/team',
