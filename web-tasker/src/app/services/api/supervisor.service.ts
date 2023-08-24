@@ -17,6 +17,11 @@ export class SupervisorService {
     return this.webReqService.get(`supervisors/${teamId}`);
   }
 
+  /**Get teams assigned to a certain supervisor */
+  getSupervisorTeams(userId: string) {
+    return this.webReqService.get(`supervisors/teams/${userId}`);
+  }
+
   /**Method to add team supervisors */
   addTeamSupervisors(supervisors: any[]) {
     return this.webReqService.post(`supervisors`, supervisors);
