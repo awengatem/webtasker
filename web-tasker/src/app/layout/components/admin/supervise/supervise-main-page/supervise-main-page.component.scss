@@ -5,7 +5,7 @@
   max-width: 1280px;
   max-height: calc(90vh - 170px);
   // max-height: 500px;
-  background: transparent;
+  background: white;
 }
 
 .teams {
@@ -19,6 +19,8 @@
 
   mat-divider {
     border-color: grey;
+    padding: 24px;
+    margin-top: 10px;
   }
 
   .teams-inside {
@@ -38,6 +40,7 @@
       border-width: 1px;
       height: 200px;
       margin: 20px;
+      background-color: #007bff;
     }
     .card-body {
       justify-content: center;
