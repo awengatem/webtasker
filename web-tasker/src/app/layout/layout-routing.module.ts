@@ -44,14 +44,12 @@ import { ClearUsessionsintervalGuard } from '../helpers/guards/clear-usessionsin
 import { ProjSessionsComponent } from './components/user/user_projects/proj-sessions/proj-sessions.component';
 import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
 import { SuperviseComponent } from './components/admin/supervise/supervise/supervise.component';
-import { SupervisorSessionsComponent } from './components/admin/supervise/supervisor-sessions/supervisor-sessions.component';
-import { FillEarningsComponent } from './components/admin/supervise/fill-earnings/fill-earnings.component';
-import { ViewEarningsComponent } from './components/admin/supervise/view-earnings/view-earnings.component';
-import { SuperviseTeamsComponent } from './components/admin/supervise/supervise-teams/supervise-teams.component';
-import { TeamsPageComponent } from './components/admin/supervise/teams-page/teams-page.component';
 import { TeamSupervisorComponent } from './components/admin/adteams/team-supervisor/team-supervisor.component';
 import { UserInfoComponent } from './components/admin/manage/users/user-info/user-info.component';
 import { AssignSupervisorComponent } from './components/admin/adteams/assign-supervisor/assign-supervisor.component';
+import { SuperviseTeamPageComponent } from './components/admin/supervise/supervise-team-page/supervise-team-page.component';
+import { SuperviseEarningPageComponent } from './components/admin/supervise/supervise-earning-page/supervise-earning-page.component';
+import { SuperviseMainPageComponent } from './components/admin/supervise/supervise-main-page/supervise-main-page.component';
 
 const routes: Routes = [
   {
@@ -241,32 +239,22 @@ const routes: Routes = [
       {
         path: 'supervise',
         canActivate: [SupervisorGuard],
+        component: SuperviseMainPageComponent,
+      },
+      {
+        path: 'supervise/old',
+        canActivate: [SupervisorGuard],
         component: SuperviseComponent,
       },
       {
-        path: 'fill_earnings',
+        path: 'supervise/team',
         canActivate: [SupervisorGuard],
-        component: FillEarningsComponent,
+        component: SuperviseTeamPageComponent,
       },
       {
-        path: 'view_earnings',
+        path: 'supervise/earnings',
         canActivate: [SupervisorGuard],
-        component: ViewEarningsComponent,
-      },
-      {
-        path: 'supervise_teams',
-        canActivate: [SupervisorGuard],
-        component: SuperviseTeamsComponent,
-      },
-      {
-        path: 'supervise_sessions',
-        canActivate: [SupervisorGuard],
-        component: SupervisorSessionsComponent,
-      },
-      {
-        path: 'teams_page',
-        canActivate: [SupervisorGuard],
-        component: TeamsPageComponent,
+        component: SuperviseEarningPageComponent,
       },
 
       /**MANAGE*/
@@ -283,7 +271,7 @@ const routes: Routes = [
       {
         path: 'ad_manage/user_info',
         canActivate: [ManagerGuard],
-        component: UserInfoComponent
+        component: UserInfoComponent,
       },
       {
         path: 'ad_manage/projects',
