@@ -6,6 +6,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import Swal from 'sweetalert2';
 import { ProjectService } from 'src/app/services/api/project.service';
 import { SnackBarService } from 'src/app/services/snackbar.service';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { NewProjectModalComponent } from '../../../adprojects/new-projectmodal/new-projectmodal.component';
 
 @Component({
   selector: 'app-mng-projects',
@@ -29,9 +31,14 @@ export class MngProjectsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  /**define modal */
+  modalRef: MdbModalRef<NewProjectModalComponent> | null = null;
+  isModalOpen: boolean = false; //add background blur
+
   constructor(
     private projectService: ProjectService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private modalService: MdbModalService
   ) {
     //load data on table
     this.loadAllProjects();
@@ -235,5 +242,21 @@ export class MngProjectsComponent implements OnInit {
     //set location then save id to local storage
     this.setLocation();
     this.saveProjectId(projectId);
+  }
+
+  /**METHODS USED BY MODAL */
+  /**open new user modal */
+  openNewProjectModal() {
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(NewProjectModalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.isModalOpen = false;
+      /**Refresh projects */
+      this.loadAllProjects();
+    });
   }
 }
