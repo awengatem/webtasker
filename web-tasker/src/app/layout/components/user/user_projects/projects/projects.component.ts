@@ -43,13 +43,6 @@ export class ProjectsComponent implements OnInit {
       this.projectsLength = projects.length;
       /**pushs project status to projects*/
       this.projects.forEach((p) => (p.status = 'Unknown'));
-      /**push teamname to each project */
-      for (let i = 0; i < this.projects.length; i++) {
-        const teamId = this.projects[i].team;
-        this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
-          this.projects[i].teamName = team.teamName;
-        });
-      }
       /**get project members immediately
        * after filling projects array*/
       this.getProjectMembers();
