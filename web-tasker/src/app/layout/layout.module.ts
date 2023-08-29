@@ -24,7 +24,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { AdDashboardComponent } from './components/admin/addashboard/ad-dashboard/ad-dashboard.component';
 import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
 import { AdTeamsComponent } from './components/admin/adteams/ad-teams/ad-teams.component';
-import { NewProjectModalComponent } from './components/admin/adprojects/new-project/new-project.component';
+import { NewProjectModalComponent } from './components/admin/adprojects/new-projectmodal/new-projectmodal.component';
 import { EditProjectComponent } from './components/admin/adprojects/edit-project/edit-project.component';
 import { EditTeamComponent } from './components/admin/adteams/edit-team/edit-team.component';
 import { NewTeamComponent } from './components/admin/adteams/new-team/new-team.component';

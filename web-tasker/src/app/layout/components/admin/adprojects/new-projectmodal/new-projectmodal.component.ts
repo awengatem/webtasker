@@ -8,8 +8,8 @@ import { AdProjectsComponent } from '../ad-projects/ad-projects.component';
 
 @Component({
   selector: 'app-new-project',
-  templateUrl: './new-project.component.html',
-  styleUrls: ['./new-project.component.scss'],
+  templateUrl: './new-projectmodal.component.html',
+  styleUrls: ['./new-projectmodal.component.scss'],
 })
 export class NewProjectModalComponent implements OnInit {
   form: any = {

@@ -3,7 +3,7 @@ import { ProjectService } from 'src/app/services/api/project.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
-import { NewProjectModalComponent } from '../new-project/new-project.component';
+import { NewProjectModalComponent } from '../new-projectmodal/new-projectmodal.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
 @Component({
