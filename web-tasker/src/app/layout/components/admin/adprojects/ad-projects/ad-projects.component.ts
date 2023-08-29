@@ -220,6 +220,9 @@ export class AdProjectsComponent implements OnInit {
     this.modalRef.onClose.subscribe((message: any) => {
       console.log(message);
       this.isModalOpen = false;
+      /**Refresh projects */
+      this.getProjects();
+      this.scrollDown();
     });
   }
 }

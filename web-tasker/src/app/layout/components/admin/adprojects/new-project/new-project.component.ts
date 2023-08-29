@@ -36,7 +36,7 @@ export class NewProjectModalComponent implements OnInit {
         //setting status to true to help in scrolldown method
         this.projectService.setAddStatus(true);
         //console.log(this.projectService.getAddStatus());
-        this.navigateBack();
+        this.close();
         Swal.fire(
           'Success!',
           `Project "${newProject}" created successfully`,
