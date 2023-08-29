@@ -10,7 +10,7 @@ import { AuthGuard } from '../helpers/guards/auth-guard.guard';
 import { AdDashboardComponent } from './components/admin/addashboard/ad-dashboard/ad-dashboard.component';
 import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
 import { AdTeamsComponent } from './components/admin/adteams/ad-teams/ad-teams.component';
-import { NewProjectComponent } from './components/admin/adprojects/new-project/new-project.component';
+import { NewProjectModalComponent } from './components/admin/adprojects/new-project/new-project.component';
 import { EditProjectComponent } from './components/admin/adprojects/edit-project/edit-project.component';
 import { NewTeamComponent } from './components/admin/adteams/new-team/new-team.component';
 import { EditTeamComponent } from './components/admin/adteams/edit-team/edit-team.component';
@@ -172,12 +172,12 @@ const routes: Routes = [
         canActivate: [ManagerGuard],
         component: AdProjSessionsComponent,
       },
-      {
-        path: 'new_project',
-        canActivate: [SupervisorGuard],
-        canDeactivate: [ClearLocationGuard],
-        component: NewProjectComponent,
-      },
+      // {
+      //   path: 'new_project',
+      //   canActivate: [SupervisorGuard],
+      //   canDeactivate: [ClearLocationGuard],
+      //   component: NewProjectModalComponent,
+      // },
       {
         path: 'edit_project/:projectId',
         canActivate: [SupervisorGuard],
