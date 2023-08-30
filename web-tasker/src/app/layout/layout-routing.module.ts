@@ -122,32 +122,32 @@ const routes: Routes = [
       /**DASHBOARD */
       {
         path: 'ad_dashboard',
-        canActivate: [SupervisorGuard],
+        canActivate: [ManagerGuard],
         canDeactivate: [ClearDashintervalGuard],
         component: AdDashboardComponent,
       },
 
       {
-        path: 'project_status',
-        canActivate: [SupervisorGuard],
+        path: 'ad_dashboard/project_status',
+        canActivate: [ManagerGuard],
         component: ProjectStatusComponent,
       },
 
       {
-        path: 'active_sessions',
-        canActivate: [SupervisorGuard],
+        path: 'ad_dashboard/active_sessions',
+        canActivate: [ManagerGuard],
         component: ActiveSessionsComponent,
       },
 
       {
-        path: 'recent_sessions',
-        canActivate: [SupervisorGuard],
+        path: 'ad_dashboard/recent_sessions',
+        canActivate: [ManagerGuard],
         component: RecentSessionsComponent,
       },
 
       {
-        path: 'user_status',
-        canActivate: [SupervisorGuard],
+        path: 'ad_dashboard/user_status',
+        canActivate: [ManagerGuard],
         component: UserStatusComponent,
       },
 
