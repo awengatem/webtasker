@@ -39,7 +39,6 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
 import { ClearUsessionsintervalGuard } from '../helpers/guards/clear-usessionsinterval.guard';
 import { ProjSessionsComponent } from './components/user/user_projects/proj-sessions/proj-sessions.component';
 import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
-import { SuperviseComponent } from './components/admin/supervise/supervise/supervise.component';
 import { TeamSupervisorComponent } from './components/admin/adteams/team-supervisor/team-supervisor.component';
 import { UserInfoComponent } from './components/admin/manage/users/user-info/user-info.component';
 import { AssignSupervisorComponent } from './components/admin/adteams/assign-supervisor/assign-supervisor.component';
@@ -213,11 +212,6 @@ const routes: Routes = [
         path: 'supervise',
         canActivate: [SupervisorGuard],
         component: SuperviseMainPageComponent,
-      },
-      {
-        path: 'supervise/old',
-        canActivate: [SupervisorGuard],
-        component: SuperviseComponent,
       },
       {
         path: 'supervise/team',
