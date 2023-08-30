@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { GeneralService } from 'src/app/services/general.service';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { TeamService } from 'src/app/services/api/team.service';
+import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit-team',
-  templateUrl: './edit-team.component.html',
-  styleUrls: ['./edit-team.component.scss'],
+  selector: 'app-edit-teammodal',
+  templateUrl: './edit-teammodal.component.html',
+  styleUrls: ['./edit-teammodal.component.scss'],
 })
-export class EditTeamComponent implements OnInit {
+export class EditTeammodalComponent implements OnInit {
   form: any = {
     teamName: null,
   };
@@ -17,18 +17,12 @@ export class EditTeamComponent implements OnInit {
   teamId!: string;
 
   constructor(
+    public modalRef: MdbModalRef<EditTeammodalComponent>,
     private teamService: TeamService,
-    private generalService: GeneralService,
-    private router: Router,
-    private route: ActivatedRoute
+    private generalService: GeneralService
   ) {}
 
   ngOnInit(): void {
-    //subscribe to the route params
-    this.route.params.subscribe((params: Params) => {
-      // this.teamId = params['teamId'];
-      // console.log(this.teamId);
-    });
     const teamId = localStorage.getItem('capturedTeamId')!;
     this.teamId = teamId;
 
@@ -50,7 +44,7 @@ export class EditTeamComponent implements OnInit {
         //setting status to true to help in scrolldown method
         this.teamService.setAddStatus(true);
         //console.log(this.teamService.getAddStatus());
-        this.navigateBack();
+        this.close();
         Swal.fire(
           'Success!',
           `team "${newTeam}" updated successfully`,
@@ -72,19 +66,13 @@ export class EditTeamComponent implements OnInit {
     });
   }
 
-  /**Method to navigate to previous route */
-  navigateBack() {
-    //check if previous location is from manage component
-    let fromMng = window.sessionStorage.getItem('fromMng');
-    if (fromMng === 'true') {
-      //navigate to manager
-      this.router.navigate(['ad_manage/teams']);
-    } else {
-      this.router.navigate(['/ad_teams']);
-    }
-  }
-
   submit() {
     this.submitted = true;
+  }
+
+  /**Method to close modal */
+  close(): void {
+    const closeMessage = 'Edit team modal closed';
+    this.modalRef.close(closeMessage);
   }
 }

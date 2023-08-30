@@ -6,6 +6,9 @@ import { SelectionModel } from '@angular/cdk/collections';
 import Swal from 'sweetalert2';
 import { TeamService } from 'src/app/services/api/team.service';
 import { SnackBarService } from 'src/app/services/snackbar.service';
+import { NewTeammodalComponent } from '../../../adteams/new-teammodal/new-teammodal.component';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { EditTeammodalComponent } from '../../../adteams/edit-teammodal/edit-teammodal.component';
 
 @Component({
   selector: 'app-mng-teams',
@@ -29,9 +32,14 @@ export class MngTeamsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  /**define modal */
+  modalRef: MdbModalRef<NewTeammodalComponent> | null = null;
+  isModalOpen: boolean = false; //add background blur
+
   constructor(
     private teamService: TeamService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private modalService: MdbModalService
   ) {
     //load data on table
     this.loadAllTeams();
@@ -236,5 +244,39 @@ export class MngTeamsComponent implements OnInit {
     //set location then save id to local storage
     this.setLocation();
     this.captureTeamId(teamId);
+  }
+
+  /**METHODS USED BY MODAL */
+  /**open new team modal */
+  openNewTeamModal() {
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(NewTeammodalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.isModalOpen = false;
+      /**Refresh teams */
+      this.loadAllTeams();
+    });
+  }
+
+  /**open edit team modal */
+  openEditTeamModal(teamId: string) {
+    /**save the team id to local storage*/
+    localStorage.setItem('capturedTeamId', teamId);
+
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(EditTeammodalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.isModalOpen = false;
+      /**Refresh teams */
+      this.loadAllTeams();
+    });
   }
 }

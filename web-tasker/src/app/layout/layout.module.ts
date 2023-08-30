@@ -24,10 +24,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { AdDashboardComponent } from './components/admin/addashboard/ad-dashboard/ad-dashboard.component';
 import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
 import { AdTeamsComponent } from './components/admin/adteams/ad-teams/ad-teams.component';
-import { NewProjectComponent } from './components/admin/adprojects/new-project/new-project.component';
-import { EditProjectComponent } from './components/admin/adprojects/edit-project/edit-project.component';
-import { EditTeamComponent } from './components/admin/adteams/edit-team/edit-team.component';
-import { NewTeamComponent } from './components/admin/adteams/new-team/new-team.component';
+import { NewProjectModalComponent } from './components/admin/adprojects/new-projectmodal/new-projectmodal.component';
 import { TeamInfoComponent } from './components/admin/adteams/team-info/team-info.component';
 import { AddMemberComponent } from './components/admin/adteams/add-member/add-member.component';
 import { AssignProjectComponent } from './components/admin/adteams/assign-project/assign-project.component';
@@ -70,6 +67,9 @@ import { AssignSupervisorComponent } from './components/admin/adteams/assign-sup
 import { SuperviseMainPageComponent } from './components/admin/supervise/supervise-main-page/supervise-main-page.component';
 import { SuperviseTeamPageComponent } from './components/admin/supervise/supervise-team-page/supervise-team-page.component';
 import { SuperviseEarningPageComponent } from './components/admin/supervise/supervise-earning-page/supervise-earning-page.component';
+import { EditProjectmodalComponent } from './components/admin/adprojects/edit-projectmodal/edit-projectmodal.component';
+import { EditTeammodalComponent } from './components/admin/adteams/edit-teammodal/edit-teammodal.component';
+import { NewTeammodalComponent } from './components/admin/adteams/new-teammodal/new-teammodal.component';
 
 @NgModule({
   declarations: [
@@ -94,10 +94,10 @@ import { SuperviseEarningPageComponent } from './components/admin/supervise/supe
     AdDashboardComponent,
     AdProjectsComponent,
     AdTeamsComponent,
-    NewProjectComponent,
-    EditProjectComponent,
-    EditTeamComponent,
-    NewTeamComponent,
+    NewProjectModalComponent,
+    EditProjectmodalComponent,
+    EditTeammodalComponent,
+    NewTeammodalComponent,
     TeamInfoComponent,
     AddMemberComponent,
     AssignProjectComponent,
