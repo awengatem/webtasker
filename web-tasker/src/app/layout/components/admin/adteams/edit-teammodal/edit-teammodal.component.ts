@@ -44,7 +44,7 @@ export class EditTeammodalComponent implements OnInit {
         //setting status to true to help in scrolldown method
         this.teamService.setAddStatus(true);
         //console.log(this.teamService.getAddStatus());
-        // this.navigateBack();
+        this.close();
         Swal.fire(
           'Success!',
           `team "${newTeam}" updated successfully`,
