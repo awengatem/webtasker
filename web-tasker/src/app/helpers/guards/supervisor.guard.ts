@@ -19,7 +19,7 @@ export class SupervisorGuard implements CanActivate {
             resolve(true);
           } else {
             /**notify user */
-            Swal.fire('Unauthorized!', `You are not an admin.`, 'warning');
+            Swal.fire('Unauthorized!', `You are not a supervisor.`, 'warning');
             this.router.navigate(['/home']);
             resolve(false);
           }
