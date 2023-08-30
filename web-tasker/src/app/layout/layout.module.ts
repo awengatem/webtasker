@@ -70,6 +70,7 @@ import { AssignSupervisorComponent } from './components/admin/adteams/assign-sup
 import { SuperviseMainPageComponent } from './components/admin/supervise/supervise-main-page/supervise-main-page.component';
 import { SuperviseTeamPageComponent } from './components/admin/supervise/supervise-team-page/supervise-team-page.component';
 import { SuperviseEarningPageComponent } from './components/admin/supervise/supervise-earning-page/supervise-earning-page.component';
+import { EditProjectmodalComponent } from './components/admin/adprojects/edit-projectmodal/edit-projectmodal.component';
 
 @NgModule({
   declarations: [
@@ -137,6 +138,7 @@ import { SuperviseEarningPageComponent } from './components/admin/supervise/supe
     SuperviseMainPageComponent,
     SuperviseTeamPageComponent,
     SuperviseEarningPageComponent,
+    EditProjectmodalComponent,
   ],
   imports: [
     CommonModule,
