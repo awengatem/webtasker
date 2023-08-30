@@ -3,6 +3,9 @@ import { ProjectService } from 'src/app/services/api/project.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
+import { NewProjectModalComponent } from '../new-projectmodal/new-projectmodal.component';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { EditProjectmodalComponent } from '../edit-projectmodal/edit-projectmodal.component';
 
 @Component({
   selector: 'app-ad-projects',
@@ -18,6 +21,10 @@ export class AdProjectsComponent implements OnInit {
   /**used by search bar */
   searchText = '';
 
+  /**define modal */
+  modalRef: MdbModalRef<NewProjectModalComponent> | null = null;
+  isModalOpen: boolean = false; //add background blur
+
   /**variables used in project status */
   projectidArr: string[] = [];
   uniqueProjects: string[] = [];
@@ -26,7 +33,8 @@ export class AdProjectsComponent implements OnInit {
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private router: Router,
-    private projectStatusService: ProjectStatusService
+    private projectStatusService: ProjectStatusService,
+    private modalService: MdbModalService
   ) {}
 
   ngOnInit(): void {
@@ -121,7 +129,7 @@ export class AdProjectsComponent implements OnInit {
   }
 
   /**Get project members and status*/
-  getProjectMembers() { 
+  getProjectMembers() {
     if (this.projects.length > 0) {
       for (let i = 0; i < this.projects.length; i++) {
         this.projectService
@@ -200,5 +208,40 @@ export class AdProjectsComponent implements OnInit {
 
   submit() {
     this.submitted = true;
+  }
+
+  /**METHODS USED BY MODAL */
+  /**open new project modal */
+  openNewProjectModal() {
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(NewProjectModalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.isModalOpen = false;
+      /**Refresh projects */
+      this.getProjects();
+      this.scrollDown();
+    });
+  }
+
+  /**open edit project modal */
+  openEditProjectModal(projectId: string) {
+    /**save the project id to local storage*/
+    localStorage.setItem('capturedProjectId', projectId);
+
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(EditProjectmodalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.isModalOpen = false;
+      /**Refresh projects */
+      this.getProjects();
+    });
   }
 }

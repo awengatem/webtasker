@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { GeneralService } from 'src/app/services/general.service';
+import { Component } from '@angular/core';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { TeamService } from 'src/app/services/api/team.service';
+import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new-team',
-  templateUrl: './new-team.component.html',
-  styleUrls: ['./new-team.component.scss'],
+  selector: 'app-new-teammodal',
+  templateUrl: './new-teammodal.component.html',
+  styleUrls: ['./new-teammodal.component.scss'],
 })
-export class NewTeamComponent implements OnInit {
+export class NewTeammodalComponent {
   form: any = {
     teamName: null,
   };
   submitted: boolean = false;
 
   constructor(
+    public modalRef: MdbModalRef<NewTeammodalComponent>,
     private teamService: TeamService,
-    private router: Router,
     private generalService: GeneralService
   ) {}
 
@@ -33,7 +33,7 @@ export class NewTeamComponent implements OnInit {
         //setting status to true to help in scrolldown method
         this.teamService.setAddStatus(true);
         //console.log(this.teamService.getAddStatus());
-        this.navigateBack();
+        this.close();
         Swal.fire(
           'Success!',
           `Team "${newTeam}" created successfully`,
@@ -47,19 +47,13 @@ export class NewTeamComponent implements OnInit {
     });
   }
 
-  /**Method to navigate to previous route */
-  navigateBack() {
-    //check if previous location is from manage component
-    let fromMng = window.sessionStorage.getItem('fromMng');
-    if (fromMng === 'true') {
-      //navigate to manager
-      this.router.navigate(['ad_manage/teams']);
-    } else {
-      this.router.navigate(['/ad_teams']);
-    }
-  }
-
   submit() {
     this.submitted = true;
+  }
+
+  /**Method to close modal */
+  close(): void {
+    const closeMessage = 'New team modal closed';
+    this.modalRef.close(closeMessage);
   }
 }

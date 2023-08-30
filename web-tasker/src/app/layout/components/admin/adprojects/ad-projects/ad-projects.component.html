@@ -1,7 +1,7 @@
 <div class="container-fluid page">
   <div class="page__box p-3 mt-2">Projects</div>
   <div class="page__content shadow p-3 position-relative">
-    <div class="page__content-data">
+    <div class="page__content-data" [ngClass]="isModalOpen ? 'modal-blur' : ''">
       <div class="centered-content">
         <div class="projects-container">
           <div class="projects">
@@ -12,7 +12,7 @@
                   <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger count"
                   >
-                    {{ projectsLength }} 
+                    {{ projectsLength }}
                   </span>
                 </h1>
               </div>
@@ -81,8 +81,7 @@
                           <button
                             type="button"
                             class="col btn btn-outline-custom btn-sm"
-                            [routerLink]="['/edit_project', project._id]"
-                            (click)="saveProjectId(project._id)"
+                            (click)="openEditProjectModal(project._id)"
                           >
                             <i class="fa-solid fa-pen-fancy"></i>
                           </button>
@@ -112,7 +111,10 @@
       <div class="row centered-content create">
         <div class="col-md-1">
           <!-- routerLink="/new-project" -->
-          <button class="btn btn-outline-custom" routerLink="/new_project">
+          <button
+            class="btn btn-outline-custom"
+            (click)="openNewProjectModal()"
+          >
             <div class="btn-txt">+</div>
           </button>
         </div>

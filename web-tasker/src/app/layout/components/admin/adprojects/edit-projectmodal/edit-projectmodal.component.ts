@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { GeneralService } from 'src/app/services/general.service';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ProjectService } from 'src/app/services/api/project.service';
+import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit-project',
-  templateUrl: './edit-project.component.html',
-  styleUrls: ['./edit-project.component.scss'],
+  selector: 'app-edit-projectmodal',
+  templateUrl: './edit-projectmodal.component.html',
+  styleUrls: ['./edit-projectmodal.component.scss'],
 })
-export class EditProjectComponent implements OnInit {
+export class EditProjectmodalComponent implements OnInit {
   form: any = {
     projectName: null,
   };
@@ -17,18 +17,12 @@ export class EditProjectComponent implements OnInit {
   projectId!: string;
 
   constructor(
+    public modalRef: MdbModalRef<EditProjectmodalComponent>,
     private projectService: ProjectService,
-    private generalService: GeneralService,
-    private router: Router,
-    private route: ActivatedRoute
+    private generalService: GeneralService
   ) {}
 
   ngOnInit(): void {
-    //subscribe to the route params
-    this.route.params.subscribe((params: Params) => {
-      // this.projectId = params['projectId'];
-      // console.log(this.projectId);
-    });
     this.projectId = localStorage.getItem('capturedProjectId')!;
     console.log(this.projectId);
 
@@ -50,7 +44,7 @@ export class EditProjectComponent implements OnInit {
         //setting status to true to help in scrolldown method
         this.projectService.setAddStatus(true);
         //console.log(this.projectService.getAddStatus());
-        this.navigateBack();
+        this.close();
         Swal.fire(
           'Success!',
           `Project "${newProject}" updated successfully`,
@@ -72,19 +66,13 @@ export class EditProjectComponent implements OnInit {
     });
   }
 
-  /**Method to navigate to previous route */
-  navigateBack() {
-    //check if previous location is from manage component
-    let fromMng = window.sessionStorage.getItem('fromMng');
-    if (fromMng === 'true') {
-      //navigate to manager
-      this.router.navigate(['ad_manage/projects']);
-    } else {
-      this.router.navigate([`/ad_projects/${this.projectId}`]);
-    }
-  }
-
   submit() {
     this.submitted = true;
+  }
+
+  /**Method to close modal */
+  close(): void {
+    const closeMessage = 'Edit project modal closed';
+    this.modalRef.close(closeMessage);
   }
 }

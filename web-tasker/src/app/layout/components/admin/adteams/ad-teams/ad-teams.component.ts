@@ -3,6 +3,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { TeamService } from 'src/app/services/api/team.service';
 import Swal from 'sweetalert2';
+import { EditTeammodalComponent } from '../edit-teammodal/edit-teammodal.component';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { NewTeammodalComponent } from '../new-teammodal/new-teammodal.component';
 
 @Component({
   selector: 'app-ad-teams',
@@ -18,6 +21,10 @@ export class AdTeamsComponent implements OnInit {
   /**used by search bar */
   searchText = '';
 
+  /**define modal */
+  modalRef: MdbModalRef<EditTeammodalComponent> | null = null;
+  isModalOpen: boolean = false; //add background blur
+
   /**variables used in team status */
   teamidArr: string[] = [];
   uniqueTeams: string[] = [];
@@ -26,7 +33,8 @@ export class AdTeamsComponent implements OnInit {
     private teamService: TeamService,
     private route: ActivatedRoute,
     private router: Router,
-    private projectStatusService: ProjectStatusService
+    private projectStatusService: ProjectStatusService,
+    private modalService: MdbModalService
   ) {}
 
   ngOnInit(): void {
@@ -184,13 +192,48 @@ export class AdTeamsComponent implements OnInit {
     }
   }
 
-  submit() {
-    this.submitted = true;
-  }
-
   /**Set the team id in local storage to aid in the team-info component */
   captureTeamId(teamId: string) {
     /**store this in localstorage to aid in next compomnent */
     localStorage.setItem('capturedTeamId', teamId);
+  }
+
+  submit() {
+    this.submitted = true;
+  }
+
+  /**METHODS USED BY MODAL */
+  /**open new team modal */
+  openNewTeamModal() {
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(NewTeammodalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.isModalOpen = false;
+      /**Refresh teams */
+      this.getTeams();
+      this.scrollDown();
+    });
+  }
+
+  /**open edit team modal */
+  openEditTeamModal(teamId: string) {
+    /**save the team id to local storage*/
+    localStorage.setItem('capturedTeamId', teamId);
+
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(EditTeammodalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.isModalOpen = false;
+      /**Refresh teams */
+      this.getTeams();
+    });
   }
 }
