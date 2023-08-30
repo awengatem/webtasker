@@ -246,7 +246,7 @@ export class MngProjectsComponent implements OnInit {
   }
 
   /**METHODS USED BY MODAL */
-  /**open new user modal */
+  /**open new project modal */
   openNewProjectModal() {
     this.isModalOpen = true;
     this.modalRef = this.modalService.open(NewProjectModalComponent, {
