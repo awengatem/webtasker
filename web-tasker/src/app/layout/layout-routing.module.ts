@@ -166,7 +166,7 @@ const routes: Routes = [
       },
       {
         path: 'ad_projects/:projectId/sessions',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         component: AdProjSessionsComponent,
       },
       {
