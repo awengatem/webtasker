@@ -46,6 +46,7 @@ import { AssignSupervisorComponent } from './components/admin/adteams/assign-sup
 import { SuperviseTeamPageComponent } from './components/admin/supervise/supervise-team-page/supervise-team-page.component';
 import { SuperviseEarningPageComponent } from './components/admin/supervise/supervise-earning-page/supervise-earning-page.component';
 import { SuperviseMainPageComponent } from './components/admin/supervise/supervise-main-page/supervise-main-page.component';
+import { AdminGuard } from '../helpers/guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -154,12 +155,12 @@ const routes: Routes = [
       /**PROJECTS */
       {
         path: 'ad_projects',
-        canActivate: [SupervisorGuard],
+        canActivate: [AdminGuard],
         component: AdProjectsComponent,
       },
       {
         path: 'ad_projects/:projectId',
-        canActivate: [SupervisorGuard],
+        canActivate: [AdminGuard],
         canDeactivate: [ClearLocationGuard],
         component: AdProjectInfoComponent,
       },
@@ -170,40 +171,40 @@ const routes: Routes = [
       },
       {
         path: 'project_teams/:projectId',
-        canActivate: [SupervisorGuard],
+        canActivate: [AdminGuard],
         component: ProjectTeamsComponent,
       },
 
       /**TEAMS */
       {
         path: 'ad_teams',
-        canActivate: [SupervisorGuard],
+        canActivate: [AdminGuard],
         component: AdTeamsComponent,
       },
       {
         path: 'ad_teams/:teamId',
-        canActivate: [SupervisorGuard],
+        canActivate: [AdminGuard],
         canDeactivate: [ClearLocationGuard],
         component: TeamInfoComponent,
       },
       {
         path: 'ad_teams/:teamId/add_member',
-        canActivate: [SupervisorGuard],
+        canActivate: [AdminGuard],
         component: AddMemberComponent,
       },
       {
         path: 'ad_teams/:teamId/assign_project',
-        canActivate: [SupervisorGuard],
+        canActivate: [AdminGuard],
         component: AssignProjectComponent,
       },
       {
         path: 'ad_teams/:teamId/supervisor',
-        canActivate: [SupervisorGuard],
+        canActivate: [AdminGuard],
         component: TeamSupervisorComponent,
       },
       {
         path: 'ad_teams/:teamId/assign_supervisor',
-        canActivate: [SupervisorGuard],
+        canActivate: [AdminGuard],
         component: AssignSupervisorComponent,
       },
 
@@ -264,7 +265,7 @@ const routes: Routes = [
       /**TESTING PURPOSE */
       {
         path: 'socketTest',
-        canActivate: [SupervisorGuard],
+        canActivate: [AdminGuard],
         component: SocketTestComponent,
       },
     ],
