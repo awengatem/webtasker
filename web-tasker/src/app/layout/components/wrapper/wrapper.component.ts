@@ -36,6 +36,7 @@ export class WrapperComponent implements OnInit {
   isExpanded!: boolean;
   sublist!: boolean;
   isAdmin!: boolean;
+  isSupervisor!: boolean;
   isManager!: boolean;
 
   constructor(
@@ -96,7 +97,7 @@ export class WrapperComponent implements OnInit {
   showSublist() {
     /**prevent showing sublist if user is not an admin */
     this.authService
-      .verifySupervisor()
+      .verifyAdmin()
       .then((result) => {
         let status;
         if (result === true) {
@@ -122,11 +123,19 @@ export class WrapperComponent implements OnInit {
       });
   }
 
-  /**Check if user is admin(supervisor) */
+  /**Check if user is admin(manger or supervisor) */
   checkAdmin() {
-    this.authService.verifySupervisor().then((result) => {
+    this.authService.verifyAdmin().then((result) => {
       if (result === true) this.isAdmin = result;
       else this.isAdmin = false;
+    });
+  }
+
+  /**Check if user is supervisor */
+  checkSupervisor() {
+    this.authService.verifySupervisor().then((result) => {
+      if (result === true) this.isSupervisor = result;
+      else this.isSupervisor = false;
     });
   }
 

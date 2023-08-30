@@ -97,26 +97,26 @@
       <mat-list-item
         [routerLink]="'ad_dashboard'"
         routerLinkActive="list-item-active"
-        *ngIf="sublist"
+        *ngIf="sublist && isManager"
         ><div class="mat-list-item-content">
           <!-- for children components -->
           <div
-            [routerLink]="'project_status'"
+            [routerLink]="'ad_dashboard/project_status'"
             routerLinkActive="list-item-active"
             *ngIf="sublist"
           ></div>
           <div
-            [routerLink]="'active_sessions'"
+            [routerLink]="'ad_dashboard/active_sessions'"
             routerLinkActive="list-item-active"
             *ngIf="sublist"
           ></div>
           <div
-            [routerLink]="'recent_sessions'"
+            [routerLink]="'ad_dashboard/recent_sessions'"
             routerLinkActive="list-item-active"
             *ngIf="sublist"
           ></div>
           <div
-            [routerLink]="'user_status'"
+            [routerLink]="'ad_dashboard/user_status'"
             routerLinkActive="list-item-active"
             *ngIf="sublist"
           ></div>
@@ -178,7 +178,7 @@
       <mat-list-item
         [routerLink]="'supervise'"
         routerLinkActive="list-item-active"
-        *ngIf="sublist"
+        *ngIf="sublist && isSupervisor"
         ><div class="mat-list-item-content">
           <i class="fa-solid fa-binoculars"></i>
           <div class="content" *ngIf="isExpanded">Supervise</div>
