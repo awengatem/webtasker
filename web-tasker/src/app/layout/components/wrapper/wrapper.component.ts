@@ -36,6 +36,7 @@ export class WrapperComponent implements OnInit {
   isExpanded!: boolean;
   sublist!: boolean;
   isAdmin!: boolean;
+  isSupervisor!: boolean;
   isManager!: boolean;
 
   constructor(
@@ -49,6 +50,7 @@ export class WrapperComponent implements OnInit {
   ngOnInit(): void {
     // check whether user is admin(supervisor) or manager to update menu
     this.checkAdmin();
+    this.checkSupervisor();
     this.checkManager();
 
     const expanded = this.sidenavService.getIsExpanded();
@@ -60,7 +62,7 @@ export class WrapperComponent implements OnInit {
     }
     if (sublist === 'true') {
       //check if admin first
-      this.authService.verifySupervisor().then((result) => {
+      this.authService.verifyAdmin().then((result) => {
         if (result === true) {
           this.sublist = true;
         } else {
@@ -96,7 +98,7 @@ export class WrapperComponent implements OnInit {
   showSublist() {
     /**prevent showing sublist if user is not an admin */
     this.authService
-      .verifySupervisor()
+      .verifyAdmin()
       .then((result) => {
         let status;
         if (result === true) {
@@ -122,11 +124,19 @@ export class WrapperComponent implements OnInit {
       });
   }
 
-  /**Check if user is admin(supervisor) */
+  /**Check if user is admin(manger or supervisor) */
   checkAdmin() {
-    this.authService.verifySupervisor().then((result) => {
+    this.authService.verifyAdmin().then((result) => {
       if (result === true) this.isAdmin = result;
       else this.isAdmin = false;
+    });
+  }
+
+  /**Check if user is supervisor */
+  checkSupervisor() {
+    this.authService.verifySupervisor().then((result) => {
+      if (result === true) this.isSupervisor = result;
+      else this.isSupervisor = false;
     });
   }
 
