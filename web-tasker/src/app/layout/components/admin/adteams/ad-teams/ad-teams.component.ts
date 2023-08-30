@@ -219,9 +219,9 @@ export class AdTeamsComponent implements OnInit {
   // }
 
   /**open edit team modal */
-  openEditTeamModal(projectId: string) {
-    /**save the project id to local storage*/
-    localStorage.setItem('capturedProjectId', projectId);
+  openEditTeamModal(teamId: string) {
+    /**save the team id to local storage*/
+    localStorage.setItem('capturedTeamId', teamId);
 
     this.isModalOpen = true;
     this.modalRef = this.modalService.open(EditTeammodalComponent, {

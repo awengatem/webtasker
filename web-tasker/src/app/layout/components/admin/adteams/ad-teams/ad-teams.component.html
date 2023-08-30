@@ -1,7 +1,7 @@
 <div class="container-fluid page">
   <div class="page__box p-3 mt-2">Teams</div>
   <div class="page__content shadow p-3 position-relative">
-    <div class="page__content-data">
+    <div class="page__content-data" [ngClass]="isModalOpen ? 'modal-blur' : ''">
       <div class="centered-content">
         <div class="projects-container">
           <div class="projects">
@@ -86,8 +86,7 @@
                           <button
                             type="button"
                             class="col btn btn-outline-custom btn-sm"
-                            (click)="captureTeamId(team._id)"
-                            [routerLink]="['/edit_team', team._id]"
+                            (click)="openEditTeamModal(team._id)"
                           >
                             <i class="fa-solid fa-pen-fancy"></i>
                           </button>
@@ -95,8 +94,7 @@
                         <!-- <div class="row">
                           <button
                             type="button"
-                            class="col btn btn-outline-dark btn-sm me-2"
-                            [routerLink]="['/edit_team', team._id]"
+                            class="col btn btn-outline-dark btn-sm me-2"                           
                           >
                             <i class="fa-solid fa-pen-fancy"></i>
                           </button>
