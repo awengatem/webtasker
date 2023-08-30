@@ -25,7 +25,6 @@ import { AdDashboardComponent } from './components/admin/addashboard/ad-dashboar
 import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
 import { AdTeamsComponent } from './components/admin/adteams/ad-teams/ad-teams.component';
 import { NewProjectModalComponent } from './components/admin/adprojects/new-projectmodal/new-projectmodal.component';
-import { EditProjectComponent } from './components/admin/adprojects/edit-project/edit-project.component';
 import { EditTeamComponent } from './components/admin/adteams/edit-team/edit-team.component';
 import { NewTeamComponent } from './components/admin/adteams/new-team/new-team.component';
 import { TeamInfoComponent } from './components/admin/adteams/team-info/team-info.component';
@@ -96,7 +95,7 @@ import { EditProjectmodalComponent } from './components/admin/adprojects/edit-pr
     AdProjectsComponent,
     AdTeamsComponent,
     NewProjectModalComponent,
-    EditProjectComponent,
+    EditProjectmodalComponent,
     EditTeamComponent,
     NewTeamComponent,
     TeamInfoComponent,
@@ -138,7 +137,6 @@ import { EditProjectmodalComponent } from './components/admin/adprojects/edit-pr
     SuperviseMainPageComponent,
     SuperviseTeamPageComponent,
     SuperviseEarningPageComponent,
-    EditProjectmodalComponent,
   ],
   imports: [
     CommonModule,

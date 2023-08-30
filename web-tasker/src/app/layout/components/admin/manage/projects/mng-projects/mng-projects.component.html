@@ -142,8 +142,7 @@
                               class="custom-button custom-button-edit mat-raised-button"
                               aria-label="Example icon button with a vertical three dot icon"
                               type="button"
-                              [routerLink]="['/edit_project', document._id]"
-                              (click)="setLocation()"
+                              (click)="openEditProjectModal(document._id)"
                             >
                               <mat-icon>edit</mat-icon>
                             </button>

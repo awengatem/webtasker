@@ -10,7 +10,6 @@ import { AuthGuard } from '../helpers/guards/auth-guard.guard';
 import { AdDashboardComponent } from './components/admin/addashboard/ad-dashboard/ad-dashboard.component';
 import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
 import { AdTeamsComponent } from './components/admin/adteams/ad-teams/ad-teams.component';
-import { EditProjectComponent } from './components/admin/adprojects/edit-project/edit-project.component';
 import { NewTeamComponent } from './components/admin/adteams/new-team/new-team.component';
 import { EditTeamComponent } from './components/admin/adteams/edit-team/edit-team.component';
 import { TeamInfoComponent } from './components/admin/adteams/team-info/team-info.component';
@@ -170,18 +169,6 @@ const routes: Routes = [
         path: 'ad_projects/:projectId/sessions',
         canActivate: [ManagerGuard],
         component: AdProjSessionsComponent,
-      },
-      // {
-      //   path: 'new_project',
-      //   canActivate: [SupervisorGuard],
-      //   canDeactivate: [ClearLocationGuard],
-      //   component: NewProjectModalComponent,
-      // },
-      {
-        path: 'edit_project/:projectId',
-        canActivate: [SupervisorGuard],
-        canDeactivate: [ClearLocationGuard],
-        component: EditProjectComponent,
       },
       {
         path: 'project_teams/:projectId',

@@ -8,6 +8,7 @@ import { ProjectService } from 'src/app/services/api/project.service';
 import { SnackBarService } from 'src/app/services/snackbar.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { NewProjectModalComponent } from '../../../adprojects/new-projectmodal/new-projectmodal.component';
+import { EditProjectmodalComponent } from '../../../adprojects/edit-projectmodal/edit-projectmodal.component';
 
 @Component({
   selector: 'app-mng-projects',
@@ -249,6 +250,24 @@ export class MngProjectsComponent implements OnInit {
   openNewProjectModal() {
     this.isModalOpen = true;
     this.modalRef = this.modalService.open(NewProjectModalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.isModalOpen = false;
+      /**Refresh projects */
+      this.loadAllProjects();
+    });
+  }
+
+  /**open edit project modal */
+  openEditProjectModal(projectId: string) {
+    /**save the project id to local storage*/
+    localStorage.setItem('capturedProjectId', projectId);
+
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(EditProjectmodalComponent, {
       modalClass: 'modal-dialog-centered modal-lg',
     });
     //listen when closed
