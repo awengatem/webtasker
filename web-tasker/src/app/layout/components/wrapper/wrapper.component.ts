@@ -50,6 +50,7 @@ export class WrapperComponent implements OnInit {
   ngOnInit(): void {
     // check whether user is admin(supervisor) or manager to update menu
     this.checkAdmin();
+    this.checkSupervisor();
     this.checkManager();
 
     const expanded = this.sidenavService.getIsExpanded();
@@ -61,7 +62,7 @@ export class WrapperComponent implements OnInit {
     }
     if (sublist === 'true') {
       //check if admin first
-      this.authService.verifySupervisor().then((result) => {
+      this.authService.verifyAdmin().then((result) => {
         if (result === true) {
           this.sublist = true;
         } else {

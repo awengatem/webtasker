@@ -125,6 +125,22 @@
         </div>
       </mat-list-item>
 
+      <!-- admin supervise -->
+      <mat-list-item
+        [routerLink]="'supervise'"
+        routerLinkActive="list-item-active"
+        *ngIf="sublist && isSupervisor"
+        ><div class="mat-list-item-content">
+          <i class="fa-solid fa-binoculars"></i>
+          <div class="content" *ngIf="isExpanded">Supervise</div>
+        </div>
+        <div
+          [routerLink]="'supervise/team'"
+          routerLinkActive="list-item-active"
+          *ngIf="sublist"
+        ></div>
+      </mat-list-item>
+
       <!-- admin projects -->
       <mat-list-item
         [routerLink]="'ad_projects'"
@@ -172,27 +188,6 @@
           <i class="fa-solid fa-people-group"></i>
           <div class="content" *ngIf="isExpanded">Teams</div>
         </div>
-      </mat-list-item>
-
-      <!-- admin supervise -->
-      <mat-list-item
-        [routerLink]="'supervise'"
-        routerLinkActive="list-item-active"
-        *ngIf="sublist && isSupervisor"
-        ><div class="mat-list-item-content">
-          <i class="fa-solid fa-binoculars"></i>
-          <div class="content" *ngIf="isExpanded">Supervise</div>
-        </div>
-        <div
-          [routerLink]="'supervise_teams'"
-          routerLinkActive="list-item-active"
-          *ngIf="sublist"
-        ></div>
-        <div
-          [routerLink]="'teams_page'"
-          routerLinkActive="list-item-active"
-          *ngIf="sublist"
-        ></div>
       </mat-list-item>
 
       <!-- admin management -->
