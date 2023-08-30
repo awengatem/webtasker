@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ProjectService } from 'src/app/services/api/project.service';
 import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
@@ -16,12 +17,20 @@ export class EditProjectmodalComponent implements OnInit {
   projectId!: string;
 
   constructor(
+    public modalRef: MdbModalRef<EditProjectmodalComponent>,
     private projectService: ProjectService,
     private generalService: GeneralService
   ) {}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.projectId = localStorage.getItem('capturedProjectId')!;
+    console.log(this.projectId);
+
+    //get the selected project
+    if (this.projectId) {
+      this.loadFieldsToEdit(this.projectId);
+      document.getElementById('autofocus')!.focus();
+    }
   }
 
   /**edit method */
@@ -35,7 +44,7 @@ export class EditProjectmodalComponent implements OnInit {
         //setting status to true to help in scrolldown method
         this.projectService.setAddStatus(true);
         //console.log(this.projectService.getAddStatus());
-        // this.navigateBack();
+        this.close();
         Swal.fire(
           'Success!',
           `Project "${newProject}" updated successfully`,
@@ -59,5 +68,11 @@ export class EditProjectmodalComponent implements OnInit {
 
   submit() {
     this.submitted = true;
+  }
+
+  /**Method to close modal */
+  close(): void {
+    const closeMessage = 'Edit project modal closed';
+    this.modalRef.close(closeMessage);
   }
 }
