@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccountService } from 'src/app/services/account-service.service';
 import { SupervisorService } from 'src/app/services/api/supervisor.service';
 
 @Component({
@@ -9,14 +10,26 @@ import { SupervisorService } from 'src/app/services/api/supervisor.service';
 })
 export class SuperviseMainPageComponent implements OnInit {
   teams: any = [];
+  supervisorId!: string;
   supervisorTeamsCount = 0;
 
-  constructor(private supervisorService: SupervisorService) {}
+  constructor(
+    private supervisorService: SupervisorService,
+    private accountService: AccountService
+  ) {}
 
   ngOnInit(): void {
-    this.teams = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    this.getSupervisor();
+    this.getSupervisorTeams(this.supervisorId);
+  }
 
-    this.getSupervisorTeams('63bb57a9222b3a4015e0699b');
+  /**get the supervisor's userId */
+  getSupervisor() {
+    /**Get the user from token */
+    const user = this.accountService.getUser();
+    if (user) {
+      this.supervisorId = user._id;
+    }
   }
 
   /**Get teams assigned to a given supervisor*/
@@ -25,6 +38,7 @@ export class SuperviseMainPageComponent implements OnInit {
     this.supervisorService.getSupervisorTeams(userId).subscribe({
       next: (supervisorTeams) => {
         console.log(supervisorTeams);
+        this.teams = supervisorTeams;
         this.supervisorTeamsCount = supervisorTeams.length;
       },
       error: (err) => {
