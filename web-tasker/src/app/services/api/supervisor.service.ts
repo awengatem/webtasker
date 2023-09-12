@@ -22,6 +22,11 @@ export class SupervisorService {
     return this.webReqService.get(`supervisors/teams/${userId}`);
   }
 
+  /**Get all projects belonging to teams assigned to a certain supervisor */
+  getSupervisorProjects(userId: string) {
+    return this.webReqService.get(`supervisors/projects/${userId}`);
+  }
+
   /**Get all sessions for teams assigned to a certain supervisor*/
   getSupervisorTeamSessions(userid: string) {
     return this.webReqService.get(`supervisors/teams_sessions/${userid}`);

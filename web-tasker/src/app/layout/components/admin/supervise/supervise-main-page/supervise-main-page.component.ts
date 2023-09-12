@@ -10,8 +10,10 @@ import { SupervisorService } from 'src/app/services/api/supervisor.service';
 })
 export class SuperviseMainPageComponent implements OnInit {
   teams: any = [];
+  projects: any = [];
   supervisorId!: string;
-  supervisorTeamsCount = 0;
+  supTeamCount = 0;
+  supProjectCount = 0;
 
   constructor(
     private supervisorService: SupervisorService,
@@ -21,9 +23,10 @@ export class SuperviseMainPageComponent implements OnInit {
   ngOnInit(): void {
     this.getSupervisor();
     this.getSupervisorTeams(this.supervisorId);
+    this.getSupervisorProjects(this.supervisorId);
   }
 
-  /**get the supervisor's userId */
+  /**Get the supervisor's userId */
   getSupervisor() {
     /**Get the user from token */
     const user = this.accountService.getUser();
@@ -39,7 +42,22 @@ export class SuperviseMainPageComponent implements OnInit {
       next: (supervisorTeams) => {
         console.log(supervisorTeams);
         this.teams = supervisorTeams;
-        this.supervisorTeamsCount = supervisorTeams.length;
+        this.supTeamCount = supervisorTeams.length;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  /**Get the supervisor projects */
+  getSupervisorProjects(userId: string) {
+    /**Get supervisor projects*/
+    this.supervisorService.getSupervisorProjects(userId).subscribe({
+      next: (supervisorProjects) => {
+        console.log(supervisorProjects);
+        this.projects = supervisorProjects;
+        this.supProjectCount = supervisorProjects.length;
       },
       error: (err) => {
         console.log(err);

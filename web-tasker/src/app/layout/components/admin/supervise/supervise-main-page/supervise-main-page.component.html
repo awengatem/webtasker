@@ -6,7 +6,8 @@
         <div class="teams-container">
           <div class="teams">
             <div class="row">
-              <div class="col"><h1>My Teams Data</h1>
+              <div class="col">
+                <h1>My Teams Data</h1>
                 <!-- <button
                   type="button"
                   class="btn btn-outline-primary"
@@ -22,14 +23,14 @@
                 <div class="col-3">
                   <h2 class="data-name" routerLink="/ad_manage/users">
                     My Teams
-                    <h1>{{supervisorTeamsCount}}</h1>
+                    <h1>{{ supTeamCount }}</h1>
                     <span class="text-success mr-2"><h3>90% active</h3></span>
                   </h2>
                 </div>
                 <div class="col-3">
                   <h2 class="data-name" routerLink="/projects">
                     Active projects
-                    <h1>3</h1>
+                    <h1>{{ supProjectCount }}</h1>
                     <span class="text-success mr-2"><h3>60% done</h3></span>
                   </h2>
                 </div>
@@ -53,7 +54,10 @@
             <div class="teams-inside">
               <div class="row">
                 <h2>Your Teams</h2>
-                <div class="card" style="width: 13rem; height: 15rem; background-color: white;">
+                <div
+                  class="card"
+                  style="width: 13rem; height: 15rem; background-color: white"
+                >
                   <!-- <img class="card-img-top" src="..." alt="" /> -->
                   <div class="card-body" style="width: 13rem; height: 15rem">
                     <h3 class="card-title">Card title</h3>
@@ -69,12 +73,11 @@
                 >
                   <!-- <img class="card-img-top" src="..." alt="Card image cap" /> -->
                   <div class="card-body">
-                    <h3 class="card-title">Four</h3>
+                    <h3 class="card-title">{{ team.teamName }}</h3>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

@@ -60,7 +60,6 @@ import { ProjectTeamsComponent } from './components/admin/adprojects/project-tea
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { ProjSessionsComponent } from './components/user/user_projects/proj-sessions/proj-sessions.component';
 import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
-import { SuperviseComponent } from './components/admin/supervise/supervise/supervise.component';
 import { TeamSupervisorComponent } from './components/admin/adteams/team-supervisor/team-supervisor.component';
 import { UserInfoComponent } from './components/admin/manage/users/user-info/user-info.component';
 import { AssignSupervisorComponent } from './components/admin/adteams/assign-supervisor/assign-supervisor.component';
@@ -130,7 +129,6 @@ import { NewTeammodalComponent } from './components/admin/adteams/new-teammodal/
     UserProfileComponent,
     ProjSessionsComponent,
     AdProjSessionsComponent,
-    SuperviseComponent,
     TeamSupervisorComponent,
     UserInfoComponent,
     AssignSupervisorComponent,
