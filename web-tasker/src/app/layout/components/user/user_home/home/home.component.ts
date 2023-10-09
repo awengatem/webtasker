@@ -46,10 +46,11 @@ export class HomeComponent implements OnInit {
       this.totalProjects = projects.length;
       //pushs project status to projects
       this.projects.forEach((p) => (p.status = 'Unknown'));
+
+      window.setTimeout(() => {
+        this.getStatus();
+      }, 100);
     });
-    window.setTimeout(() => {
-      this.getStatus();
-    }, 100);
   }
 
   /**test*/
@@ -126,7 +127,7 @@ export class HomeComponent implements OnInit {
             for (let i = 0; i < this.projects.length; i++) {
               if (
                 this.projects[i]._id === document.project_id &&
-                this.projects[i].team === document.team_id
+                this.projects[i].team_id === document.team_id
               ) {
                 this.projects[i].status = 'Active';
               } else {

@@ -77,7 +77,7 @@ const routes: Routes = [
         component: ProjectsComponent,
       },
       {
-        path: 'projects/:projectId/:teamId',
+        path: 'projects/:projectId/info',
         component: ProjectInfoComponent,
       },
       {
