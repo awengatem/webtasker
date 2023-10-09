@@ -58,7 +58,7 @@
       }
       mat-table {
         min-height: calc(100vh - 800px);
-        max-height: calc(100vh - 650px);
+        max-height: calc(100vh - 500px);
         overflow-y: auto;
         // ng-container {
         //   mat-cell {
@@ -163,18 +163,11 @@
     .create {
       padding: 24px;
       button {
-        height: 50px;
+        height: 40px;
         width: 75px;
         .btn-txt {
           font-size: 20px;
         }
-      }
-      h4 {
-        font-family: inherit;
-        font-weight: 400;
-        font-size: 16px;
-        margin-left: 1px;
-        position: absolute;
       }
     }
 
