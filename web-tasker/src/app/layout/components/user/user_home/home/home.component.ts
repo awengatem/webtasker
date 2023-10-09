@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
   /**Set the project and team id in local storage to aid in timer guard */
   saveProjectTeam(projectId: string, teamId: string) {
     /**store this in localstorage to aid in refresh */
-    localStorage.setItem('capturedProjectTeam', teamId);
+    localStorage.setItem('capturedProjectTeamId', teamId);
     localStorage.setItem('capturedProjectId', projectId);
     // console.log(teamId);
   }
@@ -156,7 +156,7 @@ export class HomeComponent implements OnInit {
   /**authorize the user timer */
   authTimer(projectId: any, teamId: any) {
     /**store this in localstorage to aid in timer guard authorization*/
-    localStorage.setItem('capturedProjectTeam', teamId);
+    localStorage.setItem('capturedProjectTeamId', teamId);
     localStorage.setItem('capturedProjectId', projectId);
     this.timerService.navigator(projectId, teamId);
   }

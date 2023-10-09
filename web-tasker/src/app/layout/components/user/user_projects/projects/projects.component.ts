@@ -56,7 +56,7 @@ export class ProjectsComponent implements OnInit {
   /**Set the project and team id in local storage to aid in timer guard */
   saveProjectTeam(projectId: string, teamId: string) {
     /**store this in localstorage to aid in refresh */
-    localStorage.setItem('capturedProjectTeam', teamId);
+    localStorage.setItem('capturedProjectTeamId', teamId);
     localStorage.setItem('capturedProjectId', projectId);
     // console.log(teamId);
   }
@@ -80,7 +80,7 @@ export class ProjectsComponent implements OnInit {
   getStatus() {
     this.projectStatusService.getActiveProjects().subscribe({
       next: (documents) => {
-        //console.log(documents);
+        // console.log(documents);
         /**update status to productive or break */
         if (documents.length > 0) {
           const document = documents[0];
@@ -90,7 +90,7 @@ export class ProjectsComponent implements OnInit {
             for (let i = 0; i < this.projects.length; i++) {
               if (
                 this.projects[i]._id === document.project_id &&
-                this.projects[i].team === document.team_id
+                this.projects[i].team_id === document.team_id
               ) {
                 this.projects[i].status = 'Active';
               } else {

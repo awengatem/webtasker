@@ -44,7 +44,7 @@ export class ProjectActionComponent implements OnInit {
       // this.getProject(projectId);
     });
     const projectId = localStorage.getItem('capturedProjectId')!;
-    const teamId = localStorage.getItem('capturedProjectTeam')!;
+    const teamId = localStorage.getItem('capturedProjectTeamId')!;
     this.projectId = projectId;
     this.teamId = teamId;
     this.getProject(projectId);
