@@ -3,7 +3,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { url } from 'src/app/configs';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class WebRequestService {
   readonly ROOT_URL;
 
   constructor(private http: HttpClient) {
-    this.ROOT_URL = url.ROOT_URL;
+    this.ROOT_URL = environment.ROOT_URL;
   }
 
   get(uri: string): Observable<any> {
