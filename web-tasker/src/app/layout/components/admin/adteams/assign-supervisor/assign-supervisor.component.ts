@@ -29,7 +29,7 @@ export class AssignSupervisorComponent {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
     //Subscribe first
     this.route.params.subscribe((params: Params) => {
       // console.log(params);
