@@ -40,14 +40,21 @@
       border-width: 1px;
       height: 200px;
       margin: 20px;
-      background-color: #239BFE;
+      background-color: #239bfe;
     }
-    
+
     .card-body {
       justify-content: center;
+      
     }
     .card-img-top {
       height: 50%;
     }
+  }
+}
+
+.label {
+  &:hover {
+    color: #22b8f0;
   }
 }
