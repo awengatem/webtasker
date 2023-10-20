@@ -35,14 +35,14 @@
                   </h2>
                 </div>
                 <div class="col-3">
-                  <h2 class="data-name" routerLink="/view_earnings">
+                  <h2 class="data-name">
                     Team Earnings
                     <h1>200$</h1>
                     <span class="text-danger mr-2"><h3>-20%</h3></span>
                   </h2>
                 </div>
                 <div class="col-3">
-                  <h2 class="data-name" routerLink="/view_earnings">
+                  <h2 class="data-name">
                     Team Sessions
                     <h1>TOTAL</h1>
                     <span class="text-danger mr-2"><h3>20:00:04</h3></span>
@@ -61,9 +61,7 @@
                   <!-- <img class="card-img-top" src="..." alt="" /> -->
                   <div class="card-body" style="width: 13rem; height: 15rem">
                     <h3 class="card-title">Card title</h3>
-                    <a class="btn btn-primary" routerLink="/teams_page"
-                      >New Team</a
-                    >
+                    <a class="btn btn-primary">New Team</a>
                   </div>
                 </div>
                 <div
@@ -72,7 +70,7 @@
                   style="width: 13rem; height: 15rem"
                 >
                   <!-- <img class="card-img-top" src="..." alt="Card image cap" /> -->
-                  <div class="card-body">
+                  <div class="card-body" routerLink="/supervise/team">
                     <h3 class="card-title">{{ team.teamName }}</h3>
                   </div>
                 </div>
