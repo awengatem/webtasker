@@ -15,50 +15,22 @@ import { EarningService } from 'src/app/services/api/earning.service';
 })
 export class MngEarningsComponent implements OnInit {
   /**variables */
-  totalSessions = 0;
+  totalEarningDocs = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
-  displayedColumns: string[] = [
-    'Select',
-    'Name',        
-    'Amount',        
-    'Date',    
-    'Delete',
-  ];
+  displayedColumns: string[] = ['Select', 'Name', 'Amount', 'Date', 'Delete'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(
-    private projectStatusService: ProjectStatusService,
+  constructor(   
     private earningsService: EarningService,
     private snackBarService: SnackBarService
   ) {
     //load data on table
-    this.loadAllSessions();
+    this.loadAllEarnings();
   }
 
-  ngOnInit(): void {
-    this.getEarnings();
-  }
-
-  /**Get the sessions */
-  getProjects(): void {
-    this.projectStatusService.getStatusDocs().then((sessions) => {
-      console.log(sessions);
-    });
-  }
-
-  /**Get the earnings */
-  getEarnings(): void {
-    this.earningsService.getEarnings().subscribe({
-      next: (earnings) => {
-        console.log(earnings);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
+  ngOnInit(): void {}
 
   /**check whether all are selected */
   isAllSelected() {
@@ -91,21 +63,21 @@ export class MngEarningsComponent implements OnInit {
     }
   }
 
-  /**Delete selected session(s) */
+  /**Delete selected earning(s) */
   deleteSelected() {
     // debugger;
-    const selectedSessionsArr = this.selection.selected;
-    let sessionIdArr: any = [];
-    console.log(selectedSessionsArr);
-    if (selectedSessionsArr.length > 0) {
-      //push only session ids in an array
-      selectedSessionsArr.forEach((item) => {
-        sessionIdArr.push(item._id);
+    const selectedEarningsArr = this.selection.selected;
+    let earningIdArr: any = [];
+    console.log(selectedEarningsArr);
+    if (selectedEarningsArr.length > 0) {
+      //push only earning ids in an array
+      selectedEarningsArr.forEach((item) => {
+        earningIdArr.push(item._id);
       });
-      console.log(sessionIdArr);
+      console.log(earningIdArr);
       //confirm and delete sessions
       Swal.fire({
-        title: `Delete ${selectedSessionsArr.length} sessions from the database?`,
+        title: `Delete ${selectedEarningsArr.length} earnings from the database?`,
         text: 'This process is irreversible.',
         icon: 'warning',
         showCancelButton: true,
@@ -116,7 +88,7 @@ export class MngEarningsComponent implements OnInit {
       }).then((result) => {
         //delete sessions from db
         if (result.value) {
-          this.deleteMultipe(sessionIdArr);
+          this.deleteMultipe(earningIdArr);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           this.snackBarService.displaySnackbar(
             'error',
@@ -131,10 +103,10 @@ export class MngEarningsComponent implements OnInit {
     }
   }
 
-  /**Method to confirm session deletion */
-  confirmDeletion(sessionId: string) {
+  /**Method to confirm earning deletion */
+  confirmDeletion(earningId: string) {
     Swal.fire({
-      title: `Delete session from the database?`,
+      title: `Delete earning from the database?`,
       text: 'This process is irreversible.',
       icon: 'warning',
       showCancelButton: true,
@@ -143,9 +115,9 @@ export class MngEarningsComponent implements OnInit {
       cancelButtonText: 'No, let me think',
       cancelButtonColor: '#22b8f0',
     }).then((result) => {
-      //delete session from db
+      //delete earning from db
       if (result.value) {
-        this.deleteSession(sessionId);
+        this.deleteEarning(earningId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.snackBarService.displaySnackbar(
           'error',
@@ -158,13 +130,13 @@ export class MngEarningsComponent implements OnInit {
   /**Method to deletemultiple */
   deleteMultipe(sessionIdArr: any[]) {
     if (sessionIdArr.length > 0) {
-      this.projectStatusService
-        .deleteMultipleProjectStatus(sessionIdArr)
+      this.earningsService
+        .deleteMultipleEarnings(sessionIdArr)
         .subscribe({
           next: (response: any) => {
             console.log(response);
             this.snackBarService.displaySnackbar('success', response.message);
-            this.loadAllSessions();
+            this.loadAllEarnings();
           },
           error: (err) => {
             console.log(err);
@@ -175,12 +147,12 @@ export class MngEarningsComponent implements OnInit {
   }
 
   /**Delete a specified session */
-  deleteSession(sessionId: string) {
-    this.projectStatusService.deleteProjectStatus(sessionId).subscribe({
+  deleteEarning(sessionId: string) {
+    this.earningsService.deleteEarning(sessionId).subscribe({
       next: (response: any) => {
         console.log(response);
         this.snackBarService.displaySnackbar('success', response.message);
-        this.loadAllSessions();
+        this.loadAllEarnings();
       },
       error: (err) => {
         console.log(err);
@@ -190,23 +162,23 @@ export class MngEarningsComponent implements OnInit {
   }
 
   /**Method to reload user table */
-  loadAllSessions() {
+  loadAllEarnings() {
     //reset selection list
     this.selection = new SelectionModel<any>(true, []);
     //load data
-    this.projectStatusService
-      .getStatusDocs()
-      .then((sessions: any) => {
-        this.dataSource = new MatTableDataSource(sessions);
+    this.earningsService.getEarnings().subscribe({
+      next: (earnings) => {
+        this.dataSource = new MatTableDataSource(earnings);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         // refresh usercount
-        this.totalSessions = sessions.length;
-        console.log(sessions);
-      })
-      .catch((err) => {
+        this.totalEarningDocs = earnings.length;
+        console.log(earnings);
+      },
+      error: (err) => {
         console.log(err);
-      });
+      },
+    });
   }
 
   /**Method to convert timestamp to date */

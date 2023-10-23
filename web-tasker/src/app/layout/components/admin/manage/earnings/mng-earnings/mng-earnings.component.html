@@ -8,7 +8,7 @@
               <div class="row">
                 <div class="col count">
                   <h1 class="text-dark position-relative">
-                    <span class=""> {{ totalSessions }} </span>Sessions
+                    <span class=""> {{ totalEarningDocs }} </span>Sessions
                     <i class="fa-sharp fa-solid fa-folder-open"></i>
                   </h1>
                 </div>
@@ -108,7 +108,7 @@
                           <ng-container matColumnDef="Date" class="">
                             <mat-header-cell *matHeaderCellDef mat-sort-header>
                               Date
-                            </mat-header-cell>
+                            </mat-header-cell> 
                             <mat-cell *matCellDef="let document">
                               {{ document.date }}
                             </mat-cell>
