@@ -12,4 +12,16 @@ export class EarningService {
   getEarnings() {
     return this.webReqService.get('earnings');
   }
+
+  /**delete earning document from db */
+  deleteEarning(id: string) {
+    return this.webReqService.delete(`earnings/${id}`);
+  }
+
+  /**delete multiple earnings documents from db */
+  deleteMultipleEarnings(idArr: any[]) {
+    return this.webReqService.post(`earnings/delete_multiple`, {
+      earningsIdArr: idArr,
+    });
+  }
 }
