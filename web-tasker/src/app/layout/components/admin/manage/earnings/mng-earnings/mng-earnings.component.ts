@@ -6,6 +6,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import Swal from 'sweetalert2';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { SnackBarService } from 'src/app/services/snackbar.service';
+import { EarningService } from 'src/app/services/api/earning.service';
 
 @Component({
   selector: 'app-mng-earnings',
@@ -33,18 +34,33 @@ export class MngEarningsComponent implements OnInit {
 
   constructor(
     private projectStatusService: ProjectStatusService,
+    private earningsService: EarningService,
     private snackBarService: SnackBarService
   ) {
     //load data on table
     this.loadAllSessions();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getEarnings();
+  }
 
   /**Get the sessions */
   getProjects(): void {
     this.projectStatusService.getStatusDocs().then((sessions) => {
       console.log(sessions);
+    });
+  }
+
+  /**Get the earnings */
+  getEarnings(): void {
+    this.earningsService.getEarnings().subscribe({
+      next: (earnings) => {
+        console.log(earnings);
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
