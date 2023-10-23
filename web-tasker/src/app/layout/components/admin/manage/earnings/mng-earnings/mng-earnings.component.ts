@@ -20,13 +20,9 @@ export class MngEarningsComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     'Select',
-    'Username',
-    'ProjectName',
-    'TeamName',
-    'Status',
-    'NewDuration',
-    'StartTime',
-    'FinishTime',
+    'Name',        
+    'Amount',        
+    'Date',    
     'Delete',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;

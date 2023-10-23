@@ -86,83 +86,31 @@
                               ></mat-checkbox>
                             </mat-cell>
                           </ng-container>
-                          <!-- Username Column -->
-                          <ng-container matColumnDef="Username" class="">
+                          <!-- UserName Column -->
+                          <ng-container matColumnDef="Name" class="">
                             <mat-header-cell *matHeaderCellDef mat-sort-header>
-                              Username
+                              Name
                             </mat-header-cell>
                             <mat-cell *matCellDef="let document">
-                              {{ document.username }}
+                              {{ document.userName }}
                             </mat-cell>
                           </ng-container>
-                          <!-- ProjectName Column -->
-                          <ng-container matColumnDef="ProjectName" class="">
+                          <!-- Amount Column -->
+                          <ng-container matColumnDef="Amount" class="">
                             <mat-header-cell *matHeaderCellDef mat-sort-header>
-                              Project name
+                              Amount
                             </mat-header-cell>
                             <mat-cell *matCellDef="let document">
-                              {{ document.projectName }}
+                              {{ document.amount }}
                             </mat-cell>
-                          </ng-container>
-                          <!-- TeamName Column -->
-                          <ng-container matColumnDef="TeamName" class="">
+                          </ng-container>                                                 
+                          <!-- Date Column -->
+                          <ng-container matColumnDef="Date" class="">
                             <mat-header-cell *matHeaderCellDef mat-sort-header>
-                              Team name
+                              Date
                             </mat-header-cell>
                             <mat-cell *matCellDef="let document">
-                              {{ document.teamName }}
-                            </mat-cell>
-                          </ng-container>
-                          <!-- Status Column -->
-                          <ng-container matColumnDef="Status" class="">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header>
-                              Status
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let document">
-                              <div
-                                *ngIf="document.status != 'finished'"
-                                class="col-sm"
-                                [ngClass]="
-                                  document.status === 'running'
-                                    ? 'running'
-                                    : 'paused'
-                                "
-                              >
-                                {{ document.status }}
-                              </div>
-                              <div
-                                *ngIf="document.status === 'finished'"
-                                class="col-sm default"
-                              >
-                                {{ document.status }}
-                              </div>
-                            </mat-cell>
-                          </ng-container>
-                          <!-- NewDuration Column -->
-                          <ng-container matColumnDef="NewDuration" class="">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header>
-                              Duration
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let document">
-                              {{ document.newDuration }}
-                            </mat-cell>
-                          </ng-container>
-                          <!-- StartTime Column -->
-                          <ng-container matColumnDef="StartTime" class="">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header>
-                              Started
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let document">
-                              {{ document.startTime }}
-                            </mat-cell>
-                          </ng-container>
-                          <!-- FinishTime Column -->
-                          <ng-container matColumnDef="FinishTime" class="">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header>
-                              Finished
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let document">
-                              {{ document.finishTime }}
+                              {{ document.date }}
                             </mat-cell>
                           </ng-container>
                           <!-- Delete Icon -->
