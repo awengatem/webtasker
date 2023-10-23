@@ -46,6 +46,7 @@ import { SuperviseTeamPageComponent } from './components/admin/supervise/supervi
 import { SuperviseEarningPageComponent } from './components/admin/supervise/supervise-earning-page/supervise-earning-page.component';
 import { SuperviseMainPageComponent } from './components/admin/supervise/supervise-main-page/supervise-main-page.component';
 import { AdminGuard } from '../helpers/guards/admin.guard';
+import { MngEarningsComponent } from './components/admin/manage/earnings/mng-earnings/mng-earnings.component';
 
 const routes: Routes = [
   {
@@ -254,6 +255,11 @@ const routes: Routes = [
         path: 'ad_manage/sessions',
         canActivate: [ManagerGuard],
         component: MngSessionsComponent,
+      },
+      {
+        path: 'ad_manage/earnings',
+        canActivate: [ManagerGuard],
+        component: MngEarningsComponent,
       },
 
       /**TESTING PURPOSE */
