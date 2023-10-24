@@ -24,4 +24,16 @@ export class EarningService {
       earningsIdArr: idArr,
     });
   }
+
+  /**convert timestamps to human readable */
+  timestampConverter(timestamp: number) {
+    return new Promise((resolve, reject) => {
+      if (timestamp === 0) {
+        resolve('null');
+      }
+      const date = new Date(timestamp);
+      // const newDate = date.toLocaleString();
+      resolve(date.toLocaleString());
+    });
+  }
 }
