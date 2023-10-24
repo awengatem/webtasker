@@ -22,7 +22,7 @@ export class MngEarningsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(   
+  constructor(
     private earningsService: EarningService,
     private snackBarService: SnackBarService
   ) {
@@ -130,19 +130,17 @@ export class MngEarningsComponent implements OnInit {
   /**Method to deletemultiple */
   deleteMultipe(sessionIdArr: any[]) {
     if (sessionIdArr.length > 0) {
-      this.earningsService
-        .deleteMultipleEarnings(sessionIdArr)
-        .subscribe({
-          next: (response: any) => {
-            console.log(response);
-            this.snackBarService.displaySnackbar('success', response.message);
-            this.loadAllEarnings();
-          },
-          error: (err) => {
-            console.log(err);
-            Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-          },
-        });
+      this.earningsService.deleteMultipleEarnings(sessionIdArr).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.snackBarService.displaySnackbar('success', response.message);
+          this.loadAllEarnings();
+        },
+        error: (err) => {
+          console.log(err);
+          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+        },
+      });
     }
   }
 
@@ -166,19 +164,19 @@ export class MngEarningsComponent implements OnInit {
     //reset selection list
     this.selection = new SelectionModel<any>(true, []);
     //load data
-    this.earningsService.getEarnings().subscribe({
-      next: (earnings) => {
+    this.earningsService
+      .getEarnings()
+      .then((earnings: any) => {
         this.dataSource = new MatTableDataSource(earnings);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         // refresh usercount
         this.totalEarningDocs = earnings.length;
         console.log(earnings);
-      },
-      error: (err) => {
+      })
+      .catch((err) => {
         console.log(err);
-      },
-    });
+      });
   }
 
   /**Method to convert timestamp to date */
