@@ -7,6 +7,7 @@ import { WebRequestService } from './web-request.service';
 export class EarningService {
   constructor(private webReqService: WebRequestService) {}
 
+  /**Method to get calibrated earnings from api */
   getEarnings() {
     return new Promise((resolve, reject) => {
       this.getEarningDocs().subscribe({
