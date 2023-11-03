@@ -69,6 +69,7 @@ import { SuperviseEarningPageComponent } from './components/admin/supervise/supe
 import { EditProjectmodalComponent } from './components/admin/adprojects/edit-projectmodal/edit-projectmodal.component';
 import { EditTeammodalComponent } from './components/admin/adteams/edit-teammodal/edit-teammodal.component';
 import { NewTeammodalComponent } from './components/admin/adteams/new-teammodal/new-teammodal.component';
+import { MngEarningsComponent } from './components/admin/manage/earnings/mng-earnings/mng-earnings.component';
 
 @NgModule({
   declarations: [
@@ -135,6 +136,7 @@ import { NewTeammodalComponent } from './components/admin/adteams/new-teammodal/
     SuperviseMainPageComponent,
     SuperviseTeamPageComponent,
     SuperviseEarningPageComponent,
+    MngEarningsComponent,
   ],
   imports: [
     CommonModule,

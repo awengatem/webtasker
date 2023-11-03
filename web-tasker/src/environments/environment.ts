@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // ROOT_URL : 'http://127.0.0.1:3000',
-  ROOT_URL: 'http://192.168.5.100:3000' /**rejects cookies but will fix later*/
+  ROOT_URL: 'http://192.168.5.100:3000' /**rejects cookies but will fix later*/,
 };
 
 /*
