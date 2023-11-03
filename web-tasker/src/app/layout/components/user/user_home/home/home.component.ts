@@ -46,10 +46,11 @@ export class HomeComponent implements OnInit {
       this.totalProjects = projects.length;
       //pushs project status to projects
       this.projects.forEach((p) => (p.status = 'Unknown'));
+
+      window.setTimeout(() => {
+        this.getStatus();
+      }, 100);
     });
-    window.setTimeout(() => {
-      this.getStatus();
-    }, 100);
   }
 
   /**test*/
@@ -66,7 +67,7 @@ export class HomeComponent implements OnInit {
   /**Set the project and team id in local storage to aid in timer guard */
   saveProjectTeam(projectId: string, teamId: string) {
     /**store this in localstorage to aid in refresh */
-    localStorage.setItem('capturedProjectTeam', teamId);
+    localStorage.setItem('capturedProjectTeamId', teamId);
     localStorage.setItem('capturedProjectId', projectId);
     // console.log(teamId);
   }
@@ -126,7 +127,7 @@ export class HomeComponent implements OnInit {
             for (let i = 0; i < this.projects.length; i++) {
               if (
                 this.projects[i]._id === document.project_id &&
-                this.projects[i].team === document.team_id
+                this.projects[i].team_id === document.team_id
               ) {
                 this.projects[i].status = 'Active';
               } else {
@@ -156,7 +157,7 @@ export class HomeComponent implements OnInit {
   /**authorize the user timer */
   authTimer(projectId: any, teamId: any) {
     /**store this in localstorage to aid in timer guard authorization*/
-    localStorage.setItem('capturedProjectTeam', teamId);
+    localStorage.setItem('capturedProjectTeamId', teamId);
     localStorage.setItem('capturedProjectId', projectId);
     this.timerService.navigator(projectId, teamId);
   }

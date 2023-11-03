@@ -68,7 +68,7 @@ export class TimerService {
     //let myBool = false;
     /**get the project and team ids first to check if they are authorized */
     const projectId = localStorage.getItem('capturedProjectId')!;
-    const teamId = localStorage.getItem('capturedProjectTeam')!;
+    const teamId = localStorage.getItem('capturedProjectTeamId')!;
     /**check response first */
     return new Promise(async (resolve, reject) => {
       /**return server response to decide */

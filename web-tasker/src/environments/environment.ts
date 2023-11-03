@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // ROOT_URL : 'http://127.0.0.1:3000',
+  ROOT_URL: 'http://192.168.5.100:3000' /**rejects cookies but will fix later*/,
 };
 
 /*

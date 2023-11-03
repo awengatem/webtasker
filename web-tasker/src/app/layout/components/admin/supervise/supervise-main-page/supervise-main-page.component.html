@@ -21,29 +21,29 @@
             <div class="card-body">
               <div class="row d-flex justify-content-center">
                 <div class="col-3">
-                  <h2 class="data-name" routerLink="/ad_manage/users">
-                    My Teams
+                  <h2 class="data-name">
+                    <div class="label pointer">My Teams</div>
                     <h1>{{ supTeamCount }}</h1>
                     <span class="text-success mr-2"><h3>90% active</h3></span>
                   </h2>
                 </div>
                 <div class="col-3">
-                  <h2 class="data-name" routerLink="/projects">
-                    Active projects
+                  <h2 class="data-name">
+                    <div class="label pointer">Active projects</div>
                     <h1>{{ supProjectCount }}</h1>
                     <span class="text-success mr-2"><h3>60% done</h3></span>
                   </h2>
                 </div>
                 <div class="col-3">
-                  <h2 class="data-name" routerLink="/view_earnings">
-                    Team Earnings
+                  <h2 class="data-name">
+                    <div class="label pointer">Team Earnings</div>
                     <h1>200$</h1>
                     <span class="text-danger mr-2"><h3>-20%</h3></span>
                   </h2>
                 </div>
                 <div class="col-3">
-                  <h2 class="data-name" routerLink="/view_earnings">
-                    Team Sessions
+                  <h2 class="data-name">
+                    <div class="label pointer">Team Sessions</div>
                     <h1>TOTAL</h1>
                     <span class="text-danger mr-2"><h3>20:00:04</h3></span>
                   </h2>
@@ -61,9 +61,7 @@
                   <!-- <img class="card-img-top" src="..." alt="" /> -->
                   <div class="card-body" style="width: 13rem; height: 15rem">
                     <h3 class="card-title">Card title</h3>
-                    <a class="btn btn-primary" routerLink="/teams_page"
-                      >New Team</a
-                    >
+                    <a class="btn btn-primary">New Team</a>
                   </div>
                 </div>
                 <div
@@ -72,7 +70,7 @@
                   style="width: 13rem; height: 15rem"
                 >
                   <!-- <img class="card-img-top" src="..." alt="Card image cap" /> -->
-                  <div class="card-body">
+                  <div class="card-body pointer" routerLink="/supervise/team">
                     <h3 class="card-title">{{ team.teamName }}</h3>
                   </div>
                 </div>

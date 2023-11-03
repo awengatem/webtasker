@@ -89,11 +89,11 @@
                           type="button"
                           class="col btn btn-outline-success btn-sm me-2"
                           *ngIf="project.status != 'Active'"
-                          (click)="saveProjectTeam(project._id, project.team)"
+                          (click)="saveProjectTeam(project._id, project.team_id)"
                           [routerLink]="[
                             '/projects',
                             project._id,
-                            project.team[0]
+                            'info'
                           ]"
                         >
                           start
@@ -102,7 +102,7 @@
                           type="button"
                           class="col btn btn-success btn-sm me-2 prog-but"
                           *ngIf="project.status === 'Active'"
-                          (click)="authTimer(project._id, project.team)"
+                          (click)="authTimer(project._id, project.team_id)"
                         >
                           progress
                         </button>

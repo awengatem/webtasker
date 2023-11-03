@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as io from 'socket.io-client';
-import { url } from 'src/app/configs';
+import {environment} from "../../environments/environment";
 import { AccountService } from './account-service.service';
 @Injectable({
   providedIn: 'root',
@@ -48,7 +48,7 @@ export class SocketIoService {
   /**Method to open socket */
   openSocket() {
     this.closeSocket();
-    this.socket = io.connect(url.ROOT_URL, {
+    this.socket = io.connect(environment.ROOT_URL, {
       withCredentials: true,
       extraHeaders: {
         'socket-header': 'abcd',

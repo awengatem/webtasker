@@ -45,7 +45,7 @@ export class ProjectInfoComponent implements OnInit {
       // this.getProject(projectId);
     });
     const projectId = localStorage.getItem('capturedProjectId')!;
-    const teamId = localStorage.getItem('capturedProjectTeam')!;
+    const teamId = localStorage.getItem('capturedProjectTeamId')!;
     this.projectId = projectId;
     this.teamId = teamId;
     this.getTeamName(teamId);
@@ -90,7 +90,7 @@ export class ProjectInfoComponent implements OnInit {
 
   //clear localstorage teamId immediately we navigate away
   clearCapturedTeam() {
-    localStorage.removeItem('capturedProjectTeam');
+    localStorage.removeItem('capturedProjectTeamId');
     localStorage.removeItem('capturedProjectId');
   }
 
