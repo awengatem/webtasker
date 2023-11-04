@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 900px;
+  max-height: calc(90vh - 170px);
+  background: white;
+}
+.teams-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 100rem;
+  max-height: calc(90vh - 170px);
+  background: white;
+}
+.row {
+  display: flex;
+  border-style: none;
+  border-width: 1px;
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 100%;
+}
+.num {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.card-text {
+  display: flex;
+  justify-items: end;
+  color: green;
+  :hover {
+    color: chartreuse;
+  }
+}
+.card {
+    &:hover {
+    background-color: linear-gradient(
+      90deg,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(9, 9, 121, 1) 35%,
+      rgba(0, 212, 255, 1) 100%
+    );
+  }
+}
