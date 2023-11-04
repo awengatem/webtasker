@@ -46,6 +46,7 @@ import { SuperviseEarningPageComponent } from './components/admin/supervisor/sup
 import { SuperviseMainPageComponent } from './components/admin/supervisor/supervise-main-page/supervise-main-page.component';
 import { AdminGuard } from '../helpers/guards/admin.guard';
 import { MngEarningsComponent } from './components/admin/manager/manage/earnings/mng-earnings/mng-earnings.component';
+import { AdminTeamsComponent } from './components/admin/manager/adteams/admin-teams/admin-teams.component';
 
 const routes: Routes = [
   {
@@ -118,7 +119,26 @@ const routes: Routes = [
         component: UserProfileComponent,
       },
 
-      /**ADMIN ROUTES */
+      /*** ADMIN ROUTES ***/
+
+      /** SUPERVISOR **/
+      {
+        path: 'supervise',
+        canActivate: [SupervisorGuard],
+        component: SuperviseMainPageComponent,
+      },
+      {
+        path: 'supervise/team',
+        canActivate: [SupervisorGuard],
+        component: SuperviseTeamPageComponent,
+      },
+      {
+        path: 'supervise/earnings',
+        canActivate: [SupervisorGuard],
+        component: SuperviseEarningPageComponent,
+      },
+
+      /** MANAGER **/
       /**DASHBOARD */
       {
         path: 'ad_dashboard',
@@ -181,6 +201,11 @@ const routes: Routes = [
         component: AdTeamsComponent,
       },
       {
+        path: 'admin_teams',
+        canActivate: [AdminGuard],
+        component: AdminTeamsComponent,
+      },
+      {
         path: 'ad_teams/:teamId',
         canActivate: [AdminGuard],
         canDeactivate: [ClearLocationGuard],
@@ -205,23 +230,6 @@ const routes: Routes = [
         path: 'ad_teams/:teamId/assign_supervisor',
         canActivate: [AdminGuard],
         component: AssignSupervisorComponent,
-      },
-
-      /**SUPERVISE*/
-      {
-        path: 'supervise',
-        canActivate: [SupervisorGuard],
-        component: SuperviseMainPageComponent,
-      },
-      {
-        path: 'supervise/team',
-        canActivate: [SupervisorGuard],
-        component: SuperviseTeamPageComponent,
-      },
-      {
-        path: 'supervise/earnings',
-        canActivate: [SupervisorGuard],
-        component: SuperviseEarningPageComponent,
       },
 
       /**MANAGE*/
