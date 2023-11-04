@@ -32,7 +32,6 @@ import { ScheduleComponent } from './components/user/user_projects/schedule/sche
 import { UsTeamInfoComponent } from './components/user/user_teams/us-team-info/us-team-info.component';
 import { ProjectInfoComponent } from './components/user/user_projects/project-info/project-info.component';
 import { AdProjectInfoComponent } from './components/admin/manager/adprojects/ad-project-info/ad-project-info.component';
-import { SocketTestComponent } from './components/admin/socket-test/socket-test.component';
 import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
 /**Filters imported below */
 import {
@@ -105,7 +104,6 @@ import { MngEarningsComponent } from './components/admin/manager/manage/earnings
     UsTeamInfoComponent,
     ProjectInfoComponent,
     AdProjectInfoComponent,
-    SocketTestComponent,
     ProjectActionComponent,
     ProjectStatusComponent,
     ActiveSessionsComponent,

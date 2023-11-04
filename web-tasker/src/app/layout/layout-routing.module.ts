@@ -16,7 +16,6 @@ import { AssignProjectComponent } from './components/admin/manager/adteams/assig
 import { UsTeamInfoComponent } from './components/user/user_teams/us-team-info/us-team-info.component';
 import { ProjectInfoComponent } from './components/user/user_projects/project-info/project-info.component';
 import { AdProjectInfoComponent } from './components/admin/manager/adprojects/ad-project-info/ad-project-info.component';
-import { SocketTestComponent } from './components/admin/socket-test/socket-test.component';
 import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
 import { TimerGuard } from '../helpers/guards/timer.guard';
 import { ManagerGuard } from '../helpers/guards/manager.guard';
@@ -260,13 +259,6 @@ const routes: Routes = [
         path: 'ad_manage/earnings',
         canActivate: [ManagerGuard],
         component: MngEarningsComponent,
-      },
-
-      /**TESTING PURPOSE */
-      {
-        path: 'socketTest',
-        canActivate: [AdminGuard],
-        component: SocketTestComponent,
       },
     ],
   },
