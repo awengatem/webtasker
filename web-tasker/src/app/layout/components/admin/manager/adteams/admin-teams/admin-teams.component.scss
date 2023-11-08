@@ -53,3 +53,11 @@
     color: green;
   }
 }
+.table {
+  font-size: large;
+  width: 100%;
+}
+.container-table {
+  height: 200px; /* Set the desired fixed height */
+  overflow: auto; /* Enable scrolling */
+}
