@@ -13,6 +13,7 @@ import { NewTeammodalComponent } from '../new-teammodal/new-teammodal.component'
 export class AdminTeamsComponent implements OnInit {
   teams!: any[];
   teamsLength = 0;
+  members = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
   /**define modal */
   modalRef: MdbModalRef<EditTeammodalComponent> | null = null;

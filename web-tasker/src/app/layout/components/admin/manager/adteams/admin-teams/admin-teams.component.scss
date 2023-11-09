@@ -61,3 +61,8 @@
   height: 300px; /* Set the desired fixed height */
   overflow: auto; /* Enable scrolling */
 }
+
+.list-container {
+  max-height: 445px;
+  overflow: auto; /* Enable scrolling */
+}
