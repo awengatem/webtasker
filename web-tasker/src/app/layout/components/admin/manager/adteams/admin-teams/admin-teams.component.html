@@ -6,17 +6,17 @@
         <div class="col-3">
           <div class="w-75 mb-2">
             <button type="button" class="btn btn-primary">
-              Add Team Member
+              + Create a team
             </button>
           </div>
           <div class="card">
             <div class="card-header">
-              <h1 class="text-center">Active members</h1>
+              <h1 class="text-center">Teams</h1>
             </div>
             <div class="list-container">
               <ul class="list-group list-group-flush">
-                <li *ngFor="let x of members" class="list-group-item">
-                  <h2>Hope Mumbi</h2>
+                <li *ngFor="let team of teams" class="list-group-item">
+                  <h2>{{ teams.indexOf(team) + 1 }}. {{ team.teamName }}</h2>
                 </li>
               </ul>
             </div>
@@ -131,8 +131,8 @@
                       <tr>
                         <th scope="row">3</th>
                         <td>Joe</td>
-                        <td>Jamba</td>
-                        <td>joejamba@gmail.com</td>
+                        <td>Karanja</td>
+                        <td>joekaranja@gmail.com</td>
                       </tr>
                     </tbody>
                   </table>
