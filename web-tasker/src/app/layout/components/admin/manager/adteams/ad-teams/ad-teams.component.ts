@@ -161,13 +161,9 @@ export class AdTeamsComponent implements OnInit {
             for (let id of this.uniqueTeams) {
               if (id === team._id) {
                 team.status = 'Active';
+              } else {
+                team.status = 'Unproductive';
               }
-            }
-          }
-          //set others to unproductive
-          for (let team of this.teams) {
-            if (team.status != 'Active') {
-              team.status = 'Unproductive';
             }
           }
         }
