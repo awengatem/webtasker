@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { TeamService } from 'src/app/services/api/team.service';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { EditTeammodalComponent } from '../edit-teammodal/edit-teammodal.component';
+import { NewTeammodalComponent } from '../new-teammodal/new-teammodal.component';
 
 @Component({
   selector: 'app-admin-teams',
@@ -11,13 +14,18 @@ export class AdminTeamsComponent implements OnInit {
   teams!: any[];
   teamsLength = 0;
 
+  /**define modal */
+  modalRef: MdbModalRef<EditTeammodalComponent> | null = null;
+  isModalOpen: boolean = false; //add background blur
+
   /**variables used in team status */
   teamidArr: string[] = [];
   uniqueTeams: string[] = [];
 
   constructor(
     private teamService: TeamService,
-    private projectStatusService: ProjectStatusService
+    private projectStatusService: ProjectStatusService,
+    private modalService: MdbModalService
   ) {}
 
   ngOnInit(): void {}
@@ -104,5 +112,39 @@ export class AdminTeamsComponent implements OnInit {
           });
       }
     }
+  }
+
+  /**METHODS USED BY MODAL */
+  /**open new team modal */
+  openNewTeamModal() {
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(NewTeammodalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.isModalOpen = false;
+      /**Refresh teams */
+      this.getTeams();
+    });
+  }
+
+  /**open edit team modal */
+  openEditTeamModal(teamId: string) {
+    /**save the team id to local storage*/
+    localStorage.setItem('capturedTeamId', teamId);
+
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(EditTeammodalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.isModalOpen = false;
+      /**Refresh teams */
+      this.getTeams();
+    });
   }
 }
