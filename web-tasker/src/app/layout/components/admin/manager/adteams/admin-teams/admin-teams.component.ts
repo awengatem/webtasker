@@ -117,6 +117,34 @@ export class AdminTeamsComponent implements OnInit {
     }
   }
 
+  //method used by navtab buttons for navigation
+  showTab(bId: string, tabId: string) {
+    // this.openTab = document.getElementById(this.getOpenTab());
+    // this.openTab.classList.remove('active');
+    // this.removeActive();
+    // this.butElement = document.getElementById(bId);
+    // this.butElement.classList.add('active');
+    // this.tabElement = document.getElementById(tabId);
+    // this.tabElement.classList.add('active');
+
+    // /**note selected tab to help in shared + button
+    //  * difference noted by routerlink
+    //  * also customize placeholder value
+    //  */
+    // if (tabId) {
+    //   this.selectedTab = tabId;
+    //   if (tabId === 'tabNav1') {
+    //     this.addButtonText = 'Add member';
+    //     this.tab1 = true;
+    //     this.placeholder = 'enter username to search ...';
+    //   } else if (tabId === 'tabNav2') {
+    //     this.addButtonText = 'Assign Project';
+    //     this.tab1 = false;
+    //     this.placeholder = 'enter project name to search ...';
+    //   }
+    // }    
+  }
+
   /**METHODS USED BY MODAL */
   /**open new team modal */
   openNewTeamModal() {

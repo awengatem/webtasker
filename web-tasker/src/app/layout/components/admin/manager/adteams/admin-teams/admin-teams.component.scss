@@ -32,6 +32,11 @@
         color: rgb(255, 238, 0);
       }
     }
+
+    &-active{
+      border-color: #22b8f0;
+      border-width: 2px;
+    }
   }
 
   .row {
