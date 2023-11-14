@@ -38,7 +38,11 @@
             <div class="container">
               <div class="row row-cols-4">
                 <div class="col-sm-3">
-                  <div class="card card-active" (click)="showTab('projects', 'tabNav2')">
+                  <div
+                    class="card card-active"
+                    id="tab1"
+                    (click)="showTab('tab1')"
+                  >
                     <div class="card-body">
                       <h2 class="card-title">Team Members</h2>
                       <div class="d-flex">
@@ -51,7 +55,7 @@
                   </div>
                 </div>
                 <div class="col-sm-3">
-                  <div class="card">
+                  <div class="card" id="tab2" (click)="showTab('tab2')">
                     <div class="card-body">
                       <h2 class="card-title">Team Project</h2>
                       <div class="d-flex">
@@ -64,7 +68,7 @@
                   </div>
                 </div>
                 <div class="col-sm-3">
-                  <div class="card">
+                  <div class="card" id="tab3" (click)="showTab('tab3')">
                     <div class="card-body">
                       <h2 class="card-title">Supervisor</h2>
                       <div class="d-flex">
@@ -77,7 +81,7 @@
                   </div>
                 </div>
                 <div class="col-sm-3">
-                  <div class="card">
+                  <div class="card" id="tab4" (click)="showTab('tab4')">
                     <div class="card-body">
                       <h2 class="card-title">Earnings</h2>
                       <h1 class="card-text">Ksh 4,000,000</h1>

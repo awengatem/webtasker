@@ -16,6 +16,12 @@
 
   .card {
     &:hover {
+      cursor: pointer;
+      border-color: #22b8f0;
+      // border-width: 2px;
+    }
+
+    &-active {
       color: white;
       background: linear-gradient(
         90deg,
@@ -24,18 +30,12 @@
         rgba(13, 151, 251, 1) 100%
       );
 
-      cursor: pointer;
       .card-text {
         color: rgb(47, 255, 75);
       }
       .num {
         color: rgb(255, 238, 0);
       }
-    }
-
-    &-active{
-      border-color: #22b8f0;
-      border-width: 2px;
     }
   }
 

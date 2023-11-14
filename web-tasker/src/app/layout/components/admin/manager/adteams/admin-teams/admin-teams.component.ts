@@ -23,6 +23,13 @@ export class AdminTeamsComponent implements OnInit {
   teamidArr: string[] = [];
   uniqueTeams: string[] = [];
 
+  /**navigation of tabs*/
+  cardElement: any;
+  tabIdArray: string[] = [];
+  loopElement: any;
+  loopResult: any;
+  openTab: any;
+
   constructor(
     private teamService: TeamService,
     private projectStatusService: ProjectStatusService,
@@ -117,13 +124,25 @@ export class AdminTeamsComponent implements OnInit {
     }
   }
 
+  //getting the open tab
+  getOpenTab(): string {
+    this.tabIdArray = ['tab1', 'tab2','tab3', 'tab4'];
+    this.tabIdArray.forEach((tab) => {
+      this.loopElement = document.getElementById(tab);
+      if (this.loopElement.classList.contains('card-active')) {
+        this.loopResult = tab;
+      }
+    });
+    return this.loopResult;
+  }
+
   //method used by navtab buttons for navigation
-  showTab(bId: string, tabId: string) {
-    // this.openTab = document.getElementById(this.getOpenTab());
-    // this.openTab.classList.remove('active');
+  showTab(cardId: string) {
+    this.openTab = document.getElementById(this.getOpenTab());
+    this.openTab.classList.remove('card-active');
     // this.removeActive();
-    // this.butElement = document.getElementById(bId);
-    // this.butElement.classList.add('active');
+    this.cardElement = document.getElementById(cardId);
+    this.cardElement.classList.add('card-active');
     // this.tabElement = document.getElementById(tabId);
     // this.tabElement.classList.add('active');
 
