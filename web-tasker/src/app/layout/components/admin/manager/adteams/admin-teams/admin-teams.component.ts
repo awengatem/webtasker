@@ -29,6 +29,12 @@ export class AdminTeamsComponent implements OnInit {
   loopElement: any;
   loopResult: any;
   openTab: any;
+  tabStates: any = {
+    tab1: true, //default tab1 as open
+    tab2: false,
+    tab3: false,
+    tab4: false,
+  };
 
   constructor(
     private teamService: TeamService,
@@ -124,9 +130,9 @@ export class AdminTeamsComponent implements OnInit {
     }
   }
 
-  //getting the open tab
+  /**getting the open tab*/
   getOpenTab(): string {
-    this.tabIdArray = ['tab1', 'tab2','tab3', 'tab4'];
+    this.tabIdArray = ['tab1', 'tab2', 'tab3', 'tab4'];
     this.tabIdArray.forEach((tab) => {
       this.loopElement = document.getElementById(tab);
       if (this.loopElement.classList.contains('card-active')) {
@@ -134,34 +140,27 @@ export class AdminTeamsComponent implements OnInit {
       }
     });
     return this.loopResult;
+  } 
+
+  /**Swap the active tabs */
+  swapTabs(tabId: string) {
+    // Assuming tabId is a string like 'tab1', 'tab2', etc.
+    for (const key in this.tabStates) {
+      if (key === tabId) {
+        this.tabStates[key] = true;
+      } else {
+        this.tabStates[key] = false;
+      }
+    }
   }
 
-  //method used by navtab buttons for navigation
+  /**method used by navtab buttons for navigation*/
   showTab(cardId: string) {
     this.openTab = document.getElementById(this.getOpenTab());
     this.openTab.classList.remove('card-active');
-    // this.removeActive();
+    this.swapTabs(cardId);
     this.cardElement = document.getElementById(cardId);
     this.cardElement.classList.add('card-active');
-    // this.tabElement = document.getElementById(tabId);
-    // this.tabElement.classList.add('active');
-
-    // /**note selected tab to help in shared + button
-    //  * difference noted by routerlink
-    //  * also customize placeholder value
-    //  */
-    // if (tabId) {
-    //   this.selectedTab = tabId;
-    //   if (tabId === 'tabNav1') {
-    //     this.addButtonText = 'Add member';
-    //     this.tab1 = true;
-    //     this.placeholder = 'enter username to search ...';
-    //   } else if (tabId === 'tabNav2') {
-    //     this.addButtonText = 'Assign Project';
-    //     this.tab1 = false;
-    //     this.placeholder = 'enter project name to search ...';
-    //   }
-    // }    
   }
 
   /**METHODS USED BY MODAL */
