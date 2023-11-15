@@ -1,0 +1,131 @@
+/*CSS SHARED BY OTHER COMPONENTS*/
+//shared with user project-info component.scss
+
+.centered-content {
+  position: absolute;
+  .modal-box {
+    position: relative;
+    //min-height: 500px;
+    min-width: 700px;
+    width: 100%;
+    max-width: 580px;
+    background: #ffff;
+    border-radius: 5px;
+    padding: 35px;
+    opacity: 0.8;
+
+    .title {
+      font-size: 26px;
+    }
+
+    .content {
+      margin-top: 0;
+      //background: grey;
+      padding: 5px;
+
+      .child {
+        display: flex;
+        padding-bottom: 30px;
+        .label {
+          font-size: 18px;
+          font-weight: 600;
+        }
+        .data {
+          font-size: 16px;
+          padding-left: 10px;
+          font-weight: 500;
+        }
+
+        /**styling the status text*/
+        .active {
+          color: #027a34;
+          font-weight: 600;
+        }
+        .break {
+          color: #ac1100;
+        }
+      }
+
+      .point {
+        &-link {
+          color: #22b8f0;
+
+          &:hover {
+            cursor: pointer;
+            color: #cb0c9f;
+          }
+        }
+
+        .count {
+          font-weight: 600;
+          font-size: 18px;
+        }
+      }
+
+      h5 {
+        font-size: 18px;
+      }
+    }
+
+    h1 {
+      i {
+        color: #22b8f0;
+        font-size: 28px;
+      }
+    }
+
+    .btm-rgt {
+      margin-left: 69%;
+      margin-right: 3px;
+
+      .btn-custom {
+        color: #ffff;
+      }
+
+      .dropdown {
+        margin: 0;
+        padding: 0;
+        margin-top: 10px;
+
+        /*Making dropdown float*/
+        //float: right;
+        // position: absolute;
+        // top: 350px;
+        // right: 20px;
+
+        &-content {
+          display: flex;
+          flex-direction: column;
+          padding: 0;
+
+          a {
+            cursor: pointer;
+            font-size: 12px;
+            font-family: "Segoe UI";
+            font-weight: 100;
+            text-align: left;
+            margin-top: 1px;
+            margin-bottom: 2px;
+            line-height: 25px;
+            width: 100%;
+
+            i {
+              color: #22b8f0;
+            }
+
+            &:hover {
+              background: #dbedfa;
+            }
+          }
+        }
+      }
+    }
+
+    &:hover {
+      opacity: 1;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      transform: scale(1.05);
+    }
+  }
+}
