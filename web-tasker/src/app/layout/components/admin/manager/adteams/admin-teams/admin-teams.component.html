@@ -1,0 +1,266 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Title</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <div class="row">
+        <div class="col-3">
+          <div class="w-75 mb-2">
+            <button type="button" class="btn btn-primary">
+              + Create a team
+            </button>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h1 class="text-center">Teams</h1>
+            </div>
+            <div class="list-container">
+              <ul class="list-group list-group-flush">
+                <li *ngFor="let team of teams" class="list-group-item">
+                  <h2>{{ teams.indexOf(team) + 1 }}. {{ team.teamName }}</h2>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="teams-container">
+            <div class="container">
+              <div class="row p-3">
+                <div class="d-flex mb-3 p-3 border rounded">
+                  <div class="me-auto p-2">cohort</div>
+                  <div class="p-2">Active</div>
+                  <div class="p-2">13</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="teams-container">
+            <div class="container">
+              <div class="row row-cols-4">
+                <div class="col-sm-3">
+                  <div
+                    class="card card-active"
+                    id="tab1"
+                    (click)="showTab('tab1')"
+                  >
+                    <div class="card-body">
+                      <h2 class="card-title">Team Members</h2>
+                      <div class="d-flex">
+                        <div class="num px-2"><p>20</p></div>
+                        <div>
+                          <h4 class="card-text">active : 6</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="card" id="tab2" (click)="showTab('tab2')">
+                    <div class="card-body">
+                      <h2 class="card-title">Team Project</h2>
+                      <div class="d-flex">
+                        <div class="num px-2"><p>24</p></div>
+                        <div>
+                          <h4 class="card-text">active : 4</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="card" id="tab3" (click)="showTab('tab3')">
+                    <div class="card-body">
+                      <h2 class="card-title">Supervisor</h2>
+                      <div class="d-flex">
+                        <div class="num px-2"><p>1</p></div>
+                        <div>
+                          <h4 class="card-text">active : 1</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="card" id="tab4" (click)="showTab('tab4')">
+                    <div class="card-body">
+                      <h2 class="card-title">Earnings</h2>
+                      <h1 class="card-text">Ksh 4,000,000</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="teams-container">
+            <div class="container">
+              <div class="row p-3">
+                <div class="container-table p-3 border rounded">
+                  <div *ngIf="tabStates['tab1']" class="">
+                    <div class="d-flex">
+                      <div class="p-2 flex-grow-1">
+                        <button type="button" class="btn btn-primary">
+                          Add Members
+                        </button>
+                      </div>
+                      <div class="p-2">
+                        <input
+                          type="text"
+                          placeholder="Search by Name"
+                          class="form-control m-3"
+                        />
+                      </div>
+                      <div class="p-2"></div>
+                    </div>
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">First</th>
+                          <th scope="col">Last</th>
+                          <th scope="col">Handle</th>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>markotto@gmail.com</td>
+                          <td>
+                            <i
+                              class="fa-solid fa-pen-to-square"
+                              style="color: #3eb16a"
+                            ></i>
+                          </td>
+                          <td>
+                            <i
+                              class="fa-solid fa-trash"
+                              style="color: #ff2929"
+                            ></i>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>jacobthornton@fat.com</td>
+                          <td>
+                            <i
+                              class="fa-solid fa-pen-to-square"
+                              style="color: #3eb16a"
+                            ></i>
+                          </td>
+                          <td>
+                            <i
+                              class="fa-solid fa-trash"
+                              style="color: #ff2929"
+                            ></i>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Joe</td>
+                          <td>Karanja</td>
+                          <td>joekaranja@gmail.com</td>
+                          <td>
+                            <i
+                              class="fa-solid fa-pen-to-square"
+                              style="color: #3eb16a"
+                            ></i>
+                          </td>
+                          <td>
+                            <i
+                              class="fa-solid fa-trash"
+                              style="color: #ff2929"
+                            ></i>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">4</th>
+                          <td>Joe</td>
+                          <td>Karanja</td>
+                          <td>joekaranja@gmail.com</td>
+                          <td>
+                            <i
+                              class="fa-solid fa-pen-to-square"
+                              style="color: #3eb16a"
+                            ></i>
+                          </td>
+                          <td>
+                            <i
+                              class="fa-solid fa-trash"
+                              style="color: #ff2929"
+                            ></i>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">5</th>
+                          <td>Joe</td>
+                          <td>Karanja</td>
+                          <td>joekaranja@gmail.com</td>
+                          <td>
+                            <i
+                              class="fa-solid fa-pen-to-square"
+                              style="color: #3eb16a"
+                            ></i>
+                          </td>
+                          <td>
+                            <i
+                              class="fa-solid fa-trash"
+                              style="color: #ff2929"
+                            ></i>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">6</th>
+                          <td>Joe</td>
+                          <td>Karanja</td>
+                          <td>joekaranja@gmail.com</td>
+                          <td>
+                            <i
+                              class="fa-solid fa-pen-to-square"
+                              style="color: #3eb16a"
+                            ></i>
+                          </td>
+                          <td>
+                            <i
+                              class="fa-solid fa-trash"
+                              style="color: #ff2929"
+                            ></i>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">7</th>
+                          <td>Joe</td>
+                          <td>Karanja</td>
+                          <td>joekaranja@gmail.com</td>
+                          <td>
+                            <i
+                              class="fa-solid fa-pen-to-square"
+                              style="color: #3eb16a"
+                            ></i>
+                          </td>
+                          <td>
+                            <i
+                              class="fa-solid fa-trash"
+                              style="color: #ff2929"
+                            ></i>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div *ngIf="tabStates['tab2']" class="">tab 2</div>
+                  <div *ngIf="tabStates['tab3']" class="">tab 3</div>
+                  <div *ngIf="tabStates['tab4']" class="">tab 4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

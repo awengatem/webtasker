@@ -1,0 +1,73 @@
+.container {
+  display: flex;
+  width: 100%;
+  // height: 100%;
+  max-width: 900px;
+  max-height: calc(90vh - 170px);
+  background: white;
+}
+.teams-container {
+  display: flex;
+  width: 100%;
+  // height: 100%;
+  max-width: 100rem;
+  max-height: calc(90vh - 170px);
+  background: white;
+
+  .card {
+    &:hover {
+      cursor: pointer;
+      border-color: #22b8f0;
+      // border-width: 2px;
+    }
+
+    &-active {
+      color: white;
+      background: linear-gradient(
+        90deg,
+        rgba(26, 167, 236, 1) 0%,
+        rgba(26, 167, 236, 1) 35%,
+        rgba(13, 151, 251, 1) 100%
+      );
+
+      .card-text {
+        color: rgb(47, 255, 75);
+      }
+      .num {
+        color: rgb(255, 238, 0);
+      }
+    }
+  }
+
+  .row {
+    display: flex;
+    border-style: none;
+    border-width: 1px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100%;
+  }
+  .num {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .card-text {
+    display: flex;
+    justify-items: end;
+    color: green;
+  }
+}
+.table {
+  font-size: large;
+  width: 100%;
+}
+.container-table {
+  height: 300px; /* Set the desired fixed height */
+  overflow: auto; /* Enable scrolling */
+}
+
+.list-container {
+  max-height: 445px;
+  overflow: auto; /* Enable scrolling */
+}
