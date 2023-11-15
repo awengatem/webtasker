@@ -1,25 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { TeamService } from 'src/app/services/api/team.service';
-import Swal from 'sweetalert2';
-import { EditTeammodalComponent } from '../edit-teammodal/edit-teammodal.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { EditTeammodalComponent } from '../edit-teammodal/edit-teammodal.component';
 import { NewTeammodalComponent } from '../new-teammodal/new-teammodal.component';
 
 @Component({
-  selector: 'app-ad-teams',
-  templateUrl: './ad-teams.component.html',
-  styleUrls: ['./ad-teams.component.scss'],
+  selector: 'app-admin-teams',
+  templateUrl: './admin-teams.component.html',
+  styleUrls: ['./admin-teams.component.scss'],
 })
-export class AdTeamsComponent implements OnInit {
+export class AdminTeamsComponent implements OnInit {
   teams!: any[];
   teamsLength = 0;
-  teamDiv: any;
-  teamStatus: any;
-  submitted: boolean = false;
-  /**used by search bar */
-  searchText = '';
+  members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
   /**define modal */
   modalRef: MdbModalRef<EditTeammodalComponent> | null = null;
@@ -29,23 +23,30 @@ export class AdTeamsComponent implements OnInit {
   teamidArr: string[] = [];
   uniqueTeams: string[] = [];
 
+  /**navigation of tabs*/
+  cardElement: any;
+  tabIdArray: string[] = [];
+  loopElement: any;
+  loopResult: any;
+  openTab: any;
+  tabStates: any = {
+    tab1: true, //default tab1 as open
+    tab2: false,
+    tab3: false,
+    tab4: false,
+  };
+
   constructor(
     private teamService: TeamService,
-    private route: ActivatedRoute,
-    private router: Router,
     private projectStatusService: ProjectStatusService,
     private modalService: MdbModalService
   ) {}
 
   ngOnInit(): void {
     this.getTeams();
-    //subscribe to the route params
-    this.route.params.subscribe((params: Params) => {
-      console.log(params);
-    });
-    this.scrollDown();
   }
 
+  /**Get all teams from API */
   getTeams() {
     this.teamService.getAllTeams().subscribe((teams: any) => {
       this.teams = teams;
@@ -57,65 +58,6 @@ export class AdTeamsComponent implements OnInit {
       //get team projects for each
       this.getTeamProjects();
       console.log(this.teams);
-    });
-  }
-
-  /**scrolldown immediately after adding new team */
-  scrollDown() {
-    //ensuring intervals only run once
-    if (this.teamService.getAddStatus() === true) {
-      const setInterval_ID = window.setInterval(() => {
-        this.teamDiv = document.getElementById('teams');
-        this.teamDiv.scrollTop = this.teamDiv?.scrollHeight;
-      }, 100);
-
-      //stopping interval above after sometime
-      window.setTimeout(() => {
-        window.clearInterval(setInterval_ID);
-      }, 500);
-    }
-    //unsetting the condition
-    this.teamService.setAddStatus(false);
-    //console.log(this.teamService.getAddStatus());
-  }
-
-  /**ACTION METHODS USED BY ALERT*/
-  alertConfirmation(teamId: string, teamName: string) {
-    Swal.fire({
-      title: `Delete "${teamName}"?`,
-      text: 'This process is irreversible.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, go ahead.',
-      confirmButtonColor: '#e74c3c',
-      cancelButtonText: 'No, let me think',
-      cancelButtonColor: '#22b8f0',
-    }).then((result) => {
-      //delete team from db
-      if (result.value) {
-        this.deleteteam(teamId, teamName);
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          `Team "${teamName}" still in our database.)`,
-          'error'
-        );
-      }
-    });
-  }
-
-  /**Delete method */
-  deleteteam(teamId: string, teamName: string) {
-    this.teamService.deleteTeam(teamId).subscribe({
-      next: (response: any) => {
-        console.log(response);
-        this.router.navigate(['/ad_teams']);
-        Swal.fire('Removed!', `team "${teamName}" has been removed`, 'success');
-      },
-      error: (err: any) => {
-        console.log(err);
-        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-      },
     });
   }
 
@@ -161,13 +103,9 @@ export class AdTeamsComponent implements OnInit {
             for (let id of this.uniqueTeams) {
               if (id === team._id) {
                 team.status = 'Active';
+              } else {
+                team.status = 'Unproductive';
               }
-            }
-          }
-          //set others to unproductive
-          for (let team of this.teams) {
-            if (team.status != 'Active') {
-              team.status = 'Unproductive';
             }
           }
         }
@@ -192,14 +130,37 @@ export class AdTeamsComponent implements OnInit {
     }
   }
 
-  /**Set the team id in local storage to aid in the team-info component */
-  captureTeamId(teamId: string) {
-    /**store this in localstorage to aid in next compomnent */
-    localStorage.setItem('capturedTeamId', teamId);
+  /**getting the open tab*/
+  getOpenTab(): string {
+    this.tabIdArray = ['tab1', 'tab2', 'tab3', 'tab4'];
+    this.tabIdArray.forEach((tab) => {
+      this.loopElement = document.getElementById(tab);
+      if (this.loopElement.classList.contains('card-active')) {
+        this.loopResult = tab;
+      }
+    });
+    return this.loopResult;
+  } 
+
+  /**Swap the active tabs */
+  swapTabs(tabId: string) {
+    // Assuming tabId is a string like 'tab1', 'tab2', etc.
+    for (const key in this.tabStates) {
+      if (key === tabId) {
+        this.tabStates[key] = true;
+      } else {
+        this.tabStates[key] = false;
+      }
+    }
   }
 
-  submit() {
-    this.submitted = true;
+  /**method used by navtab buttons for navigation*/
+  showTab(cardId: string) {
+    this.openTab = document.getElementById(this.getOpenTab());
+    this.openTab.classList.remove('card-active');
+    this.swapTabs(cardId);
+    this.cardElement = document.getElementById(cardId);
+    this.cardElement.classList.add('card-active');
   }
 
   /**METHODS USED BY MODAL */
@@ -215,7 +176,6 @@ export class AdTeamsComponent implements OnInit {
       this.isModalOpen = false;
       /**Refresh teams */
       this.getTeams();
-      this.scrollDown();
     });
   }
 

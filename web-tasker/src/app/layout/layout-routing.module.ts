@@ -7,46 +7,46 @@ import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { LoginComponent } from './auth/login/login.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
 import { AuthGuard } from '../helpers/guards/auth-guard.guard';
-import { AdDashboardComponent } from './components/admin/addashboard/ad-dashboard/ad-dashboard.component';
-import { AdProjectsComponent } from './components/admin/adprojects/ad-projects/ad-projects.component';
-import { AdTeamsComponent } from './components/admin/adteams/ad-teams/ad-teams.component';
-import { TeamInfoComponent } from './components/admin/adteams/team-info/team-info.component';
-import { AddMemberComponent } from './components/admin/adteams/add-member/add-member.component';
-import { AssignProjectComponent } from './components/admin/adteams/assign-project/assign-project.component';
+import { AdDashboardComponent } from './components/admin/manager/addashboard/ad-dashboard/ad-dashboard.component';
+import { AdProjectsComponent } from './components/admin/manager/adprojects/ad-projects/ad-projects.component';
+import { AdTeamsComponent } from './components/admin/manager/adteams/ad-teams/ad-teams.component';
+import { TeamInfoComponent } from './components/admin/manager/adteams/team-info/team-info.component';
+import { AddMemberComponent } from './components/admin/manager/adteams/add-member/add-member.component';
+import { AssignProjectComponent } from './components/admin/manager/adteams/assign-project/assign-project.component';
 import { UsTeamInfoComponent } from './components/user/user_teams/us-team-info/us-team-info.component';
 import { ProjectInfoComponent } from './components/user/user_projects/project-info/project-info.component';
-import { AdProjectInfoComponent } from './components/admin/adprojects/ad-project-info/ad-project-info.component';
-import { SocketTestComponent } from './components/admin/socket-test/socket-test.component';
+import { AdProjectInfoComponent } from './components/admin/manager/adprojects/ad-project-info/ad-project-info.component';
 import { ProjectActionComponent } from './components/user/user_projects/project-action/project-action.component';
 import { TimerGuard } from '../helpers/guards/timer.guard';
 import { ManagerGuard } from '../helpers/guards/manager.guard';
-import { ProjectStatusComponent } from './components/admin/addashboard/project-status/project-status.component';
-import { ActiveSessionsComponent } from './components/admin/addashboard/active-sessions/active-sessions.component';
+import { ProjectStatusComponent } from './components/admin/manager/addashboard/project-status/project-status.component';
+import { ActiveSessionsComponent } from './components/admin/manager/addashboard/active-sessions/active-sessions.component';
 import { DispositionComponent } from './components/user/user_projects/disposition/disposition.component';
-import { RecentSessionsComponent } from './components/admin/addashboard/recent-sessions/recent-sessions.component';
-import { UserStatusComponent } from './components/admin/addashboard/user-status/user-status.component';
-import { ManageComponent } from './components/admin/manage/manage/manage.component';
-import { MngUsersComponent } from './components/admin/manage/users/mng-users/mng-users.component';
-import { MngProjectsComponent } from './components/admin/manage/projects/mng-projects/mng-projects.component';
-import { MngTeamsComponent } from './components/admin/manage/teams/mng-teams/mng-teams.component';
-import { MngSessionsComponent } from './components/admin/manage/sessions/mng-sessions/mng-sessions.component';
+import { RecentSessionsComponent } from './components/admin/manager/addashboard/recent-sessions/recent-sessions.component';
+import { UserStatusComponent } from './components/admin/manager/addashboard/user-status/user-status.component';
+import { ManageComponent } from './components/admin/manager/manage/manage/manage.component';
+import { MngUsersComponent } from './components/admin/manager/manage/users/mng-users/mng-users.component';
+import { MngProjectsComponent } from './components/admin/manager/manage/projects/mng-projects/mng-projects.component';
+import { MngTeamsComponent } from './components/admin/manager/manage/teams/mng-teams/mng-teams.component';
+import { MngSessionsComponent } from './components/admin/manager/manage/sessions/mng-sessions/mng-sessions.component';
 import { ClearDashintervalGuard } from '../helpers/guards/clear-dashinterval.guard';
 import { SupervisorGuard } from '../helpers/guards/supervisor.guard';
 import { SessionsComponent } from './components/user/user_sessions/sessions/sessions.component';
 import { ClearLocationGuard } from '../helpers/guards/clear-location.guard';
-import { ProjectTeamsComponent } from './components/admin/adprojects/project-teams/project-teams.component';
+import { ProjectTeamsComponent } from './components/admin/manager/adprojects/project-teams/project-teams.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { ClearUsessionsintervalGuard } from '../helpers/guards/clear-usessionsinterval.guard';
 import { ProjSessionsComponent } from './components/user/user_projects/proj-sessions/proj-sessions.component';
-import { AdProjSessionsComponent } from './components/admin/adprojects/ad-proj-sessions/ad-proj-sessions.component';
-import { TeamSupervisorComponent } from './components/admin/adteams/team-supervisor/team-supervisor.component';
-import { UserInfoComponent } from './components/admin/manage/users/user-info/user-info.component';
-import { AssignSupervisorComponent } from './components/admin/adteams/assign-supervisor/assign-supervisor.component';
-import { SuperviseTeamPageComponent } from './components/admin/supervise/supervise-team-page/supervise-team-page.component';
-import { SuperviseEarningPageComponent } from './components/admin/supervise/supervise-earning-page/supervise-earning-page.component';
-import { SuperviseMainPageComponent } from './components/admin/supervise/supervise-main-page/supervise-main-page.component';
+import { AdProjSessionsComponent } from './components/admin/manager/adprojects/ad-proj-sessions/ad-proj-sessions.component';
+import { TeamSupervisorComponent } from './components/admin/manager/adteams/team-supervisor/team-supervisor.component';
+import { UserInfoComponent } from './components/admin/manager/manage/users/user-info/user-info.component';
+import { AssignSupervisorComponent } from './components/admin/manager/adteams/assign-supervisor/assign-supervisor.component';
+import { SuperviseTeamPageComponent } from './components/admin/supervisor/supervise-team-page/supervise-team-page.component';
+import { SuperviseEarningPageComponent } from './components/admin/supervisor/supervise-earning-page/supervise-earning-page.component';
+import { SuperviseMainPageComponent } from './components/admin/supervisor/supervise-main-page/supervise-main-page.component';
 import { AdminGuard } from '../helpers/guards/admin.guard';
-import { MngEarningsComponent } from './components/admin/manage/earnings/mng-earnings/mng-earnings.component';
+import { MngEarningsComponent } from './components/admin/manager/manage/earnings/mng-earnings/mng-earnings.component';
+import { AdminTeamsComponent } from './components/admin/manager/adteams/admin-teams/admin-teams.component';
 
 const routes: Routes = [
   {
@@ -119,7 +119,26 @@ const routes: Routes = [
         component: UserProfileComponent,
       },
 
-      /**ADMIN ROUTES */
+      /*** ADMIN ROUTES ***/
+
+      /** SUPERVISOR **/
+      {
+        path: 'supervise',
+        canActivate: [SupervisorGuard],
+        component: SuperviseMainPageComponent,
+      },
+      {
+        path: 'supervise/team',
+        canActivate: [SupervisorGuard],
+        component: SuperviseTeamPageComponent,
+      },
+      {
+        path: 'supervise/earnings',
+        canActivate: [SupervisorGuard],
+        component: SuperviseEarningPageComponent,
+      },
+
+      /** MANAGER **/
       /**DASHBOARD */
       {
         path: 'ad_dashboard',
@@ -182,6 +201,11 @@ const routes: Routes = [
         component: AdTeamsComponent,
       },
       {
+        path: 'admin_teams',
+        canActivate: [AdminGuard],
+        component: AdminTeamsComponent,
+      },
+      {
         path: 'ad_teams/:teamId',
         canActivate: [AdminGuard],
         canDeactivate: [ClearLocationGuard],
@@ -206,23 +230,6 @@ const routes: Routes = [
         path: 'ad_teams/:teamId/assign_supervisor',
         canActivate: [AdminGuard],
         component: AssignSupervisorComponent,
-      },
-
-      /**SUPERVISE*/
-      {
-        path: 'supervise',
-        canActivate: [SupervisorGuard],
-        component: SuperviseMainPageComponent,
-      },
-      {
-        path: 'supervise/team',
-        canActivate: [SupervisorGuard],
-        component: SuperviseTeamPageComponent,
-      },
-      {
-        path: 'supervise/earnings',
-        canActivate: [SupervisorGuard],
-        component: SuperviseEarningPageComponent,
       },
 
       /**MANAGE*/
@@ -260,13 +267,6 @@ const routes: Routes = [
         path: 'ad_manage/earnings',
         canActivate: [ManagerGuard],
         component: MngEarningsComponent,
-      },
-
-      /**TESTING PURPOSE */
-      {
-        path: 'socketTest',
-        canActivate: [AdminGuard],
-        component: SocketTestComponent,
       },
     ],
   },
