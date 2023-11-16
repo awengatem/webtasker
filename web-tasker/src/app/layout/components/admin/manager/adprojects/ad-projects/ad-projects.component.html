@@ -47,7 +47,8 @@
                     <div class="timetable-item-main">
                       <div
                         class="timetable-item-name"
-                        (click)="openProjectInfoModal(project._id)"
+                        (click)="saveProjectId(project._id)"
+                        [routerLink]="['/ad_projects', project._id]"
                       >
                         {{ project.projectName }}
                       </div>
