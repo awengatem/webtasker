@@ -196,6 +196,8 @@ export class AdProjectInfoModalComponent implements OnInit {
 
   /**Method to navigate to sessions */
   showSessions() {
+    //close this modal
+    this.closeProjectInfoModal();
     this.router.navigate([`/ad_projects/${this.projectId}/sessions`]);
   }
 
