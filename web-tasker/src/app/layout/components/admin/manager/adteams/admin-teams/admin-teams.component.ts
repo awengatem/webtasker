@@ -113,6 +113,75 @@ export class AdminTeamsComponent implements OnInit {
     });
   }
 
+  /**Get team members for each */
+  getTeamMembers() {
+    if (this.teams.length > 0) {
+      for (let i = 0; i < this.teams.length; i++) {
+        this.teamService
+          .getTeamMembersDoc(this.teams[i]._id)
+          .subscribe((members: any) => {
+            // console.log(members.length);
+            //push number of members to teams
+            this.teams[i].members = members.length;
+          });
+      }
+    }
+    //get the team status here
+    this.getTeamStatus();
+  }
+
+  /**Get the team status from active status docs
+   * identify active teams
+   */
+  getTeamStatus() {
+    /**reset the active teams and teams variables */
+    this.uniqueTeams = [];
+
+    this.projectStatusService
+      .getActiveStatusDocs()
+      .then((documents: any) => {
+        /**capture the team ids */
+        if (documents.length > 0) {
+          for (let doc of documents) {
+            this.teamidArr.push(doc.team_id);
+          }
+        }
+        //get unique teams
+        this.uniqueTeams = [...new Set(this.teamidArr)];
+
+        //set status to active for each team in the unique array
+        if (this.teams.length > 0) {
+          for (let team of this.teams) {
+            for (let id of this.uniqueTeams) {
+              if (id === team._id) {
+                team.status = 'Active';
+              } else {
+                team.status = 'Unproductive';
+              }
+            }
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  /**Get team projects for each */
+  getTeamProjects() {
+    if (this.teams.length > 0) {
+      for (let i = 0; i < this.teams.length; i++) {
+        this.teamService
+          .getTeamProjects(this.teams[i]._id)
+          .subscribe((projects: any) => {
+            // console.log(projects.length);
+            //push number of projects to teams
+            this.teams[i].projects = projects.length;
+          });
+      }
+    }
+  }
+
   /**METHODS FOR DATASOURCE */
   /**check whether all are selected */
   isAllSelected() {
@@ -261,75 +330,9 @@ export class AdminTeamsComponent implements OnInit {
 
   /**********END OF SECTION ************* */
 
-  /**Get team members for each */
-  getTeamMembers() {
-    if (this.teams.length > 0) {
-      for (let i = 0; i < this.teams.length; i++) {
-        this.teamService
-          .getTeamMembersDoc(this.teams[i]._id)
-          .subscribe((members: any) => {
-            // console.log(members.length);
-            //push number of members to teams
-            this.teams[i].members = members.length;
-          });
-      }
-    }
-    //get the team status here
-    this.getTeamStatus();
-  }
+  
 
-  /**Get the team status from active status docs
-   * identify active teams
-   */
-  getTeamStatus() {
-    /**reset the active teams and teams variables */
-    this.uniqueTeams = [];
-
-    this.projectStatusService
-      .getActiveStatusDocs()
-      .then((documents: any) => {
-        /**capture the team ids */
-        if (documents.length > 0) {
-          for (let doc of documents) {
-            this.teamidArr.push(doc.team_id);
-          }
-        }
-        //get unique teams
-        this.uniqueTeams = [...new Set(this.teamidArr)];
-
-        //set status to active for each team in the unique array
-        if (this.teams.length > 0) {
-          for (let team of this.teams) {
-            for (let id of this.uniqueTeams) {
-              if (id === team._id) {
-                team.status = 'Active';
-              } else {
-                team.status = 'Unproductive';
-              }
-            }
-          }
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  /**Get team projects for each */
-  getTeamProjects() {
-    if (this.teams.length > 0) {
-      for (let i = 0; i < this.teams.length; i++) {
-        this.teamService
-          .getTeamProjects(this.teams[i]._id)
-          .subscribe((projects: any) => {
-            // console.log(projects.length);
-            //push number of projects to teams
-            this.teams[i].projects = projects.length;
-          });
-      }
-    }
-  }
-
+  /** METHODS FOR NAVIGATION OF TABS */  
   /**getting the open tab*/
   getOpenTab(): string {
     this.tabIdArray = ['tab1', 'tab2', 'tab3', 'tab4'];
@@ -362,6 +365,8 @@ export class AdminTeamsComponent implements OnInit {
     this.cardElement = document.getElementById(cardId);
     this.cardElement.classList.add('card-active');
   }
+
+  /***** END OF NAVIGATION SECTION **** */
 
   /**METHODS USED BY MODAL */
   /**open new team modal */
