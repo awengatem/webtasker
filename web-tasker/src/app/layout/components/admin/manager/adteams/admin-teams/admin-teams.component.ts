@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { TeamService } from 'src/app/services/api/team.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { EditTeammodalComponent } from '../edit-teammodal/edit-teammodal.component';
 import { NewTeammodalComponent } from '../new-teammodal/new-teammodal.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-admin-teams',
@@ -35,6 +39,21 @@ export class AdminTeamsComponent implements OnInit {
     tab3: false,
     tab4: false,
   };
+
+  /**variables */
+  totalUsers = 0;
+  dataSource!: MatTableDataSource<any>;
+  selection = new SelectionModel<any>(true, []);
+  displayedColumns: string[] = [
+    'Select',
+    'Projectname',
+    'Teams',
+    'CreatedAt',
+    'CreatedBy',
+    'Delete',
+  ];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private teamService: TeamService,
@@ -140,7 +159,7 @@ export class AdminTeamsComponent implements OnInit {
       }
     });
     return this.loopResult;
-  } 
+  }
 
   /**Swap the active tabs */
   swapTabs(tabId: string) {
