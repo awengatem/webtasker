@@ -54,6 +54,33 @@ export class AdminTeamsComponent implements OnInit {
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  /**Temporary variable for testing datasource */
+  projects = [
+    {
+      projectName: 'project1',
+      teams: 5,
+      createdAt: '2023-01-09T00:49:27.372Z',
+      createdBy: 'joe123',
+    },
+    {
+      projectName: 'project2',
+      teams: 3,
+      createdAt: '2023-01-09T00:49:27.372Z',
+      createdBy: 'joe123',
+    },
+    {
+      projectName: 'project3',
+      teams: 37,
+      createdAt: '2023-01-09T00:49:27.372Z',
+      createdBy: 'joe123',
+    },
+    {
+      projectName: 'project4',
+      teams: 15,
+      createdAt: '2023-01-09T00:49:27.372Z',
+      createdBy: 'joe123',
+    },
+  ];
 
   constructor(
     private teamService: TeamService,
@@ -152,8 +179,6 @@ export class AdminTeamsComponent implements OnInit {
     //   this.snackBarService.displaySnackbar('error', 'no selected records');
     // }
   }
-
-  
 
   /**Get team members for each */
   getTeamMembers() {
