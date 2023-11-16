@@ -86,7 +86,10 @@ export class AdminTeamsComponent implements OnInit {
     private teamService: TeamService,
     private projectStatusService: ProjectStatusService,
     private modalService: MdbModalService
-  ) {}
+  ) {
+    //load data on table
+    this.loadAllProjects();
+  }
 
   ngOnInit(): void {
     this.getTeams();
@@ -138,6 +141,24 @@ export class AdminTeamsComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  /**Method to reload user table */
+  loadAllProjects() {
+    //reset the selection
+    this.selection = new SelectionModel<any>(true, []);
+    //add projects to table
+    this.dataSource = new MatTableDataSource(this.projects);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    console.log(this.projects);
+  }
+
+  /**Method to convert timestamp to date */
+  convertDate(timestamp: string): string {
+    const date = new Date(timestamp);
+    // const newDate = date.toLocaleString();
+    return date.toLocaleString();
   }
 
   /**Delete selected project(s) */
