@@ -91,8 +91,7 @@ export class MngProjectsComponent implements OnInit {
   }
 
   /**Delete selected project(s) */
-  deleteSelected() {
-    // debugger;
+  deleteSelected() {    
     const selectedProjectsArr = this.selection.selected;
     let projectIdArr: any = [];
     console.log(selectedProjectsArr);

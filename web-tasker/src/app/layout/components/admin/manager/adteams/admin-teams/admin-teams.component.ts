@@ -8,6 +8,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort } from '@angular/material/sort';
+import { SnackBarService } from 'src/app/services/snackbar.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-teams',
@@ -85,6 +87,7 @@ export class AdminTeamsComponent implements OnInit {
   constructor(
     private teamService: TeamService,
     private projectStatusService: ProjectStatusService,
+    private snackBarService: SnackBarService,
     private modalService: MdbModalService
   ) {
     //load data on table
@@ -163,43 +166,100 @@ export class AdminTeamsComponent implements OnInit {
 
   /**Delete selected project(s) */
   deleteSelected() {
-    // debugger;
-    // const selectedProjectsArr = this.selection.selected;
-    // let projectIdArr: any = [];
-    // console.log(selectedProjectsArr);
-    // if (selectedProjectsArr.length > 0) {
-    //   //push only project ids in an array
-    //   selectedProjectsArr.forEach((item) => {
-    //     projectIdArr.push(item._id);
+    const selectedProjectsArr = this.selection.selected;
+    let projectIdArr: any = [];
+    console.log(selectedProjectsArr);
+    if (selectedProjectsArr.length > 0) {
+      //push only project ids in an array
+      selectedProjectsArr.forEach((item) => {
+        projectIdArr.push(item._id);
+      });
+      console.log(projectIdArr);
+      //confirm and delete projects
+      Swal.fire({
+        title: `Delete ${selectedProjectsArr.length} projects from the database?`,
+        text: 'This process is irreversible.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, go ahead.',
+        confirmButtonColor: '#e74c3c',
+        cancelButtonText: 'No, let me think',
+        cancelButtonColor: '#22b8f0',
+      }).then((result) => {
+        //delete projects from db
+        if (result.value) {
+          this.deleteMultipe(projectIdArr);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          this.snackBarService.displaySnackbar(
+            'error',
+            'operation has been cancelled'
+          );
+          //reset the selection
+          this.selection = new SelectionModel<any>(true, []);
+        }
+      });
+    } else {
+      this.snackBarService.displaySnackbar('error', 'no selected records');
+    }
+  }
+
+  /**Method to confirm project deletion */
+  confirmDeletion(projectId: string, projectname: string) {
+    Swal.fire({
+      title: `Delete "${projectname}" from the database?`,
+      text: 'This process is irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      //delete project from db
+      if (result.value) {
+        this.deleteProject(projectId);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.snackBarService.displaySnackbar(
+          'error',
+          'operation has been cancelled'
+        );
+      }
+    });
+  }
+
+  /**Method to deletemultiple */
+  deleteMultipe(projectIdArr: any[]) {
+    // if (projectIdArr.length > 0) {
+    //   this.projectService.deleteMultipleProjects(projectIdArr).subscribe({
+    //     next: (response: any) => {
+    //       console.log(response);
+    //       this.snackBarService.displaySnackbar('success', response.message);
+    //       this.loadAllProjects();
+    //     },
+    //     error: (err) => {
+    //       console.log(err);
+    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+    //     },
     //   });
-    //   console.log(projectIdArr);
-    //   //confirm and delete projects
-    //   Swal.fire({
-    //     title: `Delete ${selectedProjectsArr.length} projects from the database?`,
-    //     text: 'This process is irreversible.',
-    //     icon: 'warning',
-    //     showCancelButton: true,
-    //     confirmButtonText: 'Yes, go ahead.',
-    //     confirmButtonColor: '#e74c3c',
-    //     cancelButtonText: 'No, let me think',
-    //     cancelButtonColor: '#22b8f0',
-    //   }).then((result) => {
-    //     //delete projects from db
-    //     if (result.value) {
-    //       this.deleteMultipe(projectIdArr);
-    //     } else if (result.dismiss === Swal.DismissReason.cancel) {
-    //       this.snackBarService.displaySnackbar(
-    //         'error',
-    //         'operation has been cancelled'
-    //       );
-    //       //reset the selection
-    //       this.selection = new SelectionModel<any>(true, []);
-    //     }
-    //   });
-    // } else {
-    //   this.snackBarService.displaySnackbar('error', 'no selected records');
     // }
   }
+
+  /**Delete a specified project */
+  deleteProject(projectId: string) {
+    // this.projectService.deleteProject(projectId).subscribe({
+    //   next: (response: any) => {
+    //     console.log(response);
+    //     this.snackBarService.displaySnackbar('success', response.message);
+    //     this.loadAllProjects();
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //     Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+    //   },
+    // });
+  }
+
+  /**********END OF SECTION ************* */
 
   /**Get team members for each */
   getTeamMembers() {
