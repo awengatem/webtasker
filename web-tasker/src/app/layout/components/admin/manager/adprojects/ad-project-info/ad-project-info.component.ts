@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/api/project.service';
 import Swal from 'sweetalert2';
+import { EditProjectmodalComponent } from '../edit-projectmodal/edit-projectmodal.component';
 
 @Component({
   selector: 'app-ad-project-info',
@@ -18,6 +20,10 @@ export class AdProjectInfoComponent implements OnInit {
   projectTeams!: any;
   actionClicked = false;
 
+  /**define modal */
+  modalRef: MdbModalRef<EditProjectmodalComponent> | null = null;
+  isModalOpen: boolean = false; //add background blur
+
   /**variables used in project status */
   projectidArr: string[] = [];
   uniqueProjects: string[] = [];
@@ -26,7 +32,8 @@ export class AdProjectInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private router: Router,
-    private projectStatusService: ProjectStatusService
+    private projectStatusService: ProjectStatusService,
+    private modalService: MdbModalService
   ) {}
 
   ngOnInit(): void {
@@ -192,5 +199,24 @@ export class AdProjectInfoComponent implements OnInit {
   /**Method to navigate to sessions */
   showSessions() {
     this.router.navigate([`/ad_projects/${this.projectId}/sessions`]);
+  }
+
+  /**METHODS USED BY MODAL */
+  /**open edit project modal */
+  openEditProjectModal() {
+    /**save the project id to local storage*/
+    localStorage.setItem('capturedProjectId', this.projectId);
+
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(EditProjectmodalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.isModalOpen = false;
+      /**Refresh project */
+      this.getProject(this.projectId);
+    });
   }
 }
