@@ -44,7 +44,7 @@
         <button
           class="btn btn-outline-secondary col me-2"
           type="button"
-          (click)="close()"
+          (click)="closeProjectInfoModal()"
         >
           Back
         </button>
@@ -60,7 +60,7 @@
           <div class="col dropdown-content shadow">
             <a
               class="dropdown-item"
-              [routerLink]="['/edit_project', projectId]"
+              (click)="openEditProjectModal()"
               ><i class="fa-solid fa-pen-fancy"></i> edit</a
             >
             <a class="dropdown-item" (click)="showSessions()"
