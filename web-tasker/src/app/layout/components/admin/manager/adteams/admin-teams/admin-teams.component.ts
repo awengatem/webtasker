@@ -40,7 +40,7 @@ export class AdminTeamsComponent implements OnInit {
     tab4: false,
   };
 
-  /**variables */
+  /**table variables */
   totalUsers = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
@@ -79,6 +79,81 @@ export class AdminTeamsComponent implements OnInit {
       console.log(this.teams);
     });
   }
+
+  /**METHODS FOR DATASOURCE */
+  /**check whether all are selected */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = !!this.dataSource && this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.data.forEach((r) => this.selection.select(r));
+  }
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.EmpId + 1
+    }`;
+  }
+
+  /**method used by search filter */
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  /**Delete selected project(s) */
+  deleteSelected() {
+    // debugger;
+    // const selectedProjectsArr = this.selection.selected;
+    // let projectIdArr: any = [];
+    // console.log(selectedProjectsArr);
+    // if (selectedProjectsArr.length > 0) {
+    //   //push only project ids in an array
+    //   selectedProjectsArr.forEach((item) => {
+    //     projectIdArr.push(item._id);
+    //   });
+    //   console.log(projectIdArr);
+    //   //confirm and delete projects
+    //   Swal.fire({
+    //     title: `Delete ${selectedProjectsArr.length} projects from the database?`,
+    //     text: 'This process is irreversible.',
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonText: 'Yes, go ahead.',
+    //     confirmButtonColor: '#e74c3c',
+    //     cancelButtonText: 'No, let me think',
+    //     cancelButtonColor: '#22b8f0',
+    //   }).then((result) => {
+    //     //delete projects from db
+    //     if (result.value) {
+    //       this.deleteMultipe(projectIdArr);
+    //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+    //       this.snackBarService.displaySnackbar(
+    //         'error',
+    //         'operation has been cancelled'
+    //       );
+    //       //reset the selection
+    //       this.selection = new SelectionModel<any>(true, []);
+    //     }
+    //   });
+    // } else {
+    //   this.snackBarService.displaySnackbar('error', 'no selected records');
+    // }
+  }
+
+  
 
   /**Get team members for each */
   getTeamMembers() {

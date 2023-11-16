@@ -269,7 +269,7 @@
                             <b>Search Records :</b> &nbsp;&nbsp;
                             <mat-form-field>
                               <mat-label>Filter</mat-label>
-                              <input matInput />
+                              <input matInput (keyup)="applyFilter($event)" />
                             </mat-form-field>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <b>Delete Selected Records :</b> &nbsp;&nbsp;
@@ -278,6 +278,7 @@
                               aria-label="Example icon button with a delete icon"
                               type="button"
                               class="mt-4 custom-delete mat-raised-button"
+                              (click)="deleteSelected()"
                               color="accent"
                             >
                               <mat-icon class="text-white">delete</mat-icon>
@@ -297,10 +298,25 @@
                                 <!-- Checkbox Column -->
                                 <ng-container matColumnDef="Select">
                                   <mat-header-cell *matHeaderCellDef>
-                                    <mat-checkbox></mat-checkbox>
+                                    <mat-checkbox
+                                      (change)="$event ? masterToggle() : null"
+                                      [checked]="
+                                        selection.hasValue() && isAllSelected()
+                                      "
+                                      [indeterminate]="
+                                        selection.hasValue() && !isAllSelected()
+                                      "
+                                    ></mat-checkbox>
                                   </mat-header-cell>
                                   <mat-cell *matCellDef="let row" class="">
-                                    <mat-checkbox></mat-checkbox>
+                                    <mat-checkbox
+                                      (click)="$event.stopPropagation()"
+                                      (change)="
+                                        $event ? selection.toggle(row) : null
+                                      "
+                                      [checked]="selection.isSelected(row)"
+                                      [aria-label]="checkboxLabel(row)"
+                                    ></mat-checkbox>
                                   </mat-cell>
                                 </ng-container>
                                 <!-- Projectname Column -->
@@ -401,7 +417,7 @@
                       </mat-card>
                     </div>
                   </div>
-                  
+
                   <div *ngIf="tabStates['tab4']" class="">tab 4</div>
                 </div>
               </div>
