@@ -13,6 +13,16 @@
             <div class="card-header">
               <h1 class="text-center">Teams</h1>
             </div>
+            <div class="w-11/12 mx-auto rounded-lg my-4 relative">
+              <input
+                placeholder="search"
+                type="text "
+                class="border border-black w-full rounded-lg px-2 py-2 text-xl font-semibold"
+              />
+              <i
+                class="fa-solid fa-magnifying-glass text-base absolute top-1/2 transform -translate-y-1/2 right-2"
+              ></i>
+            </div>
             <div class="list-container">
               <ul class="list-group list-group-flush">
                 <li *ngFor="let team of teams" class="list-group-item">
