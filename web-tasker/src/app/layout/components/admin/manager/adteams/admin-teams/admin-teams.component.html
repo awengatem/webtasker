@@ -13,6 +13,16 @@
             <div class="card-header">
               <h1 class="text-center">Teams</h1>
             </div>
+            <div class="w-11/12 mx-auto rounded-lg my-4 relative">
+              <input
+                placeholder="search"
+                type="text "
+                class="border border-black w-full rounded-lg px-2 py-2 text-xl font-semibold"
+              />
+              <i
+                class="fa-solid fa-magnifying-glass text-base absolute top-1/2 transform -translate-y-1/2 right-2"
+              ></i>
+            </div>
             <div class="list-container">
               <ul class="list-group list-group-flush">
                 <li *ngFor="let team of teams" class="list-group-item">
@@ -22,7 +32,7 @@
             </div>
           </div>
         </div>
-        <div class="col-9">
+        <div class="col-9 bg-slate-500">
           <div class="teams-container">
             <div class="container">
               <div class="row p-3">
@@ -36,7 +46,7 @@
           </div>
           <div class="teams-container">
             <div class="container">
-              <div class="row row-cols-4">
+              <div class="flex overflow-x-scroll gap-2">
                 <div class="col-sm-3">
                   <div
                     class="card card-active"
@@ -88,13 +98,21 @@
                     </div>
                   </div>
                 </div>
+                <div class="col-sm-3">
+                  <div class="card" id="tab4" (click)="showTab('tab4')">
+                    <div class="card-body">
+                      <h2 class="card-title">Sessions</h2>
+                      <h1 class="card-text">4:00:00:00</h1>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <div class="teams-container">
             <div class="container">
               <div class="row p-3">
-                <div class="container-table p-3 border rounded">
+                <div class="container-table p-3 border rounded h-full">
                   <div *ngIf="tabStates['tab1']" class="">
                     <div class="d-flex">
                       <div class="p-2 flex-grow-1">
@@ -111,149 +129,172 @@
                       </div>
                       <div class="p-2"></div>
                     </div>
-                    <table class="table table-striped table-hover">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
-                          <th scope="col"></th>
-                          <th scope="col"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>markotto@gmail.com</td>
-                          <td>
-                            <i
-                              class="fa-solid fa-pen-to-square"
-                              style="color: #3eb16a"
-                            ></i>
-                          </td>
-                          <td>
-                            <i
-                              class="fa-solid fa-trash"
-                              style="color: #ff2929"
-                            ></i>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>jacobthornton@fat.com</td>
-                          <td>
-                            <i
-                              class="fa-solid fa-pen-to-square"
-                              style="color: #3eb16a"
-                            ></i>
-                          </td>
-                          <td>
-                            <i
-                              class="fa-solid fa-trash"
-                              style="color: #ff2929"
-                            ></i>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Joe</td>
-                          <td>Karanja</td>
-                          <td>joekaranja@gmail.com</td>
-                          <td>
-                            <i
-                              class="fa-solid fa-pen-to-square"
-                              style="color: #3eb16a"
-                            ></i>
-                          </td>
-                          <td>
-                            <i
-                              class="fa-solid fa-trash"
-                              style="color: #ff2929"
-                            ></i>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">4</th>
-                          <td>Joe</td>
-                          <td>Karanja</td>
-                          <td>joekaranja@gmail.com</td>
-                          <td>
-                            <i
-                              class="fa-solid fa-pen-to-square"
-                              style="color: #3eb16a"
-                            ></i>
-                          </td>
-                          <td>
-                            <i
-                              class="fa-solid fa-trash"
-                              style="color: #ff2929"
-                            ></i>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">5</th>
-                          <td>Joe</td>
-                          <td>Karanja</td>
-                          <td>joekaranja@gmail.com</td>
-                          <td>
-                            <i
-                              class="fa-solid fa-pen-to-square"
-                              style="color: #3eb16a"
-                            ></i>
-                          </td>
-                          <td>
-                            <i
-                              class="fa-solid fa-trash"
-                              style="color: #ff2929"
-                            ></i>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">6</th>
-                          <td>Joe</td>
-                          <td>Karanja</td>
-                          <td>joekaranja@gmail.com</td>
-                          <td>
-                            <i
-                              class="fa-solid fa-pen-to-square"
-                              style="color: #3eb16a"
-                            ></i>
-                          </td>
-                          <td>
-                            <i
-                              class="fa-solid fa-trash"
-                              style="color: #ff2929"
-                            ></i>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">7</th>
-                          <td>Joe</td>
-                          <td>Karanja</td>
-                          <td>joekaranja@gmail.com</td>
-                          <td>
-                            <i
-                              class="fa-solid fa-pen-to-square"
-                              style="color: #3eb16a"
-                            ></i>
-                          </td>
-                          <td>
-                            <i
-                              class="fa-solid fa-trash"
-                              style="color: #ff2929"
-                            ></i>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    here
                   </div>
                   <div *ngIf="tabStates['tab2']" class="">tab 2</div>
-                  <div *ngIf="tabStates['tab3']" class="">tab 3</div>
+                  <div *ngIf="tabStates['tab3']" class="">
+                    <div class="data-table">
+                      <mat-card class="mat-elevation-z8 shadow">
+                        <mat-card-content>
+                          <form>
+                            <b>Search Records :</b> &nbsp;&nbsp;
+                            <mat-form-field>
+                              <mat-label>Filter</mat-label>
+                              <input matInput (keyup)="applyFilter($event)" />
+                            </mat-form-field>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <b>Delete Selected Records :</b> &nbsp;&nbsp;
+                            <button
+                              mat-icon-button
+                              aria-label="Example icon button with a delete icon"
+                              type="button"
+                              class="mt-4 custom-delete mat-raised-button"
+                              (click)="deleteSelected()"
+                              color="accent"
+                            >
+                              <mat-icon class="text-white">delete</mat-icon>
+                            </button>
+                            <div>
+                              <!-- TABLE BEGINS HERE-->
+                              <mat-table
+                                [dataSource]="dataSource"
+                                matSort
+                                class="mat-elevation-z8"
+                                style="
+                                  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+                                    0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                                    0 1px 18px 0 rgba(0, 0, 0, 0.12);
+                                "
+                              >
+                                <!-- Checkbox Column -->
+                                <ng-container matColumnDef="Select">
+                                  <mat-header-cell *matHeaderCellDef>
+                                    <mat-checkbox
+                                      (change)="$event ? masterToggle() : null"
+                                      [checked]="
+                                        selection.hasValue() && isAllSelected()
+                                      "
+                                      [indeterminate]="
+                                        selection.hasValue() && !isAllSelected()
+                                      "
+                                    ></mat-checkbox>
+                                  </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" class="">
+                                    <mat-checkbox
+                                      (click)="$event.stopPropagation()"
+                                      (change)="
+                                        $event ? selection.toggle(row) : null
+                                      "
+                                      [checked]="selection.isSelected(row)"
+                                      [aria-label]="checkboxLabel(row)"
+                                    ></mat-checkbox>
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Projectname Column -->
+                                <ng-container
+                                  matColumnDef="Projectname"
+                                  class=""
+                                >
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Project name
+                                  </mat-header-cell>
+                                  <mat-cell
+                                    *matCellDef="let document"
+                                    class="point"
+                                  >
+                                    {{ document.projectName }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Teams Column -->
+                                <ng-container matColumnDef="Members" class="">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Members
+                                  </mat-header-cell>
+                                  <mat-cell
+                                    *matCellDef="let document"
+                                    class="bold"
+                                  >
+                                    {{ document.members }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Createdat Column -->
+                                <ng-container matColumnDef="CreatedAt" class="">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Created at
+                                  </mat-header-cell>
+                                  <mat-cell *matCellDef="let document">
+                                    {{ convertDate(document.createdAt) }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Createdby Column -->
+                                <ng-container matColumnDef="CreatedBy" class="">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Created by
+                                  </mat-header-cell>
+                                  <mat-cell *matCellDef="let document">
+                                    {{ document.createdBy }}
+                                  </mat-cell>
+                                </ng-container>
+
+                                <!-- Delete Icon -->
+                                <ng-container matColumnDef="Delete">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Delete
+                                  </mat-header-cell>
+                                  <mat-cell *matCellDef="let document">
+                                    <button
+                                      mat-icon-button
+                                      class="custom-button custom-button-delete mat-raised-button"
+                                      aria-label="Example icon button with a delete icon"
+                                      type="button"
+                                      (click)="
+                                        confirmDeletion(
+                                          document._id,
+                                          document.projectName
+                                        )
+                                      "
+                                      color="accent"
+                                      matTooltip="Delete"
+                                    >
+                                      <mat-icon>delete_forever</mat-icon>
+                                    </button></mat-cell
+                                  >
+                                </ng-container>
+                                <mat-header-row
+                                  *matHeaderRowDef="displayedColumns"
+                                ></mat-header-row>
+                                <mat-row
+                                  *matRowDef="
+                                    let row;
+                                    columns: displayedColumns
+                                  "
+                                ></mat-row
+                              ></mat-table>
+                              <mat-paginator
+                                [pageSizeOptions]="[10, 25, 50]"
+                              ></mat-paginator>
+                            </div>
+                          </form>
+                        </mat-card-content>
+                      </mat-card>
+                    </div>
+                  </div>
+
                   <div *ngIf="tabStates['tab4']" class="">tab 4</div>
                 </div>
               </div>

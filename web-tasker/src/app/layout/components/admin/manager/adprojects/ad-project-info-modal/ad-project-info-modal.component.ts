@@ -7,11 +7,11 @@ import Swal from 'sweetalert2';
 import { EditProjectmodalComponent } from '../edit-projectmodal/edit-projectmodal.component';
 
 @Component({
-  selector: 'app-ad-project-info',
-  templateUrl: './ad-project-info.component.html',
-  styleUrls: ['./ad-project-info.component.scss'],
+  selector: 'app-ad-project-info-modal',
+  templateUrl: './ad-project-info-modal.component.html',
+  styleUrls: ['./ad-project-info-modal.component.scss'],
 })
-export class AdProjectInfoComponent implements OnInit {
+export class AdProjectInfoModalComponent implements OnInit {
   projectName: any;
   createdBy: any;
   lastUpdated: any;
@@ -20,15 +20,13 @@ export class AdProjectInfoComponent implements OnInit {
   projectTeams!: any;
   actionClicked = false;
 
-  /**define modal */
-  modalRef: MdbModalRef<EditProjectmodalComponent> | null = null;
-  isModalOpen: boolean = false; //add background blur
-
   /**variables used in project status */
   projectidArr: string[] = [];
   uniqueProjects: string[] = [];
 
   constructor(
+    public infoModalRef: MdbModalRef<AdProjectInfoModalComponent>,
+    public editModalRef: MdbModalRef<EditProjectmodalComponent>,
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private router: Router,
@@ -198,6 +196,8 @@ export class AdProjectInfoComponent implements OnInit {
 
   /**Method to navigate to sessions */
   showSessions() {
+    //close this modal
+    this.closeProjectInfoModal();
     this.router.navigate([`/ad_projects/${this.projectId}/sessions`]);
   }
 
@@ -206,17 +206,43 @@ export class AdProjectInfoComponent implements OnInit {
   openEditProjectModal() {
     /**save the project id to local storage*/
     localStorage.setItem('capturedProjectId', this.projectId);
+    this.editModalRef = this.modalService.open(EditProjectmodalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //close this modal
+    this.closeProjectInfoModal();
+    //listen when closed
+    this.editModalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      /**Open the project Info modal */
+      this.openProjectInfoModal(this.projectId);
+    });
+  }
 
-    this.isModalOpen = true;
-    this.modalRef = this.modalService.open(EditProjectmodalComponent, {
+  /**open project info modal */
+  openProjectInfoModal(projectId: string) {
+    /**save the project id to local storage*/
+    localStorage.setItem('capturedProjectId', projectId);
+
+    this.infoModalRef = this.modalService.open(AdProjectInfoModalComponent, {
       modalClass: 'modal-dialog-centered modal-lg',
     });
     //listen when closed
-    this.modalRef.onClose.subscribe((message: any) => {
+    this.infoModalRef.onClose.subscribe((message: any) => {
       console.log(message);
-      this.isModalOpen = false;
-      /**Refresh project */
-      this.getProject(this.projectId);
+      /**Refresh projects */
+      // this.getProjects();
     });
+  }
+
+  /**Method to close modal */
+  closeProjectInfoModal(): void {
+    const closeMessage = 'Project info modal closed';
+    this.infoModalRef.close(closeMessage);
+  }
+
+  closeEditProjectModal(): void {
+    const closeMessage = 'Project info modal closed';
+    this.editModalRef.close(closeMessage);
   }
 }

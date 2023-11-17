@@ -1,11 +1,6 @@
 /*CSS SHARED BY OTHER COMPONENTS*/
 //shared with user project-info component.scss
 
-/**styling when modal is opened*/
-.modal-blur {
-  opacity: 0.1;
-}
-
 .centered-content {
   position: absolute;
   .modal-box {
@@ -24,7 +19,7 @@
     }
 
     .content {
-      margin-top: 0; 
+      margin-top: 0;
       //background: grey;
       padding: 5px;
 
