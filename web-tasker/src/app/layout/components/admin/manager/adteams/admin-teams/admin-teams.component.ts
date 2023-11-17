@@ -49,7 +49,7 @@ export class AdminTeamsComponent implements OnInit {
   displayedColumns: string[] = [
     'Select',
     'Projectname',
-    'Teams',
+    'Members',
     'CreatedAt',
     'CreatedBy',
     'Delete',
@@ -60,25 +60,25 @@ export class AdminTeamsComponent implements OnInit {
   projects = [
     {
       projectName: 'project1',
-      teams: 5,
+      members: 5,
       createdAt: '2023-01-09T00:49:27.372Z',
       createdBy: 'joe123',
     },
     {
       projectName: 'project2',
-      teams: 3,
+      members: 3,
       createdAt: '2023-01-09T00:49:27.372Z',
       createdBy: 'joe123',
     },
     {
       projectName: 'project3',
-      teams: 37,
+      members: 37,
       createdAt: '2023-01-09T00:49:27.372Z',
       createdBy: 'joe123',
     },
     {
       projectName: 'project4',
-      teams: 15,
+      members: 15,
       createdAt: '2023-01-09T00:49:27.372Z',
       createdBy: 'joe123',
     },
