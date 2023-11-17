@@ -334,7 +334,7 @@
                                     *matCellDef="let document"
                                     class="point"
                                   >
-                                    {{document.projectName}}
+                                    {{ document.projectName }}
                                   </mat-cell>
                                 </ng-container>
                                 <!-- Teams Column -->
@@ -349,7 +349,7 @@
                                     *matCellDef="let document"
                                     class="bold"
                                   >
-                                    {{document.teams}}
+                                    {{ document.teams }}
                                   </mat-cell>
                                 </ng-container>
                                 <!-- Createdat Column -->
@@ -361,7 +361,7 @@
                                     Created at
                                   </mat-header-cell>
                                   <mat-cell *matCellDef="let document">
-                                    {{convertDate(document.createdAt)}}
+                                    {{ convertDate(document.createdAt) }}
                                   </mat-cell>
                                 </ng-container>
                                 <!-- Createdby Column -->
@@ -373,7 +373,7 @@
                                     Created by
                                   </mat-header-cell>
                                   <mat-cell *matCellDef="let document">
-                                    {{document.createdBy}}
+                                    {{ document.createdBy }}
                                   </mat-cell>
                                 </ng-container>
 
@@ -391,6 +391,12 @@
                                       class="custom-button custom-button-delete mat-raised-button"
                                       aria-label="Example icon button with a delete icon"
                                       type="button"
+                                      (click)="
+                                        confirmDeletion(
+                                          document._id,
+                                          document.projectName
+                                        )
+                                      "
                                       color="accent"
                                       matTooltip="Delete"
                                     >
