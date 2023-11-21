@@ -23,7 +23,7 @@ export class ProjectService {
    *  formatting to be used with project status */
   /**Getting all projects */
   getProjects() {
-    return new Promise<any>((resolve, reject) => {
+    return new Promise<any>((resolve, reject) => { 
       this.getAllProjects().subscribe({
         next: (documents: any) => {
           this.documents = documents;

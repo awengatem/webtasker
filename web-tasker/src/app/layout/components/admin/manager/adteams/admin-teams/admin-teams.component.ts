@@ -48,11 +48,10 @@ export class AdminTeamsComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     'Select',
-    'Projectname',
-    'Members',
-    'CreatedAt',
-    'CreatedBy',
-    'Delete',
+    'Firstname',
+    'Lastname',
+    'Email',    
+    'Remove',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

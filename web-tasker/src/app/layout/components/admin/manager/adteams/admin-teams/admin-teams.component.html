@@ -190,16 +190,16 @@
                                     ></mat-checkbox>
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Projectname Column -->
+                                <!-- Firstname Column -->
                                 <ng-container
-                                  matColumnDef="Projectname"
+                                  matColumnDef="Firstname"
                                   class=""
                                 >
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    Project name
+                                    First name
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
@@ -208,13 +208,31 @@
                                     {{ document.projectName }}
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Teams Column -->
-                                <ng-container matColumnDef="Members" class="">
+                                <!-- Lastname Column -->
+                                <ng-container
+                                  matColumnDef="Lastname"
+                                  class=""
+                                >
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    Members
+                                    Last name
+                                  </mat-header-cell>
+                                  <mat-cell
+                                    *matCellDef="let document"
+                                    class="point"
+                                  >
+                                    {{ document.projectName }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Email Column -->
+                                <ng-container matColumnDef="Email" class="">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Email
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
@@ -223,38 +241,13 @@
                                     {{ document.members }}
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Createdat Column -->
-                                <ng-container matColumnDef="CreatedAt" class="">
-                                  <mat-header-cell
-                                    *matHeaderCellDef
-                                    mat-sort-header
-                                  >
-                                    Created at
-                                  </mat-header-cell>
-                                  <mat-cell *matCellDef="let document">
-                                    {{ convertDate(document.createdAt) }}
-                                  </mat-cell>
-                                </ng-container>
-                                <!-- Createdby Column -->
-                                <ng-container matColumnDef="CreatedBy" class="">
-                                  <mat-header-cell
-                                    *matHeaderCellDef
-                                    mat-sort-header
-                                  >
-                                    Created by
-                                  </mat-header-cell>
-                                  <mat-cell *matCellDef="let document">
-                                    {{ document.createdBy }}
-                                  </mat-cell>
-                                </ng-container>
-
                                 <!-- Delete Icon -->
-                                <ng-container matColumnDef="Delete">
+                                <ng-container matColumnDef="Remove">
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    Delete
+                                    Remove
                                   </mat-header-cell>
                                   <mat-cell *matCellDef="let document">
                                     <button
