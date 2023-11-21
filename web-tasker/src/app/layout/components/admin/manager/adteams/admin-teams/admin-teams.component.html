@@ -131,7 +131,83 @@
                     </div>
                     here
                   </div>
-                  <div *ngIf="tabStates['tab2']" class="">tab 2</div>
+                  <div *ngIf="tabStates['tab2']" class="">
+                    <div class="teams-container">
+                      <div class="container">
+                        <div class="row p-3 h-96 overflow-scroll">
+                          <div class="container-table p-3 border rounded">
+                            <div
+                              *ngIf="tabStates['tab1']"
+                              class="h-[300px] overflow-scroll"
+                            >
+                              tab 1
+                            </div>
+                            <div *ngIf="tabStates['tab2']" class="">
+                              <div class="row mt-3">
+                                <h1 class="card-text">Projects:</h1>
+                              </div>
+                              <a
+                                class="btn btn-primary m-2"
+                                style="width: 7rem"
+                                >add Project</a
+                              >
+
+                              <div
+                                class="row-project d-flex flex-row justify-content-start"
+                              >
+                                <div
+                                  class="grid grid-cols-4 grid-flow-row gap-4"
+                                >
+                                  <div
+                                    class="card text-black bg-white mb-3"
+                                    style="
+                                      width: 10rem;
+                                      height: 13rem;
+                                      box-shadow: 2px 2px 2px 1px
+                                        rgba(0, 0, 0, 0.2);
+                                    "
+                                    *ngFor="let Project of projects"
+                                  >
+                                    <div
+                                      class="card-body px-4 flex flex-col justify-around"
+                                    >
+                                      <h2 class="text-center">Project 1</h2>
+                                      <div
+                                        class="flex flex-col text-base space-y-4"
+                                      >
+                                        <div>
+                                          <i class="uil uil-users-alt"></i
+                                          >Teams
+                                        </div>
+                                        <div>
+                                          <i class="uil uil-server"></i
+                                          >Status:
+                                        </div>
+
+                                        <!-- <p class=" text-base md:text-lg ..">Teams</p>
+                            <p class="text-base md:text-lg ...">Status:</p> -->
+                                      </div>
+                                      <button
+                                        class="ml-auto text-sm text-white p-1 rounded-lg px-2 bg-red-600 shadow-lg shadow-blue-500/50"
+                                      >
+                                        Remove
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div *ngIf="tabStates['tab3']" class="">
+                              tab 3
+                            </div>
+                            <div *ngIf="tabStates['tab4']" class="">
+                              tab 4
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div *ngIf="tabStates['tab3']" class="">
                     <div class="data-table">
                       <mat-card class="mat-elevation-z8 shadow">
