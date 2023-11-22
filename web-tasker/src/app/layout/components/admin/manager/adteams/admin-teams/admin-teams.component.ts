@@ -18,6 +18,7 @@ import Swal from 'sweetalert2';
 })
 export class AdminTeamsComponent implements OnInit {
   teams!: any[];
+  teamProjectsArr!: any[];
   teamsLength = 0;
   members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
@@ -108,9 +109,23 @@ export class AdminTeamsComponent implements OnInit {
       //get team members for each
       this.getTeamMembers();
       //get team projects for each
-      this.getTeamProjects();
+      this.getTeamProjectsNumber();
       console.log(this.teams);
     });
+  }
+
+  /**Get the team Projects */
+  getTeamProjects(teamId: string) {
+    this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
+      // console.log(projects);
+      //push number of projects to teams
+      this.teamProjectsArr = projects;
+    });
+  }
+
+  /**Load the team info */
+  loadTeamInfo(team: any) {
+    console.log(team);
   }
 
   /**Get team members for each */
@@ -168,7 +183,7 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**Get team projects for each */
-  getTeamProjects() {
+  getTeamProjectsNumber() {
     if (this.teams.length > 0) {
       for (let i = 0; i < this.teams.length; i++) {
         this.teamService
