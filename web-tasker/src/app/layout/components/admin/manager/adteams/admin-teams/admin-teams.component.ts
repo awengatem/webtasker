@@ -10,6 +10,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort } from '@angular/material/sort';
 import { SnackBarService } from 'src/app/services/snackbar.service';
 import Swal from 'sweetalert2';
+import { ProjectService } from 'src/app/services/api/project.service';
 
 @Component({
   selector: 'app-admin-teams',
@@ -18,7 +19,6 @@ import Swal from 'sweetalert2';
 })
 export class AdminTeamsComponent implements OnInit {
   teams!: any[];
-  teamProjectsArr!: any[];
   teamsLength = 0;
   members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
@@ -84,21 +84,24 @@ export class AdminTeamsComponent implements OnInit {
     },
   ];
 
+  /**TEAM INFO VARIABLES */
   /**Team Info object */
   teaminfo = {
     members: 0,
     projects: 0,
     supervisors: 0,
   };
+  teamProjectsArr!: any[];
 
   constructor(
     private teamService: TeamService,
+    private projectService: ProjectService,
     private projectStatusService: ProjectStatusService,
     private snackBarService: SnackBarService,
     private modalService: MdbModalService
   ) {
     //load data on table
-    this.loadAllProjects();
+    // this.loadAllProjects();
   }
 
   ngOnInit(): void {
@@ -106,6 +109,7 @@ export class AdminTeamsComponent implements OnInit {
     this.showTab('tab2');
   }
 
+  /***  TEAM SECTION  ***/
   /**Get all teams from API */
   getTeams() {
     this.teamService.getAllTeams().subscribe((teams: any) => {
@@ -119,40 +123,6 @@ export class AdminTeamsComponent implements OnInit {
       this.getTeamProjectsNumber();
       console.log(this.teams);
     });
-  }
-
-  /**Get the team Projects */
-  getTeamProjects(teamId: string) {
-    this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
-      // console.log(projects);
-      //push number of projects to teams
-      this.teamProjectsArr = projects;
-    });
-  }
-
-  /**Load the team info */
-  loadTeamInfo(team: any) {
-    console.log(team);
-    this.teaminfo.members = team.members;
-    this.teaminfo.projects = team.projects;
-    // this.teaminfo.supervisors = team.supervisors;
-  }
-
-  /**Get team members for each */
-  getTeamMembers() {
-    if (this.teams.length > 0) {
-      for (let i = 0; i < this.teams.length; i++) {
-        this.teamService
-          .getTeamMembersDoc(this.teams[i]._id)
-          .subscribe((members: any) => {
-            // console.log(members.length);
-            //push number of members to teams
-            this.teams[i].members = members.length;
-          });
-      }
-    }
-    //get the team status here
-    this.getTeamStatus();
   }
 
   /**Get the team status from active status docs
@@ -207,6 +177,67 @@ export class AdminTeamsComponent implements OnInit {
     }
   }
 
+  /**Get team members for each */
+  getTeamMembers() {
+    if (this.teams.length > 0) {
+      for (let i = 0; i < this.teams.length; i++) {
+        this.teamService
+          .getTeamMembersDoc(this.teams[i]._id)
+          .subscribe((members: any) => {
+            // console.log(members.length);
+            //push number of members to teams
+            this.teams[i].members = members.length;
+          });
+      }
+    }
+    //get the team status here
+    this.getTeamStatus();
+  }
+
+  /**Load the team info */
+  loadTeamInfo(team: any) {
+    const teamId = team._id;
+    console.log(team);
+    /**Fill the tabs data */
+    this.teaminfo.members = team.members;
+    this.teaminfo.projects = team.projects;
+    // this.teaminfo.supervisors = team.supervisors;
+    /**get the team projects */
+    this.getTeamProjects(teamId);
+  }
+  /*** END OF TEAM SECTION ***/
+
+  /***  TEAM INFO SECTION  ***/
+  /**Get the team Projects */
+  getTeamProjects(teamId: string) {
+    this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
+      // console.log(projects);
+      /**push number of projects to teams*/
+      this.teamProjectsArr = projects;
+      console.log(this.teamProjectsArr);
+      /**Get project members */
+      this.getProjectMembers();
+      /**Load the projects to table */
+      this.loadAllProjects(projects);
+    });
+  }
+
+  /**Get project members*/
+  getProjectMembers() {
+    if (this.teamProjectsArr.length > 0) {
+      for (let i = 0; i < this.teamProjectsArr.length; i++) {
+        this.projectService
+          .getProjectMembers(this.teamProjectsArr[i]._id)
+          .subscribe((members: any) => {
+            // console.log(members.length);
+            //push number of members to projects
+            this.teamProjectsArr[i].members = members.length;
+          });
+      }
+    }
+  }
+  /*** END OF TEAM INFO SECTION ***/
+
   /**METHODS FOR DATASOURCE */
   /**check whether all are selected */
   isAllSelected() {
@@ -241,11 +272,11 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**Method to reload user table */
-  loadAllProjects() {
+  loadAllProjects(projects: any) {
     //reset the selection
     this.selection = new SelectionModel<any>(true, []);
     //add projects to table
-    this.dataSource = new MatTableDataSource(this.projects);
+    this.dataSource = new MatTableDataSource(projects);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     console.log(this.projects);
@@ -353,7 +384,7 @@ export class AdminTeamsComponent implements OnInit {
     // });
   }
 
-  /**********END OF SECTION ************* */
+  /**********END OF DATASOURCE SECTION ************* */
 
   /** METHODS FOR NAVIGATION OF TABS */
   /**getting the open tab*/
@@ -424,4 +455,5 @@ export class AdminTeamsComponent implements OnInit {
       this.getTeams();
     });
   }
+  /**********END OF MODAL SECTION ************* */
 }
