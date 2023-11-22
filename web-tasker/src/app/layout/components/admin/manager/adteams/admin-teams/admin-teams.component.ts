@@ -76,7 +76,7 @@ export class AdminTeamsComponent implements OnInit {
       createdBy: 'joe123',
     },
     {
-      projectName: 'project4',
+      projectName: 'gravity',
       members: 15,
       createdAt: '2023-01-09T00:49:27.372Z',
       createdBy: 'joe123',
