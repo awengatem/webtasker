@@ -87,6 +87,8 @@ export class AdminTeamsComponent implements OnInit {
   /**TEAM INFO VARIABLES */
   /**Team Info object */
   teaminfo = {
+    teamName: 'team',
+    status: 'Unknown',
     members: 0,
     projects: 0,
     supervisors: 0,
@@ -199,6 +201,8 @@ export class AdminTeamsComponent implements OnInit {
     const teamId = team._id;
     console.log(team);
     /**Fill the tabs data */
+    this.teaminfo.teamName = team.teamName;
+    this.teaminfo.status = team.status;
     this.teaminfo.members = team.members;
     this.teaminfo.projects = team.projects;
     // this.teaminfo.supervisors = team.supervisors;
