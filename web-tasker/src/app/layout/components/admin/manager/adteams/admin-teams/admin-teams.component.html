@@ -48,11 +48,7 @@
             <div class="container">
               <div class="flex overflow-x-scroll gap-2">
                 <div class="col-sm-3">
-                  <div
-                    class="card card-active"
-                    id="tab1"
-                    (click)="showTab('tab1')"
-                  >
+                  <div class="card" id="tab1" (click)="showTab('tab1')">
                     <div class="card-body">
                       <h2 class="card-title">Team Members</h2>
                       <div class="d-flex">
@@ -65,7 +61,11 @@
                   </div>
                 </div>
                 <div class="col-sm-3">
-                  <div class="card" id="tab2" (click)="showTab('tab2')">
+                  <div
+                    class="card card-active"
+                    id="tab2"
+                    (click)="showTab('tab2')"
+                  >
                     <div class="card-body">
                       <h2 class="card-title">Team Project</h2>
                       <div class="d-flex">
@@ -136,13 +136,13 @@
                       <mat-card class="mat-elevation-z8 shadow">
                         <mat-card-content>
                           <form>
-                            <b>Search Records :</b> &nbsp;&nbsp;
+                            <b>Search Projects :</b> &nbsp;&nbsp;
                             <mat-form-field>
                               <mat-label>Filter</mat-label>
                               <input matInput (keyup)="applyFilter($event)" />
                             </mat-form-field>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <b>Delete Selected Records :</b> &nbsp;&nbsp;
+                            <b>Delete Selected Projects :</b> &nbsp;&nbsp;
                             <button
                               mat-icon-button
                               aria-label="Example icon button with a delete icon"
@@ -189,13 +189,16 @@
                                     ></mat-checkbox>
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Firstname Column -->
-                                <ng-container matColumnDef="Firstname" class="">
+                                <!-- Projectname Column -->
+                                <ng-container
+                                  matColumnDef="Projectname"
+                                  class=""
+                                >
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    First name
+                                    Project name
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
@@ -204,13 +207,13 @@
                                     {{ document.projectName }}
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Lastname Column -->
-                                <ng-container matColumnDef="Lastname" class="">
+                                <!-- Createdby Column -->
+                                <ng-container matColumnDef="Createdby" class="">
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    Last name
+                                    Created by
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
@@ -219,13 +222,13 @@
                                     {{ document.projectName }}
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Email Column -->
-                                <ng-container matColumnDef="Email" class="">
+                                <!-- Members Column -->
+                                <ng-container matColumnDef="Members" class="">
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    Email
+                                    Members
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"

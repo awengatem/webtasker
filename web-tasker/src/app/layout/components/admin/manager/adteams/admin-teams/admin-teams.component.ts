@@ -48,9 +48,9 @@ export class AdminTeamsComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     'Select',
-    'Firstname',
-    'Lastname',
-    'Email',    
+    'Projectname',
+    'Createdby',
+    'Members',
     'Remove',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -95,6 +95,7 @@ export class AdminTeamsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTeams();
+    this.showTab('tab2');
   }
 
   /**Get all teams from API */
@@ -329,9 +330,7 @@ export class AdminTeamsComponent implements OnInit {
 
   /**********END OF SECTION ************* */
 
-  
-
-  /** METHODS FOR NAVIGATION OF TABS */  
+  /** METHODS FOR NAVIGATION OF TABS */
   /**getting the open tab*/
   getOpenTab(): string {
     this.tabIdArray = ['tab1', 'tab2', 'tab3', 'tab4'];
