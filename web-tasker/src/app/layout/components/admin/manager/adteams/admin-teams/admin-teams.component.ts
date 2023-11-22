@@ -84,6 +84,13 @@ export class AdminTeamsComponent implements OnInit {
     },
   ];
 
+  /**Team Info object */
+  teaminfo = {
+    members: 0,
+    projects: 0,
+    supervisors: 0,
+  };
+
   constructor(
     private teamService: TeamService,
     private projectStatusService: ProjectStatusService,
@@ -126,6 +133,9 @@ export class AdminTeamsComponent implements OnInit {
   /**Load the team info */
   loadTeamInfo(team: any) {
     console.log(team);
+    this.teaminfo.members = team.members;
+    this.teaminfo.projects = team.projects;
+    // this.teaminfo.supervisors = team.supervisors;
   }
 
   /**Get team members for each */
