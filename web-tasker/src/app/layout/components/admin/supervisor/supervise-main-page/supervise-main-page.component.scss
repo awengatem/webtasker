@@ -67,3 +67,100 @@
 .color-change {
   animation: bounceColorChange 100s infinite;
 }
+.fa-spin-pulse {
+  /* Original animation properties */
+  animation: pulse 2s infinite, spin 5s linear infinite; /* Adjust the duration as needed */
+
+  /* Additional styling properties */
+  display: inline-block;
+  transform-origin: center;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.fa-bounce {
+  /* Original animation properties */
+  animation: bounce 4s infinite; /* Adjust the duration as needed */
+
+  /* Additional styling properties */
+  display: inline-block;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px); /* Adjust the bounce height as needed */
+  }
+  60% {
+    transform: translateY(-10px); /* Adjust the bounce height as needed */
+  }
+}
+.fa-shake {
+  /* Original animation properties */
+  animation: shake 20s infinite; /* Adjust the duration as needed */
+
+  /* Additional styling properties */
+  display: inline-block;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px); /* Adjust the shake width as needed */
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px); /* Adjust the shake width as needed */
+  }
+}
+.fa-beat-fade {
+  /* Original animation properties */
+  animation: beatFade 10s infinite; /* Adjust the duration as needed */
+
+  /* Additional styling properties */
+  display: inline-block;
+}
+
+@keyframes beatFade {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+}

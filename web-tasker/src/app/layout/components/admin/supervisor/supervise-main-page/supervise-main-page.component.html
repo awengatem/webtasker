@@ -19,7 +19,7 @@
               <div class="">
                 <h1>
                   <i
-                    class="fa-sharp fa-solid fa-users-rectangle fa-bounce"
+                    class="fa-sharp fa-solid fa-users-rectangle"
                     [class.color-change]="bounceAnimationTrigger"
                   ></i>
                   My Teams Data
@@ -39,21 +39,30 @@
               <div class="flex justify-center items-center gap-5">
                 <div class="">
                   <div class="data-name text-center">
-                    <div class="label pointer">My Teams</div>
+                    <div class="label pointer text-2xl">
+                      <i class="fa-solid fa-users-viewfinder fa-beat-fade"></i>
+                      My Teams
+                    </div>
                     <h1 class="text-[#22b8f0] p-4">{{ supTeamCount }}</h1>
                   </div>
                 </div>
                 <div class="border-r h-28"></div>
                 <div class="">
                   <div class="data-name text-center">
-                    <div class="label pointer">Active projects</div>
+                    <div class="label pointer text-2xl">
+                      <i class="fa-solid fa-list-check fa-shake"></i> Active
+                      projects
+                    </div>
                     <h1 class="text-[#22b8f0] p-4">{{ supProjectCount }}</h1>
                   </div>
                 </div>
                 <div class="border-r h-28"></div>
                 <div class="">
                   <div class="data-name text-center">
-                    <div class="label pointer">Team Earnings</div>
+                    <div class="label pointer text-2xl">
+                      <i class="fa-solid fa-sack-dollar fa-bounce"></i> Team
+                      Earnings
+                    </div>
                     <div class="flex p-4 gap-4">
                       <h1 class="">{{ earningsAmount }}</h1>
                       <p
@@ -74,7 +83,10 @@
                 <div class="border-r h-28"></div>
                 <div class="">
                   <div class="data-name text-center">
-                    <div class="label pointer">Team Sessions</div>
+                    <div class="label pointer text-2xl">
+                      <i class="fa-regular fa-clock fa-spin-pulse"></i> Team
+                      Sessions
+                    </div>
                     <h1 class="text-red-800 p-4">{{ currentTime }}</h1>
                   </div>
                 </div>
