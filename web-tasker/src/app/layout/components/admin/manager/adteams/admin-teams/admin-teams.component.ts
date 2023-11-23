@@ -87,6 +87,7 @@ export class AdminTeamsComponent implements OnInit {
   /**TEAM INFO VARIABLES */
   /**Team Info object */
   teaminfo = {
+    teamId: '',
     teamName: 'team',
     status: 'Unknown',
     members: 0,
@@ -207,6 +208,7 @@ export class AdminTeamsComponent implements OnInit {
     const teamId = team._id;
     console.log(team);
     /**Fill the tabs data */
+    this.teaminfo.teamId = team._id;
     this.teaminfo.teamName = team.teamName;
     this.teaminfo.status = team.status;
     this.teaminfo.members = team.members;
@@ -352,7 +354,7 @@ export class AdminTeamsComponent implements OnInit {
     }).then((result) => {
       //delete project from db
       if (result.value) {
-        this.deleteProject(projectId);
+        this.deleteTeamProject(projectId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.snackBarService.displaySnackbar(
           'error',
@@ -379,19 +381,25 @@ export class AdminTeamsComponent implements OnInit {
     // }
   }
 
-  /**Delete a specified project */
-  deleteProject(projectId: string) {
-    // this.projectService.deleteProject(projectId).subscribe({
-    //   next: (response: any) => {
-    //     console.log(response);
-    //     this.snackBarService.displaySnackbar('success', response.message);
-    //     this.loadAllProjects();
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //     Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //   },
-    // });
+  //removing specific project from team
+  deleteTeamProject(projectId: string) {
+    //place project to be deleted in array
+    let projects = [projectId];
+
+    //pass array of projects to be deleted to api
+    this.teamService
+      .deleteTeamProject(this.teaminfo.teamId, projects)
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.snackBarService.displaySnackbar('success', res.message);
+          this.getTeamProjects(this.teaminfo.teamId);
+        },
+        error: (err: any) => {
+          console.log(err);
+          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+        },
+      });
   }
 
   /**********END OF DATASOURCE SECTION ************* */
