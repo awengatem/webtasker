@@ -40,6 +40,7 @@ export class AdminTeamsComponent implements OnInit {
     tab2: false,
     tab3: false,
     tab4: false,
+    tab5: false,
   };
 
   /**table variables */
@@ -398,7 +399,7 @@ export class AdminTeamsComponent implements OnInit {
   /** METHODS FOR NAVIGATION OF TABS */
   /**getting the open tab*/
   getOpenTab(): string {
-    this.tabIdArray = ['tab1', 'tab2', 'tab3', 'tab4'];
+    this.tabIdArray = ['tab1', 'tab2', 'tab3', 'tab4',  'tab5'];
     this.tabIdArray.forEach((tab) => {
       this.loopElement = document.getElementById(tab);
       if (this.loopElement.classList.contains('card-active')) {
