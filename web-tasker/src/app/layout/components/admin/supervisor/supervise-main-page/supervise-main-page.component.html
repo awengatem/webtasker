@@ -96,8 +96,20 @@
 
             <div class="teams-inside">
               <div class="">
-                <h2><i class="fa-solid fa-users-line"></i> Your Teams</h2>
-                <div class="flex flex-wrap gap-4 overflow-y-auto h-96">
+                <div class="text-lg flex justify-between w-full">
+                  <div class="">
+                    <h1><i class="fa-solid fa-users-line"></i> Your Teams</h1>
+                  </div>
+                  <div class="w-2/6 inline-flex">
+                    <input
+                      type="search"
+                      placeholder="Search by Name"
+                      class="form-control m-3 w-1/2"
+                    />
+                  </div>
+                </div>
+                <div class="border-t my-4"></div>
+                <div class="flex flex-wrap gap-4 overflow-y-auto h-80">
                   <div
                     class="card shadow-2xl cursor-pointer"
                     *ngFor="let team of teams"
