@@ -20,7 +20,6 @@ import { ProjectService } from 'src/app/services/api/project.service';
 export class AdminTeamsComponent implements OnInit {
   teams!: any[];
   teamsLength = 0;
-  members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
   /**define modal */
   modalRef: MdbModalRef<EditTeammodalComponent> | null = null;
@@ -107,23 +106,29 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTeams();
+    this.getTeams().then((team) => {
+      /**Load teaminfo for the first team */
+      this.loadTeamInfo(team);
+    });
     this.showTab('tab2');
   }
 
   /***  TEAM SECTION  ***/
   /**Get all teams from API */
   getTeams() {
-    this.teamService.getAllTeams().subscribe((teams: any) => {
-      this.teams = teams;
-      /**pushs team status to teams*/
-      this.teams.forEach((team) => (team.status = 'Unknown'));
-      this.teamsLength = teams.length;
-      //get team members for each
-      this.getTeamMembers();
-      //get team projects for each
-      this.getTeamProjectsNumber();
-      console.log(this.teams);
+    return new Promise((resolve, reject) => {
+      this.teamService.getAllTeams().subscribe((teams: any) => {
+        this.teams = teams;
+        /**pushs team status to teams*/
+        this.teams.forEach((team) => (team.status = 'Unknown'));
+        this.teamsLength = teams.length;
+        //get team members for each
+        this.getTeamMembers();
+        //get team projects for each
+        this.getTeamProjectsNumber();
+        console.log(this.teams);
+        resolve(teams[0]);
+      });
     });
   }
 
