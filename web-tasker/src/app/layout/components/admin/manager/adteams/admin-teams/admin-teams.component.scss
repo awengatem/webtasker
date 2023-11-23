@@ -1,11 +1,3 @@
-.container {
-  display: flex;
-  width: 100%;
-  // height: 100%;
-  max-width: 900px;
-  max-height: calc(90vh - 170px);
-  background: white;
-}
 .teams-container {
   display: flex;
   width: 100%;
@@ -62,36 +54,27 @@
   font-size: large;
   width: 100%;
 }
-.container-table {
-  // height: 400px; /* Set the desired fixed height */
-  overflow: auto; /* Enable scrolling */
-}
-
-.list-container {
-  max-height: 445px;
-  overflow: auto; /* Enable scrolling */
-}
 
 /*Styles for the data table*/
 .data-table {
-  margin-top: 20px;
+  //margin-top: 20px;
 
-  b {
-    font-size: 16px;
-  }
+  // b {
+  //   font-size: 16px;
+  // }
 
-  .custom-delete {
-    background-color: #e91e63;
-  }
+  // .custom-delete {
+  //   background-color: #e91e63;
+  // }
 
-  mat-form-field {
-    //width: 50%;
-    flex: 0 5px 50%; /* grow shrink basis */
-  }
+  // mat-form-field {
+  //   //width: 50%;
+  //   flex: 0 5px 50%; /* grow shrink basis */
+  // }
   mat-table {
-    min-height: calc(100vh - 800px);
-    max-height: calc(100vh - 600px);
-    overflow-y: auto;
+    //min-height: calc(100vh - 800px);
+    //max-height: calc(100vh - 600px);
+    //overflow-y: auto;
     // ng-container {
     //   mat-cell {
     //     button {
@@ -105,14 +88,14 @@
     // }
 
     /*Styling the header*/
-    mat-header-cell {
-      color: #22b8f0;
-    }
+    // mat-header-cell {
+    //   color: #22b8f0;
+    // }
 
     .custom-button {
       // line-height: 30px;
-      height: 30px;
-      width: 30px;
+      // height: 30px;
+      // width: 30px;
 
       &-edit {
         background-color: #22b8f0;

@@ -23,7 +23,10 @@
                 class="fa-solid fa-magnifying-glass text-base absolute top-1/2 transform -translate-y-1/2 right-2"
               ></i>
             </div>
-            <div class="list-container">
+            <div
+              class="list-container overflow-y-scroll"
+              style="height: calc(70vh - 150px)"
+            >
               <ul class="list-group list-group-flush">
                 <li *ngFor="let team of teams" class="list-group-item">
                   <h2 (click)="loadTeamInfo(team)">
@@ -34,20 +37,40 @@
             </div>
           </div>
         </div>
-        <div class="col-9 bg-slate-500">
+        <div class="col-9 bg-slate-500 h-96">
           <div class="teams-container">
-            <div class="container">
+            <div
+              class="container flex w"
+              style="
+                display: flex;
+                width: 100%;
+                max-width: 900px;
+                max-height: calc(90vh - 170px);
+                background: white;
+              "
+            >
               <div class="row p-3">
                 <div class="d-flex mb-3 p-3 border rounded">
                   <div class="me-auto p-2">{{ teaminfo.teamName }}</div>
                   <div class="p-2">Status:</div>
-                  <div class="p-2">{{ teaminfo.status }}</div>
+                  <div class="p-2">
+                    {{ teaminfo.status }}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="teams-container">
-            <div class="container">
+            <div
+              class="container"
+              style="
+                display: flex;
+                width: 100%;
+                max-width: 900px;
+                max-height: calc(90vh - 170px);
+                background: white;
+              "
+            >
               <div class="flex overflow-x-scroll gap-2">
                 <div class="col-sm-3">
                   <div class="card" id="tab1" (click)="showTab('tab1')">
@@ -118,7 +141,10 @@
             </div>
           </div>
           <div class="teams-container">
-            <div class="container">
+            <div
+              class="container flex bg-slate-400"
+              style="height: calc(90vh - 400px)"
+            >
               <div class="row p-3">
                 <div class="container-table p-3 border rounded h-full">
                   <div *ngIf="tabStates['tab1']" class="">
@@ -140,22 +166,25 @@
                     here
                   </div>
                   <div *ngIf="tabStates['tab2']" class="">
-                    <div class="data-table">
+                    <div class="data-table mt-5">
                       <mat-card class="mat-elevation-z8 shadow">
                         <mat-card-content>
                           <form>
-                            <b>Search Projects :</b> &nbsp;&nbsp;
-                            <mat-form-field>
+                            <b class="text-base">Search Projects :</b>
+                            &nbsp;&nbsp;
+                            <mat-form-field style="flex: 0 5px 50%">
                               <mat-label>Filter</mat-label>
                               <input matInput (keyup)="applyFilter($event)" />
                             </mat-form-field>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <b>Delete Selected Projects :</b> &nbsp;&nbsp;
+                            <b class="text-base">Delete Selected Projects :</b>
+                            &nbsp;&nbsp;
                             <button
                               mat-icon-button
                               aria-label="Example icon button with a delete icon"
                               type="button"
                               class="mt-4 custom-delete mat-raised-button"
+                              style="background-color: #e91e63"
                               (click)="deleteSelected()"
                               color="accent"
                             >
@@ -166,8 +195,9 @@
                               <mat-table
                                 [dataSource]="dataSource"
                                 matSort
-                                class="mat-elevation-z8"
+                                class="mat-elevation-z8 overflow-y-scroll"
                                 style="
+                                  height: calc(35vh - 100px);
                                   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
                                     0 6px 10px 0 rgba(0, 0, 0, 0.14),
                                     0 1px 18px 0 rgba(0, 0, 0, 0.12);
@@ -175,7 +205,10 @@
                               >
                                 <!-- Checkbox Column -->
                                 <ng-container matColumnDef="Select">
-                                  <mat-header-cell *matHeaderCellDef>
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    style="color: #22b8f0"
+                                  >
                                     <mat-checkbox
                                       (change)="$event ? masterToggle() : null"
                                       [checked]="
@@ -257,6 +290,7 @@
                                     <button
                                       mat-icon-button
                                       class="custom-button custom-button-delete mat-raised-button"
+                                      style="height: 30px; width: 30px"
                                       aria-label="Example icon button with a delete icon"
                                       type="button"
                                       (click)="
