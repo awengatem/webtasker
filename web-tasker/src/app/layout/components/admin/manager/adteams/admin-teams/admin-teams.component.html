@@ -1,15 +1,15 @@
-<div class="container-fluid page">
+<div class="container-fluid h-screen">
   <div class="page__box p-3 mt-2">Title</div>
-  <div class="page__content shadow p-3 position-relative">
+  <div class="page__content shadow p-3">
     <div class="page__content-data">
-      <div class="row">
-        <div class="col-3">
+      <div class="border flex">
+        <div class="w-3/12">
           <div class="w-75 mb-2">
             <button type="button" class="btn btn-primary">
               + Create a team
             </button>
           </div>
-          <div class="card">
+          <div class="card hover:border-[#22b8f0] cursor-pointer">
             <div class="card-header">
               <h1 class="text-center">Teams</h1>
             </div>
@@ -24,8 +24,8 @@
               ></i>
             </div>
             <div
-              class="list-container overflow-y-scroll"
-              style="height: calc(70vh - 150px)"
+              class="list-container overflow-y-scroll h-full"
+              style="max-height: calc(100vh - 400px)"
             >
               <ul class="list-group list-group-flush">
                 <li *ngFor="let team of teams" class="list-group-item">
@@ -37,10 +37,10 @@
             </div>
           </div>
         </div>
-        <div class="col-9 bg-slate-500 h-96">
-          <div class="teams-container">
-            <div
-              class="container flex w"
+        <div class="w-9/12 h-full" style="max-height: calc(100vh - 200px)">
+          <div class="teams-container flex w-full max-w-7xl h-auto bg-white">
+            <!-- <div
+              class="container flex bg-white w-full max-w-5xl max-h-[calc(90vh - 200px)]"
               style="
                 display: flex;
                 width: 100%;
@@ -48,36 +48,42 @@
                 max-height: calc(90vh - 170px);
                 background: white;
               "
-            >
-              <div class="row p-3">
+            > -->
+            <div class="container flex bg-white w-full max-w-5xl">
+              <div class="row flex w-full p-3">
                 <div class="d-flex mb-3 p-3 border rounded">
                   <div class="me-auto p-2">{{ teaminfo.teamName }}</div>
-                  <div class="p-2">Status:</div>
-                  <div class="p-2">
-                    {{ teaminfo.status }}
+
+                  <div
+                    class="p-2"
+                    [ngClass]="{
+                      'text-green-600': teaminfo.status === 'Active',
+                      'text-red-600': teaminfo.status === 'Unproductive'
+                    }"
+                  >
+                    <i class="fa-solid fa-signal fa-glow"></i>
+                    <p class="text-xs">{{ teaminfo.status }}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="teams-container">
+          <div class="teams-container flex w-full max-w-7xl bg-white">
             <div
               class="container"
-              style="
-                display: flex;
-                width: 100%;
-                max-width: 900px;
-                max-height: calc(90vh - 170px);
-                background: white;
-              "
+              style="display: flex; width: 100%; background: white"
             >
-              <div class="flex overflow-x-scroll gap-2">
+              <div class="flex w-full overflow-x-scroll gap-2">
                 <div class="col-sm-3">
-                  <div class="card" id="tab1" (click)="showTab('tab1')">
+                  <div
+                    class="card cursor-pointer border-[#22b8f0]"
+                    id="tab1"
+                    (click)="showTab('tab1')"
+                  >
                     <div class="card-body">
                       <h2 class="card-title">Members</h2>
                       <div class="d-flex">
-                        <div class="num px-2">
+                        <div class="num flex justify-around items-center px-2">
                           <p>{{ teaminfo.members }}</p>
                         </div>
                         <div>
@@ -96,7 +102,7 @@
                     <div class="card-body">
                       <h2 class="card-title">Projects</h2>
                       <div class="d-flex">
-                        <div class="num px-2">
+                        <div class="num flex justify-around items-center px-2">
                           <p>{{ teaminfo.projects }}</p>
                         </div>
                         <div>
@@ -111,7 +117,7 @@
                     <div class="card-body">
                       <h2 class="card-title">Supervisors</h2>
                       <div class="d-flex">
-                        <div class="num px-2">
+                        <div class="num flex justify-around items-center px-2">
                           <p>{{ teaminfo.supervisors }}</p>
                         </div>
                         <div>
@@ -140,12 +146,12 @@
               </div>
             </div>
           </div>
-          <div class="teams-container">
+          <div class="teams-container flex w-full max-w-7xl h-full bg-white">
             <div
-              class="container flex bg-slate-400"
-              style="height: calc(90vh - 400px)"
+              class="container flex bg-gray-600 h-full"
+              style="max-height: calc(100vh - 500px)"
             >
-              <div class="row p-3">
+              <div class="row flex w-full border p-3">
                 <div class="container-table p-3 border rounded h-full">
                   <div *ngIf="tabStates['tab1']" class="">
                     <div class="d-flex">
@@ -165,9 +171,12 @@
                     </div>
                     here
                   </div>
-                  <div *ngIf="tabStates['tab2']" class="">
-                    <div class="data-table mt-5">
-                      <mat-card class="mat-elevation-z8 shadow">
+                  <div *ngIf="tabStates['tab2']" class="h-full overflow-auto">
+                    <button type="button" class="btn btn-primary">
+                      Add Members
+                    </button>
+                    <div class="data-table">
+                      <mat-card class="">
                         <mat-card-content>
                           <form>
                             <b class="text-base">Search Projects :</b>
@@ -197,7 +206,6 @@
                                 matSort
                                 class="mat-elevation-z8 overflow-y-scroll"
                                 style="
-                                  height: calc(35vh - 100px);
                                   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
                                     0 6px 10px 0 rgba(0, 0, 0, 0.14),
                                     0 1px 18px 0 rgba(0, 0, 0, 0.12);
@@ -243,7 +251,7 @@
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
-                                    class="point"
+                                    class="point hover:text-[#cb0c9f] cursor-pointer"
                                   >
                                     {{ document.projectName }}
                                   </mat-cell>
@@ -258,7 +266,7 @@
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
-                                    class="point"
+                                    class="point hover:text-[#cb0c9f] cursor-pointer"
                                   >
                                     {{ document.projectName }}
                                   </mat-cell>
@@ -273,7 +281,7 @@
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
-                                    class="bold"
+                                    class="bold font-semibold"
                                   >
                                     {{ document.members }}
                                   </mat-cell>
@@ -290,7 +298,11 @@
                                     <button
                                       mat-icon-button
                                       class="custom-button custom-button-delete mat-raised-button"
-                                      style="height: 30px; width: 30px"
+                                      style="
+                                        height: 30px;
+                                        width: 30px;
+                                        background-color: #e91e63;
+                                      "
                                       aria-label="Example icon button with a delete icon"
                                       type="button"
                                       (click)="
@@ -302,7 +314,10 @@
                                       color="accent"
                                       matTooltip="Delete"
                                     >
-                                      <mat-icon>delete_forever</mat-icon>
+                                      <mat-icon
+                                        class="absolute text-sm text-white top-2 right-1"
+                                        >delete_forever</mat-icon
+                                      >
                                     </button></mat-cell
                                   >
                                 </ng-container>
@@ -341,7 +356,7 @@
                               mat-icon-button
                               aria-label="Example icon button with a delete icon"
                               type="button"
-                              class="mt-4 custom-delete mat-raised-button"
+                              class="mt-4 custom-delete bg-[#e91e63] mat-raised-button"
                               (click)="deleteSelected()"
                               color="accent"
                             >
@@ -352,8 +367,9 @@
                               <mat-table
                                 [dataSource]="dataSource"
                                 matSort
-                                class="mat-elevation-z8"
+                                class="mat-elevation-z8 overflow-y-auto"
                                 style="
+                                  max-height: calc(100vh - 800px);
                                   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
                                     0 6px 10px 0 rgba(0, 0, 0, 0.14),
                                     0 1px 18px 0 rgba(0, 0, 0, 0.12);
@@ -393,7 +409,7 @@
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
-                                    class="point"
+                                    class="point hover:text-[#cb0c9f] cursor-pointer"
                                   >
                                     {{ document.projectName }}
                                   </mat-cell>
@@ -408,7 +424,7 @@
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
-                                    class="point"
+                                    class="point hover:text-[#cb0c9f] cursor-pointer"
                                   >
                                     {{ document.projectName }}
                                   </mat-cell>
@@ -423,7 +439,7 @@
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
-                                    class="bold"
+                                    class="bold font-semibold"
                                   >
                                     {{ document.members }}
                                   </mat-cell>
@@ -439,7 +455,7 @@
                                   <mat-cell *matCellDef="let document">
                                     <button
                                       mat-icon-button
-                                      class="custom-button custom-button-delete mat-raised-button"
+                                      class="custom-button custom-button-delete bg-[#e91e63] mat-raised-button"
                                       aria-label="Example icon button with a delete icon"
                                       type="button"
                                       (click)="

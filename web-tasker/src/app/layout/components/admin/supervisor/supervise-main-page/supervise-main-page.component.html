@@ -1,8 +1,8 @@
 <div class="container-fluid page">
   <div class="page__box p-3 mt-2">supervise</div>
-  <div class="page__content shadow p-3 position-relative">
-    <div class="page__content-data">
-      <div class="centered-content">
+  <div class="page__content shadow p-3 relative">
+    <div class="page__content-data h-full">
+      <div class="centered-content h-full">
         <div
           class="teams-container"
           style="
@@ -10,11 +10,11 @@
             width: 100%;
             height: 100%;
             max-width: 1280px;
-            max-height: calc(90vh - 170px);
+            max-height: calc(100vh - 100px);
             background: white;
           "
         >
-          <div class="teams p-5">
+          <div class="teams p-5 h-full">
             <div class="">
               <div class="flex justify-between">
                 <div class="py-2">
@@ -94,7 +94,7 @@
               </div>
             </div>
 
-            <div class="teams-inside">
+            <div class="teams-inside h-full">
               <div class="">
                 <div class="text-lg flex justify-between w-full">
                   <div class="">
@@ -109,7 +109,10 @@
                   </div>
                 </div>
                 <div class="border-t my-4"></div>
-                <div class="flex flex-wrap gap-4 overflow-y-auto h-80">
+                <div
+                  class="flex flex-wrap gap-4 overflow-y-auto h-full"
+                  style="max-height: calc(50vh - 200px)"
+                >
                   <div
                     class="card shadow-2xl cursor-pointer"
                     *ngFor="let team of teams"
