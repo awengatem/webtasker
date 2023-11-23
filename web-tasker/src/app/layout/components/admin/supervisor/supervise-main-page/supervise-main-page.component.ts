@@ -22,6 +22,7 @@ export class SuperviseMainPageComponent implements OnInit {
   theDifference = 30;
   currentTime = '11:00:00:11';
   bounceAnimationTrigger = true;
+  todayDate = new Date();
 
   constructor(
     private supervisorService: SupervisorService,

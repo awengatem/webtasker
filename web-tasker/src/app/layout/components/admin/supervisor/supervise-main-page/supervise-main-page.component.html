@@ -16,14 +16,15 @@
         >
           <div class="teams p-5">
             <div class="">
-              <div class="">
-                <h1>
+              <div class="flex justify-between">
+                <div class="py-2">
                   <i
                     class="fa-sharp fa-solid fa-users-rectangle"
                     [class.color-change]="bounceAnimationTrigger"
                   ></i>
                   My Teams Data
-                </h1>
+                </div>
+                <div class="text-lg text-[#22b8f0]">{{ todayDate }}</div>
                 <!-- <button
                   type="button"
                   class="btn btn-outline-primary"
