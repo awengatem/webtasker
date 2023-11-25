@@ -1,15 +1,15 @@
-<div class="container-fluid page">
+<div class="container-fluid h-screen">
   <div class="page__box p-3 mt-2">Title</div>
-  <div class="page__content shadow p-3 position-relative">
+  <div class="page__content shadow p-3">
     <div class="page__content-data">
-      <div class="row">
-        <div class="col-3">
+      <div class="border flex">
+        <div class="w-3/12">
           <div class="w-75 mb-2">
             <button type="button" class="btn btn-primary">
               + Create a team
             </button>
           </div>
-          <div class="card">
+          <div class="card hover:border-[#22b8f0] cursor-pointer">
             <div class="card-header">
               <h1 class="text-center">Teams</h1>
             </div>
@@ -23,40 +23,69 @@
                 class="fa-solid fa-magnifying-glass text-base absolute top-1/2 transform -translate-y-1/2 right-2"
               ></i>
             </div>
-            <div class="list-container">
+            <div
+              class="list-container overflow-y-scroll h-full"
+              style="max-height: calc(100vh - 400px)"
+            >
               <ul class="list-group list-group-flush">
                 <li *ngFor="let team of teams" class="list-group-item">
-                  <h2>{{ teams.indexOf(team) + 1 }}. {{ team.teamName }}</h2>
+                  <h2 (click)="loadTeamInfo(team)">
+                    {{ teams.indexOf(team) + 1 }}. {{ team.teamName }}
+                  </h2>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <div class="col-9 bg-slate-500">
-          <div class="teams-container">
-            <div class="container">
-              <div class="row p-3">
+        <div class="w-9/12 h-full" style="max-height: calc(100vh - 200px)">
+          <div class="teams-container flex w-full max-w-7xl h-auto bg-white">
+            <!-- <div
+              class="container flex bg-white w-full max-w-5xl max-h-[calc(90vh - 200px)]"
+              style="
+                display: flex;
+                width: 100%;
+                max-width: 900px;
+                max-height: calc(90vh - 170px);
+                background: white;
+              "
+            > -->
+            <div class="container flex bg-white w-full max-w-5xl">
+              <div class="row flex w-full p-3">
                 <div class="d-flex mb-3 p-3 border rounded">
-                  <div class="me-auto p-2">cohort</div>
-                  <div class="p-2">Active</div>
-                  <div class="p-2">13</div>
+                  <div class="me-auto p-2">{{ teaminfo.teamName }}</div>
+
+                  <div
+                    class="p-2"
+                    [ngClass]="{
+                      'text-green-600': teaminfo.status === 'Active',
+                      'text-red-600': teaminfo.status === 'Unproductive'
+                    }"
+                  >
+                    <i class="fa-solid fa-signal fa-glow"></i>
+                    <p class="text-xs">{{ teaminfo.status }}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="teams-container">
-            <div class="container">
-              <div class="flex overflow-x-scroll gap-2">
+          <div class="teams-container flex w-full max-w-7xl bg-white">
+            <div
+              class="container"
+              style="display: flex; width: 100%; background: white"
+            >
+              <div class="flex w-full overflow-x-scroll gap-2">
                 <div class="col-sm-3">
                   <div
-                    class="card card-active"
+                    class="card cursor-pointer border-[#22b8f0]"
                     id="tab1"
                     (click)="showTab('tab1')"
                   >
                     <div class="card-body">
-                      <h2 class="card-title">Team Members</h2>
+                      <h2 class="card-title">Members</h2>
                       <div class="d-flex">
-                        <div class="num px-2"><p>20</p></div>
+                        <div class="num flex justify-around items-center px-2">
+                          <p>{{ teaminfo.members }}</p>
+                        </div>
                         <div>
                           <h4 class="card-text">active : 6</h4>
                         </div>
@@ -65,11 +94,17 @@
                   </div>
                 </div>
                 <div class="col-sm-3">
-                  <div class="card" id="tab2" (click)="showTab('tab2')">
+                  <div
+                    class="card card-active"
+                    id="tab2"
+                    (click)="showTab('tab2')"
+                  >
                     <div class="card-body">
-                      <h2 class="card-title">Team Project</h2>
+                      <h2 class="card-title">Projects</h2>
                       <div class="d-flex">
-                        <div class="num px-2"><p>24</p></div>
+                        <div class="num flex justify-around items-center px-2">
+                          <p>{{ teaminfo.projects }}</p>
+                        </div>
                         <div>
                           <h4 class="card-text">active : 4</h4>
                         </div>
@@ -80,9 +115,11 @@
                 <div class="col-sm-3">
                   <div class="card" id="tab3" (click)="showTab('tab3')">
                     <div class="card-body">
-                      <h2 class="card-title">Supervisor</h2>
+                      <h2 class="card-title">Supervisors</h2>
                       <div class="d-flex">
-                        <div class="num px-2"><p>1</p></div>
+                        <div class="num flex justify-around items-center px-2">
+                          <p>{{ teaminfo.supervisors }}</p>
+                        </div>
                         <div>
                           <h4 class="card-text">active : 1</h4>
                         </div>
@@ -99,7 +136,7 @@
                   </div>
                 </div>
                 <div class="col-sm-3">
-                  <div class="card" id="tab4" (click)="showTab('tab4')">
+                  <div class="card" id="tab5" (click)="showTab('tab5')">
                     <div class="card-body">
                       <h2 class="card-title">Sessions</h2>
                       <h1 class="card-text">4:00:00:00</h1>
@@ -109,9 +146,12 @@
               </div>
             </div>
           </div>
-          <div class="teams-container">
-            <div class="container">
-              <div class="row p-3">
+          <div class="teams-container flex w-full max-w-7xl h-full bg-white">
+            <div
+              class="container flex bg-white h-full"
+              style="max-height: calc(100vh - 500px)"
+            >
+              <div class="row flex w-full border p-3">
                 <div class="container-table p-3 border rounded h-full">
                   <div *ngIf="tabStates['tab1']" class="">
                     <div class="d-flex">
@@ -131,24 +171,29 @@
                     </div>
                     here
                   </div>
-                  <div *ngIf="tabStates['tab2']" class="">tab 2</div>
-                  <div *ngIf="tabStates['tab3']" class="">
+                  <div *ngIf="tabStates['tab2']" class="h-full overflow-auto">
+                    <button type="button" class="btn btn-primary">
+                      Assign Projects
+                    </button>
                     <div class="data-table">
-                      <mat-card class="mat-elevation-z8 shadow">
+                      <mat-card class="">
                         <mat-card-content>
                           <form>
-                            <b>Search Records :</b> &nbsp;&nbsp;
-                            <mat-form-field>
+                            <b class="text-base">Search Projects :</b>
+                            &nbsp;&nbsp;
+                            <mat-form-field style="flex: 0 5px 50%">
                               <mat-label>Filter</mat-label>
                               <input matInput (keyup)="applyFilter($event)" />
                             </mat-form-field>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <b>Delete Selected Records :</b> &nbsp;&nbsp;
+                            <b class="text-base">Delete Selected Projects :</b>
+                            &nbsp;&nbsp;
                             <button
                               mat-icon-button
                               aria-label="Example icon button with a delete icon"
                               type="button"
                               class="mt-4 custom-delete mat-raised-button"
+                              style="background-color: #e91e63"
                               (click)="deleteSelected()"
                               color="accent"
                             >
@@ -159,7 +204,7 @@
                               <mat-table
                                 [dataSource]="dataSource"
                                 matSort
-                                class="mat-elevation-z8"
+                                class="mat-elevation-z8 overflow-y-scroll"
                                 style="
                                   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
                                     0 6px 10px 0 rgba(0, 0, 0, 0.14),
@@ -168,7 +213,10 @@
                               >
                                 <!-- Checkbox Column -->
                                 <ng-container matColumnDef="Select">
-                                  <mat-header-cell *matHeaderCellDef>
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    style="color: #22b8f0"
+                                  >
                                     <mat-checkbox
                                       (change)="$event ? masterToggle() : null"
                                       [checked]="
@@ -203,12 +251,27 @@
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
-                                    class="point"
+                                    class="point hover:text-[#cb0c9f] cursor-pointer"
                                   >
                                     {{ document.projectName }}
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Teams Column -->
+                                <!-- Createdby Column -->
+                                <ng-container matColumnDef="Createdby" class="">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Created by
+                                  </mat-header-cell>
+                                  <mat-cell
+                                    *matCellDef="let document"
+                                    class="point hover:text-[#cb0c9f] cursor-pointer"
+                                  >
+                                    {{ document.createdBy }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Members Column -->
                                 <ng-container matColumnDef="Members" class="">
                                   <mat-header-cell
                                     *matHeaderCellDef
@@ -218,48 +281,181 @@
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
-                                    class="bold"
+                                    class="bold font-semibold"
                                   >
                                     {{ document.members }}
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Createdat Column -->
-                                <ng-container matColumnDef="CreatedAt" class="">
-                                  <mat-header-cell
-                                    *matHeaderCellDef
-                                    mat-sort-header
-                                  >
-                                    Created at
-                                  </mat-header-cell>
-                                  <mat-cell *matCellDef="let document">
-                                    {{ convertDate(document.createdAt) }}
-                                  </mat-cell>
-                                </ng-container>
-                                <!-- Createdby Column -->
-                                <ng-container matColumnDef="CreatedBy" class="">
-                                  <mat-header-cell
-                                    *matHeaderCellDef
-                                    mat-sort-header
-                                  >
-                                    Created by
-                                  </mat-header-cell>
-                                  <mat-cell *matCellDef="let document">
-                                    {{ document.createdBy }}
-                                  </mat-cell>
-                                </ng-container>
-
                                 <!-- Delete Icon -->
-                                <ng-container matColumnDef="Delete">
+                                <ng-container matColumnDef="Remove">
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    Delete
+                                    Remove
                                   </mat-header-cell>
                                   <mat-cell *matCellDef="let document">
                                     <button
                                       mat-icon-button
                                       class="custom-button custom-button-delete mat-raised-button"
+                                      style="
+                                        height: 30px;
+                                        width: 30px;
+                                        background-color: #e91e63;
+                                      "
+                                      aria-label="Example icon button with a delete icon"
+                                      type="button"
+                                      (click)="
+                                        confirmDeletion(
+                                          document._id,
+                                          document.projectName
+                                        )
+                                      "
+                                      color="accent"
+                                      matTooltip="Delete"
+                                    >
+                                      <mat-icon
+                                        class="absolute text-sm text-white top-2 right-1"
+                                        >delete_forever</mat-icon
+                                      >
+                                    </button></mat-cell
+                                  >
+                                </ng-container>
+                                <mat-header-row
+                                  *matHeaderRowDef="displayedColumns"
+                                ></mat-header-row>
+                                <mat-row
+                                  *matRowDef="
+                                    let row;
+                                    columns: displayedColumns
+                                  "
+                                ></mat-row
+                              ></mat-table>
+                              <mat-paginator
+                                [pageSizeOptions]="[10, 25, 50]"
+                              ></mat-paginator>
+                            </div>
+                          </form>
+                        </mat-card-content>
+                      </mat-card>
+                    </div>
+                  </div>
+                  <div *ngIf="tabStates['tab3']" class="">
+                    <div class="data-table">
+                      <mat-card class="mat-elevation-z8 shadow">
+                        <mat-card-content>
+                          <form>
+                            <b>Search Records :</b> &nbsp;&nbsp;
+                            <mat-form-field>
+                              <mat-label>Filter</mat-label>
+                              <input matInput (keyup)="applyFilter($event)" />
+                            </mat-form-field>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <b>Delete Selected Records :</b> &nbsp;&nbsp;
+                            <button
+                              mat-icon-button
+                              aria-label="Example icon button with a delete icon"
+                              type="button"
+                              class="mt-4 custom-delete bg-[#e91e63] mat-raised-button"
+                              (click)="deleteSelected()"
+                              color="accent"
+                            >
+                              <mat-icon class="text-white">delete</mat-icon>
+                            </button>
+                            <div>
+                              <!-- TABLE BEGINS HERE-->
+                              <mat-table
+                                [dataSource]="dataSource"
+                                matSort
+                                class="mat-elevation-z8 overflow-y-auto"
+                                style="
+                                  max-height: calc(100vh - 800px);
+                                  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+                                    0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                                    0 1px 18px 0 rgba(0, 0, 0, 0.12);
+                                "
+                              >
+                                <!-- Checkbox Column -->
+                                <ng-container matColumnDef="Select">
+                                  <mat-header-cell *matHeaderCellDef>
+                                    <mat-checkbox
+                                      (change)="$event ? masterToggle() : null"
+                                      [checked]="
+                                        selection.hasValue() && isAllSelected()
+                                      "
+                                      [indeterminate]="
+                                        selection.hasValue() && !isAllSelected()
+                                      "
+                                    ></mat-checkbox>
+                                  </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" class="">
+                                    <mat-checkbox
+                                      (click)="$event.stopPropagation()"
+                                      (change)="
+                                        $event ? selection.toggle(row) : null
+                                      "
+                                      [checked]="selection.isSelected(row)"
+                                      [aria-label]="checkboxLabel(row)"
+                                    ></mat-checkbox>
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Firstname Column -->
+                                <ng-container matColumnDef="Firstname" class="">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    First name
+                                  </mat-header-cell>
+                                  <mat-cell
+                                    *matCellDef="let document"
+                                    class="point hover:text-[#cb0c9f] cursor-pointer"
+                                  >
+                                    {{ document.projectName }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Lastname Column -->
+                                <ng-container matColumnDef="Lastname" class="">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Last name
+                                  </mat-header-cell>
+                                  <mat-cell
+                                    *matCellDef="let document"
+                                    class="point hover:text-[#cb0c9f] cursor-pointer"
+                                  >
+                                    {{ document.projectName }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Email Column -->
+                                <ng-container matColumnDef="Email" class="">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Email
+                                  </mat-header-cell>
+                                  <mat-cell
+                                    *matCellDef="let document"
+                                    class="bold font-semibold"
+                                  >
+                                    {{ document.members }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Delete Icon -->
+                                <ng-container matColumnDef="Remove">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Remove
+                                  </mat-header-cell>
+                                  <mat-cell *matCellDef="let document">
+                                    <button
+                                      mat-icon-button
+                                      class="custom-button custom-button-delete bg-[#e91e63] mat-raised-button"
                                       aria-label="Example icon button with a delete icon"
                                       type="button"
                                       (click)="
@@ -294,8 +490,8 @@
                       </mat-card>
                     </div>
                   </div>
-
                   <div *ngIf="tabStates['tab4']" class="">tab 4</div>
+                  <div *ngIf="tabStates['tab5']" class="">tab 5</div>
                 </div>
               </div>
             </div>

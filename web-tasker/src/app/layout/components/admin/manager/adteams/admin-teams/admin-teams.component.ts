@@ -10,6 +10,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort } from '@angular/material/sort';
 import { SnackBarService } from 'src/app/services/snackbar.service';
 import Swal from 'sweetalert2';
+import { ProjectService } from 'src/app/services/api/project.service';
 
 @Component({
   selector: 'app-admin-teams',
@@ -19,7 +20,6 @@ import Swal from 'sweetalert2';
 export class AdminTeamsComponent implements OnInit {
   teams!: any[];
   teamsLength = 0;
-  members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
   /**define modal */
   modalRef: MdbModalRef<EditTeammodalComponent> | null = null;
@@ -40,6 +40,7 @@ export class AdminTeamsComponent implements OnInit {
     tab2: false,
     tab3: false,
     tab4: false,
+    tab5: false,
   };
 
   /**table variables */
@@ -49,10 +50,9 @@ export class AdminTeamsComponent implements OnInit {
   displayedColumns: string[] = [
     'Select',
     'Projectname',
+    'Createdby',
     'Members',
-    'CreatedAt',
-    'CreatedBy',
-    'Delete',
+    'Remove',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -77,57 +77,61 @@ export class AdminTeamsComponent implements OnInit {
       createdBy: 'joe123',
     },
     {
-      projectName: 'project4',
+      projectName: 'gravity',
       members: 15,
       createdAt: '2023-01-09T00:49:27.372Z',
       createdBy: 'joe123',
     },
   ];
 
+  /**TEAM INFO VARIABLES */
+  /**Team Info object */
+  teaminfo = {
+    teamId: '',
+    teamName: 'team',
+    status: 'Unknown',
+    members: 0,
+    projects: 0,
+    supervisors: 0,
+  };
+  teamProjectsArr!: any[];
+
   constructor(
     private teamService: TeamService,
+    private projectService: ProjectService,
     private projectStatusService: ProjectStatusService,
     private snackBarService: SnackBarService,
     private modalService: MdbModalService
   ) {
     //load data on table
-    this.loadAllProjects();
+    // this.loadAllProjects();
   }
 
   ngOnInit(): void {
-    this.getTeams();
+    this.getTeams().then((team) => {
+      /**Load teaminfo for the first team */
+      this.loadTeamInfo(team);
+    });
+    this.showTab('tab2');
   }
 
+  /***  TEAM SECTION  ***/
   /**Get all teams from API */
   getTeams() {
-    this.teamService.getAllTeams().subscribe((teams: any) => {
-      this.teams = teams;
-      /**pushs team status to teams*/
-      this.teams.forEach((team) => (team.status = 'Unknown'));
-      this.teamsLength = teams.length;
-      //get team members for each
-      this.getTeamMembers();
-      //get team projects for each
-      this.getTeamProjects();
-      console.log(this.teams);
+    return new Promise((resolve, reject) => {
+      this.teamService.getAllTeams().subscribe((teams: any) => {
+        this.teams = teams;
+        /**pushs team status to teams*/
+        this.teams.forEach((team) => (team.status = 'Unknown'));
+        this.teamsLength = teams.length;
+        //get team members for each
+        this.getTeamMembers();
+        //get team projects for each
+        this.getTeamProjectsNumber();
+        console.log(this.teams);
+        resolve(teams[0]);
+      });
     });
-  }
-
-  /**Get team members for each */
-  getTeamMembers() {
-    if (this.teams.length > 0) {
-      for (let i = 0; i < this.teams.length; i++) {
-        this.teamService
-          .getTeamMembersDoc(this.teams[i]._id)
-          .subscribe((members: any) => {
-            // console.log(members.length);
-            //push number of members to teams
-            this.teams[i].members = members.length;
-          });
-      }
-    }
-    //get the team status here
-    this.getTeamStatus();
   }
 
   /**Get the team status from active status docs
@@ -168,7 +172,7 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**Get team projects for each */
-  getTeamProjects() {
+  getTeamProjectsNumber() {
     if (this.teams.length > 0) {
       for (let i = 0; i < this.teams.length; i++) {
         this.teamService
@@ -181,6 +185,70 @@ export class AdminTeamsComponent implements OnInit {
       }
     }
   }
+
+  /**Get team members for each */
+  getTeamMembers() {
+    if (this.teams.length > 0) {
+      for (let i = 0; i < this.teams.length; i++) {
+        this.teamService
+          .getTeamMembersDoc(this.teams[i]._id)
+          .subscribe((members: any) => {
+            // console.log(members.length);
+            //push number of members to teams
+            this.teams[i].members = members.length;
+          });
+      }
+    }
+    //get the team status here
+    this.getTeamStatus();
+  }
+
+  /**Load the team info */
+  loadTeamInfo(team: any) {
+    const teamId = team._id;
+    console.log(team);
+    /**Fill the tabs data */
+    this.teaminfo.teamId = team._id;
+    this.teaminfo.teamName = team.teamName;
+    this.teaminfo.status = team.status;
+    this.teaminfo.members = team.members;
+    this.teaminfo.projects = team.projects;
+    // this.teaminfo.supervisors = team.supervisors;
+    /**get the team projects */
+    this.getTeamProjects(teamId);
+  }
+  /*** END OF TEAM SECTION ***/
+
+  /***  TEAM INFO SECTION  ***/
+  /**Get the team Projects */
+  getTeamProjects(teamId: string) {
+    this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
+      // console.log(projects);
+      /**push number of projects to teams*/
+      this.teamProjectsArr = projects;
+      console.log(this.teamProjectsArr);
+      /**Get project members */
+      this.getProjectMembers();
+      /**Load the projects to table */
+      this.loadAllProjects(projects);
+    });
+  }
+
+  /**Get project members*/
+  getProjectMembers() {
+    if (this.teamProjectsArr.length > 0) {
+      for (let i = 0; i < this.teamProjectsArr.length; i++) {
+        this.projectService
+          .getProjectMembers(this.teamProjectsArr[i]._id)
+          .subscribe((members: any) => {
+            // console.log(members.length);
+            //push number of members to projects
+            this.teamProjectsArr[i].members = members.length;
+          });
+      }
+    }
+  }
+  /*** END OF TEAM INFO SECTION ***/
 
   /**METHODS FOR DATASOURCE */
   /**check whether all are selected */
@@ -216,11 +284,11 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**Method to reload user table */
-  loadAllProjects() {
+  loadAllProjects(projects: any) {
     //reset the selection
     this.selection = new SelectionModel<any>(true, []);
     //add projects to table
-    this.dataSource = new MatTableDataSource(this.projects);
+    this.dataSource = new MatTableDataSource(projects);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     console.log(this.projects);
@@ -286,7 +354,7 @@ export class AdminTeamsComponent implements OnInit {
     }).then((result) => {
       //delete project from db
       if (result.value) {
-        this.deleteProject(projectId);
+        this.deleteTeamProject(projectId);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.snackBarService.displaySnackbar(
           'error',
@@ -313,29 +381,33 @@ export class AdminTeamsComponent implements OnInit {
     // }
   }
 
-  /**Delete a specified project */
-  deleteProject(projectId: string) {
-    // this.projectService.deleteProject(projectId).subscribe({
-    //   next: (response: any) => {
-    //     console.log(response);
-    //     this.snackBarService.displaySnackbar('success', response.message);
-    //     this.loadAllProjects();
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //     Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //   },
-    // });
+  //removing specific project from team
+  deleteTeamProject(projectId: string) {
+    //place project to be deleted in array
+    let projects = [projectId];
+
+    //pass array of projects to be deleted to api
+    this.teamService
+      .deleteTeamProject(this.teaminfo.teamId, projects)
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.snackBarService.displaySnackbar('success', res.message);
+          this.getTeamProjects(this.teaminfo.teamId);
+        },
+        error: (err: any) => {
+          console.log(err);
+          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+        },
+      });
   }
 
-  /**********END OF SECTION ************* */
+  /**********END OF DATASOURCE SECTION ************* */
 
-  
-
-  /** METHODS FOR NAVIGATION OF TABS */  
+  /** METHODS FOR NAVIGATION OF TABS */
   /**getting the open tab*/
   getOpenTab(): string {
-    this.tabIdArray = ['tab1', 'tab2', 'tab3', 'tab4'];
+    this.tabIdArray = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5'];
     this.tabIdArray.forEach((tab) => {
       this.loopElement = document.getElementById(tab);
       if (this.loopElement.classList.contains('card-active')) {
@@ -401,4 +473,5 @@ export class AdminTeamsComponent implements OnInit {
       this.getTeams();
     });
   }
+  /**********END OF MODAL SECTION ************* */
 }
