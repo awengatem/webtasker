@@ -1,4 +1,4 @@
-<div class="container-fluid h-screen">
+<div class="container-fluid page">
   <div class="page__box p-3 mt-2">Title</div>
   <div class="page__content shadow p-3">
     <div class="page__content-data">
@@ -171,7 +171,7 @@
                     </div>
                     here
                   </div>
-                  <div *ngIf="tabStates['tab2']" class="h-full overflow-auto">
+                  <div *ngIf="tabStates['tab2']" class="h-full">
                     <button type="button" class="btn btn-primary">
                       Assign Projects
                     </button>
@@ -204,7 +204,7 @@
                               <mat-table
                                 [dataSource]="dataSource"
                                 matSort
-                                class="mat-elevation-z8 overflow-y-scroll"
+                                class="mat-elevation-z8 bg-blue-400 overflow-y-auto h-44"
                                 style="
                                   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
                                     0 6px 10px 0 rgba(0, 0, 0, 0.14),
