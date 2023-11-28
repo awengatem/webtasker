@@ -6,6 +6,7 @@ import { ProjectStatusService } from 'src/app/services/api/project-status.servic
 import { NewProjectModalComponent } from '../new-projectmodal/new-projectmodal.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { EditProjectmodalComponent } from '../edit-projectmodal/edit-projectmodal.component';
+import { AdProjectInfoModalComponent } from '../ad-project-info-modal/ad-project-info-modal.component';
 
 @Component({
   selector: 'app-ad-projects',
@@ -234,6 +235,24 @@ export class AdProjectsComponent implements OnInit {
 
     this.isModalOpen = true;
     this.modalRef = this.modalService.open(EditProjectmodalComponent, {
+      modalClass: 'modal-dialog-centered modal-lg',
+    });
+    //listen when closed
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+      this.isModalOpen = false;
+      /**Refresh projects */
+      this.getProjects();
+    });
+  }
+
+  /**open project info modal */
+  openProjectInfoModal(projectId: string) {
+    /**save the project id to local storage*/
+    localStorage.setItem('capturedProjectId', projectId);
+
+    this.isModalOpen = true;
+    this.modalRef = this.modalService.open(AdProjectInfoModalComponent, {
       modalClass: 'modal-dialog-centered modal-lg',
     });
     //listen when closed

@@ -1,19 +1,4 @@
-.container {
-  display: flex;
-  width: 100%;
-  // height: 100%;
-  max-width: 900px;
-  max-height: calc(90vh - 170px);
-  background: white;
-}
 .teams-container {
-  display: flex;
-  width: 100%;
-  // height: 100%;
-  max-width: 100rem;
-  max-height: calc(90vh - 170px);
-  background: white;
-
   .card {
     &:hover {
       cursor: pointer;
@@ -39,35 +24,9 @@
     }
   }
 
-  .row {
-    display: flex;
-    border-style: none;
-    border-width: 1px;
-    margin-left: 0px;
-    margin-right: 0px;
-    width: 100%;
-  }
-  .num {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
   .card-text {
     display: flex;
     justify-items: end;
     color: green;
   }
-}
-.table {
-  font-size: large;
-  width: 100%;
-}
-.container-table {
-  height: 300px; /* Set the desired fixed height */
-  overflow: auto; /* Enable scrolling */
-}
-
-.list-container {
-  max-height: 445px;
-  overflow: auto; /* Enable scrolling */
 }
