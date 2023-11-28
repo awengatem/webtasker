@@ -314,7 +314,7 @@ export class AdminTeamsComponent implements OnInit {
       console.log(projectIdArr);
       //confirm and delete projects
       Swal.fire({
-        title: `Delete ${selectedProjectsArr.length} projects from the database?`,
+        title: `Remove ${selectedProjectsArr.length} projects from the team?`,
         text: 'This process is irreversible.',
         icon: 'warning',
         showCancelButton: true,
