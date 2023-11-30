@@ -325,7 +325,7 @@ export class AdminTeamsComponent implements OnInit {
       }).then((result) => {
         //delete projects from db
         if (result.value) {
-          this.deleteMultipe(projectIdArr);
+          this.deleteTeamProjects(projectIdArr);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           this.snackBarService.displaySnackbar(
             'error',
@@ -354,7 +354,7 @@ export class AdminTeamsComponent implements OnInit {
     }).then((result) => {
       //delete project from db
       if (result.value) {
-        this.deleteTeamProject(projectId);
+        this.deleteTeamProjects([projectId]);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.snackBarService.displaySnackbar(
           'error',
@@ -365,30 +365,27 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**Method to deletemultiple */
-  deleteMultipe(projectIdArr: any[]) {
-    // if (projectIdArr.length > 0) {
-    //   this.projectService.deleteMultipleProjects(projectIdArr).subscribe({
-    //     next: (response: any) => {
-    //       console.log(response);
-    //       this.snackBarService.displaySnackbar('success', response.message);
-    //       this.loadAllProjects();
-    //     },
-    //     error: (err) => {
-    //       console.log(err);
-    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //     },
-    //   });
-    // }
-  }
+  // deleteMultipe(projectIdArr: any[]) {
+  // if (projectIdArr.length > 0) {
+  //   this.projectService.deleteMultipleProjects(projectIdArr).subscribe({
+  //     next: (response: any) => {
+  //       console.log(response);
+  //       this.snackBarService.displaySnackbar('success', response.message);
+  //       this.loadAllProjects();
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+  //     },
+  //   });
+  // }
+  // }
 
   //removing specific project from team
-  deleteTeamProject(projectId: string) {
-    //place project to be deleted in array
-    let projects = [projectId];
-
+  deleteTeamProjects(projectIdArr: string[]) {
     //pass array of projects to be deleted to api
     this.teamService
-      .deleteTeamProject(this.teaminfo.teamId, projects)
+      .deleteTeamProject(this.teaminfo.teamId, projectIdArr)
       .subscribe({
         next: (res: any) => {
           console.log(res);
