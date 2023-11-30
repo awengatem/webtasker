@@ -91,7 +91,9 @@ export class AdminTeamsComponent implements OnInit {
   ngOnInit(): void {
     this.getTeams().then((team) => {
       /**Load teaminfo for the first team */
-      this.loadTeamInfo(team);
+      setTimeout(() => {
+        this.loadTeamInfo(team);
+      }, 200);
     });
     this.showTab('tab2');
   }
@@ -110,6 +112,7 @@ export class AdminTeamsComponent implements OnInit {
         //get team projects for each
         this.getTeamProjectsNumber();
         console.log(this.teams);
+        //return the first team
         resolve(teams[0]);
       });
     });
