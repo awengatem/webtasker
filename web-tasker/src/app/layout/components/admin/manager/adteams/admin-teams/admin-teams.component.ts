@@ -340,11 +340,11 @@ export class AdminTeamsComponent implements OnInit {
     }
   }
 
-  /**Method to confirm project deletion */
+  /**Method to confirm project removal */
   confirmDeletion(projectId: string, projectname: string) {
     Swal.fire({
-      title: `Delete "${projectname}" from the database?`,
-      text: 'This process is irreversible.',
+      title: `Remove "${projectname}"?`,
+      text: `${projectname} will be removed from team.`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, go ahead.',
