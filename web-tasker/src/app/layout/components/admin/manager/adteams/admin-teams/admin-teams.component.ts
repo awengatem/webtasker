@@ -242,13 +242,13 @@ export class AdminTeamsComponent implements OnInit {
     return numSelected === numRows;
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
+  projectMasterToggle() {
     this.areAllProjectsSelected()
       ? this.projectSelection.clear()
       : this.projectDataSource.data.forEach((r) => this.projectSelection.select(r));
   }
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row: any): string {
+  projectCheckboxLabel(row: any): string {
     if (!row) {
       return `${this.areAllProjectsSelected() ? 'select' : 'deselect'} all`;
     }
@@ -258,7 +258,7 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**method used by search filter */
-  applyFilter(event: Event) {
+  applyProjectFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.projectDataSource.filter = filterValue.trim().toLowerCase();
 
@@ -279,7 +279,7 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**Delete selected project(s) */
-  deleteSelected() {
+  deleteSelectedProjects() {
     const selectedProjectsArr = this.projectSelection.selected;
     let projectIdArr: any = [];
     console.log(selectedProjectsArr);
@@ -318,7 +318,7 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**Method to confirm project removal */
-  confirmDeletion(projectId: string, projectname: string) {
+  confirmProjectDeletion(projectId: string, projectname: string) {
     Swal.fire({
       title: `Remove "${projectname}"?`,
       text: `${projectname} will be removed from team.`,

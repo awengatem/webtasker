@@ -180,7 +180,7 @@
                             &nbsp;&nbsp;
                             <mat-form-field style="flex: 0 5px 50%">
                               <mat-label>Filter</mat-label>
-                              <input matInput (keyup)="applyFilter($event)" />
+                              <input matInput (keyup)="applyProjectFilter($event)" />
                             </mat-form-field>
                             &nbsp;&nbsp;
                             <b class="text-base">Remove Selected Projects :</b>
@@ -191,7 +191,7 @@
                               type="button"
                               class="mt-4 custom-delete mat-raised-button"
                               style="background-color: #e91e63"
-                              (click)="deleteSelected()"
+                              (click)="deleteSelectedProjects()"
                               color="accent"
                             >
                               <mat-icon class="text-white">delete</mat-icon>
@@ -220,7 +220,7 @@
                                     style="color: #22b8f0"
                                   >
                                     <mat-checkbox
-                                      (change)="$event ? masterToggle() : null"
+                                      (change)="$event ? projectMasterToggle() : null"
                                       [checked]="
                                         projectSelection.hasValue() &&
                                         areAllProjectsSelected()
@@ -242,7 +242,7 @@
                                       [checked]="
                                         projectSelection.isSelected(row)
                                       "
-                                      [aria-label]="checkboxLabel(row)"
+                                      [aria-label]="projectCheckboxLabel(row)"
                                     ></mat-checkbox>
                                   </mat-cell>
                                 </ng-container>
@@ -314,7 +314,7 @@
                                       aria-label="Example icon button with a delete icon"
                                       type="button"
                                       (click)="
-                                        confirmDeletion(
+                                        confirmProjectDeletion(
                                           document._id,
                                           document.projectName
                                         )
