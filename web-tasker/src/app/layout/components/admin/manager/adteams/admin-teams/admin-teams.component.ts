@@ -44,7 +44,6 @@ export class AdminTeamsComponent implements OnInit {
   };
 
   /**table variables */
-  totalUsers = 0;
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
@@ -56,6 +55,7 @@ export class AdminTeamsComponent implements OnInit {
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
   /**Temporary variable for testing datasource */
   projects = [
     {
@@ -204,7 +204,6 @@ export class AdminTeamsComponent implements OnInit {
   /*** END OF TEAM SECTION ***/
 
   /***  TEAM INFO SECTION  ***/
-
   /*** PROJECTS SECTION */
   /**Get the team Projects */
   getTeamProjects(teamId: string) {
@@ -277,13 +276,6 @@ export class AdminTeamsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     console.log(this.projects);
-  }
-
-  /**Method to convert timestamp to date */
-  convertDate(timestamp: string): string {
-    const date = new Date(timestamp);
-    // const newDate = date.toLocaleString();
-    return date.toLocaleString();
   }
 
   /**Delete selected project(s) */
@@ -386,6 +378,144 @@ export class AdminTeamsComponent implements OnInit {
 
   /*** END OF DATASOURCE SECTION ***/
   /*** END OF PROJECTS SECTION ***/
+
+  /*** MEMBERS SECTION */
+  /**Get the team Projects */
+  getTeamMembers(teamId: string) {
+    // this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
+    //   // console.log(projects);
+    //   /**push number of projects to teams*/
+    //   this.teamProjectsArr = projects;
+    //   console.log(this.teamProjectsArr);
+    //   /**Get project members */
+    //   this.getProjectMembers();
+    //   /**Load the projects to table */
+    //   this.loadAllProjects(projects);
+    // });
+  }
+
+  /**METHODS FOR MEMBERS DATASOURCE */
+  /**check whether all are selected */
+  areAllMembersSelected() {
+    // const numSelected = this.selection.selected.length;
+    // const numRows = !!this.dataSource && this.dataSource.data.length;
+    // return numSelected === numRows;
+  }
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  mMasterToggle() {
+    // this.areAllMembersSelected()
+    //   ? this.selection.clear()
+    //   : this.dataSource.data.forEach((r) => this.selection.select(r));
+  }
+  /** The label for the checkbox on the passed row */
+  mCheckboxLabel(row: any): string {
+    //
+    return ''; //delete this line
+  }
+
+  /**method used by search filter */
+  applyMemberFilter(event: Event) {
+    // const filterValue = (event.target as HTMLInputElement).value;
+    // this.dataSource.filter = filterValue.trim().toLowerCase();
+    // if (this.dataSource.paginator) {
+    //   this.dataSource.paginator.firstPage();
+    // }
+  }
+
+  /**Method to reload members table */
+  loadAllMembers(projects: any) {
+    // //reset the selection
+    // this.selection = new SelectionModel<any>(true, []);
+    // //add members to table
+    // this.dataSource = new MatTableDataSource(projects);
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+    // console.log(this.projects);
+  }
+
+  /**Delete selected member(s) */
+  deleteSelectedMembers() {
+    // const selectedProjectsArr = this.selection.selected;
+    // let projectIdArr: any = [];
+    // console.log(selectedProjectsArr);
+    // if (selectedProjectsArr.length > 0) {
+    //   //push only project ids in an array
+    //   selectedProjectsArr.forEach((item) => {
+    //     projectIdArr.push(item._id);
+    //   });
+    //   console.log(projectIdArr);
+    //   //confirm and delete projects
+    //   Swal.fire({
+    //     title: `Remove ${selectedProjectsArr.length} projects?`,
+    //     text: `${selectedProjectsArr.length} projects will be removed from the team?`,
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonText: 'Yes, go ahead.',
+    //     confirmButtonColor: '#e74c3c',
+    //     cancelButtonText: 'No, let me think',
+    //     cancelButtonColor: '#22b8f0',
+    //   }).then((result) => {
+    //     //delete projects from db
+    //     if (result.value) {
+    //       this.deleteTeamProjects(projectIdArr);
+    //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+    //       this.snackBarService.displaySnackbar(
+    //         'error',
+    //         'operation has been cancelled'
+    //       );
+    //       //reset the selection
+    //       this.selection = new SelectionModel<any>(true, []);
+    //     }
+    //   });
+    // } else {
+    //   this.snackBarService.displaySnackbar('error', 'no selected records');
+    // }
+  }
+
+  /**Method to confirm member removal */
+  confirmMembersDeletion(projectId: string, projectname: string) {
+    // Swal.fire({
+    //   title: `Remove "${projectname}"?`,
+    //   text: `${projectname} will be removed from team.`,
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonText: 'Yes, go ahead.',
+    //   confirmButtonColor: '#e74c3c',
+    //   cancelButtonText: 'No, let me think',
+    //   cancelButtonColor: '#22b8f0',
+    // }).then((result) => {
+    //   //delete project from db
+    //   if (result.value) {
+    //     this.deleteTeamProjects([projectId]);
+    //   } else if (result.dismiss === Swal.DismissReason.cancel) {
+    //     this.snackBarService.displaySnackbar(
+    //       'error',
+    //       'operation has been cancelled'
+    //     );
+    //   }
+    // });
+  }
+
+  //removing specific member from team
+  deleteTeamMembers(projectIdArr: string[]) {
+    //pass array of projects to be deleted to api
+    // this.teamService
+    //   .deleteTeamProject(this.teaminfo.teamId, projectIdArr)
+    //   .subscribe({
+    //     next: (res: any) => {
+    //       console.log(res);
+    //       this.snackBarService.displaySnackbar('success', res.message);
+    //       this.getTeamProjects(this.teaminfo.teamId);
+    //     },
+    //     error: (err: any) => {
+    //       console.log(err);
+    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+    //     },
+    //   });
+  }
+
+  /*** END OF MEMBERS DATASOURCE SECTION ***/
+  /*** END OF MEMBERS SECTION ***/
   /*** END OF TEAM INFO SECTION ***/
 
   /*** METHODS FOR NAVIGATION OF TABS ***/
