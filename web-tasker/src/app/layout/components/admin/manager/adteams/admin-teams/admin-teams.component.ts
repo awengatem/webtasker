@@ -95,7 +95,7 @@ export class AdminTeamsComponent implements OnInit {
         this.loadTeamInfo(team);
       }, 200);
     });
-    this.showTab('tab2');
+    this.showTab('tab1');
   }
 
   /***  TEAM SECTION  ***/
@@ -108,7 +108,7 @@ export class AdminTeamsComponent implements OnInit {
         this.teams.forEach((team) => (team.status = 'Unknown'));
         this.teamsLength = teams.length;
         //get team members for each
-        this.getTeamMembers();
+        this.getTeamMembersNumber();
         //get team projects for each
         this.getTeamProjectsNumber();
         console.log(this.teams);
@@ -171,7 +171,7 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**Get team members for each */
-  getTeamMembers() {
+  getTeamMembersNumber() {
     if (this.teams.length > 0) {
       for (let i = 0; i < this.teams.length; i++) {
         this.teamService
@@ -204,6 +204,8 @@ export class AdminTeamsComponent implements OnInit {
   /*** END OF TEAM SECTION ***/
 
   /***  TEAM INFO SECTION  ***/
+
+  /*** PROJECTS SECTION */
   /**Get the team Projects */
   getTeamProjects(teamId: string) {
     this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
@@ -232,7 +234,6 @@ export class AdminTeamsComponent implements OnInit {
       }
     }
   }
-  /*** END OF TEAM INFO SECTION ***/
 
   /**METHODS FOR DATASOURCE */
   /**check whether all are selected */
@@ -383,9 +384,11 @@ export class AdminTeamsComponent implements OnInit {
       });
   }
 
-  /**********END OF DATASOURCE SECTION ************* */
+  /*** END OF DATASOURCE SECTION ***/
+  /*** END OF PROJECTS SECTION ***/
+  /*** END OF TEAM INFO SECTION ***/
 
-  /** METHODS FOR NAVIGATION OF TABS */
+  /*** METHODS FOR NAVIGATION OF TABS ***/
   /**getting the open tab*/
   getOpenTab(): string {
     this.tabIdArray = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5'];
@@ -419,9 +422,9 @@ export class AdminTeamsComponent implements OnInit {
     this.cardElement.classList.add('card-active');
   }
 
-  /***** END OF NAVIGATION SECTION **** */
+  /*** END OF NAVIGATION SECTION ***/
 
-  /**METHODS USED BY MODAL */
+  /*** METHODS USED BY MODAL ***/
   /**open new team modal */
   openNewTeamModal() {
     this.isModalOpen = true;
@@ -454,5 +457,5 @@ export class AdminTeamsComponent implements OnInit {
       this.getTeams();
     });
   }
-  /**********END OF MODAL SECTION ************* */
+  /*** END OF MODAL SECTION ***/
 }
