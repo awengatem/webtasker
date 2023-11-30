@@ -44,9 +44,9 @@ export class AdminTeamsComponent implements OnInit {
   };
 
   /**table variables */
-  dataSource!: MatTableDataSource<any>;
-  selection = new SelectionModel<any>(true, []);
-  displayedColumns: string[] = [
+  projectDataSource!: MatTableDataSource<any>;
+  projectSelection = new SelectionModel<any>(true, []);
+  displayedProjectColumns: string[] = [
     'Select',
     'Projectname',
     'Createdby',
@@ -234,25 +234,25 @@ export class AdminTeamsComponent implements OnInit {
     }
   }
 
-  /**METHODS FOR DATASOURCE */
+  /**METHODS FOR PROJECT DATASOURCE */
   /**check whether all are selected */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = !!this.dataSource && this.dataSource.data.length;
+  areAllProjectsSelected() {
+    const numSelected = this.projectSelection.selected.length;
+    const numRows = !!this.projectDataSource && this.projectDataSource.data.length;
     return numSelected === numRows;
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected()
-      ? this.selection.clear()
-      : this.dataSource.data.forEach((r) => this.selection.select(r));
+    this.areAllProjectsSelected()
+      ? this.projectSelection.clear()
+      : this.projectDataSource.data.forEach((r) => this.projectSelection.select(r));
   }
   /** The label for the checkbox on the passed row */
   checkboxLabel(row: any): string {
     if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+      return `${this.areAllProjectsSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+    return `${this.projectSelection.isSelected(row) ? 'deselect' : 'select'} row ${
       row.EmpId + 1
     }`;
   }
@@ -260,27 +260,27 @@ export class AdminTeamsComponent implements OnInit {
   /**method used by search filter */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.projectDataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    if (this.projectDataSource.paginator) {
+      this.projectDataSource.paginator.firstPage();
     }
   }
 
   /**Method to reload user table */
   loadAllProjects(projects: any) {
     //reset the selection
-    this.selection = new SelectionModel<any>(true, []);
+    this.projectSelection = new SelectionModel<any>(true, []);
     //add projects to table
-    this.dataSource = new MatTableDataSource(projects);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.projectDataSource = new MatTableDataSource(projects);
+    this.projectDataSource.paginator = this.paginator;
+    this.projectDataSource.sort = this.sort;
     console.log(this.projects);
   }
 
   /**Delete selected project(s) */
   deleteSelected() {
-    const selectedProjectsArr = this.selection.selected;
+    const selectedProjectsArr = this.projectSelection.selected;
     let projectIdArr: any = [];
     console.log(selectedProjectsArr);
     if (selectedProjectsArr.length > 0) {
@@ -309,7 +309,7 @@ export class AdminTeamsComponent implements OnInit {
             'operation has been cancelled'
           );
           //reset the selection
-          this.selection = new SelectionModel<any>(true, []);
+          this.projectSelection = new SelectionModel<any>(true, []);
         }
       });
     } else {
@@ -376,7 +376,7 @@ export class AdminTeamsComponent implements OnInit {
       });
   }
 
-  /*** END OF DATASOURCE SECTION ***/
+  /*** END OF PROJECTS DATASOURCE SECTION ***/
   /*** END OF PROJECTS SECTION ***/
 
   /*** MEMBERS SECTION */
