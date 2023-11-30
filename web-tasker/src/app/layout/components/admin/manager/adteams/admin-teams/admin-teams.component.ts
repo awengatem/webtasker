@@ -43,7 +43,8 @@ export class AdminTeamsComponent implements OnInit {
     tab5: false,
   };
 
-  /**table variables */
+  /**TABLE VARIABLES */
+  /**project table variables */
   projectDataSource!: MatTableDataSource<any>;
   projectSelection = new SelectionModel<any>(true, []);
   displayedProjectColumns: string[] = [
@@ -53,9 +54,6 @@ export class AdminTeamsComponent implements OnInit {
     'Members',
     'Remove',
   ];
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
   /**Temporary variable for testing datasource */
   projects = [
     {
@@ -64,6 +62,26 @@ export class AdminTeamsComponent implements OnInit {
       members: 5,
     },
   ];
+   /**member table variables */
+  memberDataSource!: MatTableDataSource<any>;
+  memberSelection = new SelectionModel<any>(true, []);
+  displayedMemberColumns: string[] = [
+    'Select',
+    'Fullname',
+    'Email',
+    'Status',
+    'Remove',
+  ];
+  /**Temporary variable for testing datasource */
+  members = [
+    {
+      fullName: 'Joe Karanja',
+      email: 'joekaranjasenior52@gmail.com',
+      status: 'active',
+    },
+  ];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   /**TEAM INFO VARIABLES */
   /**Team Info object */
@@ -238,23 +256,26 @@ export class AdminTeamsComponent implements OnInit {
   /**check whether all are selected */
   areAllProjectsSelected() {
     const numSelected = this.projectSelection.selected.length;
-    const numRows = !!this.projectDataSource && this.projectDataSource.data.length;
+    const numRows =
+      !!this.projectDataSource && this.projectDataSource.data.length;
     return numSelected === numRows;
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   projectMasterToggle() {
     this.areAllProjectsSelected()
       ? this.projectSelection.clear()
-      : this.projectDataSource.data.forEach((r) => this.projectSelection.select(r));
+      : this.projectDataSource.data.forEach((r) =>
+          this.projectSelection.select(r)
+        );
   }
   /** The label for the checkbox on the passed row */
   projectCheckboxLabel(row: any): string {
     if (!row) {
       return `${this.areAllProjectsSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.projectSelection.isSelected(row) ? 'deselect' : 'select'} row ${
-      row.EmpId + 1
-    }`;
+    return `${
+      this.projectSelection.isSelected(row) ? 'deselect' : 'select'
+    } row ${row.EmpId + 1}`;
   }
 
   /**method used by search filter */
