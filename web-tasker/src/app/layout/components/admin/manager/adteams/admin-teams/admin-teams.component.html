@@ -154,22 +154,181 @@
               <div class="row flex w-full border p-3">
                 <div class="container-table p-3 border rounded h-full">
                   <div *ngIf="tabStates['tab1']" class="">
-                    <div class="d-flex">
-                      <div class="p-2 flex-grow-1">
-                        <button type="button" class="btn btn-primary">
-                          Add Members
-                        </button>
-                      </div>
-                      <div class="p-2">
-                        <input
-                          type="text"
-                          placeholder="Search by Name"
-                          class="form-control m-3"
-                        />
-                      </div>
-                      <div class="p-2"></div>
+                    <div class="data-table">
+                      <mat-card class="">
+                        <mat-card-content>
+                          <form>
+                            <b class="text-base">Search Members :</b>
+                            &nbsp;&nbsp;
+                            <mat-form-field style="flex: 0 5px 50%">
+                              <mat-label>Filter</mat-label>
+                              <input matInput (keyup)="applyProjectFilter($event)" />
+                            </mat-form-field>
+                            &nbsp;&nbsp;
+                            <b class="text-base">Remove Selected Members :</b>
+                            &nbsp;&nbsp;
+                            <button
+                              mat-icon-button
+                              aria-label="Example icon button with a delete icon"
+                              type="button"
+                              class="mt-4 custom-delete mat-raised-button"
+                              style="background-color: #e91e63"
+                              (click)="deleteSelectedProjects()"
+                              color="accent"
+                            >
+                              <mat-icon class="text-white">delete</mat-icon>
+                            </button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-primary">
+                              Add Members
+                            </button>
+                            <div>
+                              <!-- TABLE BEGINS HERE-->
+                              <mat-table
+                                [dataSource]="projectDataSource"
+                                matSort
+                                class="mat-elevation-z8 overflow-y-auto h-full"
+                                style="
+                                  max-height: calc(50vh - 300px);
+                                  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+                                    0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                                    0 1px 18px 0 rgba(0, 0, 0, 0.12);
+                                "
+                              >
+                                <!-- Checkbox Column -->
+                                <ng-container matColumnDef="Select">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    style="color: #22b8f0"
+                                  >
+                                    <mat-checkbox
+                                      (change)="$event ? projectMasterToggle() : null"
+                                      [checked]="
+                                        projectSelection.hasValue() &&
+                                        areAllProjectsSelected()
+                                      "
+                                      [indeterminate]="
+                                        projectSelection.hasValue() &&
+                                        !areAllProjectsSelected()
+                                      "
+                                    ></mat-checkbox>
+                                  </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" class="">
+                                    <mat-checkbox
+                                      (click)="$event.stopPropagation()"
+                                      (change)="
+                                        $event
+                                          ? projectSelection.toggle(row)
+                                          : null
+                                      "
+                                      [checked]="
+                                        projectSelection.isSelected(row)
+                                      "
+                                      [aria-label]="projectCheckboxLabel(row)"
+                                    ></mat-checkbox>
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Projectname Column -->
+                                <ng-container
+                                  matColumnDef="Projectname"
+                                  class=""
+                                >
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Project name
+                                  </mat-header-cell>
+                                  <mat-cell
+                                    *matCellDef="let document"
+                                    class="point hover:text-[#cb0c9f] cursor-pointer"
+                                  >
+                                    {{ document.projectName }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Createdby Column -->
+                                <ng-container matColumnDef="Createdby" class="">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Created by
+                                  </mat-header-cell>
+                                  <mat-cell
+                                    *matCellDef="let document"
+                                    class="point hover:text-[#cb0c9f] cursor-pointer"
+                                  >
+                                    {{ document.createdBy }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Members Column -->
+                                <ng-container matColumnDef="Members" class="">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Members
+                                  </mat-header-cell>
+                                  <mat-cell
+                                    *matCellDef="let document"
+                                    class="bold font-semibold"
+                                  >
+                                    {{ document.members }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Delete Icon -->
+                                <ng-container matColumnDef="Remove">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Remove
+                                  </mat-header-cell>
+                                  <mat-cell *matCellDef="let document">
+                                    <button
+                                      mat-icon-button
+                                      class="custom-button custom-button-delete mat-raised-button"
+                                      style="
+                                        height: 30px;
+                                        width: 30px;
+                                        background-color: #e91e63;
+                                      "
+                                      aria-label="Example icon button with a delete icon"
+                                      type="button"
+                                      (click)="
+                                        confirmProjectDeletion(
+                                          document._id,
+                                          document.projectName
+                                        )
+                                      "
+                                      color="accent"
+                                      matTooltip="Delete"
+                                    >
+                                      <mat-icon
+                                        class="absolute text-sm text-white top-1 right-1"
+                                        >delete_forever</mat-icon
+                                      >
+                                    </button></mat-cell
+                                  >
+                                </ng-container>
+                                <mat-header-row
+                                  *matHeaderRowDef="displayedProjectColumns"
+                                ></mat-header-row>
+                                <mat-row
+                                  *matRowDef="
+                                    let row;
+                                    columns: displayedProjectColumns
+                                  "
+                                ></mat-row
+                              ></mat-table>
+                              <mat-paginator
+                                [pageSizeOptions]="[10, 25, 50]"
+                              ></mat-paginator>
+                            </div>
+                          </form>
+                        </mat-card-content>
+                      </mat-card>
                     </div>
-                    here
                   </div>
                   <div *ngIf="tabStates['tab2']" class="h-full">
                     <div class="data-table">
@@ -180,7 +339,10 @@
                             &nbsp;&nbsp;
                             <mat-form-field style="flex: 0 5px 50%">
                               <mat-label>Filter</mat-label>
-                              <input matInput (keyup)="applyProjectFilter($event)" />
+                              <input
+                                matInput
+                                (keyup)="applyProjectFilter($event)"
+                              />
                             </mat-form-field>
                             &nbsp;&nbsp;
                             <b class="text-base">Remove Selected Projects :</b>
@@ -220,7 +382,9 @@
                                     style="color: #22b8f0"
                                   >
                                     <mat-checkbox
-                                      (change)="$event ? projectMasterToggle() : null"
+                                      (change)="
+                                        $event ? projectMasterToggle() : null
+                                      "
                                       [checked]="
                                         projectSelection.hasValue() &&
                                         areAllProjectsSelected()
