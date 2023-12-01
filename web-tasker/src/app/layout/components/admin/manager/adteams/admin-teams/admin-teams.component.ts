@@ -62,7 +62,7 @@ export class AdminTeamsComponent implements OnInit {
       members: 5,
     },
   ];
-   /**member table variables */
+  /**member table variables */
   memberDataSource!: MatTableDataSource<any>;
   memberSelection = new SelectionModel<any>(true, []);
   displayedMemberColumns: string[] = [
@@ -436,11 +436,11 @@ export class AdminTeamsComponent implements OnInit {
 
   /**method used by search filter */
   applyMemberFilter(event: Event) {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
-    // if (this.dataSource.paginator) {
-    //   this.dataSource.paginator.firstPage();
-    // }
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.memberDataSource.filter = filterValue.trim().toLowerCase();
+    if (this.memberDataSource.paginator) {
+      this.memberDataSource.paginator.firstPage();
+    }
   }
 
   /**Method to reload members table */
