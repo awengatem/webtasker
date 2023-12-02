@@ -233,52 +233,49 @@
                                     ></mat-checkbox>
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Projectname Column -->
-                                <ng-container
-                                  matColumnDef="Projectname"
-                                  class=""
-                                >
+                                <!-- Fullname Column -->
+                                <ng-container matColumnDef="Fullname" class="">
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    Project name
+                                    Full name
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
                                     class="point hover:text-[#cb0c9f] cursor-pointer"
                                   >
-                                    {{ document.projectName }}
+                                    {{ document.fullName }}
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Createdby Column -->
-                                <ng-container matColumnDef="Createdby" class="">
+                                <!-- Email Column -->
+                                <ng-container matColumnDef="Email" class="">
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    Created by
+                                    Email
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
                                     class="point hover:text-[#cb0c9f] cursor-pointer"
                                   >
-                                    {{ document.createdBy }}
+                                    {{ document.email }}
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Members Column -->
-                                <ng-container matColumnDef="Members" class="">
+                                <!-- Status Column -->
+                                <ng-container matColumnDef="Status" class="">
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    Members
+                                    Status
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
                                     class="bold font-semibold"
                                   >
-                                    {{ document.members }}
+                                    {{ document.status }}
                                   </mat-cell>
                                 </ng-container>
                                 <!-- Delete Icon -->
@@ -301,9 +298,9 @@
                                       aria-label="Example icon button with a delete icon"
                                       type="button"
                                       (click)="
-                                        confirmProjectDeletion(
+                                        confirmMembersDeletion(
                                           document._id,
-                                          document.projectName
+                                          document.fullName
                                         )
                                       "
                                       color="accent"
@@ -317,12 +314,12 @@
                                   >
                                 </ng-container>
                                 <mat-header-row
-                                  *matHeaderRowDef="displayedProjectColumns"
+                                  *matHeaderRowDef="displayedMemberColumns"
                                 ></mat-header-row>
                                 <mat-row
                                   *matRowDef="
                                     let row;
-                                    columns: displayedProjectColumns
+                                    columns: displayedMemberColumns
                                   "
                                 ></mat-row
                               ></mat-table>
