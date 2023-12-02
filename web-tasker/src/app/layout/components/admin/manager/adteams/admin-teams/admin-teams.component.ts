@@ -54,6 +54,7 @@ export class AdminTeamsComponent implements OnInit {
     'Members',
     'Remove',
   ];
+  teamProjectsArr!: any[];
   /**Temporary variable for testing datasource */
   projects = [
     {
@@ -72,6 +73,7 @@ export class AdminTeamsComponent implements OnInit {
     'Status',
     'Remove',
   ];
+  teamMembersArr!: any[];
   /**Temporary variable for testing datasource */
   members = [
     {
@@ -93,7 +95,7 @@ export class AdminTeamsComponent implements OnInit {
     projects: 0,
     supervisors: 0,
   };
-  teamProjectsArr!: any[];
+ 
 
   constructor(
     private teamService: TeamService,
@@ -401,18 +403,16 @@ export class AdminTeamsComponent implements OnInit {
   /*** END OF PROJECTS SECTION ***/
 
   /*** MEMBERS SECTION */
-  /**Get the team Projects */
+  /**Get the team Members */
   getTeamMembers(teamId: string) {
-    // this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
-    //   // console.log(projects);
-    //   /**push number of projects to teams*/
-    //   this.teamProjectsArr = projects;
-    //   console.log(this.teamProjectsArr);
-    //   /**Get project members */
-    //   this.getProjectMembers();
-    //   /**Load the projects to table */
-    //   this.loadAllProjects(projects);
-    // });
+    this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
+      // console.log(members);
+      /**push number of memberss to teams*/
+      this.teamMembersArr = members;
+      console.log(this.teamMembersArr);
+      /**Load the projects to table */
+      this.loadAllMembers(members);
+    });
   }
 
   /**METHODS FOR MEMBERS DATASOURCE */
