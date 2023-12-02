@@ -29,4 +29,38 @@
     justify-items: end;
     color: green;
   }
+
+  mat-table {
+    /*Styling columns*/
+    .mat-column-Select {
+      flex: none;
+      width: 60px;
+    }
+    .mat-column-Email {
+      flex: none;
+      width: 300px;
+    }
+    .mat-column-Position {
+      flex: none;
+      width: 60px;
+    }
+
+    /*Styling status columns data*/
+    .default {
+      color: #ac1100;
+      font-weight: 500;
+    }
+    .running {
+      color: #027a34;
+      font-weight: 500;
+    }
+    .paused {
+      color: #bebe0a;
+      font-weight: 500;
+    }
+
+    .bold {
+      font-weight: 550;
+    }
+  }
 }

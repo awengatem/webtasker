@@ -245,7 +245,20 @@
                                     *matCellDef="let document"
                                     class="point hover:text-[#cb0c9f] cursor-pointer"
                                   >
-                                    {{ document.fullName }}
+                                    {{ document.firstName }}
+                                    {{ document.lastName }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Gender Column -->
+                                <ng-container matColumnDef="Gender" class="">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                  >
+                                    Gender
+                                  </mat-header-cell>
+                                  <mat-cell *matCellDef="let document">
+                                    {{ document.gender }}
                                   </mat-cell>
                                 </ng-container>
                                 <!-- Email Column -->
@@ -256,10 +269,7 @@
                                   >
                                     Email
                                   </mat-header-cell>
-                                  <mat-cell
-                                    *matCellDef="let document"
-                                    class="point hover:text-[#cb0c9f] cursor-pointer"
-                                  >
+                                  <mat-cell *matCellDef="let document">
                                     {{ document.email }}
                                   </mat-cell>
                                 </ng-container>
@@ -271,11 +281,8 @@
                                   >
                                     Status
                                   </mat-header-cell>
-                                  <mat-cell
-                                    *matCellDef="let document"
-                                    class="bold font-semibold"
-                                  >
-                                    {{ document.status }}
+                                  <mat-cell *matCellDef="let document">
+                                    unknown
                                   </mat-cell>
                                 </ng-container>
                                 <!-- Delete Icon -->
@@ -300,7 +307,7 @@
                                       (click)="
                                         confirmMemberDeletion(
                                           document._id,
-                                          document.fullName
+                                          document.firstName
                                         )
                                       "
                                       color="accent"

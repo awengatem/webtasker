@@ -56,32 +56,33 @@ export class AdminTeamsComponent implements OnInit {
   ];
   teamProjectsArr!: any[];
   /**Temporary variable for testing datasource */
-  projects = [
-    {
-      projectName: 'project1',
-      createdBy: 'joe123',
-      members: 5,
-    },
-  ];
+  // projects = [
+  //   {
+  //     projectName: 'project1',
+  //     createdBy: 'joe123',
+  //     members: 5,
+  //   },
+  // ];
   /**member table variables */
   memberDataSource!: MatTableDataSource<any>;
   memberSelection = new SelectionModel<any>(true, []);
   displayedMemberColumns: string[] = [
     'Select',
     'Fullname',
+    'Gender',
     'Email',
     'Status',
     'Remove',
   ];
   teamMembersArr!: any[];
   /**Temporary variable for testing datasource */
-  members = [
-    {
-      fullName: 'Joe Karanja',
-      email: 'joekaranjasenior52@gmail.com',
-      status: 'active',
-    },
-  ];
+  // members = [
+  //   {
+  //     fullName: 'Joe Karanja',
+  //     email: 'joekaranjasenior52@gmail.com',
+  //     status: 'active',
+  //   },
+  // ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -219,6 +220,8 @@ export class AdminTeamsComponent implements OnInit {
     // this.teaminfo.supervisors = team.supervisors;
     /**get the team projects */
     this.getTeamProjects(teamId);
+    /**get the team members */
+    this.getTeamMembers(teamId);
   }
   /*** END OF TEAM SECTION ***/
 
@@ -297,7 +300,7 @@ export class AdminTeamsComponent implements OnInit {
     this.projectDataSource = new MatTableDataSource(projects);
     this.projectDataSource.paginator = this.paginator;
     this.projectDataSource.sort = this.sort;
-    console.log(this.projects);
+    // console.log(projects);
   }
 
   /**Delete selected project(s) */
@@ -457,7 +460,7 @@ export class AdminTeamsComponent implements OnInit {
     this.memberDataSource = new MatTableDataSource(members);
     this.memberDataSource.paginator = this.paginator;
     this.memberDataSource.sort = this.sort;
-    console.log(this.members);
+    // console.log(members);
   }
 
   /**Delete selected member(s) */
