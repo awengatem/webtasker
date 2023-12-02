@@ -450,14 +450,14 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**Method to reload members table */
-  loadAllMembers(projects: any) {
-    // //reset the selection
-    // this.selection = new SelectionModel<any>(true, []);
-    // //add members to table
-    // this.dataSource = new MatTableDataSource(projects);
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-    // console.log(this.projects);
+  loadAllMembers(members: any) {
+    //reset the selection
+    this.memberSelection = new SelectionModel<any>(true, []);
+    //add members to table
+    this.memberDataSource = new MatTableDataSource(members);
+    this.memberDataSource.paginator = this.paginator;
+    this.memberDataSource.sort = this.sort;
+    console.log(this.members);
   }
 
   /**Delete selected member(s) */
@@ -500,27 +500,27 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**Method to confirm member removal */
-  confirmMembersDeletion(projectId: string, projectname: string) {
-    // Swal.fire({
-    //   title: `Remove "${projectname}"?`,
-    //   text: `${projectname} will be removed from team.`,
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonText: 'Yes, go ahead.',
-    //   confirmButtonColor: '#e74c3c',
-    //   cancelButtonText: 'No, let me think',
-    //   cancelButtonColor: '#22b8f0',
-    // }).then((result) => {
-    //   //delete project from db
-    //   if (result.value) {
-    //     this.deleteTeamProjects([projectId]);
-    //   } else if (result.dismiss === Swal.DismissReason.cancel) {
-    //     this.snackBarService.displaySnackbar(
-    //       'error',
-    //       'operation has been cancelled'
-    //     );
-    //   }
-    // });
+  confirmMemberDeletion(memberId: string, memberName: string) {
+    Swal.fire({
+      title: `Remove "${memberName}"?`,
+      text: `${memberName} will be removed from team.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      //delete team member from db
+      if (result.value) {
+        this.deleteTeamMembers([memberId]);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.snackBarService.displaySnackbar(
+          'error',
+          'operation has been cancelled'
+        );
+      }
+    });
   }
 
   //removing specific member from team
