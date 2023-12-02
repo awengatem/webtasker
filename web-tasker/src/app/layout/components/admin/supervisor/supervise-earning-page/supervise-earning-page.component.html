@@ -20,11 +20,6 @@
             <div class="teams-inside">
               <div class="row">
                 <div class="col-3">
-                  <!-- <div class="w-75 mb-2">
-                    <button type="button" class="btn btn-primary">
-                      Add Team Member
-                    </button>
-                  </div> -->
                   <div class="card">
                     <div class="card-header">
                       <div class="px-4 flex items-center justify-between">
@@ -215,13 +210,13 @@
                                       </div>
                                     </td>
                                   </tr>
-                                  <tr>
+                                  <tr class="bg-[#e91e63]">
                                     <td>
                                       <div
                                         class="px-2 py-2 cursor-pointer flex w-full justify-center"
                                       >
                                         <p
-                                          class="text-base text-gray-500 font-medium"
+                                          class="text-base text-gray-50 font-medium"
                                         >
                                           5
                                         </p>
@@ -232,7 +227,7 @@
                                         class="px-2 py-2 cursor-pointer flex w-full justify-center"
                                       >
                                         <p
-                                          class="text-base text-gray-500 font-medium"
+                                          class="text-base text-gray-50 font-medium"
                                         >
                                           6
                                         </p>
@@ -243,7 +238,7 @@
                                         class="px-2 py-2 cursor-pointer flex w-full justify-center"
                                       >
                                         <p
-                                          class="text-base text-gray-500 dark:text-gray-100 font-medium"
+                                          class="text-base text-gray-50 font-medium"
                                         >
                                           7
                                         </p>
@@ -268,7 +263,7 @@
                                         class="px-2 py-2 cursor-pointer flex w-full justify-center"
                                       >
                                         <p
-                                          class="text-base text-gray-500 font-medium"
+                                          class="text-base text-gray-50 font-medium"
                                         >
                                           9
                                         </p>
@@ -278,18 +273,14 @@
                                       <div
                                         class="px-2 py-2 cursor-pointer flex w-full justify-center"
                                       >
-                                        <p class="text-base text-gray-500">
-                                          10
-                                        </p>
+                                        <p class="text-base text-gray-50">10</p>
                                       </div>
                                     </td>
                                     <td>
                                       <div
                                         class="px-2 py-2 cursor-pointer flex w-full justify-center"
                                       >
-                                        <p class="text-base text-gray-500">
-                                          11
-                                        </p>
+                                        <p class="text-base text-gray-50">11</p>
                                       </div>
                                     </td>
                                   </tr>
@@ -516,314 +507,81 @@
                   <div class="card overflow-y-auto" style="width: auto">
                     <div class="card-header">
                       <div class="row">
-                        <div class="col">
-                          <h1>Team Overview</h1>
-                        </div>
                         <div class="col-3">
-                          <button
-                            type="button"
-                            class="btn btn-success"
-                            routerLink="/supervise/earnings"
+                          <h2 class="bg-indigo-700 text-center text-white">
+                            TODAY
+                          </h2>
+                        </div>
+                        <div class="col">
+                          <div
+                            class="py-1 flex items-center justify-evenly bg-[#e91e63]"
                           >
-                            Earnings
-                          </button>
+                            <div class="flex items-center">
+                              <button
+                                aria-label="calendar backward"
+                                class="focus:text-gray-400 hover:text-gray-400 text-gray-50"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="icon icon-tabler icon-tabler-chevron-left"
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  stroke-width="1.5"
+                                  stroke="currentColor"
+                                  fill="none"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <path
+                                    stroke="none"
+                                    d="M0 0h24v24H0z"
+                                    fill="none"
+                                  />
+                                  <polyline points="15 6 9 12 15 18" />
+                                </svg>
+                              </button>
+                              <button
+                                aria-label="calendar forward"
+                                class="focus:text-gray-400 hover:text-gray-400 ml-3 text-gray-50"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="icon icon-tabler icon-tabler-chevron-right"
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  stroke-width="1.5"
+                                  stroke="currentColor"
+                                  fill="none"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <path
+                                    stroke="none"
+                                    d="M0 0h24v24H0z"
+                                    fill="none"
+                                  />
+                                  <polyline points="9 6 15 12 9 18" />
+                                </svg>
+                              </button>
+                            </div>
+                            <span
+                              tabindex="0"
+                              class="focus:outline-none text-base font-bold text-gray-50"
+                              >October 2020</span
+                            >
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div class="card-body">
-                      <div class="teams-container">
-                        <div class="container">
-                          <div class="row row-cols-1">
-                            <div
-                              class="flex bg-white shadow-md justify-start md:justify-center rounded-lg overflow-x-scroll mx-auto py-4 px-2 md:mx-12"
-                            >
-                              <div
-                                class="flex group hover:bg-purple-100 hover:shadow-lg hover-light-shadow rounded-lg mx-1 transition-all duration-300 cursor-pointer justify-center w-16"
-                              >
-                                <div class="flex items-center px-4 py-4">
-                                  <div class="text-center">
-                                    <p
-                                      class="text-gray-900 group-hover:text-purple-900 text-sm transition-all duration-300"
-                                    >
-                                      Sun
-                                    </p>
-                                    <p
-                                      class="text-gray-900 group-hover:text-purple-900 mt-3 group-hover:font-bold transition-all duration-300"
-                                    >
-                                      11
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div
-                                class="flex group hover:bg-purple-100 hover:shadow-lg hover-light-shadow rounded-lg mx-1 transition-all duration-300 cursor-pointer justify-center w-16"
-                              >
-                                <div class="flex items-center px-4 py-4">
-                                  <div class="text-center">
-                                    <p
-                                      class="text-gray-900 group-hover:text-purple-900 text-sm transition-all duration-300"
-                                    >
-                                      Mon
-                                    </p>
-                                    <p
-                                      class="text-gray-900 group-hover:text-purple-900 mt-3 group-hover:font-bold transition-all duration-300"
-                                    >
-                                      12
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div
-                                class="flex group hover:bg-purple-100 hover:shadow-lg hover-light-shadow rounded-lg mx-1 transition-all duration-300 cursor-pointer justify-center w-16"
-                              >
-                                <div class="flex items-center px-4 py-4">
-                                  <div class="text-center">
-                                    <p
-                                      class="text-gray-900 group-hover:text-purple-900 text-sm transition-all duration-300"
-                                    >
-                                      Tue
-                                    </p>
-                                    <p
-                                      class="text-gray-900 group-hover:text-purple-900 mt-3 group-hover:font-bold transition-all duration-300"
-                                    >
-                                      13
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div
-                                class="flex group bg-purple-300 shadow-lg light-shadow rounded-lg mx-1 cursor-pointer justify-center relative w-16 content-center"
-                              >
-                                <span
-                                  class="flex h-3 w-3 absolute -top-1 -right-1"
-                                >
-                                  <span
-                                    class="animate-ping absolute group-hover:opacity-75 opacity-0 inline-flex h-full w-full rounded-full bg-purple-400"
-                                  ></span>
-                                  <span
-                                    class="relative inline-flex rounded-full h-3 w-3 bg-purple-500"
-                                  ></span>
-                                </span>
-                                <div class="flex items-center px-4 py-4">
-                                  <div class="text-center">
-                                    <p class="text-purple-900 text-sm">Wed</p>
-                                    <p class="text-purple-900 mt-3 font-bold">
-                                      14
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div
-                                class="flex group hover:bg-purple-100 hover:shadow-lg hover-light-shadow rounded-lg mx-1 transition-all duration-300 content-center cursor-pointer justify-center w-16"
-                              >
-                                <div class="flex items-center px-4 py-4">
-                                  <div class="text-center">
-                                    <p
-                                      class="text-gray-900 group-hover:text-purple-900 text-sm transition-all duration-300"
-                                    >
-                                      Thu
-                                    </p>
-                                    <p
-                                      class="text-gray-900 group-hover:text-purple-900 mt-3 group-hover:font-bold transition-all duration-300"
-                                    >
-                                      15
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div
-                                class="flex group hover:bg-purple-100 hover:shadow-lg hover-light-shadow rounded-lg mx-1 transition-all duration-300 cursor-pointer justify-center w-16"
-                              >
-                                <div class="flex items-center px-4 py-4">
-                                  <div class="text-center">
-                                    <p
-                                      class="text-gray-900 group-hover:text-purple-900 text-sm transition-all duration-300"
-                                    >
-                                      Fri
-                                    </p>
-                                    <p
-                                      class="text-gray-900 group-hover:text-purple-900 mt-3 group-hover:font-bold transition-all duration-300"
-                                    >
-                                      16
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div
-                                class="flex group hover:bg-purple-100 hover:shadow-lg hover-light-shadow rounded-lg mx-1 transition-all duration-300 cursor-pointer justify-center w-16"
-                              >
-                                <div class="flex items-center px-4 py-4">
-                                  <div class="text-center">
-                                    <p
-                                      class="text-gray-900 group-hover:text-purple-900 text-sm transition-all duration-300"
-                                    >
-                                      Sat
-                                    </p>
-                                    <p
-                                      class="text-gray-900 group-hover:text-purple-900 mt-3 group-hover:font-bold transition-all duration-300"
-                                    >
-                                      17
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- <div class="col-sm-3">
-                              <div class="card card-active" id="tab1">
-                                <div class="card-body">
-                                  <h2 class="card-title">Team Members</h2>
-                                  <div class="d-flex">
-                                    <div class="num px-2"><p>20</p></div>
-                                    <div>
-                                      <h4 class="card-text">active : 6</h4>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-sm-3">
-                              <div class="card" id="tab2">
-                                <div class="card-body">
-                                  <h2 class="card-title">Team Project</h2>
-                                  <div class="d-flex">
-                                    <div class="num px-2"><p>24</p></div>
-                                    <div>
-                                      <h4 class="card-text">active : 4</h4>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-sm-3">
-                              <div class="card" id="tab3">
-                                <div class="card-body">
-                                  <h2 class="card-title">Supervisor</h2>
-                                  <div class="d-flex">
-                                    <div class="num px-2"><p>1</p></div>
-                                    <div>
-                                      <h4 class="card-text">active : 1</h4>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-sm-3"> -->
-                            <!-- <div class="card" id="tab4">
-                                <div class="card-body">
-                                  <h2 class="card-title">Earnings</h2>
-                                  <h1 class="card-text">Ksh 4,000,000</h1>
-                                </div>
-                              </div> -->
-                          </div>
-                        </div>
-                      </div>
-                      <!-- <div class="row d-flex justify-content-center">
-                        <div class="col-3">
-                          <h2 class="data-name" routerLink="/ad_manage/users">
-                            Team Members
-                            <h1>20</h1>
-                            <span class="text-success mr-2"
-                              ><h3>90% active</h3></span
-                            >
-                          </h2>
-                        </div>
-                        <div class="col-3">
-                          <h2 class="data-name" routerLink="/projects">
-                            Team projects
-                            <h1>3</h1>
-                            <span class="text-success mr-2"
-                              ><h3>60% done</h3></span
-                            >
-                          </h2>
-                        </div>
-                        <div class="col-3">
-                          <h2 class="data-name" routerLink="/view_earnings">
-                            Team Earnings
-                            <h1>200$</h1>
-                            <span class="text-danger mr-2"><h3>-20%</h3></span>
-                          </h2>
-                        </div>
-                      </div> -->
                       <div class="teams-container overflow-auto">
                         <div class="container h-full">
-                          <div class="row p-3">
-                            <div class="container-table p-3 border rounded">
-                              <!-- <div
-                                *ngIf="tabStates['tab1']"
-                                class="h-[300px] overflow-scroll"
-                              >
-                                tab 1
-                              </div>
-                              <div
-                                *ngIf="tabStates['tab2']"
-                                class="h-full overflow-auto"
-                              >
-                                <div class="row mt-3">
-                                  <h1 class="card-text">Projects:</h1>
-                                </div>
-                                <a
-                                  class="btn btn-primary m-2"
-                                  style="width: 7rem"
-                                  >add Project</a
-                                >
-
-                                <div
-                                  class="row-project d-flex flex-row justify-content-start"
-                                >
-                                  <div
-                                    class="grid grid-cols-4 grid-flow-row gap-4"
-                                  >
-                                    <div
-                                      class="card text-black bg-white mb-3"
-                                      style="
-                                        width: 10rem;
-                                        height: 13rem;
-                                        box-shadow: 2px 2px 2px 1px
-                                          rgba(0, 0, 0, 0.2);
-                                      "
-                                      *ngFor="let Project of projects"
-                                    >
-                                      <div
-                                        class="card-body px-4 flex flex-col justify-around"
-                                      >
-                                        <h2 class="text-center">Project 1</h2>
-                                        <div
-                                          class="flex flex-col text-base space-y-4"
-                                        >
-                                          <div>
-                                            <i class="uil uil-users-alt"></i
-                                            >Teams
-                                          </div>
-                                          <div>
-                                            <i class="uil uil-server"></i
-                                            >Status:
-                                          </div>
-
-                                         
-                                        </div>
-                                        <button
-                                          class="ml-auto text-sm text-white p-1 rounded-lg px-2 bg-red-600 shadow-lg shadow-blue-500/50"
-                                        >
-                                          Remove
-                                        </button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div *ngIf="tabStates['tab3']" class="">
-                                tab 3
-                              </div>
-                              <div *ngIf="tabStates['tab4']" class="">
-                                tab 4
-                              </div> -->
-                            </div>
+                          <div class="row p-1">
+                            <div
+                              class="container-table p-3 border rounded"
+                            ></div>
                           </div>
                         </div>
                       </div>
