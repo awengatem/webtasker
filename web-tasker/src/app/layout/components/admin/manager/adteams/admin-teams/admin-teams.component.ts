@@ -78,7 +78,9 @@ export class AdminTeamsComponent implements OnInit {
   /**Temporary variable for testing datasource */
   // members = [
   //   {
-  //     fullName: 'Joe Karanja',
+  //     firstName: 'Joe',
+  //     lastName: 'Karanja',
+  //     gender: 'male',
   //     email: 'joekaranjasenior52@gmail.com',
   //     status: 'active',
   //   },
