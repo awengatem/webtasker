@@ -162,7 +162,10 @@
                             &nbsp;&nbsp;
                             <mat-form-field style="flex: 0 5px 50%">
                               <mat-label>Filter</mat-label>
-                              <input matInput (keyup)="applyMemberFilter($event)" />
+                              <input
+                                matInput
+                                (keyup)="applyMemberFilter($event)"
+                              />
                             </mat-form-field>
                             &nbsp;&nbsp;
                             <b class="text-base">Remove Selected Members :</b>
@@ -202,14 +205,16 @@
                                     style="color: #22b8f0"
                                   >
                                     <mat-checkbox
-                                      (change)="$event ? projectMasterToggle() : null"
+                                      (change)="
+                                        $event ? memberMasterToggle() : null
+                                      "
                                       [checked]="
-                                        projectSelection.hasValue() &&
-                                        areAllProjectsSelected()
+                                        memberSelection.hasValue() &&
+                                        areAllMembersSelected()
                                       "
                                       [indeterminate]="
-                                        projectSelection.hasValue() &&
-                                        !areAllProjectsSelected()
+                                        memberSelection.hasValue() &&
+                                        !areAllMembersSelected()
                                       "
                                     ></mat-checkbox>
                                   </mat-header-cell>
@@ -218,13 +223,13 @@
                                       (click)="$event.stopPropagation()"
                                       (change)="
                                         $event
-                                          ? projectSelection.toggle(row)
+                                          ? memberSelection.toggle(row)
                                           : null
                                       "
                                       [checked]="
-                                        projectSelection.isSelected(row)
+                                        memberSelection.isSelected(row)
                                       "
-                                      [aria-label]="projectCheckboxLabel(row)"
+                                      [aria-label]="memberCheckboxLabel(row)"
                                     ></mat-checkbox>
                                   </mat-cell>
                                 </ng-container>

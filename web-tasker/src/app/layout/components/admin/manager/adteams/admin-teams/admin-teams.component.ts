@@ -95,7 +95,6 @@ export class AdminTeamsComponent implements OnInit {
     projects: 0,
     supervisors: 0,
   };
- 
 
   constructor(
     private teamService: TeamService,
@@ -418,20 +417,27 @@ export class AdminTeamsComponent implements OnInit {
   /**METHODS FOR MEMBERS DATASOURCE */
   /**check whether all are selected */
   areAllMembersSelected() {
-    // const numSelected = this.selection.selected.length;
-    // const numRows = !!this.dataSource && this.dataSource.data.length;
-    // return numSelected === numRows;
+    const numSelected = this.memberSelection.selected.length;
+    const numRows =
+      !!this.memberDataSource && this.memberDataSource.data.length;
+    return numSelected === numRows;
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
-  mMasterToggle() {
-    // this.areAllMembersSelected()
-    //   ? this.selection.clear()
-    //   : this.dataSource.data.forEach((r) => this.selection.select(r));
+  memberMasterToggle() {
+    this.areAllMembersSelected()
+      ? this.memberSelection.clear()
+      : this.memberDataSource.data.forEach((r) =>
+          this.memberSelection.select(r)
+        );
   }
   /** The label for the checkbox on the passed row */
-  mCheckboxLabel(row: any): string {
-    //
-    return ''; //delete this line
+  memberCheckboxLabel(row: any): string {
+    if (!row) {
+      return `${this.areAllMembersSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${
+      this.memberSelection.isSelected(row) ? 'deselect' : 'select'
+    } row ${row.EmpId + 1}`;
   }
 
   /**method used by search filter */
