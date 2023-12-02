@@ -115,4 +115,11 @@ export class TeamService {
       { projects: projects }
     );
   }
+
+  /**Method to delete assigned team members */
+  deleteTeamMembers(teamId: string, members: any[]) {
+    return this.webReqService.post(`team_members/delete_assigned_members/${teamId}`, {
+      members: members,
+    });
+  }
 }

@@ -54,32 +54,35 @@ export class AdminTeamsComponent implements OnInit {
     'Members',
     'Remove',
   ];
+  teamProjectsArr!: any[];
   /**Temporary variable for testing datasource */
-  projects = [
-    {
-      projectName: 'project1',
-      createdBy: 'joe123',
-      members: 5,
-    },
-  ];
+  // projects = [
+  //   {
+  //     projectName: 'project1',
+  //     createdBy: 'joe123',
+  //     members: 5,
+  //   },
+  // ];
   /**member table variables */
   memberDataSource!: MatTableDataSource<any>;
   memberSelection = new SelectionModel<any>(true, []);
   displayedMemberColumns: string[] = [
     'Select',
     'Fullname',
+    'Gender',
     'Email',
     'Status',
     'Remove',
   ];
+  teamMembersArr!: any[];
   /**Temporary variable for testing datasource */
-  members = [
-    {
-      fullName: 'Joe Karanja',
-      email: 'joekaranjasenior52@gmail.com',
-      status: 'active',
-    },
-  ];
+  // members = [
+  //   {
+  //     fullName: 'Joe Karanja',
+  //     email: 'joekaranjasenior52@gmail.com',
+  //     status: 'active',
+  //   },
+  // ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -93,7 +96,6 @@ export class AdminTeamsComponent implements OnInit {
     projects: 0,
     supervisors: 0,
   };
-  teamProjectsArr!: any[];
 
   constructor(
     private teamService: TeamService,
@@ -218,6 +220,8 @@ export class AdminTeamsComponent implements OnInit {
     // this.teaminfo.supervisors = team.supervisors;
     /**get the team projects */
     this.getTeamProjects(teamId);
+    /**get the team members */
+    this.getTeamMembers(teamId);
   }
   /*** END OF TEAM SECTION ***/
 
@@ -296,7 +300,7 @@ export class AdminTeamsComponent implements OnInit {
     this.projectDataSource = new MatTableDataSource(projects);
     this.projectDataSource.paginator = this.paginator;
     this.projectDataSource.sort = this.sort;
-    console.log(this.projects);
+    // console.log(projects);
   }
 
   /**Delete selected project(s) */
@@ -401,37 +405,42 @@ export class AdminTeamsComponent implements OnInit {
   /*** END OF PROJECTS SECTION ***/
 
   /*** MEMBERS SECTION */
-  /**Get the team Projects */
+  /**Get the team Members */
   getTeamMembers(teamId: string) {
-    // this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
-    //   // console.log(projects);
-    //   /**push number of projects to teams*/
-    //   this.teamProjectsArr = projects;
-    //   console.log(this.teamProjectsArr);
-    //   /**Get project members */
-    //   this.getProjectMembers();
-    //   /**Load the projects to table */
-    //   this.loadAllProjects(projects);
-    // });
+    this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
+      // console.log(members);
+      /**push number of memberss to teams*/
+      this.teamMembersArr = members;
+      console.log(this.teamMembersArr);
+      /**Load the projects to table */
+      this.loadAllMembers(members);
+    });
   }
 
   /**METHODS FOR MEMBERS DATASOURCE */
   /**check whether all are selected */
   areAllMembersSelected() {
-    // const numSelected = this.selection.selected.length;
-    // const numRows = !!this.dataSource && this.dataSource.data.length;
-    // return numSelected === numRows;
+    const numSelected = this.memberSelection.selected.length;
+    const numRows =
+      !!this.memberDataSource && this.memberDataSource.data.length;
+    return numSelected === numRows;
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
-  mMasterToggle() {
-    // this.areAllMembersSelected()
-    //   ? this.selection.clear()
-    //   : this.dataSource.data.forEach((r) => this.selection.select(r));
+  memberMasterToggle() {
+    this.areAllMembersSelected()
+      ? this.memberSelection.clear()
+      : this.memberDataSource.data.forEach((r) =>
+          this.memberSelection.select(r)
+        );
   }
   /** The label for the checkbox on the passed row */
-  mCheckboxLabel(row: any): string {
-    //
-    return ''; //delete this line
+  memberCheckboxLabel(row: any): string {
+    if (!row) {
+      return `${this.areAllMembersSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${
+      this.memberSelection.isSelected(row) ? 'deselect' : 'select'
+    } row ${row.EmpId + 1}`;
   }
 
   /**method used by search filter */
@@ -444,14 +453,14 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**Method to reload members table */
-  loadAllMembers(projects: any) {
-    // //reset the selection
-    // this.selection = new SelectionModel<any>(true, []);
-    // //add members to table
-    // this.dataSource = new MatTableDataSource(projects);
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-    // console.log(this.projects);
+  loadAllMembers(members: any) {
+    //reset the selection
+    this.memberSelection = new SelectionModel<any>(true, []);
+    //add members to table
+    this.memberDataSource = new MatTableDataSource(members);
+    this.memberDataSource.paginator = this.paginator;
+    this.memberDataSource.sort = this.sort;
+    // console.log(members);
   }
 
   /**Delete selected member(s) */
@@ -494,45 +503,45 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   /**Method to confirm member removal */
-  confirmMembersDeletion(projectId: string, projectname: string) {
-    // Swal.fire({
-    //   title: `Remove "${projectname}"?`,
-    //   text: `${projectname} will be removed from team.`,
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonText: 'Yes, go ahead.',
-    //   confirmButtonColor: '#e74c3c',
-    //   cancelButtonText: 'No, let me think',
-    //   cancelButtonColor: '#22b8f0',
-    // }).then((result) => {
-    //   //delete project from db
-    //   if (result.value) {
-    //     this.deleteTeamProjects([projectId]);
-    //   } else if (result.dismiss === Swal.DismissReason.cancel) {
-    //     this.snackBarService.displaySnackbar(
-    //       'error',
-    //       'operation has been cancelled'
-    //     );
-    //   }
-    // });
+  confirmMemberDeletion(memberId: string, memberName: string) {
+    Swal.fire({
+      title: `Remove "${memberName}"?`,
+      text: `${memberName} will be removed from team.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      //delete team member from db
+      if (result.value) {
+        this.deleteTeamMembers([memberId]);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.snackBarService.displaySnackbar(
+          'error',
+          'operation has been cancelled'
+        );
+      }
+    });
   }
 
   //removing specific member from team
-  deleteTeamMembers(projectIdArr: string[]) {
-    //pass array of projects to be deleted to api
-    // this.teamService
-    //   .deleteTeamProject(this.teaminfo.teamId, projectIdArr)
-    //   .subscribe({
-    //     next: (res: any) => {
-    //       console.log(res);
-    //       this.snackBarService.displaySnackbar('success', res.message);
-    //       this.getTeamProjects(this.teaminfo.teamId);
-    //     },
-    //     error: (err: any) => {
-    //       console.log(err);
-    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //     },
-    //   });
+  deleteTeamMembers(teamIdArr: string[]) {
+    //pass array of members to be deleted to api
+    this.teamService
+      .deleteTeamMembers(this.teaminfo.teamId, teamIdArr)
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.snackBarService.displaySnackbar('success', res.message);
+          this.getTeamMembers(this.teaminfo.teamId);
+        },
+        error: (err: any) => {
+          console.log(err);
+          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+        },
+      });
   }
 
   /*** END OF MEMBERS DATASOURCE SECTION ***/

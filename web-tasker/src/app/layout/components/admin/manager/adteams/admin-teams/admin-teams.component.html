@@ -162,7 +162,10 @@
                             &nbsp;&nbsp;
                             <mat-form-field style="flex: 0 5px 50%">
                               <mat-label>Filter</mat-label>
-                              <input matInput (keyup)="applyMemberFilter($event)" />
+                              <input
+                                matInput
+                                (keyup)="applyMemberFilter($event)"
+                              />
                             </mat-form-field>
                             &nbsp;&nbsp;
                             <b class="text-base">Remove Selected Members :</b>
@@ -185,7 +188,7 @@
                             <div>
                               <!-- TABLE BEGINS HERE-->
                               <mat-table
-                                [dataSource]="projectDataSource"
+                                [dataSource]="memberDataSource"
                                 matSort
                                 class="mat-elevation-z8 overflow-y-auto h-full"
                                 style="
@@ -202,14 +205,16 @@
                                     style="color: #22b8f0"
                                   >
                                     <mat-checkbox
-                                      (change)="$event ? projectMasterToggle() : null"
+                                      (change)="
+                                        $event ? memberMasterToggle() : null
+                                      "
                                       [checked]="
-                                        projectSelection.hasValue() &&
-                                        areAllProjectsSelected()
+                                        memberSelection.hasValue() &&
+                                        areAllMembersSelected()
                                       "
                                       [indeterminate]="
-                                        projectSelection.hasValue() &&
-                                        !areAllProjectsSelected()
+                                        memberSelection.hasValue() &&
+                                        !areAllMembersSelected()
                                       "
                                     ></mat-checkbox>
                                   </mat-header-cell>
@@ -218,62 +223,66 @@
                                       (click)="$event.stopPropagation()"
                                       (change)="
                                         $event
-                                          ? projectSelection.toggle(row)
+                                          ? memberSelection.toggle(row)
                                           : null
                                       "
                                       [checked]="
-                                        projectSelection.isSelected(row)
+                                        memberSelection.isSelected(row)
                                       "
-                                      [aria-label]="projectCheckboxLabel(row)"
+                                      [aria-label]="memberCheckboxLabel(row)"
                                     ></mat-checkbox>
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Projectname Column -->
-                                <ng-container
-                                  matColumnDef="Projectname"
-                                  class=""
-                                >
+                                <!-- Fullname Column -->
+                                <ng-container matColumnDef="Fullname" class="">
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    Project name
+                                    Full name
                                   </mat-header-cell>
                                   <mat-cell
                                     *matCellDef="let document"
                                     class="point hover:text-[#cb0c9f] cursor-pointer"
                                   >
-                                    {{ document.projectName }}
+                                    {{ document.firstName }}
+                                    {{ document.lastName }}
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Createdby Column -->
-                                <ng-container matColumnDef="Createdby" class="">
+                                <!-- Gender Column -->
+                                <ng-container matColumnDef="Gender" class="">
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    Created by
+                                    Gender
                                   </mat-header-cell>
-                                  <mat-cell
-                                    *matCellDef="let document"
-                                    class="point hover:text-[#cb0c9f] cursor-pointer"
-                                  >
-                                    {{ document.createdBy }}
+                                  <mat-cell *matCellDef="let document">
+                                    {{ document.gender }}
                                   </mat-cell>
                                 </ng-container>
-                                <!-- Members Column -->
-                                <ng-container matColumnDef="Members" class="">
+                                <!-- Email Column -->
+                                <ng-container matColumnDef="Email" class="">
                                   <mat-header-cell
                                     *matHeaderCellDef
                                     mat-sort-header
                                   >
-                                    Members
+                                    Email
                                   </mat-header-cell>
-                                  <mat-cell
-                                    *matCellDef="let document"
-                                    class="bold font-semibold"
+                                  <mat-cell *matCellDef="let document">
+                                    {{ document.email }}
+                                  </mat-cell>
+                                </ng-container>
+                                <!-- Status Column -->
+                                <ng-container matColumnDef="Status" class="">
+                                  <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
                                   >
-                                    {{ document.members }}
+                                    Status
+                                  </mat-header-cell>
+                                  <mat-cell *matCellDef="let document">
+                                    unknown
                                   </mat-cell>
                                 </ng-container>
                                 <!-- Delete Icon -->
@@ -296,9 +305,9 @@
                                       aria-label="Example icon button with a delete icon"
                                       type="button"
                                       (click)="
-                                        confirmProjectDeletion(
+                                        confirmMemberDeletion(
                                           document._id,
-                                          document.projectName
+                                          document.firstName
                                         )
                                       "
                                       color="accent"
@@ -312,12 +321,12 @@
                                   >
                                 </ng-container>
                                 <mat-header-row
-                                  *matHeaderRowDef="displayedProjectColumns"
+                                  *matHeaderRowDef="displayedMemberColumns"
                                 ></mat-header-row>
                                 <mat-row
                                   *matRowDef="
                                     let row;
-                                    columns: displayedProjectColumns
+                                    columns: displayedMemberColumns
                                   "
                                 ></mat-row
                               ></mat-table>
