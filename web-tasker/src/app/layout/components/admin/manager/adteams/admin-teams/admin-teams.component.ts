@@ -518,21 +518,21 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   //removing specific member from team
-  deleteTeamMembers(projectIdArr: string[]) {
-    //pass array of projects to be deleted to api
-    // this.teamService
-    //   .deleteTeamProject(this.teaminfo.teamId, projectIdArr)
-    //   .subscribe({
-    //     next: (res: any) => {
-    //       console.log(res);
-    //       this.snackBarService.displaySnackbar('success', res.message);
-    //       this.getTeamProjects(this.teaminfo.teamId);
-    //     },
-    //     error: (err: any) => {
-    //       console.log(err);
-    //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-    //     },
-    //   });
+  deleteTeamMembers(teamIdArr: string[]) {
+    //pass array of members to be deleted to api
+    this.teamService
+      .deleteTeamMembers(this.teaminfo.teamId, teamIdArr)
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.snackBarService.displaySnackbar('success', res.message);
+          this.getTeamMembers(this.teaminfo.teamId);
+        },
+        error: (err: any) => {
+          console.log(err);
+          Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+        },
+      });
   }
 
   /*** END OF MEMBERS DATASOURCE SECTION ***/
