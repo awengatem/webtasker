@@ -548,6 +548,11 @@ export class AdminTeamsComponent implements OnInit {
 
   /*** END OF MEMBERS DATASOURCE SECTION ***/
   /*** END OF MEMBERS SECTION ***/
+
+  /*** SUPERVISORS SECTION */
+  
+  /*** END OF SUPERVISORS SECTION ***/
+
   /*** END OF TEAM INFO SECTION ***/
 
   /*** METHODS FOR NAVIGATION OF TABS ***/
