@@ -118,7 +118,7 @@ export class TeamSupervisorComponent implements OnInit {
       }).then((result) => {
         //delete users from db
         if (result.value) {
-          this.deleteMultipe(supervisorDocArr);
+          this.deleteTeamSupervisors(supervisorDocArr);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           this.snackBarService.displaySnackbar(
             'error',
@@ -147,7 +147,11 @@ export class TeamSupervisorComponent implements OnInit {
     }).then((result) => {
       //delete user from db
       if (result.value) {
-        this.removeSupervisor(userId);
+        const supervisorDoc = {
+          user_account_id: userId,
+          team_id: this.teamId,
+        };
+        this.deleteTeamSupervisors([supervisorDoc]);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.snackBarService.displaySnackbar(
           'error',
@@ -156,8 +160,8 @@ export class TeamSupervisorComponent implements OnInit {
       }
     });
   }
-  /**Method to deletemultiple */
-  deleteMultipe(supervisorDocArr: any[]) {
+  /**Method to delete supervisors */
+  deleteTeamSupervisors(supervisorDocArr: any[]) {
     if (supervisorDocArr.length > 0) {
       this.supervisorService
         .deleteMultipleSupervisors(supervisorDocArr)
@@ -176,18 +180,18 @@ export class TeamSupervisorComponent implements OnInit {
   }
 
   /**Remove a specified supervisor */
-  removeSupervisor(userId: string) {
-    this.supervisorService.deleteSupervisor(userId).subscribe({
-      next: (response: any) => {
-        this.snackBarService.displaySnackbar('success', response.message);
-        this.loadAllSupervisors(this.teamId);
-      },
-      error: (err) => {
-        console.log(err);
-        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-      },
-    });
-  }
+  // removeSupervisor(userId: string) {
+  //   this.supervisorService.deleteSupervisor(userId).subscribe({
+  //     next: (response: any) => {
+  //       this.snackBarService.displaySnackbar('success', response.message);
+  //       this.loadAllSupervisors(this.teamId);
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //       Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+  //     },
+  //   });
+  // }
 
   /**Method to reload supervisor table */
   loadAllSupervisors(teamId: string) {
