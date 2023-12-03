@@ -85,6 +85,17 @@ export class AdminTeamsComponent implements OnInit {
   //     status: 'active',
   //   },
   // ];
+  /**supervisor table variables */  
+  supervisorDataSource!: MatTableDataSource<any>;
+  supervisorSelection = new SelectionModel<any>(true, []);
+  displayedSupervisorColumns: string[] = [
+    'Select',
+    'Fullname',
+    'Gender',
+    'Email',
+    'Status',
+    'Remove',
+  ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -550,7 +561,7 @@ export class AdminTeamsComponent implements OnInit {
   /*** END OF MEMBERS SECTION ***/
 
   /*** SUPERVISORS SECTION */
-  
+
   /*** END OF SUPERVISORS SECTION ***/
 
   /*** END OF TEAM INFO SECTION ***/
