@@ -593,30 +593,6 @@
                                           (keyup)="applyMemberFilter($event)"
                                         />
                                       </mat-form-field>
-                                      &nbsp;&nbsp;
-                                      <b class="text-base"
-                                        >Remove Selected Members :</b
-                                      >
-                                      &nbsp;&nbsp;
-                                      <button
-                                        mat-icon-button
-                                        aria-label="Example icon button with a delete icon"
-                                        type="button"
-                                        class="mt-4 custom-delete mat-raised-button"
-                                        style="background-color: #e91e63"
-                                        color="accent"
-                                      >
-                                        <mat-icon class="text-white"
-                                          >delete</mat-icon
-                                        >
-                                      </button>
-                                      &nbsp;&nbsp;
-                                      <button
-                                        type="button"
-                                        class="btn btn-primary"
-                                      >
-                                        Add Members
-                                      </button>
                                       <div>
                                         <!-- TABLE BEGINS HERE-->
                                         <mat-table
@@ -624,60 +600,14 @@
                                           matSort
                                           class="mat-elevation-z8 overflow-y-auto h-full"
                                           style="
-                                            max-height: calc(50vh - 300px);
+                                            max-height: calc(50vh - 100px);
                                             box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
                                               0 6px 10px 0 rgba(0, 0, 0, 0.14),
                                               0 1px 18px 0 rgba(0, 0, 0, 0.12);
                                           "
                                         >
                                           <!-- Checkbox Column -->
-                                          <ng-container matColumnDef="Select">
-                                            <mat-header-cell
-                                              *matHeaderCellDef
-                                              style="color: #22b8f0"
-                                            >
-                                              <mat-checkbox
-                                                (change)="
-                                                  $event
-                                                    ? memberMasterToggle()
-                                                    : null
-                                                "
-                                                [checked]="
-                                                  memberSelection.hasValue() &&
-                                                  areAllMembersSelected()
-                                                "
-                                                [indeterminate]="
-                                                  memberSelection.hasValue() &&
-                                                  !areAllMembersSelected()
-                                                "
-                                              ></mat-checkbox>
-                                            </mat-header-cell>
-                                            <mat-cell
-                                              *matCellDef="let row"
-                                              class=""
-                                            >
-                                              <mat-checkbox
-                                                (click)="
-                                                  $event.stopPropagation()
-                                                "
-                                                (change)="
-                                                  $event
-                                                    ? memberSelection.toggle(
-                                                        row
-                                                      )
-                                                    : null
-                                                "
-                                                [checked]="
-                                                  memberSelection.isSelected(
-                                                    row
-                                                  )
-                                                "
-                                                [aria-label]="
-                                                  memberCheckboxLabel(row)
-                                                "
-                                              ></mat-checkbox>
-                                            </mat-cell>
-                                          </ng-container>
+
                                           <!-- Fullname Column -->
                                           <ng-container
                                             matColumnDef="Fullname"
@@ -715,22 +645,7 @@
                                             </mat-cell>
                                           </ng-container>
                                           <!-- Email Column -->
-                                          <ng-container
-                                            matColumnDef="Email"
-                                            class=""
-                                          >
-                                            <mat-header-cell
-                                              *matHeaderCellDef
-                                              mat-sort-header
-                                            >
-                                              Email
-                                            </mat-header-cell>
-                                            <mat-cell
-                                              *matCellDef="let document"
-                                            >
-                                              {{ document.email }}
-                                            </mat-cell>
-                                          </ng-container>
+
                                           <!-- Status Column -->
                                           <ng-container
                                             matColumnDef="Status"
@@ -740,26 +655,37 @@
                                               *matHeaderCellDef
                                               mat-sort-header
                                             >
-                                              Status
+                                              Earnings
                                             </mat-header-cell>
                                             <mat-cell
                                               *matCellDef="let document"
                                             >
-                                              unknown
+                                              {{ document.status }}
                                             </mat-cell>
                                           </ng-container>
                                           <!-- Delete Icon -->
-                                          <ng-container matColumnDef="Remove">
+                                          <ng-container matColumnDef="Edit">
                                             <mat-header-cell
                                               *matHeaderCellDef
                                               mat-sort-header
                                             >
-                                              Remove
+                                              Input
                                             </mat-header-cell>
                                             <mat-cell
                                               *matCellDef="let document"
                                             >
                                               <button
+                                                class="rounded-md text-white px-3 py-1"
+                                                [ngClass]="{
+                                                  'bg-green-700':
+                                                    document.edit === 'add',
+                                                  'bg-blue-700':
+                                                    document.edit === 'edit'
+                                                }"
+                                              >
+                                                {{ document.edit }}
+                                              </button>
+                                              <!-- <button
                                                 mat-icon-button
                                                 class="custom-button custom-button-delete mat-raised-button"
                                                 style="
@@ -775,9 +701,9 @@
                                                 <mat-icon
                                                   class="absolute text-sm text-white top-1 right-1"
                                                   >delete_forever</mat-icon
-                                                >
-                                              </button></mat-cell
-                                            >
+                                                > 
+                                              </button> -->
+                                            </mat-cell>
                                           </ng-container>
                                           <mat-header-row
                                             *matHeaderRowDef="
