@@ -673,7 +673,7 @@
                                       aria-label="Example icon button with a delete icon"
                                       type="button"
                                       (click)="
-                                        confirmMemberDeletion(
+                                        confirmSupervisorDeletion(
                                           document._id,
                                           document.firstName
                                         )
@@ -689,12 +689,12 @@
                                   >
                                 </ng-container>
                                 <mat-header-row
-                                  *matHeaderRowDef="displayedMemberColumns"
+                                  *matHeaderRowDef="displayedSupervisorColumns"
                                 ></mat-header-row>
                                 <mat-row
                                   *matRowDef="
                                     let row;
-                                    columns: displayedMemberColumns
+                                    columns: displayedSupervisorColumns
                                   "
                                 ></mat-row
                               ></mat-table>
