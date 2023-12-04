@@ -147,6 +147,8 @@ export class AdminTeamsComponent implements OnInit {
         this.getTeamMembersNumber();
         //get team projects for each
         this.getTeamProjectsNumber();
+        //get team supervisors for each
+        this.getTeamSupervisorsNumber();
         console.log(this.teams);
         //return the first team
         resolve(teams[0]);
@@ -223,6 +225,21 @@ export class AdminTeamsComponent implements OnInit {
     this.getTeamStatus();
   }
 
+  /**Get team supervisors for each */
+  getTeamSupervisorsNumber() {
+    if (this.teams.length > 0) {
+      for (let i = 0; i < this.teams.length; i++) {
+        this.supervisorService
+          .getTeamSupervisors(this.teams[i]._id)
+          .subscribe((supervisors: any) => {
+            // console.log(supervisors.length);
+            //push number of supervisors to teams
+            this.teams[i].supervisors = supervisors.length;
+          });
+      }
+    }
+  }
+
   /**Load the team info */
   loadTeamInfo(team: any) {
     const teamId = team._id;
@@ -233,7 +250,7 @@ export class AdminTeamsComponent implements OnInit {
     this.teaminfo.status = team.status;
     this.teaminfo.members = team.members;
     this.teaminfo.projects = team.projects;
-    // this.teaminfo.supervisors = team.supervisors;
+    this.teaminfo.supervisors = team.supervisors;
     /**get the team projects */
     this.getTeamProjects(teamId);
     /**get the team members */
