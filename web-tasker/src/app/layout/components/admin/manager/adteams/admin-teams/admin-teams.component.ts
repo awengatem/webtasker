@@ -709,7 +709,7 @@ export class AdminTeamsComponent implements OnInit {
           next: (response: any) => {
             console.log(response);
             this.snackBarService.displaySnackbar('success', response.message);
-            this.loadAllSupervisors(this.teaminfo.teamId);
+            this.getTeamSupervisors(this.teaminfo.teamId);
           },
           error: (err) => {
             console.log(err);
