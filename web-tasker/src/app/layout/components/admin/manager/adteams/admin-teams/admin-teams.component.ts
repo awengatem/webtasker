@@ -611,11 +611,11 @@ export class AdminTeamsComponent implements OnInit {
 
   /**method used by search filter */
   applySupervisorFilter(event: Event) {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.memberDataSource.filter = filterValue.trim().toLowerCase();
-    // if (this.memberDataSource.paginator) {
-    //   this.memberDataSource.paginator.firstPage();
-    // }
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.supervisorDataSource.filter = filterValue.trim().toLowerCase();
+    if (this.supervisorDataSource.paginator) {
+      this.supervisorDataSource.paginator.firstPage();
+    }
   }
 
   /**Method to reload supervisors table */

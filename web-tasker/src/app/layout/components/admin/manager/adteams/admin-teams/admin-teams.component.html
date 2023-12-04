@@ -532,7 +532,7 @@
                               <mat-label>Filter</mat-label>
                               <input
                                 matInput
-                                (keyup)="applyMemberFilter($event)"
+                                (keyup)="applySupervisorFilter($event)"
                               />
                             </mat-form-field>
                             &nbsp;&nbsp;
@@ -544,7 +544,7 @@
                               type="button"
                               class="mt-4 custom-delete mat-raised-button"
                               style="background-color: #e91e63"
-                              (click)="deleteSelectedMembers()"
+                              (click)="deleteSelectedSupervisors()"
                               color="accent"
                             >
                               <mat-icon class="text-white">delete</mat-icon>
