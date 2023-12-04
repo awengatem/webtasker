@@ -526,7 +526,7 @@
                       <mat-card class="">
                         <mat-card-content>
                           <form>
-                            <b class="text-base">Search Members :</b>
+                            <b class="text-base">Search Supervisors :</b>
                             &nbsp;&nbsp;
                             <mat-form-field style="flex: 0 5px 50%">
                               <mat-label>Filter</mat-label>
@@ -536,7 +536,7 @@
                               />
                             </mat-form-field>
                             &nbsp;&nbsp;
-                            <b class="text-base">Remove Selected Members :</b>
+                            <b class="text-base">Remove Selected Supervisors :</b>
                             &nbsp;&nbsp;
                             <button
                               mat-icon-button
@@ -551,12 +551,12 @@
                             </button>
                             &nbsp;&nbsp;
                             <button type="button" class="btn btn-primary">
-                              Add Members
+                              Assign Supervisors
                             </button>
                             <div>
                               <!-- TABLE BEGINS HERE-->
                               <mat-table
-                                [dataSource]="memberDataSource"
+                                [dataSource]="supervisorDataSource"
                                 matSort
                                 class="mat-elevation-z8 overflow-y-auto h-full"
                                 style="
@@ -574,15 +574,15 @@
                                   >
                                     <mat-checkbox
                                       (change)="
-                                        $event ? memberMasterToggle() : null
+                                        $event ? supervisorMasterToggle() : null
                                       "
                                       [checked]="
-                                        memberSelection.hasValue() &&
-                                        areAllMembersSelected()
+                                       supervisorSelection.hasValue() &&
+                                        areAllSupervisorsSelected()
                                       "
                                       [indeterminate]="
-                                        memberSelection.hasValue() &&
-                                        !areAllMembersSelected()
+                                        supervisorSelection.hasValue() &&
+                                        !areAllSupervisorsSelected()
                                       "
                                     ></mat-checkbox>
                                   </mat-header-cell>
@@ -591,13 +591,13 @@
                                       (click)="$event.stopPropagation()"
                                       (change)="
                                         $event
-                                          ? memberSelection.toggle(row)
+                                          ? supervisorSelection.toggle(row)
                                           : null
                                       "
                                       [checked]="
-                                        memberSelection.isSelected(row)
+                                        supervisorSelection.isSelected(row)
                                       "
-                                      [aria-label]="memberCheckboxLabel(row)"
+                                      [aria-label]="supervisorCheckboxLabel(row)"
                                     ></mat-checkbox>
                                   </mat-cell>
                                 </ng-container>

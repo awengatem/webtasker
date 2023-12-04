@@ -585,28 +585,27 @@ export class AdminTeamsComponent implements OnInit {
   /**METHODS FOR SUPERVISORS DATASOURCE */
   /**check whether all are selected */
   areAllSupervisorsSelected() {
-    // const numSelected = this.memberSelection.selected.length;
-    // const numRows =
-    //   !!this.memberDataSource && this.memberDataSource.data.length;
-    // return numSelected === numRows;
+    const numSelected = this.supervisorSelection.selected.length;
+    const numRows =
+      !!this.supervisorDataSource && this.supervisorDataSource.data.length;
+    return numSelected === numRows;
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   supervisorMasterToggle() {
-    // this.areAllMembersSelected()
-    //   ? this.memberSelection.clear()
-    //   : this.memberDataSource.data.forEach((r) =>
-    //       this.memberSelection.select(r)
-    //     );
+    this.areAllSupervisorsSelected()
+      ? this.supervisorSelection.clear()
+      : this.supervisorDataSource.data.forEach((r) =>
+          this.supervisorSelection.select(r)
+        );
   }
   /** The label for the checkbox on the passed row */
   supervisorCheckboxLabel(row: any): string {
-    // if (!row) {
-    //   return `${this.areAllMembersSelected() ? 'select' : 'deselect'} all`;
-    // }
-    // return `${
-    //   this.memberSelection.isSelected(row) ? 'deselect' : 'select'
-    // } row ${row.EmpId + 1}`;
-    return ''; //delete this
+    if (!row) {
+      return `${this.areAllSupervisorsSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${
+      this.supervisorSelection.isSelected(row) ? 'deselect' : 'select'
+    } row ${row.EmpId + 1}`;
   }
 
   /**method used by search filter */
