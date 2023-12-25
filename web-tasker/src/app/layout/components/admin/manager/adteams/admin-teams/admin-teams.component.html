@@ -526,17 +526,17 @@
                       <mat-card class="">
                         <mat-card-content>
                           <form>
-                            <b class="text-base">Search Members :</b>
+                            <b class="text-base">Search Supervisors :</b>
                             &nbsp;&nbsp;
                             <mat-form-field style="flex: 0 5px 50%">
                               <mat-label>Filter</mat-label>
                               <input
                                 matInput
-                                (keyup)="applyMemberFilter($event)"
+                                (keyup)="applySupervisorFilter($event)"
                               />
                             </mat-form-field>
                             &nbsp;&nbsp;
-                            <b class="text-base">Remove Selected Members :</b>
+                            <b class="text-base">Remove Selected Supervisors :</b>
                             &nbsp;&nbsp;
                             <button
                               mat-icon-button
@@ -544,19 +544,19 @@
                               type="button"
                               class="mt-4 custom-delete mat-raised-button"
                               style="background-color: #e91e63"
-                              (click)="deleteSelectedMembers()"
+                              (click)="deleteSelectedSupervisors()"
                               color="accent"
                             >
                               <mat-icon class="text-white">delete</mat-icon>
                             </button>
                             &nbsp;&nbsp;
                             <button type="button" class="btn btn-primary">
-                              Add Members
+                              Assign Supervisors
                             </button>
                             <div>
                               <!-- TABLE BEGINS HERE-->
                               <mat-table
-                                [dataSource]="memberDataSource"
+                                [dataSource]="supervisorDataSource"
                                 matSort
                                 class="mat-elevation-z8 overflow-y-auto h-full"
                                 style="
@@ -574,15 +574,15 @@
                                   >
                                     <mat-checkbox
                                       (change)="
-                                        $event ? memberMasterToggle() : null
+                                        $event ? supervisorMasterToggle() : null
                                       "
                                       [checked]="
-                                        memberSelection.hasValue() &&
-                                        areAllMembersSelected()
+                                       supervisorSelection.hasValue() &&
+                                        areAllSupervisorsSelected()
                                       "
                                       [indeterminate]="
-                                        memberSelection.hasValue() &&
-                                        !areAllMembersSelected()
+                                        supervisorSelection.hasValue() &&
+                                        !areAllSupervisorsSelected()
                                       "
                                     ></mat-checkbox>
                                   </mat-header-cell>
@@ -591,13 +591,13 @@
                                       (click)="$event.stopPropagation()"
                                       (change)="
                                         $event
-                                          ? memberSelection.toggle(row)
+                                          ? supervisorSelection.toggle(row)
                                           : null
                                       "
                                       [checked]="
-                                        memberSelection.isSelected(row)
+                                        supervisorSelection.isSelected(row)
                                       "
-                                      [aria-label]="memberCheckboxLabel(row)"
+                                      [aria-label]="supervisorCheckboxLabel(row)"
                                     ></mat-checkbox>
                                   </mat-cell>
                                 </ng-container>
@@ -673,7 +673,7 @@
                                       aria-label="Example icon button with a delete icon"
                                       type="button"
                                       (click)="
-                                        confirmMemberDeletion(
+                                        confirmSupervisorDeletion(
                                           document._id,
                                           document.firstName
                                         )
@@ -689,12 +689,12 @@
                                   >
                                 </ng-container>
                                 <mat-header-row
-                                  *matHeaderRowDef="displayedMemberColumns"
+                                  *matHeaderRowDef="displayedSupervisorColumns"
                                 ></mat-header-row>
                                 <mat-row
                                   *matRowDef="
                                     let row;
-                                    columns: displayedMemberColumns
+                                    columns: displayedSupervisorColumns
                                   "
                                 ></mat-row
                               ></mat-table>

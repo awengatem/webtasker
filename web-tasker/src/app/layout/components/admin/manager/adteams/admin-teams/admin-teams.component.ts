@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { SnackBarService } from 'src/app/services/snackbar.service';
 import Swal from 'sweetalert2';
 import { ProjectService } from 'src/app/services/api/project.service';
+import { SupervisorService } from 'src/app/services/api/supervisor.service';
 
 @Component({
   selector: 'app-admin-teams',
@@ -85,6 +86,18 @@ export class AdminTeamsComponent implements OnInit {
   //     status: 'active',
   //   },
   // ];
+  /**supervisor table variables */
+  supervisorDataSource!: MatTableDataSource<any>;
+  supervisorSelection = new SelectionModel<any>(true, []);
+  displayedSupervisorColumns: string[] = [
+    'Select',
+    'Fullname',
+    'Gender',
+    'Email',
+    'Status',
+    'Remove',
+  ];
+  teamSupervisorsArr!: any[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -104,6 +117,7 @@ export class AdminTeamsComponent implements OnInit {
     private projectService: ProjectService,
     private projectStatusService: ProjectStatusService,
     private snackBarService: SnackBarService,
+    private supervisorService: SupervisorService,
     private modalService: MdbModalService
   ) {
     //load data on table
@@ -133,6 +147,8 @@ export class AdminTeamsComponent implements OnInit {
         this.getTeamMembersNumber();
         //get team projects for each
         this.getTeamProjectsNumber();
+        //get team supervisors for each
+        this.getTeamSupervisorsNumber();
         console.log(this.teams);
         //return the first team
         resolve(teams[0]);
@@ -209,6 +225,21 @@ export class AdminTeamsComponent implements OnInit {
     this.getTeamStatus();
   }
 
+  /**Get team supervisors for each */
+  getTeamSupervisorsNumber() {
+    if (this.teams.length > 0) {
+      for (let i = 0; i < this.teams.length; i++) {
+        this.supervisorService
+          .getTeamSupervisors(this.teams[i]._id)
+          .subscribe((supervisors: any) => {
+            // console.log(supervisors.length);
+            //push number of supervisors to teams
+            this.teams[i].supervisors = supervisors.length;
+          });
+      }
+    }
+  }
+
   /**Load the team info */
   loadTeamInfo(team: any) {
     const teamId = team._id;
@@ -219,11 +250,13 @@ export class AdminTeamsComponent implements OnInit {
     this.teaminfo.status = team.status;
     this.teaminfo.members = team.members;
     this.teaminfo.projects = team.projects;
-    // this.teaminfo.supervisors = team.supervisors;
+    this.teaminfo.supervisors = team.supervisors;
     /**get the team projects */
     this.getTeamProjects(teamId);
     /**get the team members */
     this.getTeamMembers(teamId);
+    /**get the team supervisors */
+    this.getTeamSupervisors(teamId);
   }
   /*** END OF TEAM SECTION ***/
 
@@ -548,6 +581,162 @@ export class AdminTeamsComponent implements OnInit {
 
   /*** END OF MEMBERS DATASOURCE SECTION ***/
   /*** END OF MEMBERS SECTION ***/
+
+  /*** SUPERVISORS SECTION */
+  /**Get the team supervisors */
+  getTeamSupervisors(teamId: string) {
+    this.supervisorService.getTeamSupervisors(teamId).subscribe({
+      next: (supervisors) => {
+        // console.log(supervisors);
+        /**push number of supervisors to teams*/
+        this.teamSupervisorsArr = supervisors;
+        console.log(this.teamSupervisorsArr);
+        /**Load the supervisors to table */
+        this.loadAllSupervisors(supervisors);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  /**METHODS FOR SUPERVISORS DATASOURCE */
+  /**check whether all are selected */
+  areAllSupervisorsSelected() {
+    const numSelected = this.supervisorSelection.selected.length;
+    const numRows =
+      !!this.supervisorDataSource && this.supervisorDataSource.data.length;
+    return numSelected === numRows;
+  }
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  supervisorMasterToggle() {
+    this.areAllSupervisorsSelected()
+      ? this.supervisorSelection.clear()
+      : this.supervisorDataSource.data.forEach((r) =>
+          this.supervisorSelection.select(r)
+        );
+  }
+  /** The label for the checkbox on the passed row */
+  supervisorCheckboxLabel(row: any): string {
+    if (!row) {
+      return `${this.areAllSupervisorsSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${
+      this.supervisorSelection.isSelected(row) ? 'deselect' : 'select'
+    } row ${row.EmpId + 1}`;
+  }
+
+  /**method used by search filter */
+  applySupervisorFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.supervisorDataSource.filter = filterValue.trim().toLowerCase();
+    if (this.supervisorDataSource.paginator) {
+      this.supervisorDataSource.paginator.firstPage();
+    }
+  }
+
+  /**Method to reload supervisors table */
+  loadAllSupervisors(supervisors: any) {
+    //reset the selection
+    this.supervisorSelection = new SelectionModel<any>(true, []);
+    //add supervisors to table
+    this.supervisorDataSource = new MatTableDataSource(supervisors);
+    this.supervisorDataSource.paginator = this.paginator;
+    this.supervisorDataSource.sort = this.sort;
+    // console.log(supervisors);
+  }
+
+  /**Delete selected supervisor(s) */
+  deleteSelectedSupervisors() {
+    const selectedSupervisorsArr = this.supervisorSelection.selected;
+    let supervisorDocArr: any = [];
+
+    console.log(selectedSupervisorsArr);
+    if (selectedSupervisorsArr.length > 0) {
+      //push only user ids in an array
+      selectedSupervisorsArr.forEach((item) => {
+        const supervisorDoc = {
+          user_account_id: item._id,
+          team_id: this.teaminfo.teamId,
+        };
+        supervisorDocArr.push(supervisorDoc);
+      });
+      console.log(supervisorDocArr);
+      //confirm and delete users
+      Swal.fire({
+        title: `Remove ${selectedSupervisorsArr.length} supervisors?`,
+        text: `${selectedSupervisorsArr.length} members will be removed from the team?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, go ahead.',
+        confirmButtonColor: '#e74c3c',
+        cancelButtonText: 'No, let me think',
+        cancelButtonColor: '#22b8f0',
+      }).then((result) => {
+        //delete users from db
+        if (result.value) {
+          this.deleteTeamSupervisors(supervisorDocArr);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          this.snackBarService.displaySnackbar(
+            'error',
+            'operation has been cancelled'
+          );
+          //reset the selection
+          this.supervisorSelection = new SelectionModel<any>(true, []);
+        }
+      });
+    } else {
+      this.snackBarService.displaySnackbar('error', 'no selected records');
+    }
+  }
+
+  /**Method to confirm supervisor removal */
+  confirmSupervisorDeletion(supervisorId: string, supervisorName: string) {
+    Swal.fire({
+      title: `Remove "${supervisorName}" from this team's supervisors?`,
+      text: 'This process is irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      //delete user from db
+      if (result.value) {
+        const supervisorDoc = {
+          user_account_id: supervisorId,
+          team_id: this.teaminfo.teamId,
+        };
+        this.deleteTeamSupervisors([supervisorDoc]);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.snackBarService.displaySnackbar(
+          'error',
+          'operation has been cancelled'
+        );
+      }
+    });
+  }
+
+  //removing specified supervisors from team
+  deleteTeamSupervisors(supervisorDocArr: any[]) {
+    if (supervisorDocArr.length > 0) {
+      this.supervisorService
+        .deleteMultipleSupervisors(supervisorDocArr)
+        .subscribe({
+          next: (response: any) => {
+            console.log(response);
+            this.snackBarService.displaySnackbar('success', response.message);
+            this.getTeamSupervisors(this.teaminfo.teamId);
+          },
+          error: (err) => {
+            console.log(err);
+            Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+          },
+        });
+    }
+  }
+  /*** END OF SUPERVISORS DATASOURCE SECTION ***/
+  /*** END OF SUPERVISORS SECTION ***/
   /*** END OF TEAM INFO SECTION ***/
 
   /*** METHODS FOR NAVIGATION OF TABS ***/

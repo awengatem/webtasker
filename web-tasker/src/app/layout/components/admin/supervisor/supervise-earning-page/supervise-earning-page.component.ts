@@ -13,14 +13,7 @@ export class SuperviseEarningPageComponent implements OnInit {
   /**member table variables */
   memberDataSource!: MatTableDataSource<any>;
   memberSelection = new SelectionModel<any>(true, []);
-  displayedMemberColumns: string[] = [
-    'Select',
-    'Fullname',
-    'Gender',
-    'Email',
-    'Status',
-    'Remove',
-  ];
+  displayedMemberColumns: string[] = ['Fullname', 'Gender', 'Status', 'Edit'];
   teamMembersArr!: any[];
   /**Temporary variable for testing datasource */
   members = [
@@ -29,14 +22,24 @@ export class SuperviseEarningPageComponent implements OnInit {
       lastName: 'Karanja',
       gender: 'male',
       email: 'joekaranjasenior52@gmail.com',
-      status: 'active',
+      status: 'ksh 10000',
+      edit: 'edit',
     },
     {
-      firstName: 'Joe',
-      lastName: 'Karanja',
+      firstName: 'immanuel',
+      lastName: 'Kimani',
       gender: 'male',
-      email: 'joekaranjasenior52@gmail.com',
-      status: 'active',
+      email: 'immanuel4082@gmail.com',
+      status: 'ksh 0',
+      edit: 'add',
+    },
+    {
+      firstName: 'Hope',
+      lastName: 'mwangi',
+      gender: 'female',
+      email: 'hopemumbi@gmail.com',
+      status: 'ksh 2000',
+      edit: 'edit',
     },
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
