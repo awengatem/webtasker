@@ -1,18 +1,12 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TimerService } from '../../services/timer.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TimerGuard implements CanActivate {
+export class TimerGuard  {
   constructor(private timerService: TimerService, private router: Router) {}
 
   canActivate(
