@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-supervise-earning-page',
@@ -6,9 +10,90 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./supervise-earning-page.component.scss'],
 })
 export class SuperviseEarningPageComponent implements OnInit {
-  constructor() {}
+  /**member table variables */
+  memberDataSource!: MatTableDataSource<any>;
+  memberSelection = new SelectionModel<any>(true, []);
+  displayedMemberColumns: string[] = ['Fullname', 'Gender', 'Status', 'Edit'];
+  teamMembersArr!: any[];
+  /**Temporary variable for testing datasource */
+  members = [
+    {
+      firstName: 'Joe',
+      lastName: 'Karanja',
+      gender: 'male',
+      email: 'joekaranjasenior52@gmail.com',
+      status: 'ksh 10000',
+      edit: 'edit',
+    },
+    {
+      firstName: 'immanuel',
+      lastName: 'Kimani',
+      gender: 'male',
+      email: 'immanuel4082@gmail.com',
+      status: 'ksh 0',
+      edit: 'add',
+    },
+    {
+      firstName: 'Hope',
+      lastName: 'mwangi',
+      gender: 'female',
+      email: 'hopemumbi@gmail.com',
+      status: 'ksh 2000',
+      edit: 'edit',
+    },
+  ];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  constructor() {
+    this.loadAllMembers(this.members);
+  }
+
+  ngOnInit(): void {}
+
+  /**METHODS FOR MEMBERS DATASOURCE */
+  /**check whether all are selected */
+  areAllMembersSelected() {
+    const numSelected = this.memberSelection.selected.length;
+    const numRows =
+      !!this.memberDataSource && this.memberDataSource.data.length;
+    return numSelected === numRows;
+  }
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  memberMasterToggle() {
+    this.areAllMembersSelected()
+      ? this.memberSelection.clear()
+      : this.memberDataSource.data.forEach((r) =>
+          this.memberSelection.select(r)
+        );
+  }
+  /** The label for the checkbox on the passed row */
+  memberCheckboxLabel(row: any): string {
+    if (!row) {
+      return `${this.areAllMembersSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${
+      this.memberSelection.isSelected(row) ? 'deselect' : 'select'
+    } row ${row.EmpId + 1}`;
+  }
+
+  /**method used by search filter */
+  applyMemberFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.memberDataSource.filter = filterValue.trim().toLowerCase();
+    if (this.memberDataSource.paginator) {
+      this.memberDataSource.paginator.firstPage();
+    }
+  }
+
+  /**Method to reload members table */
+  loadAllMembers(members: any) {
+    //reset the selection
+    this.memberSelection = new SelectionModel<any>(true, []);
+    //add members to table
+    this.memberDataSource = new MatTableDataSource(members);
+    this.memberDataSource.paginator = this.paginator;
+    this.memberDataSource.sort = this.sort;
+    // console.log(members);
   }
 }
