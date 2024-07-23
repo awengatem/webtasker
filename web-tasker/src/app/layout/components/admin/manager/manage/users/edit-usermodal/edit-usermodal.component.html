@@ -4,7 +4,7 @@
     <form [formGroup]="form" (ngSubmit)="form.valid && submitForm(form)">
       <div class="row custom-flex">
         <!-- USERNAME FIELD -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Username</mat-label>
           <input
             matInput
@@ -27,7 +27,7 @@
         </mat-form-field>
 
         <!-- EMAIL FIELD -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
           <input
             matInput
@@ -49,7 +49,7 @@
 
       <div class="row custom-flex">
         <!-- FIRSTNAME FIELD -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Firstname</mat-label>
           <input
             matInput
@@ -72,7 +72,7 @@
         </mat-form-field>
 
         <!-- LASTNAME FIELD -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Lastname</mat-label>
           <input
             matInput
@@ -97,7 +97,7 @@
 
       <div class="row custom-flex">
         <!-- DATE OF BIRTH FIELD -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Date of Birth</mat-label>
           <input
             matInput
@@ -132,7 +132,7 @@
         </mat-form-field>
 
         <!-- ID NUMBER FIELD -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Id number</mat-label>
           <input
             matInput
@@ -157,7 +157,7 @@
 
       <div class="row custom-flex">
         <!-- GENDER FIELD -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Gender</mat-label>
           <mat-select matNativeControl name="gender" formControlName="gender">
             <mat-option
@@ -177,7 +177,7 @@
         </mat-form-field>
 
         <!-- TEL NUMBER FIELD -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Tel number</mat-label>
           <input
             matInput
@@ -202,7 +202,7 @@
 
       <div class="row custom-flex">
         <!-- COUNTY FIELD -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>County</mat-label>
           <mat-select
             matNativeControl
@@ -226,7 +226,7 @@
 
         <!-- SITE FIELD -->
         <mat-form-field
-          appearance="outline"
+          appearance="fill"
           *ngIf="!form.controls['county'].errors?.['required']"
         >
           <mat-label>Site</mat-label>
@@ -252,7 +252,7 @@
       </div>
 
       <!-- ROLE FIELD -->
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="fill">
         <mat-label>Role</mat-label>
         <mat-select matNativeControl name="role" formControlName="role">
           <mat-option value="user">User</mat-option>
@@ -277,7 +277,7 @@
 
       <!-- PASSWORD FIELDS -->
       <div class="row custom-flex" *ngIf="includePassword">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>New password</mat-label>
           <input
             matInput
@@ -301,7 +301,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Confirm password</mat-label>
           <input
             matInput
