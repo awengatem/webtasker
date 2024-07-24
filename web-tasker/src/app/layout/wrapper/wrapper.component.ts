@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { TimerService } from 'src/app/services/timer.service';
 import Swal from 'sweetalert2';
-import { UserProfileComponent } from '../user/user-profile/user-profile.component';
+import { UserProfileComponent } from '../views/user/user-profile/user-profile.component';
 import {
   sideNavAnimation,
   sideNavContainerAnimation,
