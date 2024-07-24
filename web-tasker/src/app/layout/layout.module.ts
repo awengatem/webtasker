@@ -20,7 +20,6 @@ import { ProjectsComponent } from './components/user/user_projects/projects/proj
 import { TeamsComponent } from './components/user/user_teams/teams/teams.component';
 import { LogHeaderComponent } from './auth/log-header/log-header.component';
 import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { AdDashboardComponent } from './components/admin/manager/addashboard/ad-dashboard/ad-dashboard.component';
 import { AdProjectsComponent } from './components/admin/manager/adprojects/ad-projects/ad-projects.component';
 import { AdTeamsComponent } from './components/admin/manager/adteams/ad-teams/ad-teams.component';
@@ -89,7 +88,6 @@ import { AdProjectInfoModalComponent } from './components/admin/manager/adprojec
     /*auth component declarations*/
     LogHeaderComponent,
     LoginComponent,
-    RegisterComponent,
 
     /*admin component declarations*/
     AdDashboardComponent,

@@ -29,16 +29,18 @@
                 "
               ></i>
             </div>
-            <button mat-button [matMenuTriggerFor]="menu" class="">
-              <img
-                src="../../assets/username.png"
-                alt=""
-                class="user-image mr-1 p-2"
-              />
-              {{ username }}
-              <mat-icon class="user-image-icon ml-1"
-                >keyboard_arrow_down</mat-icon
-              >
+            <button mat-button [matMenuTriggerFor]="menu">
+              <div class="flex items-center text-white">
+                <img
+                  src="../../assets/username.png"
+                  alt=""
+                  class="user-image mr-1 p-2"
+                />
+                {{ username }}
+                <mat-icon class="user-image-icon ml-1"
+                  >keyboard_arrow_down</mat-icon
+                >
+              </div>
             </button>
             <mat-menu #menu="matMenu" backdropClass="customize">
               <button mat-menu-item (click)="showModal()">
