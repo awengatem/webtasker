@@ -4,8 +4,8 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { UserAccountService } from 'src/app/services/api/user-account.service';
 import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
-import Validation from '../../../../../../auth/login/validation';
-import { genders, roles } from '../../../../../../../helpers/common/store';
+import Validation from '../../../../../auth/login/validation';
+import { genders, roles } from '../../../../../../helpers/common/store';
 import { CountyService } from 'src/app/services/api/county.service';
 import { SiteService } from 'src/app/services/api/site.service';
 
