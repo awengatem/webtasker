@@ -2,17 +2,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
-
 import { AngularMaterialModule } from '../angular-material.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
-
 import { LayoutRoutingModule } from './layout-routing.module';
-
 import { RouterModule } from '@angular/router';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { HomeComponent } from './views/user/user_home/home/home.component';
@@ -75,9 +70,7 @@ import { AdProjectInfoModalComponent } from './views/admin/adprojects/ad-project
   declarations: [
     /*helper components*/
     HeaderComponent,
-    SidebarComponent,
     FooterComponent,
-    SidenavComponent,
     WrapperComponent,
 
     /*user components declarations*/
