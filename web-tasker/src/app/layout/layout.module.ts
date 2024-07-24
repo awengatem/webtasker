@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { AngularMaterialModule } from '../angular-material.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
@@ -70,7 +69,6 @@ import { AdProjectInfoModalComponent } from './views/admin/adprojects/ad-project
   declarations: [
     /*helper components*/
     HeaderComponent,
-    FooterComponent,
     WrapperComponent,
 
     /*user components declarations*/
