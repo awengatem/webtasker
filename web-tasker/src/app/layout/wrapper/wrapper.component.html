@@ -78,6 +78,22 @@
         </div>
       </mat-list-item>
 
+      <!-- ADMIN SECTION -->
+      <mat-list-item (click)="showSublist()" *ngIf="isAdminOrSupervisor">
+        <div class="mat-list-item-content">
+          <mat-icon mat-list-icon [ngClass]="sublist ? 'menu' : ''"
+            >verified_user</mat-icon
+          >
+          <div
+            class="content"
+            *ngIf="isExpanded"
+            [ngClass]="sublist ? 'menu' : ''"
+          >
+            Admin
+          </div>
+        </div>
+      </mat-list-item>
+
       <!-- SUPERVISE SECTION -->
       <!-- admin supervise -->
       <mat-list-item
@@ -93,22 +109,6 @@
           routerLinkActive="list-item-active"
           *ngIf="sublist"
         ></div>
-      </mat-list-item>
-
-      <!-- ADMIN SECTION -->
-      <mat-list-item (click)="showSublist()" *ngIf="isAdmin">
-        <div class="mat-list-item-content">
-          <mat-icon mat-list-icon [ngClass]="sublist ? 'menu' : ''"
-            >verified_user</mat-icon
-          >
-          <div
-            class="content"
-            *ngIf="isExpanded"
-            [ngClass]="sublist ? 'menu' : ''"
-          >
-            Admin
-          </div>
-        </div>
       </mat-list-item>
 
       <!-- admin dashboard -->
