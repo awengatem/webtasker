@@ -39,6 +39,7 @@
         Apps
       </h2>
 
+      <!-- USER SECTION -->
       <!-- user home -->
       <mat-list-item [routerLink]="'home'" routerLinkActive="list-item-active">
         <div class="mat-list-item-content">
@@ -77,6 +78,23 @@
         </div>
       </mat-list-item>
 
+      <!-- SUPERVISE SECTION -->
+      <!-- admin supervise -->
+      <mat-list-item
+        [routerLink]="'supervise'"
+        routerLinkActive="list-item-active"
+        *ngIf="sublist && isSupervisor"
+        ><div class="mat-list-item-content">
+          <i class="fa-solid fa-binoculars"></i>
+          <div class="content" *ngIf="isExpanded">Supervise</div>
+        </div>
+        <div
+          [routerLink]="'supervise/team'"
+          routerLinkActive="list-item-active"
+          *ngIf="sublist"
+        ></div>
+      </mat-list-item>
+
       <!-- ADMIN SECTION -->
       <mat-list-item (click)="showSublist()" *ngIf="isAdmin">
         <div class="mat-list-item-content">
@@ -97,7 +115,7 @@
       <mat-list-item
         [routerLink]="'ad_dashboard'"
         routerLinkActive="list-item-active"
-        *ngIf="sublist && isManager"
+        *ngIf="sublist && isAdmin"
         ><div class="mat-list-item-content">
           <!-- for children components -->
           <div
@@ -125,22 +143,6 @@
         </div>
       </mat-list-item>
 
-      <!-- admin supervise -->
-      <mat-list-item
-        [routerLink]="'supervise'"
-        routerLinkActive="list-item-active"
-        *ngIf="sublist && isSupervisor"
-        ><div class="mat-list-item-content">
-          <i class="fa-solid fa-binoculars"></i>
-          <div class="content" *ngIf="isExpanded">Supervise</div>
-        </div>
-        <div
-          [routerLink]="'supervise/team'"
-          routerLinkActive="list-item-active"
-          *ngIf="sublist"
-        ></div>
-      </mat-list-item>
-
       <!-- admin projects -->
       <mat-list-item
         [routerLink]="'ad_projects'"
@@ -161,7 +163,7 @@
           <div
             [routerLink]="'project_teams'"
             routerLinkActive="list-item-active"
-            *ngIf="sublist"
+            *ngIf="sublist && isAdmin"
           ></div>
           <i class="fa-solid fa-folder-open"></i>
           <div class="content" *ngIf="isExpanded">Projects</div>
@@ -183,7 +185,7 @@
           <div
             [routerLink]="'edit_team'"
             routerLinkActive="list-item-active"
-            *ngIf="sublist"
+            *ngIf="sublist && isAdmin"
           ></div>
           <i class="fa-solid fa-people-group"></i>
           <div class="content" *ngIf="isExpanded">Teams</div>
@@ -194,7 +196,7 @@
       <mat-list-item
         [routerLink]="'ad_manage'"
         routerLinkActive="list-item-active"
-        *ngIf="sublist && isManager"
+        *ngIf="sublist && isAdmin"
         ><div class="mat-list-item-content">
           <i class="fa-solid fa-people-roof"></i>
           <div class="content" *ngIf="isExpanded">Manage</div>
@@ -214,6 +216,5 @@
     <div [ngClass]="isModalOpen ? 'modal-blur' : ''">
       <router-outlet></router-outlet>
     </div>
-    
   </mat-sidenav-content>
 </mat-sidenav-container>

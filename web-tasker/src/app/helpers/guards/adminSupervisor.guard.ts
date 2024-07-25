@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
@@ -7,7 +12,7 @@ import Swal from 'sweetalert2';
 @Injectable({
   providedIn: 'root',
 })
-export class ManagerGuard  {
+export class AdminSupervisorGuard {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -19,12 +24,16 @@ export class ManagerGuard  {
     | boolean
     | UrlTree {
     return new Promise((resolve, reject) => {
-      this.authService.verifyManager().then((result) => {
+      this.authService.verifySupervisorAndAdmin().then((result) => {
         if (result === true) {
           resolve(true);
         } else {
           /**notify user */
-          Swal.fire('Unauthorized!', `You are not a manager.`, 'warning');
+          Swal.fire(
+            'Unauthorized!',
+            `You are not a supervisor or admin.`,
+            'warning'
+          );
           this.router.navigate(['/home']);
           resolve(false);
         }

@@ -18,7 +18,7 @@ import { ProjectInfoComponent } from './views/user/user_projects/project-info/pr
 import { AdProjectInfoComponent } from './views/admin/adprojects/ad-project-info/ad-project-info.component';
 import { ProjectActionComponent } from './views/user/user_projects/project-action/project-action.component';
 import { TimerGuard } from '../helpers/guards/timer.guard';
-import { ManagerGuard } from '../helpers/guards/manager.guard';
+import { AdminGuard } from '../helpers/guards/admin.guard';
 import { ProjectStatusComponent } from './views/admin/addashboard/project-status/project-status.component';
 import { ActiveSessionsComponent } from './views/admin/addashboard/active-sessions/active-sessions.component';
 import { DispositionComponent } from './views/user/user_projects/disposition/disposition.component';
@@ -44,7 +44,6 @@ import { AssignSupervisorComponent } from './views/admin/adteams/assign-supervis
 import { SuperviseTeamPageComponent } from './views/supervisor/supervise-team-page/supervise-team-page.component';
 import { SuperviseEarningPageComponent } from './views/supervisor/supervise-earning-page/supervise-earning-page.component';
 import { SuperviseMainPageComponent } from './views/supervisor/supervise-main-page/supervise-main-page.component';
-import { AdminGuard } from '../helpers/guards/admin.guard';
 import { MngEarningsComponent } from './views/admin/manage/earnings/mng-earnings/mng-earnings.component';
 import { AdminTeamsComponent } from './views/admin/adteams/admin-teams/admin-teams.component';
 
@@ -119,9 +118,7 @@ const routes: Routes = [
         component: UserProfileComponent,
       },
 
-      /*** ADMIN ROUTES ***/
-
-      /** SUPERVISOR **/
+      /*** SUPERVISOR ROUTES ***/
       {
         path: 'supervise',
         canActivate: [SupervisorGuard],
@@ -138,36 +135,36 @@ const routes: Routes = [
         component: SuperviseEarningPageComponent,
       },
 
-      /** MANAGER **/
+      /*** ADMIN ROUTES ***/
       /**DASHBOARD */
       {
         path: 'ad_dashboard',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         canDeactivate: [ClearDashintervalGuard],
         component: AdDashboardComponent,
       },
 
       {
         path: 'ad_dashboard/project_status',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         component: ProjectStatusComponent,
       },
 
       {
         path: 'ad_dashboard/active_sessions',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         component: ActiveSessionsComponent,
       },
 
       {
         path: 'ad_dashboard/recent_sessions',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         component: RecentSessionsComponent,
       },
 
       {
         path: 'ad_dashboard/user_status',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         component: UserStatusComponent,
       },
 
@@ -235,37 +232,37 @@ const routes: Routes = [
       /**MANAGE*/
       {
         path: 'ad_manage',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         component: ManageComponent,
       },
       {
         path: 'ad_manage/users',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         component: MngUsersComponent,
       },
       {
         path: 'ad_manage/user_info',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         component: UserInfoComponent,
       },
       {
         path: 'ad_manage/projects',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         component: MngProjectsComponent,
       },
       {
         path: 'ad_manage/teams',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         component: MngTeamsComponent,
       },
       {
         path: 'ad_manage/sessions',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         component: MngSessionsComponent,
       },
       {
         path: 'ad_manage/earnings',
-        canActivate: [ManagerGuard],
+        canActivate: [AdminGuard],
         component: MngEarningsComponent,
       },
     ],

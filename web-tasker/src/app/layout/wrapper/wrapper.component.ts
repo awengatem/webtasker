@@ -37,7 +37,6 @@ export class WrapperComponent implements OnInit {
   sublist!: boolean;
   isAdmin!: boolean;
   isSupervisor!: boolean;
-  isManager!: boolean;
 
   constructor(
     private authService: AuthService,
@@ -51,7 +50,6 @@ export class WrapperComponent implements OnInit {
     // check whether user is admin(supervisor) or manager to update menu
     this.checkAdmin();
     this.checkSupervisor();
-    this.checkManager();
 
     const expanded = this.sidenavService.getIsExpanded();
     const sublist = this.sidenavService.getSublist();
@@ -124,14 +122,6 @@ export class WrapperComponent implements OnInit {
       });
   }
 
-  /**Check if user is admin(manger or supervisor) */
-  checkAdmin() {
-    this.authService.verifyAdmin().then((result) => {
-      if (result === true) this.isAdmin = result;
-      else this.isAdmin = false;
-    });
-  }
-
   /**Check if user is supervisor */
   checkSupervisor() {
     this.authService.verifySupervisor().then((result) => {
@@ -140,11 +130,11 @@ export class WrapperComponent implements OnInit {
     });
   }
 
-  /**Check if user is manager */
-  checkManager() {
-    this.authService.verifyManager().then((result) => {
-      if (result === true) this.isManager = result;
-      else this.isManager = false;
+  /**Check if user is admin */
+  checkAdmin() {
+    this.authService.verifyAdmin().then((result) => {
+      if (result === true) this.isAdmin = result;
+      else this.isAdmin = false;
     });
   }
 
