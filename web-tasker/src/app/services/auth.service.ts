@@ -120,14 +120,14 @@ export class AuthService {
   }
 
   /**method used by admin guard to authorize admins (both supervisors and managers)*/
-  verifyAdmin() {
+  verifySupervisorAndAdmin() {
     return new Promise((resolve, reject) => {
       /**check if user is an admin */
       /**Get the user from token */
       const user = this.accountService.getUser();
       if (user) {
         const role = user.role;
-        //allow both supervisor and manager
+        /** allow both supervisor and manager */
         if (role === 'supervisor' || role === 'manager') {
           resolve(true);
         } else {
@@ -147,7 +147,7 @@ export class AuthService {
       const user = this.accountService.getUser();
       if (user) {
         const role = user.role;
-        //allow both supervisor only
+        /** allow supervisor only */
         if (role === 'supervisor') {
           resolve(true);
         } else {
@@ -159,15 +159,15 @@ export class AuthService {
     });
   }
 
-  /**method used by manager guard to authorize managers */
-  verifyManager() {
+  /**method used by admin guard to authorize admins */
+  verifyAdmin() {
     return new Promise((resolve, reject) => {
       /**check if user is an admin */
       /**Get the user from token */
       const user = this.accountService.getUser();
       if (user) {
         const role = user.role;
-        //allow manager only
+        /* allow manager only */
         if (role === 'manager') {
           resolve(true);
         } else {
