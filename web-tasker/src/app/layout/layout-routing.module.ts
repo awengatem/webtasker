@@ -48,6 +48,7 @@ import { MngEarningsComponent } from './views/admin/manage/earnings/mng-earnings
 import { AdminTeamsComponent } from './views/admin/adteams/admin-teams/admin-teams.component';
 import { SuperviseTeamsComponent } from './views/supervisor/supervise-teams/supervise-teams.component';
 import { SuperviseProjectsComponent } from './views/supervisor/supervise-projects/supervise-projects.component';
+import { AdminSupervisorGuard } from '../helpers/guards/adminSupervisor.guard';
 
 const routes: Routes = [
   {
@@ -203,7 +204,7 @@ const routes: Routes = [
       },
       {
         path: 'project_teams/:projectId',
-        canActivate: [AdminGuard],
+        canActivate: [AdminSupervisorGuard], //allow admin & supervisor
         component: ProjectTeamsComponent,
       },
 
