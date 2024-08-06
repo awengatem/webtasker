@@ -101,7 +101,7 @@ import { AdProjectInfoModalComponent } from './views/admin/adprojects/ad-project
     RecentSessionsComponent,
 
     /**added filter pipe to use it inside a component to filter*/
-    ProjectFilterPipe,
+    // ProjectFilterPipe,
     TeamFilterPipe,
     UserFilterPipe,
     MyFilterPipe,
@@ -145,6 +145,9 @@ import { AdProjectInfoModalComponent } from './views/admin/adprojects/ad-project
 
     /**mdb modals */
     MdbModalModule,
+
+    /**Import pipes here */
+    ProjectFilterPipe,
   ],
 })
 export class MyLayoutModule {}

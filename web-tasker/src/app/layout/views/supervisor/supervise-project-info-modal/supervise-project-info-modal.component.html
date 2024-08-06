@@ -1,0 +1,49 @@
+<div class="centered-content">
+  <div class="modal-box shadow">
+    <h1 class="title">
+      {{ projectName }} <i class="fa-solid fa-folder-open"></i>
+    </h1>
+    <div class="content">
+      <div class="child">
+        <div class="label"><i class="uil uil-user"></i> Created By:</div>
+        <div class="data">{{ createdBy }}</div>
+      </div>
+      <div class="child">
+        <div class="label"><i class="uil uil-clock"></i> Last updated:</div>
+        <div class="data">{{ lastUpdated }}</div>
+      </div>
+      <div class="child point">
+        <div class="label">
+          <i class="uil uil-users-alt"></i>
+          <span class="point-link" [routerLink]="['/project_teams', projectId]"
+            >Teams:</span
+          >
+        </div>
+        <div
+          class="data point-link count"
+          [routerLink]="['/project_teams', projectId]"
+        >
+          {{ projectTeams }}
+        </div>
+      </div>
+      <div class="child">
+        <div class="label"><i class="uil uil-server"></i> Status:</div>
+        <div
+          class="data"
+          [ngClass]="projectStatus === 'Active' ? 'active' : 'break'"
+        >
+          {{ projectStatus }}
+        </div>
+      </div>
+    </div>
+    <div class="input-group-append row btm-rgt">
+      <button
+        class="btn btn-custom col me-2"
+        type="button"
+        (click)="closeProjectInfoModal()"
+      >
+        Back
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 /**Also remember to update the module declarations*/
-@Pipe({ name: 'projectFilter' })
+@Pipe({ name: 'projectFilter', standalone: true })
 export class ProjectFilterPipe implements PipeTransform {
   /**
    * Pipe filters the list of elements based on the search text provided

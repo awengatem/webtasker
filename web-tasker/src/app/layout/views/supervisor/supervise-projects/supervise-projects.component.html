@@ -1,0 +1,100 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Projects</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data" [ngClass]="isModalOpen ? 'modal-blur' : ''">
+      <div class="centered-content">
+        <div class="projects-container">
+          <div class="projects">
+            <div class="row">
+              <div class="col-2">
+                <h1 class="text-dark position-relative">
+                  projects <i class="fa-regular fa-folder-open"></i>
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger count"
+                  >
+                    {{ projectsLength }}
+                  </span>
+                </h1>
+              </div>
+              <div class="col"></div>
+              <div class="col">
+                <div class="input-group rounded search-bar">
+                  <input
+                    type="search"
+                    class="form-control rounded shadow"
+                    placeholder="enter project name to search ..."
+                    aria-label="Search"
+                    aria-describedby="search-addon"
+                    [(ngModel)]="searchText"
+                    autofocus
+                  />
+                  <span class="border-0 filter-icon" id="search-addon">
+                    <i class="uil uil-filter"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="projects-inside" id="projects">
+              <div class="row">
+                <!-- item 1 -->
+                <!-- [routerLink]="['/ad_projects', project._id]" routerLink="/edit_project"  -->
+                <div
+                  class="col-md-6"
+                  *ngFor="let project of projects | projectFilter : searchText"
+                >
+                  <div class="timetable-item shadow pointer">
+                    <div class="timetable-item-main">
+                      <div
+                        class="timetable-item-name"
+                        (click)="openProjectInfoModal(project._id)"
+                      >
+                        {{ project.projectName }}
+                      </div>
+                      <div class="timetable-item-time">
+                        <div class="col">
+                          <div class="row">
+                            <small
+                              ><i class="uil uil-users-alt"></i>teams:
+                              {{ project.teams }}
+                            </small>
+                          </div>
+                          <div class="row">
+                            <small
+                              ><i class="uil uil-server"></i>status:
+                              <span
+                                [ngClass]="
+                                  project.status === 'Active'
+                                    ? 'active'
+                                    : 'break'
+                                "
+                                >{{ project.status }}</span
+                              >
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="timetable-item-users">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                        <div class="timetable-item-users-count">
+                          {{ project.members }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- div to display when empty-->
+                <div class="empty" *ngIf="projectsLength === 0">
+                  <div class="no-content centered">
+                    <img id="" src="../assets/images/no-projects.png" alt="" />
+                    <h1>Projects unavailable at the moment :)</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

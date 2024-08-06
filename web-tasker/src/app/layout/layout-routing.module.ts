@@ -46,6 +46,8 @@ import { SuperviseEarningPageComponent } from './views/supervisor/supervise-earn
 import { SuperviseMainPageComponent } from './views/supervisor/supervise-main-page/supervise-main-page.component';
 import { MngEarningsComponent } from './views/admin/manage/earnings/mng-earnings/mng-earnings.component';
 import { AdminTeamsComponent } from './views/admin/adteams/admin-teams/admin-teams.component';
+import { SuperviseTeamsComponent } from './views/supervisor/supervise-teams/supervise-teams.component';
+import { SuperviseProjectsComponent } from './views/supervisor/supervise-projects/supervise-projects.component';
 
 const routes: Routes = [
   {
@@ -133,6 +135,20 @@ const routes: Routes = [
         path: 'supervise/earnings',
         canActivate: [SupervisorGuard],
         component: SuperviseEarningPageComponent,
+      },
+
+      /**PROJECTS */
+      {
+        path: 'sup_projects',
+        canActivate: [SupervisorGuard],
+        component: SuperviseProjectsComponent,
+      },
+
+      /**TEAMS */
+      {
+        path: 'sup_teams',
+        canActivate: [SupervisorGuard],
+        component: SuperviseTeamsComponent,
       },
 
       /*** ADMIN ROUTES ***/
