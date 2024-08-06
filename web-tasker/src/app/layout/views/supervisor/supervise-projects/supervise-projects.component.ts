@@ -1,17 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { NewProjectModalComponent } from '../../admin/adprojects/new-projectmodal/new-projectmodal.component';
 import { ProjectService } from 'src/app/services/api/project.service';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
-import Swal from 'sweetalert2';
-import { EditProjectmodalComponent } from '../../admin/adprojects/edit-projectmodal/edit-projectmodal.component';
 import { AdProjectInfoModalComponent } from '../../admin/adprojects/ad-project-info-modal/ad-project-info-modal.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { ProjectFilterPipe } from 'src/app/filter.pipe';
-import { LayoutRoutingModule } from 'src/app/layout/layout-routing.module';
 
 @Component({
   selector: 'app-supervise-projects',
@@ -37,7 +33,7 @@ export class SuperviseProjectsComponent implements OnInit {
   searchText = '';
 
   /**define modal */
-  modalRef: MdbModalRef<NewProjectModalComponent> | null = null;
+  modalRef: MdbModalRef<AdProjectInfoModalComponent> | null = null;
   isModalOpen: boolean = false; //add background blur
 
   /**variables used in project status */
@@ -58,7 +54,6 @@ export class SuperviseProjectsComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       console.log(params);
     });
-    this.scrollDown();
   }
 
   getProjects() {
@@ -75,72 +70,9 @@ export class SuperviseProjectsComponent implements OnInit {
     });
   }
 
-  /**scrolldown immediately after adding new project */
-  scrollDown() {
-    //ensuring intervals only run once
-    if (this.projectService.getAddStatus() === true) {
-      const setInterval_ID = window.setInterval(() => {
-        this.projDiv = document.getElementById('projects');
-        this.projDiv.scrollTop = this.projDiv?.scrollHeight;
-      }, 100);
-
-      //stopping interval above after sometime
-      window.setTimeout(() => {
-        window.clearInterval(setInterval_ID);
-      }, 500);
-    }
-    //unsetting the condition
-    this.projectService.setAddStatus(false);
-    //console.log(this.projectService.getAddStatus());
-  }
-
   /**Capture project to help load it to edit component */
   captureProject(project: string) {
     this.projectService.setCapturedProject(project);
-  }
-
-  /**ACTION METHODS USED BY ALERT*/
-  alertConfirmation(projectId: string, projectName: string) {
-    Swal.fire({
-      title: `Delete "${projectName}"?`,
-      text: `This process is irreversible. Project "${projectName}" will be lost in all teams assigned to.`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, go ahead.',
-      confirmButtonColor: '#e74c3c',
-      cancelButtonText: 'No, let me think',
-      cancelButtonColor: '#22b8f0',
-    }).then((result) => {
-      //delete project from db
-      if (result.value) {
-        this.deleteProject(projectId, projectName);
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          `Project "${projectName}" still in our database.)`,
-          'error'
-        );
-      }
-    });
-  }
-
-  /**Delete method */
-  deleteProject(projectId: string, projectName: string) {
-    this.projectService.deleteProject(projectId).subscribe({
-      next: (response: any) => {
-        console.log(response);
-        this.router.navigate(['/ad_projects']);
-        Swal.fire(
-          'Removed!',
-          `Project "${projectName}" has been removed`,
-          'success'
-        );
-      },
-      error: (err) => {
-        console.log(err);
-        Swal.fire('Oops! Something went wrong', err.error, 'error');
-      },
-    });
   }
 
   /**Get project members and status*/
@@ -226,40 +158,6 @@ export class SuperviseProjectsComponent implements OnInit {
   }
 
   /**METHODS USED BY MODAL */
-  /**open new project modal */
-  openNewProjectModal() {
-    this.isModalOpen = true;
-    this.modalRef = this.modalService.open(NewProjectModalComponent, {
-      modalClass: 'modal-dialog-centered modal-lg',
-    });
-    //listen when closed
-    this.modalRef.onClose.subscribe((message: any) => {
-      console.log(message);
-      this.isModalOpen = false;
-      /**Refresh projects */
-      this.getProjects();
-      this.scrollDown();
-    });
-  }
-
-  /**open edit project modal */
-  openEditProjectModal(projectId: string) {
-    /**save the project id to local storage*/
-    localStorage.setItem('capturedProjectId', projectId);
-
-    this.isModalOpen = true;
-    this.modalRef = this.modalService.open(EditProjectmodalComponent, {
-      modalClass: 'modal-dialog-centered modal-lg',
-    });
-    //listen when closed
-    this.modalRef.onClose.subscribe((message: any) => {
-      console.log(message);
-      this.isModalOpen = false;
-      /**Refresh projects */
-      this.getProjects();
-    });
-  }
-
   /**open project info modal */
   openProjectInfoModal(projectId: string) {
     /**save the project id to local storage*/
