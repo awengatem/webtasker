@@ -136,11 +136,15 @@ const routes: Routes = [
         canActivate: [SupervisorGuard],
         component: SuperviseEarningPageComponent,
       },
+
+      /**PROJECTS */
       {
         path: 'sup_projects',
         canActivate: [SupervisorGuard],
         component: SuperviseProjectsComponent,
       },
+
+      /**TEAMS */
       {
         path: 'sup_teams',
         canActivate: [SupervisorGuard],
