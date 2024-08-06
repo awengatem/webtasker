@@ -3,11 +3,11 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ProjectService } from 'src/app/services/api/project.service';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
-import { AdProjectInfoModalComponent } from '../../admin/adprojects/ad-project-info-modal/ad-project-info-modal.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { ProjectFilterPipe } from 'src/app/filter.pipe';
+import { SuperviseProjectInfoModalComponent } from '../supervise-project-info-modal/supervise-project-info-modal.component';
 
 @Component({
   selector: 'app-supervise-projects',
@@ -33,7 +33,7 @@ export class SuperviseProjectsComponent implements OnInit {
   searchText = '';
 
   /**define modal */
-  modalRef: MdbModalRef<AdProjectInfoModalComponent> | null = null;
+  modalRef: MdbModalRef<SuperviseProjectInfoModalComponent> | null = null;
   isModalOpen: boolean = false; //add background blur
 
   /**variables used in project status */
@@ -164,7 +164,7 @@ export class SuperviseProjectsComponent implements OnInit {
     localStorage.setItem('capturedProjectId', projectId);
 
     this.isModalOpen = true;
-    this.modalRef = this.modalService.open(AdProjectInfoModalComponent, {
+    this.modalRef = this.modalService.open(SuperviseProjectInfoModalComponent, {
       modalClass: 'modal-dialog-centered modal-lg',
     });
     //listen when closed
