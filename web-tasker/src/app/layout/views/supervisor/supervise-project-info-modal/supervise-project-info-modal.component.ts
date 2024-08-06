@@ -21,7 +21,6 @@ export class SuperviseProjectInfoModalComponent implements OnInit {
   projectId!: string;
   projectStatus = 'Unknown';
   projectTeams!: any;
-  actionClicked = false;
 
   /**variables used in project status */
   projectidArr: string[] = [];
@@ -72,27 +71,6 @@ export class SuperviseProjectInfoModalComponent implements OnInit {
         console.log(err);
       },
     });
-  }
-
-  //method to show action menu
-  action(mode: string) {
-    if (mode === 'in') {
-      window.setTimeout(() => {
-        this.actionClicked = true;
-      }, 1000);
-    } else if (mode === 'out') {
-      window.setTimeout(() => {
-        this.actionClicked = false;
-      }, 1000);
-    }
-  }
-
-  actionClick() {
-    if (this.actionClicked === true) {
-      this.actionClicked = false;
-    } else {
-      this.actionClicked = true;
-    }
   }
 
   /**ACTION METHODS USED BY ALERT*/
@@ -197,31 +175,7 @@ export class SuperviseProjectInfoModalComponent implements OnInit {
     }
   }
 
-  /**Method to navigate to sessions */
-  showSessions() {
-    //close this modal
-    this.closeProjectInfoModal();
-    this.router.navigate([`/ad_projects/${this.projectId}/sessions`]);
-  }
-
   /**METHODS USED BY MODAL */
-  /**open edit project modal */
-  openEditProjectModal() {
-    /**save the project id to local storage*/
-    localStorage.setItem('capturedProjectId', this.projectId);
-    this.editModalRef = this.modalService.open(EditProjectmodalComponent, {
-      modalClass: 'modal-dialog-centered modal-lg',
-    });
-    //close this modal
-    this.closeProjectInfoModal();
-    //listen when closed
-    this.editModalRef.onClose.subscribe((message: any) => {
-      console.log(message);
-      /**Open the project Info modal */
-      this.openProjectInfoModal(this.projectId);
-    });
-  }
-
   /**open project info modal */
   openProjectInfoModal(projectId: string) {
     /**save the project id to local storage*/
@@ -245,10 +199,5 @@ export class SuperviseProjectInfoModalComponent implements OnInit {
   closeProjectInfoModal(): void {
     const closeMessage = 'Project info modal closed';
     this.infoModalRef.close(closeMessage);
-  }
-
-  closeEditProjectModal(): void {
-    const closeMessage = 'Project info modal closed';
-    this.editModalRef.close(closeMessage);
   }
 }
