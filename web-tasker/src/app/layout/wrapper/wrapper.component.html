@@ -94,8 +94,8 @@
         </div>
       </mat-list-item>
 
-      <!-- SUPERVISE SECTION -->
-      <!-- admin supervise -->
+      <!-- SUPERVISOR SECTION -->
+      <!-- supervisor dashboard -->
       <mat-list-item
         [routerLink]="'supervise'"
         routerLinkActive="list-item-active"
@@ -110,15 +110,25 @@
           *ngIf="sublist"
         ></div>
       </mat-list-item>
+
+      <!-- supervisor projects -->
       <mat-list-item
         [routerLink]="'sup_projects'"
         routerLinkActive="list-item-active"
         *ngIf="sublist && isSupervisor"
         ><div class="mat-list-item-content">
+          <!-- for children components -->
+          <div
+            [routerLink]="'project_teams'"
+            routerLinkActive="list-item-active"
+            *ngIf="sublist"
+          ></div>
           <i class="fa-solid fa-folder-open"></i>
           <div class="content" *ngIf="isExpanded">Projects</div>
         </div>
       </mat-list-item>
+
+      <!-- supervisor teams -->
       <mat-list-item
         [routerLink]="'sup_teams'"
         routerLinkActive="list-item-active"
