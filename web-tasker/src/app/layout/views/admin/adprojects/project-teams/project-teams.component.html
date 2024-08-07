@@ -86,10 +86,7 @@
       <div class="row centered-content create">
         <div class="col-md-1">
           <!-- routerLink="/new-project" -->
-          <button
-            class="btn btn-outline-custom medium"
-            [routerLink]="['/ad_projects', projectId]"
-          >
+          <button class="btn btn-outline-custom medium" (click)="goBack()">
             <div class="btn-txt">back</div>
           </button>
         </div>
@@ -98,3 +95,5 @@
     </div>
   </div>
 </div>
+
+<!-- [routerLink]="['/ad_projects', projectId]" -->

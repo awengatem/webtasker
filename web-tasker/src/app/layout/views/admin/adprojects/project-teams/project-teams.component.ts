@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/api/project.service';
 import { TeamService } from 'src/app/services/api/team.service';
+import { RouteService } from 'src/app/services/route.service';
 
 @Component({
   selector: 'app-project-teams',
@@ -18,8 +19,10 @@ export class ProjectTeamsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private projectService: ProjectService,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private routeService: RouteService
   ) {}
 
   ngOnInit(): void {
@@ -113,6 +116,18 @@ export class ProjectTeamsComponent implements OnInit {
             this.teams[i].projects = projects.length;
           });
       }
+    }
+  }
+
+  /**Navigate back to previous route */
+  goBack() {
+    const previousUrl = this.routeService.getPreviousUrl();
+    console.log(previousUrl);
+    if (previousUrl) {
+      this.router.navigateByUrl(previousUrl);
+    } else {
+      // Handle the case where there is no previous URL
+      console.log('No previous URL found.');
     }
   }
 }

@@ -5,7 +5,7 @@ import { filter } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class PreviousRouteService {
+export class RouteService {
   private previousUrl: string | null = null;
   private currentUrl: string | null = null;
 
@@ -21,5 +21,9 @@ export class PreviousRouteService {
 
   public getPreviousUrl(): string | null {
     return this.previousUrl;
+  }
+
+  public getCurrentUrl(): string | null {
+    return this.currentUrl;
   }
 }
