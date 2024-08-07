@@ -102,7 +102,7 @@ import { AdProjectInfoModalComponent } from './views/admin/adprojects/ad-project
 
     /**added filter pipe to use it inside a component to filter*/
     // ProjectFilterPipe,
-    TeamFilterPipe,
+    // TeamFilterPipe,
     UserFilterPipe,
     MyFilterPipe,
     DispositionComponent,
@@ -148,6 +148,7 @@ import { AdProjectInfoModalComponent } from './views/admin/adprojects/ad-project
 
     /**Import pipes here */
     ProjectFilterPipe,
+    TeamFilterPipe,
   ],
 })
 export class MyLayoutModule {}

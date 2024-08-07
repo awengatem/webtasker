@@ -28,7 +28,7 @@ export class ProjectFilterPipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'teamFilter' })
+@Pipe({ name: 'teamFilter', standalone: true })
 export class TeamFilterPipe implements PipeTransform {
   /**
    * Pipe filters the list of elements based on the search text provided
