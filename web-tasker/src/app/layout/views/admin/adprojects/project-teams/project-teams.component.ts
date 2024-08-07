@@ -121,13 +121,11 @@ export class ProjectTeamsComponent implements OnInit {
 
   /**Navigate back to previous route */
   goBack() {
-    const previousUrl = this.routeService.getPreviousUrl();
-    console.log(previousUrl);
+    const previousUrl = localStorage.getItem('currentUrl');
     if (previousUrl) {
       this.router.navigateByUrl(previousUrl);
     } else {
-      // Handle the case where there is no previous URL
-      console.log('No previous URL found.');
+      this.router.navigateByUrl('/');
     }
   }
 }
