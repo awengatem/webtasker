@@ -12,17 +12,16 @@
         <div class="label"><i class="uil uil-clock"></i> Last updated:</div>
         <div class="data">{{ lastUpdated }}</div>
       </div>
-      <div class="child point">
+      <div
+        class="child point"
+        [routerLink]="['/project_teams', projectId]"
+        (click)="closeProjectInfoModal()"
+      >
         <div class="label">
           <i class="uil uil-users-alt"></i>
-          <span class="point-link" [routerLink]="['/project_teams', projectId]"
-            >Teams:</span
-          >
+          <span class="point-link">Teams:</span>
         </div>
-        <div
-          class="data point-link count"
-          [routerLink]="['/project_teams', projectId]"
-        >
+        <div class="data point-link count">
           {{ projectTeams }}
         </div>
       </div>
