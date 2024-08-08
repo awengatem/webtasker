@@ -11,20 +11,9 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <div class="row">
-                  <h2 data-aos="zoom-in-up" class="col aos-init aos-animate">
-                    {{ teamName }}<i class="fa-solid fa-people-group"></i>
-                  </h2>
-                  <!-- <div class="col">
-                    <button
-                      class="btn btn-outline-custom"
-                      [routerLink]="['/ad_teams', teamId, 'supervisor']"
-                    >
-                      <i class="fa-solid fa-crown"></i>
-                      Supervisor
-                    </button>
-                  </div> -->
-                </div>
+                <h2 data-aos="zoom-in-up" class="aos-init aos-animate">
+                  {{ teamName }}<i class="fa-solid fa-people-group"></i>
+                </h2>
               </div>
 
               <div class="col">
@@ -43,21 +32,6 @@
                   </span>
                 </div>
               </div>
-              <!-- <div class="col-md-2">
-                <div class="create me-2">
-                  <button
-                    class="btn btn-primary"
-                    [routerLink]="
-                      tab1
-                        ? ['/ad_teams', teamId, 'add_member']
-                        : ['/ad_teams', teamId, 'assign_project']
-                    "
-                    
-                  >
-                    <span class="">+ {{ addButtonText }}</span>
-                  </button>
-                </div>
-              </div> -->
             </div>
 
             <div class="timetable">
@@ -95,17 +69,7 @@
                           </div>
                           <div class="timetable-item-time">
                             <small>active</small>
-                          </div>
-                          <div class="col-sm action-member">
-                            <div class="row">
-                              <i
-                                class="fa-solid fa-trash-can"
-                                (click)="
-                                  alertConfirmation(member._id, member.username)
-                                "
-                              ></i>
-                            </div>
-                          </div>
+                          </div>                          
                         </div>
                       </div>
                     </div>
