@@ -174,33 +174,7 @@ export class SuperviseTeaminfoComponent implements OnInit {
       this.selectedTeam = team;
       this.teamName = team.teamName;
     });
-  }
-
-  /**ACTION METHODS USED BY ALERT*/
-  //used by projects tab
-  alertConfirmation2(projectId: string, projectName: string) {
-    Swal.fire({
-      title: `Remove "${projectName}"?`,
-      text: `Project "${projectName}' will be removed from this team and will therefore be lost by all team members.`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, go ahead.',
-      confirmButtonColor: '#e74c3c',
-      cancelButtonText: 'No, let me think',
-      cancelButtonColor: '#22b8f0',
-    }).then((result) => {
-      //delete team from db
-      if (result.value) {
-        this.deleteTeamProject(projectId, projectName);
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          `Project "${projectName}" still belongs to this team .)`,
-          'error'
-        );
-      }
-    });
-  }
+  }  
 
   //deleting specific member
   deleteTeamMember(userId: string, username: string) {
