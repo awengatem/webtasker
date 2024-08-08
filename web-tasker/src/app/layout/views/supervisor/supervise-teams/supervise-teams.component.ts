@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { EditTeammodalComponent } from '../../admin/adteams/edit-teammodal/edit-teammodal.component';
 import { TeamService } from 'src/app/services/api/team.service';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
-import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
@@ -31,11 +28,6 @@ export class SuperviseTeamsComponent implements OnInit {
   submitted: boolean = false;
   /**used by search bar */
   searchText = '';
-
-  /**define modal */
-  modalRef: MdbModalRef<EditTeammodalComponent> | null = null;
-  isModalOpen: boolean = false; //add background blur
-
   /**variables used in team status */
   teamidArr: string[] = [];
   uniqueTeams: string[] = [];
