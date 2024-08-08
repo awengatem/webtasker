@@ -42,18 +42,8 @@ export class SuperviseTeaminfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //get the selected team
-    //this.selectedTeam = this.teamService.getCapturedTeam();
-
-    //get respective projects from route params id
-    //subscribe to the route params
-    this.route.params.subscribe((params: Params) => {
-      // const teamId = params['teamId'];
-      // this.teamId = teamId;
-      // this.getTeamName(teamId);
-      // this.getTeamProjects(teamId);
-      // this.getTeamMembers(teamId);
-    });
+    /**subscribe to the route params*/
+    this.route.params.subscribe((params: Params) => {});
 
     const teamId = localStorage.getItem('capturedTeamId')!;
     this.teamId = teamId;
@@ -81,7 +71,7 @@ export class SuperviseTeaminfoComponent implements OnInit {
   butResult: any;
 
   //monitor selected tab set default also
-  selectedTab: string = 'tabNav1'; 
+  selectedTab: string = 'tabNav1';
 
   //getting the open tab
   getOpenTab(): string {
@@ -122,10 +112,10 @@ export class SuperviseTeaminfoComponent implements OnInit {
      */
     if (tabId) {
       this.selectedTab = tabId;
-      if (tabId === 'tabNav1') {       
+      if (tabId === 'tabNav1') {
         this.tab1 = true;
         this.placeholder = 'enter username to search ...';
-      } else if (tabId === 'tabNav2') {        
+      } else if (tabId === 'tabNav2') {
         this.tab1 = false;
         this.placeholder = 'enter project name to search ...';
       }
@@ -174,7 +164,7 @@ export class SuperviseTeaminfoComponent implements OnInit {
       this.selectedTeam = team;
       this.teamName = team.teamName;
     });
-  }  
+  }
 
   //deleting specific member
   deleteTeamMember(userId: string, username: string) {
@@ -195,29 +185,6 @@ export class SuperviseTeaminfoComponent implements OnInit {
     });
   }
 
-  //deleting specific project
-  deleteTeamProject(projectId: string, projectName: string) {
-    //place project to be deleted in array
-    let projects = [projectId];
-
-    //pass array of projects to be deleted to api
-    this.teamService.deleteTeamProject(this.teamId, projects).subscribe({
-      next: (res: any) => {
-        console.log(res);
-        this.router.navigate([`/ad_teams/${this.teamId}`]);
-        Swal.fire(
-          'Removed!',
-          `Project "${projectName}" has been removed from this team.`,
-          'success'
-        ).then((result) => this.getTeamProjects(this.teamId));
-      },
-      error: (err: any) => {
-        console.log(err);
-        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-      },
-    });
-  }
-
   /**Get project members to add on icon*/
   getProjectMembers() {
     if (this.projects && this.projects.length > 0) {
@@ -230,18 +197,6 @@ export class SuperviseTeaminfoComponent implements OnInit {
             this.projects[i].members = members.length;
           });
       }
-    }
-  }
-
-  /**Method to navigate to previous route */
-  navigateBack() {
-    //check if previous location is from manage component
-    let fromMng = window.sessionStorage.getItem('fromMng');
-    if (fromMng === 'true') {
-      //navigate to manager
-      this.router.navigate(['ad_manage/teams']);
-    } else {
-      this.router.navigate(['/ad_teams']);
     }
   }
 }
