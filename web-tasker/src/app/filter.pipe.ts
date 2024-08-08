@@ -55,7 +55,7 @@ export class TeamFilterPipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'userFilter' })
+@Pipe({ name: 'userFilter', standalone: true })
 export class UserFilterPipe implements PipeTransform {
   /**
    * Pipe filters the list of elements based on the search text provided
