@@ -50,6 +50,7 @@ import { SuperviseTeamsComponent } from './views/supervisor/supervise-teams/supe
 import { SuperviseProjectsComponent } from './views/supervisor/supervise-projects/supervise-projects.component';
 import { AdminSupervisorGuard } from '../helpers/guards/adminSupervisor.guard';
 import { PreviousRouteGuard } from '../helpers/guards/previous-route.guard';
+import { SuperviseTeaminfoComponent } from './views/supervisor/supervise-teaminfo/supervise-teaminfo.component';
 
 const routes: Routes = [
   {
@@ -152,6 +153,11 @@ const routes: Routes = [
         path: 'sup_teams',
         canActivate: [SupervisorGuard],
         component: SuperviseTeamsComponent,
+      },
+      {
+        path: 'sup_teams/:teamId',
+        canActivate: [SupervisorGuard],
+        component: SuperviseTeaminfoComponent,
       },
 
       /*** ADMIN ROUTES ***/

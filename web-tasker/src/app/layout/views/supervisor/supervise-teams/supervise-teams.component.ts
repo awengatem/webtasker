@@ -131,7 +131,7 @@ export class SuperviseTeamsComponent implements OnInit {
 
   /**Set the team id in local storage to aid in the team-info component */
   captureTeamId(teamId: string) {
-    /**store this in localstorage to aid in next compomnent */
+    /**store this in localstorage to aid in next component */
     localStorage.setItem('capturedTeamId', teamId);
   }
 
