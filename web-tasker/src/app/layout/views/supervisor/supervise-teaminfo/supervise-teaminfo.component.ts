@@ -81,8 +81,7 @@ export class SuperviseTeaminfoComponent implements OnInit {
   butResult: any;
 
   //monitor selected tab set default also
-  selectedTab: string = 'tabNav1';
-  addButtonText: string = 'Add member';
+  selectedTab: string = 'tabNav1'; 
 
   //getting the open tab
   getOpenTab(): string {
@@ -123,12 +122,10 @@ export class SuperviseTeaminfoComponent implements OnInit {
      */
     if (tabId) {
       this.selectedTab = tabId;
-      if (tabId === 'tabNav1') {
-        this.addButtonText = 'Add member';
+      if (tabId === 'tabNav1') {       
         this.tab1 = true;
         this.placeholder = 'enter username to search ...';
-      } else if (tabId === 'tabNav2') {
-        this.addButtonText = 'Assign Project';
+      } else if (tabId === 'tabNav2') {        
         this.tab1 = false;
         this.placeholder = 'enter project name to search ...';
       }
@@ -270,15 +267,6 @@ export class SuperviseTeaminfoComponent implements OnInit {
         Swal.fire('Oops! Something went wrong', err.error.message, 'error');
       },
     });
-  }
-
-  //Shared function used by the + button
-  addRespective() {
-    if (this.selectedTab === 'tabNav1') {
-      console.log('addding member');
-    } else if (this.selectedTab === 'tabNav2') {
-      console.log('addding project');
-    }
   }
 
   /**Get project members to add on icon*/
