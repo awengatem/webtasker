@@ -1,16 +1,7 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { AccountService } from 'src/app/services/account-service.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { SidenavService } from 'src/app/services/sidenav.service';
-import { TimerService } from 'src/app/services/timer.service';
 import Swal from 'sweetalert2';
 import { UserProfileComponent } from '../views/user/user-profile/user-profile.component';
 import {
@@ -42,9 +33,7 @@ export class WrapperComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private modalService: MdbModalService,
-    private accountService: AccountService,
-    private sidenavService: SidenavService,
-    private timerService: TimerService
+    private sidenavService: SidenavService
   ) {}
 
   ngOnInit(): void {
@@ -62,7 +51,7 @@ export class WrapperComponent implements OnInit {
     }
     if (sublist === 'true') {
       /** check if admin first */
-      this.authService.verifyAdmin().then((result) => {
+      this.authService.verifySupervisorAndAdmin().then((result) => {
         if (result === true) {
           this.sublist = true;
         } else {

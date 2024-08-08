@@ -1,0 +1,129 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Teams</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <link
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+        rel="stylesheet"
+      />
+      <div class="idance">
+        <div class="schedule content-block">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <h2 data-aos="zoom-in-up" class="aos-init aos-animate">
+                  {{ teamName }}<i class="fa-solid fa-people-group"></i>
+                </h2>
+              </div>
+
+              <div class="col">
+                <div class="input-group rounded search-bar">
+                  <input
+                    type="search"
+                    class="form-control rounded shadow"
+                    [placeholder]="placeholder"
+                    aria-label="Search"
+                    aria-describedby="search-addon"
+                    [(ngModel)]="searchText"
+                    autofocus
+                  />
+                  <span class="border-0 filter-icon" id="search-addon">
+                    <i class="uil uil-filter"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timetable">
+              <!-- Schedule Top Navigation  -->
+              <nav class="nav nav-tabs">
+                <button
+                  class="nav-link active"
+                  (click)="showTab('members', 'tabNav1')"
+                  id="members"
+                >
+                  <a class="">Members</a>
+                </button>
+                <button
+                  class="nav-link"
+                  (click)="showTab('projects', 'tabNav2')"
+                  id="projects"
+                >
+                  <a class="">Projects</a>
+                </button>
+              </nav>
+
+              <div class="tab-content">
+                <!-- TAB 1 -->
+                <div class="tab-pane show active" id="tabNav1">
+                  <div class="row">
+                    <!-- Member Item  -->
+                    <div
+                      class="col-md-6"
+                      *ngFor="let member of members | userFilter : searchText"
+                    >
+                      <div class="timetable-item member shadow">
+                        <div class="timetable-item-main-member">
+                          <div class="timetable-item-name">
+                            {{ member.username }}
+                          </div>
+                          <div class="timetable-item-time">
+                            <small>active</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TAB 2 -->
+                <div class="tab-pane show" id="tabNav2">
+                  <div class="row">
+                    <!-- Project Item  -->
+                    <div
+                      class="col-md-6"
+                      *ngFor="
+                        let project of projects | projectFilter : searchText
+                      "
+                    >
+                      <div class="timetable-item shadow">
+                        <div class="timetable-item-main">
+                          <div class="timetable-item-name">
+                            {{ project.projectName }}
+                          </div>
+                          <div class="timetable-item-time">
+                            <small>Last updated 3 mins ago</small>
+                          </div>
+                          <div class="timetable-item-users">
+                            <i class="fa-solid fa-users-viewfinder"></i>
+                            <div class="timetable-item-users-count">
+                              {{ project.members }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- div to display when empty-->
+                    <div class="empty" *ngIf="projectsLength === 0">
+                      <div class="no-content centered">
+                        <img
+                          id=""
+                          src="../assets/images/no-projects.png"
+                          alt=""
+                        />
+                        <h1>Projects unavailable at the moment :)</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-custom text-white back" routerLink="/sup_teams">
+        <div class="btn-txt">Back</div>
+      </button>
+    </div>
+  </div>
+</div>
