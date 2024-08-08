@@ -5,7 +5,6 @@ import { TeamService } from 'src/app/services/api/team.service';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import Swal from 'sweetalert2';
-import { NewTeammodalComponent } from '../../admin/adteams/new-teammodal/new-teammodal.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
@@ -44,9 +43,7 @@ export class SuperviseTeamsComponent implements OnInit {
   constructor(
     private teamService: TeamService,
     private route: ActivatedRoute,
-    private router: Router,
-    private projectStatusService: ProjectStatusService,
-    private modalService: MdbModalService
+    private projectStatusService: ProjectStatusService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +52,6 @@ export class SuperviseTeamsComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       console.log(params);
     });
-    this.scrollDown();
   }
 
   getTeams() {
@@ -69,65 +65,6 @@ export class SuperviseTeamsComponent implements OnInit {
       //get team projects for each
       this.getTeamProjects();
       console.log(this.teams);
-    });
-  }
-
-  /**scrolldown immediately after adding new team */
-  scrollDown() {
-    //ensuring intervals only run once
-    if (this.teamService.getAddStatus() === true) {
-      const setInterval_ID = window.setInterval(() => {
-        this.teamDiv = document.getElementById('teams');
-        this.teamDiv.scrollTop = this.teamDiv?.scrollHeight;
-      }, 100);
-
-      //stopping interval above after sometime
-      window.setTimeout(() => {
-        window.clearInterval(setInterval_ID);
-      }, 500);
-    }
-    //unsetting the condition
-    this.teamService.setAddStatus(false);
-    //console.log(this.teamService.getAddStatus());
-  }
-
-  /**ACTION METHODS USED BY ALERT*/
-  alertConfirmation(teamId: string, teamName: string) {
-    Swal.fire({
-      title: `Delete "${teamName}"?`,
-      text: 'This process is irreversible.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, go ahead.',
-      confirmButtonColor: '#e74c3c',
-      cancelButtonText: 'No, let me think',
-      cancelButtonColor: '#22b8f0',
-    }).then((result) => {
-      //delete team from db
-      if (result.value) {
-        this.deleteteam(teamId, teamName);
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          `Team "${teamName}" still in our database.)`,
-          'error'
-        );
-      }
-    });
-  }
-
-  /**Delete method */
-  deleteteam(teamId: string, teamName: string) {
-    this.teamService.deleteTeam(teamId).subscribe({
-      next: (response: any) => {
-        console.log(response);
-        this.router.navigate(['/ad_teams']);
-        Swal.fire('Removed!', `team "${teamName}" has been removed`, 'success');
-      },
-      error: (err: any) => {
-        console.log(err);
-        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
-      },
     });
   }
 
@@ -211,37 +148,4 @@ export class SuperviseTeamsComponent implements OnInit {
   }
 
   /**METHODS USED BY MODAL */
-  /**open new team modal */
-  openNewTeamModal() {
-    this.isModalOpen = true;
-    this.modalRef = this.modalService.open(NewTeammodalComponent, {
-      modalClass: 'modal-dialog-centered modal-lg',
-    });
-    //listen when closed
-    this.modalRef.onClose.subscribe((message: any) => {
-      console.log(message);
-      this.isModalOpen = false;
-      /**Refresh teams */
-      this.getTeams();
-      this.scrollDown();
-    });
-  }
-
-  /**open edit team modal */
-  openEditTeamModal(teamId: string) {
-    /**save the team id to local storage*/
-    localStorage.setItem('capturedTeamId', teamId);
-
-    this.isModalOpen = true;
-    this.modalRef = this.modalService.open(EditTeammodalComponent, {
-      modalClass: 'modal-dialog-centered modal-lg',
-    });
-    //listen when closed
-    this.modalRef.onClose.subscribe((message: any) => {
-      console.log(message);
-      this.isModalOpen = false;
-      /**Refresh teams */
-      this.getTeams();
-    });
-  }
 }
