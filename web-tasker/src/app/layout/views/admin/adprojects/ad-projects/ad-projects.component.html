@@ -87,6 +87,12 @@
                           <button
                             type="button"
                             class="col btn btn-outline-danger btn-sm"
+                            (click)="
+                              alertConfirmation(
+                                project._id,
+                                project.projectName
+                              )
+                            "
                           >
                             <i class="fa-solid fa-trash-can"></i>
                           </button>
