@@ -15,6 +15,9 @@ export class SuperviseMainPageComponent implements OnInit {
   supTeamCount = 0;
   supProjectCount = 0;
 
+  /**used by search bar */
+  searchText = '';
+
   //immanuel stuff
   //please delete if not useful
   isActive = false;

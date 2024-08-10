@@ -105,6 +105,7 @@
                       type="search"
                       placeholder="Search by Name"
                       class="form-control m-3 w-1/2"
+                      [(ngModel)]="searchText"
                     />
                   </div>
                 </div>
@@ -115,7 +116,7 @@
                 >
                   <div
                     class="card shadow-2xl cursor-pointer"
-                    *ngFor="let team of teams"
+                    *ngFor="let team of teams | teamFilter : searchText"
                     routerLink="/supervise/team"
                     style="
                       width: 16rem;
