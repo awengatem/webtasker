@@ -25,7 +25,7 @@ export class SuperviseMainPageComponent implements OnInit {
   theDifference = 30;
   currentTime = '11:00:00:11';
   bounceAnimationTrigger = true;
-  todayDate = new Date();
+  todayDate = new Date().toString().split(' GMT')[0];
 
   constructor(
     private supervisorService: SupervisorService,
