@@ -18,9 +18,7 @@
             <div class="">
               <div class="flex justify-between">
                 <div class="py-2">
-                  <i
-                    class="fa-sharp fa-solid fa-users-rectangle"                 
-                  ></i>
+                  <i class="fa-sharp fa-solid fa-users-rectangle"></i>
                   My Teams Data
                 </div>
                 <div class="text-lg text-[#22b8f0]">{{ todayDate }}</div>
@@ -50,8 +48,7 @@
                 <div class="">
                   <div class="data-name text-center">
                     <div class="label pointer text-2xl">
-                      <i class="fa-solid fa-list-check"></i> Active
-                      projects
+                      <i class="fa-solid fa-list-check"></i> Active projects
                     </div>
                     <h1 class="text-[#22b8f0] p-4">{{ supProjectCount }}</h1>
                   </div>
@@ -60,8 +57,7 @@
                 <div class="">
                   <div class="data-name text-center">
                     <div class="label pointer text-2xl">
-                      <i class="fa-solid fa-sack-dollar"></i> Team
-                      Earnings
+                      <i class="fa-solid fa-sack-dollar"></i> Team Earnings
                     </div>
                     <div class="flex p-4 gap-4">
                       <h1 class="">{{ earningsAmount }}</h1>
@@ -118,7 +114,7 @@
                     *ngFor="let team of teams | teamFilter : searchText"
                     routerLink="/supervise/team"
                     style="
-                      width: 16rem;
+                      width: 15rem;
                       height: 17rem;
                       background-color: white;
                       box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -141,26 +137,26 @@
                           <i class="uil uil-users-alt"></i
                           >Members&nbsp;:&nbsp;<span
                             class="text-[#22b8f0] font-semibold"
-                            >20</span
+                            >{{ team.members }}</span
                           >
                         </div>
                         <div>
                           <i class="uil uil-folder-open"></i
                           >Projects&nbsp;:&nbsp;<span
                             class="text-[#22b8f0] font-semibold"
-                            >20</span
+                            >{{ team.projects }}</span
                           >
                         </div>
                         <div>
                           <div>
                             <i class="uil uil-server"></i>
-                            Status&nbsp;:&nbsp;<span
-                              class="font-semibold indent-1"
-                              [ngClass]="{
-                                'text-green-600': isActive,
-                                'text-red-600': !isActive
-                              }"
-                              >{{ isActive ? "Active" : "Unproductive" }}</span
+                            status:
+                            <!-- <span>active</span> -->
+                            <span
+                              [ngClass]="
+                                team.status === 'Active' ? 'active' : 'break'
+                              "
+                              >{{ team.status }}</span
                             >
                           </div>
                         </div>
