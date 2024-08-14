@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProjectService } from 'src/app/services/api/project.service';
 import { TeamService } from 'src/app/services/api/team.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class SuperviseTeamPageComponent {
   members: any = [];
   projects: any = [];
   teamId!: string;
+  projectsLength = 0;
 
   cardElement: any;
   tabIdArray: string[] = [];
@@ -25,7 +27,11 @@ export class SuperviseTeamPageComponent {
     tab3: false,
   };
 
-  constructor(private router: Router, private teamService: TeamService) {}
+  constructor(
+    private router: Router,
+    private teamService: TeamService,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit(): void {
     this.members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
@@ -76,5 +82,32 @@ export class SuperviseTeamPageComponent {
       this.selectedTeam = team;
       this.teamName = team.teamName;
     });
+  }
+
+  /**get projects for team*/
+  getTeamProjects(teamId: string) {
+    this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
+      console.log(projects);
+      this.projects = projects;
+      this.projectsLength = projects.length;
+      /**get project members immediately
+       * after filling projects array*/
+      this.getProjectMembers();
+    });
+  }
+
+  /**Get project members to add on icon*/
+  getProjectMembers() {
+    if (this.projects && this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectService
+          .getProjectMembers(this.projects[i]._id)
+          .subscribe((members: any) => {
+            console.log(members.length);
+            //push number of members to projects
+            this.projects[i].members = members.length;
+          });
+      }
+    }
   }
 }
