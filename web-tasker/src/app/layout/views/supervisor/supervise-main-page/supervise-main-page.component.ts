@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account-service.service';
 import { SupervisorService } from 'src/app/services/api/supervisor.service';
+import { TeamService } from 'src/app/services/api/team.service';
 
 @Component({
   selector: 'app-supervise-main-page',
@@ -29,7 +30,8 @@ export class SuperviseMainPageComponent implements OnInit {
 
   constructor(
     private supervisorService: SupervisorService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private teamService: TeamService
   ) {}
 
   // Method to trigger animation and change color
@@ -71,6 +73,23 @@ export class SuperviseMainPageComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  /**Get team members for each */
+  getTeamMembers() {
+    if (this.teams.length > 0) {
+      for (let i = 0; i < this.teams.length; i++) {
+        this.teamService
+          .getTeamMembersDoc(this.teams[i]._id)
+          .subscribe((members: any) => {
+            // console.log(members.length);
+            //push number of members to teams
+            this.teams[i].members = members.length;
+          });
+      }
+    }
+    //get the team status here
+    // this.getTeamStatus();
   }
 
   /**Get the supervisor projects */
