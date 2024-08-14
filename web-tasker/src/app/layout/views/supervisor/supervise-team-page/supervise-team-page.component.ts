@@ -15,6 +15,7 @@ export class SuperviseTeamPageComponent {
   projects: any = [];
   teamId!: string;
   teamProjectsLength = 0;
+  teamMembersLength = 0;
 
   cardElement: any;
   tabIdArray: string[] = [];
@@ -34,14 +35,11 @@ export class SuperviseTeamPageComponent {
   ) {}
 
   ngOnInit(): void {
-    this.members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-    this.projects = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-
     const teamId = localStorage.getItem('capturedTeamId')!;
     this.teamId = teamId;
     this.getTeamName(teamId);
     this.getTeamProjects(teamId);
-    // this.getTeamMembers(teamId);
+    this.getTeamMembers(teamId);
   }
 
   /**METHODS FOR TAB NAVIGATION */
@@ -95,6 +93,21 @@ export class SuperviseTeamPageComponent {
       /**get project members immediately
        * after filling projects array*/
       this.getProjectMembers();
+    });
+  }
+
+  /**get team members */
+  getTeamMembers(teamId: string) {
+    this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
+      let membersArr: any = [];
+      members.forEach((member: any) => {
+        if (member) {
+          membersArr.push(member);
+        }
+      });
+      this.members = membersArr;
+      // console.log(this.members);
+      this.teamMembersLength = members.length;
     });
   }
 

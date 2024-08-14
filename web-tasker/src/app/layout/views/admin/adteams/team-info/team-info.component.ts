@@ -145,7 +145,7 @@ export class TeamInfoComponent implements OnInit {
     });
   }
 
-  //getting members for team
+  /**get team members */
   getTeamMembers(teamId: string) {
     this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
       let membersArr: any = [];
