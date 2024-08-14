@@ -117,23 +117,6 @@
                                 (click)="showTab('tab3')"
                               >
                                 <div class="card-body">
-                                  <h2 class="card-title">Supervisor</h2>
-                                  <div class="d-flex">
-                                    <div class="num px-2"><p>1</p></div>
-                                    <div>
-                                      <h4 class="card-text">active : 1</h4>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-sm-3">
-                              <div
-                                class="card"
-                                id="tab4"
-                                (click)="showTab('tab4')"
-                              >
-                                <div class="card-body">
                                   <h2 class="card-title">Earnings</h2>
                                   <h1 class="card-text">Ksh 4,000,000</h1>
                                 </div>
@@ -237,11 +220,11 @@
                                   </div>
                                 </div>
                               </div>
-                              <div *ngIf="tabStates['tab3']" class="">
+                              <div
+                                *ngIf="tabStates['tab3']"
+                                class="h-[300px] overflow-scroll"
+                              >
                                 tab 3
-                              </div>
-                              <div *ngIf="tabStates['tab4']" class="">
-                                tab 4
                               </div>
                             </div>
                           </div>

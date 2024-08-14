@@ -25,13 +25,13 @@ export class SuperviseTeamPageComponent {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,];
+    this.members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
     this.projects = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
   }
 
   /**getting the open tab*/
   getOpenTab(): string {
-    this.tabIdArray = ['tab1', 'tab2', 'tab3', 'tab4'];
+    this.tabIdArray = ['tab1', 'tab2', 'tab3'];
     this.tabIdArray.forEach((tab) => {
       this.loopElement = document.getElementById(tab);
       if (this.loopElement.classList.contains('card-active')) {
@@ -39,7 +39,7 @@ export class SuperviseTeamPageComponent {
       }
     });
     return this.loopResult;
-  } 
+  }
   swapTabs(tabId: string) {
     // Assuming tabId is a string like 'tab1', 'tab2', etc.
     for (const key in this.tabStates) {
