@@ -159,7 +159,7 @@ export class TeamInfoComponent implements OnInit {
     });
   }
 
-  //getting team name
+  /**get team name*/
   getTeamName(teamId: string) {
     this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
       console.log(team);

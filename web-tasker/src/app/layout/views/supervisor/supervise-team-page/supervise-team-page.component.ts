@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TeamService } from 'src/app/services/api/team.service';
 
 @Component({
   selector: 'app-supervise-team-page',
@@ -7,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./supervise-team-page.component.scss'],
 })
 export class SuperviseTeamPageComponent {
+  selectedTeam!: any[];
+  teamName!: string;
   members: any = [];
   projects: any = [];
   teamId!: string;
@@ -22,7 +25,7 @@ export class SuperviseTeamPageComponent {
     tab3: false,
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private teamService: TeamService) {}
 
   ngOnInit(): void {
     this.members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
@@ -30,8 +33,10 @@ export class SuperviseTeamPageComponent {
 
     const teamId = localStorage.getItem('capturedTeamId')!;
     this.teamId = teamId;
+    this.getTeamName(teamId);
   }
 
+  /**METHODS FOR TAB NAVIGATION */
   /**getting the open tab*/
   getOpenTab(): string {
     this.tabIdArray = ['tab1', 'tab2', 'tab3'];
@@ -61,5 +66,15 @@ export class SuperviseTeamPageComponent {
     this.swapTabs(cardId);
     this.cardElement = document.getElementById(cardId);
     this.cardElement.classList.add('card-active');
+  }
+
+  /**OTHER METHODS */
+  /**get team name*/
+  getTeamName(teamId: string) {
+    this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
+      console.log(team);
+      this.selectedTeam = team;
+      this.teamName = team.teamName;
+    });
   }
 }
