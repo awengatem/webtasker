@@ -75,6 +75,7 @@
                     <div class="card-body">
                       <div class="teams-container">
                         <div class="container">
+                          <!-- Tab Selections -->
                           <div class="row row-cols-4">
                             <div class="col-sm-3">
                               <div
@@ -125,43 +126,18 @@
                           </div>
                         </div>
                       </div>
-                      <!-- <div class="row d-flex justify-content-center">
-                        <div class="col-3">
-                          <h2 class="data-name" routerLink="/ad_manage/users">
-                            Team Members
-                            <h1>20</h1>
-                            <span class="text-success mr-2"
-                              ><h3>90% active</h3></span
-                            >
-                          </h2>
-                        </div>
-                        <div class="col-3">
-                          <h2 class="data-name" routerLink="/projects">
-                            Team projects
-                            <h1>3</h1>
-                            <span class="text-success mr-2"
-                              ><h3>60% done</h3></span
-                            >
-                          </h2>
-                        </div>
-                        <div class="col-3">
-                          <h2 class="data-name" routerLink="/view_earnings">
-                            Team Earnings
-                            <h1>200$</h1>
-                            <span class="text-danger mr-2"><h3>-20%</h3></span>
-                          </h2>
-                        </div>
-                      </div> -->
                       <div class="teams-container overflow-auto">
                         <div class="container h-full">
                           <div class="row p-3">
                             <div class="container-table p-3 border rounded">
+                              <!-- TAB 1 -->
                               <div
                                 *ngIf="tabStates['tab1']"
-                                class="h-[300px] overflow-scroll"
+                                class="h-[400px] overflow-scroll"
                               >
                                 tab 1
                               </div>
+                              <!-- TAB 2 -->
                               <div
                                 *ngIf="tabStates['tab2']"
                                 class="h-full overflow-auto"
@@ -206,9 +182,6 @@
                                             <i class="uil uil-server"></i
                                             >Status:
                                           </div>
-
-                                          <!-- <p class=" text-base md:text-lg ..">Teams</p>
-                              <p class="text-base md:text-lg ...">Status:</p> -->
                                         </div>
                                         <button
                                           class="ml-auto text-sm text-white p-1 rounded-lg px-2 bg-red-600 shadow-lg shadow-blue-500/50"
@@ -220,9 +193,10 @@
                                   </div>
                                 </div>
                               </div>
+                              <!-- TAB 3 -->
                               <div
                                 *ngIf="tabStates['tab3']"
-                                class="h-[300px] overflow-scroll"
+                                class="h-[400px] overflow-scroll"
                               >
                                 tab 3
                               </div>
