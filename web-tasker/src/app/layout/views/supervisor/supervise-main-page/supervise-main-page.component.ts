@@ -20,13 +20,9 @@ export class SuperviseMainPageComponent implements OnInit {
   /**used by search bar */
   searchText = '';
 
-  //immanuel stuff
-  //please delete if not useful
-  isActive = false;
   earningsAmount = 20000; // Replace this with your actual earnings data
   theDifference = 30;
   currentTime = '11:00:00:11';
-  bounceAnimationTrigger = true;
   todayDate = new Date().toString().split(' GMT')[0];
 
   /**variables used in team status */
@@ -40,9 +36,10 @@ export class SuperviseMainPageComponent implements OnInit {
     private projectStatusService: ProjectStatusService
   ) {}
 
-  // Method to trigger animation and change color
-  startBounceAnimation() {
-    this.bounceAnimationTrigger = !this.bounceAnimationTrigger;
+  ngOnInit(): void {
+    this.getSupervisor();
+    this.getSupervisorTeams(this.supervisorId);
+    this.getSupervisorProjects(this.supervisorId);
   }
 
   hasIncreased(): boolean {
@@ -50,11 +47,6 @@ export class SuperviseMainPageComponent implements OnInit {
     // For example, compare current earnings with previous earnings
     // Return true if increased, false otherwise
     return false /* your logic here */;
-  }
-  ngOnInit(): void {
-    this.getSupervisor();
-    this.getSupervisorTeams(this.supervisorId);
-    this.getSupervisorProjects(this.supervisorId);
   }
 
   /**Get the supervisor's userId */
