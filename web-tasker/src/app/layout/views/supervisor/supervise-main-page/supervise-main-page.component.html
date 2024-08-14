@@ -112,6 +112,7 @@
                   <div
                     class="card shadow-2xl cursor-pointer"
                     *ngFor="let team of teams | teamFilter : searchText"
+                    (click)="captureTeamId(team._id)"
                     routerLink="/supervise/team"
                     style="
                       width: 15rem;

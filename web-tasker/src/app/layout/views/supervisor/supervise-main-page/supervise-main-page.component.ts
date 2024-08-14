@@ -4,6 +4,7 @@ import { AccountService } from 'src/app/services/account-service.service';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { SupervisorService } from 'src/app/services/api/supervisor.service';
 import { TeamService } from 'src/app/services/api/team.service';
+import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
   selector: 'app-supervise-main-page',
@@ -33,7 +34,8 @@ export class SuperviseMainPageComponent implements OnInit {
     private supervisorService: SupervisorService,
     private accountService: AccountService,
     private teamService: TeamService,
-    private projectStatusService: ProjectStatusService
+    private projectStatusService: ProjectStatusService,
+    private generalService: GeneralService
   ) {}
 
   ngOnInit(): void {
@@ -160,5 +162,10 @@ export class SuperviseMainPageComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  /**Set the team id in local storage to aid in the team-info component */
+  captureTeamId(teamId: string) {
+    this.generalService.captureTeamId(teamId);
   }
 }

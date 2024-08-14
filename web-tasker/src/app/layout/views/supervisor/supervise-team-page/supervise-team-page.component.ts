@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class SuperviseTeamPageComponent {
   members: any = [];
   projects: any = [];
+  teamId!: string;
 
   cardElement: any;
   tabIdArray: string[] = [];
@@ -19,7 +20,6 @@ export class SuperviseTeamPageComponent {
     tab1: true, //default tab1 as open
     tab2: false,
     tab3: false,
-    tab4: false,
   };
 
   constructor(private router: Router) {}
@@ -27,6 +27,9 @@ export class SuperviseTeamPageComponent {
   ngOnInit(): void {
     this.members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
     this.projects = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+
+    const teamId = localStorage.getItem('capturedTeamId')!;
+    this.teamId = teamId;
   }
 
   /**getting the open tab*/

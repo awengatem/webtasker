@@ -20,4 +20,10 @@ export class GeneralService {
     // return input.split(' ').join('');
     //return input.replace(/\s/g,'');
   }
+
+  /**Set the team id in local storage to aid in the team-info component */
+  captureTeamId(teamId: string) {
+    /**store this in localstorage to aid in next compomnent */
+    localStorage.setItem('capturedTeamId', teamId);
+  }
 }
