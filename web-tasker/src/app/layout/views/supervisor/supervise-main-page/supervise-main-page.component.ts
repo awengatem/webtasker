@@ -111,10 +111,10 @@ export class SuperviseMainPageComponent implements OnInit {
             this.teamidArr.push(doc.team_id);
           }
         }
-        //get unique teams
+        /**get unique teams*/
         this.uniqueTeams = [...new Set(this.teamidArr)];
 
-        //set status to active for each team in the unique array
+        /**set status to active for each team in the unique array*/
         if (this.teams.length > 0) {
           for (let team of this.teams) {
             for (let id of this.uniqueTeams) {
@@ -140,7 +140,7 @@ export class SuperviseMainPageComponent implements OnInit {
           .getTeamProjects(this.teams[i]._id)
           .subscribe((projects: any) => {
             // console.log(projects.length);
-            //push number of projects to teams
+            /**push number of projects to teams*/
             this.teams[i].projects = projects.length;
           });
       }
