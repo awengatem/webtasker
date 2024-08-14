@@ -59,8 +59,12 @@
                     <div class="card-header">
                       <div class="row">
                         <div class="col">
-                          <h2 data-aos="zoom-in-up" class="col aos-init aos-animate">
-                            {{ teamName }}<i class="fa-solid fa-people-group"></i>
+                          <h2
+                            data-aos="zoom-in-up"
+                            class="col aos-init aos-animate"
+                          >
+                            {{ teamName
+                            }}<i class="fa-solid fa-people-group"></i>
                           </h2>
                         </div>
                         <div class="col-3">
@@ -90,7 +94,7 @@
                                   <div class="d-flex">
                                     <div class="num px-2"><p>20</p></div>
                                     <div>
-                                      <h4 class="card-text">active : 6</h4>
+                                      <h4 class="card-text">active : []</h4>
                                     </div>
                                   </div>
                                 </div>
@@ -103,11 +107,13 @@
                                 (click)="showTab('tab2')"
                               >
                                 <div class="card-body">
-                                  <h2 class="card-title">Team Project</h2>
+                                  <h2 class="card-title">Team Projects</h2>
                                   <div class="d-flex">
-                                    <div class="num px-2"><p>24</p></div>
+                                    <div class="num px-2">
+                                      <p>{{ teamProjectsLength }}</p>
+                                    </div>
                                     <div>
-                                      <h4 class="card-text">active : 4</h4>
+                                      <h4 class="card-text">active : []</h4>
                                     </div>
                                   </div>
                                 </div>

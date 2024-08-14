@@ -14,7 +14,7 @@ export class SuperviseTeamPageComponent {
   members: any = [];
   projects: any = [];
   teamId!: string;
-  projectsLength = 0;
+  teamProjectsLength = 0;
 
   cardElement: any;
   tabIdArray: string[] = [];
@@ -40,6 +40,8 @@ export class SuperviseTeamPageComponent {
     const teamId = localStorage.getItem('capturedTeamId')!;
     this.teamId = teamId;
     this.getTeamName(teamId);
+    this.getTeamProjects(teamId);
+    // this.getTeamMembers(teamId);
   }
 
   /**METHODS FOR TAB NAVIGATION */
@@ -89,7 +91,7 @@ export class SuperviseTeamPageComponent {
     this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
       console.log(projects);
       this.projects = projects;
-      this.projectsLength = projects.length;
+      this.teamProjectsLength = projects.length;
       /**get project members immediately
        * after filling projects array*/
       this.getProjectMembers();
@@ -103,8 +105,8 @@ export class SuperviseTeamPageComponent {
         this.projectService
           .getProjectMembers(this.projects[i]._id)
           .subscribe((members: any) => {
-            console.log(members.length);
-            //push number of members to projects
+            // console.log(members.length);
+            /**push number of members to projects*/
             this.projects[i].members = members.length;
           });
       }
