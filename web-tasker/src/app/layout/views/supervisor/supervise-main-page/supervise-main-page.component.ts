@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account-service.service';
+import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { SupervisorService } from 'src/app/services/api/supervisor.service';
 import { TeamService } from 'src/app/services/api/team.service';
 
@@ -28,10 +29,15 @@ export class SuperviseMainPageComponent implements OnInit {
   bounceAnimationTrigger = true;
   todayDate = new Date().toString().split(' GMT')[0];
 
+  /**variables used in team status */
+  teamidArr: string[] = [];
+  uniqueTeams: string[] = [];
+
   constructor(
     private supervisorService: SupervisorService,
     private accountService: AccountService,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private projectStatusService: ProjectStatusService
   ) {}
 
   // Method to trigger animation and change color
@@ -88,8 +94,45 @@ export class SuperviseMainPageComponent implements OnInit {
           });
       }
     }
-    //get the team status here
-    // this.getTeamStatus();
+    /**get the team status here*/
+    this.getTeamStatus();
+  }
+
+  /**Get the team status from active status docs
+   * identify active teams
+   */
+  getTeamStatus() {
+    /**reset the active teams and teams variables */
+    this.uniqueTeams = [];
+
+    this.projectStatusService
+      .getActiveStatusDocs()
+      .then((documents: any) => {
+        /**capture the team ids */
+        if (documents.length > 0) {
+          for (let doc of documents) {
+            this.teamidArr.push(doc.team_id);
+          }
+        }
+        //get unique teams
+        this.uniqueTeams = [...new Set(this.teamidArr)];
+
+        //set status to active for each team in the unique array
+        if (this.teams.length > 0) {
+          for (let team of this.teams) {
+            for (let id of this.uniqueTeams) {
+              if (id === team._id) {
+                team.status = 'Active';
+              } else {
+                team.status = 'Unproductive';
+              }
+            }
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   /**Get the supervisor projects */
