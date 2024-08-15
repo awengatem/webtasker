@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/api/project.service';
 import { TeamService } from 'src/app/services/api/team.service';
 
@@ -12,10 +13,14 @@ export class SuperviseTeamPageComponent {
   selectedTeam!: any[];
   teamName!: string;
   members: any = [];
-  projects: any = [];
+  projects!: any[];
   teamId!: string;
   teamProjectsLength = 0;
   teamMembersLength = 0;
+
+  /**variables used in project status */
+  projectidArr: string[] = [];
+  uniqueProjects: string[] = [];
 
   cardElement: any;
   tabIdArray: string[] = [];
@@ -31,7 +36,8 @@ export class SuperviseTeamPageComponent {
   constructor(
     private router: Router,
     private teamService: TeamService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private projectStatusService: ProjectStatusService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +46,7 @@ export class SuperviseTeamPageComponent {
     this.getTeamName(teamId);
     this.getTeamProjects(teamId);
     this.getTeamMembers(teamId);
+    this.getProjectStatus();
   }
 
   /**METHODS FOR TAB NAVIGATION */
@@ -90,6 +97,8 @@ export class SuperviseTeamPageComponent {
       console.log(projects);
       this.projects = projects;
       this.teamProjectsLength = projects.length;
+      /**pushs project status and teams to projects*/
+      this.projects.forEach((project) => (project.status = 'Unknown'));
       /**get project teams immediately
        * after filling projects array*/
       this.getProjectTeams();
@@ -124,5 +133,46 @@ export class SuperviseTeamPageComponent {
           });
       }
     }
+  }
+
+  /**Get the project status from active status docs
+   * identify active projects
+   */
+  getProjectStatus() {
+    /**reset the active projects and projects variables */
+    this.uniqueProjects = [];
+
+    this.projectStatusService
+      .getActiveStatusDocs()
+      .then((documents: any) => {
+        /**capture the project ids */
+        if (documents.length > 0) {
+          for (let doc of documents) {
+            this.projectidArr.push(doc.project_id);
+          }
+        }
+        //get unique projects
+        this.uniqueProjects = [...new Set(this.projectidArr)];
+
+        //set status to active for each project in the unique array
+        if (this.projects.length > 0) {
+          for (let project of this.projects) {
+            for (let id of this.uniqueProjects) {
+              if (id === project._id) {
+                project.status = 'Active';
+              }
+            }
+          }
+          //set others to unproductive
+          for (let project of this.projects) {
+            if (project.status != 'Active') {
+              project.status = 'Unproductive';
+            }
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }
