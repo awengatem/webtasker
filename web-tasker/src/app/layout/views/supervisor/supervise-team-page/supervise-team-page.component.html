@@ -59,7 +59,13 @@
                     <div class="card-header">
                       <div class="row">
                         <div class="col">
-                          <h1>Team Overview</h1>
+                          <h2
+                            data-aos="zoom-in-up"
+                            class="col aos-init aos-animate"
+                          >
+                            {{ teamName
+                            }}<i class="fa-solid fa-people-group"></i>
+                          </h2>
                         </div>
                         <div class="col-3">
                           <button
@@ -75,6 +81,7 @@
                     <div class="card-body">
                       <div class="teams-container">
                         <div class="container">
+                          <!-- Tab Selections -->
                           <div class="row row-cols-4">
                             <div class="col-sm-3">
                               <div
@@ -85,9 +92,11 @@
                                 <div class="card-body">
                                   <h2 class="card-title">Team Members</h2>
                                   <div class="d-flex">
-                                    <div class="num px-2"><p>20</p></div>
+                                    <div class="num px-2">
+                                      <p>{{ teamMembersLength }}</p>
+                                    </div>
                                     <div>
-                                      <h4 class="card-text">active : 6</h4>
+                                      <h4 class="card-text">active : []</h4>
                                     </div>
                                   </div>
                                 </div>
@@ -100,11 +109,16 @@
                                 (click)="showTab('tab2')"
                               >
                                 <div class="card-body">
-                                  <h2 class="card-title">Team Project</h2>
+                                  <h2 class="card-title">
+                                    Team Projects
+                                    <i class="fa-solid fa-folder-open"></i>
+                                  </h2>
                                   <div class="d-flex">
-                                    <div class="num px-2"><p>24</p></div>
+                                    <div class="num px-2">
+                                      <p>{{ teamProjectsLength }}</p>
+                                    </div>
                                     <div>
-                                      <h4 class="card-text">active : 4</h4>
+                                      <h4 class="card-text">active : []</h4>
                                     </div>
                                   </div>
                                 </div>
@@ -117,23 +131,6 @@
                                 (click)="showTab('tab3')"
                               >
                                 <div class="card-body">
-                                  <h2 class="card-title">Supervisor</h2>
-                                  <div class="d-flex">
-                                    <div class="num px-2"><p>1</p></div>
-                                    <div>
-                                      <h4 class="card-text">active : 1</h4>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-sm-3">
-                              <div
-                                class="card"
-                                id="tab4"
-                                (click)="showTab('tab4')"
-                              >
-                                <div class="card-body">
                                   <h2 class="card-title">Earnings</h2>
                                   <h1 class="card-text">Ksh 4,000,000</h1>
                                 </div>
@@ -142,43 +139,18 @@
                           </div>
                         </div>
                       </div>
-                      <!-- <div class="row d-flex justify-content-center">
-                        <div class="col-3">
-                          <h2 class="data-name" routerLink="/ad_manage/users">
-                            Team Members
-                            <h1>20</h1>
-                            <span class="text-success mr-2"
-                              ><h3>90% active</h3></span
-                            >
-                          </h2>
-                        </div>
-                        <div class="col-3">
-                          <h2 class="data-name" routerLink="/projects">
-                            Team projects
-                            <h1>3</h1>
-                            <span class="text-success mr-2"
-                              ><h3>60% done</h3></span
-                            >
-                          </h2>
-                        </div>
-                        <div class="col-3">
-                          <h2 class="data-name" routerLink="/view_earnings">
-                            Team Earnings
-                            <h1>200$</h1>
-                            <span class="text-danger mr-2"><h3>-20%</h3></span>
-                          </h2>
-                        </div>
-                      </div> -->
                       <div class="teams-container overflow-auto">
                         <div class="container h-full">
                           <div class="row p-3">
                             <div class="container-table p-3 border rounded">
+                              <!-- TAB 1 -->
                               <div
                                 *ngIf="tabStates['tab1']"
-                                class="h-[300px] overflow-scroll"
+                                class="h-[400px] overflow-scroll"
                               >
                                 tab 1
                               </div>
+                              <!-- TAB 2 -->
                               <div
                                 *ngIf="tabStates['tab2']"
                                 class="h-full overflow-auto"
@@ -189,6 +161,11 @@
                                 <a
                                   class="btn btn-primary m-2"
                                   style="width: 7rem"
+                                  [routerLink]="[
+                                    '/ad_teams',
+                                    teamId,
+                                    'assign_project'
+                                  ]"
                                   >add Project</a
                                 >
 
@@ -206,26 +183,34 @@
                                         box-shadow: 2px 2px 2px 1px
                                           rgba(0, 0, 0, 0.2);
                                       "
-                                      *ngFor="let Project of projects"
+                                      *ngFor="let project of projects"
                                     >
                                       <div
                                         class="card-body px-4 flex flex-col justify-around"
                                       >
-                                        <h2 class="text-center">Project 1</h2>
+                                        <h2 class="text-center">
+                                          {{ project.projectName }}
+                                        </h2>
                                         <div
                                           class="flex flex-col text-base space-y-4"
                                         >
-                                          <div>
-                                            <i class="uil uil-users-alt"></i
-                                            >Teams
-                                          </div>
-                                          <div>
-                                            <i class="uil uil-server"></i
-                                            >Status:
-                                          </div>
-
-                                          <!-- <p class=" text-base md:text-lg ..">Teams</p>
-                              <p class="text-base md:text-lg ...">Status:</p> -->
+                                          <small
+                                            ><i class="uil uil-users-alt"></i
+                                            >teams:
+                                            {{ project.teams }}
+                                          </small>
+                                          <small
+                                            ><i class="uil uil-server"></i
+                                            >status:
+                                            <span
+                                              [ngClass]="
+                                                project.status === 'Active'
+                                                  ? 'active'
+                                                  : 'break'
+                                              "
+                                              >{{ project.status }}</span
+                                            >
+                                          </small>
                                         </div>
                                         <button
                                           class="ml-auto text-sm text-white p-1 rounded-lg px-2 bg-red-600 shadow-lg shadow-blue-500/50"
@@ -237,11 +222,12 @@
                                   </div>
                                 </div>
                               </div>
-                              <div *ngIf="tabStates['tab3']" class="">
+                              <!-- TAB 3 -->
+                              <div
+                                *ngIf="tabStates['tab3']"
+                                class="h-[400px] overflow-scroll"
+                              >
                                 tab 3
-                              </div>
-                              <div *ngIf="tabStates['tab4']" class="">
-                                tab 4
                               </div>
                             </div>
                           </div>

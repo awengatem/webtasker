@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProjectStatusService } from 'src/app/services/api/project-status.service';
+import { ProjectService } from 'src/app/services/api/project.service';
+import { TeamService } from 'src/app/services/api/team.service';
 
 @Component({
   selector: 'app-supervise-team-page',
@@ -7,8 +10,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./supervise-team-page.component.scss'],
 })
 export class SuperviseTeamPageComponent {
+  selectedTeam!: any[];
+  teamName!: string;
   members: any = [];
-  projects: any = [];
+  projects!: any[];
+  teamId!: string;
+  teamProjectsLength = 0;
+  teamMembersLength = 0;
+
+  /**variables used in project status */
+  projectidArr: string[] = [];
+  uniqueProjects: string[] = [];
 
   cardElement: any;
   tabIdArray: string[] = [];
@@ -19,19 +31,28 @@ export class SuperviseTeamPageComponent {
     tab1: true, //default tab1 as open
     tab2: false,
     tab3: false,
-    tab4: false,
   };
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private teamService: TeamService,
+    private projectService: ProjectService,
+    private projectStatusService: ProjectStatusService
+  ) {}
 
   ngOnInit(): void {
-    this.members = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,];
-    this.projects = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    const teamId = localStorage.getItem('capturedTeamId')!;
+    this.teamId = teamId;
+    this.getTeamName(teamId);
+    this.getTeamProjects(teamId);
+    this.getTeamMembers(teamId);
+    this.getProjectStatus();
   }
 
+  /**METHODS FOR TAB NAVIGATION */
   /**getting the open tab*/
   getOpenTab(): string {
-    this.tabIdArray = ['tab1', 'tab2', 'tab3', 'tab4'];
+    this.tabIdArray = ['tab1', 'tab2', 'tab3'];
     this.tabIdArray.forEach((tab) => {
       this.loopElement = document.getElementById(tab);
       if (this.loopElement.classList.contains('card-active')) {
@@ -39,7 +60,7 @@ export class SuperviseTeamPageComponent {
       }
     });
     return this.loopResult;
-  } 
+  }
   swapTabs(tabId: string) {
     // Assuming tabId is a string like 'tab1', 'tab2', etc.
     for (const key in this.tabStates) {
@@ -58,5 +79,100 @@ export class SuperviseTeamPageComponent {
     this.swapTabs(cardId);
     this.cardElement = document.getElementById(cardId);
     this.cardElement.classList.add('card-active');
+  }
+
+  /**OTHER METHODS */
+  /**get team name*/
+  getTeamName(teamId: string) {
+    this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
+      console.log(team);
+      this.selectedTeam = team;
+      this.teamName = team.teamName;
+    });
+  }
+
+  /**get projects for team*/
+  getTeamProjects(teamId: string) {
+    this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
+      console.log(projects);
+      this.projects = projects;
+      this.teamProjectsLength = projects.length;
+      /**pushs project status and teams to projects*/
+      this.projects.forEach((project) => (project.status = 'Unknown'));
+      /**get project teams immediately
+       * after filling projects array*/
+      this.getProjectTeams();
+    });
+  }
+
+  /**get team members */
+  getTeamMembers(teamId: string) {
+    this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
+      let membersArr: any = [];
+      members.forEach((member: any) => {
+        if (member) {
+          membersArr.push(member);
+        }
+      });
+      this.members = membersArr;
+      // console.log(this.members);
+      this.teamMembersLength = members.length;
+    });
+  }
+
+  /**Get team projects for each */
+  getProjectTeams() {
+    if (this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        this.projectService
+          .getProjectTeams(this.projects[i]._id)
+          .subscribe((teams: any) => {
+            // console.log(teams.length);
+            //push number of teams to projects
+            this.projects[i].teams = teams.length;
+          });
+      }
+    }
+  }
+
+  /**Get the project status from active status docs
+   * identify active projects
+   */
+  getProjectStatus() {
+    /**reset the active projects and projects variables */
+    this.uniqueProjects = [];
+
+    this.projectStatusService
+      .getActiveStatusDocs()
+      .then((documents: any) => {
+        /**capture the project ids */
+        if (documents.length > 0) {
+          for (let doc of documents) {
+            this.projectidArr.push(doc.project_id);
+          }
+        }
+        //get unique projects
+        this.uniqueProjects = [...new Set(this.projectidArr)];
+
+        //set status to active for each project in the unique array
+        if (this.projects.length > 0) {
+          for (let project of this.projects) {
+            for (let id of this.uniqueProjects) {
+              if (id === project._id) {
+                project.status = 'Active';
+              }
+            }
+          }
+          //set others to unproductive
+          for (let project of this.projects) {
+            if (project.status != 'Active') {
+              project.status = 'Unproductive';
+            }
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

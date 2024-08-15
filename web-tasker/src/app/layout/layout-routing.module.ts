@@ -132,6 +132,7 @@ const routes: Routes = [
       {
         path: 'supervise/team',
         canActivate: [SupervisorGuard],
+        canDeactivate: [PreviousRouteGuard],
         component: SuperviseTeamPageComponent,
       },
       {
@@ -231,17 +232,17 @@ const routes: Routes = [
       {
         path: 'ad_teams/:teamId',
         canActivate: [AdminGuard],
-        canDeactivate: [ClearLocationGuard],
+        canDeactivate: [ClearLocationGuard, PreviousRouteGuard],
         component: TeamInfoComponent,
       },
       {
         path: 'ad_teams/:teamId/add_member',
-        canActivate: [AdminGuard],
+        canActivate: [AdminSupervisorGuard], //allow admin & supervisor
         component: AddMemberComponent,
       },
       {
         path: 'ad_teams/:teamId/assign_project',
-        canActivate: [AdminGuard],
+        canActivate: [AdminSupervisorGuard], //allow admin & supervisor
         component: AssignProjectComponent,
       },
       {

@@ -145,7 +145,7 @@ export class TeamInfoComponent implements OnInit {
     });
   }
 
-  //getting members for team
+  /**get team members */
   getTeamMembers(teamId: string) {
     this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
       let membersArr: any = [];
@@ -159,7 +159,7 @@ export class TeamInfoComponent implements OnInit {
     });
   }
 
-  //getting team name
+  /**get team name*/
   getTeamName(teamId: string) {
     this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
       console.log(team);
@@ -264,9 +264,9 @@ export class TeamInfoComponent implements OnInit {
   //Shared function used by the + button
   addRespective() {
     if (this.selectedTab === 'tabNav1') {
-      console.log('addding member');
+      console.log('adding member');
     } else if (this.selectedTab === 'tabNav2') {
-      console.log('addding project');
+      console.log('adding project');
     }
   }
 

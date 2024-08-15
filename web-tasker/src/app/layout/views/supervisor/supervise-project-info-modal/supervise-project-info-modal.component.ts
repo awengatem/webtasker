@@ -163,18 +163,6 @@ export class SuperviseProjectInfoModalComponent implements OnInit {
       });
   }
 
-  /**Method to navigate to previous route */
-  navigateBack() {
-    //check if previous location is from manage component
-    let fromMng = window.sessionStorage.getItem('fromMng');
-    if (fromMng === 'true') {
-      //navigate to manager
-      this.router.navigate(['ad_manage/projects']);
-    } else {
-      this.router.navigate(['/ad_projects']);
-    }
-  }
-
   /**METHODS USED BY MODAL */
   /**open project info modal */
   openProjectInfoModal(projectId: string) {

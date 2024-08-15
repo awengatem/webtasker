@@ -182,18 +182,6 @@ export class AdProjectInfoModalComponent implements OnInit {
       });
   }
 
-  /**Method to navigate to previous route */
-  navigateBack() {
-    //check if previous location is from manage component
-    let fromMng = window.sessionStorage.getItem('fromMng');
-    if (fromMng === 'true') {
-      //navigate to manager
-      this.router.navigate(['ad_manage/projects']);
-    } else {
-      this.router.navigate(['/ad_projects']);
-    }
-  }
-
   /**Method to navigate to sessions */
   showSessions() {
     //close this modal
