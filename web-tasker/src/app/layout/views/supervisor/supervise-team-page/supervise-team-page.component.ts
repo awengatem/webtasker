@@ -90,9 +90,9 @@ export class SuperviseTeamPageComponent {
       console.log(projects);
       this.projects = projects;
       this.teamProjectsLength = projects.length;
-      /**get project members immediately
+      /**get project teams immediately
        * after filling projects array*/
-      this.getProjectMembers();
+      this.getProjectTeams();
     });
   }
 
@@ -111,16 +111,16 @@ export class SuperviseTeamPageComponent {
     });
   }
 
-  /**Get project members to add on icon*/
-  getProjectMembers() {
-    if (this.projects && this.projects.length > 0) {
+  /**Get team projects for each */
+  getProjectTeams() {
+    if (this.projects.length > 0) {
       for (let i = 0; i < this.projects.length; i++) {
         this.projectService
-          .getProjectMembers(this.projects[i]._id)
-          .subscribe((members: any) => {
-            // console.log(members.length);
-            /**push number of members to projects*/
-            this.projects[i].members = members.length;
+          .getProjectTeams(this.projects[i]._id)
+          .subscribe((teams: any) => {
+            // console.log(teams.length);
+            //push number of teams to projects
+            this.projects[i].teams = teams.length;
           });
       }
     }
