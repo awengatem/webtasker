@@ -264,9 +264,9 @@ export class TeamInfoComponent implements OnInit {
   //Shared function used by the + button
   addRespective() {
     if (this.selectedTab === 'tabNav1') {
-      console.log('addding member');
+      console.log('adding member');
     } else if (this.selectedTab === 'tabNav2') {
-      console.log('addding project');
+      console.log('adding project');
     }
   }
 

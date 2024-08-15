@@ -6,7 +6,6 @@ import { filter } from 'rxjs';
   providedIn: 'root',
 })
 export class RouteService {
-  private previousUrl: string | null = null;
   private currentUrl: string | null = null;
 
   constructor(private router: Router) {
@@ -14,13 +13,8 @@ export class RouteService {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.previousUrl = this.currentUrl;
         this.currentUrl = event.url;
       });
-  }
-
-  public getPreviousUrl(): string | null {
-    return this.previousUrl;
   }
 
   public getCurrentUrl(): string | null {

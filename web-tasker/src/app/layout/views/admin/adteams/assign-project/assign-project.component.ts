@@ -155,4 +155,14 @@ export class AssignProjectComponent implements OnInit {
       Swal.fire('Alert!', `Please select a project to assign`, 'warning');
     }
   }
+
+  /**Navigate back to previous route */
+  navigateBack() {
+    const previousUrl = localStorage.getItem('previousUrl');
+    if (previousUrl) {
+      this.router.navigateByUrl(previousUrl);
+    } else {
+      this.router.navigateByUrl('/');
+    }
+  }
 }

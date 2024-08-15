@@ -18,8 +18,8 @@ export class PreviousRouteGuard {
   ): Observable<boolean> | Promise<boolean> | boolean {
     /**Perform the action here before the user leaves the route*/
     /** capture the route and add to local storage */
-    const currentUrl = this.routeService.getCurrentUrl();
-    currentUrl ? localStorage.setItem('currentUrl', currentUrl) : false;
+    const previousUrl = this.routeService.getCurrentUrl();
+    previousUrl ? localStorage.setItem('previousUrl', previousUrl) : false;
 
     return component.canDeactivate ? component.canDeactivate() : true;
   }
