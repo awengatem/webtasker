@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { AuthService } from 'src/app/services/auth.service';
-import { SidenavService } from 'src/app/services/sidenav.service';
+import { GeneralService } from 'src/app/services/general.service';
 import Swal from 'sweetalert2';
 import { UserProfileComponent } from '../views/user/user-profile/user-profile.component';
 import {
@@ -33,7 +33,7 @@ export class WrapperComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private modalService: MdbModalService,
-    private sidenavService: SidenavService
+    private generalService: GeneralService
   ) {}
 
   ngOnInit(): void {
@@ -42,8 +42,8 @@ export class WrapperComponent implements OnInit {
     this.checkSupervisor();
     this.checkAdminOrSupervisor();
 
-    const expanded = this.sidenavService.getIsExpanded();
-    const sublist = this.sidenavService.getSublist();
+    const expanded = this.generalService.getSidenavState();
+    const sublist = this.generalService.getSublist();
     if (expanded === 'true') {
       this.isExpanded = true;
     } else {
@@ -66,10 +66,10 @@ export class WrapperComponent implements OnInit {
   toggle() {
     if (this.isExpanded === true) {
       this.isExpanded = false;
-      this.sidenavService.setIsExpanded('false');
+      this.generalService.setSidenavState('false');
     } else {
       this.isExpanded = true;
-      this.sidenavService.setIsExpanded('true');
+      this.generalService.setSidenavState('true');
     }
   }
 
@@ -105,7 +105,7 @@ export class WrapperComponent implements OnInit {
           Swal.fire('Unauthorized!', `You are not an admin.`, 'warning');
         }
         //update local storage
-        this.sidenavService.setSublist(status);
+        this.generalService.setSublist(status);
       })
       .catch((error) => {
         console.log(error);

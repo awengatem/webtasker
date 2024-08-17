@@ -26,4 +26,24 @@ export class GeneralService {
     /**store this in localstorage to aid in next compomnent */
     localStorage.setItem('capturedTeamId', teamId);
   }
+
+  /**Get the state of the sidenav from local storage */
+  getSidenavState() {
+    return localStorage.getItem('isExpanded');
+  }
+
+  /**Get the sidenav cascaded admin menu status */
+  getSublist() {
+    return localStorage.getItem('sublist');
+  }
+
+  /**Set the state of the sidenav to local storage */
+  setSidenavState(status: string) {
+    localStorage.setItem('isExpanded', status);
+  }
+
+  /**Set the sidenav cascaded admin menu status */
+  setSublist(status: string) {
+    localStorage.setItem('sublist', status);
+  }
 }
