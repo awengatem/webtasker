@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/api/project.service';
 import { TeamService } from 'src/app/services/api/team.service';
+import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
   selector: 'app-supervise-team-page',
@@ -22,13 +23,15 @@ export class SuperviseTeamPageComponent {
   projectidArr: string[] = [];
   uniqueProjects: string[] = [];
 
+  /**variables for tab navigation */
   cardElement: any;
-  tabIdArray: string[] = [];
+  tabIdArray: string[] = ['tab1', 'tab2', 'tab3'];
   loopElement: any;
   loopResult: any;
   openTab: any;
+  activeTab: any;
   tabStates: any = {
-    tab1: true, //default tab1 as open
+    tab1: false, //default tab1 as open
     tab2: false,
     tab3: false,
   };
@@ -37,7 +40,8 @@ export class SuperviseTeamPageComponent {
     private router: Router,
     private teamService: TeamService,
     private projectService: ProjectService,
-    private projectStatusService: ProjectStatusService
+    private projectStatusService: ProjectStatusService,
+    private generalService: GeneralService
   ) {}
 
   ngOnInit(): void {
@@ -47,12 +51,17 @@ export class SuperviseTeamPageComponent {
     this.getTeamProjects(teamId);
     this.getTeamMembers(teamId);
     this.getProjectStatus();
+
+    /**Get the active tab from local storage and display on reload */
+    this.activeTab = this.generalService.getSupTeamTab();
+    if (this.activeTab) {
+      this.showTab(this.activeTab);
+    }
   }
 
   /**METHODS FOR TAB NAVIGATION */
   /**getting the open tab*/
   getOpenTab(): string {
-    this.tabIdArray = ['tab1', 'tab2', 'tab3'];
     this.tabIdArray.forEach((tab) => {
       this.loopElement = document.getElementById(tab);
       if (this.loopElement.classList.contains('card-active')) {
@@ -61,8 +70,10 @@ export class SuperviseTeamPageComponent {
     });
     return this.loopResult;
   }
+
+  /**Change the tabs */
   swapTabs(tabId: string) {
-    // Assuming tabId is a string like 'tab1', 'tab2', etc.
+    /**Assuming tabId is a string like 'tab1', 'tab2', etc.*/
     for (const key in this.tabStates) {
       if (key === tabId) {
         this.tabStates[key] = true;
@@ -70,6 +81,9 @@ export class SuperviseTeamPageComponent {
         this.tabStates[key] = false;
       }
     }
+
+    /**Record in local storage */
+    this.setActiveTab(tabId);
   }
 
   /**method used by navtab buttons for navigation*/
@@ -79,6 +93,11 @@ export class SuperviseTeamPageComponent {
     this.swapTabs(cardId);
     this.cardElement = document.getElementById(cardId);
     this.cardElement.classList.add('card-active');
+  }
+
+  /**Set the active tab to local storage */
+  setActiveTab(tabId: string) {
+    this.generalService.setSupTeamTab(tabId);
   }
 
   /**OTHER METHODS */

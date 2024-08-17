@@ -26,4 +26,34 @@ export class GeneralService {
     /**store this in localstorage to aid in next compomnent */
     localStorage.setItem('capturedTeamId', teamId);
   }
+
+  /**Get the state of the sidenav from local storage */
+  getSidenavState() {
+    return localStorage.getItem('isExpanded');
+  }
+
+  /**Set the state of the sidenav to local storage */
+  setSidenavState(status: string) {
+    localStorage.setItem('isExpanded', status);
+  }
+
+  /**Get the sidenav cascaded admin menu status */
+  getSublist() {
+    return localStorage.getItem('sublist');
+  }
+
+  /**Set the sidenav cascaded admin menu status */
+  setSublist(status: string) {
+    localStorage.setItem('sublist', status);
+  }
+
+  /**Get Supervisor team-page active tab */
+  getSupTeamTab() {
+    return localStorage.getItem('supteamtab');
+  }
+
+  /**Set Supervisor team-page active tab */
+  setSupTeamTab(activeTab: string) {
+    return localStorage.setItem('supteamtab', activeTab);
+  }
 }
