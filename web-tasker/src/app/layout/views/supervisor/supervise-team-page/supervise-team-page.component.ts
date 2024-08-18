@@ -31,7 +31,7 @@ export class SuperviseTeamPageComponent {
   openTab: any;
   activeTab: any;
   tabStates: any = {
-    tab1: false, //default tab1 as open
+    tab1: true, //default tab1 as open
     tab2: false,
     tab3: false,
   };
