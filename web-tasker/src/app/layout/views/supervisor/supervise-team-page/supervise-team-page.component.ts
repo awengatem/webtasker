@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
@@ -6,16 +6,18 @@ import { ProjectService } from 'src/app/services/api/project.service';
 import { TeamService } from 'src/app/services/api/team.service';
 import { GeneralService } from 'src/app/services/general.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-supervise-team-page',
   templateUrl: './supervise-team-page.component.html',
   styleUrls: ['./supervise-team-page.component.scss'],
 })
-export class SuperviseTeamPageComponent {
+export class SuperviseTeamPageComponent implements OnInit {
   selectedTeam!: any[];
   teamName!: string;
-  members: any = [];
+
   projects!: any[];
   teamId!: string;
   teamProjectsLength = 0;
@@ -49,6 +51,9 @@ export class SuperviseTeamPageComponent {
     'Status',
     'Remove',
   ];
+  teamMembersArr!: any[];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private router: Router,
@@ -141,15 +146,17 @@ export class SuperviseTeamPageComponent {
   /**get team members */
   getTeamMembers(teamId: string) {
     this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
-      let membersArr: any = [];
-      members.forEach((member: any) => {
-        if (member) {
-          membersArr.push(member);
-        }
-      });
-      this.members = membersArr;
-      // console.log(this.members);
+      // let membersArr: any = [];
+      // members.forEach((member: any) => {
+      //   if (member) {
+      //     membersArr.push(member);
+      //   }
+      // });
+      this.teamMembersArr = members;
+      console.log(this.teamMembersArr);
       this.teamMembersLength = members.length;
+      /**Load the team members to table */
+      this.loadAllMembers(members);
     });
   }
 
@@ -209,6 +216,7 @@ export class SuperviseTeamPageComponent {
       });
   }
 
+  /*** MEMBERS SECTION */
   /**METHODS FOR MEMBERS DATASOURCE */
   /**method used by search filter */
   applyMemberFilter(event: Event) {
@@ -244,5 +252,16 @@ export class SuperviseTeamPageComponent {
     return `${
       this.memberSelection.isSelected(row) ? 'deselect' : 'select'
     } row ${row.EmpId + 1}`;
+  }
+
+  /**Method to reload members table */
+  loadAllMembers(members: any) {
+    //reset the selection
+    this.memberSelection = new SelectionModel<any>(true, []);
+    //add members to table
+    this.memberDataSource = new MatTableDataSource(members);
+    this.memberDataSource.paginator = this.paginator;
+    this.memberDataSource.sort = this.sort;
+    // console.log(members);
   }
 }

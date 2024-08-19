@@ -447,7 +447,7 @@ export class AdminTeamsComponent implements OnInit {
       /**push number of memberss to teams*/
       this.teamMembersArr = members;
       console.log(this.teamMembersArr);
-      /**Load the projects to table */
+      /**Load the team members to table */
       this.loadAllMembers(members);
     });
   }
