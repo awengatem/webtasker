@@ -148,7 +148,229 @@
                                 *ngIf="tabStates['tab1']"
                                 class="h-[400px] overflow-scroll"
                               >
-                                tab 1
+                                <div class="data-table">
+                                  <mat-card class="">
+                                    <mat-card-content>
+                                      <form>
+                                        <b class="text-base"
+                                          >Search Members :</b
+                                        >
+                                        &nbsp;&nbsp;
+                                        <mat-form-field style="flex: 0 5px 50%">
+                                          <mat-label>Filter</mat-label>
+                                          <input
+                                            matInput
+                                            (keyup)="applyMemberFilter($event)"
+                                          />
+                                        </mat-form-field>
+                                        &nbsp;&nbsp;
+                                        <b class="text-base"
+                                          >Remove Selected Members :</b
+                                        >
+                                        &nbsp;&nbsp;
+                                        <!-- (click)="deleteSelectedMembers()" -->
+                                        <button
+                                          mat-icon-button
+                                          aria-label="Example icon button with a delete icon"
+                                          type="button"
+                                          class="mt-4 custom-delete mat-raised-button"
+                                          style="background-color: #e91e63"
+                                          color="accent"
+                                        >
+                                          <mat-icon class="text-white"
+                                            >delete</mat-icon
+                                          >
+                                        </button>
+                                        &nbsp;&nbsp;
+                                        <button
+                                          type="button"
+                                          class="btn btn-primary"
+                                        >
+                                          Add Members
+                                        </button>
+                                        <div>
+                                          <!-- TABLE BEGINS HERE-->
+                                          <mat-table
+                                            [dataSource]="memberDataSource"
+                                            matSort
+                                            class="mat-elevation-z8 overflow-y-auto h-full"
+                                            style="
+                                              max-height: calc(50vh - 300px);
+                                              box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+                                                0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                                                0 1px 18px 0 rgba(0, 0, 0, 0.12);
+                                            "
+                                          >
+                                            <!-- Checkbox Column -->
+                                            <ng-container matColumnDef="Select">
+                                              <mat-header-cell
+                                                *matHeaderCellDef
+                                                style="color: #22b8f0"
+                                              >
+                                                <mat-checkbox
+                                                  (change)="
+                                                    $event
+                                                      ? memberMasterToggle()
+                                                      : null
+                                                  "
+                                                  [checked]="
+                                                    memberSelection.hasValue() &&
+                                                    areAllMembersSelected()
+                                                  "
+                                                  [indeterminate]="
+                                                    memberSelection.hasValue() &&
+                                                    !areAllMembersSelected()
+                                                  "
+                                                ></mat-checkbox>
+                                              </mat-header-cell>
+                                              <mat-cell
+                                                *matCellDef="let row"
+                                                class=""
+                                              >
+                                                <mat-checkbox
+                                                  (click)="
+                                                    $event.stopPropagation()
+                                                  "
+                                                  (change)="
+                                                    $event
+                                                      ? memberSelection.toggle(
+                                                          row
+                                                        )
+                                                      : null
+                                                  "
+                                                  [checked]="
+                                                    memberSelection.isSelected(
+                                                      row
+                                                    )
+                                                  "
+                                                  [aria-label]="
+                                                    memberCheckboxLabel(row)
+                                                  "
+                                                ></mat-checkbox>
+                                              </mat-cell>
+                                            </ng-container>
+                                            <!-- Fullname Column -->
+                                            <ng-container
+                                              matColumnDef="Fullname"
+                                              class=""
+                                            >
+                                              <mat-header-cell
+                                                *matHeaderCellDef
+                                                mat-sort-header
+                                              >
+                                                Full name
+                                              </mat-header-cell>
+                                              <mat-cell
+                                                *matCellDef="let document"
+                                                class="point hover:text-[#cb0c9f] cursor-pointer"
+                                              >
+                                                {{ document.firstName }}
+                                                {{ document.lastName }}
+                                              </mat-cell>
+                                            </ng-container>
+                                            <!-- Gender Column -->
+                                            <ng-container
+                                              matColumnDef="Gender"
+                                              class=""
+                                            >
+                                              <mat-header-cell
+                                                *matHeaderCellDef
+                                                mat-sort-header
+                                              >
+                                                Gender
+                                              </mat-header-cell>
+                                              <mat-cell
+                                                *matCellDef="let document"
+                                              >
+                                                {{ document.gender }}
+                                              </mat-cell>
+                                            </ng-container>
+                                            <!-- Email Column -->
+                                            <ng-container
+                                              matColumnDef="Email"
+                                              class=""
+                                            >
+                                              <mat-header-cell
+                                                *matHeaderCellDef
+                                                mat-sort-header
+                                              >
+                                                Email
+                                              </mat-header-cell>
+                                              <mat-cell
+                                                *matCellDef="let document"
+                                              >
+                                                {{ document.email }}
+                                              </mat-cell>
+                                            </ng-container>
+                                            <!-- Status Column -->
+                                            <ng-container
+                                              matColumnDef="Status"
+                                              class=""
+                                            >
+                                              <mat-header-cell
+                                                *matHeaderCellDef
+                                                mat-sort-header
+                                              >
+                                                Status
+                                              </mat-header-cell>
+                                              <mat-cell
+                                                *matCellDef="let document"
+                                              >
+                                                unknown
+                                              </mat-cell>
+                                            </ng-container>
+                                            <!-- Delete Icon -->
+                                            <ng-container matColumnDef="Remove">
+                                              <mat-header-cell
+                                                *matHeaderCellDef
+                                                mat-sort-header
+                                              >
+                                                Remove
+                                              </mat-header-cell>
+                                              <mat-cell
+                                                *matCellDef="let document"
+                                              >
+                                                <!-- (click)="confirmMemberDeletion(document._id,document.firstName)" -->
+                                                <button
+                                                  mat-icon-button
+                                                  class="custom-button custom-button-delete mat-raised-button"
+                                                  style="
+                                                    height: 30px;
+                                                    width: 30px;
+                                                    background-color: #e91e63;
+                                                  "
+                                                  aria-label="Example icon button with a delete icon"
+                                                  type="button"
+                                                  color="accent"
+                                                  matTooltip="Delete"
+                                                >
+                                                  <mat-icon
+                                                    class="absolute text-sm text-white top-1 right-1"
+                                                    >delete_forever</mat-icon
+                                                  >
+                                                </button></mat-cell
+                                              >
+                                            </ng-container>
+                                            <mat-header-row
+                                              *matHeaderRowDef="
+                                                displayedMemberColumns
+                                              "
+                                            ></mat-header-row>
+                                            <mat-row
+                                              *matRowDef="
+                                                let row;
+                                                columns: displayedMemberColumns
+                                              "
+                                            ></mat-row
+                                          ></mat-table>
+                                          <mat-paginator
+                                            [pageSizeOptions]="[10, 25, 50]"
+                                          ></mat-paginator>
+                                        </div>
+                                      </form>
+                                    </mat-card-content>
+                                  </mat-card>
+                                </div>
                               </div>
                               <!-- TAB 2 -->
                               <div

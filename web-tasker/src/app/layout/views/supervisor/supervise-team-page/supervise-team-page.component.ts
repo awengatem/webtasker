@@ -41,6 +41,14 @@ export class SuperviseTeamPageComponent {
   /**member table variables */
   memberDataSource!: MatTableDataSource<any>;
   memberSelection = new SelectionModel<any>(true, []);
+  displayedMemberColumns: string[] = [
+    'Select',
+    'Fullname',
+    'Gender',
+    'Email',
+    'Status',
+    'Remove',
+  ];
 
   constructor(
     private router: Router,
