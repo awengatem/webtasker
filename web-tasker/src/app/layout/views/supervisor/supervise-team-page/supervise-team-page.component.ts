@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/api/project.service';
 import { TeamService } from 'src/app/services/api/team.service';
 import { GeneralService } from 'src/app/services/general.service';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import Swal from 'sweetalert2';
+import { SnackBarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-supervise-team-page',
   templateUrl: './supervise-team-page.component.html',
   styleUrls: ['./supervise-team-page.component.scss'],
 })
-export class SuperviseTeamPageComponent {
+export class SuperviseTeamPageComponent implements OnInit {
   selectedTeam!: any[];
   teamName!: string;
-  members: any = [];
+
   projects!: any[];
   teamId!: string;
   teamProjectsLength = 0;
@@ -31,17 +37,33 @@ export class SuperviseTeamPageComponent {
   openTab: any;
   activeTab: any;
   tabStates: any = {
-    tab1: false, //default tab1 as open
+    tab1: true, //default tab1 as open
     tab2: false,
     tab3: false,
   };
+
+  /**member table variables */
+  memberDataSource!: MatTableDataSource<any>;
+  memberSelection = new SelectionModel<any>(true, []);
+  displayedMemberColumns: string[] = [
+    'Select',
+    'Fullname',
+    'Gender',
+    'Email',
+    'Status',
+    'Remove',
+  ];
+  teamMembersArr!: any[];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private router: Router,
     private teamService: TeamService,
     private projectService: ProjectService,
     private projectStatusService: ProjectStatusService,
-    private generalService: GeneralService
+    private generalService: GeneralService,
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {
@@ -127,15 +149,17 @@ export class SuperviseTeamPageComponent {
   /**get team members */
   getTeamMembers(teamId: string) {
     this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
-      let membersArr: any = [];
-      members.forEach((member: any) => {
-        if (member) {
-          membersArr.push(member);
-        }
-      });
-      this.members = membersArr;
-      // console.log(this.members);
+      // let membersArr: any = [];
+      // members.forEach((member: any) => {
+      //   if (member) {
+      //     membersArr.push(member);
+      //   }
+      // });
+      this.teamMembersArr = members;
+      console.log(this.teamMembersArr);
       this.teamMembersLength = members.length;
+      /**Load the team members to table */
+      this.loadAllMembers(members);
     });
   }
 
@@ -193,5 +217,109 @@ export class SuperviseTeamPageComponent {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  /*** MEMBERS SECTION */
+  /**METHODS FOR MEMBERS DATASOURCE */
+  /**method used by search filter */
+  applyMemberFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.memberDataSource.filter = filterValue.trim().toLowerCase();
+    if (this.memberDataSource.paginator) {
+      this.memberDataSource.paginator.firstPage();
+    }
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  memberMasterToggle() {
+    this.areAllMembersSelected()
+      ? this.memberSelection.clear()
+      : this.memberDataSource.data.forEach((r) =>
+          this.memberSelection.select(r)
+        );
+  }
+
+  /**check whether all are selected */
+  areAllMembersSelected() {
+    const numSelected = this.memberSelection.selected.length;
+    const numRows =
+      !!this.memberDataSource && this.memberDataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** The label for the checkbox on the passed row */
+  memberCheckboxLabel(row: any): string {
+    if (!row) {
+      return `${this.areAllMembersSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${
+      this.memberSelection.isSelected(row) ? 'deselect' : 'select'
+    } row ${row.EmpId + 1}`;
+  }
+
+  /**Method to reload members table */
+  loadAllMembers(members: any) {
+    //reset the selection
+    this.memberSelection = new SelectionModel<any>(true, []);
+    //add members to table
+    this.memberDataSource = new MatTableDataSource(members);
+    this.memberDataSource.paginator = this.paginator;
+    this.memberDataSource.sort = this.sort;
+    // console.log(members);
+  }
+
+  /**Delete selected member(s) */
+  deleteSelectedMembers() {
+    const selectedMembersArr = this.memberSelection.selected;
+    let memberIdArr: any = [];
+    console.log(selectedMembersArr);
+    if (selectedMembersArr.length > 0) {
+      //push only member ids in an array
+      selectedMembersArr.forEach((item) => {
+        memberIdArr.push(item._id);
+      });
+      console.log(memberIdArr);
+      //confirm and delete members
+      Swal.fire({
+        title: `Remove ${selectedMembersArr.length} members?`,
+        text: `${selectedMembersArr.length} members will be removed from the team?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, go ahead.',
+        confirmButtonColor: '#e74c3c',
+        cancelButtonText: 'No, let me think',
+        cancelButtonColor: '#22b8f0',
+      }).then((result) => {
+        //delete members from db
+        if (result.value) {
+          this.deleteTeamMembers(memberIdArr);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          this.snackBarService.displaySnackbar(
+            'error',
+            'operation has been cancelled'
+          );
+          //reset the selection
+          this.memberSelection = new SelectionModel<any>(true, []);
+        }
+      });
+    } else {
+      this.snackBarService.displaySnackbar('error', 'no selected records');
+    }
+  }
+
+  //removing specific member from team
+  deleteTeamMembers(teamIdArr: string[]) {
+    //pass array of members to be deleted to api
+    this.teamService.deleteTeamMembers(this.teamId, teamIdArr).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.snackBarService.displaySnackbar('success', res.message);
+        this.getTeamMembers(this.teamId);
+      },
+      error: (err: any) => {
+        console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+      },
+    });
   }
 }
