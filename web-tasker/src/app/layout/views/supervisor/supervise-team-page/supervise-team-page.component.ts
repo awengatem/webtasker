@@ -5,6 +5,7 @@ import { ProjectStatusService } from 'src/app/services/api/project-status.servic
 import { ProjectService } from 'src/app/services/api/project.service';
 import { TeamService } from 'src/app/services/api/team.service';
 import { GeneralService } from 'src/app/services/general.service';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-supervise-team-page',
@@ -39,6 +40,7 @@ export class SuperviseTeamPageComponent {
 
   /**member table variables */
   memberDataSource!: MatTableDataSource<any>;
+  memberSelection = new SelectionModel<any>(true, []);
 
   constructor(
     private router: Router,
@@ -207,5 +209,22 @@ export class SuperviseTeamPageComponent {
     if (this.memberDataSource.paginator) {
       this.memberDataSource.paginator.firstPage();
     }
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  memberMasterToggle() {
+    this.areAllMembersSelected()
+      ? this.memberSelection.clear()
+      : this.memberDataSource.data.forEach((r) =>
+          this.memberSelection.select(r)
+        );
+  }
+
+  /**check whether all are selected */
+  areAllMembersSelected() {
+    const numSelected = this.memberSelection.selected.length;
+    const numRows =
+      !!this.memberDataSource && this.memberDataSource.data.length;
+    return numSelected === numRows;
   }
 }
