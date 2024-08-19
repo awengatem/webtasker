@@ -330,7 +330,6 @@
                                               <mat-cell
                                                 *matCellDef="let document"
                                               >
-                                                <!-- (click)="confirmMemberDeletion(document._id,document.firstName)" -->
                                                 <button
                                                   mat-icon-button
                                                   class="custom-button custom-button-delete mat-raised-button"
@@ -343,6 +342,12 @@
                                                   type="button"
                                                   color="accent"
                                                   matTooltip="Delete"
+                                                  (click)="
+                                                    confirmMemberDeletion(
+                                                      document._id,
+                                                      document.firstName
+                                                    )
+                                                  "
                                                 >
                                                   <mat-icon
                                                     class="absolute text-sm text-white top-1 right-1"

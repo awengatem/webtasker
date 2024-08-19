@@ -322,4 +322,28 @@ export class SuperviseTeamPageComponent implements OnInit {
       },
     });
   }
+
+  /**Method to confirm member removal */
+  confirmMemberDeletion(memberId: string, memberName: string) {
+    Swal.fire({
+      title: `Remove "${memberName}"?`,
+      text: `${memberName} will be removed from team.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      //delete team member from db
+      if (result.value) {
+        this.deleteTeamMembers([memberId]);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.snackBarService.displaySnackbar(
+          'error',
+          'operation has been cancelled'
+        );
+      }
+    });
+  }
 }
