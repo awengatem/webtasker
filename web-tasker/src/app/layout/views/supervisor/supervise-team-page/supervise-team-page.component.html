@@ -446,6 +446,12 @@
                                         </div>
                                         <button
                                           class="ml-auto text-sm text-white p-1 rounded-lg px-2 bg-red-600 shadow-lg shadow-blue-500/50"
+                                          (click)="
+                                            confirmProjectDeletion(
+                                              project._id,
+                                              project.projectName
+                                            )
+                                          "
                                         >
                                           Remove
                                         </button>

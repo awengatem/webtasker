@@ -418,7 +418,7 @@ export class AdminTeamsComponent implements OnInit {
   // }
   // }
 
-  //removing specific project from team
+  /**removing specific project from team*/
   deleteTeamProjects(projectIdArr: string[]) {
     //pass array of projects to be deleted to api
     this.teamService

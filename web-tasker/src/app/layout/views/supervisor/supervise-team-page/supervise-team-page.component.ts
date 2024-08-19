@@ -346,4 +346,50 @@ export class SuperviseTeamPageComponent implements OnInit {
       }
     });
   }
+  /*** END OF MEMBERS DATASOURCE SECTION ***/
+  /*** END OF MEMBERS SECTION ***/
+
+  /*** PROJECTS SECTION */
+  /**METHODS FOR PROJECT DATASOURCE */
+  /**Method to confirm project removal */
+  confirmProjectDeletion(projectId: string, projectname: string) {
+    Swal.fire({
+      title: `Remove "${projectname}"?`,
+      text: `${projectname} will be removed from team.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      //delete project from db
+      if (result.value) {
+        this.deleteTeamProjects([projectId]);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.snackBarService.displaySnackbar(
+          'error',
+          'operation has been cancelled'
+        );
+      }
+    });
+  }
+
+  /**removing specific project from team*/
+  deleteTeamProjects(projectIdArr: string[]) {
+    //pass array of projects to be deleted to api
+    this.teamService.deleteTeamProject(this.teamId, projectIdArr).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.snackBarService.displaySnackbar('success', res.message);
+        this.getTeamProjects(this.teamId);
+      },
+      error: (err: any) => {
+        console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+      },
+    });
+  }
+  /*** END OF PROJECTS DATASOURCE SECTION ***/
+  /*** END OF PROJECTS SECTION ***/
 }
