@@ -227,4 +227,14 @@ export class SuperviseTeamPageComponent {
       !!this.memberDataSource && this.memberDataSource.data.length;
     return numSelected === numRows;
   }
+
+  /** The label for the checkbox on the passed row */
+  memberCheckboxLabel(row: any): string {
+    if (!row) {
+      return `${this.areAllMembersSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${
+      this.memberSelection.isSelected(row) ? 'deselect' : 'select'
+    } row ${row.EmpId + 1}`;
+  }
 }
