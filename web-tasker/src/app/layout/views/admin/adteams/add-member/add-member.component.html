@@ -13,7 +13,7 @@
               </div>
               <div class="col-md-3">
                 <div class="row centered-content add">
-                  <div class="col-md-1">                    
+                  <div class="col-md-1">
                     <button class="btn btn-primary" (click)="addMember()">
                       <div class="btn-txt">+</div>
                     </button>
@@ -41,10 +41,7 @@
         </div>
       </div>
       <div class="back">
-        <button
-          class="btn btn-outline-custom"
-          [routerLink]="['/ad_teams', teamId]"
-        >
+        <button class="btn btn-outline-custom" (click)="navigateBack()">
           <div class="btn-txt">Back</div>
         </button>
       </div>
