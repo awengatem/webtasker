@@ -143,7 +143,8 @@ export class AssignProjectComponent implements OnInit {
       this.teamService.assignTeamProjects(teamProjects).subscribe({
         next: (res: any) => {
           console.log(res);
-          this.router.navigate([`/ad_teams/${this.teamId}`]);
+          // this.router.navigate([`/ad_teams/${this.teamId}`]);
+          this.navigateBack();
           Swal.fire('Assigned!', `Projects have been assigned`, 'success');
         },
         error: (err: any) => {
