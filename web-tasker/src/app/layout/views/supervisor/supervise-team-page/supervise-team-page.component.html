@@ -168,7 +168,6 @@
                                           >Remove Selected Members :</b
                                         >
                                         &nbsp;&nbsp;
-                                        <!-- (click)="deleteSelectedMembers()" -->
                                         <button
                                           mat-icon-button
                                           aria-label="Example icon button with a delete icon"
@@ -176,6 +175,7 @@
                                           class="mt-4 custom-delete mat-raised-button"
                                           style="background-color: #e91e63"
                                           color="accent"
+                                          (click)="deleteSelectedMembers()"
                                         >
                                           <mat-icon class="text-white"
                                             >delete</mat-icon

@@ -26,7 +26,7 @@ export class AdminTeamsComponent implements OnInit {
   modalRef: MdbModalRef<EditTeammodalComponent> | null = null;
   isModalOpen: boolean = false; //add background blur
 
-  /**variables used in team status */ 
+  /**variables used in team status */
   teamidArr: string[] = [];
   uniqueTeams: string[] = [];
 
@@ -561,7 +561,7 @@ export class AdminTeamsComponent implements OnInit {
     });
   }
 
-  //removing specific member from team
+  /** removing specific member from team */
   deleteTeamMembers(teamIdArr: string[]) {
     //pass array of members to be deleted to api
     this.teamService
