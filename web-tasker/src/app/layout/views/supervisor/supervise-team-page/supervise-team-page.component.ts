@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ProjectStatusService } from 'src/app/services/api/project-status.service';
 import { ProjectService } from 'src/app/services/api/project.service';
@@ -35,6 +36,9 @@ export class SuperviseTeamPageComponent {
     tab2: false,
     tab3: false,
   };
+
+  /**member table variables */
+  memberDataSource!: MatTableDataSource<any>;
 
   constructor(
     private router: Router,
@@ -193,5 +197,15 @@ export class SuperviseTeamPageComponent {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  /**METHODS FOR MEMBERS DATASOURCE */
+  /**method used by search filter */
+  applyMemberFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.memberDataSource.filter = filterValue.trim().toLowerCase();
+    if (this.memberDataSource.paginator) {
+      this.memberDataSource.paginator.firstPage();
+    }
   }
 }
