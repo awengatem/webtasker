@@ -25,13 +25,13 @@
                       Add Team Member
                     </button>
                   </div>
-                  <div class="card">
-                    <div class="card-header">
+                  <div class="border rounded-lg">
+                    <div class="pt-3 border rounded-lg bg-gray-100">
                       <h1 class="text-center">Active members</h1>
                     </div>
                     <div
-                      class="list-container overflow-y-scroll h-full"
-                      style="max-height: calc(100vh - 600px)"
+                      class="list-container overflow-y-scroll pt-3"
+                      style="max-height: calc(57vh)"
                     >
                       <ul class="list-group list-group-flush">
                         <li
@@ -51,11 +51,8 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  class="col-9 h-full overflow-auto"
-                  style="max-height: calc(100vh - 400px)"
-                >
-                  <div class="card overflow-y-auto" style="width: auto">
+                <div class="col-9 h-full overflow-auto">
+                  <div class="overflow-y-auto" style="width: auto">
                     <div class="card-header">
                       <div class="row">
                         <div class="col">
@@ -78,9 +75,9 @@
                         </div>
                       </div>
                     </div>
-                    <div class="card-body">
-                      <div class="teams-container">
-                        <div class="container">
+                    <div class="">
+                      <div class="">
+                        <div class="">
                           <!-- Tab Selections -->
                           <div class="row row-cols-4">
                             <div class="col-sm-3">
@@ -139,16 +136,15 @@
                           </div>
                         </div>
                       </div>
-                      <div class="teams-container overflow-auto">
-                        <div class="container h-full">
-                          <div class="row p-3">
-                            <div class="container-table p-3 border rounded">
+                      <div class="overflow-auto">
+                        <div class="">
+                          <div class="">
+                            <div class="p-1 rounded">
                               <!-- TAB 1 -->
                               <div
                                 *ngIf="tabStates['tab1']"
-                                class="h-[400px] overflow-scroll"
-                              >
-                                <div class="data-table">
+                                class=" ">
+                                <div class="">
                                   <mat-card class="">
                                     <mat-card-content>
                                       <form>
@@ -164,9 +160,9 @@
                                           />
                                         </mat-form-field>
                                         &nbsp;&nbsp;
-                                        <b class="text-base"
+                                        <!-- <b class="text-base"
                                           >Remove Selected Members :</b
-                                        >
+                                        > -->
                                         &nbsp;&nbsp;
                                         <button
                                           mat-icon-button
@@ -195,7 +191,7 @@
                                             matSort
                                             class="mat-elevation-z8 overflow-y-auto h-full"
                                             style="
-                                              max-height: calc(50vh - 300px);
+                                              max-height: calc(29vh);
                                               box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
                                                 0 6px 10px 0 rgba(0, 0, 0, 0.14),
                                                 0 1px 18px 0 rgba(0, 0, 0, 0.12);
