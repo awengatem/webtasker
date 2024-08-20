@@ -155,4 +155,14 @@ export class AddMemberComponent implements OnInit {
       Swal.fire('Alert!', `Please select a member to add`, 'warning');
     }
   }
+
+  /**Navigate back to previous route */
+  navigateBack() {
+    const previousUrl = localStorage.getItem('previousUrl');
+    if (previousUrl) {
+      this.router.navigateByUrl(previousUrl);
+    } else {
+      this.router.navigateByUrl('/');
+    }
+  }
 }
