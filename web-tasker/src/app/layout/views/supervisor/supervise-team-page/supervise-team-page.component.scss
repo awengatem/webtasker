@@ -120,3 +120,38 @@
 .break {
   color: #ac1100;
 }
+
+.custom-button {
+  // line-height: 30px;
+  height: 30px;
+  width: 30px;
+
+  &-delete {
+    background-color: #e91e63;
+  }
+
+  mat-icon {
+    position: absolute;
+    font-size: 14px;
+    color: white;
+    top: 5px;
+    right: 3px;
+    // background: red;
+  }
+}
+
+/*Create rise effect on button*/
+.mat-raised-button {
+  border: none; /* Remove the border */
+  outline: none; /* Remove the outline */
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12); /* Add a box shadow to give the button a raised appearance */
+  transition: box-shadow 0.2s; /* Add a transition to the box shadow to smooth the effect when the button is hovered or clicked */
+}
+
+.mat-raised-button:hover,
+.mat-raised-button:active,
+.mat-raised-button:focus {
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12); /* Increase the size of the box shadow to give the button a pressed appearance when it is hovered or focused */
+}
