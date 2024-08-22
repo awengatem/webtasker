@@ -20,18 +20,13 @@
             <div class="teams-inside">
               <div class="row">
                 <div class="col-3">
-                  <div class="w-75 mb-2">
-                    <button type="button" class="btn btn-primary">
-                      Add Team Member
-                    </button>
-                  </div>
-                  <div class="card">
-                    <div class="card-header">
+                  <div class="border rounded-lg">
+                    <div class="pt-3 border rounded-lg bg-gray-100">
                       <h1 class="text-center">Active members</h1>
                     </div>
                     <div
-                      class="list-container overflow-y-scroll h-full"
-                      style="max-height: calc(100vh - 600px)"
+                      class="list-container overflow-y-scroll pt-3"
+                      style="max-height: calc(57vh)"
                     >
                       <ul class="list-group list-group-flush">
                         <li
@@ -51,11 +46,8 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  class="col-9 h-full overflow-auto"
-                  style="max-height: calc(100vh - 400px)"
-                >
-                  <div class="card overflow-y-auto" style="width: auto">
+                <div class="col-9 h-full overflow-auto">
+                  <div class="overflow-y-auto" style="width: auto">
                     <div class="card-header">
                       <div class="row">
                         <div class="col">
@@ -78,9 +70,9 @@
                         </div>
                       </div>
                     </div>
-                    <div class="card-body">
-                      <div class="teams-container">
-                        <div class="container">
+                    <div class="">
+                      <div class="">
+                        <div class="">
                           <!-- Tab Selections -->
                           <div class="row row-cols-4">
                             <div class="col-sm-3">
@@ -139,16 +131,13 @@
                           </div>
                         </div>
                       </div>
-                      <div class="teams-container overflow-auto">
-                        <div class="container h-full">
-                          <div class="row p-3">
-                            <div class="container-table p-3 border rounded">
+                      <div class="overflow-auto">
+                        <div class="">
+                          <div class="">
+                            <div class="p-1 rounded">
                               <!-- TAB 1 -->
-                              <div
-                                *ngIf="tabStates['tab1']"
-                                class="h-[400px] overflow-scroll"
-                              >
-                                <div class="data-table">
+                              <div *ngIf="tabStates['tab1']" class=" ">
+                                <div class="">
                                   <mat-card class="">
                                     <mat-card-content>
                                       <form>
@@ -164,11 +153,10 @@
                                           />
                                         </mat-form-field>
                                         &nbsp;&nbsp;
-                                        <b class="text-base"
+                                        <!-- <b class="text-base"
                                           >Remove Selected Members :</b
-                                        >
+                                        > -->
                                         &nbsp;&nbsp;
-                                        <!-- (click)="deleteSelectedMembers()" -->
                                         <button
                                           mat-icon-button
                                           aria-label="Example icon button with a delete icon"
@@ -176,6 +164,7 @@
                                           class="mt-4 custom-delete mat-raised-button"
                                           style="background-color: #e91e63"
                                           color="accent"
+                                          (click)="deleteSelectedMembers()"
                                         >
                                           <mat-icon class="text-white"
                                             >delete</mat-icon
@@ -185,6 +174,11 @@
                                         <button
                                           type="button"
                                           class="btn btn-primary"
+                                          [routerLink]="[
+                                            '/ad_teams',
+                                            teamId,
+                                            'add_member'
+                                          ]"
                                         >
                                           Add Members
                                         </button>
@@ -195,7 +189,7 @@
                                             matSort
                                             class="mat-elevation-z8 overflow-y-auto h-full"
                                             style="
-                                              max-height: calc(50vh - 300px);
+                                              max-height: calc(29vh);
                                               box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
                                                 0 6px 10px 0 rgba(0, 0, 0, 0.14),
                                                 0 1px 18px 0 rgba(0, 0, 0, 0.12);
@@ -330,19 +324,19 @@
                                               <mat-cell
                                                 *matCellDef="let document"
                                               >
-                                                <!-- (click)="confirmMemberDeletion(document._id,document.firstName)" -->
                                                 <button
                                                   mat-icon-button
                                                   class="custom-button custom-button-delete mat-raised-button"
-                                                  style="
-                                                    height: 30px;
-                                                    width: 30px;
-                                                    background-color: #e91e63;
-                                                  "
                                                   aria-label="Example icon button with a delete icon"
                                                   type="button"
                                                   color="accent"
-                                                  matTooltip="Delete"
+                                                  matTooltip="Remove"
+                                                  (click)="
+                                                    confirmMemberDeletion(
+                                                      document._id,
+                                                      document.firstName
+                                                    )
+                                                  "
                                                 >
                                                   <mat-icon
                                                     class="absolute text-sm text-white top-1 right-1"
@@ -375,7 +369,7 @@
                               <!-- TAB 2 -->
                               <div
                                 *ngIf="tabStates['tab2']"
-                                class="h-full overflow-auto"
+                                class="h-[460px] overflow-auto"
                               >
                                 <div class="row mt-3">
                                   <h1 class="card-text">Projects:</h1>
@@ -436,6 +430,12 @@
                                         </div>
                                         <button
                                           class="ml-auto text-sm text-white p-1 rounded-lg px-2 bg-red-600 shadow-lg shadow-blue-500/50"
+                                          (click)="
+                                            confirmProjectDeletion(
+                                              project._id,
+                                              project.projectName
+                                            )
+                                          "
                                         >
                                           Remove
                                         </button>

@@ -8,6 +8,8 @@ import { GeneralService } from 'src/app/services/general.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import Swal from 'sweetalert2';
+import { SnackBarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-supervise-team-page',
@@ -60,7 +62,8 @@ export class SuperviseTeamPageComponent implements OnInit {
     private teamService: TeamService,
     private projectService: ProjectService,
     private projectStatusService: ProjectStatusService,
-    private generalService: GeneralService
+    private generalService: GeneralService,
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {
@@ -264,4 +267,129 @@ export class SuperviseTeamPageComponent implements OnInit {
     this.memberDataSource.sort = this.sort;
     // console.log(members);
   }
+
+  /**Delete selected member(s) */
+  deleteSelectedMembers() {
+    const selectedMembersArr = this.memberSelection.selected;
+    let memberIdArr: any = [];
+    console.log(selectedMembersArr);
+    if (selectedMembersArr.length > 0) {
+      //push only member ids in an array
+      selectedMembersArr.forEach((item) => {
+        memberIdArr.push(item._id);
+      });
+      console.log(memberIdArr);
+      //confirm and delete members
+      Swal.fire({
+        title: `Remove ${selectedMembersArr.length} members?`,
+        text: `${selectedMembersArr.length} members will be removed from the team?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, go ahead.',
+        confirmButtonColor: '#e74c3c',
+        cancelButtonText: 'No, let me think',
+        cancelButtonColor: '#22b8f0',
+      }).then((result) => {
+        //delete members from db
+        if (result.value) {
+          this.deleteTeamMembers(memberIdArr);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          this.snackBarService.displaySnackbar(
+            'error',
+            'operation has been cancelled'
+          );
+          //reset the selection
+          this.memberSelection = new SelectionModel<any>(true, []);
+        }
+      });
+    } else {
+      this.snackBarService.displaySnackbar('error', 'no selected records');
+    }
+  }
+
+  //removing specific member from team
+  deleteTeamMembers(teamIdArr: string[]) {
+    //pass array of members to be deleted to api
+    this.teamService.deleteTeamMembers(this.teamId, teamIdArr).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.snackBarService.displaySnackbar('success', res.message);
+        this.getTeamMembers(this.teamId);
+      },
+      error: (err: any) => {
+        console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+      },
+    });
+  }
+
+  /**Method to confirm member removal */
+  confirmMemberDeletion(memberId: string, memberName: string) {
+    Swal.fire({
+      title: `Remove "${memberName}"?`,
+      text: `${memberName} will be removed from team.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      //delete team member from db
+      if (result.value) {
+        this.deleteTeamMembers([memberId]);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.snackBarService.displaySnackbar(
+          'error',
+          'operation has been cancelled'
+        );
+      }
+    });
+  }
+  /*** END OF MEMBERS DATASOURCE SECTION ***/
+  /*** END OF MEMBERS SECTION ***/
+
+  /*** PROJECTS SECTION */
+  /**METHODS FOR PROJECT DATASOURCE */
+  /**Method to confirm project removal */
+  confirmProjectDeletion(projectId: string, projectname: string) {
+    Swal.fire({
+      title: `Remove "${projectname}"?`,
+      text: `${projectname} will be removed from team.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      confirmButtonColor: '#e74c3c',
+      cancelButtonText: 'No, let me think',
+      cancelButtonColor: '#22b8f0',
+    }).then((result) => {
+      //delete project from db
+      if (result.value) {
+        this.deleteTeamProjects([projectId]);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.snackBarService.displaySnackbar(
+          'error',
+          'operation has been cancelled'
+        );
+      }
+    });
+  }
+
+  /**removing specific project from team*/
+  deleteTeamProjects(projectIdArr: string[]) {
+    //pass array of projects to be deleted to api
+    this.teamService.deleteTeamProject(this.teamId, projectIdArr).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.snackBarService.displaySnackbar('success', res.message);
+        this.getTeamProjects(this.teamId);
+      },
+      error: (err: any) => {
+        console.log(err);
+        Swal.fire('Oops! Something went wrong', err.error.message, 'error');
+      },
+    });
+  }
+  /*** END OF PROJECTS DATASOURCE SECTION ***/
+  /*** END OF PROJECTS SECTION ***/
 }
