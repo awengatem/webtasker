@@ -26,7 +26,7 @@ export class AdminTeamsComponent implements OnInit {
   modalRef: MdbModalRef<EditTeammodalComponent> | null = null;
   isModalOpen: boolean = false; //add background blur
 
-  /**variables used in team status */
+  /**variables used in team status */ 
   teamidArr: string[] = [];
   uniqueTeams: string[] = [];
 
