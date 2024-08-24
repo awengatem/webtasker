@@ -274,12 +274,12 @@ export class SuperviseTeamPageComponent implements OnInit {
     let memberIdArr: any = [];
     console.log(selectedMembersArr);
     if (selectedMembersArr.length > 0) {
-      //push only member ids in an array
+      /**push only member ids in an array*/
       selectedMembersArr.forEach((item) => {
         memberIdArr.push(item._id);
       });
       console.log(memberIdArr);
-      //confirm and delete members
+      /**confirm and delete members*/
       Swal.fire({
         title: `Remove ${selectedMembersArr.length} members?`,
         text: `${selectedMembersArr.length} members will be removed from the team?`,
@@ -307,9 +307,9 @@ export class SuperviseTeamPageComponent implements OnInit {
     }
   }
 
-  //removing specific member from team
+  /**removing specific member from team*/
   deleteTeamMembers(teamIdArr: string[]) {
-    //pass array of members to be deleted to api
+    /**pass array of members to be deleted to api*/
     this.teamService.deleteTeamMembers(this.teamId, teamIdArr).subscribe({
       next: (res: any) => {
         console.log(res);
