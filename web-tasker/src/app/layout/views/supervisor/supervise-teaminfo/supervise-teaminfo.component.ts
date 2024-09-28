@@ -124,14 +124,14 @@ export class SuperviseTeaminfoComponent implements OnInit {
     this.searchText = '';
   }
 
-  //method to load projects tab
+  /** method to load projects tab */
   showProjects() {
     this.showTab('projects', 'tabNav2');
     //unset
     this.projectService.setFromAssigning(false);
   }
 
-  //getting projects for team
+  /** getting projects for team */
   getTeamProjects(teamId: string) {
     this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
       console.log(projects);
@@ -143,7 +143,7 @@ export class SuperviseTeaminfoComponent implements OnInit {
     });
   }
 
-  //getting members for team
+  /** getting members for team */
   getTeamMembers(teamId: string) {
     this.teamService.getTeamMembers(teamId).subscribe((members: any) => {
       let membersArr: any = [];
@@ -157,7 +157,7 @@ export class SuperviseTeaminfoComponent implements OnInit {
     });
   }
 
-  //getting team name
+  /** getting team name */
   getTeamName(teamId: string) {
     this.teamService.getSpecificTeam(teamId).subscribe((team: any) => {
       console.log(team);
@@ -166,7 +166,7 @@ export class SuperviseTeaminfoComponent implements OnInit {
     });
   }
 
-  //deleting specific member
+  /** deleting specific member */
   deleteTeamMember(userId: string, username: string) {
     this.teamService.deleteTeamMember(this.teamId, userId).subscribe({
       next: (res: any) => {
