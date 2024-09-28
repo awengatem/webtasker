@@ -31,7 +31,7 @@ export class SuperviseTeaminfoComponent implements OnInit {
   searchText = '';
   placeholder = 'enter username to search ...';
 
-  //control the router link, defines active default tab
+  /** control the router link, defines active default tab*/
   tab1: boolean = true;
 
   constructor(
@@ -57,7 +57,7 @@ export class SuperviseTeaminfoComponent implements OnInit {
     }
   }
 
-  //navigation of schedule
+  /** navigation of schedule */
   tabElement: any;
   openTab: any;
   butElement: any;
@@ -70,10 +70,10 @@ export class SuperviseTeaminfoComponent implements OnInit {
   loopButElement: any;
   butResult: any;
 
-  //monitor selected tab set default also
+  /** monitor selected tab set default also */
   selectedTab: string = 'tabNav1';
 
-  //getting the open tab
+  /** getting the open tab */
   getOpenTab(): string {
     this.tabIdArray = ['tabNav1', 'tabNav2'];
     this.tabIdArray.forEach((tab) => {
@@ -85,7 +85,7 @@ export class SuperviseTeaminfoComponent implements OnInit {
     return this.loopResult;
   }
 
-  //remove active link on tab
+  /** remove active link on tab */
   removeActive() {
     this.butIdArray = ['members', 'projects'];
     this.butIdArray.forEach((tab) => {
@@ -96,7 +96,7 @@ export class SuperviseTeaminfoComponent implements OnInit {
     });
   }
 
-  //method used by navtab buttons for navigation
+  /** method used by navtab buttons for navigation */
   showTab(bId: string, tabId: string) {
     this.openTab = document.getElementById(this.getOpenTab());
     this.openTab.classList.remove('active');
