@@ -88,7 +88,7 @@ export class SuperviseProjectsComponent implements OnInit {
           });
       }
     }
-    //get the project status here
+    /**Get the project status here */
     this.getProjectStatus();
   }
 
@@ -167,7 +167,7 @@ export class SuperviseProjectsComponent implements OnInit {
     this.modalRef = this.modalService.open(SuperviseProjectInfoModalComponent, {
       modalClass: 'modal-dialog-centered modal-lg',
     });
-    //listen when closed
+    /**Listen when closed */
     this.modalRef.onClose.subscribe((message: any) => {
       console.log(message);
       this.isModalOpen = false;

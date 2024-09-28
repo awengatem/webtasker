@@ -175,7 +175,7 @@ export class SuperviseProjectInfoModalComponent implements OnInit {
         modalClass: 'modal-dialog-centered modal-lg',
       }
     );
-    //listen when closed
+    /**Listen when closed */
     this.infoModalRef.onClose.subscribe((message: any) => {
       console.log(message);
       /**Refresh projects */

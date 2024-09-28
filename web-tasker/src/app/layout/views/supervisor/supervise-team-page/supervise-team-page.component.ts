@@ -132,7 +132,7 @@ export class SuperviseTeamPageComponent implements OnInit {
     });
   }
 
-  /**get projects for team*/
+  /**Get projects for team*/
   getTeamProjects(teamId: string) {
     this.teamService.getTeamProjects(teamId).subscribe((projects: any) => {
       console.log(projects);
@@ -171,7 +171,7 @@ export class SuperviseTeamPageComponent implements OnInit {
           .getProjectTeams(this.projects[i]._id)
           .subscribe((teams: any) => {
             // console.log(teams.length);
-            //push number of teams to projects
+            /**push number of teams to projects*/
             this.projects[i].teams = teams.length;
           });
       }
@@ -194,10 +194,10 @@ export class SuperviseTeamPageComponent implements OnInit {
             this.projectidArr.push(doc.project_id);
           }
         }
-        //get unique projects
+        /**get unique projects */
         this.uniqueProjects = [...new Set(this.projectidArr)];
 
-        //set status to active for each project in the unique array
+        /**set status to active for each project in the unique array */
         if (this.projects.length > 0) {
           for (let project of this.projects) {
             for (let id of this.uniqueProjects) {
@@ -206,7 +206,7 @@ export class SuperviseTeamPageComponent implements OnInit {
               }
             }
           }
-          //set others to unproductive
+          /**set others to unproductive */
           for (let project of this.projects) {
             if (project.status != 'Active') {
               project.status = 'Unproductive';
