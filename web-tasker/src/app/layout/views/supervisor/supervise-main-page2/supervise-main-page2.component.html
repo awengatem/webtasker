@@ -1,7 +1,62 @@
 <div class="container-fluid page">
-    <div class="page__box p-3 mt-2">Title</div>
-    <div class="page__content shadow p-3 position-relative">
-      <div class="page__content-data">Content here</div>
+  <div class="page__box p-3 mt-2">Title</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <!-- bg -->
+      <div class="h-[80vh] w-[80vw] m-auto bg-white rounded">
+        <!-- Navbar -->
+        <div class="flex items-center justify-between mx-[40px] py-6">
+          <div class="py-2">
+            <i class="fa-sharp fa-solid fa-users-rectangle"></i>
+            My Teams Data
+          </div>
+          <div>
+            <h1>{{ todayDate }}</h1>
+          </div>
+        </div>
+        <hr class="border-gray-800" />
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 p-4"
+        >
+          <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col">
+            <h2 class="text-xl font-semibold">
+              <div class="label pointer text-2xl">
+                <i class="fa-solid fa-users-viewfinder"></i>
+                My Teams
+              </div>
+            </h2>
+            <h1 class="text-[#22b8f0] p-4 mx-auto
+            ">{{ supTeamCount }}</h1>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-xl font-semibold">
+              <div class="label pointer text-2xl">
+                <i class="fa-solid fa-list-check"></i> Active projects
+              </div>
+            </h2>
+            <h1 class="text-[#22b8f0] p-4">{{ supProjectCount }}</h1>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-xl font-semibold">
+              <div class="label pointer text-2xl">
+                <i class="fa-solid fa-sack-dollar"></i> Team Earnings
+              </div>
+            </h2>
+            <h1 class="">{{ earningsAmount }}</h1>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-xl font-semibold">
+              <div class="label pointer text-2xl">
+                <i class="fa-regular fa-clock fa-spin-pulse"></i> Team Sessions
+              </div>
+            </h2>
+            <h1 class="text-red-800 p-4">{{ currentTime }}</h1>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
+</div>
