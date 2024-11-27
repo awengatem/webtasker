@@ -1,6 +1,6 @@
 <div class="container-fluid page">
   <div class="page__box p-3 mt-2 text-xl font-bold">Teams Page</div>
-  <div class="page__content shadow-lg p-2 bg-white rounded-lg">
+  <div class="page__content shadow-lg p-2 bg-red-500 h-auto rounded-lg">
     <div class="page__content-data">
       <div class="centered-content">
         <div class="teams-container">
@@ -27,8 +27,12 @@
                       </h1>
                     </div>
                     <div
-                      class="list-container overflow-y-scroll pt-3"
-                      style="max-height: calc(57vh)"
+                      class="list-container overflow-y-auto pt-3 px-2 rounded-lg shadow-inner bg-gray-50 transition-all duration-300 hover:bg-white"
+                      style="
+                        max-height: calc(57vh);
+                        scrollbar-width: thin;
+                        scrollbar-color: #CBD5E1 transparent;
+                      "
                     >
                       <ul class="list-group list-group-flush">
                         <li
