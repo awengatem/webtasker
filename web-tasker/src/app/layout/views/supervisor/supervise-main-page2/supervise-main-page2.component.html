@@ -1,7 +1,162 @@
 <div class="container-fluid page">
-    <div class="page__box p-3 mt-2">Title</div>
-    <div class="page__content shadow p-3 position-relative">
-      <div class="page__content-data">Content here</div>
+  <div class="page__box p-3 mt-2">Title</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="page__content-data">
+      <!-- bg -->
+      <div class="h-[80vh] w-[80vw] m-auto bg-white rounded">
+        <!-- Navbar -->
+        <div class="flex items-center justify-between mx-[40px] py-6">
+          <div class="py-2">
+            <i class="fa-sharp fa-solid fa-users-rectangle"></i>
+            My Teams Data
+          </div>
+          <div>
+            <h1>{{ todayDate }}</h1>
+          </div>
+        </div>
+        <hr class="border-gray-800" />
+        <div class="flex h-[65vh]">
+          <div class="flex-[0_0_25%]">
+            <div>
+              <div class="data-name text-center hover:translate-x-4">
+                <div class="label pointer text-2xl">
+                  <i class="fa-solid fa-users-viewfinder"></i>
+                  My Teams
+                </div>
+                <h1 class="text-[#22b8f0] p-4">{{ supTeamCount }}</h1>
+              </div>
+            </div>
+
+            <div class="">
+              <div class="data-name text-center">
+                <div class="label pointer text-2xl">
+                  <i class="fa-solid fa-list-check"></i> Active projects
+                </div>
+                <h1 class="text-[#22b8f0] p-4">{{ supProjectCount }}</h1>
+              </div>
+            </div>
+
+            <div class="">
+              <div class="data-name text-center">
+                <div class="label pointer text-2xl">
+                  <i class="fa-solid fa-sack-dollar"></i> Team Earnings
+                </div>
+
+                <div class="flex p-4 gap-4 ml-[60px]">
+                  <h1 class="">{{ earningsAmount }}</h1>
+                  <p
+                    *ngIf="hasIncreased(); else decreased"
+                    class="text-lg text-green-600"
+                  >
+                    &#8593; 50%
+                  </p>
+                  <ng-template #decreased>
+                    <p class="text-sm text-red-600">
+                      &#8595; {{ theDifference }} %
+                    </p>
+                  </ng-template>
+                </div>
+              </div>
+
+              <div class="">
+                <div class="data-name text-center">
+                  <div class="label pointer text-2xl">
+                    <i class="fa-regular fa-clock fa-spin-pulse"></i> Team
+                    Sessions
+                  </div>
+                  <h1 class="text-red-800 p-4">{{ currentTime }}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Main -->
+          <div class="flex-1">
+            <div class="teams-inside h-full">
+              <div class="">
+                <div class="text-lg flex justify-between w-full">
+                  <div class="">
+                    <h1><i class="fa-solid fa-users-line"></i> Your Teams</h1>
+                  </div>
+                  <div class="w-2/6 inline-flex">
+                    <input
+                      type="search"
+                      placeholder="Search by Name"
+                      class="form-control m-3 w-1/2"
+                      [(ngModel)]="searchText"
+                    />
+                  </div>
+                </div>
+                <div class="border-t my-4"></div>
+                <div
+                  class="flex flex-wrap items-center gap-4 overflow-y-auto h-full mx-auto"
+                  style="max-height: calc(50vh)"
+                >
+                  <div
+                    class="card shadow-2xl cursor-pointer"
+                    *ngFor="let team of teams | teamFilter : searchText"
+                    (click)="captureTeamId(team._id)"
+                    routerLink="/supervise/team"
+                    style="
+                      width: 15rem;
+                      height: 17rem;
+                      background-color: white;
+                      box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+                    "
+                  >
+                    <!-- <img class="card-img-top" src="..." alt="Card image cap" /> -->
+                    <div
+                      class="card-body flex flex-col justify-around space-y-4"
+                    >
+                      <div class="flex justify-around">
+                        <h3 class="uppercase font-semibold">
+                          <i class="fa-solid fa-people-group"></i>
+                          {{ team.teamName }}
+                        </h3>
+                        <!-- <i class="fa-solid fa-users-line text-base"></i> -->
+                      </div>
+                      <!-- <a class="btn btn-primary">New Team</a> -->
+                      <div class="flex flex-col text-base">
+                        <div>
+                          <i class="uil uil-users-alt"></i
+                          >Members&nbsp;:&nbsp;<span
+                            class="text-[#22b8f0] font-semibold"
+                            >{{ team.members }}</span
+                          >
+                        </div>
+                        <div>
+                          <i class="uil uil-folder-open"></i
+                          >Projects&nbsp;:&nbsp;<span
+                            class="text-[#22b8f0] font-semibold"
+                            >{{ team.projects }}</span
+                          >
+                        </div>
+                        <div>
+                          <div>
+                            <i class="uil uil-server"></i>
+                            status:
+                            <!-- <span>active</span> -->
+                            <!--                             <span
+                              [ngClass]="
+                                team.status === 'Active' ? 'active' : 'break'
+                              "
+                              >{{ team.status }}</span -->
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="text-base font-semibold text-[#22b8f0] rounded-md p-1 bg-sky-50 w-full text-center border border-sky-100 hover:bg-[#22b8f0] hover:text-white"
+                      >
+                        DETAILS
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
+</div>
