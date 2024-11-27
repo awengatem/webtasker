@@ -1,0 +1,469 @@
+<div class="container-fluid page">
+    <div class="page__box p-3 mt-2">Teams page</div>
+    <div class="page__content shadow p-3 position-relative">
+      <div class="page__content-data">
+        <div class="centered-content">
+          <div class="teams-container">
+            <div class="teams">
+              <div class="row">
+                <div class="col">
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary"
+                    routerLink="/supervise"
+                  >
+                    Back
+                  </button>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="teams-inside">
+                <div class="row">
+                  <div class="col-3">
+                    <div class="border rounded-lg">
+                      <div class="pt-3 border rounded-lg bg-gray-100">
+                        <h1 class="text-center">Active members</h1>
+                      </div>
+                      <div
+                        class="list-container overflow-y-scroll pt-3"
+                        style="max-height: calc(57vh)"
+                      >
+                        <ul class="list-group list-group-flush">
+                          <li
+                            class="list-group-item"
+                            *ngFor="let member of teamMembersArr"
+                          >
+                            <div class="flex gap-2">
+                              <div
+                                class="position-absolute translate-middle p-2 bg-success border border-light rounded-circle"
+                              >
+                                <span class="visually-hidden">New alerts</span>
+                              </div>
+                              <h2>Hope Mumbi</h2>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-9 h-full overflow-auto">
+                    <div class="overflow-y-auto" style="width: auto">
+                      <div class="card-header">
+                        <div class="row">
+                          <div class="col">
+                            <h2
+                              data-aos="zoom-in-up"
+                              class="col aos-init aos-animate"
+                            >
+                              {{ teamName
+                              }}<i class="fa-solid fa-people-group"></i>
+                            </h2>
+                          </div>
+                          <div class="col-3">
+                            <button
+                              type="button"
+                              class="btn btn-success"
+                              routerLink="/supervise/earnings"
+                            >
+                              Earnings
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="">
+                        <div class="">
+                          <div class="">
+                            <!-- Tab Selections -->
+                            <div class="row row-cols-4">
+                              <div class="col-sm-3">
+                                <div
+                                  class="card card-active"
+                                  id="tab1"
+                                  (click)="showTab('tab1')"
+                                >
+                                  <div class="card-body">
+                                    <h2 class="card-title">Team Members</h2>
+                                    <div class="d-flex">
+                                      <div class="num px-2">
+                                        <p>{{ teamMembersLength }}</p>
+                                      </div>
+                                      <div>
+                                        <h4 class="card-text">active : []</h4>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-3">
+                                <div
+                                  class="card"
+                                  id="tab2"
+                                  (click)="showTab('tab2')"
+                                >
+                                  <div class="card-body">
+                                    <h2 class="card-title">
+                                      Team Projects
+                                      <i class="fa-solid fa-folder-open"></i>
+                                    </h2>
+                                    <div class="d-flex">
+                                      <div class="num px-2">
+                                        <p>{{ teamProjectsLength }}</p>
+                                      </div>
+                                      <div>
+                                        <h4 class="card-text">active : []</h4>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-3">
+                                <div
+                                  class="card"
+                                  id="tab3"
+                                  (click)="showTab('tab3')"
+                                >
+                                  <div class="card-body">
+                                    <h2 class="card-title">Earnings</h2>
+                                    <h1 class="card-text">Ksh 4,000,000</h1>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="overflow-auto">
+                          <div class="">
+                            <div class="">
+                              <div class="p-1 rounded">
+                                <!-- TAB 1 -->
+                                <div *ngIf="tabStates['tab1']" class=" ">
+                                  <div class="">
+                                    <mat-card class="">
+                                      <mat-card-content>
+                                        <form>
+                                          <b class="text-base"
+                                            >Search Members :</b
+                                          >
+                                          &nbsp;&nbsp;
+                                          <mat-form-field style="flex: 0 5px 50%">
+                                            <mat-label>Filter</mat-label>
+                                            <input
+                                              matInput
+                                              (keyup)="applyMemberFilter($event)"
+                                            />
+                                          </mat-form-field>
+                                          &nbsp;&nbsp;
+                                          <!-- <b class="text-base"
+                                            >Remove Selected Members :</b
+                                          > -->
+                                          &nbsp;&nbsp;
+                                          <button
+                                            mat-icon-button
+                                            aria-label="Example icon button with a delete icon"
+                                            type="button"
+                                            class="mt-4 custom-delete mat-raised-button"
+                                            style="background-color: #e91e63"
+                                            color="accent"
+                                            (click)="deleteSelectedMembers()"
+                                          >
+                                            <mat-icon class="text-white"
+                                              >delete</mat-icon
+                                            >
+                                          </button>
+                                          &nbsp;&nbsp;
+                                          <button
+                                            type="button"
+                                            class="btn btn-primary"
+                                            [routerLink]="[
+                                              '/ad_teams',
+                                              teamId,
+                                              'add_member'
+                                            ]"
+                                          >
+                                            Add Members
+                                          </button>
+                                          <div>
+                                            <!-- TABLE BEGINS HERE-->
+                                            <mat-table
+                                              [dataSource]="memberDataSource"
+                                              matSort
+                                              class="mat-elevation-z8 overflow-y-auto h-full"
+                                              style="
+                                                max-height: calc(29vh);
+                                                box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+                                                  0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                                                  0 1px 18px 0 rgba(0, 0, 0, 0.12);
+                                              "
+                                            >
+                                              <!-- Checkbox Column -->
+                                              <ng-container matColumnDef="Select">
+                                                <mat-header-cell
+                                                  *matHeaderCellDef
+                                                  style="color: #22b8f0"
+                                                >
+                                                  <mat-checkbox
+                                                    (change)="
+                                                      $event
+                                                        ? memberMasterToggle()
+                                                        : null
+                                                    "
+                                                    [checked]="
+                                                      memberSelection.hasValue() &&
+                                                      areAllMembersSelected()
+                                                    "
+                                                    [indeterminate]="
+                                                      memberSelection.hasValue() &&
+                                                      !areAllMembersSelected()
+                                                    "
+                                                  ></mat-checkbox>
+                                                </mat-header-cell>
+                                                <mat-cell
+                                                  *matCellDef="let row"
+                                                  class=""
+                                                >
+                                                  <mat-checkbox
+                                                    (click)="
+                                                      $event.stopPropagation()
+                                                    "
+                                                    (change)="
+                                                      $event
+                                                        ? memberSelection.toggle(
+                                                            row
+                                                          )
+                                                        : null
+                                                    "
+                                                    [checked]="
+                                                      memberSelection.isSelected(
+                                                        row
+                                                      )
+                                                    "
+                                                    [aria-label]="
+                                                      memberCheckboxLabel(row)
+                                                    "
+                                                  ></mat-checkbox>
+                                                </mat-cell>
+                                              </ng-container>
+                                              <!-- Fullname Column -->
+                                              <ng-container
+                                                matColumnDef="Fullname"
+                                                class=""
+                                              >
+                                                <mat-header-cell
+                                                  *matHeaderCellDef
+                                                  mat-sort-header
+                                                >
+                                                  Full name
+                                                </mat-header-cell>
+                                                <mat-cell
+                                                  *matCellDef="let document"
+                                                  class="point hover:text-[#cb0c9f] cursor-pointer"
+                                                >
+                                                  {{ document.firstName }}
+                                                  {{ document.lastName }}
+                                                </mat-cell>
+                                              </ng-container>
+                                              <!-- Gender Column -->
+                                              <ng-container
+                                                matColumnDef="Gender"
+                                                class=""
+                                              >
+                                                <mat-header-cell
+                                                  *matHeaderCellDef
+                                                  mat-sort-header
+                                                >
+                                                  Gender
+                                                </mat-header-cell>
+                                                <mat-cell
+                                                  *matCellDef="let document"
+                                                >
+                                                  {{ document.gender }}
+                                                </mat-cell>
+                                              </ng-container>
+                                              <!-- Email Column -->
+                                              <ng-container
+                                                matColumnDef="Email"
+                                                class=""
+                                              >
+                                                <mat-header-cell
+                                                  *matHeaderCellDef
+                                                  mat-sort-header
+                                                >
+                                                  Email
+                                                </mat-header-cell>
+                                                <mat-cell
+                                                  *matCellDef="let document"
+                                                >
+                                                  {{ document.email }}
+                                                </mat-cell>
+                                              </ng-container>
+                                              <!-- Status Column -->
+                                              <ng-container
+                                                matColumnDef="Status"
+                                                class=""
+                                              >
+                                                <mat-header-cell
+                                                  *matHeaderCellDef
+                                                  mat-sort-header
+                                                >
+                                                  Status
+                                                </mat-header-cell>
+                                                <mat-cell
+                                                  *matCellDef="let document"
+                                                >
+                                                  unknown
+                                                </mat-cell>
+                                              </ng-container>
+                                              <!-- Delete Icon -->
+                                              <ng-container matColumnDef="Remove">
+                                                <mat-header-cell
+                                                  *matHeaderCellDef
+                                                  mat-sort-header
+                                                >
+                                                  Remove
+                                                </mat-header-cell>
+                                                <mat-cell
+                                                  *matCellDef="let document"
+                                                >
+                                                  <button
+                                                    mat-icon-button
+                                                    class="custom-button custom-button-delete mat-raised-button"
+                                                    aria-label="Example icon button with a delete icon"
+                                                    type="button"
+                                                    color="accent"
+                                                    matTooltip="Remove"
+                                                    (click)="
+                                                      confirmMemberDeletion(
+                                                        document._id,
+                                                        document.firstName
+                                                      )
+                                                    "
+                                                  >
+                                                    <mat-icon
+                                                      class="absolute text-sm text-white top-1 right-1"
+                                                      >delete_forever</mat-icon
+                                                    >
+                                                  </button></mat-cell
+                                                >
+                                              </ng-container>
+                                              <mat-header-row
+                                                *matHeaderRowDef="
+                                                  displayedMemberColumns
+                                                "
+                                              ></mat-header-row>
+                                              <mat-row
+                                                *matRowDef="
+                                                  let row;
+                                                  columns: displayedMemberColumns
+                                                "
+                                              ></mat-row
+                                            ></mat-table>
+                                            <mat-paginator
+                                              [pageSizeOptions]="[10, 25, 50]"
+                                            ></mat-paginator>
+                                          </div>
+                                        </form>
+                                      </mat-card-content>
+                                    </mat-card>
+                                  </div>
+                                </div>
+                                <!-- TAB 2 -->
+                                <div
+                                  *ngIf="tabStates['tab2']"
+                                  class="h-[460px] overflow-auto"
+                                >
+                                  <div class="row mt-3">
+                                    <h1 class="card-text">Projects:</h1>
+                                  </div>
+                                  <a
+                                    class="btn btn-primary m-2"
+                                    style="width: 7rem"
+                                    [routerLink]="[
+                                      '/ad_teams',
+                                      teamId,
+                                      'assign_project'
+                                    ]"
+                                    >add Project</a
+                                  >
+  
+                                  <div
+                                    class="row-project d-flex flex-row justify-content-start"
+                                  >
+                                    <div
+                                      class="grid grid-cols-4 grid-flow-row gap-4"
+                                    >
+                                      <div
+                                        class="card text-black bg-white mb-3"
+                                        style="
+                                          width: 10rem;
+                                          height: 13rem;
+                                          box-shadow: 2px 2px 2px 1px
+                                            rgba(0, 0, 0, 0.2);
+                                        "
+                                        *ngFor="let project of projects"
+                                      >
+                                        <div
+                                          class="card-body px-4 flex flex-col justify-around"
+                                        >
+                                          <h2 class="text-center">
+                                            {{ project.projectName }}
+                                          </h2>
+                                          <div
+                                            class="flex flex-col text-base space-y-4"
+                                          >
+                                            <small
+                                              ><i class="uil uil-users-alt"></i
+                                              >teams:
+                                              {{ project.teams }}
+                                            </small>
+                                            <small
+                                              ><i class="uil uil-server"></i
+                                              >status:
+                                              <span
+                                                [ngClass]="
+                                                  project.status === 'Active'
+                                                    ? 'active'
+                                                    : 'break'
+                                                "
+                                                >{{ project.status }}</span
+                                              >
+                                            </small>
+                                          </div>
+                                          <button
+                                            class="ml-auto text-sm text-white p-1 rounded-lg px-2 bg-red-600 shadow-lg shadow-blue-500/50"
+                                            (click)="
+                                              confirmProjectDeletion(
+                                                project._id,
+                                                project.projectName
+                                              )
+                                            "
+                                          >
+                                            Remove
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- TAB 3 -->
+                                <div
+                                  *ngIf="tabStates['tab3']"
+                                  class="h-[400px] overflow-scroll"
+                                >
+                                  tab 3
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

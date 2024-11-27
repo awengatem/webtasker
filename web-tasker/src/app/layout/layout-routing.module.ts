@@ -51,7 +51,8 @@ import { SuperviseProjectsComponent } from './views/supervisor/supervise-project
 import { AdminSupervisorGuard } from '../helpers/guards/adminSupervisor.guard';
 import { PreviousRouteGuard } from '../helpers/guards/previous-route.guard';
 import { SuperviseTeaminfoComponent } from './views/supervisor/supervise-teaminfo/supervise-teaminfo.component';
-import { SuperviseTeams2Component } from './views/supervisor/supervise-teams2/supervise-teams2.component';
+//import { SuperviseTeams2Component } from './views/supervisor/supervise-teams2/supervise-teams2.component';
+import { SuperviseTeamPage2Component } from './views/supervisor/supervise-team-page2/supervise-team-page2.component';
 
 const routes: Routes = [
   {
@@ -140,7 +141,7 @@ const routes: Routes = [
         path: 'supervise/team2',
         canActivate: [SupervisorGuard],
         canDeactivate: [PreviousRouteGuard],
-        component: SuperviseTeams2Component,
+        component: SuperviseTeamPage2Component,
       },
       {
         path: 'supervise/earnings',
