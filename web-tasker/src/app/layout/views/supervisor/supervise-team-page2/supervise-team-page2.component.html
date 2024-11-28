@@ -5,7 +5,6 @@
       <div class="centered-content">
         <div class="teams-container">
           <div class="teams">
-            
             <div class="col">
               <button
                 type="button"
@@ -31,7 +30,7 @@
                       style="
                         max-height: calc(57vh);
                         scrollbar-width: thin;
-                        scrollbar-color: #CBD5E1 transparent;
+                        scrollbar-color: #cbd5e1 transparent;
                       "
                     >
                       <ul class="list-group list-group-flush">
@@ -45,7 +44,9 @@
                             >
                               <span class="visually-hidden">New alerts</span>
                             </div>
-                            <h2 class="font-medium px-4">{{ member.firstName }} {{ member.lastName }}</h2>
+                            <h2 class="font-medium px-4">
+                              {{ member.firstName }} {{ member.lastName }}
+                            </h2>
                           </div>
                         </li>
                       </ul>
@@ -111,7 +112,7 @@
                                     Team Projects
                                     <i class="fa-solid fa-folder-open"></i>
                                   </h2>
-                                  <div class="d-flex">
+                                  <div class="flex">
                                     <div class="num px-2">
                                       <p>{{ teamProjectsLength }}</p>
                                     </div>
@@ -130,11 +131,17 @@
                               >
                                 <div class="card-body">
                                   <h2 class="card-title">Earnings</h2>
-                                  <h1 class="card-text">Ksh {{ totalEarnings | currency: 'KES':'symbol' }}</h1>
+                                  <h1 class="card-text">
+                                    Ksh
+                                    {{
+                                      totalEarnings
+                                        | currency : "KES" : "symbol"
+                                    }}
+                                  </h1>
                                   <!-- <h1 class="card-text">Ksh 4,000,000</h1> -->
                                 </div>
                               </div>
-                            </div>                          
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -167,7 +174,9 @@
                                           class="mt-4 custom-delete mat-raised-button bg-red-600 text-white rounded-lg"
                                           (click)="deleteSelectedMembers()"
                                         >
-                                          <mat-icon class="text-white">delete</mat-icon>
+                                          <mat-icon class="text-white"
+                                            >delete</mat-icon
+                                          >
                                         </button>
                                         &nbsp;&nbsp;
                                         <button
@@ -368,66 +377,118 @@
                               <!-- TAB 2 -->
                               <div
                                 *ngIf="tabStates['tab2']"
-                                class="h-[460px] overflow-auto"
+                                class="h-[460px] overflow-auto p-4 bg-gray-50 rounded-lg shadow-md"
                               >
-                                <div class="row mt-3">
-                                  <h1 class="card-text">Projects:</h1>
-                                </div>
-                                <a
-                                  class="btn btn-primary m-2 bg-blue-500 text-white hover:bg-blue-600"
-                                  style="width: 7rem"
-                                  [routerLink]="[
-                                    '/ad_teams',
-                                    teamId,
-                                    'assign_project'
-                                  ]"
-                                  >add Project</a
-                                >
-
+                                <!-- Header Section -->
                                 <div
-                                  class="row-project d-flex flex-row justify-content-start"
+                                  class="flex justify-between items-center mb-4"
                                 >
+                                  <a
+                                    class="btn btn-primary bg-blue-500 text-white hover:bg-blue-600 rounded-lg px-4 py-2"
+                                    [routerLink]="[
+                                      '/ad_teams',
+                                      teamId,
+                                      'assign_project'
+                                    ]"
+                                  >
+                                    Add Project
+                                  </a>
+                                </div>
+
+                                <!-- Projects Grid Container -->
+                                <div
+                                  class="bg-gray-100 p-6 rounded-xl shadow-lg"
+                                >
+                                  <h1
+                                    class="text-2xl font-bold text-gray-800 mb-6"
+                                  >
+                                    Projects
+                                  </h1>
+
+                                  <!-- Projects Grid -->
                                   <div
-                                    class="grid grid-cols-4 grid-flow-row gap-4"
+                                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                                   >
                                     <div
-                                      class="card text-black bg-white mb-3"
-                                      style="
-                                        width: 10rem;
-                                        height: 13rem;
-                                        box-shadow: 2px 2px 2px 1px
-                                          rgba(0, 0, 0, 0.2);
-                                      "
+                                      class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl"
                                       *ngFor="let project of projects"
                                     >
+                                      <!-- Project Header -->
                                       <div
-                                        class="card-body px-4 flex flex-col justify-around"
+                                        class="bg-gradient-to-r from-blue-500 to-blue-600 p-4"
                                       >
-                                        <h2 class="text-center">
+                                        <h2
+                                          class="text-lg font-bold text-white text-center truncate"
+                                        >
                                           {{ project.projectName }}
                                         </h2>
+                                      </div>
+
+                                      <!-- Project Details -->
+                                      <div class="p-4 space-y-4">
+                                        <!-- Teams -->
                                         <div
-                                          class="flex flex-col text-base space-y-4"
+                                          class="flex items-center space-x-2 text-gray-600"
                                         >
-                                          <small
-                                            ><i class="uil uil-users-alt"></i
-                                            >teams: {{ project.teams }}</small
+                                          <svg
+                                            class="w-5 h-5 text-blue-500"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg"
                                           >
-                                          <small
-                                            ><i class="uil uil-server"></i
-                                            >status:
-                                            <span
-                                              [ngClass]="
-                                                project.status === 'Active'
-                                                  ? 'active'
-                                                  : 'break'
-                                              "
-                                              >{{ project.status }}</span
-                                            ></small
+                                            <path
+                                              stroke-linecap="round"
+                                              stroke-linejoin="round"
+                                              stroke-width="2"
+                                              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                            ></path>
+                                          </svg>
+                                          <span class="text-sm"
+                                            >Teams: {{ project.teams }}</span
                                           >
                                         </div>
+
+                                        <!-- Status -->
+                                        <div
+                                          class="flex items-center justify-between"
+                                        >
+                                          <div
+                                            class="flex items-center space-x-2 text-gray-600"
+                                          >
+                                            <svg
+                                              class="w-5 h-5 text-green-500"
+                                              fill="none"
+                                              stroke="currentColor"
+                                              viewBox="0 0 24 24"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                              ></path>
+                                            </svg>
+                                            <span class="text-sm">Status:</span>
+                                          </div>
+                                          <span
+                                            class="px-2 py-1 text-xs font-semibold rounded-full"
+                                            [ngClass]="
+                                              project.status === 'Active'
+                                                ? 'bg-green-100 text-green-800'
+                                                : 'bg-red-100 text-red-800'
+                                            "
+                                          >
+                                            {{ project.status }}
+                                          </span>
+                                        </div>
+                                      </div>
+
+                                      <!-- Remove Button -->
+                                      <div class="px-4 pb-4">
                                         <button
-                                          class="ml-auto text-sm text-white p-1 rounded-lg px-2 bg-red-600 shadow-lg shadow-blue-500/50"
+                                          class="w-full bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
                                           (click)="
                                             confirmProjectDeletion(
                                               project._id,
@@ -435,52 +496,86 @@
                                             )
                                           "
                                         >
-                                          Remove
+                                          Remove Project
                                         </button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
+
                               <!-- TAB 3 -->
                               <div
                                 *ngIf="tabStates['tab3']"
                                 class="h-[400px] overflow-scroll"
-                              >             <!-- Tab Content -->
-                              <div *ngIf="tabStates['tab3']" class="h-[400px] overflow-scroll">
-                                <mat-card>
-                                  <mat-card-content>
-                                    <h3 class="mb-4">Earnings Summary</h3>
-                                    <div class="row">
-                                      <div class="col-sm-4">
-                                        <div class="card">
-                                          <div class="card-body">
-                                            <h5 class="card-title">Daily Earnings</h5>
-                                            <p class="card-text">Ksh {{ dailyEarnings | currency: 'KES':'symbol' }}</p>
+                              >
+                                <!-- Tab Content -->
+                                <div
+                                  *ngIf="tabStates['tab3']"
+                                  class="h-[400px] overflow-scroll"
+                                >
+                                  <mat-card>
+                                    <mat-card-content>
+                                      <h3 class="mb-4">Earnings Summary</h3>
+                                      <div class="row">
+                                        <div class="col-sm-4">
+                                          <div class="card">
+                                            <div class="card-body">
+                                              <h5 class="card-title">
+                                                Daily Earnings
+                                              </h5>
+                                              <p class="card-text">
+                                                Ksh
+                                                {{
+                                                  dailyEarnings
+                                                    | currency
+                                                      : "KES"
+                                                      : "symbol"
+                                                }}
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="card">
+                                            <div class="card-body">
+                                              <h5 class="card-title">
+                                                Weekly Earnings
+                                              </h5>
+                                              <p class="card-text">
+                                                Ksh
+                                                {{
+                                                  weeklyEarnings
+                                                    | currency
+                                                      : "KES"
+                                                      : "symbol"
+                                                }}
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="card">
+                                            <div class="card-body">
+                                              <h5 class="card-title">
+                                                Monthly Earnings
+                                              </h5>
+                                              <p class="card-text">
+                                                Ksh
+                                                {{
+                                                  monthlyEarnings
+                                                    | currency
+                                                      : "KES"
+                                                      : "symbol"
+                                                }}
+                                              </p>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
-                                      <div class="col-sm-4">
-                                        <div class="card">
-                                          <div class="card-body">
-                                            <h5 class="card-title">Weekly Earnings</h5>
-                                            <p class="card-text">Ksh {{ weeklyEarnings | currency: 'KES':'symbol' }}</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="card">
-                                          <div class="card-body">
-                                            <h5 class="card-title">Monthly Earnings</h5>
-                                            <p class="card-text">Ksh {{ monthlyEarnings | currency: 'KES':'symbol' }}</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </mat-card-content>
-                                </mat-card>
-                              </div>
-                              
+                                    </mat-card-content>
+                                  </mat-card>
+                                </div>
                               </div>
                             </div>
                           </div>
