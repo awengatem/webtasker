@@ -126,10 +126,11 @@
                               >
                                 <div class="card-body">
                                   <h2 class="card-title">Earnings</h2>
-                                  <h1 class="card-text">Ksh 4,000,000</h1>
+                                  <h1 class="card-text">Ksh {{ totalEarnings | currency: 'KES':'symbol' }}</h1>
+                                  <!-- <h1 class="card-text">Ksh 4,000,000</h1> -->
                                 </div>
                               </div>
-                            </div>
+                            </div>                          
                           </div>
                         </div>
                       </div>
@@ -441,8 +442,41 @@
                               <div
                                 *ngIf="tabStates['tab3']"
                                 class="h-[400px] overflow-scroll"
-                              >
-                                tab 3
+                              >             <!-- Tab Content -->
+                              <div *ngIf="tabStates['tab3']" class="h-[400px] overflow-scroll">
+                                <mat-card>
+                                  <mat-card-content>
+                                    <h3 class="mb-4">Earnings Summary</h3>
+                                    <div class="row">
+                                      <div class="col-sm-4">
+                                        <div class="card">
+                                          <div class="card-body">
+                                            <h5 class="card-title">Daily Earnings</h5>
+                                            <p class="card-text">Ksh {{ dailyEarnings | currency: 'KES':'symbol' }}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="card">
+                                          <div class="card-body">
+                                            <h5 class="card-title">Weekly Earnings</h5>
+                                            <p class="card-text">Ksh {{ weeklyEarnings | currency: 'KES':'symbol' }}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="card">
+                                          <div class="card-body">
+                                            <h5 class="card-title">Monthly Earnings</h5>
+                                            <p class="card-text">Ksh {{ monthlyEarnings | currency: 'KES':'symbol' }}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </mat-card-content>
+                                </mat-card>
+                              </div>
+                              
                               </div>
                             </div>
                           </div>

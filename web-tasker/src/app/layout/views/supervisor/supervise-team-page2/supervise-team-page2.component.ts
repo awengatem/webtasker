@@ -23,6 +23,10 @@ import { SnackBarService } from 'src/app/services/snackbar.service';
 export class SuperviseTeamPage2Component implements OnInit {
   selectedTeam!: any[];
   teamName!: string;
+  totalEarnings: number = 500000;
+  dailyEarnings: number = 35000;
+  weeklyEarnings: number = 150000;
+  monthlyEarnings: number = 450000;
 
   projects!: any[];
   teamId!: string;
