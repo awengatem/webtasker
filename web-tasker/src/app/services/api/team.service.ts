@@ -5,6 +5,7 @@ import { WebRequestService } from './web-request.service';
   providedIn: 'root',
 })
 export class TeamService {
+  [x: string]: any;
   //variable to help view newly created team
   private teamAdded: Boolean = false;
 

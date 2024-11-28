@@ -53,6 +53,7 @@ import { PreviousRouteGuard } from '../helpers/guards/previous-route.guard';
 import { SuperviseTeaminfoComponent } from './views/supervisor/supervise-teaminfo/supervise-teaminfo.component';
 //import { SuperviseTeams2Component } from './views/supervisor/supervise-teams2/supervise-teams2.component';
 import { SuperviseTeamPage2Component } from './views/supervisor/supervise-team-page2/supervise-team-page2.component';
+import { SuperviseTeamAlphaComponent } from './views/supervisor/supervise-team-alpha/supervise-team-alpha.component';
 
 const routes: Routes = [
   {
@@ -142,6 +143,12 @@ const routes: Routes = [
         canActivate: [SupervisorGuard],
         canDeactivate: [PreviousRouteGuard],
         component: SuperviseTeamPage2Component,
+      },
+      {
+        path: 'supervise/team3',
+        canActivate: [SupervisorGuard],
+        canDeactivate: [PreviousRouteGuard],
+        component: SuperviseTeamAlphaComponent,
       },
       {
         path: 'supervise/earnings',
