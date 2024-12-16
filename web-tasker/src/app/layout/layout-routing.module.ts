@@ -51,9 +51,13 @@ import { SuperviseProjectsComponent } from './views/supervisor/supervise-project
 import { AdminSupervisorGuard } from '../helpers/guards/adminSupervisor.guard';
 import { PreviousRouteGuard } from '../helpers/guards/previous-route.guard';
 import { SuperviseTeaminfoComponent } from './views/supervisor/supervise-teaminfo/supervise-teaminfo.component';
-//import { SuperviseTeams2Component } from './views/supervisor/supervise-teams2/supervise-teams2.component';
-import { SuperviseTeamPage2Component } from './views/supervisor/supervise-team-page2/supervise-team-page2.component';
-import { SuperviseTeamAlphaComponent } from './views/supervisor/supervise-team-alpha/supervise-team-alpha.component';
+// <<<<<<< hackathon-teams
+// //import { SuperviseTeams2Component } from './views/supervisor/supervise-teams2/supervise-teams2.component';
+// import { SuperviseTeamPage2Component } from './views/supervisor/supervise-team-page2/supervise-team-page2.component';
+// import { SuperviseTeamAlphaComponent } from './views/supervisor/supervise-team-alpha/supervise-team-alpha.component';
+// =======
+// import { SuperviseMainPage2Component } from './views/supervisor/supervise-main-page2/supervise-main-page2.component';
+// >>>>>>> main
 
 const routes: Routes = [
   {
@@ -154,6 +158,12 @@ const routes: Routes = [
         path: 'supervise/earnings',
         canActivate: [SupervisorGuard],
         component: SuperviseEarningPageComponent,
+      },
+
+      {
+        path: 'supervise/main2',
+        canActivate: [SupervisorGuard],
+        component: SuperviseMainPage2Component,
       },
 
       /**PROJECTS */
