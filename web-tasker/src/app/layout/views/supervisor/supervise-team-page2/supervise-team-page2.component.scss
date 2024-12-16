@@ -1,0 +1,178 @@
+.teams-container {
+    display: flex;
+    width: 100%;
+     //height: auto;
+    //max-width: 1280px;
+    max-width: 100rem;
+    // max-height: calc(100vh);
+    // max-height: 500px;
+    background: transparent;
+  }
+  //Testing
+  .headericon {
+    height: 150px;
+    width: 1300px;
+    align-items: center;
+  }
+  
+  .teams {
+    display: flex;
+    flex-direction: column;
+    width: 245vh;
+    height: auto;
+    //background: grey;
+    background: transparent;
+    padding: 24px;
+    border-radius: 2px;
+  
+    mat-divider {
+      border-color: grey;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .teams-inside {
+      overflow-x: 1000px;
+      display: flex-start;
+      // .btn {
+      //   width: 23rem;
+      //   margin-bottom: 10px;
+      // }
+      .card {
+        width: auto;
+        .card {
+          margin-left: 6px;
+        }
+        .data-name:hover {
+          scale: 1.2;
+        }
+        .list-container {
+          max-height: 340px; /* Set the desired height for the scrollable list */
+          overflow-y: auto; /* Add vertical scrollbar when needed */
+        }
+      }
+    }
+  }
+  .container {
+    display: flex;
+    width: 100%;
+    // height: 100%;
+    max-width: 900px;
+    max-height: calc(80vh);
+    background: white;
+  }
+  .teams-container {
+    display: flex;
+    width: 100%;
+    height: auto;
+    max-width: 100rem;
+    max-height: calc(80vh);
+    background: white;
+  
+    .card {
+      &:hover {
+        cursor: pointer;
+        border-color: #22b8f0;
+        // border-width: 2px;
+      }
+  
+      &-active {
+        color: white;
+        background: linear-gradient(
+          90deg,
+          rgba(26, 167, 236, 1) 0%,
+          rgba(26, 167, 236, 1) 35%,
+          rgba(13, 151, 251, 1) 100%
+        );
+  
+        .card-text {
+          color: rgb(47, 255, 75);
+        }
+        .num {
+          color: rgb(255, 238, 0);
+        }
+      }
+    }
+  
+    .row {
+      display: flex;
+      border-style: none;
+      border-width: 1px;
+      margin-left: 0px;
+      margin-right: 0px;
+      width: 100%;
+    }
+    .num {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .card-text {
+      display: flex;
+      justify-items: end;
+      color: green;
+    }
+  }
+  
+  .active {
+    color: #027a34;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .break {
+    color: #ac1100;
+  }
+  
+  .custom-button {
+    // line-height: 30px;
+    height: 30px;
+    width: 30px;
+  
+    &-delete {
+      background-color: #e91e63;
+    }
+  
+    mat-icon {
+      position: absolute;
+      font-size: 14px;
+      color: white;
+      top: 5px;
+      right: 3px;
+      // background: red;
+    }
+  }
+  
+  /*Create rise effect on button*/
+  .mat-raised-button {
+    border: none; /* Remove the border */
+    outline: none; /* Remove the outline */
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 1px 5px 0 rgba(0, 0, 0, 0.12); /* Add a box shadow to give the button a raised appearance */
+    transition: box-shadow 0.2s; /* Add a transition to the box shadow to smooth the effect when the button is hovered or clicked */
+  }
+  
+  .mat-raised-button:hover,
+  .mat-raised-button:active,
+  .mat-raised-button:focus {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+      0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12); /* Increase the size of the box shadow to give the button a pressed appearance when it is hovered or focused */
+  }
+  
+  .list-container {
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: #CBD5E1;
+      border-radius: 20px;
+    }
+    
+    &:hover::-webkit-scrollbar-thumb {
+      background-color: #94A3B8;
+    }
+  }
+  

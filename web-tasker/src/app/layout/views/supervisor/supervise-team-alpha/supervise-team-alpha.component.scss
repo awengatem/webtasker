@@ -1,0 +1,47 @@
+.page {
+  color: #000;
+  padding: 0 1rem;
+  background: #f1f5f9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  
+  &__box {
+    min-height: 120px;
+    background: #1e293b;
+    margin: 0 -1rem;
+    font-size: 36px;
+    color: white;
+  }
+  
+  &__content {
+    flex: 1;
+    min-height: calc(100vh - 178px);
+    height: auto;
+    border-radius: 10px;
+    margin-top: -2rem;
+    background: white;
+    color: black;
+    overflow-y: auto;
+    position: relative;
+    padding-bottom: 2rem;
+  }
+}
+
+.mat-table {
+  width: 100%;
+  background: transparent;
+  
+  .mat-header-cell {
+    font-weight: bold;
+    color: #1e293b;
+  }
+}
+
+@media (max-width: 768px) {
+  .absolute.top-4.left-4 {
+    top: 1rem;
+    left: 1rem;
+  }
+}

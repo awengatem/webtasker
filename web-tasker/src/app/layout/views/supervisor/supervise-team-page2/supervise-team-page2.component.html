@@ -1,0 +1,596 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2 text-xl font-bold">Teams Page</div>
+  <div class="page__content shadow-lg p-2 bg-red-500 h-auto rounded-lg">
+    <div class="page__content-data">
+      <div class="centered-content">
+        <div class="teams-container">
+          <div class="teams">
+            <div class="col">
+              <button
+                type="button"
+                class="bg-blue-500 text-white font-semibold py-3 px-6 rounded-full shadow-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+                routerLink="/supervise"
+              >
+                <span class="text-1xl">←</span>
+              </button>
+            </div>
+
+            <mat-divider></mat-divider>
+            <div class="teams-inside">
+              <div class="row">
+                <div class="col-3">
+                  <div class="border rounded-lg shadow-md">
+                    <div class="pt-3 border rounded-lg bg-gray-100">
+                      <h1 class="text-center text-lg font-semibold">
+                        Active Members
+                      </h1>
+                    </div>
+                    <div
+                      class="list-container overflow-y-auto pt-3 px-2 rounded-lg shadow-inner bg-gray-50 transition-all duration-300 hover:bg-white"
+                      style="
+                        max-height: calc(57vh);
+                        scrollbar-width: thin;
+                        scrollbar-color: #cbd5e1 transparent;
+                      "
+                    >
+                      <ul class="list-group list-group-flush">
+                        <li
+                          class="list-group-item flex items-center justify-between p-2 hover:bg-gray-200"
+                          *ngFor="let member of teamMembersArr"
+                        >
+                          <div class="flex gap-2 items-center">
+                            <div
+                              class="position-absolute translate-middle p-2 bg-green-500 border border-light rounded-full"
+                            >
+                              <span class="visually-hidden">New alerts</span>
+                            </div>
+                            <h2 class="font-medium px-4">
+                              {{ member.firstName }} {{ member.lastName }}
+                            </h2>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              <!-- changed the overflow-auto to overflow-hidden to be compatible to all devices  -->
+                <div class="col-9 h-full overflow-hidden">
+                  <div class="overflow-y-auto" style="width: auto; max-width: 1200px;">
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="col">
+                          <h2
+                            data-aos="zoom-in-up"
+                            class="col aos-init aos-animate text-2xl font-bold"
+                          >
+                            {{ teamName }}
+                            <i class="fa-solid fa-people-group"></i>
+                          </h2>
+                        </div>
+                        <div class="col-3">
+                          <button
+                            type="button"
+                            class="btn btn-success bg-green-500 text-white hover:bg-green-600 rounded-lg px-4 py-2"
+                            routerLink="/supervise/earnings"
+                          >
+                            Earnings
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="">
+                      <div class="">
+                        <div class="">
+                          <!-- Tab Selections -->
+                          <div class="row row-cols-4">
+                            <div class="col-sm-3">
+                              <div
+                                class="card card-active"
+                                id="tab1"
+                                (click)="showTab('tab1')"
+                              >
+                                <div class="card-body">
+                                  <h2 class="card-title">Team Members</h2>
+                                  <div class="d-flex">
+                                    <div class="num px-2">
+                                      <p>{{ teamMembersLength }}</p>
+                                    </div>
+                                    <div>
+                                      <h4 class="card-text">active : []</h4>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-3">
+                              <div
+                                class="card"
+                                id="tab2"
+                                (click)="showTab('tab2')"
+                              >
+                                <div class="card-body">
+                                  <h2 class="card-title">
+                                    Team Projects
+                                    <i class="fa-solid fa-folder-open"></i>
+                                  </h2>
+                                  <div class="flex">
+                                    <div class="num px-2">
+                                      <p>{{ teamProjectsLength }}</p>
+                                    </div>
+                                    <div>
+                                      <h4 class="card-text">active : []</h4>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-3">
+                              <div
+                                class="card"
+                                id="tab3"
+                                (click)="showTab('tab3')"
+                              >
+                                <div class="card-body">
+                                  <h2 class="card-title">Earnings</h2>
+                                  <h1 class="card-text">
+                                    Ksh
+                                    {{
+                                      totalEarnings
+                                        | currency : "KES" : "symbol"
+                                    }}
+                                  </h1>
+                                  <!-- <h1 class="card-text">Ksh 4,000,000</h1> -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="overflow-auto">
+                        <div class="">
+                          <div class="">
+                            <div class="p-1 rounded">
+                              <!-- TAB 1 -->
+                              <div *ngIf="tabStates['tab1']" class=" ">
+                                <div class="">
+                                  <mat-card class="">
+                                    <mat-card-content>
+                                      <form>
+                                        <b class="text-base"
+                                          >Search Members :</b
+                                        >
+                                        &nbsp;&nbsp;
+                                        <mat-form-field style="flex: 0 5px 50%">
+                                          <mat-label>Filter</mat-label>
+                                          <input
+                                            matInput
+                                            (keyup)="applyMemberFilter($event)"
+                                          />
+                                        </mat-form-field>
+                                        &nbsp;&nbsp;
+                                        <button
+                                          mat-icon-button
+                                          aria-label="Example icon button with a delete icon"
+                                          type="button"
+                                          class="mt-4 custom-delete mat-raised-button bg-red-600 text-white rounded-lg"
+                                          (click)="deleteSelectedMembers()"
+                                        >
+                                          <mat-icon class="text-white"
+                                            >delete</mat-icon
+                                          >
+                                        </button>
+                                        &nbsp;&nbsp;
+                                        <button
+                                          type="button"
+                                          class="btn btn-primary bg-blue-500 text-white hover:bg-blue-600 rounded-lg px-4 py-2"
+                                          [routerLink]="[
+                                            '/ad_teams',
+                                            teamId,
+                                            'add_member'
+                                          ]"
+                                        >
+                                          Add Members
+                                        </button>
+                                        <div>
+                                          <!-- TABLE BEGINS HERE-->
+                                          <mat-table
+                                            [dataSource]="memberDataSource"
+                                            matSort
+                                            class="mat-elevation-z8 overflow-y-auto h-full"
+                                            style="
+                                              max-height: calc(29vh);
+                                              box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+                                                0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                                                0 1px 18px 0 rgba(0, 0, 0, 0.12);
+                                            "
+                                          >
+                                            <!-- Checkbox Column -->
+                                            <ng-container matColumnDef="Select">
+                                              <mat-header-cell
+                                                *matHeaderCellDef
+                                                style="color: #22b8f0"
+                                              >
+                                                <mat-checkbox
+                                                  (change)="
+                                                    $event
+                                                      ? memberMasterToggle()
+                                                      : null
+                                                  "
+                                                  [checked]="
+                                                    memberSelection.hasValue() &&
+                                                    areAllMembersSelected()
+                                                  "
+                                                  [indeterminate]="
+                                                    memberSelection.hasValue() &&
+                                                    !areAllMembersSelected()
+                                                  "
+                                                ></mat-checkbox>
+                                              </mat-header-cell>
+                                              <mat-cell
+                                                *matCellDef="let row"
+                                                class=""
+                                              >
+                                                <mat-checkbox
+                                                  (click)="
+                                                    $event.stopPropagation()
+                                                  "
+                                                  (change)="
+                                                    $event
+                                                      ? memberSelection.toggle(
+                                                          row
+                                                        )
+                                                      : null
+                                                  "
+                                                  [checked]="
+                                                    memberSelection.isSelected(
+                                                      row
+                                                    )
+                                                  "
+                                                  [aria-label]="
+                                                    memberCheckboxLabel(row)
+                                                  "
+                                                ></mat-checkbox>
+                                              </mat-cell>
+                                            </ng-container>
+                                            <!-- Fullname Column -->
+                                            <ng-container
+                                              matColumnDef="Fullname"
+                                              class=""
+                                            >
+                                              <mat-header-cell
+                                                *matHeaderCellDef
+                                                mat-sort-header
+                                              >
+                                                Full name
+                                              </mat-header-cell>
+                                              <mat-cell
+                                                *matCellDef="let document"
+                                                class="point hover:text-[#cb0c9f] cursor-pointer"
+                                              >
+                                                {{ document.firstName }}
+                                                {{ document.lastName }}
+                                              </mat-cell>
+                                            </ng-container>
+                                            <!-- Gender Column -->
+                                            <ng-container
+                                              matColumnDef="Gender"
+                                              class=""
+                                            >
+                                              <mat-header-cell
+                                                *matHeaderCellDef
+                                                mat-sort-header
+                                              >
+                                                Gender
+                                              </mat-header-cell>
+                                              <mat-cell
+                                                *matCellDef="let document"
+                                              >
+                                                {{ document.gender }}
+                                              </mat-cell>
+                                            </ng-container>
+                                            <!-- Email Column -->
+                                            <ng-container
+                                              matColumnDef="Email"
+                                              class=""
+                                            >
+                                              <mat-header-cell
+                                                *matHeaderCellDef
+                                                mat-sort-header
+                                              >
+                                                Email
+                                              </mat-header-cell>
+                                              <mat-cell
+                                                *matCellDef="let document"
+                                              >
+                                                {{ document.email }}
+                                              </mat-cell>
+                                            </ng-container>
+                                            <!-- Status Column -->
+                                            <ng-container
+                                              matColumnDef="Status"
+                                              class=""
+                                            >
+                                              <mat-header-cell
+                                                *matHeaderCellDef
+                                                mat-sort-header
+                                              >
+                                                Status
+                                              </mat-header-cell>
+                                              <mat-cell
+                                                *matCellDef="let document"
+                                              >
+                                                unknown
+                                              </mat-cell>
+                                            </ng-container>
+                                            <!-- Delete Icon -->
+                                            <ng-container matColumnDef="Remove">
+                                              <mat-header-cell
+                                                *matHeaderCellDef
+                                                mat-sort-header
+                                              >
+                                                Remove
+                                              </mat-header-cell>
+                                              <mat-cell
+                                                *matCellDef="let document"
+                                              >
+                                                <button
+                                                  mat-icon-button
+                                                  class="custom-button custom-button-delete mat-raised-button"
+                                                  aria-label="Example icon button with a delete icon"
+                                                  type="button"
+                                                  color="accent"
+                                                  matTooltip="Remove"
+                                                  (click)="
+                                                    confirmMemberDeletion(
+                                                      document._id,
+                                                      document.firstName
+                                                    )
+                                                  "
+                                                >
+                                                  <mat-icon
+                                                    class="absolute text-sm text-white top-1 right-1"
+                                                    >delete_forever</mat-icon
+                                                  >
+                                                </button>
+                                              </mat-cell>
+                                            </ng-container>
+                                            <mat-header-row
+                                              *matHeaderRowDef="
+                                                displayedMemberColumns
+                                              "
+                                            ></mat-header-row>
+                                            <mat-row
+                                              *matRowDef="
+                                                let row;
+                                                columns: displayedMemberColumns
+                                              "
+                                            ></mat-row>
+                                          </mat-table>
+                                          <mat-paginator
+                                            [pageSizeOptions]="[10, 25, 50]"
+                                          ></mat-paginator>
+                                        </div>
+                                      </form>
+                                    </mat-card-content>
+                                  </mat-card>
+                                </div>
+                              </div>
+                              <!-- TAB 2 -->
+                              <div
+                                *ngIf="tabStates['tab2']"
+                                class="h-[460px] overflow-auto p-4 bg-gray-50 rounded-lg shadow-md"
+                              >
+                                <!-- Header Section -->
+                                <div
+                                  class="flex justify-between items-center mb-4"
+                                >
+                                  <a
+                                    class="btn btn-primary bg-blue-500 text-white hover:bg-blue-600 rounded-lg px-4 py-2"
+                                    [routerLink]="[
+                                      '/ad_teams',
+                                      teamId,
+                                      'assign_project'
+                                    ]"
+                                  >
+                                    Add Project
+                                  </a>
+                                </div>
+
+                                <!-- Projects Grid Container -->
+                                <div
+                                  class="bg-gray-100 p-6 rounded-xl shadow-lg"
+                                >
+                                  <h1
+                                    class="text-2xl font-bold text-gray-800 mb-6"
+                                  >
+                                    Projects
+                                  </h1>
+
+                                  <!-- Projects Grid -->
+                                  <div
+                                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                                  >
+                                    <div
+                                      class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl"
+                                      *ngFor="let project of projects"
+                                    >
+                                      <!-- Project Header -->
+                                      <div
+                                        class="bg-gradient-to-r from-blue-500 to-blue-600 p-4"
+                                      >
+                                        <h2
+                                          class="text-lg font-bold text-white text-center truncate"
+                                        >
+                                          {{ project.projectName }}
+                                        </h2>
+                                      </div>
+
+                                      <!-- Project Details -->
+                                      <div class="p-4 space-y-4">
+                                        <!-- Teams -->
+                                        <div
+                                          class="flex items-center space-x-2 text-gray-600"
+                                        >
+                                          <svg
+                                            class="w-5 h-5 text-blue-500"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              stroke-linecap="round"
+                                              stroke-linejoin="round"
+                                              stroke-width="2"
+                                              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                            ></path>
+                                          </svg>
+                                          <span class="text-sm"
+                                            >Teams: {{ project.teams }}</span
+                                          >
+                                        </div>
+
+                                        <!-- Status -->
+                                        <div
+                                          class="flex items-center justify-between"
+                                        >
+                                          <div
+                                            class="flex items-center space-x-2 text-gray-600"
+                                          >
+                                            <svg
+                                              class="w-5 h-5 text-green-500"
+                                              fill="none"
+                                              stroke="currentColor"
+                                              viewBox="0 0 24 24"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                              ></path>
+                                            </svg>
+                                            <span class="text-sm">Status:</span>
+                                          </div>
+                                          <span
+                                            class="px-2 py-1 text-xs font-semibold rounded-full"
+                                            [ngClass]="
+                                              project.status === 'Active'
+                                                ? 'bg-green-100 text-green-800'
+                                                : 'bg-red-100 text-red-800'
+                                            "
+                                          >
+                                            {{ project.status }}
+                                          </span>
+                                        </div>
+                                      </div>
+
+                                      <!-- Remove Button -->
+                                      <div class="px-4 pb-4">
+                                        <button
+                                          class="w-full bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                                          (click)="
+                                            confirmProjectDeletion(
+                                              project._id,
+                                              project.projectName
+                                            )
+                                          "
+                                        >
+                                          Remove Project
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- TAB 3 -->
+                              <div
+                                *ngIf="tabStates['tab3']"
+                                class="h-[400px] overflow-scroll"
+                              >
+                                <!-- Tab Content -->
+                                <div
+                                  *ngIf="tabStates['tab3']"
+                                  class="h-[400px] overflow-scroll"
+                                >
+                                  <mat-card>
+                                    <mat-card-content>
+                                      <h3 class="mb-4">Earnings Summary</h3>
+                                      <div class="row">
+                                        <div class="col-sm-4">
+                                          <div class="card">
+                                            <div class="card-body">
+                                              <h5 class="card-title">
+                                                Daily Earnings
+                                              </h5>
+                                              <p class="card-text">
+                                                Ksh
+                                                {{
+                                                  dailyEarnings
+                                                    | currency
+                                                      : "KES"
+                                                      : "symbol"
+                                                }}
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="card">
+                                            <div class="card-body">
+                                              <h5 class="card-title">
+                                                Weekly Earnings
+                                              </h5>
+                                              <p class="card-text">
+                                                Ksh
+                                                {{
+                                                  weeklyEarnings
+                                                    | currency
+                                                      : "KES"
+                                                      : "symbol"
+                                                }}
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="card">
+                                            <div class="card-body">
+                                              <h5 class="card-title">
+                                                Monthly Earnings
+                                              </h5>
+                                              <p class="card-text">
+                                                Ksh
+                                                {{
+                                                  monthlyEarnings
+                                                    | currency
+                                                      : "KES"
+                                                      : "symbol"
+                                                }}
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </mat-card-content>
+                                  </mat-card>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
